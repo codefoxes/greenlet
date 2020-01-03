@@ -1,0 +1,8 @@
+Major:
+
+1. option framework typography sanitization.
+2. If current_user_can check in init.php:105 and meta_boxes.php:15
+
+Minor:
+
+1. Update Google fonts json weekly.
