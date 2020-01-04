@@ -10,12 +10,12 @@
 class Options_Framework_Admin {
 
 	/**
-     * Page hook for the options screen
-     *
-     * @since 1.7.0
-     * @type string
-     */
-    protected $options_screen = null;
+	 * Page hook for the options screen
+	 *
+	 * @since 1.7.0
+	 * @type string
+	 */
+	protected $options_screen = null;
 
     public $of_name;
 

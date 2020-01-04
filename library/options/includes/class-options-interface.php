@@ -287,36 +287,6 @@ class Options_Framework_Interface {
 					$font_size .= '</select>';
 				}
 
-				// Font Face
-				if ( $typography_options['faces'] ) {
-					$font_face = '<select class="of-typography of-typography-face" name="' . esc_attr( $option_name . '[' . $value['id'] . '][face]' ) . '" id="' . esc_attr( $value['id'] . '_face' ) . '">';
-					$faces = $typography_options['faces'];
-					if ( $typography_stored['googlefont'] == 1 ) {
-						$faces = greenlet_google_fonts( $add_gf = 'true', $name = null, $return = true )['google'];
-						foreach ( $faces as $key => $face ) {
-							$font_face .= '<option value="' . esc_attr( $face ) . '" ' . selected( $typography_stored['face'], $face, false ) . '>' . esc_html( $face ) . '</option>';
-						}
-					} else {
-						foreach ( $faces as $key => $face ) {
-							$font_face .= '<option value="' . esc_attr( $key ) . '" ' . selected( $typography_stored['face'], $key, false ) . '>' . esc_html( $face ) . '</option>';
-						}
-					}
-					$font_face .= '</select>';
-				}
-
-				// Font Styles
-				if ( $typography_options['styles'] ) {
-					$font_style = '<select class="of-typography of-typography-style" name="'.$option_name.'['.$value['id'].'][style]" id="'. $value['id'].'_style">';
-					$styles = $typography_options['styles'];
-					if ( $typography_stored['googlefont'] == 1 ) {
-						$styles = greenlet_google_fonts( $add_gf = null, $name = $typography_stored['face'], $return = true );
-					}
-					foreach ( $styles as $key => $style ) {
-						$font_style .= '<option value="' . esc_attr( $key ) . '" ' . selected( $typography_stored['style'], $key, false ) . '>'. $style .'</option>';
-					}
-					$font_style .= '</select>';
-				}
-
 				// Font Color
 				if ( $typography_options['color'] ) {
 					$default_color = '';

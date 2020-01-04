@@ -1,35 +1,47 @@
 <?php
 /**
- * markup.php
+ * Greenlet Markup Manager.
  *
- * Get markup.
- *
- * @package Greenlet
- * @subpackage /library
+ * @package greenlet\library
  */
 
+/**
+ * Print markup tag.
+ *
+ * @param string $context    Context/Place to add markup.
+ * @param string $attributes Tag attributes.
+ */
 function greenlet_markup( $context, $attributes = '' ) {
 
-	global $is_html5, $open_tags;
+	global $open_tags;
 
-	if ( $is_html5 )
-		$tag = greenlet_markup_tag( $context );
-	else $tag = greenlet_markup_legacy_tag( $context );
+	$tag = greenlet_markup_tag( $context );
 
 	$final_tag = apply_filters( "greenlet_markup_tag_{$context}", $tag );
-	echo '<' . $final_tag . ' ' . $attributes . '>';
+	echo '<' . esc_html( $final_tag ) . ' ' . wp_kses( $attributes, null ) . '>';
 	$open_tags[] = $final_tag;
 }
 
+/**
+ * Close opened tags opened via greenlet_markup.
+ *
+ * @param int $close Number of tags to close.
+ */
 function greenlet_markup_close( $close = 1 ) {
 
 	global $open_tags;
 
-	for ( $i = 1; $i <= $close; $i++) {
-		echo '</' . array_pop( $open_tags ) . '>';
+	for ( $i = 1; $i <= $close; $i++ ) {
+		echo '</' . esc_html( array_pop( $open_tags ) ) . '>';
 	}
 }
 
+/**
+ * Retrieve Markup tag.
+ *
+ * @param string $context Context/Place of the tag.
+ * @return string         Tag name.
+ */
 function greenlet_markup_tag( $context ) {
 	switch ( $context ) {
 		case 'site-content':
@@ -75,10 +87,4 @@ function greenlet_markup_tag( $context ) {
 			$tag = 'div';
 	}
 	return $tag;
-}
-
-function greenlet_markup_legacy_tag( $context ) {
-	if (  $context === 'entry-meta' )
-		return 'ul';
-	else return 'div';
 }

@@ -1,13 +1,10 @@
 <?php
 /**
- * init.php
+ * Load Greenlet.
  *
  * Load framework constants, files, functions.
  *
- * @link [url] [description]
- *
- * @package Greenlet
- * @subpackage /library
+ * @package greenlet\library
  */
 
 // Run greenlet_pre action hook.
@@ -22,7 +19,7 @@ if ( ! isset( $content_width ) ) {
 
 if ( ! function_exists( 'greenlet_constants' ) ) {
 	/**
-	 * Defines the Circle Theme constants.
+	 * Defines the Greenlet Theme constants.
 	 *
 	 * @since 1.0.0
 	 */
@@ -64,7 +61,7 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 
 		// Define other contants.
 		define( 'OPTIONS_FRAMEWORK_DIRECTORY', LIBRARY_URL . '/options/' );
-		define( 'CIRCLE_VERSION', '1.0.0' );
+		define( 'GREENLET_VERSION', '1.0.0' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
@@ -75,11 +72,10 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 	/**
 	 * Loads all the framework files.
 	 *
-	 * greenlet_pre_framework action hook is called before any files are added.
+	 * Before any files are added, greenlet_pre_framework action hook is called.
 	 *
-	 * If child theme defines CIRCLE_LOAD_FRAMEWORK as false before requiring this
+	 * If child theme defines GREENLET_LOAD_FRAMEWORK as false before requiring this
 	 * init.php file, then no files will be loaded. They can be loaded manually.
-	 * @example [url]
 	 *
 	 * @since 1.0.0
 	 * @todo Set Permissions to meta and update.
@@ -90,22 +86,20 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		do_action( 'greenlet_pre_framework' );
 
 		// Do not load greenlet, if necessary.
-		if ( defined( 'CIRCLE_LOAD_FRAMEWORK' ) && CIRCLE_LOAD_FRAMEWORK === false )
-		return;
-
-		require_once( LIBRARY_DIR . '/classes.php' );
-		require_once( OPTIONS_DIR . '/options-framework.php' );
-		require_once( PARENT_DIR  . '/options.php' );
-		require_once( LIBRARY_DIR . '/header-structure.php' );
-		require_once( LIBRARY_DIR . '/page-structure.php' );
-		require_once( LIBRARY_DIR . '/footer-structure.php' );
-		require_once( LIBRARY_DIR . '/markup.php' );
-		require_once( LIBRARY_DIR . '/attributes.php' );
-		require_once( LIBRARY_DIR . '/meta-boxes.php' );
-
-		if ( is_admin() ) {
-			require_once( LIBRARY_DIR . '/update.php' );
+		if ( defined( 'GREENLET_LOAD_FRAMEWORK' ) && GREENLET_LOAD_FRAMEWORK === false ) {
+			return;
 		}
+
+		require_once LIBRARY_DIR . '/class-columnobject.php';
+		require_once LIBRARY_DIR . '/class-honeypot.php';
+		require_once OPTIONS_DIR . '/options-framework.php';
+		require_once PARENT_DIR . '/options.php';
+		require_once LIBRARY_DIR . '/header-structure.php';
+		require_once LIBRARY_DIR . '/page-structure.php';
+		require_once LIBRARY_DIR . '/footer-structure.php';
+		require_once LIBRARY_DIR . '/markup.php';
+		require_once LIBRARY_DIR . '/attributes.php';
+		require_once LIBRARY_DIR . '/meta-boxes.php';
 	}
 
 	add_action( 'greenlet_init', 'greenlet_load_framework' );
@@ -128,35 +122,43 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 		load_theme_textdomain( 'greenlet', LANGUAGES_DIR );
 
 		// Add action to wp ajax.
+		// Todo: Nonce verification
 		if ( array_key_exists( 'action', $_REQUEST ) ) {
 			add_action( "wp_ajax_{$_REQUEST['action']}",		$_REQUEST['action'] );
 			add_action( "wp_ajax_nopriv_{$_REQUEST['action']}",	$_REQUEST['action'] );
 		}
 
-		global $is_html5;
-		// $is_html5 = of_get_option( 'is_html5' ) ? true : false; //Legacy
-		$is_html5 = true;
-
 		// Switch to html5 support.
-		if ( $is_html5 )
-			add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
-		//Let WordPress manage the document title.
+		// Let WordPress manage the document title.
 		add_theme_support( 'title-tag' );
 
-		add_theme_support( 'custom-background', apply_filters( 'greenlet_custom_background_args', array(
-			'default-color' => 'fff',
-			'default-image' => '',
-		) ) );
+		add_theme_support(
+			'custom-background',
+			apply_filters(
+				'greenlet_custom_background_args',
+				array(
+					'default-color' => 'fff',
+					'default-image' => '',
+				)
+			)
+		);
 
-		add_theme_support( 'custom-header', apply_filters( 'greenlet_custom_header_args', array(
-			'default-image'				=> '',
-			'default-text-color'		=> '000',
-			'width'						=> 1980,
-			'height'					=> 250,
-			'flex-height'				=> true,
-			'wp-head-callback'			=> 'greenlet_header_style',
-		) ) );
+		add_theme_support(
+			'custom-header',
+			apply_filters(
+				'greenlet_custom_header_args',
+				array(
+					'default-image'      => '',
+					'default-text-color' => '000',
+					'width'              => 1980,
+					'height'             => 250,
+					'flex-height'        => true,
+					'wp-head-callback'   => 'greenlet_header_style',
+				)
+			)
+		);
 
 		// Add support for automatic feed links.
 		add_theme_support( 'automatic-feed-links' );
@@ -167,9 +169,9 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 		// Register nav menus.
 		register_nav_menus(
 			array(
-				'main-menu' => __( 'Main Menu', 'greenlet' ),
+				'main-menu'      => __( 'Main Menu', 'greenlet' ),
 				'secondary-menu' => __( 'Secondary Menu', 'greenlet' ),
-				'footer-menu' => __( 'Footer Menu', 'greenlet' )
+				'footer-menu'    => __( 'Footer Menu', 'greenlet' ),
 			)
 		);
 
@@ -202,16 +204,18 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 			$sidebars_qty = of_get_option( 'sidebars_qty' ) ? of_get_option( 'sidebars_qty' ) : 3;
 
 			// Register number of sidebars.
-			for ( $i=1; $i <= $sidebars_qty; $i++ ) {
+			for ( $i = 1; $i <= $sidebars_qty; $i++ ) {
 				register_sidebar(
 					array(
-						'name' => sprintf(__( 'Sidebar %s', 'greenlet' ), $i),
-						'id' => 'sidebar-' . $i,
-						'description'	=> sprintf(__( 'Appears on the posts and pages as sidebar %s.', 'greenlet' ), $i),
-						'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
-						'after_widget'	=> '</div> <!-- end widget -->',
-						'before_title'	=> '<h5 class="widget-title">',
-						'after_title'	=> '</h5>',
+						// translators: %s: Index of the sidebar.
+						'name'          => sprintf( __( 'Sidebar %s', 'greenlet' ), $i ),
+						'id'            => 'sidebar-' . $i,
+						// translators: %s: Index of the sidebar.
+						'description'   => sprintf( __( 'Appears on the posts and pages as sidebar %s.', 'greenlet' ), $i ),
+						'before_widget' => '<div id="%1$s" class="widget %2$s">',
+						'after_widget'  => '</div><!-- end widget -->',
+						'before_title'  => '<h5 class="widget-title">',
+						'after_title'   => '</h5>',
 					)
 				);
 			}
@@ -219,31 +223,33 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 			// Crate position array to loop through.
 			$position = array( 'topbar', 'header', 'semifooter', 'footer' );
 
-			// For each positions in the array,
+			// For each positions in the array.
 			foreach ( $position as $pos ) {
 
-				// If the content source set in options is widgets,
+				// If the content source set in options is widgets.
 				if ( of_get_option( $pos . '_content_source' ) === 'widgets' ) {
 
 					// Get position template option.
-					$layout_option	= $pos . '_template';
-					$layout			= of_get_option( $layout_option ) ? of_get_option( $layout_option ) : '4-4-4';
+					$layout_option = $pos . '_template';
+					$layout        = of_get_option( $layout_option ) ? of_get_option( $layout_option ) : '4-4-4';
 
 					// Create new column object.
 					// @see library/classes.php.
 					$cobj = new ColumnObject( $layout );
 
 					// For total number of columns register sidebars.
-					for ( $i=1; $i <= ($cobj->total); $i++ ) {
+					for ( $i = 1; $i <= ( $cobj->total ); $i++ ) {
 						register_sidebar(
 							array(
-								'name' => sprintf(__( '%s Widget Area %s', 'greenlet' ), ucfirst($pos), $i),
-								'id' => $pos . '-sidebar-' . $i,
-								'description' => sprintf(__( 'Appears on the %s as column %s.', 'greenlet' ), $pos, $i),
+								// translators: %1$s: Widget Position. %2$s: Widget Column.
+								'name'          => sprintf( __( '%1$s Widget Area %2$s', 'greenlet' ), ucfirst( $pos ), $i ),
+								'id'            => $pos . '-sidebar-' . $i,
+								// translators: %1$s: Widget Position. %2$s: Widget Column.
+								'description'   => sprintf( __( 'Appears on the %1$s as column %2$s.', 'greenlet' ), $pos, $i ),
 								'before_widget' => '<div id="%1$s" class="widget %2$s">',
-								'after_widget' => '</div> <!-- end widget -->',
-								'before_title' => '<h5 class="widget-title">',
-								'after_title' => '</h5>',
+								'after_widget'  => '</div> <!-- end widget -->',
+								'before_title'  => '<h5 class="widget-title">',
+								'after_title'   => '</h5>',
 							)
 						);
 					}
@@ -255,23 +261,39 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	add_action( 'widgets_init', 'greenlet_widget_init' );
 }
 
-function print_defered_style( $href ) {
-	// Todo: Prefetch if external URL.
-	printf( '<link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">', $href );
-	printf( '<noscript><link rel="stylesheet" href="%s"></noscript>', $href );
+if ( ! function_exists( 'greenlet_defer_style' ) ) {
+	/**
+	 * Defer stylesheet.
+	 *
+	 * @param string $href Link href.
+	 */
+	function greenlet_defer_style( $href ) {
+		// Todo: Prefetch if external URL.
+		printf( '<link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">', esc_url( $href ) );
+		printf( '<noscript><link rel="stylesheet" href="%s"></noscript>', esc_url( $href ) ); // phpcs:ignore
+	}
 }
 
 if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
-	function greenlet_enqueue_style( $handle, $href, $defer = null ) {
-		if ( $defer === null ) {
-			$defer	= of_get_option( 'defer_css' )	? of_get_option( 'defer_css' )	: 0;
+	/**
+	 * Enqueue stylesheet.
+	 *
+	 * @param string           $handle Stylesheet handle.
+	 * @param string           $src    Link href.
+	 * @param bool|null        $defer  Whether to defer.
+	 * @param array            $deps   An array of registered stylesheet handles.
+	 * @param string|bool|null $ver    Stylesheet version number.
+	 */
+	function greenlet_enqueue_style( $handle, $src, $defer = null, $deps = array(), $ver = false ) {
+		if ( null === $defer ) {
+			$defer = of_get_option( 'defer_css' ) ? of_get_option( 'defer_css' ) : 0;
 		}
 		if ( $defer ) {
-			print_defered_style( $href );
+			greenlet_defer_style( $src );
 			return;
 		}
 
-		wp_enqueue_style( $handle, $href );
+		wp_enqueue_style( $handle, $src, $deps, $ver );
 	}
 }
 
@@ -293,17 +315,21 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		}
 
 		global $wp_query, $wp, $wp_rewrite;
-		wp_enqueue_script( 'greenlet-custom', SCRIPTS_URL . '/scripts.js', array(), false, true );
-		wp_localize_script( 'greenlet-custom', 'pagination_ajax', array(
-			'ajaxurl'		=> admin_url( 'admin-ajax.php' ),
-			'current_url'	=> preg_replace( "~paged?/[0-9]+/?~", "", home_url( $wp->request ) ),
-			'page'			=> get_query_var( 'paged', 1 ),
-			'permalinks'	=> $wp_rewrite->using_permalinks(),
-			'query_vars'	=> json_encode( $wp_query->query_vars )
-			));
+		wp_enqueue_script( 'greenlet-custom', SCRIPTS_URL . '/scripts.js', array(), GREENLET_VERSION, true );
+		wp_localize_script(
+			'greenlet-custom',
+			'pagination_ajax',
+			array(
+				'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+				'current_url' => preg_replace( '~paged?/[0-9]+/?~', '', home_url( $wp->request ) ),
+				'page'        => get_query_var( 'paged', 1 ),
+				'permalinks'  => $wp_rewrite->using_permalinks(),
+				'query_vars'  => wp_json_encode( $wp_query->query_vars ),
+			)
+		);
 
-		$css_framework	= of_get_option( 'css_framework' )	? of_get_option( 'css_framework' )	: 'default';
-		$load_js		= of_get_option( 'load_js' )		? of_get_option( 'load_js' )		: 0;
+		$css_framework = of_get_option( 'css_framework' ) ? of_get_option( 'css_framework' ) : 'default';
+		$load_js       = of_get_option( 'load_js' ) ? of_get_option( 'load_js' ) : 0;
 
 		switch ( $css_framework ) {
 			case 'default':
@@ -311,18 +337,20 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$css_path	= of_get_option( 'css_path' ) ? of_get_option( 'css_path' )	: 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
-				$js_path	= of_get_option( 'js_path' )  ? of_get_option( 'js_path' )	: 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
+				$css_path = of_get_option( 'css_path' ) ? of_get_option( 'css_path' ) : 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
+				$js_path  = of_get_option( 'js_path' ) ? of_get_option( 'js_path' ) : 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
 				break;
 			default:
-				$css_path	= STYLES_URL . '/default.css';
-				$js_path	= '';
+				$css_path = STYLES_URL . '/default.css';
+				$js_path  = '';
 				break;
 		}
 
-		if ( $css_framework !== 'default' ) {
+		if ( 'default' !== $css_framework ) {
 			greenlet_enqueue_style( $css_framework, $css_path );
-			if ( $load_js == 1 ) wp_enqueue_script( $css_framework . '-js', $js_path, array( 'jquery' ), false, true );
+			if ( 1 === $load_js ) {
+				wp_enqueue_script( $css_framework . '-js', $js_path, array( 'jquery' ), GREENLET_VERSION, true );
+			}
 		}
 
 		$styles_href = STYLES_URL . '/styles.css';
@@ -344,44 +372,29 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 	 * @see wp-includes/general-template.php.
 	 */
 	function greenlet_load_wp_head() {
+		$main_width = of_get_option( 'container_width' ) ? of_get_option( 'container_width' ) : '1170px';
+		$main_class = '.container';
 
-		// Get the logos URL from options, else set to default.
-		$logo				= (array)apply_filters( 'greenlet_logo',			array( IMAGES_URL . '/logo.png' ) );
-		$logo_retina		= (array)apply_filters( 'greenlet_logo_retina',	array( IMAGES_URL . '/logo@2x.png' ) );
-		$fw					= of_get_option( 'css_framework' )		? of_get_option( 'css_framework' )		: 'default'	;
-		$topbar_height		= of_get_option( 'topbar_height' )		? of_get_option( 'topbar_height' )		: '50px'	;
-		$main_width			= of_get_option( 'container_width' )	? of_get_option( 'container_width' )	: '1170px'	;
-
-		if ( $fw === 'foundation' || $fw === 'gumby' ) {
-			$main_class = '.row';
-		} else {
-			$main_class = '.container';
-		}
-
-		//$logo_size = isset( $logo[1] ) ? $logo[1] : getimagesize( $logo[0] );
 		?>
 		<style type="text/css">
 			@media (min-width: 1281px) {
-				<?php echo $main_class; ?> {
-					/* width: <?php echo $main_width; ?>; */
-					max-width: <?php echo $main_width; ?>;
+				<?php echo esc_html( $main_class ); ?> {
+					max-width: <?php echo esc_html( $main_width ); ?>;
 				}
 			}
-
 		<?php
-		/*if ( of_get_option( 'show_topbar' ) ) {
-			echo ".topbar{ height: $topbar_height; margin-top: -$topbar_height;}";
-			echo "\r\n";
-			echo "body{ padding-top: $topbar_height;}";
-			echo "\r\n";
-		}*/
+
 		if ( of_get_option( 'fixed_topbar' ) ) {
-			function fixed_top_body( $classes ) {
-				$classes[] = 'fixed-topbar';
-				return $classes;
-			}
-			add_filter( 'body_class', 'fixed_top_body' );
-		} ?>
+			add_filter(
+				'body_class',
+				function ( $classes ) {
+					$classes[] = 'fixed-topbar';
+					return $classes;
+				}
+			);
+		}
+
+		?>
 		</style>
 		<?php
 	}
@@ -392,7 +405,7 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 
 if ( ! function_exists( 'greenlet' ) ) {
 	/**
-	 * Circle function.
+	 * Greenlet function.
 	 *
 	 * Gets header and footer.
 	 * Creates main action hooks.
@@ -420,7 +433,7 @@ if ( ! function_exists( 'greenlet' ) ) {
 
 if ( ! function_exists( 'greenlet_cover' ) ) {
 	/**
-	 * Circle Cover function.
+	 * Greenlet Cover function.
 	 *
 	 * Get templates for Topbar, Header, Semifooter, Footer.
 	 * Get templates for logo and registered menus.
@@ -433,38 +446,38 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 	function greenlet_cover( $pos = 'header' ) {
 
 		// Set variables.
-		$layout_option	= $pos . '_template';
-		$source_option	= $pos . '_content_source';
+		$layout_option = $pos . '_template';
+		$source_option = $pos . '_content_source';
 
 		// Get logo and menu positions from options, else set default values.
-		$logo_position	= of_get_option( 'logo_position' )	? of_get_option( 'logo_position' )	: 'header-1';
-		$mmenu_position	= of_get_option( 'mmenu_position' )	? of_get_option( 'mmenu_position' )	: 'header-2';
-		$smenu_position	= of_get_option( 'smenu_position' )	? of_get_option( 'smenu_position' )	: 'dont-show';
-		$fmenu_position	= of_get_option( 'fmenu_position' )	? of_get_option( 'fmenu_position' )	: 'select';
-		$layout			= of_get_option( $layout_option )	? of_get_option( $layout_option )	: '4-8';
-		$source			= of_get_option( $source_option )	? of_get_option( $source_option )	: 'ceditor';
+		$logo_position  = of_get_option( 'logo_position' ) ? of_get_option( 'logo_position' ) : 'header-1';
+		$mmenu_position = of_get_option( 'mmenu_position' ) ? of_get_option( 'mmenu_position' ) : 'header-2';
+		$smenu_position = of_get_option( 'smenu_position' ) ? of_get_option( 'smenu_position' ) : 'dont-show';
+		$fmenu_position = of_get_option( 'fmenu_position' ) ? of_get_option( 'fmenu_position' ) : 'select';
+		$layout         = of_get_option( $layout_option ) ? of_get_option( $layout_option ) : '4-8';
+		$source         = of_get_option( $source_option ) ? of_get_option( $source_option ) : 'ceditor';
 
 		// Create new column object with current layout as parameter.
 		// @see library/classes.php.
 		$cobj = new ColumnObject( $layout );
 
-		// For each columns in the array,
+		// For each columns in the array.
 		$i = 1;
 		foreach ( $cobj->array as $col ) {
 
 			$args = array(
 				'primary' => "{$pos}-{$i} {$pos}-column",
-				'width' => $col
+				'width'   => $col,
 			);
 
-			printf( '<div %s>', greenlet_attr( $args ) );
+			printf( '<div %s>', wp_kses( greenlet_attr( $args ), null ) );
 
 			do_action( "greenlet_before_{$pos}_{$i}_content" );
 
 			// If current position has logo or menu, get template part.
-			switch ( $pos.'-'.$i ) {
+			switch ( $pos . '-' . $i ) {
 
-				case $logo_position :
+				case $logo_position:
 					get_template_part( 'templates/logo' );
 					break;
 
@@ -487,7 +500,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 				case 'ceditor':
 					// Echo Saved content from content editor option.
 					$template_part = $pos . '_' . $i . '_textarea';
-					echo of_get_option( $template_part );
+					echo of_get_option( $template_part ); // phpcs:ignore
 					break;
 
 				case 'widgets':
@@ -497,13 +510,13 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 
 				case 'manual':
 					// Get current column template.
-					get_template_part( 'templates/'.$pos.'/column', ($i) );
+					get_template_part( 'templates/' . $pos . '/column', ( $i ) );
 					break;
 			}
 
 			do_action( "greenlet_after_{$pos}_{$i}_content" );
 
-			echo "</div>";
+			echo '</div>';
 			$i++;
 		}
 	}
@@ -521,38 +534,41 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 	function greenlet_get_min_sidebars() {
 
 		// Get file names in the template directory, exclude current and parent.
-		$files = array_filter(scandir( TEMPLATES_DIR ), function($item) {
-    		return $item[0] !== '.';
-		});
+		$files = array_filter(
+			scandir( TEMPLATES_DIR ),
+			function( $item ) {
+				return '.' !== $item[0];
+			}
+		);
 
 		// Get template names from options, else set default values.
-		$files[] = of_get_option( 'default_template' )		? of_get_option( 'default_template' )		: '12';
-		$files[] = of_get_option( 'default_post_template' )	? of_get_option( 'default_post_template' )	: '12';
-		$files[] = of_get_option( 'home_template' )			? of_get_option( 'home_template' )			: '12';
-		$files[] = of_get_option( 'archive_template' )		? of_get_option( 'archive_template' )		: '12';
+		$files[] = of_get_option( 'default_template' ) ? of_get_option( 'default_template' ) : '12';
+		$files[] = of_get_option( 'default_post_template' ) ? of_get_option( 'default_post_template' ) : '12';
+		$files[] = of_get_option( 'home_template' ) ? of_get_option( 'home_template' ) : '12';
+		$files[] = of_get_option( 'archive_template' ) ? of_get_option( 'archive_template' ) : '12';
 
 		$cols = array();
 
-		// For each file names in the array,
+		// For each file names in the array.
 		foreach ( $files as $file ) {
 
 			// Remove php file extension if exist.
-			$file = str_replace('.php', '', $file );
+			$file = str_replace( '.php', '', $file );
 
 			// Store each columns in array.
 			$cols_array = explode( '-', $file );
 
-			// If array contains only numbers,
+			// If array contains only numbers.
 			if ( is_numeric_array( $cols_array ) ) {
 
 				// Count columns in array.
-				$cols[] = sizeof( $cols_array );
+				$cols[] = count( $cols_array );
 			}
 		}
 
 		// Count maximum value in array, remove 1 and return.
-		$max_cols		= max( $cols );
-		$min_sidebars	= $max_cols - 1;
+		$max_cols     = max( $cols );
+		$min_sidebars = $max_cols - 1;
 
 		return $min_sidebars;
 	}
@@ -561,11 +577,14 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 
 if ( ! function_exists( 'is_numeric_array' ) ) {
 	/**
-	 * Check if array is numeric.
+	 * Check if the array is numeric.
+	 *
+	 * @param array $array Input array.
+	 * @return bool        Whether array is numeric.
 	 */
 	function is_numeric_array( $array ) {
 		$nonints = preg_grep( '/\D/', $array );
-		return( count( $nonints ) == 0 );
+		return( 0 === count( $nonints ) );
 	}
 }
 
@@ -577,18 +596,50 @@ if ( ! function_exists( 'greenlet_template_sequence' ) ) {
 	function greenlet_template_sequence() {
 
 		// Get ajax post data.
-		$template_name	= isset( $_REQUEST['template'] )	? $_REQUEST['template']	: null;
-		$context		= isset( $_REQUEST['context'] )		? $_REQUEST['context']	: null;
+		// Todo: Nonce verification
+		$template_name = isset( $_REQUEST[ 'template' ] ) ? $_REQUEST[ 'template' ] : null;
+		$context       = isset( $_REQUEST[ 'context' ] ) ? $_REQUEST[ 'context' ] : null;
 
 		// Get templates columns and content sequence.
-		$options		= greenlet_column_options( $template_name );
-		$selections		= greenlet_column_content_options();
+		$options    = greenlet_column_options( $template_name );
+		$selections = greenlet_column_content_options();
 
 		// Get sequence html, Output and terminate the current script.
-		$output			= greenlet_sequencer( $options, $selections, $context, array(
-			'main', 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5', 'sidebar-6', 'sidebar-7', 'sidebar-8' ) );
-		echo $output;
+		$output = greenlet_sequencer(
+			$options,
+			$selections,
+			$context,
+			array( 'main', 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5', 'sidebar-6', 'sidebar-7', 'sidebar-8' )
+		);
+
+		echo wp_kses( $output, greenlet_sequencer_tags() );
 		die();
+	}
+}
+
+if ( ! function_exists( 'greenlet_sequencer_tags' ) ) {
+	/**
+	 * Retrieve sequencer allowed tags.
+	 *
+	 * @return array Sequencer allowed Tags
+	 */
+	function greenlet_sequencer_tags() {
+		return array(
+			'div'    => array(),
+			'label'  => array(
+				'for' => array(),
+			),
+			'select' => array(
+				'id'    => array(),
+				'class' => array(),
+				'name'  => array(),
+				'style' => array(),
+			),
+			'option' => array(
+				'selected' => array(),
+				'value'    => array(),
+			),
+		);
 	}
 }
 
@@ -598,11 +649,11 @@ if ( ! function_exists( 'greenlet_sequencer' ) ) {
 	 * Column sequencer
 	 * Generates template columns and content sequence.
 	 *
-	 * @param	array	$options	template columns
-	 * @param	array	$selections	column content
-	 * @param	string	$context	for current option
-	 * @param	array	$sequence	previously set sequence
-	 * @return	string				column sequence html
+	 * @param    array  $options    template columns.
+	 * @param    array  $selections column content.
+	 * @param    string $context    for current option.
+	 * @param    array  $sequence   previously set sequence.
+	 * @return   string             column sequence html
 	 */
 	function greenlet_sequencer( $options, $selections, $context = null, $sequence = null ) {
 
@@ -610,19 +661,20 @@ if ( ! function_exists( 'greenlet_sequencer' ) ) {
 
 		foreach ( $options as $key => $option ) {
 
-			$selected	= '';
-			$label		= $option;
-			$option		= preg_replace('/[^a-zA-Z0-9._\-]/', '', strtolower($key));
+			$selected = '';
+			$label    = $option;
+			$option   = preg_replace( '/[^a-zA-Z0-9._\-]/', '', strtolower( $key ) );
 
-			$id	= $name	= 'template-sequence[' . $option . ']';
+			$id   = 'template-sequence[' . $option . ']';
+			$name = 'template-sequence[' . $option . ']';
 
 			// If context exist, set option framework id and name.
 			if ( $context ) {
 
-				$options_framework = new Options_Framework;
-				$option_name = $options_framework->get_option_name();
-				$id		= $option_name . '-' . $context . '-'. $option;
-				$name	= $option_name . '[' . $context . '][' . $option .']';
+				$options_framework = new Options_Framework();
+				$option_name       = $options_framework->get_option_name();
+				$id                = $option_name . '-' . $context . '-' . $option;
+				$name              = $option_name . '[' . $context . '][' . $option . ']';
 			}
 
 			$output .= '<div><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>';
@@ -631,7 +683,7 @@ if ( ! function_exists( 'greenlet_sequencer' ) ) {
 				if ( isset( $sequence[ $option ] ) ) {
 					$selected = selected( $sequence[ $option ], $key2, false );
 				}
-				$output .= '<option'. $selected .' value="' . esc_attr( $key2 ) . '">' . esc_html( $option2 ) . '</option>';
+				$output .= '<option' . $selected . ' value="' . esc_attr( $key2 ) . '">' . esc_html( $option2 ) . '</option>';
 			}
 			$output .= '</select></div>';
 		}
@@ -646,19 +698,19 @@ if ( ! function_exists( 'greenlet_cover_columns' ) ) {
 	/**
 	 * Gets cover (header, footer) columns.
 	 *
-	 * @param	array	$positions	Cover positions
-	 * @return	array				List of columns
+	 * @param  array $positions Cover positions.
+	 * @return array            List of columns
 	 */
 	function greenlet_cover_columns( $positions = array( 'topbar', 'header', 'semifooter', 'footer' ) ) {
 
 		$cover_columns = array( 'dont-show' => 'Do Not Show' );
 
 		foreach ( $positions as $key => $position ) {
-			$cols = of_get_option( "{$position}_template" );
-			$array = explode('-', $cols);
+			$cols  = of_get_option( "{$position}_template" );
+			$array = explode( '-', $cols );
 			foreach ( $array as $id => $width ) {
 				$id++;
-				$cover_columns[ $position . '-' . $id] = ucfirst( $position ) . ' Column ' . $id . ' (width = ' . $width . ')';
+				$cover_columns[ $position . '-' . $id ] = ucfirst( $position ) . ' Column ' . $id . ' (width = ' . $width . ')';
 			}
 		}
 
@@ -671,7 +723,7 @@ if ( ! function_exists( 'greenlet_column_options' ) ) {
 	/**
 	 * Returns column array for current template selection.
 	 *
-	 * @param  string $layout template option
+	 * @param  string $layout template option.
 	 * @return array columns
 	 */
 	function greenlet_column_options( $layout = 'default_template' ) {
@@ -680,19 +732,19 @@ if ( ! function_exists( 'greenlet_column_options' ) ) {
 		if ( of_get_option( $layout ) ) {
 			$cols = of_get_option( $layout );
 		} else {
-			$cols = str_replace('.php', '', basename($layout) );
+			$cols = str_replace( '.php', '', basename( $layout ) );
 		}
 
 		// Assign to column array.
-		$cols	= explode( '-', $cols );
-		$array	= array();
+		$cols  = explode( '-', $cols );
+		$array = array();
 
 		// If array is numeric, return columns array. Else return empty.
 		if ( is_numeric_array( $cols ) ) {
 
 			$total = count( $cols );
-			for ( $i=1; $i <= $total ; $i++) {
-				$array[ $i - 1 ] = 'Column '.$i;
+			for ( $i = 1; $i <= $total; $i++ ) {
+				$array[ $i - 1 ] = 'Column ' . $i;
 			}
 		}
 
@@ -710,123 +762,13 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 	 */
 	function greenlet_column_content_options() {
 
-		$array[ 'main' ] = 'Main Content';
+		$array['main'] = 'Main Content';
 
 		foreach ( $GLOBALS['wp_registered_sidebars'] as $sidebar ) {
-	    	$array[ $sidebar['id'] ] = $sidebar['name'];
+			$array[ $sidebar['id'] ] = $sidebar['name'];
 		}
 
 		return $array;
-	}
-}
-
-
-if ( ! function_exists( 'greenlet_google_fonts' ) ) {
-	/**
-	 * Sends google fonts list upon ajax. Or returns fontlist.
-	 *
-	 * @param	string	$add_gf	Whether to add googlefonts
-	 * @param	string	$name	Googlefont name
-	 * @param	boolean	$return	Whether to return fonts array
-	 * @return	mixed			Either array or output fonts
-	 */
-	function greenlet_google_fonts( $add_gf = null, $name = null, $return = false ) {
-
-		// Get ajax post data.
-		$option_id	= isset( $_REQUEST['id'] )	? ( $_REQUEST['id'] )	: false;
-		$add_gf		= isset( $_REQUEST['add'] )	? $_REQUEST['add']		: $add_gf;
-
-		$name		= isset( $_REQUEST['name'] ) ? $_REQUEST['name']	: $name;
-
-		// Get google fonts json.
-		$link		= LIBRARY_URL . '/options/googlefonts.json';
-		$google		= json_decode( wp_remote_fopen( $link ), 'assoc' );
-		$array		= array();
-
-		if ( $name ) {
-
-			$style = $google[ $name ];
-
-			foreach ($style['variants'] as $key => $value) {
-				$array[$value['id']] = $value['name'];
-			}
-		}
-
-		if ( $add_gf === 'false' ) {
-
-			$options = Options_Framework::options_array_by_id( $option_id );
-			$array['default']	= isset( $options['options']['face'] )	? $options['options']['face']	: of_recognized_font_faces();
-			$array['styles']	= isset( $options['options']['style'] )	? $options['options']['style']	: of_recognized_font_styles();
-		} elseif ( $add_gf === 'true' ) {
-
-			$gf_array	= array();
-			foreach ($google as $key => $value) {
-				$gf_array[] = $key;
-			}
-			$array[ 'google' ] = $gf_array;
-		}
-
-		if ( $return === true ) return $array;
-
-		$output	= json_encode($array);
-		echo $output;
-		die();
-	}
-}
-
-
-if ( ! function_exists( 'greenlet_typography_css' ) ) {
-	/**
-	 * Generate css for typography option saved.
-	 * If google font is true, enqueues required style link.
-	 *
-	 * @param	string	$id		typography option id
-	 * @param	boolean	$size	font-size css
-	 * @param	boolean	$family	font-family css
-	 * @param	boolean	$color	font color css
-	 * @param	boolean	$weight	font_weight css
-	 * @param	boolean	$style	font_style css
-	 * @return	string			generated css
-	 */
-	function greenlet_typography_css( $id = '', $size = true, $family = true, $color = true, $weight = true, $style = true ) {
-
-		$output = '{';
-		$fweight = $fstyle = '';
-		$array = of_get_option( $id );
-		$fallback = apply_filters( 'greenlet_fallback_fonts', 'sans-serif, serif' );
-		$fallback = apply_filters( "{$id}_fallback_fonts", $fallback, $array['face'] );
-
-		if ( $array['googlefont'] ) {
-			$gflink = 'http://fonts.googleapis.com/css?family=';
-			$face = str_replace( ' ', '+', $array['face'] );
-			wp_register_style( $face . $array['style'], $gflink . $face . ':' . $array['style'] );
-			wp_enqueue_style( $face . $array['style'] );
-		}
-
-		if ( $array['size'] && $size ) $output .= sprintf( 'font-size: %s;', $array['size'] );
-		if ( $array['face'] && $family ) $output .= sprintf( 'font-family: %s, %s;', $array['face'], $fallback );
-		if ( $array['color'] && $color ) $output .= sprintf( 'color: %s;', $array['color'] );
-		if ( $array['style'] ) {
-			switch( $array['style'] ){
-				case 'normal': $fweight = $fstyle = 'normal';
-				break;
-				case 'bold': $fweight = 'bold'; $fstyle = 'normal';
-				break;
-				case 'italic': $fweight = 'normal'; $fstyle = 'italic';
-				break;
-				case 'bold italic':
-				case 'italic bold': $fweight = 'bold'; $fstyle = 'italic';
-				break;
-				default:
-				preg_match( '/(\d+)(\w*)/', $array['style'], $matches );
-				$fweight = $matches[1] ? $matches[1] : 'normal';
-				$fstyle = $matches[2] ? $matches[2] : 'normal';
-			}
-			if ( $weight ) $output .= sprintf( 'font-weight: %s;', $fweight  );
-			if ( $style ) $output .= sprintf( 'font-style: %s;', $fstyle  );
-		}
-		$output .= '}';
-		return $output;
 	}
 }
 
@@ -835,9 +777,9 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) {
 	/**
 	 * Filters wp_title to print a neat <title> tag based on what is being viewed.
 	 *
-	 * @param	string	$title	Default title text for current view.
-	 * @param	string	$sep	Optional separator.
-	 * @return	string	The		filtered title.
+	 * @param    string $title Default title text for current view.
+	 * @param    string $sep   Optional separator.
+	 * @return    string    The        filtered title.
 	 */
 	function greenlet_wp_title( $title, $sep ) {
 		if ( is_feed() ) {
@@ -846,7 +788,7 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) {
 
 		global $page, $paged;
 
-		// Add the blog name
+		// Add the blog name.
 		$title .= get_bloginfo( 'name', 'display' );
 
 		// Add the blog description for the home/front page.
@@ -855,9 +797,10 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) {
 			$title .= " $sep $site_description";
 		}
 
-		// Add a page number if necessary:
+		// Add a page number if necessary.
 		if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
-			$title .= " $sep " . sprintf( __( 'Page %s', 'greenlet' ), max( $paged, $page ) );
+			// translators: %s: Page number.
+			$title .= " $sep " . sprintf( esc_html__( 'Page %s', 'greenlet' ), max( $paged, $page ) );
 		}
 
 		return $title;
@@ -895,19 +838,29 @@ if ( ! function_exists( 'greenlet_header_style' ) ) :
 			return;
 		}
 
-		$css = '.site-header{ background: url(' . $header_image . '); }';
-		$greenlet_css = apply_filters( 'greenlet_header_css', $css, $header_image ); ?>
+		$css          = '.site-header{ background: url(' . $header_image . '); }';
+		$greenlet_css = apply_filters( 'greenlet_header_css', $css, $header_image );
+		?>
 
 		<style type="text/css" id="greenlet-header-css">
-		<?php echo $greenlet_css; ?>
+			<?php echo $greenlet_css; // phpcs:ignore ?>
 		</style>
 
 		<?php
 	}
 endif;
 
-add_action('wp_enqueue_scripts', 'greenlet_deregister_scripts', 99);
+/**
+ * Get meta description.
+ *
+ * @return string Meta description.
+ */
+function greenlet_meta_description() {
+	if ( is_single() ) {
+		$description = single_post_title( '', false );
+	} else {
+		$description = get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
+	}
 
-function greenlet_deregister_scripts() {
-	// wp_dequeue_script( 'jquery' );
+	return $description;
 }

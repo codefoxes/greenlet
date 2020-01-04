@@ -1,9 +1,8 @@
-<?php 
+<?php
 /**
- * template-full-width.php
+ * Template Name: Full Width Page.
  *
- * Template Name: Full Width Page
+ * @package greenlet\templates
  */
-?>
 
-<?php get_template_part( 'page' ); ?>
+get_template_part( 'page' );

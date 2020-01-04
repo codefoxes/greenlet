@@ -1,5 +1,7 @@
 <?php
 /**
+ * Options Framework.
+ *
  * @package   Options_Framework
  * @author    Devin Price <devin@wptheming.com>
  * @license   GPL-2.0+
@@ -7,6 +9,9 @@
  * @copyright 2010-2014 WP Theming
  */
 
+/**
+ * Class Options_Framework
+ */
 class Options_Framework {
 
 	/**
@@ -22,19 +27,19 @@ class Options_Framework {
 	 *
 	 * @since 1.9.0
 	 */
-	function get_option_name() {
+	public function get_option_name() {
 
 		$name = '';
 
-		// Gets option name as defined in the theme
+		// Gets option name as defined in the theme.
 		if ( function_exists( 'optionsframework_option_name' ) ) {
 			$name = optionsframework_option_name();
 		}
 
-		// Fallback
-		if ( '' == $name ) {
+		// Fallback.
+		if ( '' === $name ) {
 			$name = get_option( 'stylesheet' );
-			$name = preg_replace( "/\W/", "_", strtolower( $name ) );
+			$name = preg_replace( '/\W/', '_', strtolower( $name ) );
 		}
 
 		return apply_filters( 'options_framework_option_name', $name );
@@ -69,36 +74,48 @@ class Options_Framework {
 	 * return array(...);
 	 * </code>
 	 *
+	 * @todo: Should not be prefixed with an underscore to indicate visibility.
+	 *
 	 * @return array (by reference)
 	 */
-	static function &_optionsframework_options() {
+	static function &_optionsframework_options() { // phpcs:ignore
 		static $options = null;
 
-		if ( !$options ) {
-	        // Load options from options.php file (if it exists)
-	        $location = apply_filters( 'options_framework_location', array( 'options.php' ) );
-	        if ( $optionsfile = locate_template( $location ) ) {
-	            $maybe_options = load_template( $optionsfile );
-	            if ( is_array( $maybe_options ) ) {
+		if ( ! $options ) {
+			// Load options from options.php file (if it exists).
+			$location    = apply_filters( 'options_framework_location', array( 'options.php' ) );
+			$optionsfile = locate_template( $location );
+
+			if ( '' !== $optionsfile ) {
+				$maybe_options = load_template( $optionsfile );
+				if ( is_array( $maybe_options ) ) {
 					$options = $maybe_options;
-	            } else if ( function_exists( 'optionsframework_options' ) ) {
+				} elseif ( function_exists( 'optionsframework_options' ) ) {
 					$options = optionsframework_options();
 				}
-	        }
+			}
 
-	        // Allow setting/manipulating options via filters
-	        $options = apply_filters( 'of_options', $options );
+			// Allow setting/manipulating options via filters.
+			$options = apply_filters( 'of_options', $options );
 		}
 
 		return $options;
 	}
 
-	static function options_array_by_id( $id ){
+	/**
+	 * Retrieve Options by id.
+	 *
+	 * @param string $id Option id.
+	 * @return mixed Options.
+	 */
+	public static function options_array_by_id( $id ) {
 		$options = & self::_optionsframework_options();
 
 		foreach ( $options as $key => $val ) {
-			if ( isset( $val['id'] ) && ( $val[ 'id' ] === $id ) ) return $val;
+			if ( isset( $val['id'] ) && ( $val['id'] === $id ) ) {
+				return $val;
+			}
 		}
+		return false;
 	}
-
 }

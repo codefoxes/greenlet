@@ -1,10 +1,10 @@
 <?php
 /**
- * footer.php
+ * Footer Template.
  *
  * The template for displaying the footer.
  *
- * @package Greenlet
+ * @package greenlet
  */
 
 echo '</div>';

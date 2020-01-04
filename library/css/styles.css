@@ -107,7 +107,7 @@ body {
 
 .entry-footer {
 	padding-top: 2em;
-    border-top: 1px solid #ccc;
+	border-top: 1px solid #ccc;
 }
 
 .entry-footer .author-avatar {
@@ -128,9 +128,9 @@ body {
 
 .entry-footer .author-heading {
 	font-size: 1em;
-    margin: 0;
-    line-height: 40px;
-    padding-left: 20px;
+	margin: 0;
+	line-height: 40px;
+	padding-left: 20px;
 }
 
 .search-form input[type=search] {
@@ -162,8 +162,8 @@ body {
 
 .breadcrumb {
 	padding: .8em 3em;
-    margin-bottom: 30px;
-    background: #fff;
+	margin-bottom: 30px;
+	background: #fff;
 }
 
 .breadcrumb > div {
@@ -223,9 +223,9 @@ body {
 }
 
 .comment-form:after {
-    content: '';
-    display: table;
-    clear: both;
+	content: '';
+	display: table;
+	clear: both;
 }
 
 .copyright {

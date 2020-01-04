@@ -1,9 +1,8 @@
-<?php 
+<?php
 /**
- * template-4-8.php
+ * Template Name: Side-4, Main-8.
  *
- * Template Name: Side-4, Main-8
+ * @package greenlet\templates
  */
-?>
 
-<?php get_template_part( 'page' ); ?>
+get_template_part( 'page' );

@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Circle 1.0.0\n"
+"Project-Id-Version: Greenlet 1.0.0\n"
 "Report-Msgid-Bugs-To: Karthik <me@kart.tk>\n"
 "POT-Creation-Date: 2015-02-03 06:00:00+00:00\n"
 "MIME-Version: 1.0\n"

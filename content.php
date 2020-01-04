@@ -1,8 +1,10 @@
 <?php
 /**
- * content.php
+ * Content Template.
  *
  * The template for displaying post content.
+ *
+ * @package greenlet
  */
 
 do_action( 'greenlet_before_entry' );

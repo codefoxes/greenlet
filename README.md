@@ -8,7 +8,7 @@ It gives you 100/100 in Lighthouse tool if followed the following: (Things a the
 
 Use Greenlet as base theme and as a starting point to create the child theme according to your need.
 
-Features:
+## Features:
 - Scores 100/100 Google's Lighthouse Page Speed Tool
 - Extremely Lightweight (~25KB)
 - Schema Markup Added
@@ -16,3 +16,6 @@ Features:
 - Select Greenlet CSS Framework or Bootstrap
 - 8 Predefined Layouts (extendable)
 - Numbered or Ajax or Infinite Scroll - Pagination
+
+## Coding Standards
+PHP CS: WordPress
