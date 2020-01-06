@@ -122,14 +122,14 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'css_framework',
 		'sargs' => array(
-			'default' => 'greenlet',
+			'default' => 'default',
 		),
 		'cargs' => array(
 			'type'    => 'radio',
 			'section' => 'framework',
 			'label'   => __( 'CSS Framework' ),
 			'choices' => array(
-				'greenlet'  => __( 'Greenlet Framework' ),
+				'default'  => __( 'Greenlet Framework' ),
 				'bootstrap' => __( 'Bootstrap 4.4.1' ),
 			),
 		),
@@ -168,7 +168,9 @@ function greenlet_options() {
 	$options[] = array(
 		'type'  => 'setting_control',
 		'id'    => 'critical_css',
-		'sargs' => array(),
+		'sargs' => array(
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_css'),
+		),
 		'cargs' => array(
 			'label'       => __( 'Critical CSS' ),
 			'description' => __( 'If CSS files are defered enter the critical css here.' ),
@@ -191,6 +193,85 @@ function greenlet_options() {
 			'section'     => 'framework',
 			'label'       => __( 'Load Respective JS' ),
 			'description' => __( 'Eg: If you select Bootstrap above, check this option to also load Bootstrap JS.' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'container_width',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'framework',
+			'label'       => __( 'Container Width' ),
+			'description' => __( 'Enter container width in percentage or pixels. Eg: 1170px or 80% ( Optional )' ),
+			'input_attrs' => array(
+				'placeholder' => __( 'Default' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'panel',
+		'id'   => 'layout',
+		'args' => array(
+			'title'       => __( 'Layout' ),
+			'description' => 'Site Layout.',
+			'priority'    => 35,
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'header_layout',
+		'args' => array(
+			'title' => __( 'Header Layout' ),
+			'panel' => 'layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'show_topbar',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'checkbox',
+			'section' => 'header_layout',
+			'label'   => __( 'Show Topbar' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'fixed_topbar',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'    => 'checkbox',
+			'section' => 'header_layout',
+			'label'   => __( 'Fixed Topbar' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'header_template',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'header_layout',
+			'label'       => __( 'Header Layout' ),
+			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only integers. Sum should be 12.)' ),
+			'input_attrs' => array(
+				'placeholder' => __( '8-4' ),
+			),
 		),
 	);
 

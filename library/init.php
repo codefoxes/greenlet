@@ -313,8 +313,8 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			)
 		);
 
-		$css_framework = gl_get_option( 'css_framework', 'greenlet' );
-		$load_js       = of_get_option( 'load_js' ) ? of_get_option( 'load_js' ) : 0;
+		$css_framework = gl_get_option( 'css_framework', 'default' );
+		$load_js       = gl_get_option( 'load_js', false );
 
 		switch ( $css_framework ) {
 			case 'default':
@@ -333,7 +333,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 
 		if ( 'default' !== $css_framework ) {
 			greenlet_enqueue_style( $css_framework, $css_path );
-			if ( 1 === $load_js ) {
+			if ( false !== $load_js ) {
 				wp_enqueue_script( $css_framework . '-js', $js_path, array( 'jquery' ), GREENLET_VERSION, true );
 			}
 		}

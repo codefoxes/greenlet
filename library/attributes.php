@@ -67,7 +67,7 @@ function greenlet_attr( $args, $get_array = false ) {
 	// If width is set.
 	if ( $width ) {
 		// Get css framework from options.
-		$css_framework = of_get_option( 'css_framework' ) ? of_get_option( 'css_framework' ) : 'default';
+		$css_framework = gl_get_option( 'css_framework', 'default' );
 
 		switch ( $css_framework ) {
 			case 'default':

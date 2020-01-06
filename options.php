@@ -86,67 +86,6 @@ function optionsframework_options() {
 	$options = apply_filters( 'greenlet_before_options', array() );
 
 	$options[] = array(
-		'name' => __( 'Basic Settings', 'greenlet' ),
-		'type' => 'heading',
-	);
-
-	$options[] = array(
-		'name'    => __( 'CSS Framework', 'greenlet' ),
-		'desc'    => __( 'Which css framework do you want to use ?', 'greenlet' ),
-		'id'      => 'css_framework',
-		'std'     => 'default',
-		'type'    => 'radio',
-		'options' => $css_frameworks,
-	);
-
-	$options[] = array(
-		'name'        => __( 'Have different version or cdn for css framework selected above?', 'greenlet' ),
-		'desc'        => __( 'Enter local or cdn path. ( Optional )', 'greenlet' ),
-		'id'          => 'css_path',
-		'placeholder' => 'http://somecdn.com/above_framework.css',
-		'type'        => 'text',
-	);
-
-	$options[] = array(
-		'name' => __( 'Load respective JS?', 'greenlet' ),
-		'desc' => __( 'Check to load js library for above framework. Eg: If you select Bootstrap above & check this option Bootstrap JS also loaded.', 'greenlet' ),
-		'id'   => 'load_js',
-		'type' => 'checkbox',
-	);
-
-	$options[] = array(
-		'name'        => __( 'Have different version or cdn for the above JavaScript?', 'greenlet' ),
-		'desc'        => __( 'Enter local or cdn path. ( Optional )', 'greenlet' ),
-		'id'          => 'js_path',
-		'placeholder' => 'http://somecdn.com/above_framework_jslibrary.js',
-		'type'        => 'text',
-	);
-
-	$options[] = array(
-		'name' => __( 'Defer CSS', 'greenlet' ),
-		'desc' => __( 'Load the above CSS framework after page load to increase page speed.', 'greenlet' ),
-		'id'   => 'defer_css',
-		'type' => 'checkbox',
-	);
-
-	$options[] = array(
-		'name'        => __( 'Critical CSS', 'greenlet' ),
-		'desc'        => __( 'If CSS files are defered enter the critical css here.', 'greenlet' ),
-		'id'          => 'critical_css',
-		'placeholder' => 'Leave blank to not add critical CSS',
-		'type'        => 'textarea',
-	);
-
-	$options[] = array(
-		'name'        => __( 'Container Width', 'greenlet' ),
-		'desc'        => __( 'Enter container width in percentage or pixels. Eg: 1170px or 80% ( Optional )', 'greenlet' ),
-		'id'          => 'container_width',
-		'class'       => 'mini',
-		'placeholder' => 'Default',
-		'type'        => 'text',
-	);
-
-	$options[] = array(
 		'name' => __( 'Main Layout', 'greenlet' ),
 		'type' => 'heading',
 	);

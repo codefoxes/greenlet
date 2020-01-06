@@ -42,6 +42,9 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 		$footer_bg    = gl_get_option( 'footer_bg', '#212121' );
 		$footer_color = gl_get_option( 'footer_color', '#fff' );
 
+		$critical_css = gl_get_option( 'critical_css', '' );
+		$defer_css    = gl_get_option( 'defer_css', false );
+
 		?>
 		<style type="text/css">
 			@media (min-width: 1281px) {
@@ -73,6 +76,10 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 			}
 			if ( false === $show_tagline ) {
 				echo '.site-tagline { display: none; }';
+			}
+
+			if ( false !== $defer_css && '' !== $critical_css ) {
+				echo $critical_css;
 			}
 			?>
 		</style>

@@ -40,6 +40,7 @@ class Customizer {
 	 * @return void
 	 */
 	public function __construct() {
+		require_once ADMIN_DIR . '/customizer/class-sanitizer.php';
 		// Todo: Load options.php from child theme if exists?
 		require_once ADMIN_DIR . '/customizer/options.php';
 
@@ -53,6 +54,8 @@ class Customizer {
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
+
+		wp_enqueue_script( 'greenlet_customizer', ADMIN_URL . '/customizer/customizer.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
 	}
 
 	/**
