@@ -3,26 +3,41 @@
  *
  */
 
-( function( wp ) {
-    // console.log( wp )
-} )( window.wp );
+jQuery( document ).ready( function( $ ) {
 
-jQuery(document).ready(function($){
+	// Hide Default Page Attributes Panel.
+	// Todo: Do this only if Gutenberg.
+	let i = 0;
+	const intId = setInterval(() => {
+		if ( i > 50 ) {
+			clearInterval( intId );
+		}
+		let panels = document.querySelectorAll( '.components-panel__body' );
+		if ( panels.length > 0 ) {
+			clearInterval( intId );
+
+			panels.forEach( ( panel ) => {
+				if ( panel.innerText === 'Page Attributes' ) {
+					panel.remove();
+				}
+			} );
+		}
+		i++;
+	}, 200 )
 
 	$( "#postparentdiv #page_template" ).change( function() {
 
 		$("#sequence").fadeTo( "fast", 0.5 );
 		$(".sequence.spinner").show();
 
-		var value = $(this).val();
+		var tempValue = $(this).val();
 
 		jQuery.ajax({
 		type : "post",
 		dataType : 'html',
 		url : template_ajax.ajaxurl,
-		data : {action: "greenlet_template_sequence", template: value },
+		data : {action: "greenlet_template_sequence", template: tempValue },
 		success: function(response) {
-			console.log(response);
 			$("#sequence").html( response );
 			$(".sequence.spinner").hide();
 			$("#sequence").fadeTo( "fast", 1 );
@@ -33,9 +48,9 @@ jQuery(document).ready(function($){
 	$( "#optionsframework .of-radio-img-img" ).click( function() {
 
 		var input = $(this).prev().prev();
-			value = input.val();
-			name = input.attr( "name" );
-			primary = name.match(/\[(.*?)\]/);
+		var ipValue = input.val();
+		var ipName = input.attr( "name" );
+		var primary = ipName.match(/\[(.*?)\]/);
 		if (primary[1].indexOf("template") > -1){
 			var sequence = primary[1].replace( "_template", "_sequence" );
 				container = $(this).parent().parent().parent().parent().find( "#section-" + sequence + " .controls" );
@@ -49,7 +64,7 @@ jQuery(document).ready(function($){
 				type : "post",
 				dataType : 'html',
 				url : template_ajax.ajaxurl,
-				data : {action: "greenlet_template_sequence", template: value, context: sequence },
+				data : {action: "greenlet_template_sequence", template: ipValue, context: sequence },
 				success: function(response) {
 					matcher.html( response );
 					spinner.hide();

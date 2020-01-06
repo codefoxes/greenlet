@@ -219,7 +219,7 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 	function greenlet_admin_enqueue( $hook ) {
 		// if ( $hook == 'post-new.php' || $hook == 'post.php' || theme.php( ? options page ) ) {}.
 
-		wp_register_script( 'greenlet_template', LIBRARY_URL . '/admin/templates.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
+		wp_register_script( 'greenlet_template', ADMIN_URL . '/templates.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
 		wp_localize_script( 'greenlet_template', 'template_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'greenlet_template' );
 	}

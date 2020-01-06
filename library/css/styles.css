@@ -19,7 +19,7 @@ body {
 
 .site-header {
 	background: #7CB342;
-	color: #F1F8E9;
+	color: #FFF;
 }
 
 .site-header h1, .topbar h1 {
@@ -29,23 +29,29 @@ body {
 }
 
 .site-header a {
-	color: #F1F8E9;
-	display: inline-block;
+	color: #FFF;
+	display: block;
 	white-space: nowrap;
 }
 
 .site-header a:hover {
-	color: #FFF;
+	color: #F1F8E9;
 }
 
 .site-logo {
 	padding: 20px 0;
 }
 
-.site-logo small {
+.site-tagline {
 	padding-top: 10px;
 	display: block;
 	line-height: 1;
+}
+
+.site-logo img {
+	max-width: 300px;
+	max-height: 28px;
+	display: block;
 }
 
 .site-navigation ul {

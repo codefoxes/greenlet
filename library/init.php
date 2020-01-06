@@ -99,7 +99,9 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		require_once LIBRARY_DIR . '/footer-structure.php';
 		require_once LIBRARY_DIR . '/markup.php';
 		require_once LIBRARY_DIR . '/attributes.php';
-		require_once LIBRARY_DIR . '/meta-boxes.php';
+		require_once ADMIN_DIR . '/meta-boxes.php';
+		require_once ADMIN_DIR . '/customizer/class-customizer.php';
+		require_once ADMIN_DIR . '/customizer/customizer-styles.php';
 	}
 
 	add_action( 'greenlet_init', 'greenlet_load_framework' );
@@ -134,31 +136,14 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 		// Let WordPress manage the document title.
 		add_theme_support( 'title-tag' );
 
-		add_theme_support(
-			'custom-background',
-			apply_filters(
-				'greenlet_custom_background_args',
-				array(
-					'default-color' => 'fff',
-					'default-image' => '',
-				)
-			)
+		$logo_defaults = array(
+			'height'      => 28,
+			'width'       => 300,
+			'flex-height' => true,
+			'flex-width'  => true,
 		);
 
-		add_theme_support(
-			'custom-header',
-			apply_filters(
-				'greenlet_custom_header_args',
-				array(
-					'default-image'      => '',
-					'default-text-color' => '000',
-					'width'              => 1980,
-					'height'             => 250,
-					'flex-height'        => true,
-					'wp-head-callback'   => 'greenlet_header_style',
-				)
-			)
-		);
+		add_theme_support( 'custom-logo', $logo_defaults );
 
 		// Add support for automatic feed links.
 		add_theme_support( 'automatic-feed-links' );
@@ -286,9 +271,9 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	 */
 	function greenlet_enqueue_style( $handle, $src, $defer = null, $deps = array(), $ver = false ) {
 		if ( null === $defer ) {
-			$defer = of_get_option( 'defer_css' ) ? of_get_option( 'defer_css' ) : 0;
+			$defer = gl_get_option( 'defer_css', '1' );
 		}
-		if ( $defer ) {
+		if ( false !== $defer ) {
 			greenlet_defer_style( $src );
 			return;
 		}
@@ -328,7 +313,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			)
 		);
 
-		$css_framework = of_get_option( 'css_framework' ) ? of_get_option( 'css_framework' ) : 'default';
+		$css_framework = gl_get_option( 'css_framework', 'greenlet' );
 		$load_js       = of_get_option( 'load_js' ) ? of_get_option( 'load_js' ) : 0;
 
 		switch ( $css_framework ) {
@@ -358,48 +343,6 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 	}
 
 	add_action( 'wp_enqueue_scripts', 'greenlet_scripts' );
-}
-
-
-if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
-	/**
-	 * Adds styles to head.
-	 *
-	 * Gets logo and adds style to wp head.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @see wp-includes/general-template.php.
-	 */
-	function greenlet_load_wp_head() {
-		$main_width = of_get_option( 'container_width' ) ? of_get_option( 'container_width' ) : '1170px';
-		$main_class = '.container';
-
-		?>
-		<style type="text/css">
-			@media (min-width: 1281px) {
-				<?php echo esc_html( $main_class ); ?> {
-					max-width: <?php echo esc_html( $main_width ); ?>;
-				}
-			}
-		<?php
-
-		if ( of_get_option( 'fixed_topbar' ) ) {
-			add_filter(
-				'body_class',
-				function ( $classes ) {
-					$classes[] = 'fixed-topbar';
-					return $classes;
-				}
-			);
-		}
-
-		?>
-		</style>
-		<?php
-	}
-
-	add_action( 'wp_head', 'greenlet_load_wp_head' );
 }
 
 
@@ -822,33 +765,6 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) {
 
 	add_action( 'wp_head', 'greenlet_render_title' );
 }
-
-
-if ( ! function_exists( 'greenlet_header_style' ) ) :
-	/**
-	 * Styles the header image and text displayed on the blog
-	 *
-	 * @see greenlet_custom_header_setup().
-	 */
-	function greenlet_header_style() {
-		$header_image = get_header_image();
-
-		// If no custom options for text are set, let's bail.
-		if ( empty( $header_image ) && display_header_text() ) {
-			return;
-		}
-
-		$css          = '.site-header{ background: url(' . $header_image . '); }';
-		$greenlet_css = apply_filters( 'greenlet_header_css', $css, $header_image );
-		?>
-
-		<style type="text/css" id="greenlet-header-css">
-			<?php echo $greenlet_css; // phpcs:ignore ?>
-		</style>
-
-		<?php
-	}
-endif;
 
 /**
  * Get meta description.
