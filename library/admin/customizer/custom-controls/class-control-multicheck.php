@@ -91,9 +91,15 @@ if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Contr
 			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
 			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
 
+			<input id="_customize-input-{{ data.id }}" type="hidden" value="{{ JSON.stringify( data.default ) }}" data-customize-setting-link="{{ data.id }}" />
+
 			<ul>
 				<# for ( key in data.choices ) { #>
-				<li><label<# if ( _.contains( data.value, key ) ) { #> class="checked"<# } #>><input {{{ data.inputAttrs }}} type="checkbox" value="{{ key }}"<# if ( _.contains( data.value, key ) ) { #> checked<# } #> />{{ data.choices[ key ] }}</label></li>
+				<li>
+					<label<# if ( _.contains( data.value, key ) ) { #> class="checked"<# } #>>
+					<input {{{ data.inputAttrs }}} type="checkbox" value="{{ key }}"<# if ( _.contains( data.value, key ) ) { #> checked<# } #> />{{ data.choices[ key ] }}
+					</label>
+				</li>
 				<# } #>
 			</ul>
 			<?php

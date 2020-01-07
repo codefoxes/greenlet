@@ -1,29 +1,41 @@
-jQuery( document ).ready( function() {
+(function( $ ){
+	/**
+	 * Run function when customizer is ready.
+	 */
+	wp.customize.bind('ready', function () {
+		wp.customize.control('show_author', function (control) {
+			var checkboxes = $('#customize-control-show_author input[type="checkbox"]');
+			var input = $('#_customize-input-show_author');
+			var val = control.setting._value;
 
-	jQuery( '.customize-control-multicheck input[type="checkbox"]' ).on(
-		'change',
-		function() {
-			var checkbox_values = jQuery( this ).parents( '.customize-control' ).find( 'input[type="checkbox"]:checked' ).map(
-				function() {
-					return this.value;
+			checkboxes.on('change', function() {
+				var current = $(this).val();
+				var index = val.indexOf( current )
+
+				if ( $(this).prop('checked') ) {
+					if ( index === -1 ) {
+
+						console.log(index)
+
+						val.push( current );
+						control.setting.set(val);
+
+						console.log(val);
+					}
+				} else {
+					if ( index !== -1 ) {
+						console.log(index)
+
+						val.splice(index, 1)
+						control.setting.set(val);
+
+						console.log(val);
+					}
 				}
-			).get().join( ',' );
 
-			jQuery( this ).parents( '.customize-control' ).find( 'input[type="hidden"]' ).val( checkbox_values ).trigger( 'change' );
-		}
-	);
-
-} );
-
-
-jQuery( document ).ready(function($) {
-	wp.customize('multicheck', function(control) {
-		control.bind(function( controlValue ) {
-			console.log(controlValue);
-			if( controlValue == true ) {
-			}
-			else {
-			}
+				$( input ).attr( 'value', JSON.stringify( val ) ).trigger( 'change' );
+				control.setting.set(val);
+			})
 		});
 	});
-});
+})( jQuery );

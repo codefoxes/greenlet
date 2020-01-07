@@ -400,6 +400,8 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 		$layout         = gl_get_option( $layout_option, '4-8' );
 		$source         = gl_get_option( $source_option, 'ceditor' );
 
+		$layout = ( '' === $layout ) ? '12' : $layout;
+
 		// Create new column object with current layout as parameter.
 		// @see library/classes.php.
 		$cobj = new ColumnObject( $layout );
@@ -439,13 +441,6 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 
 			// Get content from the option source.
 			switch ( $source ) {
-
-				case 'ceditor':
-					// Echo Saved content from content editor option.
-					// Todo: Not needed.
-					$template_part = $pos . '_' . $i . '_textarea';
-					echo of_get_option( $template_part ); // phpcs:ignore
-					break;
 
 				case 'widgets':
 					// Get dynamic sidebar.
