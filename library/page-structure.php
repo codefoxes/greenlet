@@ -7,9 +7,7 @@
 
 add_action( 'greenlet_main_container', 'greenlet_do_main_container' );
 
-if ( of_get_option( 'breadcrumb' ) ) {
-	add_action( 'greenlet_before_loop', 'greenlet_breadcrumb', 2 );
-}
+add_action( 'greenlet_before_loop', 'greenlet_breadcrumb', 2 );
 
 add_action( 'greenlet_before_loop', 'greenlet_archive_header_template' );
 add_action( 'greenlet_archive_header', 'greenlet_do_archive_header' );
@@ -158,7 +156,7 @@ function greenlet_do_main_container() {
  */
 function greenlet_breadcrumb() {
 
-	if ( ! is_front_page() ) {
+	if ( ! is_front_page() && ( false !== gl_get_option( 'breadcrumb', '1' ) ) ) {
 		do_action( 'greenlet_before_breadcrumb' );
 
 		if ( function_exists( 'yoast_breadcrumb' ) ) {
@@ -533,7 +531,7 @@ function greenlet_excerpt_more() {
  * @return int length
  */
 function greenlet_excerpt_length() {
-	$length = of_get_option( 'excerpt_length' ) ? of_get_option( 'excerpt_length' ) : 55;
+	$length = gl_get_option( 'excerpt_length', 55 );
 	$length = apply_filters( 'greenlet_excerpt_length', $length );
 	return $length;
 }

@@ -23,6 +23,19 @@ function greenlet_options() {
 		$sidebars_qty[ $i ] = $i;
 	}
 
+	$imagepath = ADMIN_URL . '/images/';
+
+	$templates_array = array(
+		'12'    => $imagepath . '12.png',
+		'8-4'   => $imagepath . '8-4.png',
+		'4-8'   => $imagepath . '4-8.png',
+		'9-3'   => $imagepath . '9-3.png',
+		'3-9'   => $imagepath . '3-9.png',
+		'3-6-3' => $imagepath . '3-6-3.png',
+		'3-3-6' => $imagepath . '3-3-6.png',
+		'6-3-3' => $imagepath . '6-3-3.png',
+	);
+
 	// Page top and bottom columns.
 	$pagetop_columns    = greenlet_cover_columns( array( 'header', 'topbar' ) );
 	$pagebottom_columns = greenlet_cover_columns( array( 'semifooter', 'footer' ) );
@@ -411,6 +424,20 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'home_template',
+		'sargs' => array(
+			'default' => '12',
+		),
+		'cargs' => array(
+			'type'    => 'radio-image',
+			'section' => 'main_layout',
+			'label'   => __( 'Home Page (Post List) Layout' ),
+			'choices' => $templates_array,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'home_sequence',
 		'sargs' => array(
 			'default' => array( 'main', 'sidebar-1' ),
@@ -598,7 +625,7 @@ function greenlet_options() {
 			'type'        => 'text',
 			'section'     => 'misc',
 			'label'       => __( 'Excerpt length' ),
-			'description' => __( 'Number of characters in excerpts for post list and archives.' ),
+			'description' => __( 'Number of characters in excerpts for post list.' ),
 		),
 	);
 
@@ -638,6 +665,24 @@ function greenlet_options() {
 				'name'  => 'Name',
 				'image' => 'Avatar',
 				'bio'   => 'Biographical Info',
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'show_comments',
+		'sargs' => array(
+			'default'           => array( 'posts', 'pages' ),
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
+		),
+		'cargs' => array(
+			'type'    => 'multicheck',
+			'section' => 'misc',
+			'label'   => __( 'Show Comments' ),
+			'choices' => array(
+				'posts' => 'Posts',
+				'pages' => 'Pages',
 			),
 		),
 	);

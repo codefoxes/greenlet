@@ -33,9 +33,9 @@ function greenlet_do_head() {
  */
 function greenlet_do_topbar() {
 
-	$topshow = of_get_option( 'show_topbar' ) ? of_get_option( 'show_topbar' ) : 0;
+	$topshow = gl_get_option( 'show_topbar', false );
 
-	if ( 1 === $topshow ) {
+	if ( false !== $topshow ) {
 		greenlet_markup( 'topbar', greenlet_attr( 'topbar' ) );
 		printf( '<div %s>', wp_kses( greenlet_attr( 'container' ), null ) );
 		printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );

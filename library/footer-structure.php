@@ -16,9 +16,9 @@ add_action( 'greenlet_footer', 'greenlet_do_footer' );
  */
 function greenlet_do_semifooter() {
 
-	$sfshow = of_get_option( 'show_semifooter' ) ? of_get_option( 'show_semifooter' ) : 0;
+	$sfshow = gl_get_option( 'show_semifooter', false );
 
-	if ( 1 === $sfshow ) {
+	if ( false !== $sfshow ) {
 		greenlet_markup( 'semifooter', greenlet_attr( 'semifooter' ) );
 		printf( '<div %s>', wp_kses( greenlet_attr( 'container' ), null ) );
 		printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );

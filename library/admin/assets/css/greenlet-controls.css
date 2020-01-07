@@ -1,0 +1,33 @@
+.gl-radio-images {
+	background: #fff;
+	font-size: 0;
+	padding: 2px;
+	margin-bottom: 0;
+	line-height: 0;
+}
+
+.gl-radio-image {
+	display: inline-block;
+	max-width: 25%;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.gl-radio-image label {
+	display: block;
+}
+
+.gl-radio-image input[type="radio"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.gl-radio-image img {
+	display: block;
+}
+
+.gl-radio-image input[type="radio"]:checked + img {
+	outline: 3px solid #7cb342;
+}

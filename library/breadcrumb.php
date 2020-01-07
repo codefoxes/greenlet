@@ -6,7 +6,7 @@
  */
 
 global $post;
-$separator = of_get_option( 'breadcrumb_sep' ) ? of_get_option( 'breadcrumb_sep' ) : '&raquo;';
+$separator = gl_get_option( 'breadcrumb_sep', '&raquo;' );
 $microdata = '<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">';
 
 echo '<div class="breadcrumb">';

@@ -62,4 +62,9 @@ class Control_Matcher extends \WP_Customize_Control {
 
 		<?php
 	}
+
+	/**
+	 * Render Content.
+	 */
+	protected function render_content() {}
 }

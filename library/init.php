@@ -94,14 +94,14 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		require_once LIBRARY_DIR . '/class-honeypot.php';
 		require_once OPTIONS_DIR . '/options-framework.php';
 		require_once PARENT_DIR . '/options.php';
+		require_once ADMIN_DIR . '/customizer/class-customizer.php';
+		require_once ADMIN_DIR . '/customizer/customizer-styles.php';
 		require_once LIBRARY_DIR . '/header-structure.php';
 		require_once LIBRARY_DIR . '/page-structure.php';
 		require_once LIBRARY_DIR . '/footer-structure.php';
 		require_once LIBRARY_DIR . '/markup.php';
 		require_once LIBRARY_DIR . '/attributes.php';
 		require_once ADMIN_DIR . '/meta-boxes.php';
-		require_once ADMIN_DIR . '/customizer/class-customizer.php';
-		require_once ADMIN_DIR . '/customizer/customizer-styles.php';
 	}
 
 	add_action( 'greenlet_init', 'greenlet_load_framework' );
@@ -212,11 +212,11 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 			foreach ( $position as $pos ) {
 
 				// If the content source set in options is widgets.
-				if ( of_get_option( $pos . '_content_source' ) === 'widgets' ) {
+				if ( gl_get_option( $pos . '_content_source', 'manual' ) === 'widgets' ) {
 
 					// Get position template option.
 					$layout_option = $pos . '_template';
-					$layout        = of_get_option( $layout_option ) ? of_get_option( $layout_option ) : '4-4-4';
+					$layout        = gl_get_option( $layout_option, '4-4-4' );
 
 					// Create new column object.
 					// @see library/classes.php.
@@ -398,7 +398,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 		$smenu_position = gl_get_option( 'smenu_position', 'dont-show' );
 		$fmenu_position = gl_get_option( 'fmenu_position', 'dont-show' );
 		$layout         = gl_get_option( $layout_option, '4-8' );
-		$source         = gl_get_option( $source_option, 'ceditor' );
+		$source         = gl_get_option( $source_option, 'manual' );
 
 		$layout = ( '' === $layout ) ? '12' : $layout;
 

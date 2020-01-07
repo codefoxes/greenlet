@@ -42,6 +42,8 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 		$footer_bg    = gl_get_option( 'footer_bg', '#212121' );
 		$footer_color = gl_get_option( 'footer_color', '#fff' );
 
+		$fixed_topbar    = gl_get_option( 'fixed_topbar', false );
+
 		$critical_css = gl_get_option( 'critical_css', '' );
 		$defer_css    = gl_get_option( 'defer_css', false );
 
@@ -80,6 +82,10 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 
 			if ( false !== $defer_css && '' !== $critical_css ) {
 				echo $critical_css;
+			}
+
+			if ( false !== $fixed_topbar ) {
+				echo '.topbar { position: sticky; }';
 			}
 			?>
 		</style>

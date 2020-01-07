@@ -35,8 +35,12 @@ class Sanitizer {
 	 * @return array
 	 */
 	public static function sanitize_multicheck( $value ) {
+		$value = json_decode( $value );
 
-		$value = ( ! is_array( $value ) ) ? explode( ',', $value ) : $value;
+		if ( json_last_error() !== JSON_ERROR_NONE ) {
+			return array();
+		}
+
 		return ( ! empty( $value ) ) ? array_map( 'sanitize_text_field', $value ) : array();
 	}
 }

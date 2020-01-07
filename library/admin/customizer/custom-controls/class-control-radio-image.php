@@ -1,20 +1,20 @@
 <?php
 /**
- * Multicheck Control.
+ * Radio Image Control.
  *
  * @package greenlet\library\admin\customizer
  */
 
 namespace Greenlet;
 
-if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Control' ) ) {
+if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Control' ) ) {
 	/**
-	 * Customizer multicheck custom control.
+	 * Radio Image custom control.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 */
-	class Control_Multicheck extends \WP_Customize_Control {
+	class Control_Radio_Image extends \WP_Customize_Control {
 
 		/**
 		 * The type of customize control being rendered.
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Contr
 		 * @access public
 		 * @var    string
 		 */
-		public $type = 'multicheck';
+		public $type = 'radio-image';
 
 		/**
 		 * Allow choices parameter.
@@ -41,6 +41,7 @@ if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Contr
 		 */
 		public function enqueue() {
 			wp_enqueue_script( 'greenlet-controls', ADMIN_URL . '/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
+			wp_enqueue_style( 'greenlet-controls', ADMIN_URL . '/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 		}
 
 		/**
@@ -90,15 +91,16 @@ if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Contr
 
 			<input id="_customize-input-{{ data.id }}" type="hidden" {{{ data.link }}} />
 
-			<ul>
+			<div class="gl-radio-images">
 				<# for ( key in data.choices ) { #>
-				<li>
-					<label<# if ( _.contains( data.value, key ) ) { #> class="checked"<# } #>>
-					<input type="checkbox" value="{{ key }}"<# if ( _.contains( data.value, key ) ) { #> checked<# } #> />{{ data.choices[ key ] }}
+				<div class="gl-radio-image">
+					<label<# if ( data.value === key ) { #> class="checked"<# } #>>
+						<input type="radio" name="test" value="{{ key }}" <# if ( data.value === key ) { #> checked<# } #> />
+						<img src="{{ data.choices[ key ] }}">
 					</label>
-				</li>
+				</div>
 				<# } #>
-			</ul>
+			</div>
 			<?php
 		}
 

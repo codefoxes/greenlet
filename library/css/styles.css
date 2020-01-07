@@ -17,6 +17,13 @@ body {
 	background: #f5f5f5;
 }
 
+.topbar {
+	min-height: 50px;
+	top: 0;
+	z-index: 990;
+	background: #fff;
+}
+
 .site-header {
 	background: #7CB342;
 	color: #FFF;
@@ -151,6 +158,11 @@ body {
 
 .widget ul {
 	list-style: none;
+}
+
+.semifooter {
+	min-height: 50px;
+	background: #fff;
 }
 
 .site-footer {
