@@ -27,4 +27,16 @@ class Sanitizer {
 		// Todo: Sanitize css.
 		return $css;
 	}
+
+	/**
+	 * Sanitizes multiple checkbox control.
+	 *
+	 * @param string $value Checkbox values.
+	 * @return array
+	 */
+	public static function sanitize_multicheck( $value ) {
+
+		$value = ( ! is_array( $value ) ) ? explode( ',', $value ) : $value;
+		return ( ! empty( $value ) ) ? array_map( 'sanitize_text_field', $value ) : array();
+	}
 }

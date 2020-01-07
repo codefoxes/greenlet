@@ -393,12 +393,12 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 		$source_option = $pos . '_content_source';
 
 		// Get logo and menu positions from options, else set default values.
-		$logo_position  = of_get_option( 'logo_position' ) ? of_get_option( 'logo_position' ) : 'header-1';
-		$mmenu_position = of_get_option( 'mmenu_position' ) ? of_get_option( 'mmenu_position' ) : 'header-2';
-		$smenu_position = of_get_option( 'smenu_position' ) ? of_get_option( 'smenu_position' ) : 'dont-show';
-		$fmenu_position = of_get_option( 'fmenu_position' ) ? of_get_option( 'fmenu_position' ) : 'select';
-		$layout         = of_get_option( $layout_option ) ? of_get_option( $layout_option ) : '4-8';
-		$source         = of_get_option( $source_option ) ? of_get_option( $source_option ) : 'ceditor';
+		$logo_position  = gl_get_option( 'logo_position', 'header-1' );
+		$mmenu_position = gl_get_option( 'mmenu_position', 'header-2' );
+		$smenu_position = gl_get_option( 'smenu_position', 'dont-show' );
+		$fmenu_position = gl_get_option( 'fmenu_position', 'dont-show' );
+		$layout         = gl_get_option( $layout_option, '4-8' );
+		$source         = gl_get_option( $source_option, 'ceditor' );
 
 		// Create new column object with current layout as parameter.
 		// @see library/classes.php.
@@ -442,6 +442,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 
 				case 'ceditor':
 					// Echo Saved content from content editor option.
+					// Todo: Not needed.
 					$template_part = $pos . '_' . $i . '_textarea';
 					echo of_get_option( $template_part ); // phpcs:ignore
 					break;
@@ -649,7 +650,7 @@ if ( ! function_exists( 'greenlet_cover_columns' ) ) {
 		$cover_columns = array( 'dont-show' => 'Do Not Show' );
 
 		foreach ( $positions as $key => $position ) {
-			$cols  = of_get_option( "{$position}_template" );
+			$cols  = gl_get_option( "{$position}_template", '12' );
 			$array = explode( '-', $cols );
 			foreach ( $array as $id => $width ) {
 				$id++;

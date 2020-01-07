@@ -40,10 +40,14 @@ class Customizer {
 	 * @return void
 	 */
 	public function __construct() {
+		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-matcher.php';
+		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-multicheck.php';
 		require_once ADMIN_DIR . '/customizer/class-sanitizer.php';
+
 		// Todo: Load options.php from child theme if exists?
 		require_once ADMIN_DIR . '/customizer/options.php';
 
+		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
@@ -54,8 +58,6 @@ class Customizer {
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
-
-		wp_enqueue_script( 'greenlet_customizer', ADMIN_URL . '/customizer/customizer.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
 	}
 
 	/**
@@ -101,9 +103,29 @@ class Customizer {
 
 				$wp_customize->add_setting( $option['id'], $option['sargs'] );
 
-				$wp_customize->add_control( $option['id'], $option['cargs'] );
+				if ( 'matcher' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Matcher( $wp_customize, $option['id'], $option['cargs'] ) );
+
+				} elseif ( 'multicheck' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Multicheck( $wp_customize, $option['id'], $option['cargs'] ) );
+
+				} else {
+					$wp_customize->add_control( $option['id'], $option['cargs'] );
+				}
 			}
 		}
+	}
+
+	/**
+	 * Register Custom Controls.
+	 *
+	 * @return void
+	 */
+	public function greenlet_add_custom_controls() {
+		global $wp_customize;
+
+		$wp_customize->register_control_type( 'Greenlet\Control_Multicheck' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Matcher' );
 	}
 
 	/**

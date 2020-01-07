@@ -11,6 +11,22 @@
  * @return array
  */
 function greenlet_options() {
+	$content_source = array(
+		'widgets' => __( 'Widgets', 'greenlet' ),
+		'manual'  => __( 'Manual Edit', 'greenlet' ),
+	);
+
+	$min_sidebars = greenlet_get_min_sidebars();
+
+	$sidebars_qty = array();
+	for ( $i = $min_sidebars; $i <= 12; $i++ ) {
+		$sidebars_qty[ $i ] = $i;
+	}
+
+	// Page top and bottom columns.
+	$pagetop_columns    = greenlet_cover_columns( array( 'header', 'topbar' ) );
+	$pagebottom_columns = greenlet_cover_columns( array( 'semifooter', 'footer' ) );
+
 	$options = array();
 
 	$options[] = array(
@@ -129,7 +145,7 @@ function greenlet_options() {
 			'section' => 'framework',
 			'label'   => __( 'CSS Framework' ),
 			'choices' => array(
-				'default'  => __( 'Greenlet Framework' ),
+				'default'   => __( 'Greenlet Framework' ),
 				'bootstrap' => __( 'Bootstrap 4.4.1' ),
 			),
 		),
@@ -169,7 +185,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'critical_css',
 		'sargs' => array(
-			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_css'),
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_css' ),
 		),
 		'cargs' => array(
 			'label'       => __( 'Critical CSS' ),
@@ -260,6 +276,37 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'topbar_template',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'header_layout',
+			'label'       => __( 'Topbar Layout' ),
+			'description' => __( 'Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only integers. Sum should be 12.)' ),
+			'input_attrs' => array(
+				'placeholder' => __( '4-8' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'topbar_content_source',
+		'sargs' => array(
+			'default' => 'widgets',
+		),
+		'cargs' => array(
+			'type'    => 'radio',
+			'section' => 'header_layout',
+			'label'   => __( 'Topbar Content Source' ),
+			'choices' => $content_source,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'header_template',
 		'sargs' => array(
 			'default' => '',
@@ -268,9 +315,329 @@ function greenlet_options() {
 			'type'        => 'text',
 			'section'     => 'header_layout',
 			'label'       => __( 'Header Layout' ),
-			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only integers. Sum should be 12.)' ),
+			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc.' ),
 			'input_attrs' => array(
-				'placeholder' => __( '8-4' ),
+				'placeholder' => __( '4-8' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'header_content_source',
+		'sargs' => array(
+			'default' => 'widgets',
+		),
+		'cargs' => array(
+			'type'    => 'radio',
+			'section' => 'header_layout',
+			'label'   => __( 'Header Content Source' ),
+			'choices' => $content_source,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'logo_position',
+		'sargs' => array(
+			'default' => 'header-1',
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'header_layout',
+			'label'       => __( 'Logo Position' ),
+			'description' => __( 'Column for the logo to be displayed.', 'greenlet' ),
+			'choices'     => $pagetop_columns,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'mmenu_position',
+		'sargs' => array(
+			'default' => 'header-2',
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'header_layout',
+			'label'       => __( 'Main Menu Position' ),
+			'description' => __( 'Column for the Main Menu to be displayed.', 'greenlet' ),
+			'choices'     => $pagetop_columns,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'smenu_position',
+		'sargs' => array(
+			'default' => 'dont-show',
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'header_layout',
+			'label'       => __( 'Secondary Menu Position' ),
+			'description' => __( 'Column for the Secondary Menu to be displayed.', 'greenlet' ),
+			'choices'     => $pagetop_columns,
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'main_layout',
+		'args' => array(
+			'title' => __( 'Main Layout' ),
+			'panel' => 'layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'sidebars_qty',
+		'sargs' => array(
+			'default' => '3',
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'main_layout',
+			'label'       => __( 'Number of Sidebars ( For Main Container )' ),
+			'description' => sprintf(
+				'How many sidebars you want ro register for main container of page ? ( Not for header or footer. They will be configured in "Header/Footer Layout".)
+				Minimum sidebars required are "%s" according to your templates.',
+				$min_sidebars
+			),
+			'choices'     => $sidebars_qty,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'home_sequence',
+		'sargs' => array(
+			'default' => array( 'main', 'sidebar-1' ),
+		),
+		'cargs' => array(
+			'type'       => 'matcher',
+			'section'    => 'main_layout',
+			'label'      => __( 'Home (Post List) Content' ),
+			'options'    => greenlet_column_options( 'home_template' ),
+			'selections' => greenlet_column_content_options(),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'footer_layout',
+		'args' => array(
+			'title' => __( 'Footer Layout' ),
+			'panel' => 'layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'show_semifooter',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'checkbox',
+			'section' => 'footer_layout',
+			'label'   => __( 'Show Semifooter' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'semifooter_template',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'footer_layout',
+			'label'       => __( 'Semi Footer Layout' ),
+			'description' => __( 'Enter semifooter columns in Format: 4-8 or 3-9-3 etc.' ),
+			'input_attrs' => array(
+				'placeholder' => __( '3-3-3-3' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'semifooter_content_source',
+		'sargs' => array(
+			'default' => 'widgets',
+		),
+		'cargs' => array(
+			'type'    => 'radio',
+			'section' => 'footer_layout',
+			'label'   => __( 'Semi Footer Content Source' ),
+			'choices' => $content_source,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'footer_template',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'footer_layout',
+			'label'       => __( 'Footer Layout' ),
+			'description' => __( 'Enter footer columns in Format: 4-8 or 3-9-3 etc.' ),
+			'input_attrs' => array(
+				'placeholder' => __( '12' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'footer_content_source',
+		'sargs' => array(
+			'default' => 'widgets',
+		),
+		'cargs' => array(
+			'type'    => 'radio',
+			'section' => 'footer_layout',
+			'label'   => __( 'Footer Content Source' ),
+			'choices' => $content_source,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'fmenu_position',
+		'sargs' => array(
+			'default' => 'dont-show',
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'footer_layout',
+			'label'       => __( 'Footer Menu Position' ),
+			'description' => __( 'Column for the Footer Menu to be displayed.', 'greenlet' ),
+			'choices'     => $pagebottom_columns,
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'misc',
+		'args' => array(
+			'title'    => __( 'Misc Settings' ),
+			'priority' => 200,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'schema',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'misc',
+			'label'       => __( 'Schema Markup' ),
+			'description' => __( 'Enable Schema Markup' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'breadcrumb',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'misc',
+			'label'       => __( 'Breadcrumb' ),
+			'description' => __( 'Enable breadcrumb navigation' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'breadcrumb_sep',
+		'sargs' => array(
+			'default' => '»',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'misc',
+			'label'       => __( 'Breadcrumb Separator' ),
+			'description' => __( 'Separator between links in breadcrumb. Eg: / or >' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'featured_image',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'misc',
+			'label'       => __( 'Featured Image' ),
+			'description' => __( 'Show featured image on post list and archives.' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'excerpt_length',
+		'sargs' => array(
+			'default' => 55,
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'misc',
+			'label'       => __( 'Excerpt length' ),
+			'description' => __( 'Number of characters in excerpts for post list and archives.' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'paging_nav',
+		'sargs' => array(
+			'default' => 'number',
+		),
+		'cargs' => array(
+			'type'        => 'radio',
+			'section'     => 'misc',
+			'label'       => __( 'Pagination' ),
+			'description' => __( 'Paging Navigation display format.', 'greenlet' ),
+			'choices'     => array(
+				'simple'   => 'Simple',
+				'number'   => 'Numbered',
+				'ajax'     => 'Numbered (Ajax)',
+				'load'     => 'Load More Button',
+				'infinite' => 'Infinite Scroll',
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'show_author',
+		'sargs' => array(
+			'default'           => array( 'name', 'image', 'bio' ),
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
+		),
+		'cargs' => array(
+			'type'    => 'multicheck',
+			'section' => 'misc',
+			'label'   => __( 'Show Author Info' ),
+			'choices' => array(
+				'name'  => 'Name',
+				'image' => 'Avatar',
+				'bio'   => 'Biographical Info',
 			),
 		),
 	);
