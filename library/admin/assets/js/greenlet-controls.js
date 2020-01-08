@@ -8,6 +8,8 @@
 				multicheckControl( controlObj )
 			} else if( controlObj.params.type === 'radio-image' ) {
 				radioImageControl( controlObj )
+			} else if( controlObj.params.type === 'template-selector' ) {
+				templateSelectorControl( controlObj )
 			} else if( controlObj.params.type === 'matcher' ) {
 				matcherControl( controlObj )
 			}
@@ -55,6 +57,22 @@
 
 				$( input ).attr( 'value', val ).trigger( 'change' );
 				control.setting.set( val );
+			})
+		});
+	}
+
+	function templateSelectorControl ( controlObj ) {
+		wp.customize.control(controlObj.id, function (control) {
+			// Todo: Get correct numbers.
+			var sidebars = 3;
+
+			var radios = $(controlObj.selector + ' input[type="radio"]');
+			var input = $('#_customize-input-' + controlObj.id);
+
+			radios.on('change', function() {
+				val = $(this).val();
+				var nums = val.split('-');
+				console.log(nums)
 			})
 		});
 	}

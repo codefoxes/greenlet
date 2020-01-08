@@ -429,23 +429,10 @@ function greenlet_options() {
 			'default' => '12',
 		),
 		'cargs' => array(
-			'type'    => 'radio-image',
+			'type'    => 'template-selector',
 			'section' => 'main_layout',
 			'label'   => __( 'Home Page (Post List) Layout' ),
 			'choices' => $templates_array,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'home_sequence',
-		'sargs' => array(
-			'default' => array( 'main', 'sidebar-1' ),
-		),
-		'cargs' => array(
-			'type'       => 'matcher',
-			'section'    => 'main_layout',
-			'label'      => __( 'Home (Post List) Content' ),
 			'options'    => greenlet_column_options( 'home_template' ),
 			'selections' => greenlet_column_content_options(),
 		),
