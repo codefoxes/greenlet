@@ -308,7 +308,7 @@ body {
 .screen-reader-text, .screen-reader-text:hover, .screen-reader-text:active, .screen-reader-text:focus {
 	display: none;
 }
-.bypostauthor, .gallery-caption, .wp-caption, .gallery-caption, .wp-caption.alignnone,
+.bypostauthor, .gallery-caption, .wp-caption, .gallery-caption, .wp-caption.alignnone, .aligncenter,
 .wp-caption.alignleft, .wp-caption.alignright, .wp-caption img, .wp-caption p.wp-caption-text{}
 
 @media (min-width: 801px) {

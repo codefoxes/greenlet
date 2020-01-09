@@ -1,31 +1,64 @@
 <?php
 /**
- * Meta boxes Manager.
+ * Meta Boxes Manager.
  *
- * Add meta boxes to posts and pages.
- *
- * @package greenlet\library
+ * @package greenlet\library\admin\metaboxes
  */
 
-// If greenlet_add_page_template doesnt exist.
-if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
+namespace Greenlet;
 
-	// Meta box action.
-	add_action( 'add_meta_boxes', 'greenlet_add_page_template' );
+/**
+ * Set up Custom Meta Boxes.
+ *
+ * @since  1.0.0
+ */
+class Metaboxes {
 
-	// Save page template while post is saved or updated.
-	add_action( 'save_post', 'greenlet_save_page_template', 10, 2 );
+	/**
+	 * Holds the instances of this class.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @var    object
+	 */
+	private static $instance;
 
-	// Add scripts to admin pages.
-	add_action( 'admin_enqueue_scripts', 'greenlet_admin_enqueue' );
+	/**
+	 * Sets up needed actions/filters for the honeypot to initialize.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function __construct() {
+		// Meta box action.
+		add_action( 'add_meta_boxes', array( $this, 'greenlet_add_page_template' ) );
+
+		// Save page template while post is saved or updated.
+		add_action( 'save_post', array( $this, 'greenlet_save_page_template' ), 10, 2 );
+
+		// Add scripts to admin pages.
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Enqueue Customizer Scripts.
+	 */
+	public function enqueue_scripts() {
+		wp_register_script( 'greenlet_metaboxes', ADMIN_URL . '/assets/js/metaboxes.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
+		wp_localize_script( 'greenlet_metaboxes', 'template_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_enqueue_script( 'greenlet_metaboxes' );
+	}
 
 	/**
 	 * Add Page Attributes meta box.
 	 * Removes default page attributes meta and adds modified.
 	 *
+	 * @since  1.0.0
+	 * @access public
 	 * @param array $post_type Current post type.
 	 */
-	function greenlet_add_page_template( $post_type ) {
+	public function greenlet_add_page_template( $post_type ) {
 
 		// Set desired post types array to show template meta box.
 		$post_types = array( 'post', 'page', 'forum', 'product' );
@@ -46,7 +79,7 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 			add_meta_box(
 				'postparentdiv',
 				__( 'Page Attributes', 'greenlet' ),
-				'greenlet_page_template_meta_box',
+				array( $this, 'greenlet_page_template_meta_box' ),
 				$post_type,
 				'side',
 				'core'
@@ -54,13 +87,12 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 		}
 	}
 
-
 	/**
 	 * Conditionally output Meta box.
 	 *
 	 * @param WP_Post $post The current WP_Post object.
 	 */
-	function greenlet_page_template_meta_box( $post ) {
+	public function greenlet_page_template_meta_box( $post ) {
 
 		// If page templates exist.
 		if ( 0 !== count( get_page_templates() ) ) {
@@ -108,19 +140,21 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 			}
 			?>
 
+			<p id="greenlet-post-type" data-value="<?php echo esc_html( $post->post_type ); ?>"></p>
+
 			<p><strong><?php esc_html_e( 'Template', 'greenlet' ); ?></strong></p>
 			<label class="screen-reader-text" for="page_template"><?php esc_html_e( 'Page Template', 'greenlet' ); ?></label>
 			<select name="page_template" id="page_template">
 				<option value='default'><?php esc_html_e( 'Default Template', 'greenlet' ); ?></option>
-				<?php greenlet_page_template_dropdown( $template ); ?>
+				<?php $this->greenlet_page_template_dropdown( $template ); ?>
 			</select>
 			<div class="sequence spinner"></div>
 			<div id="sequence" style="margin: 1em 0;">
 				<?php
 				// Output template column sequencer.
-				$options    = greenlet_column_options( $template );
+				$options    = greenlet_column_options( $template, $post->post_type );
 				$selections = greenlet_column_content_options();
-				$output     = greenlet_sequencer( $options, $selections, null, $sequence );
+				$output     = greenlet_sequencer( $options, $selections, $sequence );
 				echo wp_kses( $output, greenlet_sequencer_tags() );
 				?>
 			</div>
@@ -133,13 +167,12 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 		}
 	}
 
-
 	/**
 	 * Adds page templates dropdown.
 	 *
 	 * @param string $default selected page template.
 	 */
-	function greenlet_page_template_dropdown( $default = '' ) {
+	public function greenlet_page_template_dropdown( $default = '' ) {
 
 		// Get page templates.
 		$templates = get_page_templates();
@@ -158,7 +191,6 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 		}
 	}
 
-
 	/**
 	 * Saves page template meta.
 	 *
@@ -169,7 +201,7 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 	 * @param int     $post_id Post ID of current post.
 	 * @param WP_Post $post    The current WP_Post object.
 	 */
-	function greenlet_save_page_template( $post_id, $post ) {
+	public function greenlet_save_page_template( $post_id, $post ) {
 
 		// Check if our nonce is set.
 		if ( ! isset( $_POST['greenlet_template_meta_box_nonce'] ) ) {
@@ -205,22 +237,23 @@ if ( ! function_exists( 'greenlet_add_page_template' ) && is_admin() ) {
 		}
 	}
 
-
 	/**
-	 * Add admin scripts.
+	 * Returns the instance.
 	 *
-	 * Add and Localize script for admin pages.
-	 *
-	 * @see wp-includes/functions.wp-scripts.php.
-	 * @todo Add to only required pages.
-	 *
-	 * @param string $hook admin pages.
+	 * @since  1.0.0
+	 * @access public
+	 * @return object
 	 */
-	function greenlet_admin_enqueue( $hook ) {
-		// if ( $hook == 'post-new.php' || $hook == 'post.php' || theme.php( ? options page ) ) {}.
+	public static function get_instance() {
 
-		wp_register_script( 'greenlet_template', ADMIN_URL . '/templates.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
-		wp_localize_script( 'greenlet_template', 'template_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-		wp_enqueue_script( 'greenlet_template' );
+		if ( ! self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
 	}
+}
+
+if ( is_admin() ) {
+	Metaboxes::get_instance();
 }

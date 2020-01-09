@@ -92,16 +92,15 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 
 		require_once LIBRARY_DIR . '/class-columnobject.php';
 		require_once LIBRARY_DIR . '/class-honeypot.php';
-		require_once OPTIONS_DIR . '/options-framework.php';
-		require_once PARENT_DIR . '/options.php';
+		require_once ADMIN_DIR . '/options/class-options-admin.php';
 		require_once ADMIN_DIR . '/customizer/class-customizer.php';
 		require_once ADMIN_DIR . '/customizer/customizer-styles.php';
+		require_once ADMIN_DIR . '/metaboxes/class-metaboxes.php';
 		require_once LIBRARY_DIR . '/header-structure.php';
 		require_once LIBRARY_DIR . '/page-structure.php';
 		require_once LIBRARY_DIR . '/footer-structure.php';
 		require_once LIBRARY_DIR . '/markup.php';
 		require_once LIBRARY_DIR . '/attributes.php';
-		require_once ADMIN_DIR . '/meta-boxes.php';
 	}
 
 	add_action( 'greenlet_init', 'greenlet_load_framework' );
@@ -184,9 +183,12 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	 */
 	function greenlet_widget_init() {
 		if ( function_exists( 'register_sidebar' ) ) {
+			$sidebars_qty = 3;
 
-			// Get number of sidebars from saved options, else set to 3.
-			$sidebars_qty = of_get_option( 'sidebars_qty' ) ? of_get_option( 'sidebars_qty' ) : 3;
+			if ( ! is_customize_preview() ) {
+				// Get number of sidebars from saved options, else set to 3.
+				$sidebars_qty = gl_get_option( 'sidebars_qty', 3 );
+			}
 
 			// Register number of sidebars.
 			for ( $i = 1; $i <= $sidebars_qty; $i++ ) {
@@ -322,13 +324,13 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$default_src_css = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
-				$default_src_js = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
-				$css_path = gl_get_option( 'css_path', $default_src_css );
-				$js_path  = gl_get_option( 'js_path', $default_src_js );
+				$default_css = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
+				$default_js  = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
+				$css_path    = gl_get_option( 'css_path', $default_css );
+				$js_path     = gl_get_option( 'js_path', $default_js );
 
-				$css_path = ( '' === $css_path ) ? $default_src_css : $css_path;
-				$js_path  = ( '' === $js_path ) ? $default_src_js : $js_path;
+				$css_path = ( '' === $css_path ) ? $default_css : $css_path;
+				$js_path  = ( '' === $js_path ) ? $default_js : $js_path;
 				break;
 			default:
 				$css_path = STYLES_URL . '/default.css';
@@ -337,7 +339,6 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		}
 
 		if ( 'default' !== $css_framework ) {
-			error_log($css_path);
 			greenlet_enqueue_style( $css_framework, $css_path );
 			if ( false !== $load_js ) {
 				wp_enqueue_script( $css_framework . '-js', $js_path, array( 'jquery' ), GREENLET_VERSION, true );
@@ -551,17 +552,16 @@ if ( ! function_exists( 'greenlet_template_sequence' ) ) {
 		// Get ajax post data.
 		// Todo: Nonce verification
 		$template_name = isset( $_REQUEST[ 'template' ] ) ? $_REQUEST[ 'template' ] : null;
-		$context       = isset( $_REQUEST[ 'context' ] ) ? $_REQUEST[ 'context' ] : null;
+		$post_type     = isset( $_REQUEST[ 'post_type' ] ) ? $_REQUEST[ 'post_type' ] : 'post';
 
 		// Get templates columns and content sequence.
-		$options    = greenlet_column_options( $template_name );
+		$options    = greenlet_column_options( $template_name, $post_type );
 		$selections = greenlet_column_content_options();
 
 		// Get sequence html, Output and terminate the current script.
 		$output = greenlet_sequencer(
 			$options,
 			$selections,
-			$context,
 			array( 'main', 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5', 'sidebar-6', 'sidebar-7', 'sidebar-8' )
 		);
 
@@ -602,13 +602,12 @@ if ( ! function_exists( 'greenlet_sequencer' ) ) {
 	 * Column sequencer
 	 * Generates template columns and content sequence.
 	 *
-	 * @param    array  $options    template columns.
-	 * @param    array  $selections column content.
-	 * @param    string $context    for current option.
-	 * @param    array  $sequence   previously set sequence.
-	 * @return   string             column sequence html
+	 * @param    array $options    template columns.
+	 * @param    array $selections column content.
+	 * @param    array $sequence   previously set sequence.
+	 * @return   string            column sequence html
 	 */
-	function greenlet_sequencer( $options, $selections, $context = null, $sequence = null ) {
+	function greenlet_sequencer( $options, $selections, $sequence = null ) {
 
 		$output = '';
 
@@ -620,15 +619,6 @@ if ( ! function_exists( 'greenlet_sequencer' ) ) {
 
 			$id   = 'template-sequence[' . $option . ']';
 			$name = 'template-sequence[' . $option . ']';
-
-			// If context exist, set option framework id and name.
-			if ( $context ) {
-
-				$options_framework = new Options_Framework();
-				$option_name       = $options_framework->get_option_name();
-				$id                = $option_name . '-' . $context . '-' . $option;
-				$name              = $option_name . '[' . $context . '][' . $option . ']';
-			}
 
 			$output .= '<div><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>';
 			$output .= '<select id="' . esc_attr( $id ) . '" class="of-input" name="' . esc_attr( $name ) . '" style="width:60%;margin:2px 10px;">';
@@ -676,20 +666,25 @@ if ( ! function_exists( 'greenlet_column_options' ) ) {
 	/**
 	 * Returns column array for current template selection.
 	 *
-	 * @param  string $layout template option.
+	 * @param  string $template_name template name.
+	 * @param  string $post_type     Post type.
 	 * @return array columns
 	 */
-	function greenlet_column_options( $layout = 'default_template' ) {
+	function greenlet_column_options( $template_name, $post_type ) {
+		if ( 'default' === $template_name ) {
+			if ( 'page' === $post_type ) {
+				$layout = gl_get_option( 'default_template', array( 'template' => '12' ) );
+			} else {
+				$layout = gl_get_option( 'post_template', array( 'template' => '12' ) );
+			}
 
-		// If layout option exist, get saved options. Else extract columns name.
-		if ( of_get_option( $layout ) ) {
-			$cols = of_get_option( $layout );
+			$template = $layout['template'];
 		} else {
-			$cols = str_replace( '.php', '', basename( $layout ) );
+			$template = str_replace( '.php', '', basename( $template_name ) );
 		}
 
 		// Assign to column array.
-		$cols  = explode( '-', $cols );
+		$cols  = explode( '-', $template );
 		$array = array();
 
 		// If array is numeric, return columns array. Else return empty.

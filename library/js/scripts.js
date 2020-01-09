@@ -69,7 +69,7 @@ window.onscroll = function (e) {
 				greenlet_page_loader( link, next_page, true );
 			}
 		}
-	};
+	}
 }
 
 function greenlet_page_loader( obj, cur_page, add, act ) {

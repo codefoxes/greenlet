@@ -51,7 +51,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'checkbox',
 			'section' => 'title_tagline',
-			'label'   => __( 'Show Title' ),
+			'label'   => __( 'Show Title', 'greenlet' ),
 		),
 	);
 
@@ -64,7 +64,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'checkbox',
 			'section' => 'title_tagline',
-			'label'   => __( 'Show Tagline' ),
+			'label'   => __( 'Show Tagline', 'greenlet' ),
 		),
 	);
 
@@ -78,7 +78,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'color',
 			'section' => 'colors',
-			'label'   => __( 'Site Background' ),
+			'label'   => __( 'Site Background', 'greenlet' ),
 		),
 	);
 
@@ -92,7 +92,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'color',
 			'section' => 'colors',
-			'label'   => __( 'Header Background' ),
+			'label'   => __( 'Header Background', 'greenlet' ),
 		),
 	);
 
@@ -106,7 +106,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'color',
 			'section' => 'colors',
-			'label'   => __( 'Header Text Color' ),
+			'label'   => __( 'Header Text Color', 'greenlet' ),
 		),
 	);
 
@@ -120,7 +120,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'color',
 			'section' => 'colors',
-			'label'   => __( 'Footer Background' ),
+			'label'   => __( 'Footer Background', 'greenlet' ),
 		),
 	);
 
@@ -134,7 +134,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'color',
 			'section' => 'colors',
-			'label'   => __( 'Footer Text Color' ),
+			'label'   => __( 'Footer Text Color', 'greenlet' ),
 		),
 	);
 
@@ -142,7 +142,7 @@ function greenlet_options() {
 		'type' => 'section',
 		'id'   => 'framework',
 		'args' => array(
-			'title'    => __( 'Framework' ),
+			'title'    => __( 'Framework', 'greenlet' ),
 			'priority' => 30,
 		),
 	);
@@ -156,10 +156,10 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'radio',
 			'section' => 'framework',
-			'label'   => __( 'CSS Framework' ),
+			'label'   => __( 'CSS Framework', 'greenlet' ),
 			'choices' => array(
-				'default'   => __( 'Greenlet Framework' ),
-				'bootstrap' => __( 'Bootstrap 4.4.1' ),
+				'default'   => __( 'Greenlet Framework', 'greenlet' ),
+				'bootstrap' => __( 'Bootstrap 4.4.1', 'greenlet' ),
 			),
 		),
 	);
@@ -173,9 +173,9 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'url',
 			'section'     => 'framework',
-			'description' => __( 'Different CDN or CSS Framework? Enter local or cdn path. ( Optional )' ),
+			'description' => __( 'Enter URL if different CDN or CSS Framework', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( 'https://somecdn.com/css_framework.css' ),
+				'placeholder' => __( 'https://somecdn.com/css_framework.css', 'greenlet' ),
 			),
 		),
 	);
@@ -189,8 +189,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'checkbox',
 			'section'     => 'framework',
-			'label'       => __( 'Defer CSS' ),
-			'description' => __( 'Load the above CSS framework after page load to increase page speed.' ),
+			'label'       => __( 'Defer CSS', 'greenlet' ),
+			'description' => __( 'Load the CSS framework after page load.', 'greenlet' ),
 		),
 	);
 
@@ -201,12 +201,12 @@ function greenlet_options() {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_css' ),
 		),
 		'cargs' => array(
-			'label'       => __( 'Critical CSS' ),
-			'description' => __( 'If CSS files are defered enter the critical css here.' ),
+			'label'       => __( 'Critical CSS', 'greenlet' ),
+			'description' => __( 'If CSS files are defered enter the critical css here.', 'greenlet' ),
 			'type'        => 'textarea',
 			'section'     => 'framework',
 			'input_attrs' => array(
-				'placeholder' => __( 'Leave Blank to not add Critical CSS.' ),
+				'placeholder' => __( 'Leave Blank to not add Critical CSS.', 'greenlet' ),
 			),
 		),
 	);
@@ -220,8 +220,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'checkbox',
 			'section'     => 'framework',
-			'label'       => __( 'Load Respective JS' ),
-			'description' => __( 'Eg: If you select Bootstrap above, check this option to also load Bootstrap JS.' ),
+			'label'       => __( 'Load Respective JS', 'greenlet' ),
+			'description' => __( 'Eg: Load Bootstrap JS if loaded Bootstrap CSS.', 'greenlet' ),
 		),
 	);
 
@@ -234,10 +234,10 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'framework',
-			'label'       => __( 'Container Width' ),
-			'description' => __( 'Enter container width in percentage or pixels. Eg: 1170px or 80% ( Optional )' ),
+			'label'       => __( 'Container Width', 'greenlet' ),
+			'description' => __( 'Enter container width. Eg: 1170px or 80% (Optional)', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( 'Default' ),
+				'placeholder' => __( 'Default', 'greenlet' ),
 			),
 		),
 	);
@@ -246,7 +246,7 @@ function greenlet_options() {
 		'type' => 'panel',
 		'id'   => 'layout',
 		'args' => array(
-			'title'       => __( 'Layout' ),
+			'title'       => __( 'Layout', 'greenlet' ),
 			'description' => 'Site Layout.',
 			'priority'    => 35,
 		),
@@ -256,7 +256,7 @@ function greenlet_options() {
 		'type' => 'section',
 		'id'   => 'header_layout',
 		'args' => array(
-			'title' => __( 'Header Layout' ),
+			'title' => __( 'Header Layout', 'greenlet' ),
 			'panel' => 'layout',
 		),
 	);
@@ -270,7 +270,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'checkbox',
 			'section' => 'header_layout',
-			'label'   => __( 'Show Topbar' ),
+			'label'   => __( 'Show Topbar', 'greenlet' ),
 		),
 	);
 
@@ -283,7 +283,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'checkbox',
 			'section' => 'header_layout',
-			'label'   => __( 'Fixed Topbar' ),
+			'label'   => __( 'Fixed Topbar', 'greenlet' ),
 		),
 	);
 
@@ -296,10 +296,10 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'header_layout',
-			'label'       => __( 'Topbar Layout' ),
-			'description' => __( 'Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only integers. Sum should be 12.)' ),
+			'label'       => __( 'Topbar Layout', 'greenlet' ),
+			'description' => __( 'Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only integers. Sum should be 12.)', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( '4-8' ),
+				'placeholder' => __( '4-8', 'greenlet' ),
 			),
 		),
 	);
@@ -313,7 +313,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'radio',
 			'section' => 'header_layout',
-			'label'   => __( 'Topbar Content Source' ),
+			'label'   => __( 'Topbar Content Source', 'greenlet' ),
 			'choices' => $content_source,
 		),
 	);
@@ -327,10 +327,10 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'header_layout',
-			'label'       => __( 'Header Layout' ),
-			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc.' ),
+			'label'       => __( 'Header Layout', 'greenlet' ),
+			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( '4-8' ),
+				'placeholder' => __( '4-8', 'greenlet' ),
 			),
 		),
 	);
@@ -344,7 +344,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'radio',
 			'section' => 'header_layout',
-			'label'   => __( 'Header Content Source' ),
+			'label'   => __( 'Header Content Source', 'greenlet' ),
 			'choices' => $content_source,
 		),
 	);
@@ -358,7 +358,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'select',
 			'section'     => 'header_layout',
-			'label'       => __( 'Logo Position' ),
+			'label'       => __( 'Logo Position', 'greenlet' ),
 			'description' => __( 'Column for the logo to be displayed.', 'greenlet' ),
 			'choices'     => $pagetop_columns,
 		),
@@ -373,7 +373,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'select',
 			'section'     => 'header_layout',
-			'label'       => __( 'Main Menu Position' ),
+			'label'       => __( 'Main Menu Position', 'greenlet' ),
 			'description' => __( 'Column for the Main Menu to be displayed.', 'greenlet' ),
 			'choices'     => $pagetop_columns,
 		),
@@ -388,7 +388,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'select',
 			'section'     => 'header_layout',
-			'label'       => __( 'Secondary Menu Position' ),
+			'label'       => __( 'Secondary Menu Position', 'greenlet' ),
 			'description' => __( 'Column for the Secondary Menu to be displayed.', 'greenlet' ),
 			'choices'     => $pagetop_columns,
 		),
@@ -398,7 +398,7 @@ function greenlet_options() {
 		'type' => 'section',
 		'id'   => 'main_layout',
 		'args' => array(
-			'title' => __( 'Main Layout' ),
+			'title' => __( 'Main Layout', 'greenlet' ),
 			'panel' => 'layout',
 		),
 	);
@@ -412,7 +412,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'select',
 			'section'     => 'main_layout',
-			'label'       => __( 'Number of Sidebars ( For Main Container )' ),
+			'label'       => __( 'Number of Sidebars ( For Main Container )', 'greenlet' ),
 			'description' => sprintf(
 				'How many sidebars you want ro register for main container of page ? ( Not for header or footer. They will be configured in "Header/Footer Layout".)
 				Minimum sidebars required are "%s" according to your templates.',
@@ -435,7 +435,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
-			'label'     => __( 'Home Page (Post List) Layout' ),
+			'label'     => __( 'Home Page (Post List) Layout', 'greenlet' ),
 			'templates' => $templates_array,
 			'columns'   => greenlet_column_content_options(),
 		),
@@ -454,7 +454,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
-			'label'     => __( 'Default Page Layout' ),
+			'label'     => __( 'Default Page Layout', 'greenlet' ),
 			'templates' => $templates_array,
 			'columns'   => greenlet_column_content_options(),
 		),
@@ -473,11 +473,13 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
-			'label'     => __( 'Single Post Layout' ),
+			'label'     => __( 'Single Post Layout', 'greenlet' ),
 			'templates' => $templates_array,
 			'columns'   => greenlet_column_content_options(),
 		),
 	);
+
+	// Todo: Custom Post Types Template.
 
 	$options[] = array(
 		'type'  => 'setting_control',
@@ -492,7 +494,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
-			'label'     => __( 'Archive Layout' ),
+			'label'     => __( 'Archive Layout', 'greenlet' ),
 			'templates' => $templates_array,
 			'columns'   => greenlet_column_content_options(),
 		),
@@ -502,7 +504,7 @@ function greenlet_options() {
 		'type' => 'section',
 		'id'   => 'footer_layout',
 		'args' => array(
-			'title' => __( 'Footer Layout' ),
+			'title' => __( 'Footer Layout', 'greenlet' ),
 			'panel' => 'layout',
 		),
 	);
@@ -516,7 +518,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'checkbox',
 			'section' => 'footer_layout',
-			'label'   => __( 'Show Semifooter' ),
+			'label'   => __( 'Show Semifooter', 'greenlet' ),
 		),
 	);
 
@@ -529,10 +531,10 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'footer_layout',
-			'label'       => __( 'Semi Footer Layout' ),
-			'description' => __( 'Enter semifooter columns in Format: 4-8 or 3-9-3 etc.' ),
+			'label'       => __( 'Semi Footer Layout', 'greenlet' ),
+			'description' => __( 'Enter semifooter columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( '3-3-3-3' ),
+				'placeholder' => __( '3-3-3-3', 'greenlet' ),
 			),
 		),
 	);
@@ -546,7 +548,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'radio',
 			'section' => 'footer_layout',
-			'label'   => __( 'Semi Footer Content Source' ),
+			'label'   => __( 'Semi Footer Content Source', 'greenlet' ),
 			'choices' => $content_source,
 		),
 	);
@@ -560,10 +562,10 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'footer_layout',
-			'label'       => __( 'Footer Layout' ),
-			'description' => __( 'Enter footer columns in Format: 4-8 or 3-9-3 etc.' ),
+			'label'       => __( 'Footer Layout', 'greenlet' ),
+			'description' => __( 'Enter footer columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( '12' ),
+				'placeholder' => '12',
 			),
 		),
 	);
@@ -577,7 +579,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'radio',
 			'section' => 'footer_layout',
-			'label'   => __( 'Footer Content Source' ),
+			'label'   => __( 'Footer Content Source', 'greenlet' ),
 			'choices' => $content_source,
 		),
 	);
@@ -591,7 +593,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'select',
 			'section'     => 'footer_layout',
-			'label'       => __( 'Footer Menu Position' ),
+			'label'       => __( 'Footer Menu Position', 'greenlet' ),
 			'description' => __( 'Column for the Footer Menu to be displayed.', 'greenlet' ),
 			'choices'     => $pagebottom_columns,
 		),
@@ -601,7 +603,7 @@ function greenlet_options() {
 		'type' => 'section',
 		'id'   => 'misc',
 		'args' => array(
-			'title'    => __( 'Misc Settings' ),
+			'title'    => __( 'Misc Settings', 'greenlet' ),
 			'priority' => 200,
 		),
 	);
@@ -615,8 +617,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'checkbox',
 			'section'     => 'misc',
-			'label'       => __( 'Schema Markup' ),
-			'description' => __( 'Enable Schema Markup' ),
+			'label'       => __( 'Schema Markup', 'greenlet' ),
+			'description' => __( 'Enable Schema Markup', 'greenlet' ),
 		),
 	);
 
@@ -629,8 +631,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'checkbox',
 			'section'     => 'misc',
-			'label'       => __( 'Breadcrumb' ),
-			'description' => __( 'Enable breadcrumb navigation' ),
+			'label'       => __( 'Breadcrumb', 'greenlet' ),
+			'description' => __( 'Enable breadcrumb navigation', 'greenlet' ),
 		),
 	);
 
@@ -643,8 +645,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'misc',
-			'label'       => __( 'Breadcrumb Separator' ),
-			'description' => __( 'Separator between links in breadcrumb. Eg: / or >' ),
+			'label'       => __( 'Breadcrumb Separator', 'greenlet' ),
+			'description' => __( 'Separator between links in breadcrumb. Eg: / or >', 'greenlet' ),
 		),
 	);
 
@@ -657,8 +659,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'checkbox',
 			'section'     => 'misc',
-			'label'       => __( 'Featured Image' ),
-			'description' => __( 'Show featured image on post list and archives.' ),
+			'label'       => __( 'Featured Image', 'greenlet' ),
+			'description' => __( 'Show featured image on post list and archives.', 'greenlet' ),
 		),
 	);
 
@@ -671,8 +673,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'text',
 			'section'     => 'misc',
-			'label'       => __( 'Excerpt length' ),
-			'description' => __( 'Number of characters in excerpts for post list.' ),
+			'label'       => __( 'Excerpt length', 'greenlet' ),
+			'description' => __( 'Number of characters in excerpts for post list.', 'greenlet' ),
 		),
 	);
 
@@ -685,7 +687,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'radio',
 			'section'     => 'misc',
-			'label'       => __( 'Pagination' ),
+			'label'       => __( 'Pagination', 'greenlet' ),
 			'description' => __( 'Paging Navigation display format.', 'greenlet' ),
 			'choices'     => array(
 				'simple'   => 'Simple',
@@ -707,7 +709,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'multicheck',
 			'section' => 'misc',
-			'label'   => __( 'Show Author Info' ),
+			'label'   => __( 'Show Author Info', 'greenlet' ),
 			'choices' => array(
 				'name'  => 'Name',
 				'image' => 'Avatar',
@@ -726,7 +728,7 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'    => 'multicheck',
 			'section' => 'misc',
-			'label'   => __( 'Show Comments' ),
+			'label'   => __( 'Show Comments', 'greenlet' ),
 			'choices' => array(
 				'posts' => 'Posts',
 				'pages' => 'Pages',

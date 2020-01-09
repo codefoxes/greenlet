@@ -86,7 +86,7 @@ function greenlet_attr( $args, $get_array = false ) {
 	}
 
 	// If schema enabled, add filter to each primary class.
-	if ( of_get_option( 'schema' ) ) {
+	if ( gl_get_option( 'schema', '1' ) ) {
 		add_filter( "greenlet_attr_{$primary}", 'greenlet_attribute', 10, 2 );
 	}
 
