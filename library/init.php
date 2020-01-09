@@ -322,8 +322,13 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$css_path = gl_get_option( 'css_path', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' );
-				$js_path  = gl_get_option( 'js_path', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' );
+				$default_src_css = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
+				$default_src_js = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
+				$css_path = gl_get_option( 'css_path', $default_src_css );
+				$js_path  = gl_get_option( 'js_path', $default_src_js );
+
+				$css_path = ( '' === $css_path ) ? $default_src_css : $css_path;
+				$js_path  = ( '' === $js_path ) ? $default_src_js : $js_path;
 				break;
 			default:
 				$css_path = STYLES_URL . '/default.css';
