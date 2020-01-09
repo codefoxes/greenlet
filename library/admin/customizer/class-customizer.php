@@ -40,7 +40,6 @@ class Customizer {
 	 * @return void
 	 */
 	public function __construct() {
-		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-matcher.php';
 		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-multicheck.php';
 		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-radio-image.php';
 		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-template-selector.php';
@@ -105,10 +104,7 @@ class Customizer {
 
 				$wp_customize->add_setting( $option['id'], $option['sargs'] );
 
-				if ( 'matcher' === $option['cargs']['type'] ) {
-					$wp_customize->add_control( new Control_Matcher( $wp_customize, $option['id'], $option['cargs'] ) );
-
-				} elseif ( 'multicheck' === $option['cargs']['type'] ) {
+				if ( 'multicheck' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Multicheck( $wp_customize, $option['id'], $option['cargs'] ) );
 
 				} elseif ( 'radio-image' === $option['cargs']['type'] ) {
@@ -135,7 +131,6 @@ class Customizer {
 		$wp_customize->register_control_type( 'Greenlet\Control_Multicheck' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Radio_Image' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Template_Selector' );
-		$wp_customize->register_control_type( 'Greenlet\Control_Matcher' );
 	}
 
 	/**

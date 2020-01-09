@@ -17,8 +17,8 @@ function fix_topbar() {
 	}
 }
 
-fix_topbar();
-window.onresize = fix_topbar;
+// fix_topbar();
+// window.onresize = fix_topbar;
 
 var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><greenlet class="loader-ring" cx="25" cy="25" r="22" /><greenlet class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
 

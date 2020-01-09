@@ -322,8 +322,8 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$css_path = of_get_option( 'css_path' ) ? of_get_option( 'css_path' ) : 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
-				$js_path  = of_get_option( 'js_path' ) ? of_get_option( 'js_path' ) : 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
+				$css_path = gl_get_option( 'css_path', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' );
+				$js_path  = gl_get_option( 'js_path', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' );
 				break;
 			default:
 				$css_path = STYLES_URL . '/default.css';
@@ -332,6 +332,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		}
 
 		if ( 'default' !== $css_framework ) {
+			error_log($css_path);
 			greenlet_enqueue_style( $css_framework, $css_path );
 			if ( false !== $load_js ) {
 				wp_enqueue_script( $css_framework . '-js', $js_path, array( 'jquery' ), GREENLET_VERSION, true );
@@ -480,11 +481,19 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 			}
 		);
 
-		// Get template names from options, else set default values.
-		$files[] = of_get_option( 'default_template' ) ? of_get_option( 'default_template' ) : '12';
-		$files[] = of_get_option( 'default_post_template' ) ? of_get_option( 'default_post_template' ) : '12';
-		$files[] = of_get_option( 'home_template' ) ? of_get_option( 'home_template' ) : '12';
-		$files[] = of_get_option( 'archive_template' ) ? of_get_option( 'archive_template' ) : '12';
+		$default_layout = array( 'template' => '12' );
+
+		$layouts = array(
+			gl_get_option( 'default_template', $default_layout ),
+			gl_get_option( 'post_template', $default_layout ),
+			gl_get_option( 'home_template', $default_layout ),
+			gl_get_option( 'archive_template', $default_layout ),
+		);
+
+		foreach ( $layouts as $layout ) {
+			// Get template names from options, else set default values.
+			$files[] = isset( $layout['template'] ) ? $layout['template'] : '12';
+		}
 
 		$cols = array();
 

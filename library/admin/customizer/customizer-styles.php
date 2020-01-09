@@ -13,7 +13,7 @@ if ( ! function_exists( 'gl_get_option' ) ) {
 	 *
 	 * @param string      $option_name  Option Name.
 	 * @param string|bool $default      Default Value to return.
-	 * @return string|bool              Option Value.
+	 * @return mixed                    Option Value.
 	 */
 	function gl_get_option( $option_name, $default = false ) {
 		return get_theme_mod( $option_name, $default );
@@ -31,7 +31,8 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 	 * @see wp-includes/general-template.php.
 	 */
 	function greenlet_load_wp_head() {
-		$main_width = of_get_option( 'container_width' ) ? of_get_option( 'container_width' ) : '1170px';
+		$main_width = gl_get_option( 'container_width', '1170px' );
+		$main_width = ( '' === $main_width ) ? '1170px' : $main_width;
 		$main_class = '.container';
 
 		$show_title   = gl_get_option( 'show_title', '1' );
@@ -42,7 +43,7 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 		$footer_bg    = gl_get_option( 'footer_bg', '#212121' );
 		$footer_color = gl_get_option( 'footer_color', '#fff' );
 
-		$fixed_topbar    = gl_get_option( 'fixed_topbar', false );
+		$fixed_topbar = gl_get_option( 'fixed_topbar', false );
 
 		$critical_css = gl_get_option( 'critical_css', '' );
 		$defer_css    = gl_get_option( 'defer_css', false );
@@ -92,7 +93,7 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 		<?php
 
 		// Todo: Move this somewhere else.
-		if ( of_get_option( 'fixed_topbar' ) ) {
+		if ( false !== $fixed_topbar ) {
 			add_filter(
 				'body_class',
 				function ( $classes ) {

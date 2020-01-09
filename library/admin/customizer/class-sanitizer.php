@@ -43,4 +43,20 @@ class Sanitizer {
 
 		return ( ! empty( $value ) ) ? array_map( 'sanitize_text_field', $value ) : array();
 	}
+
+	/**
+	 * Sanitizes template selector control.
+	 *
+	 * @param string $value Template and Sequence Values.
+	 * @return array
+	 */
+	public static function sanitize_template_selector( $value ) {
+		$value = json_decode( $value, true );
+
+		if ( json_last_error() !== JSON_ERROR_NONE ) {
+			return array();
+		}
+
+		return ( ! empty( $value ) ) ? $value : array();
+	}
 }

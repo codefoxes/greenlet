@@ -74,6 +74,11 @@ class ColumnObject {
 			// The wp query.
 			global $wp_query;
 
+			$default_layout = array(
+				'template' => '12',
+				'sequence' => array( 'main' ),
+			);
+
 			if ( is_page() || is_single() ) {
 				// If is single page or post.
 
@@ -87,14 +92,17 @@ class ColumnObject {
 					if ( is_page() ) {
 
 						// Get columns, column sequence from options.
-						$this->columns  = of_get_option( 'default_template' ) ? of_get_option( 'default_template' ) : '12';
-						$this->sequence = of_get_option( 'default_sequence' ) ? of_get_option( 'default_sequence' ) : array( 'main' );
+						$layout = gl_get_option( 'default_template', $default_layout );
+
+						$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
+						$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 					}
 
 					if ( is_single() ) {
+						$layout = gl_get_option( 'post_template', $default_layout );
 
-						$this->columns  = of_get_option( 'default_post_template' ) ? of_get_option( 'default_post_template' ) : '12';
-						$this->sequence = of_get_option( 'default_post_sequence' ) ? of_get_option( 'default_post_sequence' ) : array( 'main' );
+						$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
+						$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 					}
 				} else {
 
@@ -105,16 +113,22 @@ class ColumnObject {
 			} elseif ( is_home() ) {
 				// If is home (post list) page.
 
-				$this->columns  = of_get_option( 'home_template' ) ? of_get_option( 'home_template' ) : '12';
-				$this->sequence = of_get_option( 'home_sequence' ) ? of_get_option( 'home_sequence' ) : array( 'main' );
+				$layout = gl_get_option( 'home_template', $default_layout );
+
+				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
+				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 			} elseif ( is_archive() || is_search() ) {
 				// If is archive page.
 
-				$this->columns  = of_get_option( 'archive_template' ) ? of_get_option( 'archive_template' ) : '12';
-				$this->sequence = of_get_option( 'archive_sequence' ) ? of_get_option( 'archive_sequence' ) : array( 'main' );
+				$layout = gl_get_option( 'archive_template', $default_layout );
+
+				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
+				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 			} else {
-				$this->columns  = of_get_option( 'default_template' ) ? of_get_option( 'default_template' ) : '12';
-				$this->sequence = of_get_option( 'default_sequence' ) ? of_get_option( 'default_sequence' ) : array( 'main' );
+				$layout = gl_get_option( 'default_template', $default_layout );
+
+				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
+				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 			}
 		}
 

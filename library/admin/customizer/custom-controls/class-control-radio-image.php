@@ -50,7 +50,6 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
-
 			// Get the basics from the parent class.
 			parent::to_json();
 
@@ -65,14 +64,14 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 
 			$this->json['link'] = $this->get_link();
 
-			// Choices.
-			$this->json['choices'] = $this->choices;
-
 			// Setting ID.
 			$this->json['id'] = $this->id;
 
 			// Control Type.
 			$this->json['type'] = $this->type;
+
+			// Choices.
+			$this->json['choices'] = $this->choices;
 		}
 
 		/**
@@ -95,7 +94,7 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 				<# for ( key in data.choices ) { #>
 				<div class="gl-radio-image">
 					<label<# if ( data.value === key ) { #> class="checked"<# } #>>
-						<input type="radio" name="test" value="{{ key }}" <# if ( data.value === key ) { #> checked<# } #> />
+						<input type="radio" name="{{ data.id }}" value="{{ key }}" <# if ( data.value === key ) { #> checked<# } #> />
 						<img src="{{ data.choices[ key ] }}">
 					</label>
 				</div>

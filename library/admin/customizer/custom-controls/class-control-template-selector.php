@@ -14,7 +14,7 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 	 * @since  1.0.0
 	 * @access public
 	 */
-	class Control_Template_Selector extends Control_Radio_Image {
+	class Control_Template_Selector extends \WP_Customize_Control {
 
 		/**
 		 * The type of customize control being rendered.
@@ -26,15 +26,18 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		public $type = 'template-selector';
 
 		/**
-		 * Allow choices parameter.
+		 * Allow templates parameter.
 		 *
 		 * @var array
 		 */
-		public $choices = array();
+		public $templates = array();
 
-		public $options = array();
-
-		public $selections = array();
+		/**
+		 * Allow columns parameter.
+		 *
+		 * @var array
+		 */
+		public $columns = array();
 
 		/**
 		 * Enqueue scripts/styles.
@@ -54,12 +57,31 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
-
 			// Get the basics from the parent class.
 			parent::to_json();
 
-			$this->json['options']    = $this->options;
-			$this->json['selections'] = $this->selections;
+			// Default value.
+			$this->json['default'] = $this->setting->default;
+			if ( isset( $this->default ) ) {
+				$this->json['default'] = $this->default;
+			}
+
+			// Value.
+			$this->json['value'] = $this->value();
+
+			$this->json['link'] = $this->get_link();
+
+			// Setting ID.
+			$this->json['id'] = $this->id;
+
+			// Control Type.
+			$this->json['type'] = $this->type;
+
+			// Templates.
+			$this->json['templates'] = $this->templates;
+
+			// Columns.
+			$this->json['columns'] = $this->columns;
 		}
 
 		/**
@@ -71,10 +93,7 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		 */
 		protected function content_template() {
 			?>
-			<#
-			console.log( data );
-			#>
-			<# if ( ! data.choices ) { return; } #>
+			<# if ( ! data.templates ) { return; } #>
 
 			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
 			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
@@ -82,25 +101,27 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 			<input id="_customize-input-{{ data.id }}" type="hidden" {{{ data.link }}} />
 
 			<div class="gl-radio-images">
-				<# for ( key in data.choices ) { #>
+				<# for ( key in data.templates ) { #>
 				<div class="gl-radio-image">
-					<label<# if ( data.value === key ) { #> class="checked"<# } #>>
-						<input type="radio" name="test" value="{{ key }}" <# if ( data.value === key ) { #> checked<# } #> />
-						<img src="{{ data.choices[ key ] }}">
+					<label<# if ( data.value.template === key ) { #> class="checked"<# } #>>
+						<input type="radio" name="{{ data.id }}" value="{{ key }}" <# if ( data.value.template === key ) { #> checked<# } #> />
+						<img src="{{ data.templates[ key ] }}">
 					</label>
 				</div>
 				<# } #>
 			</div>
 
+			<# var cols = data.value.template.split('-'); #>
+
 			<div class="gl-template-matcher-sequence">
-			<# _.each( data.options, function( option, key ){  #>
-				<div class="gl-template-matcher">
-					<div class="gl-template-matcher-column">{{ option }}</div>
-					<select data-name="gl-template-selection" data-value="{{data.value[key]}}" >
-						<# _.each( data.selections, function( option2, key2 ){  #>
-						<option <# if ( data.value[key] == key2 ){ #> selected="selected" <# } #> value="{{ key2 }}">{{ option2 }}</option>
+			<# _.each( cols, function( col, index ){  #>
+				<div class="gl-template-matcher col-{{ col }}">
+					<select class="gl-template-selection" >
+						<# _.each( data.columns, function( col_name, col_id ){  #>
+						<option <# if ( data.value.sequence[index] == col_id ){ #> selected="selected" <# } #> value="{{ col_id }}">{{ col_name }}</option>
 						<# } ); #>
 					</select>
+					<div class="gl-template-matcher-column">col {{ index + 1 }} ({{ col }})</div>
 				</div>
 			<# } ); #>
 		</div>

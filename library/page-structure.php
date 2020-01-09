@@ -426,11 +426,11 @@ function greenlet_do_entry_content() {
 
 		global $post;
 		$is_more    = strpos( $post->post_content, '<!--more-->' );
-		$show_image = of_get_option( 'featured_image' ) ? of_get_option( 'featured_image' ) : 0;
+		$show_image = gl_get_option( 'featured_image', false );
 		$more       = apply_filters( 'greenlet_more_text', __( '<span class="more-text">Read More</span>', 'greenlet' ) );
 
 		// If the post has a thumbnail and not password protected, display.
-		if ( ( 1 === $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
+		if ( ( false !== $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
 
 			greenlet_markup( 'entry-thumbnail', greenlet_attr( 'entry-thumbnail' ) );
 			the_post_thumbnail( 'thumbnail' );
@@ -455,16 +455,16 @@ function greenlet_do_entry_content() {
  */
 function greenlet_do_entry_footer() {
 
-	$show_author = of_get_option( 'show_author' );
+	$show_author = gl_get_option( 'show_author', array( 'name', 'image', 'bio' ) );
 
 	$name  = null;
 	$image = null;
 	$bio   = null;
 
 	if ( is_array( $show_author ) && count( $show_author ) > 0 ) {
-		$name  = isset( $show_author['name'] ) ? $show_author['name'] : null;
-		$image = isset( $show_author['image'] ) ? $show_author['image'] : null;
-		$bio   = isset( $show_author['bio'] ) ? $show_author['bio'] : null;
+		$name  = in_array( 'name', $show_author, true ) ? true : false;
+		$image = in_array( 'image', $show_author, true ) ? true : false;
+		$bio   = in_array( 'bio', $show_author, true ) ? true : false;
 	}
 
 	// If we have a single post.
@@ -543,9 +543,9 @@ function greenlet_excerpt_length() {
  * @return void
  */
 function greenlet_comments_template() {
-	$show = of_get_option( 'show_comments' ) ? of_get_option( 'show_comments' ) : array( 'posts' => true );
+	$show = gl_get_option( 'show_comments', array( 'posts' ) );
 	if ( comments_open() ) {
-		if ( ( is_page() && $show['pages'] ) || ( is_single() && $show['posts'] ) ) {
+		if ( ( is_page() && in_array( 'pages', $show, true ) ) || ( is_single() && in_array( 'posts', $show, true ) ) ) {
 			comments_template();
 		}
 	}
@@ -559,7 +559,7 @@ function greenlet_comments_template() {
  */
 function greenlet_paging_nav() {
 
-	$format   = of_get_option( 'paging_nav' ) ? of_get_option( 'paging_nav' ) : 'number';
+	$format   = gl_get_option( 'paging_nav', 'number' );
 	$pag_attr = greenlet_attr( "pagination {$format}" );
 
 	global $wp_query;
