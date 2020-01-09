@@ -27,40 +27,41 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 
 		// Define constants for parent theme directories.
 		define( 'PARENT_DIR', get_template_directory() );
-		define( 'IMAGES_DIR', PARENT_DIR . '/images' );
+		define( 'ASSETS_DIR', PARENT_DIR . '/assets' );
+		define( 'IMAGES_DIR', ASSETS_DIR . '/images' );
 		define( 'TEMPLATES_DIR', PARENT_DIR . '/templates' );
 		define( 'LIBRARY_DIR', PARENT_DIR . '/library' );
 		define( 'LANGUAGES_DIR', LIBRARY_DIR . '/languages' );
-		define( 'OPTIONS_DIR', LIBRARY_DIR . '/options' );
 		define( 'ADMIN_DIR', LIBRARY_DIR . '/admin' );
 
 		// Define constants for child directories.
 		define( 'CHILD_DIR', get_stylesheet_directory() );
-		define( 'CHILD_IMAGES_DIR', CHILD_DIR . '/images' );
+		define( 'CHILD_ASSETS_DIR', CHILD_DIR . '/assets' );
+		define( 'CHILD_IMAGES_DIR', CHILD_ASSETS_DIR . '/images' );
 		define( 'CHILD_TEMPLATES_DIR', CHILD_DIR . '/templates' );
 		define( 'CHILD_LIBRARY_DIR', CHILD_DIR . '/library' );
 		define( 'CHILD_LANGUAGES_DIR', CHILD_LIBRARY_DIR . '/languages' );
-		define( 'CHILD_OPTIONS_DIR', CHILD_LIBRARY_DIR . '/options' );
 		define( 'CHILD_ADMIN_DIR', CHILD_LIBRARY_DIR . '/admin' );
 
 		// Define constants for parent theme URLs.
 		define( 'PARENT_URL', get_template_directory_uri() );
 		define( 'LIBRARY_URL', PARENT_URL . '/library' );
-		define( 'IMAGES_URL', PARENT_URL . '/images' );
-		define( 'STYLES_URL', LIBRARY_URL . '/css' );
-		define( 'SCRIPTS_URL', LIBRARY_URL . '/js' );
+		define( 'ASSETS_URL', PARENT_URL . '/assets' );
+		define( 'IMAGES_URL', ASSETS_URL . '/images' );
+		define( 'STYLES_URL', ASSETS_URL . '/css' );
+		define( 'SCRIPTS_URL', ASSETS_URL . '/js' );
 		define( 'ADMIN_URL', LIBRARY_URL . '/admin' );
 
 		// Define constants for child theme URLs.
 		define( 'CHILD_URL', get_stylesheet_directory_uri() );
 		define( 'CHILD_LIBRARY_URL', CHILD_URL . '/library' );
-		define( 'CHILD_IMAGES_URL', CHILD_URL . '/images' );
-		define( 'CHILD_STYLES_URL', CHILD_LIBRARY_URL . '/css' );
-		define( 'CHILD_SCRIPTS_URL', CHILD_LIBRARY_URL . '/js' );
+		define( 'CHILD_ASSETS_URL', CHILD_URL . '/assets' );
+		define( 'CHILD_IMAGES_URL', CHILD_ASSETS_URL . '/images' );
+		define( 'CHILD_STYLES_URL', CHILD_ASSETS_URL . '/css' );
+		define( 'CHILD_SCRIPTS_URL', CHILD_ASSETS_URL . '/js' );
 		define( 'CHILD_ADMIN_URL', CHILD_LIBRARY_URL . '/admin' );
 
 		// Define other contants.
-		define( 'OPTIONS_FRAMEWORK_DIRECTORY', LIBRARY_URL . '/options/' );
 		define( 'GREENLET_VERSION', '1.0.0' );
 	}
 

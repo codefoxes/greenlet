@@ -64,7 +64,7 @@ class Options_Admin {
 			'page_title'  => __( 'Greenlet Settings', 'greenlet' ),
 			'menu_title'  => __( 'Greenlet Options', 'greenlet' ),
 			'capability'  => 'edit_theme_options',
-			'menu_slug'   => 'greenlet-options',
+			'menu_slug'   => 'greenlet',
 			'parent_slug' => 'themes.php',
 
 			// Menu default settings.
@@ -103,7 +103,10 @@ class Options_Admin {
 			return;
 		}
 
+		// Styles.
 		wp_enqueue_style( 'greenlet-options', ADMIN_URL . '/assets/css/options.css', array(), GREENLET_VERSION );
+
+		// Scripts.
 		wp_enqueue_script( 'greenlet-options', ADMIN_URL . '/assets/js/options.js', array(), GREENLET_VERSION, true );
 	}
 
@@ -120,17 +123,46 @@ class Options_Admin {
 		} else {
 			$val = __( 'ERROR! You don\'t have any options to export. Try saving your options first.', 'greenlet' );
 		}
+
+		$setting_links = array(
+			'title_tagline' => 'Title and Tagline',
+			'colors'        => 'Colours',
+			'framework'     => 'CSS Framework',
+			'header_layout' => 'Header Layout',
+			'main_layout'   => 'Main Layout',
+			'footer_layout' => 'Footer Layout',
+			'misc'          => 'Other Settings',
+		);
 		?>
 
-		<div id="greenlet-options-wrap" class="wrap">
+		<div id="greenlet" class="wrap">
 
 			<?php $menu = $this->menu_settings(); ?>
-			<h2><?php echo esc_html( $menu['page_title'] ); ?></h2>
+			<div class="title"><?php echo esc_html( $menu['page_title'] ); ?></div>
 
 			<?php settings_errors( 'options-framework' ); ?>
 
-			<div id="greenlet-options-metabox">
-				Options
+			<div id="greenlet-options">
+				<div class="container">
+					<div class="row">
+						<div class="col-8">
+							<div class="settings">
+								<div class="heading">Customizer Controls</div>
+								<div class="links-wrap">
+									<?php
+									foreach ( $setting_links as $section => $title ) {
+										$link = admin_url( '/customize.php?autofocus[section]=' . $section );
+										echo '<div class="link">';
+										printf( '<a href="%1$s" target="_blank" >%2$s</a>', esc_url( $link ), wp_kses( $title, null ) );
+										echo '</div>';
+									}
+									?>
+								</div>
+							</div>
+						</div>
+						<div class="col-4">Ads</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<?php
