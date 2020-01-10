@@ -133,6 +133,8 @@ class Options_Admin {
 			'footer_layout' => 'Footer Layout',
 			'misc'          => 'Other Settings',
 		);
+
+		$ads_url = 'https://karthikbhat.net/iframes/greenlet-ads.php';
 		?>
 
 		<div id="greenlet" class="wrap">
@@ -160,7 +162,9 @@ class Options_Admin {
 								</div>
 							</div>
 						</div>
-						<div class="col-4">Ads</div>
+						<div class="col-4">
+							<iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" src="<?php echo $ads_url; ?>"></iframe>
+						</div>
 					</div>
 				</div>
 			</div>
