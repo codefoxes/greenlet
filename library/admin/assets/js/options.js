@@ -62,3 +62,43 @@ document.addEventListener( 'click',function( e ) {
 		}
 	}
 });
+
+function xhRequest( obj ) {
+	return new Promise(function( resolve, reject ) {
+		let xhr = new XMLHttpRequest();
+		xhr.open( obj.method || 'GET', obj.url );
+
+		if (obj.headers) {
+			Object.keys(obj.headers).forEach(function( key ) {
+				xhr.setRequestHeader( key, obj.headers[key] );
+			});
+		}
+
+		xhr.onload = function() {
+			if (xhr.status >= 200 && xhr.status < 300) {
+				resolve(xhr.response);
+			} else {
+				reject(xhr.statusText);
+			}
+		};
+
+		xhr.onerror = function() { reject(xhr.statusText) };
+		xhr.send(obj.body);
+	});
+}
+
+function fill_xhr_section() {
+	var url = 'https://karthikbhat.net/wp-json/greenlet/api-section';
+	var xhrSection = document.getElementById( 'xhr-section' );
+
+	var req = xhRequest({ url: url })
+	req.then( function( res ) {
+		var data = JSON.parse( res )
+		xhrSection.innerHTML = data.html;
+	})
+	req.catch( function( err ) {
+		console.log( err )
+	})
+}
+
+fill_xhr_section()

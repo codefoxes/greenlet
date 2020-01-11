@@ -25,8 +25,9 @@ body {
 }
 
 .site-header {
-	background: #7CB342;
-	color: #FFF;
+	background: #FFF;
+	color: #33691e;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 }
 
 .site-header h1, .topbar h1 {
@@ -36,13 +37,13 @@ body {
 }
 
 .site-header a {
-	color: #FFF;
+	color: #33691e;
 	display: block;
 	white-space: nowrap;
 }
 
 .site-header a:hover {
-	color: #F1F8E9;
+	color: #7CB342;
 }
 
 .site-logo {
@@ -57,7 +58,7 @@ body {
 
 .site-logo img {
 	max-width: 300px;
-	max-height: 28px;
+	max-height: 50px;
 	display: block;
 }
 

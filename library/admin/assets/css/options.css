@@ -4,6 +4,11 @@
 	padding: 0;
 }
 
+.appearance_page_greenlet .update-nag {
+	margin: 0;
+	display: block;
+}
+
 #greenlet, #greenlet *, #greenlet *::before, #greenlet *::after {
 	box-sizing: border-box;
 }
@@ -30,8 +35,6 @@
 
 .container {
 	position: relative;
-	width: 100%;
-	max-width: 1170px;
 	margin: 0 auto;
 	padding: 0 20px;
 }
@@ -54,13 +57,6 @@
 	width: 100%;
 	float: left;
 	padding: 0 15px;
-}
-
-@media (min-width: 480px) {
-	.container {
-		width: 90%;
-		padding: 0;
-	}
 }
 
 @media (min-width: 801px) {

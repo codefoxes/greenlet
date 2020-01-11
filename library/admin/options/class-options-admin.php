@@ -119,9 +119,9 @@ class Options_Admin {
 		$options = get_theme_mods();
 		if ( $options && is_array( $options ) ) {
 			// Generate the export data.
-			$val = wp_json_encode( $options, JSON_PRETTY_PRINT );
+			$val = wp_json_encode( $options );
 		} else {
-			$val = __( 'ERROR! You don\'t have any options to export. Try saving your options first.', 'greenlet' );
+			$val = __( 'You don\'t have any options to export. Try saving your options first.', 'greenlet' );
 		}
 
 		$setting_links = array(
@@ -133,8 +133,6 @@ class Options_Admin {
 			'footer_layout' => 'Footer Layout',
 			'misc'          => 'Other Settings',
 		);
-
-		$ads_url = 'https://karthikbhat.net/iframes/greenlet-ads.php';
 		?>
 
 		<div id="greenlet" class="wrap">
@@ -147,7 +145,7 @@ class Options_Admin {
 			<div id="greenlet-options">
 				<div class="container">
 					<div class="row">
-						<div class="col-8">
+						<div class="col-6">
 							<div class="settings">
 								<div class="heading">Customizer Controls</div>
 								<div class="links-wrap">
@@ -191,8 +189,8 @@ class Options_Admin {
 								</div>
 							</div>
 						</div>
-						<div class="col-4">
-							 <iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" src="<?php echo $ads_url; ?>"></iframe>
+						<div class="col-6">
+							<div id="xhr-section"></div>
 						</div>
 					</div>
 				</div>

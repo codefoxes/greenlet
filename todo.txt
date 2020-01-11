@@ -4,7 +4,6 @@ Major:
 - Add logo height and width
 - Minimize css and js
 - Load minimized in prod and other in debug mode
-- Ad section in backend options page
 - Add ML and RTL support
 - Add Woocommerce support
 
@@ -13,3 +12,4 @@ Minor:
 - phpcs: greenlet_attr needs escaping while printing.
 - Add typography
 - Update Google fonts json weekly.
+- Editor Style equivalent to frontend
