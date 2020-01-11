@@ -119,7 +119,7 @@ class Options_Admin {
 		$options = get_theme_mods();
 		if ( $options && is_array( $options ) ) {
 			// Generate the export data.
-			$val = wp_json_encode( $options );
+			$val = wp_json_encode( $options, JSON_PRETTY_PRINT );
 		} else {
 			$val = __( 'ERROR! You don\'t have any options to export. Try saving your options first.', 'greenlet' );
 		}
@@ -192,7 +192,7 @@ class Options_Admin {
 							</div>
 						</div>
 						<div class="col-4">
-							<!-- <iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" src="--><?php //echo $ads_url; ?><!--"></iframe> -->
+							 <iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" src="<?php echo $ads_url; ?>"></iframe>
 						</div>
 					</div>
 				</div>

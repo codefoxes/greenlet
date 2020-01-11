@@ -1,1 +1,0 @@
-Semi Footer Column 2 Content

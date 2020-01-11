@@ -4,22 +4,6 @@
  * @package greenlet\library\js
  */
 
-/**
- * Fix Topbar.
- */
-function fix_topbar() {
-	if ( document.getElementsByClassName( 'fixed-topbar' ).length > 0 ) {
-		var topbar = document.getElementsByClassName( 'topbar' )[0];
-		var height = topbar.offsetHeight;
-
-		document.body.style.paddingTop = height + 'px';
-		topbar.style.marginTop         = '-' + height + 'px';
-	}
-}
-
-// fix_topbar();
-// window.onresize = fix_topbar;
-
 var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><greenlet class="loader-ring" cx="25" cy="25" r="22" /><greenlet class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
 
 function greenlet_loader_listener(e) {

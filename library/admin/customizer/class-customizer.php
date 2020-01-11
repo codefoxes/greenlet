@@ -92,17 +92,32 @@ class Customizer {
 			} elseif ( 'section' === $option['type'] ) {
 				$wp_customize->add_section( $option['id'], $option['args'] );
 			} elseif ( 'setting' === $option['type'] ) {
-				$option['args']['type']       = 'theme_mod';
-				$option['args']['capability'] = 'edit_theme_options';
+				$wp_customize->add_setting(
+					$option['id'],
+					array(
+						'type'                 => 'theme_mod',
+						'capability'           => 'edit_theme_options',
+						'default'              => $this->get_setting_param( 'default', $option['args'] ),
+						'transport'            => $this->get_setting_param( 'transport', $option['args'] ),
+						'sanitize_callback'    => $this->get_setting_param( 'sanitize_callback', $option['args'] ),
+						'sanitize_js_callback' => $this->get_setting_param( 'sanitize_js_callback', $option['args'] ),
+					)
+				);
 
-				$wp_customize->add_setting( $option['id'], $option['args'] );
 			} elseif ( 'control' === $option['type'] ) {
 				$wp_customize->add_control( $option['id'], $option['args'] );
 			} elseif ( 'setting_control' === $option['type'] ) {
-				$option['sargs']['type']       = 'theme_mod';
-				$option['sargs']['capability'] = 'edit_theme_options';
-
-				$wp_customize->add_setting( $option['id'], $option['sargs'] );
+				$wp_customize->add_setting(
+					$option['id'],
+					array(
+						'type'                 => 'theme_mod',
+						'capability'           => 'edit_theme_options',
+						'default'              => $this->get_setting_param( 'default', $option['sargs'] ),
+						'transport'            => $this->get_setting_param( 'transport', $option['sargs'] ),
+						'sanitize_callback'    => $this->get_setting_param( 'sanitize_callback', $option['sargs'] ),
+						'sanitize_js_callback' => $this->get_setting_param( 'sanitize_js_callback', $option['sargs'] ),
+					)
+				);
 
 				if ( 'multicheck' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Multicheck( $wp_customize, $option['id'], $option['cargs'] ) );
@@ -131,6 +146,29 @@ class Customizer {
 		$wp_customize->register_control_type( 'Greenlet\Control_Multicheck' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Radio_Image' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Template_Selector' );
+	}
+
+	/**
+	 * Get Setting Argument Parameter.
+	 *
+	 * @param string $prop        Property name.
+	 * @param array  $setting_arg Argument array.
+	 *
+	 * @return mixed Parameter value.
+	 */
+	private function get_setting_param( $prop, $setting_arg ) {
+		if ( ! isset( $setting_arg[ $prop ] ) ) {
+			if ( 'default' === $prop ) {
+				return '';
+			} elseif ( 'transport' === $prop ) {
+				return 'refresh';
+			} elseif ( 'sanitize_callback' === $prop ) {
+				return '';
+			} elseif ( 'sanitize_js_callback' === $prop ) {
+				return '';
+			}
+		}
+		return $setting_arg[ $prop ];
 	}
 
 	/**
