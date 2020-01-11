@@ -640,7 +640,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'breadcrumb_sep',
 		'sargs' => array(
-			'default' => '»',
+			'default' => '&raquo;',
 		),
 		'cargs' => array(
 			'type'        => 'text',
