@@ -5,6 +5,8 @@ Major:
 - Minimize css and js
 - Load minimized in prod and other in debug mode
 - Add Woocommerce support
+- Enable Disable wp-embed, wp-emoji, block library styles
+- Uglify theme inline css
 
 Minor:
 
