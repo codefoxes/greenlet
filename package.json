@@ -1,0 +1,34 @@
+{
+  "name": "greenlet",
+  "version": "1.0.0",
+  "description": "Extremely fast and highly customizable WordPress theme.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^9.7.3",
+    "clean-css-cli": "^4.3.0",
+    "node-sass": "^4.13.0",
+    "postcss-cli": "^7.1.0",
+    "rimraf": "^3.0.0"
+  },
+  "scripts": {
+    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix && npm run build-cleancss",
+    "build-clean": "rimraf assets/css",
+    "build-sass": "npm run build-sass-default && npm run build-sass-styles",
+    "build-sass-default": "node-sass --output-style expanded --source-map true src/frontend/css/default.scss assets/css/default.css",
+    "build-sass-styles": "node-sass --output-style expanded --source-map true src/frontend/css/styles.scss assets/css/styles.css",
+    "build-autoprefix": "npm run build-autoprefix-default && npm run build-autoprefix-styles",
+    "build-autoprefix-default": "postcss --use autoprefixer --map false --output assets/css/default.css assets/css/default.css",
+    "build-autoprefix-styles": "postcss --use autoprefixer --map false --output assets/css/styles.css assets/css/styles.css",
+    "build-cleancss": "npm run build-cleancss-default && npm run build-cleancss-styles",
+    "build-cleancss-default": "cleancss -o assets/css/default.min.css assets/css/default.css",
+    "build-cleancss-styles": "cleancss -o assets/css/styles.min.css assets/css/styles.css",
+    "start": "npm run build-sass -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefoxes/greenlet.git"
+  },
+  "author": "Karthik Bhat",
+  "license": "ISC"
+}
