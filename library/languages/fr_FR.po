@@ -1,14 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-12 08:38+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-01-12 10:04+0000\n"
 "Last-Translator: Karthik Bhat <admin@karthikbhat.net>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +18,7 @@ msgstr ""
 #: library/init.php:233
 #, php-format
 msgid "%1$s Widget Area %2$s"
-msgstr ""
+msgstr "%1$s Zone de widget %2$s"
 
 #. %s: Archive Title.
 #. %s: Archive Description.
@@ -30,76 +29,76 @@ msgstr ""
 
 #: library/page-structure.php:596
 msgid "&laquo; Newer Posts"
-msgstr ""
+msgstr "&laquo; Messages plus récents"
 
 #: comments.php:37
 msgid "&larr; Older Comments"
-msgstr ""
+msgstr "&larr; Commentaires plus anciens"
 
 #: library/admin/metaboxes/class-metaboxes.php:117
 msgid "(no parent)"
-msgstr ""
+msgstr "(pas de parent)"
 
 #: library/admin/customizer/options.php:537
 msgid "3-3-3-3"
-msgstr ""
+msgstr "3-3-3-3"
 
 #: library/admin/customizer/options.php:302
 #: library/admin/customizer/options.php:333
 msgid "4-8"
-msgstr ""
+msgstr "4-8"
 
 #: library/page-structure.php:430 library/page-structure.php:523
 msgid "<span class=\"more-text\">Read More</span>"
-msgstr ""
+msgstr "<span class=\"more-text\">Lire la suite</span>"
 
 #. %1$s: Widget Position. %2$s: Widget Column.
 #: library/init.php:236
 #, php-format
 msgid "Appears on the %1$s as column %2$s."
-msgstr ""
+msgstr "Apparaît sur le %1$s dans la colonne %2$s."
 
 #. %s: Index of the sidebar.
 #: library/init.php:202
 #, php-format
 msgid "Appears on the posts and pages as sidebar %s."
-msgstr ""
+msgstr "Apparaît sur les publications et les pages sous forme de barre latérale %s."
 
 #: library/admin/customizer/options.php:497
 msgid "Archive Layout"
-msgstr ""
+msgstr "Disposition des archives"
 
 #: library/page-structure.php:499
 msgid "Author:"
-msgstr ""
+msgstr "Auteur:"
 
 #: library/admin/customizer/options.php:162
 msgid "Bootstrap 4.4.1"
-msgstr ""
+msgstr "Bootstrap 4.4.1"
 
 #: library/admin/customizer/options.php:634
 msgid "Breadcrumb"
-msgstr ""
+msgstr "Breadcrumb"
 
 #: library/admin/customizer/options.php:648
 msgid "Breadcrumb Separator"
-msgstr ""
+msgstr "Breadcrumb Séparateur"
 
 #: library/admin/customizer/options.php:597
 msgid "Column for the Footer Menu to be displayed."
-msgstr ""
+msgstr "Colonne pour le menu de pied de page à afficher."
 
 #: library/admin/customizer/options.php:362
 msgid "Column for the logo to be displayed."
-msgstr ""
+msgstr "Colonne pour le logo à afficher."
 
 #: library/admin/customizer/options.php:377
 msgid "Column for the Main Menu to be displayed."
-msgstr ""
+msgstr "Colonne pour le menu principal à afficher."
 
 #: library/admin/customizer/options.php:392
 msgid "Column for the Secondary Menu to be displayed."
-msgstr ""
+msgstr "Colonne pour le menu secondaire à afficher."
 
 #. %s: Number of comments.
 #: comments.php:21
@@ -112,200 +111,201 @@ msgstr[1] ""
 
 #: comments.php:51
 msgid "Comments are closed."
-msgstr ""
+msgstr "Les commentaires sont fermés."
 
 #: library/admin/customizer/options.php:237
 msgid "Container Width"
-msgstr ""
+msgstr "Largeur du conteneur"
 
 #: library/admin/customizer/options.php:204
 msgid "Critical CSS"
-msgstr ""
+msgstr "Critique CSS"
 
 #: library/admin/customizer/options.php:159
 msgid "CSS Framework"
-msgstr ""
+msgstr "CSS Cadre"
 
 #: library/admin/customizer/options.php:240
 msgid "Default"
-msgstr ""
+msgstr "Défaut"
 
 #: library/admin/customizer/options.php:457
 msgid "Default Page Layout"
-msgstr ""
+msgstr "Mise en page par défaut"
 
 #: library/admin/metaboxes/class-metaboxes.php:148
 msgid "Default Template"
-msgstr ""
+msgstr "Modèle par défaut"
 
 #: library/admin/customizer/options.php:192
 msgid "Defer CSS"
-msgstr ""
+msgstr "Différer CSS"
 
 #: library/page-structure.php:403
 msgid "Edit"
-msgstr ""
+msgstr "Éditer"
 
 #: library/admin/customizer/options.php:224
 msgid "Eg: Load Bootstrap JS if loaded Bootstrap CSS."
-msgstr ""
+msgstr "Par exemple: chargez Bootstrap JS si vous chargez Bootstrap CSS."
 
 #: library/admin/customizer/options.php:635
 msgid "Enable breadcrumb navigation"
-msgstr ""
+msgstr "Activer la navigation au fil d'Ariane"
 
 #: library/admin/customizer/options.php:621
 msgid "Enable Schema Markup"
-msgstr ""
+msgstr "Activer le balisage de schéma"
 
 #: library/admin/customizer/options.php:238
 msgid "Enter container width. Eg: 1170px or 80% (Optional)"
-msgstr ""
+msgstr "Entrez la largeur du conteneur. Par exemple: 1170 px ou 80% (facultatif)"
 
 #: library/admin/customizer/options.php:566
 msgid "Enter footer columns in Format: 4-8 or 3-9-3 etc."
-msgstr ""
+msgstr "Entrez les colonnes de pied de page au format: 4-8 ou 3-9-3 etc."
 
 #: library/admin/customizer/options.php:331
 msgid "Enter header columns in Format: 4-8 or 3-9-3 etc."
-msgstr ""
+msgstr "Entrez les colonnes d'en-tête au format: 4-8 ou 3-9-3 etc."
 
 #: library/admin/customizer/options.php:535
 msgid "Enter semifooter columns in Format: 4-8 or 3-9-3 etc."
-msgstr ""
+msgstr "Entrez les colonnes semi-tireurs au format: 4-8 ou 3-9-3 etc."
 
 #: library/admin/customizer/options.php:300
-msgid ""
-"Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
+msgid "Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
 "integers. Sum should be 12.)"
-msgstr ""
+msgstr "Entrez les colonnes de la barre supérieure au format: 4-8 ou 3-9-3 etc. "
+"(séparés par un trait d'union. Seuls les nombres entiers. La somme doit être "
+"12.)"
 
 #: library/admin/customizer/options.php:176
 msgid "Enter URL if different CDN or CSS Framework"
-msgstr ""
+msgstr "Entrez l'URL si un framework CDN ou CSS différent"
 
 #: 404.php:15
 msgid "Error 404 - Nothing Found"
-msgstr ""
+msgstr "Erreur 404 - Rien trouvé"
 
 #: library/admin/customizer/options.php:676
 msgid "Excerpt length"
-msgstr ""
+msgstr "Extrait longueur"
 
 #. phpcs:ignore
 #: library/page-structure.php:346
 msgid "Featured"
-msgstr ""
+msgstr "En vedette"
 
 #: library/admin/customizer/options.php:662
 msgid "Featured Image"
-msgstr ""
+msgstr "L'image sélectionnée"
 
 #: library/admin/customizer/options.php:286
 msgid "Fixed Topbar"
-msgstr ""
+msgstr "Barre supérieure fixe"
 
 #: library/admin/customizer/options.php:123
 msgid "Footer Background"
-msgstr ""
+msgstr "Fond de pied de page"
 
 #: library/admin/customizer/options.php:582
 msgid "Footer Content Source"
-msgstr ""
+msgstr "Source de contenu de pied de page"
 
 #: library/admin/customizer/options.php:507
 #: library/admin/customizer/options.php:565
 msgid "Footer Layout"
-msgstr ""
+msgstr "Disposition du pied de page"
 
 #: library/init.php:159
 msgid "Footer Menu"
-msgstr ""
+msgstr "Menu Pied de page"
 
 #: library/admin/customizer/options.php:596
 msgid "Footer Menu Position"
-msgstr ""
+msgstr "Position du menu de pied de page"
 
 #: library/admin/customizer/options.php:137
 msgid "Footer Text Color"
-msgstr ""
+msgstr "Couleur du texte du pied de page"
 
 #: library/admin/customizer/options.php:145
 msgid "Framework"
-msgstr ""
+msgstr "Cadre"
 
 #. Name of the template
 msgid "Full Width Page."
-msgstr ""
+msgstr "Page pleine largeur."
 
 #. Name of the theme
 msgid "Greenlet"
-msgstr ""
+msgstr "Greenlet"
 
 #: library/admin/customizer/options.php:161
 msgid "Greenlet Framework"
-msgstr ""
+msgstr "Cadre de Greenlet"
 
 #: library/admin/options/class-options-admin.php:65
 msgid "Greenlet Options"
-msgstr ""
+msgstr "Options de Greenlet"
 
 #: library/admin/options/class-options-admin.php:64
 msgid "Greenlet Settings"
-msgstr ""
+msgstr "Paramètres de Greenlet"
 
 #: library/admin/customizer/options.php:95
 msgid "Header Background"
-msgstr ""
+msgstr "Arrière-plan de l'en-tête"
 
 #: library/admin/customizer/options.php:347
 msgid "Header Content Source"
-msgstr ""
+msgstr "Source de contenu d'en-tête"
 
 #: library/admin/customizer/options.php:259
 #: library/admin/customizer/options.php:330
 msgid "Header Layout"
-msgstr ""
+msgstr "Disposition des en-têtes"
 
 #: library/admin/customizer/options.php:109
 msgid "Header Text Color"
-msgstr ""
+msgstr "Couleur du texte de l'en-tête"
 
 #: library/admin/customizer/options.php:438
 msgid "Home Page (Post List) Layout"
-msgstr ""
+msgstr "Mise en page de la page d'accueil (liste des articles)"
 
 #. Author URI of the theme
 msgid "https://karthikbhat.net"
-msgstr ""
+msgstr "https://karthikbhat.net"
 
 #. URI of the theme
 msgid "https://karthikbhat.net/greenlet"
-msgstr ""
+msgstr "https://karthikbhat.net/greenlet"
 
 #: library/admin/customizer/options.php:178
 msgid "https://somecdn.com/css_framework.css"
-msgstr ""
+msgstr "https://certainscdn.com/css_framework.css"
 
 #: library/admin/customizer/options.php:205
 msgid "If CSS files are defered enter the critical css here."
-msgstr ""
+msgstr "Si les fichiers CSS sont différés, entrez le css critique ici."
 
 #: 404.php:17
 msgid "It looks like nothing was found here. Maybe try a search?"
-msgstr ""
+msgstr "On dirait que rien n'a été trouvé ici. Peut-être essayer une recherche?"
 
 #. Author of the theme
 msgid "Karthik"
-msgstr ""
+msgstr "Karthik"
 
 #: library/admin/customizer/options.php:249
 msgid "Layout"
-msgstr ""
+msgstr "Disposition"
 
 #: library/page-structure.php:396
 msgid "Leave a comment"
-msgstr ""
+msgstr "laissez un commentaire"
 
 #: library/admin/customizer/options.php:209
 msgid "Leave Blank to not add Critical CSS."

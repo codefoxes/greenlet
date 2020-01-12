@@ -1,14 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-12 08:38+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-01-12 09:45+0000\n"
 "Last-Translator: Karthik Bhat <admin@karthikbhat.net>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language-Team: Kannada\n"
+"Language: kn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,26 +18,26 @@ msgstr ""
 #: library/init.php:233
 #, php-format
 msgid "%1$s Widget Area %2$s"
-msgstr ""
+msgstr "%1$s ವಿಜೆಟ್ ಪ್ರದೇಶ %2$s"
 
 #. %s: Archive Title.
 #. %s: Archive Description.
 #: library/page-structure.php:253 library/page-structure.php:258
 #, php-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: library/page-structure.php:596
 msgid "&laquo; Newer Posts"
-msgstr ""
+msgstr "&laquo; ಹೊಸ ಪೋಸ್ಟ್‌ಗಳು"
 
 #: comments.php:37
 msgid "&larr; Older Comments"
-msgstr ""
+msgstr "&larr; ಹಳೆಯ ಪ್ರತಿಕ್ರಿಯೆಗಳು"
 
 #: library/admin/metaboxes/class-metaboxes.php:117
 msgid "(no parent)"
-msgstr ""
+msgstr "(ಪೇರೆಂಟ್ ಇಲ್ಲ)"
 
 #: library/admin/customizer/options.php:537
 msgid "3-3-3-3"
@@ -51,55 +50,55 @@ msgstr ""
 
 #: library/page-structure.php:430 library/page-structure.php:523
 msgid "<span class=\"more-text\">Read More</span>"
-msgstr ""
+msgstr "<span class=\"more-text\">ಮುಂದಕ್ಕೆ ಓದಿ</span>"
 
 #. %1$s: Widget Position. %2$s: Widget Column.
 #: library/init.php:236
 #, php-format
 msgid "Appears on the %1$s as column %2$s."
-msgstr ""
+msgstr "%1$ ನಲ್ಲಿ %2$s ಕಾಲಮ್‌ನಂತೆ ಗೋಚರಿಸುತ್ತದೆ"
 
 #. %s: Index of the sidebar.
 #: library/init.php:202
 #, php-format
 msgid "Appears on the posts and pages as sidebar %s."
-msgstr ""
+msgstr "ಪೋಸ್ಟ್‌ಗಳು ಮತ್ತು ಪುಟಗಳಲ್ಲಿ ಸೈಡ್‌ಬಾರ್ %s ಆಗಿ ಗೋಚರಿಸುತ್ತದೆ."
 
 #: library/admin/customizer/options.php:497
 msgid "Archive Layout"
-msgstr ""
+msgstr "ಹಳೆಗೂಡಿಕೆ ವಿನ್ಯಾಸ"
 
 #: library/page-structure.php:499
 msgid "Author:"
-msgstr ""
+msgstr "ಲೇಖಕ:"
 
 #: library/admin/customizer/options.php:162
 msgid "Bootstrap 4.4.1"
-msgstr ""
+msgstr "ಬೂಟ್ ಸ್ಟ್ರಾಪ್ 4.4.1"
 
 #: library/admin/customizer/options.php:634
 msgid "Breadcrumb"
-msgstr ""
+msgstr "ಬ್ರೆಡ್‌ಕ್ರಂಬ್"
 
 #: library/admin/customizer/options.php:648
 msgid "Breadcrumb Separator"
-msgstr ""
+msgstr "ಬ್ರೆಡ್‌ಕ್ರಂಬ್ ವಿಭಜಕ"
 
 #: library/admin/customizer/options.php:597
 msgid "Column for the Footer Menu to be displayed."
-msgstr ""
+msgstr "ಅಡಿಟಿಪ್ಪಣಿ ಮೆನು ಪ್ರದರ್ಶಿಸಲು ಕಾಲಮ್."
 
 #: library/admin/customizer/options.php:362
 msgid "Column for the logo to be displayed."
-msgstr ""
+msgstr "ಲೋಗೋವನ್ನು ಪ್ರದರ್ಶಿಸಲು ಕಾಲಮ್."
 
 #: library/admin/customizer/options.php:377
 msgid "Column for the Main Menu to be displayed."
-msgstr ""
+msgstr "ಮುಖ್ಯ ಮೆನು ಪ್ರದರ್ಶಿಸಲು ಕಾಲಮ್."
 
 #: library/admin/customizer/options.php:392
 msgid "Column for the Secondary Menu to be displayed."
-msgstr ""
+msgstr "ದ್ವಿತೀಯ ಮೆನು ಪ್ರದರ್ಶಿಸಲು ಕಾಲಮ್."
 
 #. %s: Number of comments.
 #: comments.php:21
@@ -107,56 +106,56 @@ msgstr ""
 msgctxt "Comment title"
 msgid "%s comment"
 msgid_plural "%s comments"
-msgstr[0] ""
+msgstr[0] "%s ಪ್ರತಿಕ್ರಿಯೆಗಳು"
 msgstr[1] ""
 
 #: comments.php:51
 msgid "Comments are closed."
-msgstr ""
+msgstr "ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಮುಚ್ಚಲಾಗಿದೆ."
 
 #: library/admin/customizer/options.php:237
 msgid "Container Width"
-msgstr ""
+msgstr "ಕಂಟೇನರ್ ಅಗಲ"
 
 #: library/admin/customizer/options.php:204
 msgid "Critical CSS"
-msgstr ""
+msgstr "ಕ್ರಿಟಿಕಲ್ CSS"
 
 #: library/admin/customizer/options.php:159
 msgid "CSS Framework"
-msgstr ""
+msgstr "CSS ಚೌಕಟ್ಟು"
 
 #: library/admin/customizer/options.php:240
 msgid "Default"
-msgstr ""
+msgstr "ಇದ್ದಾಯ್ಕೆ"
 
 #: library/admin/customizer/options.php:457
 msgid "Default Page Layout"
-msgstr ""
+msgstr "ಇದ್ದಾಯ್ಕೆ ಪುಟದ ವಿನ್ಯಾಸ"
 
 #: library/admin/metaboxes/class-metaboxes.php:148
 msgid "Default Template"
-msgstr ""
+msgstr "ಇದ್ದಾಯ್ಕೆ ಮಾದರಿ"
 
 #: library/admin/customizer/options.php:192
 msgid "Defer CSS"
-msgstr ""
+msgstr "CSS ಮುಂದೂಡಿ"
 
 #: library/page-structure.php:403
 msgid "Edit"
-msgstr ""
+msgstr "ತಿದ್ದು"
 
 #: library/admin/customizer/options.php:224
 msgid "Eg: Load Bootstrap JS if loaded Bootstrap CSS."
-msgstr ""
+msgstr "Eg: ಬೂಟ್ ಸ್ಟ್ರಾಪ್ CSS ಲೋಡ್ ಆದರೆ ಬೂಟ್ ಸ್ಟ್ರಾಪ್ JS ಲೋಡ್ ಮಾಡಿ"
 
 #: library/admin/customizer/options.php:635
 msgid "Enable breadcrumb navigation"
-msgstr ""
+msgstr "ಬ್ರೆಡ್‌ಕ್ರಂಬ್ ನ್ಯಾವಿಗೇಷನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
 
 #: library/admin/customizer/options.php:621
 msgid "Enable Schema Markup"
-msgstr ""
+msgstr "ಸ್ಕೀಮಾ ಮಾರ್ಕಪ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
 
 #: library/admin/customizer/options.php:238
 msgid "Enter container width. Eg: 1170px or 80% (Optional)"
@@ -175,8 +174,7 @@ msgid "Enter semifooter columns in Format: 4-8 or 3-9-3 etc."
 msgstr ""
 
 #: library/admin/customizer/options.php:300
-msgid ""
-"Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
+msgid "Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
 "integers. Sum should be 12.)"
 msgstr ""
 
@@ -240,7 +238,7 @@ msgstr ""
 
 #. Name of the theme
 msgid "Greenlet"
-msgstr ""
+msgstr "ಗ್ರೀನ್ಲೆಟ್"
 
 #: library/admin/customizer/options.php:161
 msgid "Greenlet Framework"
@@ -466,53 +464,53 @@ msgstr ""
 
 #: library/admin/customizer/options.php:67
 msgid "Show Tagline"
-msgstr ""
+msgstr "ಕೂಗುನುಡಿ ತೋರಿಸಿ"
 
 #: library/admin/customizer/options.php:54
 msgid "Show Title"
-msgstr ""
+msgstr "ಶೀರ್ಷಿಕೆಯನ್ನು ತೋರಿಸಿ"
 
 #: library/admin/customizer/options.php:273
 msgid "Show Topbar"
-msgstr ""
+msgstr "ಟಾಪ್ ಬಾರ್ ತೋರಿಸಿ"
 
 #. Name of the template
 msgid "Side-4, Main-4, Side-4."
-msgstr ""
+msgstr "ಅಡ್ಡ-4, ಮುಖ್ಯ-4, ಅಡ್ಡ-4."
 
 #. Name of the template
 msgid "Side-4, Main-8."
-msgstr ""
+msgstr "ಅಡ್ಡ-4, ಮುಖ್ಯ-8."
 
 #. %s: Index of the sidebar.
 #: library/init.php:199
 #, php-format
 msgid "Sidebar %s"
-msgstr ""
+msgstr "ಅಡ್ಡಪಟ್ಟಿ %s"
 
 #: library/admin/customizer/options.php:476
 msgid "Single Post Layout"
-msgstr ""
+msgstr "ಏಕ ಪೋಸ್ಟ್ ವಿನ್ಯಾಸ"
 
 #: library/admin/customizer/options.php:81
 msgid "Site Background"
-msgstr ""
+msgstr "ಸೈಟ್ ಹಿನ್ನೆಲೆ"
 
 #: library/admin/metaboxes/class-metaboxes.php:145
 msgid "Template"
-msgstr ""
+msgstr "ವಿನ್ಯಾಸ"
 
 #: library/class-honeypot.php:52
 msgid "Thank you. Successfully added."
-msgstr ""
+msgstr "ಧನ್ಯವಾದಗಳು. ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ."
 
 #: library/admin/customizer/options.php:316
 msgid "Topbar Content Source"
-msgstr ""
+msgstr "ಟಾಪ್ ಬಾರ್ ವಿಷಯದ ಮೂಲ"
 
 #: library/admin/customizer/options.php:299
 msgid "Topbar Layout"
-msgstr ""
+msgstr "ಟಾಪ್ ಬಾರ್ ವಿನ್ಯಾಸ"
 
 #: library/page-structure.php:396
 #, php-format
@@ -521,7 +519,7 @@ msgstr ""
 
 #: library/admin/customizer/options.php:15
 msgid "Widgets"
-msgstr ""
+msgstr "ವಿಡ್ಗೆಟ್ಗಳು"
 
 #: library/breadcrumb.php:57 library/page-structure.php:246
 msgctxt "Yearly archives date format"
@@ -530,8 +528,9 @@ msgstr ""
 
 #: library/admin/options/class-options-admin.php:124
 msgid "You don't have any options to export. Try saving your options first."
-msgstr ""
+msgstr "ರಫ್ತು ಮಾಡಲು ನಿಮಗೆ ಯಾವುದೇ ಆಯ್ಕೆಗಳಿಲ್ಲ. ಮೊದಲು ನಿಮ್ಮ ಆಯ್ಕೆಗಳನ್ನು ಉಳಿಸಲು "
+"ಪ್ರಯತ್ನಿಸಿ."
 
 #: library/class-honeypot.php:99
 msgid "Your Name"
-msgstr ""
+msgstr "ನಿಮ್ಮ ಹೆಸರು"
