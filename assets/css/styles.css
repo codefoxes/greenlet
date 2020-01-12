@@ -17,6 +17,11 @@ body {
 	background: #f5f5f5;
 }
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 .topbar {
 	min-height: 50px;
 	top: 0;
@@ -71,7 +76,7 @@ body {
 	margin: 30px auto;
 }
 
-.entry.post, .entry.page, .sidebar>.wrap, #comments, .comment-body {
+.entry.post, .entry.page, .sidebar>.wrap, #comments {
 	padding: 3em;
 	margin-bottom: 30px;
 	background-color: #fff;
@@ -309,8 +314,130 @@ body {
 .screen-reader-text, .screen-reader-text:hover, .screen-reader-text:active, .screen-reader-text:focus {
 	display: none;
 }
-.bypostauthor, .gallery-caption, .wp-caption, .gallery-caption, .wp-caption.alignnone, .aligncenter,
-.wp-caption.alignleft, .wp-caption.alignright, .wp-caption img, .wp-caption p.wp-caption-text{}
+
+/* ----------- COMMENTS ----------- */
+.comments {
+	list-style: none;
+}
+
+.comments-title {
+	font-size: 3.2rem;
+}
+
+.comment-body {
+	padding: 3em 0;
+	border-bottom: 1px solid #eee;
+}
+
+.comment-meta {
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.comment-author img {
+	width: 40px;
+	margin-right: 10px;
+}
+
+.comment-author .fn, .comment-author .says {
+	vertical-align: top;
+	line-height: 1;
+	font-weight: 400;
+}
+
+.comment-metadata {
+	position: absolute;
+	left: 54px;
+	bottom: 5px;
+	font-size: 12px;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/* ----------- IMAGES ----------- */
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+}
+
+.wp-caption-text {
+	text-align: center;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.aligncenter {
+	clear: both;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* ----------- GALLERY ----------- */
+.gallery {
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-bottom: 10px;
+}
+
+.gallery-item {
+	display: inline-block;
+	margin: 0;
+	padding: 10px;
+}
+
+.gallery-icon, .gallery-caption {
+	border: 1px solid #eee;
+}
+
+.gallery-caption {
+	border-top: none;
+}
+
+.gallery-columns-2 .gallery-item {
+	max-width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+	max-width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item {
+	max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+	max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+	max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+	max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+	max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+	max-width: 11.11%;
+}
 
 @media (min-width: 801px) {
 	.site-header h1, .topbar h1 {

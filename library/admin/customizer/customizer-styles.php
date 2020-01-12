@@ -57,20 +57,20 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 			}
 
 			body {
-				background: <?php echo $site_bg; // phpcs:ignore ?>;
+				background: <?php echo sanitize_hex_color( $site_bg ); // phpcs:ignore ?>;
 			}
 
 			.site-header {
-				background: <?php echo $header_bg; // phpcs:ignore ?>;
+				background: <?php echo sanitize_hex_color( $header_bg ); // phpcs:ignore ?>;
 			}
 
 			.site-header, .site-header a {
-				color: <?php echo $header_color; // phpcs:ignore ?>;
+				color: <?php echo sanitize_hex_color( $header_color ); // phpcs:ignore ?>;
 			}
 
 			.site-footer {
-				background: <?php echo $footer_bg; // phpcs:ignore ?>;
-				color: <?php echo $footer_color; // phpcs:ignore ?>;
+				background: <?php echo sanitize_hex_color( $footer_bg ); // phpcs:ignore ?>;
+				color: <?php echo sanitize_hex_color( $footer_color ); // phpcs:ignore ?>;
 			}
 
 			<?php

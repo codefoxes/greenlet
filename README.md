@@ -14,8 +14,20 @@ Use Greenlet as base theme and as a starting point to create the child theme acc
 - Schema Markup Added
 - Does not need jQuery
 - Select Greenlet CSS Framework or Bootstrap
-- 8 Predefined Layouts (extendable)
+- 12 Column Design System
+- 8 Global Predefined Layouts (extendable)
+- Unlimited Individual Post Layout
+- Unlimited Header and Footer layout
 - Numbered or Ajax or Infinite Scroll - Pagination
+- ML Support
+- RTL Support
+- Change Theme design via customizer
+- Change Theme behaviour via tons of hooks
+- Mobile Ready
+- Page Builders Ready
+
+## Requirements
+PHP 5.4
 
 ## Coding Standards
 PHP CS: WordPress

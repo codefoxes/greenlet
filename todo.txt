@@ -4,7 +4,6 @@ Major:
 - Add logo height and width
 - Minimize css and js
 - Load minimized in prod and other in debug mode
-- Add ML and RTL support
 - Add Woocommerce support
 
 Minor:
