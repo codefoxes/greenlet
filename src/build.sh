@@ -32,6 +32,8 @@ buildcss() {
 if [ -z "$1" ]; then
 	buildjs
 	buildcss
+elif [ "$1" == "--watch" ]; then
+	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
 else
 	echo 'Building Separately?'
 fi

@@ -93,6 +93,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 
 		require_once LIBRARY_DIR . '/class-columnobject.php';
 		require_once LIBRARY_DIR . '/class-honeypot.php';
+		require_once LIBRARY_DIR . '/performance.php';
 		require_once ADMIN_DIR . '/options/class-options-admin.php';
 		require_once ADMIN_DIR . '/customizer/class-customizer.php';
 		require_once ADMIN_DIR . '/customizer/customizer-styles.php';
@@ -110,6 +111,26 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 // Run greenlet_init action hook.
 do_action( 'greenlet_init' );
 
+/**
+ * Handle Ajax.
+ */
+function greenlet_ajax() {
+	if ( ! isset( $_REQUEST['nonce'] ) || ! isset( $_REQUEST['action'] ) ) {
+		return;
+	}
+
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'greenlet_generic' ) ) {
+		return;
+	}
+
+	// Add action to wp ajax.
+	if ( array_key_exists( 'action', $_REQUEST ) ) {
+		$action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+		add_action( "wp_ajax_{$action}", $action );
+		add_action( "wp_ajax_nopriv_{$action}", $action );
+	}
+}
+
 
 if ( ! function_exists( 'greenlet_setup' ) ) {
 	/**
@@ -123,12 +144,7 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 		// Make the theme available for translation.
 		load_theme_textdomain( 'greenlet', LANGUAGES_DIR );
 
-		// Add action to wp ajax.
-		// Todo: Nonce verification
-		if ( array_key_exists( 'action', $_REQUEST ) ) {
-			add_action( "wp_ajax_{$_REQUEST['action']}",		$_REQUEST['action'] );
-			add_action( "wp_ajax_nopriv_{$_REQUEST['action']}",	$_REQUEST['action'] );
-		}
+		greenlet_ajax();
 
 		// Switch to html5 support.
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );

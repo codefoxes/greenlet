@@ -599,7 +599,9 @@ function greenlet_paging_nav() {
 
 	$op  = sprintf( "<ul %s>\n\t<li>", $pag_attr );
 	$op .= join( "</li>\n\t<li>", $pages );
-	$op .= "</li>\n</ul>\n";
+	$op .= "</li>\n";
+	$op .= '<input type="hidden" id="greenlet_generic_nonce" value="' . wp_create_nonce( 'greenlet_generic' ) . '" />';
+	$op .= "</ul>\n";
 
 	echo apply_filters( 'greenlet_paging_nav', $op, $pages, $pag_attr ); // phpcs:ignore
 }
@@ -610,6 +612,14 @@ function greenlet_paging_nav() {
  * @return void
  */
 function greenlet_get_paginated() {
+	if ( ! isset( $_POST['nonce'] ) || ! isset( $_POST['action'] ) || ! isset( $_POST['query_vars'] ) ) {
+		return;
+	}
+
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'greenlet_generic' ) ) {
+		return;
+	}
+
 	global $wp_query, $wp_rewrite;
 	$options = array(
 		'no_posts_message' => 'There are no posts meeting your criteria',
@@ -627,14 +637,19 @@ function greenlet_get_paginated() {
 	add_filter( 'greenlet_pagination_args', 'greenlet_pagination_args' );
 
 	$args    = apply_filters( 'greenlet_pagination_query_args', array() );
-	$args_in = json_decode( stripslashes( $_POST['query_vars'] ), true );
+	$args_in = json_decode( wp_unslash( $_POST['query_vars'] ), true );
 	$args    = $args_in;
+
+	$location = ''; // Placeholder.
+	if ( isset( $_POST['location'] ) ) {
+		$location = sanitize_text_field( wp_unslash( $_POST['location'] ) );
+	}
 
 	$wp_query = new WP_Query( $args ); // phpcs:ignore
 
 	// Here we get max posts to know if current page is not too big.
-	if ( $wp_rewrite->using_permalinks() && preg_match( '~/page/([0-9]+)~', $_POST['location'], $mathces ) || preg_match( '~paged?=([0-9]+)~', $_POST['location'], $mathces ) ) {
-		$args['paged']          = min( $mathces[1], $wp_query->max_num_pages );
+	if ( $wp_rewrite->using_permalinks() && preg_match( '~/page/([0-9]+)~', $location, $matches ) || preg_match( '~paged?=([0-9]+)~', $location, $matches ) ) {
+		$args['paged']          = min( $matches[1], $wp_query->max_num_pages );
 		$args['posts_per_page'] = get_option( 'posts_per_page' );
 		$wp_query               = new WP_Query( $args ); // phpcs:ignore
 	}
@@ -707,7 +722,7 @@ function greenlet_get_page_link( $pagenum = 1, $escape = true ) {
 	$request = remove_query_arg( 'paged', preg_replace( '~' . home_url() . '~', '', $current ) );
 	$request = remove_query_arg( 'page', preg_replace( '~' . home_url() . '~', '', $current ) );
 
-	$home_root = parse_url( home_url() );
+	$home_root = wp_parse_url( home_url() );
 	$home_root = ( isset( $home_root['path'] ) ) ? $home_root['path'] : '';
 	$home_root = preg_quote( $home_root, '|' );
 

@@ -4,7 +4,7 @@
  * @package greenlet\library\js
  */
 
-var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><greenlet class="loader-ring" cx="25" cy="25" r="22" /><greenlet class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
+var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><circle class="loader-ring" cx="25" cy="25" r="22" /><circle class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
 
 function greenlet_loader_listener(e) {
 	e.preventDefault();
@@ -30,8 +30,8 @@ function pagination_init() {
 	if ( loadElements.length > 0 ) {
 		loadElements[0].addEventListener( 'click', greenlet_loader_listener );
 	}
-	if ( ajaxElements.length > 0 ) {
-		ajaxElements[0].addEventListener( 'click', greenlet_loader_listener );
+	for (var i = 0; i < ajaxElements.length; i++) {
+		ajaxElements[i].addEventListener( 'click', greenlet_loader_listener );
 	}
 }
 
@@ -47,8 +47,8 @@ window.onscroll = function (e) {
 		var sheight	= window.scrollY;
 		if ( ( wheight + sheight ) > loadpos ) {
 			var link  = infinite[0].querySelector( 'a' );
-			next_page = link.getAttribute( 'data-next' );
-			if ( link ) {
+			if ( link !== null ) {
+				next_page = link.getAttribute( 'data-next' );
 				link.style.display = 'none';
 				greenlet_page_loader( link, next_page, true );
 			}
@@ -57,6 +57,7 @@ window.onscroll = function (e) {
 }
 
 function greenlet_page_loader( obj, cur_page, add, act ) {
+	var nonce = document.getElementById( 'greenlet_generic_nonce' ).value;
 	obj.parentNode.parentNode.innerHTML = '<span id="page-loader">' + greenlet_loader + '</span>';
 
 	add  = typeof add !== 'undefined' ? add : false;
@@ -67,7 +68,8 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 		query_vars: pagination_ajax.query_vars,
 		current: cur_page,
 		append: add,
-		action: act
+		action: act,
+		nonce: nonce
 	};
 
 	if ( pagination_ajax.permalinks ) {
@@ -97,7 +99,9 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 				document.querySelector( '.main .wrap' ).innerHTML = res.posts
 			}
 			var pageLoader = document.getElementById( 'page-loader' );
-			pageLoader.parentElement.removeChild( pageLoader );
+			if ( pageLoader !== null ) {
+				pageLoader.parentElement.removeChild( pageLoader );
+			}
 			pagination_init();
 		}
 	}

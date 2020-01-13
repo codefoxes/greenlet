@@ -270,7 +270,7 @@ img {
 .loader-ring {
   stroke: #D7DCE3;
   stroke-width: 2.99891;
-  stroke-dasharray: 15 12.3;
+  stroke-dasharray: 15,12.3;
   stroke-linecap: round;
   fill: none;
   animation: color 1s linear infinite alternate;
@@ -278,7 +278,7 @@ img {
 }
 
 .loader-c {
-  stroke: #FF5B46;
+  stroke: #7CB342;
   stroke-width: 4.99976;
   stroke-dasharray: 93,30;
   stroke-dashoffset: -21;

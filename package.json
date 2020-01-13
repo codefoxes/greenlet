@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "./src/build.sh",
-    "start": "npm run build-sass -- --watch"
+    "start": "./src/build.sh --watch"
   },
   "repository": {
     "type": "git",

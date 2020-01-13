@@ -2,11 +2,9 @@ Major:
 
 - If current_user_can check in init.php:105 and meta_boxes.php:15
 - Add logo height and width
-- Minimize css and js
-- Load minimized in prod and other in debug mode
 - Add Woocommerce support
-- Enable Disable wp-embed, wp-emoji, block library styles
 - Uglify theme inline css
+- Posts per page
 
 Minor:
 

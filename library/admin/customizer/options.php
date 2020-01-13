@@ -601,9 +601,9 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
-		'id'   => 'misc',
+		'id'   => 'blog',
 		'args' => array(
-			'title'    => __( 'Misc Settings', 'greenlet' ),
+			'title'    => __( 'Blog Settings', 'greenlet' ),
 			'priority' => 200,
 		),
 	);
@@ -616,7 +616,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'        => 'checkbox',
-			'section'     => 'misc',
+			'section'     => 'blog',
 			'label'       => __( 'Schema Markup', 'greenlet' ),
 			'description' => __( 'Enable Schema Markup', 'greenlet' ),
 		),
@@ -630,7 +630,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'        => 'checkbox',
-			'section'     => 'misc',
+			'section'     => 'blog',
 			'label'       => __( 'Breadcrumb', 'greenlet' ),
 			'description' => __( 'Enable breadcrumb navigation', 'greenlet' ),
 		),
@@ -644,7 +644,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'        => 'text',
-			'section'     => 'misc',
+			'section'     => 'blog',
 			'label'       => __( 'Breadcrumb Separator', 'greenlet' ),
 			'description' => __( 'Separator between links in breadcrumb. Eg: / or >', 'greenlet' ),
 		),
@@ -658,7 +658,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'        => 'checkbox',
-			'section'     => 'misc',
+			'section'     => 'blog',
 			'label'       => __( 'Featured Image', 'greenlet' ),
 			'description' => __( 'Show featured image on post list and archives.', 'greenlet' ),
 		),
@@ -672,7 +672,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'        => 'text',
-			'section'     => 'misc',
+			'section'     => 'blog',
 			'label'       => __( 'Excerpt length', 'greenlet' ),
 			'description' => __( 'Number of characters in excerpts for post list.', 'greenlet' ),
 		),
@@ -686,7 +686,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'        => 'radio',
-			'section'     => 'misc',
+			'section'     => 'blog',
 			'label'       => __( 'Pagination', 'greenlet' ),
 			'description' => __( 'Paging Navigation display format.', 'greenlet' ),
 			'choices'     => array(
@@ -708,7 +708,7 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'    => 'multicheck',
-			'section' => 'misc',
+			'section' => 'blog',
 			'label'   => __( 'Show Author Info', 'greenlet' ),
 			'choices' => array(
 				'name'  => 'Name',
@@ -727,12 +727,63 @@ function greenlet_options() {
 		),
 		'cargs' => array(
 			'type'    => 'multicheck',
-			'section' => 'misc',
+			'section' => 'blog',
 			'label'   => __( 'Show Comments', 'greenlet' ),
 			'choices' => array(
 				'posts' => 'Posts',
 				'pages' => 'Pages',
 			),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'performance',
+		'args' => array(
+			'title'    => __( 'Performance', 'greenlet' ),
+			'priority' => 250,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'disable_emojis',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Disable WP Emojis', 'greenlet' ),
+			'description' => __( 'Posts with emojis may break, disable with caution.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'disable_embed',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Disable WP Embed Script', 'greenlet' ),
+			'description' => __( 'Posts with posts-embed may break, disable with caution.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'disable_block_editor',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Disable WP Block Editor Style', 'greenlet' ),
+			'description' => __( 'Posts created with WP Block Editor may break, disable with caution.', 'greenlet' ),
 		),
 	);
 
