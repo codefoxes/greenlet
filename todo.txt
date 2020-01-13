@@ -5,6 +5,16 @@ Major:
 - Add Woocommerce support
 - Uglify theme inline css
 - Posts per page
+- Test Mobile menu
+- Container Width for Header, Content, Footer
+- Add more colors
+- Import WP Test data and Test
+- Theme check and Theme sniffer compatible
+- PHPCS and JS WP Standards.
+- Remove PHPCS ignores
+- Create Documentation
+- DNS Prefetch for theme CSS and JS
+- Fix Customizer Control Hack
 
 Minor:
 
