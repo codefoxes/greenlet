@@ -90,7 +90,7 @@ class Metaboxes {
 	/**
 	 * Conditionally output Meta box.
 	 *
-	 * @param WP_Post $post The current WP_Post object.
+	 * @param object $post The current WP_Post object.
 	 */
 	public function greenlet_page_template_meta_box( $post ) {
 
@@ -98,7 +98,7 @@ class Metaboxes {
 		if ( 0 !== count( get_page_templates() ) ) {
 
 			// Add an nonce field so we can check for it later.
-			wp_nonce_field( 'greenlet_template_meta_box', 'greenlet_template_meta_box_nonce' );
+			wp_nonce_field( 'greenlet_template_meta_box', 'greenlet_nonce' );
 
 			// Get previously set page template and sequence.
 			$template = get_post_meta( $post->ID, '_wp_page_template', true );
@@ -124,8 +124,8 @@ class Metaboxes {
 				 *
 				 * @see wp_dropdown_pages()
 				 *
-				 * @param array   $dropdown_args Array of arguments used to generate the pages drop-down.
-				 * @param WP_Post $post          The current WP_Post object.
+				 * @param array  $dropdown_args Array of arguments used to generate the pages drop-down.
+				 * @param object $post          The current WP_Post object.
 				 */
 				$dropdown_args = apply_filters( 'page_attributes_dropdown_pages_args', $dropdown_args, $post );
 				$pages         = wp_dropdown_pages( $dropdown_args ); // phpcs:ignore
@@ -140,8 +140,7 @@ class Metaboxes {
 			}
 			?>
 
-			<p id="greenlet-post-type" data-value="<?php echo esc_html( $post->post_type ); ?>"></p>
-
+			<input type="hidden" id="greenlet-post-type" value="<?php echo esc_html( $post->post_type ); ?>" />
 			<p><strong><?php esc_html_e( 'Template', 'greenlet' ); ?></strong></p>
 			<label class="screen-reader-text" for="page_template"><?php esc_html_e( 'Page Template', 'greenlet' ); ?></label>
 			<select name="page_template" id="page_template">
@@ -198,34 +197,28 @@ class Metaboxes {
 	 * @see wp-includes/formatting.php
 	 * @see wp-includes/post.php
 	 *
-	 * @param int     $post_id Post ID of current post.
-	 * @param WP_Post $post    The current WP_Post object.
+	 * @param int $post_id Post ID of current post.
 	 */
-	public function greenlet_save_page_template( $post_id, $post ) {
-
-		// Check if our nonce is set.
-		if ( ! isset( $_POST['greenlet_template_meta_box_nonce'] ) ) {
-			return;
-		}
-
-		// Verify that the nonce is valid.
-		if ( ! wp_verify_nonce( $_POST['greenlet_template_meta_box_nonce'], 'greenlet_template_meta_box' ) ) {
-			return;
-		}
+	public function greenlet_save_page_template( $post_id ) {
 
 		// If this is an autosave, our form has not been submitted, so we don't want to do anything.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
 
-		// Sanitize user input.
-		$template = sanitize_text_field( $_POST[ 'page_template' ] );
-		$sequence = $_POST['template-sequence'] ? $_POST['template-sequence'] : '';
-		if ( is_array( $sequence ) ) {
-			$sequence = array_map( 'sanitize_text_field', $sequence );
-		} else {
-			$sequence = sanitize_text_field( $sequence );
+		// Check if our nonce is set.
+		if ( ! isset( $_POST['greenlet_nonce'] ) ) {
+			return;
 		}
+
+		// Verify that the nonce is valid.
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['greenlet_nonce'] ) ), 'greenlet_template_meta_box' ) ) {
+			return;
+		}
+
+		// Sanitize user input.
+		$template = isset( $_POST['page_template'] ) ? sanitize_text_field( wp_unslash( $_POST['page_template'] ) ) : null;
+		$sequence = array_key_exists( 'template-sequence', $_POST ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['template-sequence'] ) ) : array();
 
 		// Update custom page template meta upon save.
 		if ( ! empty( $_POST['page_template'] ) ) {

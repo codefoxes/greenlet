@@ -111,30 +111,26 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 // Run greenlet_init action hook.
 do_action( 'greenlet_init' );
 
-/**
- * Handle Ajax.
- */
-function greenlet_ajax() {
-	if ( ! isset( $_REQUEST['nonce'] ) || ! isset( $_REQUEST['action'] ) ) {
-		return;
-	}
 
-	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'greenlet_generic' ) ) {
-		return;
-	}
+if ( ! function_exists( 'greenlet_ajax' ) ) {
+	/**
+	 * Handle Ajax.
+	 *
+	 * @since 1.0.0
+	 */
+	function greenlet_ajax() {
+		add_action( 'wp_ajax_greenlet_get_paginated', 'greenlet_get_paginated' );
+		add_action( 'wp_ajax_nopriv_greenlet_get_paginated', 'greenlet_get_paginated' );
 
-	// Add action to wp ajax.
-	if ( array_key_exists( 'action', $_REQUEST ) ) {
-		$action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
-		add_action( "wp_ajax_{$action}", $action );
-		add_action( "wp_ajax_nopriv_{$action}", $action );
+		add_action( 'wp_ajax_greenlet_template_sequence', 'greenlet_template_sequence' );
+		add_action( 'wp_ajax_nopriv_greenlet_template_sequence', 'greenlet_template_sequence' );
 	}
 }
 
 
 if ( ! function_exists( 'greenlet_setup' ) ) {
 	/**
-	 * Loads textdomain, Adds theme support, menu etc.
+	 * Loads text domain, Adds theme support, menu etc.
 	 *
 	 * @since 1.0.0
 	 *
@@ -568,10 +564,17 @@ if ( ! function_exists( 'greenlet_template_sequence' ) ) {
 	 */
 	function greenlet_template_sequence() {
 
+		if ( ! isset( $_POST['nonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'greenlet_template_meta_box' ) ) {
+			return;
+		}
+
 		// Get ajax post data.
-		// Todo: Nonce verification
-		$template_name = isset( $_REQUEST[ 'template' ] ) ? $_REQUEST[ 'template' ] : null;
-		$post_type     = isset( $_REQUEST[ 'post_type' ] ) ? $_REQUEST[ 'post_type' ] : 'post';
+		$template_name = isset( $_POST['template'] ) ? sanitize_text_field( wp_unslash( $_POST['template'] ) ) : null;
+		$post_type     = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'post';
 
 		// Get templates columns and content sequence.
 		$options    = greenlet_column_options( $template_name, $post_type );

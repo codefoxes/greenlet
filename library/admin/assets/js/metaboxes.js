@@ -27,21 +27,21 @@ jQuery( document ).ready( function( $ ) {
 
 	$( "#postparentdiv #page_template" ).change( function() {
 
-		$("#sequence").fadeTo( "fast", 0.5 );
-		$(".sequence.spinner").show();
+		$("#sequence").fadeTo( 'fast', 0.5 );
+		$(".sequence.spinner").show().css({ visibility: 'visible' });
 
-		var postType = document.getElementById( 'greenlet-post-type' ).getAttribute( 'data-value' );
 		var tempValue = $(this).val();
+		var postType = document.getElementById( 'greenlet-post-type' ).value;
+		var nonce = document.getElementById( 'greenlet_nonce' ).value;
 
 		jQuery.ajax({
-			type : "post",
+			type : 'POST',
 			dataType : 'html',
 			url : template_ajax.ajaxurl,
-			data : {action: "greenlet_template_sequence", template: tempValue, post_type: postType },
+			data : { action: 'greenlet_template_sequence', template: tempValue, post_type: postType, nonce: nonce },
 			success: function(response) {
-				$("#sequence").html( response );
-				$(".sequence.spinner").hide();
-				$("#sequence").fadeTo( "fast", 1 );
+				$("#sequence").html( response ).fadeTo( 'fast', 1 );
+				$(".sequence.spinner").hide().css({ visibility: 'hidden' });
 			}
 		});
 	});
