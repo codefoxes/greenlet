@@ -303,7 +303,9 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		}
 
 		global $wp_query, $wp, $wp_rewrite;
-		wp_enqueue_script( 'greenlet-custom', SCRIPTS_URL . '/scripts.js', array(), GREENLET_VERSION, true );
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+		wp_enqueue_script( 'greenlet-custom', SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
 		wp_localize_script(
 			'greenlet-custom',
 			'pagination_ajax',
@@ -321,7 +323,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 
 		switch ( $css_framework ) {
 			case 'default':
-				$default_href = STYLES_URL . '/default.css';
+				$default_href = STYLES_URL . '/default' . $min . '.css';
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
@@ -334,7 +336,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				$js_path  = ( '' === $js_path ) ? $default_js : $js_path;
 				break;
 			default:
-				$css_path = STYLES_URL . '/default.css';
+				$css_path = STYLES_URL . '/default' . $min . '.css';
 				$js_path  = '';
 				break;
 		}
@@ -346,7 +348,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			}
 		}
 
-		$styles_href = STYLES_URL . '/styles.css';
+		$styles_href = STYLES_URL . '/styles' . $min . '.css';
 		greenlet_enqueue_style( 'greenlet-styles', $styles_href );
 	}
 
@@ -756,20 +758,6 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) {
 	}
 
 	add_filter( 'wp_title', 'greenlet_wp_title', 10, 2 );
-
-	/**
-	 * Title shim for sites older than WordPress 4.1.
-	 *
-	 * @link https://make.wordpress.org/core/2014/10/29/title-tags-in-4-1/
-	 * @todo Remove this function when WordPress 4.3 is released.
-	 */
-	function greenlet_render_title() {
-		?>
-		<title><?php wp_title( '|', true, 'right' ); ?></title>
-		<?php
-	}
-
-	add_action( 'wp_head', 'greenlet_render_title' );
 }
 
 /**
