@@ -4,8 +4,6 @@ Major:
 - Add logo height and width
 - Add Woocommerce support
 - Uglify theme inline css
-- Posts per page
-- Test Mobile menu
 - Container Width for Header, Content, Footer
 - Add more colors
 - Import WP Test data and Test
@@ -15,6 +13,8 @@ Major:
 - Create Documentation
 - DNS Prefetch for theme CSS and JS
 - Fix Customizer Control Hack
+- Add background Image option
+- Post list Grid/List
 
 Minor:
 

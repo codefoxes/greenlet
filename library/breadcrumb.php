@@ -7,57 +7,77 @@
 
 global $post;
 $separator = gl_get_option( 'breadcrumb_sep', '&raquo;' );
-$microdata = '<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">';
 
-echo '<div class="breadcrumb">';
-echo $microdata; // phpcs:ignore
-echo '<a href="' . esc_html( home_url() ) . '" itemprop="url"><span itemprop="title">Home</span></a> ' . esc_html( $separator ) . ' </div>';
+printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb' ), null ) );
+printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
+echo '<a href="' . esc_html( home_url() ) . '" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></div>' . esc_html( $separator );
+printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 
-if ( is_category() || is_tag() ) {
-	single_cat_title();
-
-} elseif ( is_single() ) {
+if ( is_single() ) {
 	$category = get_the_category();
 	if ( $category ) {
-		echo $microdata; // phpcs:ignore
 		echo '<a href="' . esc_html( get_category_link( $category[0]->term_id ) );
-		echo '" itemprop="url"><span itemprop="title">' . esc_html( $category[0]->cat_name ) . '</span></a> ' . esc_html( $separator ) . ' </div>';
+		echo '" itemprop="item"><span itemprop="name">' . esc_html( $category[0]->cat_name ) . '</span></a><meta itemprop="position" content="2" /></div>' . esc_html( $separator );
+		printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 	}
-	the_title();
+
+	printf( '<span itemprop="name">%s</span>', esc_html( get_the_title() ) );
+	echo '<meta itemprop="position" content="3" /></div>';
 
 } elseif ( is_page() && $post->post_parent ) {
-	$home = get_post( get_option( 'page_on_front' ) );
-	for ( $i = count( $post->ancestors ) - 1; $i >= 0; $i-- ) {
+	$home            = get_post( get_option( 'page_on_front' ) );
+	$ancestors_count = count( $post->ancestors );
+	for ( $i = $ancestors_count - 1; $i >= 0; $i-- ) {
 		if ( ( $home->ID ) !== ( $post->ancestors[ $i ] ) ) {
-			echo $microdata . '<a href="'; // phpcs:ignore
+			echo '<a href="';
 			echo esc_html( get_permalink( $post->ancestors[ $i ] ) );
-			echo '" itemprop="url"><span itemprop="title">';
+			echo '" itemprop="item"><span itemprop="name">';
 			echo esc_html( get_the_title( $post->ancestors[ $i ] ) );
-			echo '</span></a> ' . esc_html( $separator ) . ' </div>';
+			echo '</span></a>';
+			printf( '<meta itemprop="position" content="%s" /></div>', esc_html( ( $i * -1 ) + $ancestors_count + 1 ) );
+			echo esc_html( $separator );
+			printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 		}
 	}
-	echo esc_html( get_the_title() );
+
+	printf( '<span itemprop="name">%s</span>', esc_html( get_the_title() ) );
+	printf( '<meta itemprop="position" content="%s" /></div>', esc_html( $ancestors_count + 2 ) );
+
+} elseif ( is_category() || is_tag() ) {
+	printf( '<span itemprop="name">%s</span>', single_cat_title( '', false ) );
+	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_page() ) {
-	echo esc_html( get_the_title() );
-
-} elseif ( is_404() ) {
-	echo '404';
+	printf( '<span itemprop="name">%s</span>', esc_html( get_the_title() ) );
+	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_author() ) {
-	echo get_the_author();
+	printf( '<span itemprop="name">%s</span>', get_the_author() );
+	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_day() ) {
-	echo get_the_date();
+	printf( '<span itemprop="name">%s</span>', get_the_date() );
+	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_month() ) {
-	echo get_the_date( _x( 'F Y', 'Monthly archives date format', 'greenlet' ) );
+	printf( '<span itemprop="name">%s</span>', get_the_date( _x( 'F Y', 'Monthly archives date format', 'greenlet' ) ) );
+	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_year() ) {
-	echo get_the_date( _x( 'Y', 'Yearly archives date format', 'greenlet' ) );
+	printf( '<span itemprop="name">%s</span>', get_the_date( _x( 'Y', 'Yearly archives date format', 'greenlet' ) ) );
+	echo '<meta itemprop="position" content="2" /></div>';
+
 } elseif ( is_search() ) {
-	echo 'Search: ' . get_search_query();
+	printf( '<span itemprop="name">%s</span>', 'Search: ' . get_search_query() );
+	echo '<meta itemprop="position" content="2" /></div>';
+
+} elseif ( is_404() ) {
+	echo '<span itemprop="name">404</span>';
+	echo '<meta itemprop="position" content="2" /></div>';
+
 } else {
-	echo 'Post';
+	echo '<span itemprop="name">Post</span>';
+	echo '<meta itemprop="position" content="2" /></div>';
+
 }
 echo '</div>';

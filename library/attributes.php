@@ -136,7 +136,7 @@ function greenlet_attribute( $attributes, $primary ) {
 		// Is body, add web page schema.
 		case 'body':
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/WebPage';
+			$attributes['itemtype']  = 'https://schema.org/WebPage';
 			break;
 
 		// Is site-header, add banner role, header schema.
@@ -144,7 +144,7 @@ function greenlet_attribute( $attributes, $primary ) {
 			$attributes['id']        = 'header';
 			$attributes['role']      = 'banner';
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/WPHeader';
+			$attributes['itemtype']  = 'https://schema.org/WPHeader';
 			break;
 
 		// Is site-content, add id.
@@ -155,7 +155,7 @@ function greenlet_attribute( $attributes, $primary ) {
 		// Is site-logo, add organization schema.
 		case 'site-logo':
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/Organization';
+			$attributes['itemtype']  = 'https://schema.org/Organization';
 			break;
 
 		// Is site-name or author-name, add name prop.
@@ -174,7 +174,7 @@ function greenlet_attribute( $attributes, $primary ) {
 		case 'site-navigation':
 			$attributes['role']      = 'navigation';
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/SiteNavigationElement';
+			$attributes['itemtype']  = 'https://schema.org/SiteNavigationElement';
 			break;
 
 		// Is main, add main role, prop.
@@ -187,7 +187,7 @@ function greenlet_attribute( $attributes, $primary ) {
 
 				// Add Blog schema.
 				$attributes['itemscope'] = 'itemscope';
-				$attributes['itemtype']  = 'http://schema.org/Blog';
+				$attributes['itemtype']  = 'https://schema.org/Blog';
 			}
 
 			// If search page.
@@ -195,7 +195,7 @@ function greenlet_attribute( $attributes, $primary ) {
 
 				// Add searchpage schema.
 				$attributes['itemscope'] = 'itemscope';
-				$attributes['itemtype']  = 'http://schema.org/SearchResultsPage';
+				$attributes['itemtype']  = 'https://schema.org/SearchResultsPage';
 			}
 			break;
 
@@ -203,19 +203,19 @@ function greenlet_attribute( $attributes, $primary ) {
 		case 'sidebar':
 			$attributes['role']      = 'complementary';
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/WPSideBar';
+			$attributes['itemtype']  = 'https://schema.org/WPSideBar';
 			break;
 
 		// Is entry, add post classes, creativework schema.
 		case 'entry':
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/CreativeWork';
+			$attributes['itemtype']  = 'https://schema.org/CreativeWork';
 
 			// If is post.
 			if ( 'post' === get_post_type() ) {
 
 				// Add blogposting schema.
-				$attributes['itemtype'] = 'http://schema.org/BlogPosting';
+				$attributes['itemtype'] = 'https://schema.org/BlogPosting';
 
 				// If is main query (not secondary), add blogpost prop.
 				if ( is_main_query() ) {
@@ -248,7 +248,7 @@ function greenlet_attribute( $attributes, $primary ) {
 		case 'author':
 			$attributes['itemprop']  = 'author';
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/Person';
+			$attributes['itemtype']  = 'https://schema.org/Person';
 			break;
 
 		// Is author-link, add url prop, author rel.
@@ -261,7 +261,7 @@ function greenlet_attribute( $attributes, $primary ) {
 		case 'comments-area':
 			$attributes['id']        = 'comments';
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/UserComments';
+			$attributes['itemtype']  = 'https://schema.org/UserComments';
 			break;
 
 		// Is meta-date, add date published prop, datetime.
@@ -281,7 +281,18 @@ function greenlet_attribute( $attributes, $primary ) {
 			$attributes['id']        = 'footer';
 			$attributes['role']      = 'contentinfo';
 			$attributes['itemscope'] = 'itemscope';
-			$attributes['itemtype']  = 'http://schema.org/WPFooter';
+			$attributes['itemtype']  = 'https://schema.org/WPFooter';
+			break;
+
+		case 'breadcrumb':
+			$attributes['itemscope'] = 'itemscope';
+			$attributes['itemtype']  = 'https://schema.org/BreadcrumbList';
+			break;
+
+		case 'breadcrumb-item':
+			$attributes['itemscope'] = 'itemscope';
+			$attributes['itemprop']  = 'itemListElement';
+			$attributes['itemtype']  = 'https://schema.org/ListItem';
 			break;
 	}
 

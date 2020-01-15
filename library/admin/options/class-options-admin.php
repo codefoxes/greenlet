@@ -212,8 +212,7 @@ class Options_Admin {
 			die( '0' );
 		}
 
-		// Todo: Sanitize incoming data.
-		$new_mods = json_decode( wp_unslash( $_POST['value'] ), true ); // phpcs:ignore
+		$new_mods = json_decode( sanitize_textarea_field( wp_unslash( $_POST['value'] ) ), true );
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
 			die( '0' );
 		}

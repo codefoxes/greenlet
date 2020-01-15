@@ -92,7 +92,6 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		}
 
 		require_once LIBRARY_DIR . '/class-columnobject.php';
-		require_once LIBRARY_DIR . '/class-honeypot.php';
 		require_once LIBRARY_DIR . '/performance.php';
 		require_once ADMIN_DIR . '/options/class-options-admin.php';
 		require_once ADMIN_DIR . '/customizer/class-customizer.php';
@@ -270,7 +269,7 @@ if ( ! function_exists( 'greenlet_defer_style' ) ) {
 	function greenlet_defer_style( $href ) {
 		// Todo: Prefetch if external URL.
 		printf( '<link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">', esc_url( $href ) );
-		printf( '<noscript><link rel="stylesheet" href="%s"></noscript>', esc_url( $href ) ); // phpcs:ignore
+		printf( '<noscript><link rel="%1$s" href="%2$s"></noscript>', 'stylesheet', esc_url( $href ) );
 	}
 }
 

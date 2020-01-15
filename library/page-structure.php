@@ -33,12 +33,14 @@ add_filter( 'excerpt_length', 'greenlet_excerpt_length', 999 );
 function greenlet_do_main_container() {
 	do_action( 'greenlet_before_left_sidebar' );
 
-	// Intantiate ColumnObject class to get column widths.
+	// Instantiate ColumnObject class to get column widths.
 	$cobj = new ColumnObject();
 
 	if ( $cobj->sequence ) {
 		foreach ( $cobj->sequence as $pos => $column ) {
-			$width = isset( $cobj->cols_array()[ $pos ] ) ? $cobj->cols_array()[ $pos ] : null;
+			$cols_array = $cobj->cols_array();
+			$width      = isset( $cols_array[ $pos ] ) ? $cols_array[ $pos ] : null;
+
 			if ( 'main' === $column ) {
 				do_action( 'greenlet_after_left_sidebar' );
 
@@ -249,13 +251,11 @@ function greenlet_do_archive_header() {
 
 	if ( isset( $archive_title ) ) {
 		printf( '<h1 %s>', wp_kses( greenlet_attr( 'archive-title' ), null ) );
-		// translators: %s: Archive Title.
-		printf( esc_html__( '%s', 'greenlet' ), esc_html( $archive_title ) ); // phpcs:ignore
+		echo esc_html( $archive_title );
 		echo '</h1>';
 	}
 	if ( isset( $archive_description ) ) {
-		// translators: %s: Archive Description.
-		printf( esc_html__( '%s', 'greenlet' ), esc_html( $archive_description ) ); // phpcs:ignore
+		echo wp_kses_post( $archive_description );
 	}
 }
 
@@ -319,7 +319,14 @@ function greenlet_do_entry_header() {
 	greenlet_markup_close();
 }
 
-function greenlet_get_file_contents ( $file_path ) {
+
+/**
+ * Get file Contents.
+ *
+ * @param string $file_path File Path.
+ * @return false|string File Contents.
+ */
+function greenlet_get_file_contents( $file_path ) {
 	ob_start();
 	include $file_path;
 	$file_contents = ob_get_contents();
@@ -336,13 +343,39 @@ function greenlet_get_file_contents ( $file_path ) {
 function greenlet_post_meta() {
 	greenlet_markup( 'entry-meta', greenlet_attr( 'list-inline entry-meta' ) );
 
+	$svg_tags = array(
+		'svg'   => array(
+			'class'           => true,
+			'aria-hidden'     => true,
+			'aria-labelledby' => true,
+			'role'            => true,
+			'xmlns'           => true,
+			'width'           => true,
+			'height'          => true,
+			'viewbox'         => true,
+		),
+		'g'     => array( 'fill' => true ),
+		'title' => array( 'title' => true ),
+		'path'  => array(
+			'd'    => true,
+			'fill' => true,
+		),
+	);
+
+	$term_list_tags = array(
+		'a' => array(
+			'href' => true,
+			'rel'  => true,
+		),
+	);
+
 	if ( get_post_type() === 'post' ) {
 		// If the post is sticky, mark it.
 		if ( is_sticky() ) {
 			printf(
 				'<li %s><span class="sticky-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-featured-post list-inline-item' ), null ),
-				greenlet_get_file_contents( IMAGES_DIR . '/icons/pin-icon.svg' ), // phpcs:ignore
+				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/pin-icon.svg' ), $svg_tags ),
 				esc_html__( 'Featured', 'greenlet' )
 			);
 		}
@@ -351,7 +384,7 @@ function greenlet_post_meta() {
 		printf(
 			'<li %1$s><span class="user-icon">%2$s</span><a href="%3$s" rel="author"> %4$s</a></li>',
 			wp_kses( greenlet_attr( 'meta-author list-inline-item' ), null ),
-			greenlet_get_file_contents( IMAGES_DIR . '/icons/user-icon.svg' ), // phpcs:ignore
+			wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/user-icon.svg' ), $svg_tags ),
 			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 			get_the_author()
 		);
@@ -360,7 +393,7 @@ function greenlet_post_meta() {
 		printf(
 			'<li %s><span class="date-icon">%s</span> %s </li>',
 			wp_kses( greenlet_attr( 'meta-date list-inline-item' ), null ),
-			greenlet_get_file_contents( IMAGES_DIR . '/icons/date-icon.svg' ), // phpcs:ignore
+			wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/date-icon.svg' ), $svg_tags ),
 			get_the_date()
 		);
 
@@ -370,8 +403,8 @@ function greenlet_post_meta() {
 			printf(
 				'<li %s><span class="folder-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-categories list-inline-item' ), null ),
-				greenlet_get_file_contents( IMAGES_DIR . '/icons/folder-icon.svg' ), // phpcs:ignore
-				$category_list // phpcs:ignore
+				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/folder-icon.svg' ), $svg_tags ),
+				wp_kses( $category_list, $term_list_tags )
 			);
 		}
 
@@ -381,8 +414,8 @@ function greenlet_post_meta() {
 			printf(
 				'<li %s><span class="tag-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-tags list-inline-item' ), null ),
-				greenlet_get_file_contents( IMAGES_DIR . '/icons/tag-icon.svg' ), // phpcs:ignore
-				$tag_list // phpcs:ignore
+				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/tag-icon.svg' ), $svg_tags ),
+				wp_kses( $tag_list, $term_list_tags )
 			);
 		}
 
@@ -391,7 +424,7 @@ function greenlet_post_meta() {
 			printf(
 				'<li %s><span class="comment-icon">%s</span> ',
 				wp_kses( greenlet_attr( 'meta-reply list-inline-item' ), null ),
-				greenlet_get_file_contents( IMAGES_DIR . '/icons/comment-icon.svg' ) // phpcs:ignore
+				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/comment-icon.svg' ), $svg_tags )
 			);
 			comments_popup_link( __( 'Leave a comment', 'greenlet' ), __( 'One comment', 'greenlet' ), __( 'View all % comments', 'greenlet' ) );
 			echo '</li>';
@@ -497,6 +530,8 @@ function greenlet_do_entry_footer() {
 			);
 
 			$heading = sprintf( '<h2 %s> %s %s</h2>', greenlet_attr( 'author-heading' ), __( 'Author:', 'greenlet' ), $author );
+
+			// Todo: Better way to allow filter.
 			echo apply_filters( 'greenlet_author', $heading, $author ); // phpcs:ignore
 		}
 
@@ -555,6 +590,7 @@ function greenlet_comments_template() {
 /**
  * Renders pagination navigation.
  *
+ * @param object $query WP_Query Object.
  * @return void
  */
 function greenlet_paging_nav( $query = null ) {
@@ -570,12 +606,15 @@ function greenlet_paging_nav( $query = null ) {
 	if ( $query->max_num_pages <= 1 ) {
 		return;
 	}
-	$bignum = 999999999;
+	$big_num = 999999999;
 
 	$paged = 1;
 	if ( property_exists( $query, 'query_vars' ) && array_key_exists( 'paged', $query->query_vars ) ) {
 		$paged = $query->query_vars['paged'];
 	}
+
+	$current_page = max( 1, $paged );
+	// Not sure. Maybe get $paged from $_POST['current'].
 
 	if ( 'number' === $format || 'ajax' === $format ) {
 
@@ -583,9 +622,9 @@ function greenlet_paging_nav( $query = null ) {
 			apply_filters(
 				'greenlet_pagination_args',
 				array(
-					'base'      => str_replace( $bignum, '%#%', esc_url( get_pagenum_link( $bignum ) ) ),
+					'base'      => str_replace( $big_num, '%#%', esc_url( get_pagenum_link( $big_num ) ) ),
 					'format'    => '',
-					'current'   => max( 1, $paged ),
+					'current'   => $current_page,
 					'total'     => $query->max_num_pages,
 					'prev_text' => '&laquo;',
 					'next_text' => '&raquo;',
@@ -596,9 +635,9 @@ function greenlet_paging_nav( $query = null ) {
 			)
 		);
 	} elseif ( 'load' === $format ) {
-		$pages = array( greenlet_load_link( $query ) );
+		$pages = array( greenlet_load_link( $current_page, $query ) );
 	} elseif ( 'infinite' === $format ) {
-		$pages    = array( greenlet_load_link( $query ) );
+		$pages    = array( greenlet_load_link( $current_page, $query ) );
 		$pag_attr = greenlet_attr( "pagination load {$format}" );
 	} else {
 		$pages    = array();
@@ -629,7 +668,9 @@ function greenlet_get_paginated() {
 		return;
 	}
 
-	global $wp_query, $wp_rewrite;
+	global $wp_rewrite, $current_location;
+	$current_location = array_key_exists( 'location', $_POST ) ? esc_url_raw( wp_unslash( $_POST['location'] ) ) : '';
+
 	$options = array(
 		'no_posts_message' => 'There are no posts meeting your criteria',
 		'no_posts_class'   => '',
@@ -645,9 +686,7 @@ function greenlet_get_paginated() {
 	);
 	add_filter( 'greenlet_pagination_args', 'greenlet_pagination_args' );
 
-	$args    = apply_filters( 'greenlet_pagination_query_args', array() );
-	$args_in = wp_unslash( json_decode( wp_unslash( $_POST['query_vars'] ), true ) );
-	$args    = $args_in;
+	$args = wp_unslash( json_decode( sanitize_textarea_field( wp_unslash( $_POST['query_vars'] ) ), true ) );
 
 	$args['post_status'] = 'publish';
 
@@ -662,7 +701,9 @@ function greenlet_get_paginated() {
 	if ( $wp_rewrite->using_permalinks() && preg_match( '~/page/([0-9]+)~', $location, $matches ) || preg_match( '~paged?=([0-9]+)~', $location, $matches ) ) {
 		$args['paged']          = min( $matches[1], $page_query->max_num_pages );
 		$args['posts_per_page'] = get_option( 'posts_per_page' );
-		$page_query               = new WP_Query( $args ); // phpcs:ignore
+
+		$args       = apply_filters( 'greenlet_pagination_query_args', $args );
+		$page_query = new WP_Query( $args );
 	}
 
 	$response = array();
@@ -690,8 +731,7 @@ function greenlet_get_paginated() {
 	} else {
 		get_template_part( 'content', 'none' );
 
-		// phpcs:ignore
-		echo apply_filters( 'greenlet_no_posts_message', "<div class='no-posts" . ( ( $options['no_posts_class'] ) ? ' ' . $options['no_posts_class'] : '' ) . "'>" . $options['no_posts_message'] . '</div>' );
+		echo apply_filters( 'greenlet_no_posts_message', "<div class='no-posts" . ( ( $options['no_posts_class'] ) ? ' ' . $options['no_posts_class'] : '' ) . "'>" . $options['no_posts_message'] . '</div>' ); // phpcs:ignore
 
 		$response['no_posts'] = ob_get_contents();
 	}
@@ -713,25 +753,31 @@ function greenlet_pagination_args( $args = array() ) {
 	return $args;
 }
 
-// WordPress' get_pagenum_link.
-//
-// CONVERT PAGINATION TO CLASS
-// BECAUSE IT USES $_POST LOCATION.
-
 /**
  * Retrieve Page link.
+ *
+ * Fork of WordPress' get_pagenum_link.
+ * CONVERT PAGINATION TO CLASS.
+ * BECAUSE IT USES $_POST LOCATION?
+ *
+ * @Todo: Check if this has been changed.
+ *
+ * @see wp-includes/link-template.php
  *
  * @param int  $pagenum Page number.
  * @param bool $escape  Whether to escape.
  * @return string       Page link.
  */
 function greenlet_get_page_link( $pagenum = 1, $escape = true ) {
-	global $wp_rewrite;
+	global $wp_rewrite, $current_location;
+
+	if ( empty( $current_location ) ) {
+		$current_location = '';
+	}
 
 	$pagenum = (int) $pagenum;
-	$current = array_key_exists( 'location', $_POST ) ? $_POST['location'] : '';
-	$request = remove_query_arg( 'paged', preg_replace( '~' . home_url() . '~', '', $current ) );
-	$request = remove_query_arg( 'page', preg_replace( '~' . home_url() . '~', '', $current ) );
+	$request = remove_query_arg( 'paged', preg_replace( '~' . home_url() . '~', '', $current_location ) );
+	$request = remove_query_arg( 'page', preg_replace( '~' . home_url() . '~', '', $current_location ) );
 
 	$home_root = wp_parse_url( home_url() );
 	$home_root = ( isset( $home_root['path'] ) ) ? $home_root['path'] : '';
@@ -793,13 +839,13 @@ function greenlet_get_page_link( $pagenum = 1, $escape = true ) {
 /**
  * Return the next posts page link.
  *
- * @param string $label    Content for link text.
- * @param int    $max_page Optional. Max pages.
- * @return string|null     HTML-formatted next posts page link.
+ * @param int    $current_page Current Page Index.
+ * @param object $query        WP_Query.
+ * @param string $label        Content for link text.
+ * @param int    $max_page     Optional. Max pages.
+ * @return string|null         HTML-formatted next posts page link.
  */
-function greenlet_load_link( $query = null, $label = null, $max_page = 0 ) {
-	global $paged;
-
+function greenlet_load_link( $current_page, $query = null, $label = null, $max_page = 0 ) {
 	if ( empty( $query ) ) {
 		global $wp_query;
 		$query = $wp_query;
@@ -809,40 +855,37 @@ function greenlet_load_link( $query = null, $label = null, $max_page = 0 ) {
 		$max_page = $query->max_num_pages;
 	}
 
-	if ( ! $paged ) {
-		$paged = array_key_exists( 'current', $_POST ) ? $_POST['current'] : 1;
-	}
-
-	$nextpage = intval( $paged ) + 1;
+	$next_page = intval( $current_page ) + 1;
 
 	if ( null === $label ) {
 		$label = esc_html__( 'Load More', 'greenlet' );
 	}
 
-	if ( ! is_single() && ( $nextpage <= $max_page ) ) {
+	if ( ! is_single() && ( $next_page <= $max_page ) ) {
 		/**
 		 * Filter the anchor tag attributes for the next posts page link.
 		 *
 		 * @param string $attributes Attributes for the anchor tag.
 		 */
-		$attr = apply_filters( 'greenlet_next_link_attributes', sprintf( 'class="load" data-next="%s"', $nextpage ) );
+		$attr = apply_filters( 'greenlet_next_link_attributes', sprintf( 'class="load" data-next="%s"', $next_page ) );
 
-		return '<a href="' . esc_url( greenlet_get_load_page_link( $paged, $max_page ) ) . "\" $attr>" . preg_replace( '/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label ) . '</a>';
+		return '<a href="' . esc_url( greenlet_get_load_page_link( $next_page, $max_page ) ) . "\" $attr>" . preg_replace( '/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label ) . '</a>';
 	}
+
+	return '';
 }
 
 /**
  * Retrieve next posts page link.
  *
- * @param int $paged Current Page index.
- * @param int $max_page Optional. Max pages.
- * @return string The link URL for next posts page.
+ * @param int $next_page Next Page index.
+ * @param int $max_page  Optional. Max pages.
+ * @return string        The link URL for next posts page.
  */
-function greenlet_get_load_page_link( $paged, $max_page = 0 ) {
+function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
 	if ( ! is_single() ) {
-		$nextpage = intval( $paged ) + 1;
-		if ( ! $max_page || $max_page >= $nextpage ) {
-			return greenlet_get_page_link( $nextpage );
+		if ( ! $max_page || $max_page >= $next_page ) {
+			return greenlet_get_page_link( $next_page );
 		}
 	}
 }

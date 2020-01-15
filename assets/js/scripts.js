@@ -9,7 +9,8 @@ var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/s
 function greenlet_loader_listener(e) {
 	e.preventDefault();
 	var thisElement = e.target;
-	add             = false;
+	var add         = false;
+	var next_page   = 2;
 
 	if ( thisElement.classList.contains( 'next' ) ) {
 		next_page = parseInt( document.querySelector( '.pagination span.current' ).textContent ) + 1
@@ -48,7 +49,7 @@ window.onscroll = function (e) {
 		if ( ( wheight + sheight ) > loadpos ) {
 			var link  = infinite[0].querySelector( 'a' );
 			if ( link !== null ) {
-				next_page = link.getAttribute( 'data-next' );
+				var next_page = link.getAttribute( 'data-next' );
 				link.style.display = 'none';
 				greenlet_page_loader( link, next_page, true );
 			}

@@ -3,10 +3,16 @@
  *
  */
 
-jQuery( document ).ready( function( $ ) {
+function hide_attributes( panels ) {
+	panels.forEach( ( panel ) => {
+		if ( panel.innerText === 'Page Attributes' ) {
+			panel.classList.add('hidden');
+		}
+	} );
+}
 
+function init_hide_attributes() {
 	// Hide Default Page Attributes Panel.
-	// Todo: Do this only if Gutenberg.
 	let i = 0;
 	const intId = setInterval(() => {
 		if ( i > 50 ) {
@@ -16,14 +22,24 @@ jQuery( document ).ready( function( $ ) {
 		if ( panels.length > 0 ) {
 			clearInterval( intId );
 
-			panels.forEach( ( panel ) => {
-				if ( panel.innerText === 'Page Attributes' ) {
-					panel.remove();
+			document.addEventListener( 'click', function(e) {
+				if ( e.target && e.target.classList.contains('edit-post-sidebar__panel-tab') ) {
+					let newPanels = document.querySelectorAll( '.components-panel__body' );
+					if ( newPanels.length > 0 ) {
+						hide_attributes( newPanels );
+					}
 				}
-			} );
+			});
+
+			hide_attributes( panels );
 		}
 		i++;
 	}, 200 )
+}
+
+jQuery( document ).ready( function( $ ) {
+
+	init_hide_attributes();
 
 	$( "#postparentdiv #page_template" ).change( function() {
 
