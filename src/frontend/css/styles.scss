@@ -74,10 +74,52 @@ img {
 .site-navigation ul {
 	list-style: none;
 	margin: 0;
+
+	.children {
+		position: absolute;
+		left: 0;
+		width: max-content;
+		min-width: 180px;
+		font-size: 95%;
+		visibility: hidden;
+		opacity: 0;
+		text-align: left;
+		background: #fff;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+		transition: .25s all;
+		z-index: 999;
+
+		li {
+			display: block;
+			position: relative;
+
+			&:first-child {
+				border-top: 2px solid #7CB342;
+			}
+		}
+
+		a {
+			padding: 15px;
+		}
+
+		.children {
+			left: 100%;
+			top: -2px;
+			font-size: 100%;
+		}
+	}
 }
 
 .site-navigation li {
 	display: block;
+	position: relative;
+
+	&:hover {
+		& > .children {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
 }
 
 input[type="checkbox"].menu-toggle {
@@ -158,8 +200,19 @@ input[type="checkbox"].menu-toggle {
 	color: var(--font-color);
 }
 
+.entry-content {
+	word-wrap: break-word;
+}
+
 .entry-content p {
 	line-height: 2;
+}
+
+.entry-content .post-page-numbers {
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	line-height: 1;
+	margin: 5px;
 }
 
 .entry-meta li {
@@ -433,6 +486,11 @@ input[type="checkbox"].menu-toggle {
 }
 
 /* ----------- IMAGES ----------- */
+
+figure {
+	margin: 0;
+}
+
 .wp-caption {
 	margin-bottom: 1.5em;
 	max-width: 100%;
@@ -448,10 +506,12 @@ input[type="checkbox"].menu-toggle {
 
 .alignleft {
 	float: left;
+	margin-right: 1.5em;
 }
 
 .alignright {
 	float: right;
+	margin-left: 1.5em;
 }
 
 .aligncenter {
@@ -531,7 +591,7 @@ input[type="checkbox"].menu-toggle {
 	}
 
 	.site-navigation a {
-		padding: 33px 15px;
+		padding: 33px 12px;
 		display: block;
 	}
 

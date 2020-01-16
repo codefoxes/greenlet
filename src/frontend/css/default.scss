@@ -37,6 +37,10 @@ b, strong {
 code, kbd, samp, pre {
 	font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
 	font-size: 1em;
+	overflow: auto;
+	background: #fcfcfc;
+	border: 1px solid #f1f1f1;
+	padding: 15px;
 }
 
 small {
@@ -135,9 +139,9 @@ a {
 
 .container:after,
 .row:after,
-.u-cf {
+.clearfix:after {
 	content: '';
-	display: table;
+	display: block;
 	clear: both;
 }
 
@@ -423,7 +427,7 @@ label > .label-body {
 
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-ul { list-style: circle inside; }
+ul { list-style: disc inside; }
 
 ol { list-style: decimal inside; }
 
@@ -438,7 +442,8 @@ ul ol,
 ol ol,
 ol ul {
 	margin: 1.5rem 0 1.5rem 3rem;
-	font-size: 90%;
+	font-size: 95%;
+	list-style: circle inside;
 }
 
 li { margin-bottom: 1rem; }
@@ -448,7 +453,7 @@ li { margin-bottom: 1rem; }
 code {
 	padding: .2rem .5rem;
 	margin: 0 .2rem;
-	white-space: nowrap;
+	// white-space: nowrap;
 	background: #F1F1F1;
 	border: 1px solid #E1E1E1;
 }

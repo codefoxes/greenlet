@@ -418,7 +418,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 		$mmenu_position = gl_get_option( 'mmenu_position', 'header-2' );
 		$smenu_position = gl_get_option( 'smenu_position', 'dont-show' );
 		$fmenu_position = gl_get_option( 'fmenu_position', 'dont-show' );
-		$layout         = gl_get_option( $layout_option, '4-8' );
+		$layout         = gl_get_option( $layout_option, '3-9' );
 		$source         = gl_get_option( $source_option, 'manual' );
 
 		$layout = ( '' === $layout ) ? '12' : $layout;

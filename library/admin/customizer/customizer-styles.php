@@ -38,8 +38,8 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 		$show_title   = gl_get_option( 'show_title', '1' );
 		$show_tagline = gl_get_option( 'show_tagline', '1' );
 		$site_bg      = gl_get_option( 'site_bg', '#f5f5f5' );
-		$header_bg    = gl_get_option( 'header_bg', '#7CB342' );
-		$header_color = gl_get_option( 'header_color', '#fff' );
+		$header_bg    = gl_get_option( 'header_bg', '#fff' );
+		$header_color = gl_get_option( 'header_color', '#33691e' );
 		$footer_bg    = gl_get_option( 'footer_bg', '#212121' );
 		$footer_color = gl_get_option( 'footer_color', '#fff' );
 

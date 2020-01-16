@@ -86,7 +86,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_bg',
 		'sargs' => array(
-			'default'           => '#7CB342',
+			'default'           => '#fff',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -100,7 +100,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_color',
 		'sargs' => array(
-			'default'           => '#fff',
+			'default'           => '#33691e',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(

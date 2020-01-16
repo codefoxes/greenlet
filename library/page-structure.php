@@ -449,9 +449,13 @@ function greenlet_post_meta() {
  */
 function greenlet_do_entry_content() {
 
-	greenlet_markup( 'entry-content', greenlet_attr( 'entry-content' ) );
+	greenlet_markup( 'entry-content', greenlet_attr( 'entry-content clearfix' ) );
 
 	if ( is_single() || is_page() ) {
+
+		if ( has_post_thumbnail() ) {
+			the_post_thumbnail();
+		}
 
 		the_content();
 		apply_filters( 'greenlet_page_break', wp_link_pages() );
@@ -459,14 +463,14 @@ function greenlet_do_entry_content() {
 
 		global $post;
 		$is_more    = strpos( $post->post_content, '<!--more-->' );
-		$show_image = gl_get_option( 'featured_image', false );
+		$show_image = gl_get_option( 'featured_image', '1' );
 		$more       = apply_filters( 'greenlet_more_text', __( '<span class="more-text">Read More</span>', 'greenlet' ) );
 
 		// If the post has a thumbnail and not password protected, display.
 		if ( ( false !== $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
 
 			greenlet_markup( 'entry-thumbnail', greenlet_attr( 'entry-thumbnail' ) );
-			the_post_thumbnail( 'thumbnail' );
+			the_post_thumbnail( 'medium' );
 			greenlet_markup_close();
 		}
 
