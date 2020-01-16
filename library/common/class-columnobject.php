@@ -11,6 +11,10 @@
  * Class to create columns based on the layout if set,
  * else based on various options like current template.
  *
+ * @see greenlet_widget_init()
+ * @see greenlet_cover()
+ * @see greenlet_do_main_container()
+ *
  * @since   1.0.0
  * @global  object $wp_query Intricacies of single post or page.
  * @param   mixed  $cols     Columns as integer or string of integers separated by hyphen.

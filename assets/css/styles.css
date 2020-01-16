@@ -200,7 +200,7 @@ input[type="checkbox"].menu-toggle {
   color: var(--font-color);
 }
 
-.entry-content {
+.entry-content, .entry-header {
   word-wrap: break-word;
 }
 

@@ -2,7 +2,7 @@
 /**
  * Greenlet Markup Manager.
  *
- * @package greenlet\library
+ * @package greenlet\library\frontend
  */
 
 /**

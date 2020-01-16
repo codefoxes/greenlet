@@ -2,7 +2,7 @@
 /**
  * Header structure.
  *
- * @package greenlet\library
+ * @package greenlet\library\frontend
  */
 
 add_action( 'greenlet_head', 'greenlet_do_head' );

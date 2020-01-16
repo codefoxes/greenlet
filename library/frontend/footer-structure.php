@@ -2,7 +2,7 @@
 /**
  * Footer Structure.
  *
- * @package greenlet\library
+ * @package greenlet\library\frontend
  */
 
 add_action( 'greenlet_semifooter', 'greenlet_do_semifooter' );

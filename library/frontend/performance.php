@@ -2,7 +2,7 @@
 /**
  * Performance.
  *
- * @package greenlet\library
+ * @package greenlet\library\frontend
  */
 
 /**

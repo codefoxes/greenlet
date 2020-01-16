@@ -39,6 +39,9 @@ class Metaboxes {
 
 		// Add scripts to admin pages.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		add_action( 'wp_ajax_greenlet_template_sequence', array( $this, 'greenlet_template_sequence' ) );
+		add_action( 'wp_ajax_nopriv_greenlet_template_sequence', array( $this, 'greenlet_template_sequence' ) );
 	}
 
 	/**
@@ -151,10 +154,10 @@ class Metaboxes {
 			<div id="sequence" style="margin: 1em 0;">
 				<?php
 				// Output template column sequencer.
-				$options    = greenlet_column_options( $template, $post->post_type );
+				$options    = $this->greenlet_column_options( $template, $post->post_type );
 				$selections = greenlet_column_content_options();
-				$output     = greenlet_sequencer( $options, $selections, $sequence );
-				echo wp_kses( $output, greenlet_sequencer_tags() );
+				$output     = $this->greenlet_sequencer( $options, $selections, $sequence );
+				echo wp_kses( $output, $this->greenlet_sequencer_tags() );
 				?>
 			</div>
 			<?php if ( 'page' === $post->post_type ) { ?>
@@ -228,6 +231,134 @@ class Metaboxes {
 		if ( ! empty( $_POST['template-sequence'] ) ) {
 			update_post_meta( $post_id, '_template_sequence', $sequence );
 		}
+	}
+
+	/**
+	 * Sends template sequence upon ajax.
+	 */
+	public function greenlet_template_sequence() {
+
+		if ( ! isset( $_POST['nonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'greenlet_template_meta_box' ) ) {
+			return;
+		}
+
+		// Get ajax post data.
+		$template_name = isset( $_POST['template'] ) ? sanitize_text_field( wp_unslash( $_POST['template'] ) ) : null;
+		$post_type     = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'post';
+
+		// Get templates columns and content sequence.
+		$options    = $this->greenlet_column_options( $template_name, $post_type );
+		$selections = greenlet_column_content_options();
+
+		// Get sequence html, Output and terminate the current script.
+		$output = $this->greenlet_sequencer(
+			$options,
+			$selections,
+			array( 'main', 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5', 'sidebar-6', 'sidebar-7', 'sidebar-8' )
+		);
+
+		echo wp_kses( $output, $this->greenlet_sequencer_tags() );
+		die();
+	}
+
+	/**
+	 * Returns column array for current template selection.
+	 *
+	 * @param  string $template_name template name.
+	 * @param  string $post_type     Post type.
+	 * @return array columns
+	 */
+	public function greenlet_column_options( $template_name, $post_type ) {
+		if ( 'default' === $template_name ) {
+			if ( 'page' === $post_type ) {
+				$layout = gl_get_option( 'default_template', array( 'template' => '12' ) );
+			} else {
+				$layout = gl_get_option( 'post_template', array( 'template' => '12' ) );
+			}
+
+			$template = $layout['template'];
+		} else {
+			$template = str_replace( '.php', '', basename( $template_name ) );
+		}
+
+		// Assign to column array.
+		$cols  = explode( '-', $template );
+		$array = array();
+
+		// If array is numeric, return columns array. Else return empty.
+		if ( is_numeric_array( $cols ) ) {
+
+			$total = count( $cols );
+			for ( $i = 1; $i <= $total; $i++ ) {
+				$array[ $i - 1 ] = 'Column ' . $i;
+			}
+		}
+
+		return $array;
+	}
+
+	/**
+	 * Column sequencer
+	 * Generates template columns and content sequence.
+	 *
+	 * @param    array $options    template columns.
+	 * @param    array $selections column content.
+	 * @param    array $sequence   previously set sequence.
+	 * @return   string            column sequence html
+	 */
+	public function greenlet_sequencer( $options, $selections, $sequence = null ) {
+
+		$output = '';
+
+		foreach ( $options as $key => $option ) {
+
+			$selected = '';
+			$label    = $option;
+			$option   = preg_replace( '/[^a-zA-Z0-9._\-]/', '', strtolower( $key ) );
+
+			$id   = 'template-sequence[' . $option . ']';
+			$name = 'template-sequence[' . $option . ']';
+
+			$output .= '<div><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>';
+			$output .= '<select id="' . esc_attr( $id ) . '" class="of-input" name="' . esc_attr( $name ) . '" style="width:60%;margin:2px 10px;">';
+			foreach ( $selections as $key2 => $option2 ) {
+				if ( isset( $sequence[ $option ] ) ) {
+					$selected = selected( $sequence[ $option ], $key2, false );
+				}
+				$output .= '<option' . $selected . ' value="' . esc_attr( $key2 ) . '">' . esc_html( $option2 ) . '</option>';
+			}
+			$output .= '</select></div>';
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Retrieve sequencer allowed tags.
+	 *
+	 * @return array Sequencer allowed Tags
+	 */
+	public function greenlet_sequencer_tags() {
+		return array(
+			'div'    => array(),
+			'label'  => array(
+				'for' => array(),
+			),
+			'select' => array(
+				'id'    => array(),
+				'class' => array(),
+				'name'  => array(),
+				'style' => array(),
+			),
+			'option' => array(
+				'selected' => array(),
+				'value'    => array(),
+			),
+		);
 	}
 
 	/**

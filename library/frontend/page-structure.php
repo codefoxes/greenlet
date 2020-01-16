@@ -2,7 +2,7 @@
 /**
  * Page structure.
  *
- * @package greenlet\library
+ * @package greenlet\library\frontend
  */
 
 add_action( 'greenlet_main_container', 'greenlet_do_main_container' );
@@ -180,7 +180,7 @@ function greenlet_breadcrumb() {
 		} elseif ( function_exists( 'breadcrumbs_everywhere' ) ) {
 			breadcrumbs_everywhere();
 		} else {
-			get_template_part( 'library/breadcrumb' );
+			get_template_part( 'templates/breadcrumb' );
 		}
 
 		do_action( 'greenlet_after_breadcrumb' );
@@ -307,9 +307,18 @@ function greenlet_do_entry_header() {
 		the_title();
 		echo '</h1>';
 	} else {
-		printf( '<h2 %s>', wp_kses( greenlet_attr( 'entry-title' ), null ) ); ?>
-		<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-		<?php
+		printf( '<h2 %s>', wp_kses( greenlet_attr( 'entry-title' ), null ) );
+		$title = get_the_title();
+
+		if ( empty( $title ) ) {
+			?>
+			<a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo get_the_date(); ?></a>
+			<?php
+		} else {
+			?>
+			<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+			<?php
+		}
 		echo '</h2>';
 	}
 

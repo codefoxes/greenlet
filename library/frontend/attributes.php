@@ -4,7 +4,7 @@
  *
  * Get attributes.
  *
- * @package greenlet\library
+ * @package greenlet\library\frontend
  */
 
 /**
