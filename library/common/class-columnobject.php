@@ -79,8 +79,8 @@ class ColumnObject {
 			global $wp_query;
 
 			$default_layout = array(
-				'template' => '12',
-				'sequence' => array( 'main' ),
+				'template' => '8-4',
+				'sequence' => array( 'main', 'sidebar-1' ),
 			);
 
 			if ( is_page() || is_single() ) {
@@ -119,8 +119,8 @@ class ColumnObject {
 
 				$layout = gl_get_option( 'home_template', $default_layout );
 
-				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
-				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
+				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '9-3';
+				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main', 'sidebar-1' );
 			} elseif ( is_archive() || is_search() ) {
 				// If is archive page.
 

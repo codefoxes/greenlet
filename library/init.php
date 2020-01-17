@@ -26,7 +26,6 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'TEMPLATES_DIR', PARENT_DIR . '/templates' );
 		define( 'LIBRARY_DIR', PARENT_DIR . '/library' );
 		define( 'LANGUAGES_DIR', LIBRARY_DIR . '/languages' );
-		define( 'ADMIN_DIR', LIBRARY_DIR . '/admin' );
 
 		// Define constants for child directories.
 		define( 'CHILD_DIR', get_stylesheet_directory() );
@@ -35,7 +34,6 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'CHILD_TEMPLATES_DIR', CHILD_DIR . '/templates' );
 		define( 'CHILD_LIBRARY_DIR', CHILD_DIR . '/library' );
 		define( 'CHILD_LANGUAGES_DIR', CHILD_LIBRARY_DIR . '/languages' );
-		define( 'CHILD_ADMIN_DIR', CHILD_LIBRARY_DIR . '/admin' );
 
 		// Define constants for parent theme URLs.
 		define( 'PARENT_URL', get_template_directory_uri() );
@@ -44,7 +42,6 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'IMAGES_URL', ASSETS_URL . '/images' );
 		define( 'STYLES_URL', ASSETS_URL . '/css' );
 		define( 'SCRIPTS_URL', ASSETS_URL . '/js' );
-		define( 'ADMIN_URL', LIBRARY_URL . '/admin' );
 
 		// Define constants for child theme URLs.
 		define( 'CHILD_URL', get_stylesheet_directory_uri() );
@@ -53,7 +50,6 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'CHILD_IMAGES_URL', CHILD_ASSETS_URL . '/images' );
 		define( 'CHILD_STYLES_URL', CHILD_ASSETS_URL . '/css' );
 		define( 'CHILD_SCRIPTS_URL', CHILD_ASSETS_URL . '/js' );
-		define( 'CHILD_ADMIN_URL', CHILD_LIBRARY_URL . '/admin' );
 
 		// Define other constants.
 		define( 'GREENLET_VERSION', '1.0.0' );
@@ -91,10 +87,10 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 
 		global $wp_customize;
 		if ( is_admin() || isset( $wp_customize ) ) {
-			require_once ADMIN_DIR . '/helpers.php';
-			require_once ADMIN_DIR . '/options/class-options-admin.php';
-			require_once ADMIN_DIR . '/customizer/class-customizer.php';
-			require_once ADMIN_DIR . '/metaboxes/class-metaboxes.php';
+			require_once LIBRARY_DIR . '/backend/helpers.php';
+			require_once LIBRARY_DIR . '/backend/options/class-options-admin.php';
+			require_once LIBRARY_DIR . '/backend/customizer/class-customizer.php';
+			require_once LIBRARY_DIR . '/backend/metaboxes/class-metaboxes.php';
 		}
 
 		require_once LIBRARY_DIR . '/frontend/helpers.php';

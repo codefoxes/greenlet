@@ -47,8 +47,8 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		 * @return void
 		 */
 		public function enqueue() {
-			wp_enqueue_script( 'greenlet-controls', ADMIN_URL . '/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'greenlet-controls', ADMIN_URL . '/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
+			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
+			wp_enqueue_style( 'greenlet-controls', LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 		}
 
 		/**

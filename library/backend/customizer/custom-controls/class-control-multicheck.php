@@ -1,20 +1,20 @@
 <?php
 /**
- * Radio Image Control.
+ * Multicheck Control.
  *
  * @package greenlet\library\admin\customizer
  */
 
 namespace Greenlet;
 
-if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Control' ) ) {
+if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Control' ) ) {
 	/**
-	 * Radio Image custom control.
+	 * Customizer multicheck custom control.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 */
-	class Control_Radio_Image extends \WP_Customize_Control {
+	class Control_Multicheck extends \WP_Customize_Control {
 
 		/**
 		 * The type of customize control being rendered.
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 		 * @access public
 		 * @var    string
 		 */
-		public $type = 'radio-image';
+		public $type = 'multicheck';
 
 		/**
 		 * Allow choices parameter.
@@ -40,8 +40,7 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 		 * @return void
 		 */
 		public function enqueue() {
-			wp_enqueue_script( 'greenlet-controls', ADMIN_URL . '/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'greenlet-controls', ADMIN_URL . '/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
+			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
 		}
 
 		/**
@@ -50,6 +49,7 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
+
 			// Get the basics from the parent class.
 			parent::to_json();
 
@@ -64,14 +64,14 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 
 			$this->json['link'] = $this->get_link();
 
+			// Choices.
+			$this->json['choices'] = $this->choices;
+
 			// Setting ID.
 			$this->json['id'] = $this->id;
 
 			// Control Type.
 			$this->json['type'] = $this->type;
-
-			// Choices.
-			$this->json['choices'] = $this->choices;
 		}
 
 		/**
@@ -90,16 +90,15 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 
 			<input id="_customize-input-{{ data.id }}" type="hidden" {{{ data.link }}} />
 
-			<div class="gl-radio-images">
+			<ul>
 				<# for ( key in data.choices ) { #>
-				<div class="gl-radio-image">
-					<label<# if ( data.value === key ) { #> class="checked"<# } #>>
-						<input type="radio" name="{{ data.id }}" value="{{ key }}" <# if ( data.value === key ) { #> checked<# } #> />
-						<img src="{{ data.choices[ key ] }}">
+				<li>
+					<label<# if ( _.contains( data.value, key ) ) { #> class="checked"<# } #>>
+					<input type="checkbox" value="{{ key }}"<# if ( _.contains( data.value, key ) ) { #> checked<# } #> />{{ data.choices[ key ] }}
 					</label>
-				</div>
+				</li>
 				<# } #>
-			</div>
+			</ul>
 			<?php
 		}
 

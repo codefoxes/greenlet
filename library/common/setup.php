@@ -106,7 +106,7 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 
 					// Get position template option.
 					$layout_option = $pos . '_template';
-					$layout        = gl_get_option( $layout_option, '4-4-4' );
+					$layout        = gl_get_option( $layout_option, top_bottom_default_columns( $pos ) );
 
 					// Create new column object.
 					// @see library/classes.php.

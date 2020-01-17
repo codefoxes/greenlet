@@ -40,13 +40,13 @@ class Customizer {
 	 * @return void
 	 */
 	public function __construct() {
-		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-multicheck.php';
-		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-radio-image.php';
-		require_once ADMIN_DIR . '/customizer/custom-controls/class-control-template-selector.php';
-		require_once ADMIN_DIR . '/customizer/class-sanitizer.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-multicheck.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-selector.php';
+		require_once LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
 
 		// Todo: Load options.php from child theme if exists?
-		require_once ADMIN_DIR . '/customizer/options.php';
+		require_once LIBRARY_DIR . '/backend/customizer/options.php';
 
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );

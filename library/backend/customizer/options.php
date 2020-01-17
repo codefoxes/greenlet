@@ -23,7 +23,7 @@ function greenlet_options() {
 		$sidebars_qty[ $i ] = $i;
 	}
 
-	$imagepath = ADMIN_URL . '/images/';
+	$imagepath = LIBRARY_URL . '/backend/images/';
 
 	$templates_array = array(
 		'12'    => $imagepath . '12.png',
@@ -330,7 +330,7 @@ function greenlet_options() {
 			'label'       => __( 'Header Layout', 'greenlet' ),
 			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( '4-8', 'greenlet' ),
+				'placeholder' => __( '3-9', 'greenlet' ),
 			),
 		),
 	);
@@ -427,8 +427,8 @@ function greenlet_options() {
 		'id'    => 'home_template',
 		'sargs' => array(
 			'default'           => array(
-				'template' => '12',
-				'sequence' => array( 'main' ),
+				'template' => '8-4',
+				'sequence' => array( 'main', 'sidebar-1' ),
 			),
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
@@ -534,7 +534,7 @@ function greenlet_options() {
 			'label'       => __( 'Semi Footer Layout', 'greenlet' ),
 			'description' => __( 'Enter semifooter columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
 			'input_attrs' => array(
-				'placeholder' => __( '3-3-3-3', 'greenlet' ),
+				'placeholder' => __( '4-4-4', 'greenlet' ),
 			),
 		),
 	);

@@ -37,7 +37,7 @@ if ( ! function_exists( 'greenlet_cover_columns' ) ) {
 		$cover_columns = array( 'dont-show' => 'Do Not Show' );
 
 		foreach ( $positions as $key => $position ) {
-			$cols  = gl_get_option( "{$position}_template", '12' );
+			$cols  = gl_get_option( "{$position}_template", top_bottom_default_columns( $position ) );
 			$array = explode( '-', $cols );
 			foreach ( $array as $id => $width ) {
 				$id++;

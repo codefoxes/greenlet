@@ -48,7 +48,7 @@ class Metaboxes {
 	 * Enqueue Customizer Scripts.
 	 */
 	public function enqueue_scripts() {
-		wp_register_script( 'greenlet_metaboxes', ADMIN_URL . '/assets/js/metaboxes.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
+		wp_register_script( 'greenlet_metaboxes', LIBRARY_URL . '/backend/assets/js/metaboxes.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
 		wp_localize_script( 'greenlet_metaboxes', 'template_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'greenlet_metaboxes' );
 	}

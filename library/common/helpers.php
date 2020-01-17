@@ -135,3 +135,26 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 		return $min_sidebars;
 	}
 }
+
+if ( ! function_exists( 'top_bottom_default_columns' ) ) {
+	/**
+	 * Get default columns for Topbar, Header, Semi-footer and Footer.
+	 *
+	 * @param string $pos Position.
+	 * @return string     Columns String.
+	 */
+	function top_bottom_default_columns( $pos ) {
+		switch ( $pos ) {
+			case 'topbar':
+				return '4-8';
+			case 'header':
+				return '3-9';
+			case 'semifooter':
+				return '4-4-4';
+			case 'footer':
+				return '12';
+			default:
+				return '12';
+		}
+	}
+}

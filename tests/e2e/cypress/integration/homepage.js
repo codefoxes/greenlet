@@ -36,8 +36,18 @@ describe('Default Homepage', () => {
     })
 
     describe('Layout', () => {
-        it('Header should be 12', () => {
-            cy.get('header').find('nav').should('be.visible')
+        it('Header should be 3-9', () => {
+            cy.get('header').find('.header-1').should('have.class', 'col-3')
+            cy.get('header').find('.header-2').should('have.class', 'col-9')
+        })
+
+        it('Content should be 8-4', () => {
+            cy.get('#content').find('.main').should('have.class', 'col-8')
+            cy.get('#content').find('.sidebar').should('have.class', 'col-4')
+        })
+
+        it('Footer should be 12', () => {
+            cy.get('footer').find('.footer-1').should('have.class', 'col-12')
         })
     })
 })
