@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'greenlet_meta_description' ) ) {
 	/**
 	 * Get meta description.

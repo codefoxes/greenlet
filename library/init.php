@@ -7,6 +7,10 @@
  * @package greenlet\library
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Run greenlet_pre action hook.
 do_action( 'greenlet_pre' );
 
@@ -96,11 +100,11 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		require_once LIBRARY_DIR . '/frontend/helpers.php';
 		require_once LIBRARY_DIR . '/frontend/performance.php';
 		require_once LIBRARY_DIR . '/frontend/scripts.php';
-		require_once LIBRARY_DIR . '/frontend/header-structure.php';
-		require_once LIBRARY_DIR . '/frontend/page-structure.php';
-		require_once LIBRARY_DIR . '/frontend/footer-structure.php';
 		require_once LIBRARY_DIR . '/frontend/markup.php';
 		require_once LIBRARY_DIR . '/frontend/attributes.php';
+		require_once LIBRARY_DIR . '/frontend/header-structure.php';
+		require_once LIBRARY_DIR . '/frontend/main-structure.php';
+		require_once LIBRARY_DIR . '/frontend/footer-structure.php';
 		require_once LIBRARY_DIR . '/frontend/main.php';
 	}
 

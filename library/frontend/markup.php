@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Print markup tag.
  *

@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'greenlet_scripts' ) ) {
 	/**
 	 * Styles and Scripts.
@@ -76,7 +80,25 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 }
 
 
-if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
+if ( ! function_exists( 'greenlet_css_width' ) ) {
+	/**
+	 * Get CSS width property for option.
+	 *
+	 * @param string      $option  Option name.
+	 * @param string|bool $default Default Value.
+	 * @return string         Width.
+	 */
+	function greenlet_css_width( $option, $default = false ) {
+		if ( ! $default ) {
+			$default = '100%';
+		}
+		$width = gl_get_option( $option, $default );
+		return ( '' === $width ) ? $default : $width;
+	}
+}
+
+
+if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 	/**
 	 * Adds styles to head.
 	 *
@@ -86,79 +108,132 @@ if ( ! function_exists( 'greenlet_load_wp_head' ) ) {
 	 *
 	 * @see wp-includes/general-template.php.
 	 */
-	function greenlet_load_wp_head() {
-		$main_width = gl_get_option( 'container_width', '1170px' );
-		$main_width = ( '' === $main_width ) ? '1170px' : $main_width;
-		$main_class = '.container';
-
+	function greenlet_load_inline_styles() {
 		$show_title   = gl_get_option( 'show_title', '1' );
 		$show_tagline = gl_get_option( 'show_tagline', '1' );
-		$site_bg      = gl_get_option( 'site_bg', '#f5f5f5' );
-		$header_bg    = gl_get_option( 'header_bg', '#fff' );
-		$header_color = gl_get_option( 'header_color', '#33691e' );
-		$footer_bg    = gl_get_option( 'footer_bg', '#212121' );
-		$footer_color = gl_get_option( 'footer_color', '#fff' );
 
 		$fixed_topbar = gl_get_option( 'fixed_topbar', false );
+
+		$site_bg          = gl_get_option( 'site_bg', '#f5f5f5' );
+		$site_color       = gl_get_option( 'site_color', '#383838' );
+		$topbar_bg        = gl_get_option( 'topbar_bg', '#fff' );
+		$topbar_color     = gl_get_option( 'topbar_color', '#212121' );
+		$header_bg        = gl_get_option( 'header_bg', '#fff' );
+		$header_color     = gl_get_option( 'header_color', '#33691e' );
+		$main_bg          = gl_get_option( 'main_bg', '' );
+		$content_bg       = gl_get_option( 'content_bg', '' );
+		$semifooter_bg    = gl_get_option( 'semifooter_bg', '#fff' );
+		$semifooter_color = gl_get_option( 'semifooter_color', '#212121' );
+		$footer_bg        = gl_get_option( 'footer_bg', '#212121' );
+		$footer_color     = gl_get_option( 'footer_color', '#fff' );
+		$heading_color    = gl_get_option( 'heading_color', '#383838' );
+		$link_color       = gl_get_option( 'link_color', '#1565C0' );
+		$link_hover       = gl_get_option( 'link_hover', '#0D47A1' );
 
 		$critical_css = gl_get_option( 'critical_css', '' );
 		$defer_css    = gl_get_option( 'defer_css', false );
 
+		ob_start();
+		// phpcs:disable
 		?>
-		<style type="text/css">
-			@media (min-width: 1281px) {
-			<?php echo esc_html( $main_class ); ?> {
-				max-width: <?php echo esc_html( $main_width ); ?>;
-			}
+		@media (min-width: 801px) {
+			.container {
+				max-width: <?php echo esc_html( greenlet_css_width( 'container_width', '1170px' ) ); ?>;
 			}
 
-			body {
-				background: <?php echo sanitize_hex_color( $site_bg ); // phpcs:ignore ?>;
+			.topbar .container {
+				max-width: <?php echo esc_html( greenlet_css_width( 'topbar_container', '1170px' ) ); ?>;
 			}
 
-			.site-header {
-				background: <?php echo sanitize_hex_color( $header_bg ); // phpcs:ignore ?>;
+			.site-header .container {
+				max-width: <?php echo esc_html( greenlet_css_width( 'header_container', '1170px' ) ); ?>;
 			}
 
-			.site-header, .site-header a {
-				color: <?php echo sanitize_hex_color( $header_color ); // phpcs:ignore ?>;
+			.site-content .container {
+				max-width: <?php echo esc_html( greenlet_css_width( 'main_container', '1170px' ) ); ?>;
 			}
 
-			.site-footer {
-				background: <?php echo sanitize_hex_color( $footer_bg ); // phpcs:ignore ?>;
-				color: <?php echo sanitize_hex_color( $footer_color ); // phpcs:ignore ?>;
+			.semifooter .container {
+				max-width: <?php echo esc_html( greenlet_css_width( 'semifooter_container', '1170px' ) ); ?>;
 			}
 
-			<?php
-			if ( false === $show_title ) {
-				echo '.site-name { display: none; }';
+			.site-footer .container {
+				max-width: <?php echo esc_html( greenlet_css_width( 'footer_container', '1170px' ) ); ?>;
 			}
-			if ( false === $show_tagline ) {
-				echo '.site-tagline { display: none; }';
-			}
+		}
 
-			if ( false !== $defer_css && '' !== $critical_css ) {
-				echo $critical_css;
-			}
+		body {
+			background: <?php echo sanitize_hex_color( $site_bg ); ?>;
+			color: <?php echo sanitize_hex_color( $site_color ); ?>;
+		}
 
-			if ( false !== $fixed_topbar ) {
-				echo '.topbar { position: sticky; }';
-			}
-			?>
-		</style>
+		.topbar {
+			background: <?php echo sanitize_hex_color( $topbar_bg ); ?>;
+			color: <?php echo sanitize_hex_color( $topbar_color ); ?>;
+			max-width: <?php echo esc_html( greenlet_css_width( 'topbar_width' ) ); ?>;
+		}
+
+		.site-header {
+			background: <?php echo sanitize_hex_color( $header_bg ); ?>;
+			max-width: <?php echo esc_html( greenlet_css_width( 'header_width' ) ); ?>;
+		}
+
+		.site-header, .site-header a {
+			color: <?php echo sanitize_hex_color( $header_color ); ?>;
+		}
+
+		.site-content {
+			background: <?php echo sanitize_hex_color( $main_bg ); ?>;
+			max-width: <?php echo esc_html( greenlet_css_width( 'main_width' ) ); ?>;
+		}
+
+		.entry.post, .entry.page, .sidebar > .wrap, #comments {
+			background: <?php echo sanitize_hex_color( $content_bg ); ?>;
+		}
+
+		.semifooter {
+			background: <?php echo sanitize_hex_color( $semifooter_bg ); ?>;
+			color: <?php echo sanitize_hex_color( $semifooter_color ); ?>;
+			max-width: <?php echo esc_html( greenlet_css_width( 'semifooter_width' ) ); ?>;
+		}
+
+		.site-footer {
+			background: <?php echo sanitize_hex_color( $footer_bg ); ?>;
+			color: <?php echo sanitize_hex_color( $footer_color ); ?>;
+			max-width: <?php echo esc_html( greenlet_css_width( 'footer_width' ) ); ?>;
+		}
+
+		a, .entry-meta li {
+			color: <?php echo sanitize_hex_color( $link_color ); ?>;
+		}
+
+		a:hover {
+			color: <?php echo sanitize_hex_color( $link_hover ); ?>;
+		}
+
+		h1, h2, h3, h4, h5, h6, .entry-title a {
+			color: <?php echo sanitize_hex_color( $heading_color ); ?>;
+		}
+
 		<?php
+		// phpcs:enable
+		if ( false === $show_title ) {
+			echo '.site-name { display: none; }';
+		}
+		if ( false === $show_tagline ) {
+			echo '.site-tagline { display: none; }';
+		}
 
-		// Todo: Move this somewhere else.
 		if ( false !== $fixed_topbar ) {
-			add_filter(
-				'body_class',
-				function ( $classes ) {
-					$classes[] = 'fixed-topbar';
-					return $classes;
-				}
-			);
+			echo '.topbar { position: sticky; }';
+		}
+
+		greenlet_enqueue_inline_style( 'greenlet-inline', ob_get_clean() );
+
+		if ( false !== $defer_css && '' !== $critical_css ) {
+			greenlet_enqueue_inline_style( 'greenlet-critical', $critical_css );
 		}
 	}
 
-	add_action( 'wp_head', 'greenlet_load_wp_head' );
+	add_action( 'wp_enqueue_scripts', 'greenlet_load_inline_styles' );
 }

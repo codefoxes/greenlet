@@ -1,24 +1,36 @@
 Major:
-
-- If current_user_can check in init.php:105 and meta_boxes.php:15
 - Add logo height and width
 - Add Woocommerce support
-- Uglify theme inline css
-- Container Width for Header, Content, Footer
-- Add more colors
+- DNS Prefetch for theme CSS and JS
+- Fix Customizer Control Hack
+- Add background Image option
+- Footer link with nofollow
+
+Minor:
+- Post list Grid/List
+- phpcs: greenlet_attr needs escaping while printing.
+- Add typography
+- Update Google fonts json weekly.
+- Editor Style equivalent to frontend
+- If current_user_can check in init.php:105 and meta_boxes.php:15
+
+Always
 - Import WP Test data and Test
 - Theme check and Theme sniffer compatible
 - PHPCS and JS WP Standards.
 - Remove PHPCS ignores
 - Create Documentation
-- DNS Prefetch for theme CSS and JS
-- Fix Customizer Control Hack
-- Add background Image option
-- Post list Grid/List
 
-Minor:
+/**
+ * Deregister WP Embed script.
+ */
+function greenlet_deregister_scripts() {
+	$disable = gl_get_option( 'disable_embed', false );
+	if ( false === $disable ) {
+		return;
+	}
 
-- phpcs: greenlet_attr needs escaping while printing.
-- Add typography
-- Update Google fonts json weekly.
-- Editor Style equivalent to frontend
+	wp_deregister_script( 'wp-embed' );
+}
+
+add_action( 'wp_footer', 'greenlet_deregister_scripts' );

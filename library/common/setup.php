@@ -5,6 +5,10 @@
  * @package greenlet\library\common
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'greenlet_setup' ) ) {
 	/**
 	 * Loads text domain, Adds theme support, menu etc.
@@ -134,6 +138,22 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	}
 
 	add_action( 'widgets_init', 'greenlet_widget_init' );
+}
+
+
+if ( ! function_exists( 'set_content_width' ) ) {
+	/**
+	 * Set Content Width
+	 */
+	function set_content_width() {
+		global $content_width;
+
+		if ( ! isset( $content_width ) ) {
+			$content_width = apply_filters( 'greenlet_content_width', 1170 );
+		}
+	}
+
+	add_action( 'wp', 'set_content_width' );
 }
 
 

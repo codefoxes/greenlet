@@ -31,7 +31,8 @@ function pagination_init() {
 	if ( loadElements.length > 0 ) {
 		loadElements[0].addEventListener( 'click', greenlet_loader_listener );
 	}
-	for (var i = 0; i < ajaxElements.length; i++) {
+	var ajaxElementsLength = ajaxElements.length;
+	for (var i = 0; i < ajaxElementsLength; i++) {
 		ajaxElements[i].addEventListener( 'click', greenlet_loader_listener );
 	}
 }
@@ -47,9 +48,9 @@ window.onscroll = function (e) {
 		var wheight = window.innerHeight;
 		var sheight	= window.scrollY;
 		if ( ( wheight + sheight ) > loadpos ) {
-			var link  = infinite[0].querySelector( 'a' );
+			var link = infinite[0].querySelector( 'a' );
 			if ( link !== null ) {
-				var next_page = link.getAttribute( 'data-next' );
+				var next_page      = link.getAttribute( 'data-next' );
 				link.style.display = 'none';
 				greenlet_page_loader( link, next_page, true );
 			}
@@ -59,6 +60,7 @@ window.onscroll = function (e) {
 
 function greenlet_page_loader( obj, cur_page, add, act ) {
 	var nonce = document.getElementById( 'greenlet_generic_nonce' ).value;
+
 	obj.parentNode.parentNode.innerHTML = '<span id="page-loader">' + greenlet_loader + '</span>';
 
 	add  = typeof add !== 'undefined' ? add : false;

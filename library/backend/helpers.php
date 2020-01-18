@@ -5,6 +5,10 @@
  * @package greenlet\library\admin
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 	/**
 	 * Returns columns content array.

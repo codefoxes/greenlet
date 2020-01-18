@@ -24,5 +24,6 @@ do_action( 'greenlet_before_header' );
 do_action( 'greenlet_header' );
 do_action( 'greenlet_after_header' );
 
-greenlet_markup( 'site-content', greenlet_attr( 'site-content container' ) );
+greenlet_markup( 'site-content', greenlet_attr( 'site-content' ) );
+echo '<div class="container">';
 echo '<div class="row">';

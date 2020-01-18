@@ -5,6 +5,10 @@
  * @package greenlet\library\admin\customizer
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Greenlet customizer options.
  *
@@ -84,6 +88,48 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'site_color',
+		'sargs' => array(
+			'default'           => '#383838',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Site Text Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'topbar_bg',
+		'sargs' => array(
+			'default'           => '#fff',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Topbar Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'topbar_color',
+		'sargs' => array(
+			'default'           => '#212121',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Topbar Text Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'header_bg',
 		'sargs' => array(
 			'default'           => '#fff',
@@ -112,6 +158,62 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'main_bg',
+		'sargs' => array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Content Section Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'content_bg',
+		'sargs' => array(
+			'default'           => '#fff',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Content Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'semifooter_bg',
+		'sargs' => array(
+			'default'           => '#fff',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Semifooter Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'semifooter_color',
+		'sargs' => array(
+			'default'           => '#212121',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Semifooter Text Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'footer_bg',
 		'sargs' => array(
 			'default'           => '#212121',
@@ -135,6 +237,48 @@ function greenlet_options() {
 			'type'    => 'color',
 			'section' => 'colors',
 			'label'   => __( 'Footer Text Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'heading_color',
+		'sargs' => array(
+			'default'           => '#383838',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Heading Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'link_color',
+		'sargs' => array(
+			'default'           => '#1565C0',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Link Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'link_hover',
+		'sargs' => array(
+			'default'           => '#0D47A1',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Link Hover Color', 'greenlet' ),
 		),
 	);
 
@@ -320,6 +464,51 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'topbar_width',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'header_layout',
+			'label'       => __( 'Topbar Width', 'greenlet' ),
+			'description' => __( 'Topbar width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( '100%', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'topbar_container',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'header_layout',
+			'description' => __( 'Topbar container width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( 'Default', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'header_divider',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'divider',
+			'section' => 'header_layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'header_template',
 		'sargs' => array(
 			'default' => '',
@@ -346,6 +535,52 @@ function greenlet_options() {
 			'section' => 'header_layout',
 			'label'   => __( 'Header Content Source', 'greenlet' ),
 			'choices' => $content_source,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'header_width',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'header_layout',
+			'label'       => __( 'Header Width', 'greenlet' ),
+			'description' => __( 'Enter header width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( '100%', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'header_container',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'header_layout',
+			'label'       => __( 'Header Container Width', 'greenlet' ),
+			'description' => __( 'Enter container width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( 'Default', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'logo_divider',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'divider',
+			'section' => 'header_layout',
 		),
 	);
 
@@ -413,11 +648,7 @@ function greenlet_options() {
 			'type'        => 'select',
 			'section'     => 'main_layout',
 			'label'       => __( 'Number of Sidebars ( For Main Container )', 'greenlet' ),
-			'description' => sprintf(
-				'How many sidebars you want ro register for main container of page ? ( Not for header or footer. They will be configured in "Header/Footer Layout".)
-				Minimum sidebars required are "%s" according to your templates.',
-				$min_sidebars
-			),
+			'description' => __( 'How many sidebars ro register for main container of page ? (Not for header or footer.)', 'greenlet' ),
 			'choices'     => $sidebars_qty,
 		),
 	);
@@ -501,6 +732,50 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'main_divider',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'divider',
+			'section' => 'main_layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'main_width',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'main_layout',
+			'description' => __( 'Content Width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( '100%', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'main_container',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'main_layout',
+			'description' => __( 'Content container width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( 'Default', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
 		'type' => 'section',
 		'id'   => 'footer_layout',
 		'args' => array(
@@ -555,6 +830,50 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'semifooter_width',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'footer_layout',
+			'description' => __( 'Semifooter Width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( '100%', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'semifooter_container',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'footer_layout',
+			'description' => __( 'Semifooter container width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( 'Default', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'footer_divider',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'divider',
+			'section' => 'footer_layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'footer_template',
 		'sargs' => array(
 			'default' => '',
@@ -581,6 +900,50 @@ function greenlet_options() {
 			'section' => 'footer_layout',
 			'label'   => __( 'Footer Content Source', 'greenlet' ),
 			'choices' => $content_source,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'footer_width',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'footer_layout',
+			'description' => __( 'Semifooter Width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( '100%', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'footer_container',
+		'sargs' => array(
+			'default' => '',
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'footer_layout',
+			'description' => __( 'Semifooter container width in % or px or em.', 'greenlet' ),
+			'input_attrs' => array(
+				'placeholder' => __( 'Default', 'greenlet' ),
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'fmenu_divider',
+		'sargs' => array(
+			'default' => false,
+		),
+		'cargs' => array(
+			'type'    => 'divider',
+			'section' => 'footer_layout',
 		),
 	);
 
@@ -722,7 +1085,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'show_comments',
 		'sargs' => array(
-			'default'           => array( 'posts' ),
+			'default'           => array( 'posts', 'pages' ),
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
 		),
 		'cargs' => array(
@@ -756,20 +1119,6 @@ function greenlet_options() {
 			'section'     => 'performance',
 			'label'       => __( 'Disable WP Emojis', 'greenlet' ),
 			'description' => __( 'Posts with emojis may break, disable with caution.', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'disable_embed',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'performance',
-			'label'       => __( 'Disable WP Embed Script', 'greenlet' ),
-			'description' => __( 'Posts with posts-embed may break, disable with caution.', 'greenlet' ),
 		),
 	);
 

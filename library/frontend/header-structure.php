@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'greenlet_head', 'greenlet_do_head' );
 add_action( 'greenlet_topbar', 'greenlet_do_topbar' );
 add_action( 'greenlet_header', 'greenlet_do_header' );
@@ -26,6 +30,17 @@ function greenlet_do_head() {
 		echo '<meta name="description" content="' . esc_html( greenlet_meta_description() ) . '" />';
 	}
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+
+	$fixed_topbar = gl_get_option( 'fixed_topbar', false );
+	if ( false !== $fixed_topbar ) {
+		add_filter(
+			'body_class',
+			function ( $classes ) {
+				$classes[] = 'fixed-topbar';
+				return $classes;
+			}
+		);
+	}
 }
 
 /**

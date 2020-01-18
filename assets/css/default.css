@@ -160,12 +160,15 @@ a {
 
 @media (min-width: 480px) {
   .container {
-    width: 90%;
+    max-width: 90%;
     padding: 0;
   }
 }
 
 @media (min-width: 801px) {
+  .container {
+    max-width: 95%;
+  }
   .col-1 {
     width: 8.33333333333%;
   }

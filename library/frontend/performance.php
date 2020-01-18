@@ -5,8 +5,12 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
- * Disable Emojis.
+ * Disable Emojis if opted.
  */
 function disable_emojis() {
 	$disable = gl_get_option( 'disable_emojis', false );
@@ -58,21 +62,7 @@ function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
 }
 
 /**
- * Deregister WP Embed script.
- */
-function greenlet_deregister_scripts() {
-	$disable = gl_get_option( 'disable_embed', false );
-	if ( false === $disable ) {
-		return;
-	}
-
-	wp_deregister_script( 'wp-embed' );
-}
-
-add_action( 'wp_footer', 'greenlet_deregister_scripts' );
-
-/**
- * Dequeue Block Editor CSS.
+ * Dequeue Block Editor CSS if opted.
  */
 function greenlet_remove_block_library_css() {
 	$disable = gl_get_option( 'disable_block_editor', false );

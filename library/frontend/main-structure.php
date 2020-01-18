@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'greenlet_main_container', 'greenlet_do_main_container' );
 
 add_action( 'greenlet_before_loop', 'greenlet_breadcrumb', 2 );

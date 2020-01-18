@@ -22,12 +22,12 @@ msgstr ""
 
 #. %s: Archive Title.
 #. %s: Archive Description.
-#: library/page-structure.php:253 library/page-structure.php:258
+#: library/main-structure.php:253 library/main-structure.php:258
 #, php-format
 msgid "%s"
 msgstr ""
 
-#: library/page-structure.php:596
+#: library/main-structure.php:596
 msgid "&laquo; Newer Posts"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "4-8"
 msgstr ""
 
-#: library/page-structure.php:430 library/page-structure.php:523
+#: library/main-structure.php:430 library/main-structure.php:523
 msgid "<span class=\"more-text\">Read More</span>"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Archive Layout"
 msgstr ""
 
-#: library/page-structure.php:499
+#: library/main-structure.php:499
 msgid "Author:"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Defer CSS"
 msgstr ""
 
-#: library/page-structure.php:403
+#: library/main-structure.php:403
 msgid "Edit"
 msgstr ""
 
@@ -192,7 +192,7 @@ msgid "Excerpt length"
 msgstr ""
 
 #. phpcs:ignore
-#: library/page-structure.php:346
+#: library/main-structure.php:346
 msgid "Featured"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: library/page-structure.php:396
+#: library/main-structure.php:396
 msgid "Leave a comment"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Lightweight, Fast, Best SEO Wordpress theme"
 msgstr ""
 
-#: library/page-structure.php:788
+#: library/main-structure.php:788
 msgid "Load More"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "Misc Settings"
 msgstr ""
 
-#: library/breadcrumb.php:54 library/page-structure.php:243
+#: library/breadcrumb.php:54 library/main-structure.php:243
 msgctxt "Monthly archives date format"
 msgid "F Y"
 msgstr ""
@@ -383,11 +383,11 @@ msgstr ""
 msgid "Number of Sidebars ( For Main Container )"
 msgstr ""
 
-#: library/page-structure.php:597
+#: library/main-structure.php:597
 msgid "Older Posts &raquo;"
 msgstr ""
 
-#: library/page-structure.php:396
+#: library/main-structure.php:396
 msgid "One comment"
 msgstr ""
 
@@ -513,7 +513,7 @@ msgstr ""
 msgid "Topbar Layout"
 msgstr ""
 
-#: library/page-structure.php:396
+#: library/main-structure.php:396
 #, php-format
 msgid "View all % comments"
 msgstr ""
@@ -522,7 +522,7 @@ msgstr ""
 msgid "Widgets"
 msgstr ""
 
-#: library/breadcrumb.php:57 library/page-structure.php:246
+#: library/breadcrumb.php:57 library/main-structure.php:246
 msgctxt "Yearly archives date format"
 msgid "Y"
 msgstr ""

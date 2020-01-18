@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'wp_ajax_greenlet_get_paginated', 'greenlet_get_paginated' );
 add_action( 'wp_ajax_nopriv_greenlet_get_paginated', 'greenlet_get_paginated' );
 
@@ -27,7 +31,7 @@ if ( ! function_exists( 'greenlet' ) ) {
 
 		do_action( 'greenlet_before_main_container' );
 
-		// see library/page-structure.php for default actions for this hook.
+		// see library/main-structure.php for default actions for this hook.
 		do_action( 'greenlet_main_container' );
 
 		do_action( 'greenlet_after_main_container' );

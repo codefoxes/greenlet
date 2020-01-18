@@ -8,6 +8,7 @@
  */
 
 echo '</div>';
+echo '</div>';
 greenlet_markup_close();
 
 do_action( 'greenlet_before_semifooter' );

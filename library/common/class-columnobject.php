@@ -5,6 +5,10 @@
  * @package greenlet\library
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * ColumnObject Class.
  *

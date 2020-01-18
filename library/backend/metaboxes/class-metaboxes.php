@@ -131,14 +131,15 @@ class Metaboxes {
 				 * @param object $post          The current WP_Post object.
 				 */
 				$dropdown_args = apply_filters( 'page_attributes_dropdown_pages_args', $dropdown_args, $post );
-				$pages         = wp_dropdown_pages( $dropdown_args ); // phpcs:ignore
+				$pages         = wp_dropdown_pages( array_map( 'esc_html', $dropdown_args ) );
 
 				// If pages exist, output dropdown list.
 				if ( ! empty( $pages ) ) { ?>
 					<p><strong><?php esc_html_e( 'Parent', 'greenlet' ); ?></strong></p>
 					<label class="screen-reader-text" for="parent_id"><?php esc_html_e( 'Parent', 'greenlet' ); ?></label>
 					<?php
-					echo $pages; // phpcs:ignore
+					$dropdown_args['echo'] = 1;
+					wp_dropdown_pages( array_map( 'esc_html', $dropdown_args ) );
 				}
 			}
 			?>
@@ -378,6 +379,4 @@ class Metaboxes {
 	}
 }
 
-if ( is_admin() ) {
-	Metaboxes::get_instance();
-}
+Metaboxes::get_instance();

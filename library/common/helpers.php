@@ -5,6 +5,10 @@
  * @package greenlet\library\common
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'gl_get_option' ) ) {
 	/**
 	 * Retrieve Greenlet theme option.
@@ -55,6 +59,41 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 		}
 
 		wp_enqueue_style( $handle, $src, $deps, $ver );
+	}
+}
+
+
+if ( ! function_exists( 'minify_css' ) ) {
+	/**
+	 * Minify CSS.
+	 *
+	 * @param string $css Input CSS.
+	 * @return string     Minified CSS
+	 */
+	function minify_css( $css = '' ) {
+		if ( ! empty( $css ) ) {
+			$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+			$css = str_replace( array( "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ), '', $css );
+			$css = str_replace( ', ', ',', $css );
+			$css = str_replace( ' {', '{', $css );
+		}
+
+		return $css;
+	}
+}
+
+
+if ( ! function_exists( 'greenlet_enqueue_inline_style' ) ) {
+	/**
+	 * Enqueue inline styles.
+	 *
+	 * @param string $handle Stylesheet handle.
+	 * @param string $data   CSS Data.
+	 */
+	function greenlet_enqueue_inline_style( $handle, $data ) {
+		wp_register_style( $handle, false, array(), GREENLET_VERSION );
+		wp_enqueue_style( $handle );
+		wp_add_inline_style( $handle, minify_css( $data ) );
 	}
 }
 

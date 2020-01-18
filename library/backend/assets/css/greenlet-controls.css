@@ -79,3 +79,9 @@
 .gl-template-matcher-sequence .col-10 { width: 83.3333333333%; }
 .gl-template-matcher-sequence .col-11 { width: 91.6666666667%; }
 .gl-template-matcher-sequence .col-12 { width: 100%; }
+
+.greenlet-divider {
+	border-top: 2px solid #dadada;
+	border-bottom: 2px solid #f7f7f7;
+	margin: 10px -12px;
+}

@@ -252,6 +252,4 @@ class Options_Admin {
 	}
 }
 
-if ( is_admin() ) {
-	Options_Admin::get_instance();
-}
+Options_Admin::get_instance();

@@ -5,6 +5,10 @@
  * @package greenlet\library\frontend
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'greenlet_semifooter', 'greenlet_do_semifooter' );
 add_action( 'greenlet_footer', 'greenlet_do_footer' );
 

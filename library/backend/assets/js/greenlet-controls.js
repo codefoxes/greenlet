@@ -11,6 +11,14 @@
 			} else if( controlObj.params.type === 'template-selector' ) {
 				templateSelectorControl( controlObj )
 			}
+
+			// Manage dependencies
+
+			else if (controlObj.id === 'show_topbar') {
+				manage_topbar_dependencies( controlObj )
+			} else if (controlObj.id === 'show_semifooter') {
+				manage_semifooter_dependencies( controlObj )
+			}
 		})
 	});
 
@@ -128,6 +136,54 @@
 				control.setting.set( JSON.stringify( val ) );
 			});
 		});
+	}
+
+	function manage_topbar_dependencies ( controlObj ) {
+		var section = controlObj.container.closest('.control-section')
+
+		if ( controlObj.setting._value === false ) {
+			section.find('#customize-control-fixed_topbar').hide()
+			section.find('#customize-control-topbar_template').hide()
+			section.find('#customize-control-topbar_content_source').hide()
+			section.find('#customize-control-topbar_width').hide()
+			section.find('#customize-control-topbar_container').hide()
+			$('#customize-control-topbar_bg').hide()
+			$('#customize-control-topbar_color').hide()
+		}
+
+		var checkboxes = $(controlObj.selector + ' input[type="checkbox"]');
+		checkboxes.on('change', function() {
+			section.find('#customize-control-fixed_topbar').toggle()
+			section.find('#customize-control-topbar_template').toggle()
+			section.find('#customize-control-topbar_content_source').toggle()
+			section.find('#customize-control-topbar_width').toggle()
+			section.find('#customize-control-topbar_container').toggle()
+			$('#customize-control-topbar_bg').toggle()
+			$('#customize-control-topbar_color').toggle()
+		})
+	}
+
+	function manage_semifooter_dependencies ( controlObj ) {
+		var section = controlObj.container.closest('.control-section')
+
+		if ( controlObj.setting._value === false ) {
+			section.find('#customize-control-semifooter_template').hide()
+			section.find('#customize-control-semifooter_content_source').hide()
+			section.find('#customize-control-semifooter_width').hide()
+			section.find('#customize-control-semifooter_container').hide()
+			$('#customize-control-semifooter_bg').hide()
+			$('#customize-control-semifooter_color').hide()
+		}
+
+		var checkboxes = $(controlObj.selector + ' input[type="checkbox"]');
+		checkboxes.on('change', function() {
+			section.find('#customize-control-semifooter_template').toggle()
+			section.find('#customize-control-semifooter_content_source').toggle()
+			section.find('#customize-control-semifooter_width').toggle()
+			section.find('#customize-control-semifooter_container').toggle()
+			$('#customize-control-semifooter_bg').toggle()
+			$('#customize-control-semifooter_color').toggle()
+		})
 	}
 
 })( jQuery );
