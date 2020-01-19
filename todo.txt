@@ -4,7 +4,7 @@ Major:
 - DNS Prefetch for theme CSS and JS
 - Fix Customizer Control Hack
 - Add background Image option
-- Footer link with nofollow
+- Search field ally
 
 Minor:
 - Post list Grid/List

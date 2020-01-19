@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "./src/build.sh",
-    "start": "./src/build.sh --watch"
+    "start": "./src/build.sh --watch",
+    "deploy": "./src/build.sh --final"
   },
   "repository": {
     "type": "git",

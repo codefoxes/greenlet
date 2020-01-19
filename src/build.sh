@@ -34,6 +34,14 @@ if [ -z "$1" ]; then
 	buildcss
 elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
+elif [ "$1" == "--final" ]; then
+	buildjs
+    buildcss
+    rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
+    current=$(pwd)
+    cd ~/Desktop
+    zip -r greenlet.zip greenlet
+    cd $current
 else
 	echo 'Building Separately?'
 fi

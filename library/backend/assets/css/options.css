@@ -183,3 +183,12 @@
 .impex-section .message.import-error{
 	background: #cb000b;
 }
+
+.ext-links {
+	margin-bottom: 10px;
+}
+
+.ext-links .link-wrap a {
+	padding: 10px 0;
+	display: block;
+}
