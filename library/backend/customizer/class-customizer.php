@@ -45,8 +45,6 @@ class Customizer {
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-selector.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
 		require_once LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
-
-		// Todo: Load options.php from child theme if exists?
 		require_once LIBRARY_DIR . '/backend/customizer/options.php';
 
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
@@ -73,7 +71,6 @@ class Customizer {
 		$options = greenlet_options();
 
 		if ( ! is_array( $options ) ) {
-			// Todo: throw Exception.
 			return;
 		}
 
@@ -81,8 +78,6 @@ class Customizer {
 			if ( ! isset( $option['type'] ) ) {
 				continue;
 			}
-
-			// Todo: Continue if args are not correct.
 
 			if ( ! in_array( $option['type'], array( 'panel', 'section', 'setting', 'control', 'setting_control' ), true ) ) {
 				continue;

@@ -18,10 +18,10 @@ buildcss() {
 
 	for i in "${css_files[@]}"; do
 		# Compile SCSS to CSS
-		./node_modules/.bin/node-sass --output-style expanded --source-map true src/frontend/css/$i.scss assets/css/$i.css
+		./node_modules/.bin/node-sass --output-style expanded --indent-type tab --indent-width 1 --source-map true src/frontend/css/$i.scss assets/css/$i.css
 
 		# Autoprefix
-		./node_modules/.bin/postcss --use autoprefixer --map false --output assets/css/$i.css assets/css/$i.css
+		./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output assets/css/$i.css assets/css/$i.css
 
 		# Uglify
 		cleancss -o assets/css/$i.min.css assets/css/$i.css
@@ -37,7 +37,7 @@ elif [ "$1" == "--watch" ]; then
 elif [ "$1" == "--final" ]; then
 	buildjs
     buildcss
-    rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
+    rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
     current=$(pwd)
     cd ~/Desktop
     zip -r greenlet.zip greenlet

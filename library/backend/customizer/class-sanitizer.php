@@ -24,7 +24,6 @@ class Sanitizer {
 	 * @return string Sanitized CSS.
 	 */
 	public static function sanitize_css( $css ) {
-		// Todo: Sanitize css.
 		return $css;
 	}
 

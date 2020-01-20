@@ -73,7 +73,6 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 	 * init.php file, then no files will be loaded. They can be loaded manually.
 	 *
 	 * @since 1.0.0
-	 * @todo Set Permissions to meta and update.
 	 */
 	function greenlet_load_framework() {
 

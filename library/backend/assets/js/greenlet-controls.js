@@ -28,7 +28,6 @@
 			var input = $('#_customize-input-' + controlObj.id);
 			var val = control.setting._value;
 
-			// Todo: This is a hack.
 			control.setting.set( JSON.stringify( val ) );
 
 			checkboxes.on('change', function() {
@@ -70,7 +69,6 @@
 
 	function templateSelectorControl ( controlObj ) {
 		wp.customize.control(controlObj.id, function (control) {
-			// Todo: Get correct numbers.
 			var sidebars = 3;
 
 			var radios = $(controlObj.selector + ' input[type="radio"]');
@@ -79,7 +77,6 @@
 			var val = control.setting._value;
 			var template = val.template;
 
-			// Todo: This is a hack.
 			control.setting.set( JSON.stringify( val ) );
 
 			// Listen to Template selection change.
@@ -120,7 +117,6 @@
 
 			// Listen to Template column sequence change.
 			$( controlObj.selector ).on('change', '.gl-template-matcher select', function() {
-				// Todo: Rearrange sequence if needed.
 				// Update control value.
 				var sequence = []
 				$(this).parent().parent().find('select').each(function() {

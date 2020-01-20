@@ -710,8 +710,6 @@ function greenlet_options() {
 		),
 	);
 
-	// Todo: Custom Post Types Template.
-
 	$options[] = array(
 		'type'  => 'setting_control',
 		'id'    => 'archive_template',

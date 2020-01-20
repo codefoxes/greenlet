@@ -548,7 +548,6 @@ function greenlet_do_entry_footer() {
 
 			$heading = sprintf( '<h2 %s> %s %s</h2>', greenlet_attr( 'author-heading' ), __( 'Author:', 'greenlet' ), $author );
 
-			// Todo: Better way to allow filter.
 			echo apply_filters( 'greenlet_author', $heading, $author ); // phpcs:ignore
 		}
 
@@ -776,8 +775,6 @@ function greenlet_pagination_args( $args = array() ) {
  * Fork of WordPress' get_pagenum_link.
  * CONVERT PAGINATION TO CLASS.
  * BECAUSE IT USES $_POST LOCATION?
- *
- * @Todo: Check if this has been changed.
  *
  * @see wp-includes/link-template.php
  *

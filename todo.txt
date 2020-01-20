@@ -14,11 +14,24 @@ Minor:
 - If current_user_can check in init.php:105 and meta_boxes.php:15
 - Default Site Icon
 
+Todo list conversion
+- Check if greenlet_get_page_link has been changed.
+- Better way to allow filters with escaping.
+- Load options.php from child theme if exists? or filter is enough?
+- greenlet_customize_register
+    - throw Exception if $options is not an array.
+    - Continue if args are not correct.
+- options.php: Custom Post Types Template.
+- Sanitizer: Sanitize css.
+- greenlet-controls.js: Get correct number of sidebars.
+- on 'change', '.gl-template-matcher select' Rearrange sequence if needed.
+
 Always
 - Import WP Test data and Test
 - Theme check and Theme sniffer compatible
 - PHPCS and JS WP Standards.
 - Remove PHPCS ignores
+- Ad Doc blocks
 - Create Documentation
 - Security
 

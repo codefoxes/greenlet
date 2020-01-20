@@ -153,7 +153,6 @@ class ColumnObject {
 	/**
 	 * Convert Columns String into Array.
 	 *
-	 * @todo   Check if string is convertible.
 	 * @return array
 	 */
 	public function cols_array() {
