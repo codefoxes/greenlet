@@ -44,7 +44,7 @@ function greenlet_do_footer() {
 	printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
 	greenlet_cover( 'footer' );
 	$text  = sprintf( '<div %s><p>', greenlet_attr( 'copyright' ) );
-	$text .= sprintf( '&copy; %1$s &middot; <a href="%2$s">%3$s</a> &middot; Powered By <a href="https://greenletwp.com/" target="_blank" rel="nofollow">Greenlet</a></p></div>', gmdate( 'Y' ), get_home_url(), get_bloginfo( 'name' ) );
+	$text .= sprintf( '&copy; %1$s &middot; <a href="%2$s">%3$s</a> &middot; Powered By <a href="https://greenletwp.com/" target="_blank" rel="nofollow noopener">Greenlet</a></p></div>', gmdate( 'Y' ), get_home_url(), get_bloginfo( 'name' ) );
 	echo apply_filters( 'greenlet_copyright', $text ); // phpcs:ignore
 	echo '</div></div>';
 	greenlet_markup_close();

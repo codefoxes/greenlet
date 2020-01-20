@@ -193,6 +193,7 @@ class Options_Admin {
 							<div class="ext-links">
 								<div class="link-wrap"><a href="https://greenletwp.com/pro/" target="_blank">Get Pro Version</a></div>
 								<div class="link-wrap"><a href="https://greenletwp.com/docs/" target="_blank">Documentation</a></div>
+								<div class="link-wrap"><a href="https://github.com/codefoxes/greenlet/tree/dev" target="_blank">Latest dev branch</a></div>
 							</div>
 							<div id="xhr-section"></div>
 						</div>

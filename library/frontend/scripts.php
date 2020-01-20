@@ -187,7 +187,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 			max-width: <?php echo esc_html( greenlet_css_width( 'main_width' ) ); ?>;
 		}
 
-		.entry.post, .entry.page, .sidebar > .wrap, #comments {
+		.entry-article, .sidebar > .wrap, #comments {
 			background: <?php echo sanitize_hex_color( $content_bg ); ?>;
 		}
 

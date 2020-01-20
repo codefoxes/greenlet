@@ -17,8 +17,6 @@ add_action( 'greenlet_header', 'greenlet_do_header' );
  * Print the head.
  */
 function greenlet_do_head() {
-	$favicon    = apply_filters( 'greenlet_favicon', IMAGES_URL . '/icons/favicon.png' );
-	$touch_icon = apply_filters( 'greenlet_touch_icon', IMAGES_URL . '/icons/apple-touch-icon-152x152-precomposed.png' );
 	?>
 <!DOCTYPE html>
 <html <?php language_attributes( 'html' ); ?>>

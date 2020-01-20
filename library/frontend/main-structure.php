@@ -906,3 +906,23 @@ function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
 		}
 	}
 }
+
+
+/**
+ * Get search form.
+ *
+ * @return string Search form HTML.
+ */
+function greenlet_search_form() {
+	$html = '<form role="search" method="get" class="search-form" action="' . home_url( '/' ) . '">
+		<label for="search-input">
+			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
+			<input type="search" class="search-field" id="search-input" placeholder="' . __( 'Search …', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="Search">
+		</label>
+		<input type="submit" class="search-submit" value="' . __( 'Search', 'greenlet' ) . '">
+	</form>';
+
+	return $html;
+}
+
+add_filter( 'get_search_form', 'greenlet_search_form' );
