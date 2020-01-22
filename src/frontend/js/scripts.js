@@ -6,6 +6,11 @@
 
 var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><circle class="loader-ring" cx="25" cy="25" r="22" /><circle class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
 
+/**
+ * Page loader Listener.
+ *
+ * @param {Event} e Click event.
+ */
 function greenlet_loader_listener(e) {
 	e.preventDefault();
 	var thisElement = e.target;
@@ -25,6 +30,9 @@ function greenlet_loader_listener(e) {
 	greenlet_page_loader( this, next_page, add )
 }
 
+/**
+ * Initialize Pagination Listeners.
+ */
 function pagination_init() {
 	var loadElements = document.querySelectorAll( '.pagination.load a' );
 	var ajaxElements = document.querySelectorAll( '.pagination.ajax a' );
@@ -58,6 +66,14 @@ window.onscroll = function (e) {
 	}
 }
 
+/**
+ * Load Paginated content.
+ *
+ * @param {Node}   obj      Pagination link Node.
+ * @param {number} cur_page Current Page Number.
+ * @param {bool}   add      Append or Replace.
+ * @param {string} act      WordPress action.
+ */
 function greenlet_page_loader( obj, cur_page, add, act ) {
 	var nonce = document.getElementById( 'greenlet_generic_nonce' ).value;
 
@@ -110,6 +126,12 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 	}
 }
 
+/**
+ * Convert JSON to Form data.
+ *
+ * @param {object} srcjson Source JSON object.
+ * @returns {string}       Form Data.
+ */
 function jsonToFormData( srcjson ) {
 	if ( (typeof srcjson !== 'object') && (typeof console !== 'undefined') ) {
 		console.log( '"srcjson" is not a JSON object' );

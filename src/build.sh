@@ -23,6 +23,9 @@ buildcss() {
 		# Autoprefix
 		./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output assets/css/$i.css assets/css/$i.css
 
+        # Remove spaced alignment from autoprefixer.
+		sed -i '' 's/\  \ *//g' assets/css/$i.css
+
 		# Uglify
 		cleancss -o assets/css/$i.min.css assets/css/$i.css
 	done

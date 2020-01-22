@@ -10,7 +10,7 @@
 :root {
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
-	   tab-size: 4;
+	tab-size: 4;
 }
 
 html {
@@ -29,7 +29,7 @@ hr {
 
 abbr[title] {
 	-webkit-text-decoration: underline dotted;
-	        text-decoration: underline dotted;
+	text-decoration: underline dotted;
 }
 
 b, strong {
