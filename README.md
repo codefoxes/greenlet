@@ -44,7 +44,27 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - Toggle WP Emoji, WP Embed and Block editor scripts and styles
 
 ## Requirements
-PHP 5.4
+- PHP 5.4 or above
+- WordPress 4.6 or above
 
 ## Coding Standards
 PHP CS: WordPress
+
+## Development
+```
+# Clone this repo inside WordPress' wp-content/themes
+git clone --depth=1 git@github.com:codefoxes/greenlet.git
+
+# Install node packages
+npm install
+
+# Build CSS and JS
+npm run build
+
+# Watch CSS and JS (Optional: To update assets on change)
+npm start
+
+# Package (Optional: To bundle for WordPress)
+# rsync is needed. Will bundle to ~/Desktop
+npm run bundle
+```
