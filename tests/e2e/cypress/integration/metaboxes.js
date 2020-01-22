@@ -27,16 +27,22 @@ describe('Posts', () => {
 		let url = Cypress.env( Cypress.env('ENV') );
 		url = `${url}/wp-admin/post-new.php`
 		cy.visit(url).then((contentWindow) => {
-			expect(contentWindow.find('#postparentdiv')).to.exist
-			expect(contentWindow.find('#page_template')).to.exist
-			expect(contentWindow.find('#sequence')).to.exist
+			cy.get('#page_template').should('exist')
+			cy.get('#sequence').should('exist')
 		})
 	})
 
 	it('Should update sequence on template change', () => {
+		cy.server()
+		cy.route('POST', '/wp-admin/admin-ajax.php').as('template')
 		cy.get('#page_template').select('templates/6-6.php')
-		cy.wait(2000)
-		cy.get('.of-input').should('have.value', 'main')
-		cy.get('.of-input').should('have.value', 'sidebar-1')
+		cy.wait('@template')
+		cy.get('.of-input').eq(0).should('have.value', 'main')
+		cy.get('.of-input').eq(1).should('have.value', 'sidebar-1')
+
+		cy.get('#page_template').select('templates/12.php')
+		cy.wait('@template')
+		cy.get('.of-input').eq(0).should('have.value', 'main')
+		cy.get('.of-input').eq(1).should('not.exist')
 	})
 })

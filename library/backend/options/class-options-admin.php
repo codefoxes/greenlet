@@ -27,7 +27,7 @@ class Options_Admin {
 	 * Page hook for the options screen
 	 *
 	 * @since 1.0.0
-	 * @var string
+	 * @var   string
 	 */
 	protected $options_screen = null;
 
@@ -95,8 +95,8 @@ class Options_Admin {
 	/**
 	 * Loads the required javascript.
 	 *
-	 * @param string $hook The current admin page.
 	 * @since 1.0.0
+	 * @param string $hook The current admin page.
 	 */
 	public function enqueue_admin_scripts( $hook ) {
 		if ( $this->options_screen !== $hook ) {
@@ -206,6 +206,8 @@ class Options_Admin {
 
 	/**
 	 * Import options.
+	 *
+	 * @since 1.0.0
 	 */
 	public function greenlet_options_import() {
 

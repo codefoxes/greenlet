@@ -28,14 +28,18 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		/**
 		 * Allow templates parameter.
 		 *
-		 * @var array
+		 * @since  1.0.0
+		 * @access public
+		 * @var    array
 		 */
 		public $templates = array();
 
 		/**
 		 * Allow columns parameter.
 		 *
-		 * @var array
+		 * @since  1.0.0
+		 * @access public
+		 * @var    array
 		 */
 		public $columns = array();
 
@@ -54,6 +58,7 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
+		 * @since  1.0.0
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
@@ -130,6 +135,8 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 
 		/**
 		 * Render Content.
+		 *
+		 * @since 1.0.0
 		 */
 		protected function render_content() {}
 	}

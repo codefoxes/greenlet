@@ -28,6 +28,7 @@ if ( ! class_exists( 'Control_Divider' ) && class_exists( 'WP_Customize_Control'
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
+		 * @since  1.0.0
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
@@ -61,6 +62,8 @@ if ( ! class_exists( 'Control_Divider' ) && class_exists( 'WP_Customize_Control'
 
 		/**
 		 * Render Content.
+		 *
+		 * @since 1.0.0
 		 */
 		protected function render_content() {}
 	}

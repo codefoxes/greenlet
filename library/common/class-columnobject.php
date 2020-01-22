@@ -28,48 +28,55 @@ class ColumnObject {
 	/**
 	 * Template name from options or template files.
 	 *
-	 * @var string
+	 * @since 1.0.0
+	 * @var   string
 	 */
 	public $template_name;
 
 	/**
 	 * Columns in the template as integer or string of integers separated by hyphen.
 	 *
-	 * @var mixed
+	 * @since 1.0.0
+	 * @var   mixed
 	 */
 	public $columns;
 
 	/**
 	 * Array of each columns (width) in the template.
 	 *
-	 * @var array
+	 * @since 1.0.0
+	 * @var   array
 	 */
 	public $array;
 
 	/**
 	 * Width of the main column.
 	 *
-	 * @var integer
+	 * @since 1.0.0
+	 * @var   integer
 	 */
 	public $main_column;
 
 	/**
 	 * Total count of the columns array.
 	 *
-	 * @var integer
+	 * @since 1.0.0
+	 * @var   integer
 	 */
 	public $total;
 
 	/**
 	 * Sequence of main and sidebar columns in the template.
 	 *
-	 * @var array
+	 * @since 1.0.0
+	 * @var   array
 	 */
 	public $sequence;
 
 	/**
 	 * ColumnObject constructor.
 	 *
+	 * @since 1.0.0
 	 * @param int $cols Number of columns.
 	 */
 	public function __construct( $cols = 0 ) {
@@ -153,6 +160,7 @@ class ColumnObject {
 	/**
 	 * Convert Columns String into Array.
 	 *
+	 * @since  1.0.0
 	 * @return array
 	 */
 	public function cols_array() {

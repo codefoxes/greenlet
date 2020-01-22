@@ -13,6 +13,7 @@ if ( ! function_exists( 'greenlet_meta_description' ) ) {
 	/**
 	 * Get meta description.
 	 *
+	 * @since  1.0.0
 	 * @return string Meta description.
 	 */
 	function greenlet_meta_description() {

@@ -46,6 +46,8 @@ class Metaboxes {
 
 	/**
 	 * Enqueue Customizer Scripts.
+	 *
+	 * @since  1.0.0
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( 'greenlet_metaboxes', LIBRARY_URL . '/backend/assets/js/metaboxes.js', array( 'wp-blocks', 'wp-element', 'wp-components' ), GREENLET_VERSION, true );
@@ -59,7 +61,7 @@ class Metaboxes {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param array $post_type Current post type.
+	 * @param  array $post_type Current post type.
 	 */
 	public function greenlet_add_page_template( $post_type ) {
 
@@ -93,6 +95,7 @@ class Metaboxes {
 	/**
 	 * Conditionally output Meta box.
 	 *
+	 * @since 1.0.0
 	 * @param object $post The current WP_Post object.
 	 */
 	public function greenlet_page_template_meta_box( $post ) {
@@ -173,6 +176,7 @@ class Metaboxes {
 	/**
 	 * Adds page templates dropdown.
 	 *
+	 * @since 1.0.0
 	 * @param string $default selected page template.
 	 */
 	public function greenlet_page_template_dropdown( $default = '' ) {
@@ -201,6 +205,7 @@ class Metaboxes {
 	 * @see wp-includes/formatting.php
 	 * @see wp-includes/post.php
 	 *
+	 * @since 1.0.0
 	 * @param int $post_id Post ID of current post.
 	 */
 	public function greenlet_save_page_template( $post_id ) {
@@ -236,6 +241,8 @@ class Metaboxes {
 
 	/**
 	 * Sends template sequence upon ajax.
+	 *
+	 * @since 1.0.0
 	 */
 	public function greenlet_template_sequence() {
 
@@ -269,6 +276,7 @@ class Metaboxes {
 	/**
 	 * Returns column array for current template selection.
 	 *
+	 * @since  1.0.0
 	 * @param  string $template_name template name.
 	 * @param  string $post_type     Post type.
 	 * @return array columns
@@ -306,6 +314,7 @@ class Metaboxes {
 	 * Column sequencer
 	 * Generates template columns and content sequence.
 	 *
+	 * @since    1.0.0
 	 * @param    array $options    template columns.
 	 * @param    array $selections column content.
 	 * @param    array $sequence   previously set sequence.
@@ -341,6 +350,7 @@ class Metaboxes {
 	/**
 	 * Retrieve sequencer allowed tags.
 	 *
+	 * @since  1.0.0
 	 * @return array Sequencer allowed Tags
 	 */
 	public function greenlet_sequencer_tags() {

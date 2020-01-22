@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Disable Emojis if opted.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function disable_emojis() {
 	$disable = gl_get_option( 'disable_emojis', false );
@@ -34,8 +37,9 @@ add_action( 'init', 'disable_emojis' );
 /**
  * Filter function used to remove the tinymce emoji plugin.
  *
- * @param array $plugins Plugins list.
- * @return array Difference between the two arrays
+ * @since  1.0.0
+ * @param  array $plugins Plugins list.
+ * @return array          Difference between the two arrays
  */
 function disable_emojis_tinymce( $plugins ) {
 	if ( is_array( $plugins ) ) {
@@ -48,9 +52,10 @@ function disable_emojis_tinymce( $plugins ) {
 /**
  * Remove emoji CDN hostname from DNS pre-fetching hints.
  *
- * @param array  $urls          URLs to print for resource hints.
- * @param string $relation_type The relation type the URLs are printed for.
- * @return array Difference between the two arrays.
+ * @since  1.0.0
+ * @param  array  $urls          URLs to print for resource hints.
+ * @param  string $relation_type The relation type the URLs are printed for.
+ * @return array                 Difference between the two arrays.
  */
 function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
 	if ( 'dns-prefetch' === $relation_type ) {
@@ -63,6 +68,9 @@ function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
 
 /**
  * Dequeue Block Editor CSS if opted.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function greenlet_remove_block_library_css() {
 	$disable = gl_get_option( 'disable_block_editor', false );

@@ -15,9 +15,9 @@ if ( ! function_exists( 'gl_get_option' ) ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string      $option_name  Option Name.
-	 * @param string|bool $default      Default Value to return.
-	 * @return mixed                    Option Value.
+	 * @param  string      $option_name  Option Name.
+	 * @param  string|bool $default      Default Value to return.
+	 * @return mixed                     Option Value.
 	 */
 	function gl_get_option( $option_name, $default = false ) {
 		return get_theme_mod( $option_name, $default );
@@ -29,6 +29,7 @@ if ( ! function_exists( 'greenlet_defer_style' ) ) {
 	/**
 	 * Defer stylesheet.
 	 *
+	 * @since 1.0.0
 	 * @param string $href Link href.
 	 */
 	function greenlet_defer_style( $href ) {
@@ -43,6 +44,7 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	/**
 	 * Enqueue stylesheet.
 	 *
+	 * @since 1.0.0
 	 * @param string           $handle Stylesheet handle.
 	 * @param string           $src    Link href.
 	 * @param bool|null        $defer  Whether to defer.
@@ -67,7 +69,8 @@ if ( ! function_exists( 'minify_css' ) ) {
 	/**
 	 * Minify CSS.
 	 *
-	 * @param string $css Input CSS.
+	 * @since  1.0.0
+	 * @param  string $css Input CSS.
 	 * @return string     Minified CSS
 	 */
 	function minify_css( $css = '' ) {
@@ -87,6 +90,7 @@ if ( ! function_exists( 'greenlet_enqueue_inline_style' ) ) {
 	/**
 	 * Enqueue inline styles.
 	 *
+	 * @since 1.0.0
 	 * @param string $handle Stylesheet handle.
 	 * @param string $data   CSS Data.
 	 */
@@ -102,10 +106,9 @@ if ( ! function_exists( 'is_numeric_array' ) ) {
 	/**
 	 * Check if the array is numeric.
 	 *
-	 * @todo Only needed for admin. Move to admin.
-	 *
-	 * @param array $array Input array.
-	 * @return bool        Whether array is numeric.
+	 * @since  1.0.0
+	 * @param  array $array Input array.
+	 * @return bool         Whether array is numeric.
 	 */
 	function is_numeric_array( $array ) {
 		$nonints = preg_grep( '/\D/', $array );
@@ -120,8 +123,7 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 	 * Calculates minimum sidebars required based on the
 	 * default template options and template file names.
 	 *
-	 * @todo Only needed for Customizer. Move to admin.
-	 *
+	 * @since  1.0.0
 	 * @return int Sidebars qty
 	 */
 	function greenlet_get_min_sidebars() {
@@ -179,8 +181,9 @@ if ( ! function_exists( 'top_bottom_default_columns' ) ) {
 	/**
 	 * Get default columns for Topbar, Header, Semi-footer and Footer.
 	 *
-	 * @param string $pos Position.
-	 * @return string     Columns String.
+	 * @since  1.0.0
+	 * @param  string $pos Position.
+	 * @return string      Columns String.
 	 */
 	function top_bottom_default_columns( $pos ) {
 		switch ( $pos ) {

@@ -32,6 +32,7 @@ add_filter( 'excerpt_length', 'greenlet_excerpt_length', 999 );
 /**
  * Renders main container.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_do_main_container() {
@@ -158,6 +159,7 @@ function greenlet_do_main_container() {
 /**
  * Renders breadcrumb.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_breadcrumb() {
@@ -195,6 +197,7 @@ function greenlet_breadcrumb() {
 /**
  * Renders archive header.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_archive_header_template() {
@@ -213,6 +216,7 @@ function greenlet_archive_header_template() {
 /**
  * Renders archive header content.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_do_archive_header() {
@@ -267,6 +271,7 @@ function greenlet_do_archive_header() {
 /**
  * Renders main post loop.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_do_loop() {
@@ -295,6 +300,7 @@ function greenlet_do_loop() {
 /**
  * Renders post header.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_do_entry_header() {
@@ -336,8 +342,9 @@ function greenlet_do_entry_header() {
 /**
  * Get file Contents.
  *
- * @param string $file_path File Path.
- * @return false|string File Contents.
+ * @since  1.0.0
+ * @param  string $file_path File Path.
+ * @return false|string      File Contents.
  */
 function greenlet_get_file_contents( $file_path ) {
 	ob_start();
@@ -351,6 +358,7 @@ function greenlet_get_file_contents( $file_path ) {
 /**
  * Renders post meta.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_post_meta() {
@@ -458,6 +466,7 @@ function greenlet_post_meta() {
 /**
  * Renders post content.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_do_entry_content() {
@@ -501,6 +510,7 @@ function greenlet_do_entry_content() {
 /**
  * Renders post footer.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_do_entry_footer() {
@@ -567,6 +577,7 @@ function greenlet_do_entry_footer() {
 /**
  * Defines read more button.
  *
+ * @since  1.0.0
  * @return string more button
  */
 function greenlet_excerpt_more() {
@@ -579,6 +590,7 @@ function greenlet_excerpt_more() {
 /**
  * Defines excerpt words length.
  *
+ * @since  1.0.0
  * @return int length
  */
 function greenlet_excerpt_length() {
@@ -591,6 +603,7 @@ function greenlet_excerpt_length() {
 /**
  * Renders comment template.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_comments_template() {
@@ -606,7 +619,8 @@ function greenlet_comments_template() {
 /**
  * Renders pagination navigation.
  *
- * @param object $query WP_Query Object.
+ * @since  1.0.0
+ * @param  object $query WP_Query Object.
  * @return void
  */
 function greenlet_paging_nav( $query = null ) {
@@ -673,6 +687,7 @@ function greenlet_paging_nav( $query = null ) {
 /**
  * Ajax Pagination functions.
  *
+ * @since  1.0.0
  * @return void
  */
 function greenlet_get_paginated() {
@@ -761,7 +776,8 @@ function greenlet_get_paginated() {
 /**
  * Retrieve Paginations arguments.
  *
- * @param array $args Pagination Args.
+ * @since  1.0.0
+ * @param  array $args Pagination Args.
  * @return array
  */
 function greenlet_pagination_args( $args = array() ) {
@@ -778,9 +794,10 @@ function greenlet_pagination_args( $args = array() ) {
  *
  * @see wp-includes/link-template.php
  *
- * @param int  $pagenum Page number.
- * @param bool $escape  Whether to escape.
- * @return string       Page link.
+ * @since  1.0.0
+ * @param  int  $pagenum Page number.
+ * @param  bool $escape  Whether to escape.
+ * @return string        Page link.
  */
 function greenlet_get_page_link( $pagenum = 1, $escape = true ) {
 	global $wp_rewrite, $current_location;
@@ -853,11 +870,12 @@ function greenlet_get_page_link( $pagenum = 1, $escape = true ) {
 /**
  * Return the next posts page link.
  *
- * @param int    $current_page Current Page Index.
- * @param object $query        WP_Query.
- * @param string $label        Content for link text.
- * @param int    $max_page     Optional. Max pages.
- * @return string|null         HTML-formatted next posts page link.
+ * @since  1.0.0
+ * @param  int    $current_page Current Page Index.
+ * @param  object $query        WP_Query.
+ * @param  string $label        Content for link text.
+ * @param  int    $max_page     Optional. Max pages.
+ * @return string|null          HTML-formatted next posts page link.
  */
 function greenlet_load_link( $current_page, $query = null, $label = null, $max_page = 0 ) {
 	if ( empty( $query ) ) {
@@ -892,9 +910,10 @@ function greenlet_load_link( $current_page, $query = null, $label = null, $max_p
 /**
  * Retrieve next posts page link.
  *
- * @param int $next_page Next Page index.
- * @param int $max_page  Optional. Max pages.
- * @return string        The link URL for next posts page.
+ * @since  1.0.0
+ * @param  int $next_page Next Page index.
+ * @param  int $max_page  Optional. Max pages.
+ * @return string         The link URL for next posts page.
  */
 function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
 	if ( ! is_single() ) {
@@ -908,6 +927,7 @@ function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
 /**
  * Get search form.
  *
+ * @since  1.0.0
  * @return string Search form HTML.
  */
 function greenlet_search_form() {

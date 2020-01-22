@@ -143,7 +143,9 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 
 if ( ! function_exists( 'set_content_width' ) ) {
 	/**
-	 * Set Content Width
+	 * Set Content Width.
+	 *
+	 * @since 1.0.0
 	 */
 	function set_content_width() {
 		global $content_width;
@@ -161,6 +163,7 @@ if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) {
 	/**
 	 * Filters wp_title to print a neat <title> tag based on what is being viewed.
 	 *
+	 * @since  1.0.0
 	 * @param  string $title Default title text for current view.
 	 * @param  string $sep   Optional separator.
 	 * @return string        The filtered title.

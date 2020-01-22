@@ -84,9 +84,10 @@ if ( ! function_exists( 'greenlet_css_width' ) ) {
 	/**
 	 * Get CSS width property for option.
 	 *
-	 * @param string      $option  Option name.
-	 * @param string|bool $default Default Value.
-	 * @return string         Width.
+	 * @since  1.0.0
+	 * @param  string      $option  Option name.
+	 * @param  string|bool $default Default Value.
+	 * @return string               Width.
 	 */
 	function greenlet_css_width( $option, $default = false ) {
 		if ( ! $default ) {

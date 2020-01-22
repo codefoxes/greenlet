@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Greenlet customizer options.
  *
+ * @since  1.0.0
  * @return array
  */
 function greenlet_options() {

@@ -19,7 +19,7 @@ class Sanitizer {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param string $css CSS String.
+	 * @param  string $css CSS String.
 	 *
 	 * @return string Sanitized CSS.
 	 */
@@ -30,7 +30,8 @@ class Sanitizer {
 	/**
 	 * Sanitizes multiple checkbox control.
 	 *
-	 * @param string $value Checkbox values.
+	 * @since  1.0.0
+	 * @param  string $value Checkbox values.
 	 * @return array
 	 */
 	public static function sanitize_multicheck( $value ) {
@@ -46,7 +47,8 @@ class Sanitizer {
 	/**
 	 * Sanitizes template selector control.
 	 *
-	 * @param string $value Template and Sequence Values.
+	 * @since  1.0.0
+	 * @param  string $value Template and Sequence Values.
 	 * @return array
 	 */
 	public static function sanitize_template_selector( $value ) {

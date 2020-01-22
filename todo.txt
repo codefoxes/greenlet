@@ -25,6 +25,8 @@ Todo list conversion
 - Sanitizer: Sanitize css.
 - greenlet-controls.js: Get correct number of sidebars.
 - on 'change', '.gl-template-matcher select' Rearrange sequence if needed.
+- is_numeric_array Only needed for admin. Move to admin.
+- greenlet_get_min_sidebars Only needed for Customizer. Move to admin.
 
 Always
 - Import WP Test data and Test

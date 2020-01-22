@@ -15,7 +15,8 @@ add_action( 'greenlet_footer', 'greenlet_do_footer' );
 /**
  * Display the semifooter.
  *
- * @see greenlet_cover() to display semifooter columns.
+ * @since  1.0.0
+ * @see    greenlet_cover() to display semifooter columns.
  * @return void
  */
 function greenlet_do_semifooter() {
@@ -35,7 +36,8 @@ function greenlet_do_semifooter() {
 /**
  * Display the footer.
  *
- * @see greenlet_cover() to display semifooter columns.
+ * @since  1.0.0
+ * @see    greenlet_cover() to display semifooter columns.
  * @return void
  */
 function greenlet_do_footer() {

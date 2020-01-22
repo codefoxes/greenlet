@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Print markup tag.
  *
+ * @since 1.0.0
  * @param string $context    Context/Place to add markup.
  * @param string $attributes Tag attributes.
  */
@@ -29,6 +30,7 @@ function greenlet_markup( $context, $attributes = '' ) {
 /**
  * Close opened tags opened via greenlet_markup.
  *
+ * @since 1.0.0
  * @param int $close Number of tags to close.
  */
 function greenlet_markup_close( $close = 1 ) {
@@ -43,8 +45,9 @@ function greenlet_markup_close( $close = 1 ) {
 /**
  * Retrieve Markup tag.
  *
- * @param string $context Context/Place of the tag.
- * @return string         Tag name.
+ * @since  1.0.0
+ * @param  string $context Context/Place of the tag.
+ * @return string          Tag name.
  */
 function greenlet_markup_tag( $context ) {
 	switch ( $context ) {

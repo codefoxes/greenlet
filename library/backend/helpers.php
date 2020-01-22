@@ -14,6 +14,7 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 	 * Returns columns content array.
 	 * Assigns Main content and sidebars into array and returns.
 	 *
+	 * @since  1.0.0
 	 * @return array column content
 	 */
 	function greenlet_column_content_options() {
@@ -33,6 +34,7 @@ if ( ! function_exists( 'greenlet_cover_columns' ) ) {
 	/**
 	 * Gets cover (header, footer) columns.
 	 *
+	 * @since  1.0.0
 	 * @param  array $positions Cover positions.
 	 * @return array            List of columns
 	 */

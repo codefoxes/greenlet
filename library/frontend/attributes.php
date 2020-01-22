@@ -307,6 +307,7 @@ function greenlet_attribute( $attributes, $primary ) {
 /**
  * Converts number to words.
  *
+ * @since  1.0.0
  * @param  integer $num Number to be converted.
  * @return string       Number in words.
  */

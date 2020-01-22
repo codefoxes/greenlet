@@ -19,7 +19,8 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 	/**
 	 * Defines the Greenlet Theme constants.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @return void
 	 */
 	function greenlet_constants() {
 
@@ -72,7 +73,8 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 	 * If child theme defines GREENLET_LOAD_FRAMEWORK as false before requiring this
 	 * init.php file, then no files will be loaded. They can be loaded manually.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @return void
 	 */
 	function greenlet_load_framework() {
 

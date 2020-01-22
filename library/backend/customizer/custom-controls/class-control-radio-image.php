@@ -28,7 +28,9 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 		/**
 		 * Allow choices parameter.
 		 *
-		 * @var array
+		 * @since  1.0.0
+		 * @access public
+		 * @var    array
 		 */
 		public $choices = array();
 
@@ -47,6 +49,7 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
+		 * @since  1.0.0
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
@@ -105,6 +108,8 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 
 		/**
 		 * Render Content.
+		 *
+		 * @since 1.0.0
 		 */
 		protected function render_content() {}
 	}

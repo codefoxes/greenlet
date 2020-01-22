@@ -15,6 +15,8 @@ add_action( 'greenlet_header', 'greenlet_do_header' );
 
 /**
  * Print the head.
+ *
+ * @since 1.0.0
  */
 function greenlet_do_head() {
 	?>
@@ -43,6 +45,8 @@ function greenlet_do_head() {
 
 /**
  * Display the topbar.
+ *
+ * @since 1.0.0
  */
 function greenlet_do_topbar() {
 
@@ -60,6 +64,8 @@ function greenlet_do_topbar() {
 
 /**
  * Display the header.
+ *
+ * @since 1.0.0
  */
 function greenlet_do_header() {
 	greenlet_markup( 'site-header', greenlet_attr( 'site-header' ) );

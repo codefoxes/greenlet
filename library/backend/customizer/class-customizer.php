@@ -54,6 +54,8 @@ class Customizer {
 
 	/**
 	 * Enqueue Customizer Scripts.
+	 *
+	 * @since  1.0.0
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-color-picker' );
@@ -137,6 +139,7 @@ class Customizer {
 	/**
 	 * Register Custom Controls.
 	 *
+	 * @since  1.0.0
 	 * @return void
 	 */
 	public function greenlet_add_custom_controls() {
@@ -151,6 +154,7 @@ class Customizer {
 	/**
 	 * Get Setting Argument Parameter.
 	 *
+	 * @since  1.0.0
 	 * @param string $prop        Property name.
 	 * @param array  $setting_arg Argument array.
 	 *
