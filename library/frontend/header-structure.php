@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_action( 'greenlet_before_topbar', 'greenlet_skip_link' );
 add_action( 'greenlet_head', 'greenlet_do_head' );
 add_action( 'greenlet_topbar', 'greenlet_do_topbar' );
 add_action( 'greenlet_header', 'greenlet_do_header' );
@@ -41,6 +42,19 @@ function greenlet_do_head() {
 			}
 		);
 	}
+}
+
+/**
+ * Display Skip Link
+ *
+ * @since 1.0.0
+ */
+function greenlet_skip_link() {
+	?>
+	<a class="skip-link screen-reader-text" href="#content">
+		<?php esc_html_e( 'Skip to content', 'greenlet' ); ?>
+	</a>
+	<?php
 }
 
 /**

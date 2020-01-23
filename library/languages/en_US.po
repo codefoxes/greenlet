@@ -125,7 +125,7 @@ msgid "Search for:"
 msgstr ""
 
 #: library/frontend/main-structure.php:937
-msgid "Search …"
+msgid "Search &hellip;"
 msgstr ""
 
 #: library/frontend/main-structure.php:939

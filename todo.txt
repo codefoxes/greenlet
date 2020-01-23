@@ -13,6 +13,7 @@ Minor:
 - Editor Style equivalent to frontend
 - If current_user_can check in init.php:105 and meta_boxes.php:15
 - Default Site Icon
+- Make ally ready, Add tag
 
 Todo list conversion
 - Check if greenlet_get_page_link has been changed.
