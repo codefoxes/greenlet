@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-22 15:53+0000\n"
-"PO-Revision-Date: 2020-01-22 17:08+0000\n"
+"POT-Creation-Date: 2020-01-23 14:16+0000\n"
+"PO-Revision-Date: 2020-01-23 14:18+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.3.2"
+"X-Loco-Version: 2.3.1; wp-5.3"
 
 #. %s: Number of comments.
 #: comments.php:21
@@ -76,6 +76,10 @@ msgstr "Y"
 #. Name of the template
 msgid "Main-6, Side-6."
 msgstr "ಮುಖ್ಯ-6, ಅಡ್ಡ-6."
+
+#: library/frontend/header-structure.php:55
+msgid "Skip to content"
+msgstr "ವಿಷಯಕ್ಕೆ ತೆರಳಿ"
 
 #. phpcs:ignore
 #: library/frontend/main-structure.php:400
@@ -441,9 +445,11 @@ msgid "Number of Sidebars ( For Main Container )"
 msgstr "ಸೈಡ್‌ಬಾರ್‌ಗಳ ಸಂಖ್ಯೆ (ಮುಖ್ಯ ಕಂಟೇನರ್‌ಗಾಗಿ)"
 
 #: library/backend/customizer/options.php:652
-msgid "How many sidebars ro register for main container of page ? (Not for header "
+msgid ""
+"How many sidebars ro register for main container of page ? (Not for header "
 "or footer.)"
-msgstr "ಪುಟದ ಮುಖ್ಯ ಕಂಟೇನರ್ ನಲ್ಲಿ ಎಷ್ಟು ಸೈಡ್‌ಬಾರ್‌ಗಳು ನೋಂದಾಯಿಸೋಣ? (ಹೆಡರ್ ಅಥವಾ "
+msgstr ""
+"ಪುಟದ ಮುಖ್ಯ ಕಂಟೇನರ್ ನಲ್ಲಿ ಎಷ್ಟು ಸೈಡ್‌ಬಾರ್‌ಗಳು ನೋಂದಾಯಿಸೋಣ? (ಹೆಡರ್ ಅಥವಾ "
 "ಅಡಿಟಿಪ್ಪಣಿಗಾಗಿ ಅಲ್ಲ.)"
 
 #: library/backend/customizer/options.php:670
@@ -595,7 +601,8 @@ msgstr "WP ಎಮೋಜಿಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊ�
 
 #: library/backend/customizer/options.php:1120
 msgid "Posts with emojis may break, disable with caution."
-msgstr "ಎಮೋಜಿಗಳೊಂದಿಗಿನ ಪೋಸ್ಟ್‌ಗಳು ಮುರಿಯಬಹುದು, ಎಚ್ಚರಿಕೆಯಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಬಹುದು."
+msgstr ""
+"ಎಮೋಜಿಗಳೊಂದಿಗಿನ ಪೋಸ್ಟ್‌ಗಳು ಮುರಿಯಬಹುದು, ಎಚ್ಚರಿಕೆಯಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಬಹುದು."
 
 #: library/backend/customizer/options.php:1133
 msgid "Disable WP Block Editor Style"
@@ -603,7 +610,8 @@ msgstr "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕ ಶೈಲಿಯನ್ನು ನ
 
 #: library/backend/customizer/options.php:1134
 msgid "Posts created with WP Block Editor may break, disable with caution."
-msgstr "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕದೊಂದಿಗೆ ರಚಿಸಲಾದ ಪೋಸ್ಟ್‌ಗಳು ಮುರಿಯಬಹುದು, ಎಚ್ಚರಿಕೆಯಿಂದ "
+msgstr ""
+"WP ಬ್ಲಾಕ್ ಸಂಪಾದಕದೊಂದಿಗೆ ರಚಿಸಲಾದ ಪೋಸ್ಟ್‌ಗಳು ಮುರಿಯಬಹುದು, ಎಚ್ಚರಿಕೆಯಿಂದ "
 "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ."
 
 #: library/backend/metaboxes/class-metaboxes.php:86
@@ -650,7 +658,8 @@ msgstr "ಗ್ರೀನ್ಲೆಟ್ ಆಯ್ಕೆಗಳು"
 
 #: library/backend/options/class-options-admin.php:124
 msgid "You don't have any options to export. Try saving your options first."
-msgstr "ರಫ್ತು ಮಾಡಲು ನಿಮಗೆ ಯಾವುದೇ ಆಯ್ಕೆಗಳಿಲ್ಲ. ಮೊದಲು ನಿಮ್ಮ ಆಯ್ಕೆಗಳನ್ನು ಉಳಿಸಲು "
+msgstr ""
+"ರಫ್ತು ಮಾಡಲು ನಿಮಗೆ ಯಾವುದೇ ಆಯ್ಕೆಗಳಿಲ್ಲ. ಮೊದಲು ನಿಮ್ಮ ಆಯ್ಕೆಗಳನ್ನು ಉಳಿಸಲು "
 "ಪ್ರಯತ್ನಿಸಿ."
 
 #. Name of the theme
@@ -669,3 +678,7 @@ msgstr "https://greenletwp.com"
 #. Author of the theme
 msgid "Greenlet Team"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ತಂಡ"
+
+#. Author URI of the theme
+msgid "https://greenletwp.com/about/"
+msgstr "https://greenletwp.com/about/"

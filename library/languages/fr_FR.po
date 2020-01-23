@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-22 15:53+0000\n"
-"PO-Revision-Date: 2020-01-22 17:07+0000\n"
+"POT-Creation-Date: 2020-01-23 14:16+0000\n"
+"PO-Revision-Date: 2020-01-23 14:17+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.3.2"
+"X-Loco-Version: 2.3.1; wp-5.3"
 
 #. %s: Number of comments.
 #: comments.php:21
@@ -41,7 +41,8 @@ msgstr "Erreur 404 - Rien trouvé"
 
 #: 404.php:17
 msgid "It looks like nothing was found here. Maybe try a search?"
-msgstr "On dirait que rien n'a été trouvé ici. Peut-être essayer une recherche?"
+msgstr ""
+"On dirait que rien n'a été trouvé ici. Peut-être essayer une recherche?"
 
 #: content-none.php:13
 msgid "Nothing found!"
@@ -76,6 +77,10 @@ msgstr "Y"
 #. Name of the template
 msgid "Main-6, Side-6."
 msgstr "Main-6, Side-6."
+
+#: library/frontend/header-structure.php:55
+msgid "Skip to content"
+msgstr "Aller au contenu"
 
 #. phpcs:ignore
 #: library/frontend/main-structure.php:400
@@ -154,7 +159,8 @@ msgstr "Barre latérale %s"
 #: library/common/setup.php:93
 #, php-format
 msgid "Appears on the posts and pages as sidebar %s."
-msgstr "Apparaît sur les publications et les pages sous forme de barre latérale %s."
+msgstr ""
+"Apparaît sur les publications et les pages sous forme de barre latérale %s."
 
 #. %1$s: Widget Position. %2$s: Widget Column.
 #: library/common/setup.php:124
@@ -308,7 +314,8 @@ msgstr "Largeur du conteneur"
 
 #: library/backend/customizer/options.php:383
 msgid "Enter container width. Eg: 1170px or 80% (Optional)"
-msgstr "Entrez la largeur du conteneur. Par exemple: 1170 px ou 80% (facultatif)"
+msgstr ""
+"Entrez la largeur du conteneur. Par exemple: 1170 px ou 80% (facultatif)"
 
 #: library/backend/customizer/options.php:385
 #: library/backend/customizer/options.php:494
@@ -341,9 +348,11 @@ msgid "Topbar Layout"
 msgstr "Disposition de la barre supérieure"
 
 #: library/backend/customizer/options.php:445
-msgid "Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
+msgid ""
+"Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
 "integers. Sum should be 12.)"
-msgstr "Entrez les colonnes de la barre supérieure au format: 4-8 ou 3-9-3 etc. "
+msgstr ""
+"Entrez les colonnes de la barre supérieure au format: 4-8 ou 3-9-3 etc. "
 "(séparés par un trait d'union. Seuls les nombres entiers. La somme doit être "
 "12.)"
 
@@ -440,9 +449,11 @@ msgid "Number of Sidebars ( For Main Container )"
 msgstr "Nombre de barres latérales (pour le conteneur principal)"
 
 #: library/backend/customizer/options.php:652
-msgid "How many sidebars ro register for main container of page ? (Not for header "
+msgid ""
+"How many sidebars ro register for main container of page ? (Not for header "
 "or footer.)"
-msgstr "Combien de barres latérales s'enregistrer pour le conteneur principal de la "
+msgstr ""
+"Combien de barres latérales s'enregistrer pour le conteneur principal de la "
 "page? (Pas pour l'en-tête ou le pied de page.)"
 
 #: library/backend/customizer/options.php:670
@@ -558,7 +569,8 @@ msgstr "L'image sélectionnée"
 
 #: library/backend/customizer/options.php:1025
 msgid "Show featured image on post list and archives."
-msgstr "Afficher l'image sélectionnée sur la liste des publications et les archives."
+msgstr ""
+"Afficher l'image sélectionnée sur la liste des publications et les archives."
 
 #: library/backend/customizer/options.php:1038
 msgid "Excerpt length"
@@ -594,7 +606,8 @@ msgstr "Désactiver WP Emojis"
 
 #: library/backend/customizer/options.php:1120
 msgid "Posts with emojis may break, disable with caution."
-msgstr "Les messages contenant des emojis peuvent se casser, désactivez-les avec "
+msgstr ""
+"Les messages contenant des emojis peuvent se casser, désactivez-les avec "
 "prudence."
 
 #: library/backend/customizer/options.php:1133
@@ -603,7 +616,8 @@ msgstr "Désactiver le style de l'éditeur de blocs WP"
 
 #: library/backend/customizer/options.php:1134
 msgid "Posts created with WP Block Editor may break, disable with caution."
-msgstr "Les publications créées avec WP Block Editor peuvent se casser, désactivez-"
+msgstr ""
+"Les publications créées avec WP Block Editor peuvent se casser, désactivez-"
 "les avec prudence."
 
 #: library/backend/metaboxes/class-metaboxes.php:86
@@ -650,7 +664,8 @@ msgstr "Options de Greenlet"
 
 #: library/backend/options/class-options-admin.php:124
 msgid "You don't have any options to export. Try saving your options first."
-msgstr "Vous n'avez aucune option à exporter. Essayez d'abord d'enregistrer vos "
+msgstr ""
+"Vous n'avez aucune option à exporter. Essayez d'abord d'enregistrer vos "
 "options."
 
 #. Name of the theme
@@ -669,3 +684,7 @@ msgstr "https://greenletwp.com"
 #. Author of the theme
 msgid "Greenlet Team"
 msgstr "L'équipe Greenlet"
+
+#. Author URI of the theme
+msgid "https://greenletwp.com/about/"
+msgstr "https://greenletwp.com/about/"

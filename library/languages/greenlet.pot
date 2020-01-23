@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-22 17:11+0000\n"
+"POT-Creation-Date: 2020-01-23 14:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -78,6 +78,10 @@ msgstr ""
 msgid "Main-6, Side-6."
 msgstr ""
 
+#: library/frontend/header-structure.php:55
+msgid "Skip to content"
+msgstr ""
+
 #. phpcs:ignore
 #: library/frontend/main-structure.php:400
 msgid "Featured"
@@ -126,7 +130,7 @@ msgid "Search for:"
 msgstr ""
 
 #: library/frontend/main-structure.php:937
-msgid "Search …"
+msgid "Search &hellip;"
 msgstr ""
 
 #: library/frontend/main-structure.php:939
@@ -665,4 +669,8 @@ msgstr ""
 
 #. Author of the theme
 msgid "Greenlet Team"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://greenletwp.com/about/"
 msgstr ""
