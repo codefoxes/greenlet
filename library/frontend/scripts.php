@@ -121,6 +121,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$topbar_color     = gl_get_option( 'topbar_color', '#212121' );
 		$header_bg        = gl_get_option( 'header_bg', '#fff' );
 		$header_color     = gl_get_option( 'header_color', '#33691e' );
+		$header_link_over = gl_get_option( 'header_link_hover', '#7cb342' );
 		$main_bg          = gl_get_option( 'main_bg', '' );
 		$content_bg       = gl_get_option( 'content_bg', '' );
 		$semifooter_bg    = gl_get_option( 'semifooter_bg', '#fff' );
@@ -181,6 +182,10 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 
 		.site-header, .site-header a {
 			color: <?php echo sanitize_hex_color( $header_color ); ?>;
+		}
+
+		.site-header a:hover {
+			color: <?php echo sanitize_hex_color( $header_link_over ); ?>;
 		}
 
 		.site-content {

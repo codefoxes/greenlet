@@ -159,6 +159,20 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'header_link_hover',
+		'sargs' => array(
+			'default'           => '#000',
+			'sanitize_callback' => 'sanitize_hex_color',
+		),
+		'cargs' => array(
+			'type'    => 'color',
+			'section' => 'colors',
+			'label'   => __( 'Header Link Hover Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'main_bg',
 		'sargs' => array(
 			'default'           => '',
