@@ -34,7 +34,7 @@ if ( ! function_exists( 'greenlet_defer_style' ) ) {
 	 */
 	function greenlet_defer_style( $href ) {
 		// Todo: Prefetch if external URL.
-		printf( '<link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">', esc_url( $href ) );
+		printf( '<link rel="%1$s" href="%2$s" media="none" onload="this.media=\'all\'">', 'stylesheet', esc_url( $href ) );
 		printf( '<noscript><link rel="%1$s" href="%2$s"></noscript>', 'stylesheet', esc_url( $href ) );
 	}
 }
