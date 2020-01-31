@@ -23,7 +23,7 @@ buildcss() {
 		# Autoprefix
 		./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output assets/css/$i.css assets/css/$i.css
 
-        # Remove spaced alignment from autoprefixer.
+		# Remove spaced alignment from autoprefixer.
 		sed -i '' 's/\  \ *//g' assets/css/$i.css
 
 		# Uglify
@@ -39,12 +39,12 @@ elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
 elif [ "$1" == "--final" ]; then
 	buildjs
-    buildcss
-    rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
-    current=$(pwd)
-    cd ~/Desktop
-    zip -r greenlet.zip greenlet
-    cd $current
+	buildcss
+	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
+	current=$(pwd)
+	cd ~/Desktop
+	zip -r greenlet.zip greenlet
+	cd $current
 else
 	echo 'Building Separately?'
 fi
