@@ -176,5 +176,46 @@ describe('Customizer', () => {
 				})
 			})
 		})
+
+		describe('Main Layout', () => {
+			before( () => {
+				cy.get('#accordion-section-main_layout').click()
+			})
+
+			after( () => {
+				cy.get('#customize-controls .wp-full-overlay-sidebar-content:visible').scrollTo(0, 0)
+				cy.get('.customize-section-back:visible').click()
+			})
+
+			it('Contains Number of Sidebars: 3', () => {
+				cy.get('#_customize-input-sidebars_qty').should('have.value', '3')
+			})
+
+			it('Updates Template on Sidebars change', () => {
+				cy.get('#_customize-input-sidebars_qty').select('4')
+				cy.get('.gl-template-selection').each(($el) => {
+					cy.wrap($el).contains('Sidebar 4')
+				})
+			})
+
+			it('Contains Home Templates as 8-4', () => {
+				cy.get('#customize-control-home_template').find('[value="8-4"]').should('be.checked')
+			})
+
+			it('Updates Home Template Sequence to 6-3-3', () => {
+				cy.get('#customize-control-home_template').find('[value="6-3-3"]').check({ force: true }).should('be.checked')
+				cy.get('#customize-control-home_template .gl-template-selection').each(($el, index) => {
+					if (index === 0) {
+						cy.wrap($el).should('have.value', 'main')
+					}
+					if (index === 1) {
+						cy.wrap($el).should('have.value', 'sidebar-1')
+					}
+					if (index === 2) {
+						cy.wrap($el).should('have.value', 'sidebar-2')
+					}
+				})
+			})
+		})
 	})
 })
