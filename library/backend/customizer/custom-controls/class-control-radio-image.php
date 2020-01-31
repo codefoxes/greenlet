@@ -91,8 +91,6 @@ if ( ! class_exists( 'Control_Radio_Image' ) && class_exists( 'WP_Customize_Cont
 			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
 			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
 
-			<input id="_customize-input-{{ data.id }}" type="hidden" {{{ data.link }}} />
-
 			<div class="gl-radio-images">
 				<# for ( key in data.choices ) { #>
 				<div class="gl-radio-image">

@@ -105,7 +105,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'topbar_bg',
 		'sargs' => array(
-			'default'           => '#fff',
+			'default'           => '#ffffff',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -133,7 +133,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_bg',
 		'sargs' => array(
-			'default'           => '#fff',
+			'default'           => '#ffffff',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -161,7 +161,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_link_hover',
 		'sargs' => array(
-			'default'           => '#000',
+			'default'           => '#000000',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -175,7 +175,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'main_bg',
 		'sargs' => array(
-			'default'           => '',
+			'default'           => '#f5f5f5',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -189,7 +189,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'content_bg',
 		'sargs' => array(
-			'default'           => '#fff',
+			'default'           => '#ffffff',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -203,7 +203,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'semifooter_bg',
 		'sargs' => array(
-			'default'           => '#fff',
+			'default'           => '#ffffff',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
@@ -245,7 +245,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'footer_color',
 		'sargs' => array(
-			'default'           => '#fff',
+			'default'           => '#ffffff',
 			'sanitize_callback' => 'sanitize_hex_color',
 		),
 		'cargs' => array(
