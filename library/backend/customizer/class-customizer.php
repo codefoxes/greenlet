@@ -49,7 +49,8 @@ class Customizer {
 
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'customize_preview_init', array( $this, 'enqueue_preview_scripts' ) );
 	}
 
 	/**
@@ -60,6 +61,15 @@ class Customizer {
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
+	}
+
+	/**
+	 * Enqueue Customizer Preview Scripts.
+	 *
+	 * @since  1.1.0
+	 */
+	public function enqueue_preview_scripts() {
+		wp_enqueue_script( 'greenlet-preview', LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'jquery', 'customize-preview' ), GREENLET_VERSION, true );
 	}
 
 	/**

@@ -4,7 +4,7 @@
  * @package greenlet\library\backend\assets\js
  */
 
-(function( $ ){
+(function( $ ) {
 	/**
 	 * Run function when customizer is ready.
 	 */
@@ -19,6 +19,8 @@
 						radioImageControl( controlObj )
 					} else if ( controlObj.params.type === 'template-selector' ) {
 						templateSelectorControl( controlObj )
+					} else if ( controlObj.params.type === 'range' ) {
+						rangeControl( controlObj )
 
 						// Manage dependencies.
 					} else if ( controlObj.id === 'show_topbar' ) {
@@ -160,6 +162,28 @@
 						}
 
 						control.setting.set( JSON.stringify( val ) )
+					}
+				)
+			}
+		)
+	}
+
+	/**
+	 * Add range Controller reset.
+	 *
+	 * @param {object} controlObj range control Object.
+	 */
+	function rangeControl( controlObj ) {
+		wp.customize.control(
+			controlObj.id,
+			function ( control ) {
+				controlObj.container.append( '<span class="reset dashicons dashicons-undo"></span>' )
+				var resetVal = control.setting._value
+
+				$( controlObj.selector + ' .reset' ).on(
+					'click',
+					function() {
+						control.setting.set( resetVal )
 					}
 				)
 			}

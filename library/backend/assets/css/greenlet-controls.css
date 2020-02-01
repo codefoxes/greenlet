@@ -85,3 +85,23 @@
 	border-bottom: 2px solid #f7f7f7;
 	margin: 10px -12px;
 }
+
+.customize-control-range {
+	position: relative;
+}
+
+.customize-control-range input {
+	width: 100%;
+	background: #689F38;
+	-webkit-appearance: none;
+	height: 4px;
+	border-radius: 4px;
+}
+
+.customize-control-range .dashicons {
+	position: absolute;
+	right: 0;
+	bottom: 12px;
+	font-size: 15px;
+	color: #999;
+}

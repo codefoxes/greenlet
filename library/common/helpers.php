@@ -200,3 +200,22 @@ if ( ! function_exists( 'top_bottom_default_columns' ) ) {
 		}
 	}
 }
+
+if ( ! function_exists( 'greenlet_get_logo' ) ) {
+	/**
+	 * Get logo URL.
+	 *
+	 * @since  1.1.0
+	 * @return string Logo URL.
+	 */
+	function greenlet_get_logo() {
+		$logo_id  = get_theme_mod( 'custom_logo' );
+		$logo_url = false;
+
+		if ( false !== $logo_id ) {
+			$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
+		}
+
+		return apply_filters( 'greenlet_logo', $logo_url );
+	}
+}

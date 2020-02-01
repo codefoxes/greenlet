@@ -45,7 +45,47 @@ function greenlet_options() {
 	$pagetop_columns    = greenlet_cover_columns( array( 'header', 'topbar' ) );
 	$pagebottom_columns = greenlet_cover_columns( array( 'semifooter', 'footer' ) );
 
+	list( $logo_width, $logo_height ) = getimagesize( esc_url( greenlet_get_logo() ) );
+
 	$options = array();
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'logo_width',
+		'sargs' => array(
+			'default'   => $logo_width,
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'range',
+			'section'     => 'title_tagline',
+			'label'       => __( 'Logo Width', 'greenlet' ),
+			'input_attrs' => array(
+				'min' => 0,
+				'max' => 500,
+			),
+			'priority'    => 8,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'logo_height',
+		'sargs' => array(
+			'default'   => $logo_height,
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'range',
+			'section'     => 'title_tagline',
+			'label'       => __( 'Logo Height', 'greenlet' ),
+			'input_attrs' => array(
+				'min' => 0,
+				'max' => 500,
+			),
+			'priority'    => 8,
+		),
+	);
 
 	$options[] = array(
 		'type'  => 'setting_control',
