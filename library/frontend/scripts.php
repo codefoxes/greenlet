@@ -192,6 +192,10 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 			color: <?php echo sanitize_hex_color( $header_link_over ); ?>;
 		}
 
+		.site-navigation ul .children {
+			background: <?php echo sanitize_hex_color( $header_bg ); ?>;
+		}
+
 		.site-content {
 			background: <?php echo sanitize_hex_color( $main_bg ); ?>;
 			max-width: <?php echo esc_html( greenlet_css_width( 'main_width' ) ); ?>;
