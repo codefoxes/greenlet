@@ -54,3 +54,25 @@ if ( ! function_exists( 'greenlet_cover_columns' ) ) {
 		return $cover_columns;
 	}
 }
+
+if ( ! function_exists( 'greenlet_template_images' ) ) {
+	/**
+	 * Get Templates Images Array.
+	 *
+	 * @return array Templates Images Array.
+	 */
+	function greenlet_template_images() {
+		$imagepath = LIBRARY_URL . '/backend/images/';
+
+		return array(
+			'12'    => $imagepath . '12.png',
+			'8-4'   => $imagepath . '8-4.png',
+			'4-8'   => $imagepath . '4-8.png',
+			'9-3'   => $imagepath . '9-3.png',
+			'3-9'   => $imagepath . '3-9.png',
+			'3-6-3' => $imagepath . '3-6-3.png',
+			'3-3-6' => $imagepath . '3-3-6.png',
+			'6-3-3' => $imagepath . '6-3-3.png',
+		);
+	}
+}

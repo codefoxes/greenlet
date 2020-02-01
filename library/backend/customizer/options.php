@@ -28,19 +28,6 @@ function greenlet_options() {
 		$sidebars_qty[ $i ] = $i;
 	}
 
-	$imagepath = LIBRARY_URL . '/backend/images/';
-
-	$templates_array = array(
-		'12'    => $imagepath . '12.png',
-		'8-4'   => $imagepath . '8-4.png',
-		'4-8'   => $imagepath . '4-8.png',
-		'9-3'   => $imagepath . '9-3.png',
-		'3-9'   => $imagepath . '3-9.png',
-		'3-6-3' => $imagepath . '3-6-3.png',
-		'3-3-6' => $imagepath . '3-3-6.png',
-		'6-3-3' => $imagepath . '6-3-3.png',
-	);
-
 	// Page top and bottom columns.
 	$pagetop_columns    = greenlet_cover_columns( array( 'header', 'topbar' ) );
 	$pagebottom_columns = greenlet_cover_columns( array( 'semifooter', 'footer' ) );
@@ -718,7 +705,7 @@ function greenlet_options() {
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
 			'label'     => __( 'Home Page (Post List) Layout', 'greenlet' ),
-			'templates' => $templates_array,
+			'templates' => greenlet_template_images(),
 			'columns'   => greenlet_column_content_options(),
 		),
 	);
@@ -737,7 +724,7 @@ function greenlet_options() {
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
 			'label'     => __( 'Default Page Layout', 'greenlet' ),
-			'templates' => $templates_array,
+			'templates' => greenlet_template_images(),
 			'columns'   => greenlet_column_content_options(),
 		),
 	);
@@ -756,7 +743,7 @@ function greenlet_options() {
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
 			'label'     => __( 'Single Post Layout', 'greenlet' ),
-			'templates' => $templates_array,
+			'templates' => greenlet_template_images(),
 			'columns'   => greenlet_column_content_options(),
 		),
 	);
@@ -775,7 +762,7 @@ function greenlet_options() {
 			'type'      => 'template-selector',
 			'section'   => 'main_layout',
 			'label'     => __( 'Archive Layout', 'greenlet' ),
-			'templates' => $templates_array,
+			'templates' => greenlet_template_images(),
 			'columns'   => greenlet_column_content_options(),
 		),
 	);
@@ -1179,5 +1166,5 @@ function greenlet_options() {
 		),
 	);
 
-	return $options;
+	return apply_filters( 'greenlet_options', $options );
 }
