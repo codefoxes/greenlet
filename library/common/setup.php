@@ -75,12 +75,8 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	 */
 	function greenlet_widget_init() {
 		if ( function_exists( 'register_sidebar' ) ) {
-			$sidebars_qty = 3;
-
-			if ( ! is_customize_preview() ) {
-				// Get number of sidebars from saved options, else set to 3.
-				$sidebars_qty = gl_get_option( 'sidebars_qty', 3 );
-			}
+			// Get number of sidebars from saved options, else set to 3.
+			$sidebars_qty = gl_get_option( 'sidebars_qty', 3 );
 
 			// Register number of sidebars.
 			for ( $i = 1; $i <= $sidebars_qty; $i++ ) {

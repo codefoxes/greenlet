@@ -103,8 +103,6 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
 			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
 
-			<input id="_customize-input-{{ data.id }}" type="hidden" {{{ data.link }}} />
-
 			<div class="gl-radio-images">
 				<# for ( key in data.templates ) { #>
 				<div class="gl-radio-image">

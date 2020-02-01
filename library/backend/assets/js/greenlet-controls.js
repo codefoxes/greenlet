@@ -25,6 +25,8 @@
 						manage_topbar_dependencies( controlObj )
 					} else if ( controlObj.id === 'show_semifooter' ) {
 						manage_semifooter_dependencies( controlObj )
+					} else if ( controlObj.id === 'sidebars_qty' ) {
+						manage_sidebar_dependencies( controlObj )
 					}
 				}
 			);
@@ -41,10 +43,7 @@
 			controlObj.id,
 			function ( control ) {
 				var checkboxes = $( controlObj.selector + ' input[type="checkbox"]' )
-				var input      = $( '#_customize-input-' + controlObj.id )
 				var val        = control.setting._value
-
-				control.setting.set( JSON.stringify( val ) )
 
 				checkboxes.on(
 					'change',
@@ -55,22 +54,13 @@
 						if ( $( this ).prop( 'checked' ) ) {
 							if ( index === - 1 ) {
 								val.push( current )
-								control.setting.set( JSON.stringify( val ) )
 							}
 						} else {
 							if ( index !== - 1 ) {
-								val.splice(
-									index,
-									1
-								)
-								control.setting.set( JSON.stringify( val ) )
+								val.splice( index, 1 )
 							}
 						}
 
-						$( input ).attr(
-							'value',
-							JSON.stringify( val )
-						).trigger( 'change' )
 						control.setting.set( JSON.stringify( val ) )
 					}
 				)
@@ -88,19 +78,11 @@
 			controlObj.id,
 			function ( control ) {
 				var radios = $( controlObj.selector + ' input[type="radio"]' )
-				var input  = $( '#_customize-input-' + controlObj.id )
-				var val    = control.setting._value
 
 				radios.on(
 					'change',
 					function () {
-						val = $( this ).val()
-
-						$( input ).attr(
-							'value',
-							val
-						).trigger( 'change' )
-						control.setting.set( val )
+						control.setting.set( this.value )
 					}
 				)
 			}
@@ -116,15 +98,9 @@
 		wp.customize.control(
 			controlObj.id,
 			function ( control ) {
-				var sidebars = 3
-
-				var radios = $( controlObj.selector + ' input[type="radio"]' )
-				var input  = $( '#_customize-input-' + controlObj.id )
-
+				var radios   = $( controlObj.selector + ' input[type="radio"]' )
 				var val      = control.setting._value
 				var template = val.template
-
-				control.setting.set( JSON.stringify( val ) )
 
 				// Listen to Template selection change.
 				radios.on(
@@ -135,6 +111,7 @@
 						var colsLength  = cols.length
 						var matcherHtml = ''
 						var sequence    = [ 'main' ]
+						var sidebars    = $( '#_customize-input-sidebars_qty' ).val()
 
 						for ( var i = 1; i <= colsLength; i ++ ) {
 							matcherHtml += '<div class="gl-template-matcher col-' + cols[ i - 1 ] + '">'
@@ -160,10 +137,6 @@
 							sequence: sequence
 						}
 
-						$( input ).attr(
-							'value',
-							JSON.stringify( val )
-						).trigger( 'change' )
 						control.setting.set( JSON.stringify( val ) )
 					}
 				)
@@ -186,10 +159,6 @@
 							sequence: sequence
 						}
 
-						$( input ).attr(
-							'value',
-							JSON.stringify( val )
-						).trigger( 'change' )
 						control.setting.set( JSON.stringify( val ) )
 					}
 				)
@@ -257,6 +226,38 @@
 				section.find( '#customize-control-semifooter_container' ).toggle()
 				$( '#customize-control-semifooter_bg' ).toggle()
 				$( '#customize-control-semifooter_color' ).toggle()
+			}
+		)
+	}
+
+	/**
+	 * Change Sidebars quantity dependencies.
+	 *
+	 * @param {object} controlObj sidebars_qty control Object.
+	 */
+	function manage_sidebar_dependencies( controlObj ) {
+		var selector = $( '#_customize-input-sidebars_qty' )
+
+		selector.on(
+			'change',
+			function() {
+				var section  = controlObj.container.closest( '.control-section' )
+				var template = section.find( '.gl-template-selection' )
+				var sidebars = this.value
+				template.each(
+					function() {
+						var current     = this.value
+						var selected    = ( current === 'main' ) ? 'selected' : ''
+						var matcherHtml = '<option value="main" ' + selected + '>Main Content</option>'
+
+						for ( var j = 1; j <= sidebars; j ++ ) {
+							selected     = ( current === 'sidebar-' + j ) ? 'selected' : ''
+							matcherHtml += '<option value="sidebar-' + j + '" ' + selected + '>Sidebar ' + j + '</option>'
+						}
+
+						this.innerHTML = matcherHtml
+					}
+				);
 			}
 		)
 	}

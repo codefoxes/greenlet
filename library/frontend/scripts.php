@@ -122,7 +122,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$header_bg        = gl_get_option( 'header_bg', '#fff' );
 		$header_color     = gl_get_option( 'header_color', '#33691e' );
 		$header_link_over = gl_get_option( 'header_link_hover', '#7cb342' );
-		$main_bg          = gl_get_option( 'main_bg', '' );
+		$main_bg          = gl_get_option( 'main_bg', '#f5f5f5' );
 		$content_bg       = gl_get_option( 'content_bg', '' );
 		$semifooter_bg    = gl_get_option( 'semifooter_bg', '#fff' );
 		$semifooter_color = gl_get_option( 'semifooter_color', '#212121' );
