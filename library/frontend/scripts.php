@@ -115,6 +115,8 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 
 		$fixed_topbar = gl_get_option( 'fixed_topbar', false );
 
+		$logo_width       = gl_get_option( 'logo_width', false );
+		$logo_height      = gl_get_option( 'logo_height', false );
 		$site_bg          = gl_get_option( 'site_bg', '#f5f5f5' );
 		$site_color       = gl_get_option( 'site_color', '#383838' );
 		$topbar_bg        = gl_get_option( 'topbar_bg', '#fff' );
@@ -134,6 +136,8 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 
 		$critical_css = gl_get_option( 'critical_css', '' );
 		$defer_css    = gl_get_option( 'defer_css', false );
+
+		list( $raw_width, $raw_height ) = getimagesize( esc_url( greenlet_get_logo() ) );
 
 		ob_start();
 		// phpcs:disable
@@ -188,6 +192,10 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 			color: <?php echo sanitize_hex_color( $header_link_over ); ?>;
 		}
 
+		.site-navigation ul .children {
+			background: <?php echo sanitize_hex_color( $header_bg ); ?>;
+		}
+
 		.site-content {
 			background: <?php echo sanitize_hex_color( $main_bg ); ?>;
 			max-width: <?php echo esc_html( greenlet_css_width( 'main_width' ) ); ?>;
@@ -223,6 +231,14 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 
 		<?php
 		// phpcs:enable
+		if ( false !== $logo_width && $raw_width !== $logo_width ) {
+			echo '.site-logo img { width: ' . esc_html( $logo_width ) . 'px;}';
+		}
+
+		if ( false !== $logo_height && $raw_height !== $logo_height ) {
+			echo '.site-logo img { height: ' . esc_html( $logo_height ) . 'px;}';
+		}
+
 		if ( false === $show_title ) {
 			echo '.site-name { display: none; }';
 		}

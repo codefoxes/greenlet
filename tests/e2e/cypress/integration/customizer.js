@@ -39,6 +39,24 @@ describe('Customizer', () => {
 		cy.get('#accordion-section-colors').contains('Colors')
 	})
 
+	describe('Site Identity', () => {
+		before( () => {
+			cy.get('#accordion-section-title_tagline').click()
+		})
+
+		after( () => {
+			cy.get('.customize-section-back:visible').click()
+		})
+
+		it('Contains Logo Width', () => {
+			cy.get('#_customize-input-logo_width').should('have.attr', 'type', 'range')
+		})
+
+		it('Contains Logo Height', () => {
+			cy.get('#_customize-input-logo_height').should('have.attr', 'type', 'range')
+		})
+	})
+
 	describe('Framework', () => {
 		before( () => {
 			cy.get('#accordion-section-framework').click()
