@@ -511,14 +511,12 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'header_divider',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'    => 'divider',
-			'section' => 'header_layout',
+		'type' => 'control',
+		'id'   => 'header_divider',
+		'args' => array(
+			'type'     => 'divider',
+			'settings' => array(),
+			'section'  => 'header_layout',
 		),
 	);
 
@@ -588,14 +586,12 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'logo_divider',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'    => 'divider',
-			'section' => 'header_layout',
+		'type' => 'control',
+		'id'   => 'logo_divider',
+		'args' => array(
+			'type'     => 'divider',
+			'settings' => array(),
+			'section'  => 'header_layout',
 		),
 	);
 
@@ -745,14 +741,12 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'main_divider',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'    => 'divider',
-			'section' => 'main_layout',
+		'type' => 'control',
+		'id'   => 'main_divider',
+		'args' => array(
+			'type'     => 'divider',
+			'settings' => array(),
+			'section'  => 'main_layout',
 		),
 	);
 
@@ -874,14 +868,12 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'footer_divider',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'    => 'divider',
-			'section' => 'footer_layout',
+		'type' => 'control',
+		'id'   => 'footer_divider',
+		'args' => array(
+			'type'     => 'divider',
+			'settings' => array(),
+			'section'  => 'footer_layout',
 		),
 	);
 
@@ -949,14 +941,12 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'fmenu_divider',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'    => 'divider',
-			'section' => 'footer_layout',
+		'type' => 'control',
+		'id'   => 'fmenu_divider',
+		'args' => array(
+			'type'     => 'divider',
+			'settings' => array(),
+			'section'  => 'footer_layout',
 		),
 	);
 

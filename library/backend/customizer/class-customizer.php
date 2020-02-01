@@ -103,7 +103,11 @@ class Customizer {
 				);
 
 			} elseif ( 'control' === $option['type'] ) {
-				$wp_customize->add_control( $option['id'], $option['args'] );
+				if ( 'divider' === $option['args']['type'] ) {
+					$wp_customize->add_control( new Control_Divider( $wp_customize, $option['id'], $option['args'] ) );
+				} else {
+					$wp_customize->add_control( $option['id'], $option['args'] );
+				}
 			} elseif ( 'setting_control' === $option['type'] ) {
 				$wp_customize->add_setting(
 					$option['id'],
@@ -125,9 +129,6 @@ class Customizer {
 
 				} elseif ( 'template-selector' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Template_Selector( $wp_customize, $option['id'], $option['cargs'] ) );
-
-				} elseif ( 'divider' === $option['cargs']['type'] ) {
-					$wp_customize->add_control( new Control_Divider( $wp_customize, $option['id'], $option['cargs'] ) );
 
 				} else {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
