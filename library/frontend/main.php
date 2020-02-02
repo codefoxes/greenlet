@@ -5,6 +5,8 @@
  * @package greenlet\library\frontend
  */
 
+use Greenlet\Columns as GreenletColumns;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -71,7 +73,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 
 		// Create new column object with current layout as parameter.
 		// @see library/classes.php.
-		$cobj = new ColumnObject( $layout );
+		$cobj = new GreenletColumns( $layout );
 
 		// For each columns in the array.
 		$i = 1;

@@ -1,16 +1,18 @@
 <?php
 /**
- * ColumnObject.
+ * Greenlet Columns.
  *
  * @package greenlet\library
  */
+
+namespace Greenlet;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * ColumnObject Class.
+ * Columns Class.
  *
  * Class to create columns based on the layout if set,
  * else based on various options like current template.
@@ -23,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @global  object $wp_query Intricacies of single post or page.
  * @param   mixed  $cols     Columns as integer or string of integers separated by hyphen.
  */
-class ColumnObject {
+class Columns {
 
 	/**
 	 * Template name from options or template files.
@@ -74,7 +76,7 @@ class ColumnObject {
 	public $sequence;
 
 	/**
-	 * ColumnObject constructor.
+	 * Columns constructor.
 	 *
 	 * @since 1.0.0
 	 * @param int $cols Number of columns.

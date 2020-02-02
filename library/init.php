@@ -88,7 +88,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 
 		require_once LIBRARY_DIR . '/common/helpers.php';
 		require_once LIBRARY_DIR . '/common/setup.php';
-		require_once LIBRARY_DIR . '/common/class-columnobject.php';
+		require_once LIBRARY_DIR . '/common/class-columns.php';
 
 		global $wp_customize;
 		if ( is_admin() || isset( $wp_customize ) ) {

@@ -7,6 +7,8 @@
 
 namespace Greenlet\Support;
 
+use Greenlet\Columns as GreenletColumns;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -17,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class to create columns based on the layout if set,
  * else based on various options like current template.
  */
-class Woo_Columns extends \ColumnObject {
+class Woo_Columns extends GreenletColumns {
 	/**
-	 * WooCommerce ColumnObject constructor.
+	 * WooCommerce Columns constructor.
 	 *
 	 * @since 1.0.0
 	 * @param int $cols Number of columns.
