@@ -66,7 +66,7 @@ class WooCommerce {
 		add_action( 'template_redirect', array( $this, 'adjust_woocommerce_actions' ) );
 		add_filter( 'loop_shop_per_page', array( $this, 'get_archive_products_count' ), 20 );
 		add_filter( 'loop_shop_columns', array( $this, 'get_archive_columns' ) );
-		add_filter( 'add_to_cart_fragments', array( $this, 'add_to_cart_fragment' ) );
+		add_filter( 'woocommerce_add_to_cart_fragments', array( $this, 'add_to_cart_fragment' ) );
 
 		$this->hook_cart_button();
 	}
