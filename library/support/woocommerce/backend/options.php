@@ -17,12 +17,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array         Updated options array.
  */
 function greenlet_woo_options( $options ) {
+	$archive_count = array_combine( range( 1, 40 ), range( 1, 40 ) );
+	array_push( $archive_count, 'unlimited' );
+
+	$archive_columns = array_combine( range( 1, 12 ), range( 1, 12 ) );
+
 	$options[] = array(
 		'type' => 'section',
 		'id'   => 'shop_layout',
 		'args' => array(
 			'title' => __( 'Shop Layout', 'greenlet' ),
-			'panel' => 'layout',
+			'panel' => 'woocommerce',
 		),
 	);
 
@@ -118,6 +123,59 @@ function greenlet_woo_options( $options ) {
 			'label'     => __( 'Product Search Results Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
 			'columns'   => greenlet_column_content_options(),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'shop_design',
+		'args' => array(
+			'title' => __( 'Shop Design', 'greenlet' ),
+			'panel' => 'woocommerce',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'archive_products_count',
+		'sargs' => array(
+			'default' => 8,
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'shop_design',
+			'label'       => __( 'Archive page Products Count.', 'greenlet' ),
+			'description' => __( 'Number of Products in product archives page.', 'greenlet' ),
+			'choices'     => $archive_count,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'archive_products_columns',
+		'sargs' => array(
+			'default' => 4,
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'shop_design',
+			'description' => __( 'Number of products in one row. (Number of columns).', 'greenlet' ),
+			'choices'     => $archive_columns,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'cart_position',
+		'sargs' => array(
+			'default' => 'dont-show',
+		),
+		'cargs' => array(
+			'type'        => 'select',
+			'section'     => 'shop_design',
+			'label'       => __( 'Cart Position', 'greenlet' ),
+			'description' => __( 'Column for the Shopping cart to be displayed.', 'greenlet' ),
+			'choices'     => greenlet_cover_columns( array( 'header', 'topbar' ) ),
 		),
 	);
 

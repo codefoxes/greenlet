@@ -39,10 +39,7 @@ class WooCommerce {
 		}
 
 		$this->init_backend();
-
-		require_once LIBRARY_DIR . '/support/woocommerce/class-woo-columns.php';
-		add_filter( 'woocommerce_template_loader_files', array( $this, 'template_loader_files' ), 10, 2 );
-		add_action( 'template_redirect', array( $this, 'adjust_woocommerce_actions' ) );
+		$this->init_frontend();
 	}
 
 	/**
@@ -55,6 +52,31 @@ class WooCommerce {
 		if ( is_admin() || isset( $wp_customize ) ) {
 			require_once LIBRARY_DIR . '/support/woocommerce/backend/options.php';
 		}
+	}
+
+	/**
+	 * Initialize WooCommerce Frontend Setup.
+	 *
+	 * @since  1.1.0
+	 */
+	public function init_frontend() {
+		require_once LIBRARY_DIR . '/support/woocommerce/frontend/class-woo-columns.php';
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_filter( 'woocommerce_template_loader_files', array( $this, 'template_loader_files' ), 10, 2 );
+		add_action( 'template_redirect', array( $this, 'adjust_woocommerce_actions' ) );
+		add_filter( 'loop_shop_per_page', array( $this, 'get_archive_products_count' ), 20 );
+		add_filter( 'loop_shop_columns', array( $this, 'get_archive_columns' ) );
+		add_filter( 'add_to_cart_fragments', array( $this, 'add_to_cart_fragment' ) );
+
+		$this->hook_cart_button();
+	}
+
+	/**
+	 * Enqueue Woocommerce support scripts.
+	 */
+	public function enqueue_scripts() {
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		greenlet_enqueue_style( 'greenlet-shop', STYLES_URL . '/shop' . $min . '.css' );
 	}
 
 	/**
@@ -102,7 +124,8 @@ class WooCommerce {
 
 		if ( $cobj->sequence ) {
 			foreach ( $cobj->sequence as $pos => $column ) {
-				$width = $cobj->cols_array()[ $pos ];
+				$cols_array = $cobj->cols_array();
+				$width      = isset( $cols_array[ $pos ] ) ? $cols_array[ $pos ] : null;
 				if ( 'main' === $column ) {
 					do_action( 'greenlet_after_left_sidebar' );
 
@@ -140,6 +163,92 @@ class WooCommerce {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Get Archive Page Products Count.
+	 *
+	 * @since  1.1.0
+	 */
+	public function get_archive_products_count() {
+		$number = (int) gl_get_option( 'archive_products_count' ) ? (int) gl_get_option( 'archive_products_count' ) : 8;
+
+		if ( 'unlimited' === $number ) {
+			$number = 999;
+		}
+
+		return $number;
+	}
+
+	/**
+	 * Get Archive Page Products Columns.
+	 *
+	 * @since  1.1.0
+	 */
+	public function get_archive_columns() {
+		$number = (int) gl_get_option( 'archive_products_columns' ) ? (int) gl_get_option( 'archive_products_columns' ) : 4;
+		return $number;
+	}
+
+	/**
+	 * Hook Shopping cart button.
+	 *
+	 * @since  1.1.0
+	 */
+	public function hook_cart_button() {
+		// If cart position is set, hook dynamic action to that position.
+		$cart_pos = gl_get_option( 'cart_position' ) ? gl_get_option( 'cart_position' ) : 'dont-show';
+		if ( 'dont-show' !== $cart_pos ) {
+			$cart_pos = str_replace( '-', '_', $cart_pos );
+			add_action( "greenlet_after_{$cart_pos}_content", array( $this, 'get_cart_button' ), 20, 0 );
+		}
+	}
+
+	/**
+	 * Retrieve or print cart button.
+	 *
+	 * @param bool $echo Whether to print.
+	 * @return array|mixed|string|void
+	 */
+	public function get_cart_button( $echo = true ) {
+		global $woocommerce;
+		$ajax_class = 'a.cart-button';
+
+		$cart  = '<a class="cart-button" href="';
+		$cart .= wc_get_cart_url() . '" title="';
+		$cart .= __( 'View shopping cart', 'greenlet' ) . '"><div class="cart-icon">';
+		$cart .= greenlet_get_file_contents( LIBRARY_DIR . '/support/woocommerce/frontend/cart.svg' );
+		$cart .= '</div><div class="cart-contents">';
+		// translators: %d: Cart contents count.
+		$cart .= sprintf( _n( '%d Item', '%d Items', $woocommerce->cart->cart_contents_count, 'greenlet' ), $woocommerce->cart->cart_contents_count ) . ' - ';
+		$cart .= $woocommerce->cart->get_cart_total() . '</div></a>';
+		$cart  = array( $cart, $ajax_class );
+
+		/**
+		 * Filter to change Cart Button Content.
+		 * Hook a function to this filter and return an array of
+		 * cart content and ajax class as strings (see format above)
+		 * to change cart button content.
+		 */
+		$cart = apply_filters( 'greenlet_cart_button_contents', $cart );
+		if ( true !== $echo ) {
+			return $cart;
+		}
+
+		echo $cart[0]; // phpcs:ignore
+	}
+
+	/**
+	 * Get changed cart contents.
+	 *
+	 * @param array $fragments Cart contents.
+	 * @return array           Updated contents
+	 */
+	public function add_to_cart_fragment( $fragments ) {
+		$cart = $this->get_cart_button( false );
+
+		$fragments[ $cart[1] ] = $cart[0];
+		return $fragments;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a css_files=( 'default' 'styles' )
+declare -a css_files=( 'default' 'styles' 'shop' )
 
 buildjs() {
 	echo 'Build JS: Started'
