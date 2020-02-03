@@ -265,8 +265,8 @@
 		selector.on(
 			'change',
 			function() {
-				var section  = controlObj.container.closest( '.control-section' )
-				var template = section.find( '.gl-template-selection' )
+				var controls = $( '#customize-theme-controls' )
+				var template = controls.find( '.gl-template-selection' )
 				var sidebars = this.value
 				template.each(
 					function() {

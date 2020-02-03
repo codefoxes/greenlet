@@ -5,6 +5,8 @@
  * @package greenlet\library\common
  */
 
+use Greenlet\Columns as GreenletColumns;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -109,8 +111,7 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 					$layout        = gl_get_option( $layout_option, top_bottom_default_columns( $pos ) );
 
 					// Create new column object.
-					// @see library/classes.php.
-					$cobj = new ColumnObject( $layout );
+					$cobj = new GreenletColumns( $layout );
 
 					// For total number of columns register sidebars.
 					for ( $i = 1; $i <= ( $cobj->total ); $i++ ) {

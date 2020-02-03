@@ -5,6 +5,8 @@
  * @package greenlet\library\frontend
  */
 
+use Greenlet\Columns as GreenletColumns;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -38,8 +40,8 @@ add_filter( 'excerpt_length', 'greenlet_excerpt_length', 999 );
 function greenlet_do_main_container() {
 	do_action( 'greenlet_before_left_sidebar' );
 
-	// Instantiate ColumnObject class to get column widths.
-	$cobj = new ColumnObject();
+	// Instantiate Greenlet\Columns class to get column widths.
+	$cobj = new GreenletColumns();
 
 	if ( $cobj->sequence ) {
 		foreach ( $cobj->sequence as $pos => $column ) {

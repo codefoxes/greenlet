@@ -30,6 +30,14 @@ img {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	margin: auto;
 	z-index: 99;
+
+	.header-column {
+		display: flex;
+
+		&:last-child {
+			justify-content: flex-end;
+		}
+	}
 }
 
 .site-header h1, .topbar h1 {
@@ -68,54 +76,72 @@ img {
 	display: block;
 }
 
-.site-navigation ul {
-	list-style: none;
-	margin: 0;
+.site-navigation {
+	height: 100%;
+	width: 100%;
 
-	.children {
-		position: absolute;
-		left: 0;
-		width: max-content;
-		min-width: 180px;
-		font-size: 95%;
-		visibility: hidden;
-		opacity: 0;
-		text-align: left;
-		background: #fff;
-		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-		transition: .25s all;
-		z-index: 999;
+	ul {
+		height: 100%;
+		list-style: none;
+		margin: 0;
 
-		li {
-			display: block;
-			position: relative;
+		.children, .sub-menu {
+			position: absolute;
+			left: 0;
+			width: max-content;
+			min-width: 180px;
+			font-size: 95%;
+			visibility: hidden;
+			opacity: 0;
+			text-align: left;
+			background: #fff;
+			box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+			transition: .25s all;
+			z-index: 999;
+			height: unset;
 
-			&:first-child {
-				border-top: 2px solid #7CB342;
+			li {
+				display: block;
+				position: relative;
+
+				&:first-child {
+					border-top: 2px solid #7CB342;
+				}
+			}
+
+			a {
+				padding: 15px;
+			}
+
+			.children, .sub-menu {
+				left: 100%;
+				top: -2px;
+				font-size: 100%;
+
+				ul {
+					top: 100%;
+					left: 0;
+				}
 			}
 		}
+	}
 
-		a {
-			padding: 15px;
-		}
+	li {
+		display: block;
+		position: relative;
+		margin: 0;
+		padding: 0;
 
-		.children {
-			left: 100%;
-			top: -2px;
-			font-size: 100%;
+		&:hover {
+			& > .children, & > .sub-menu {
+				visibility: visible;
+				opacity: 1;
+			}
 		}
 	}
-}
 
-.site-navigation li {
-	display: block;
-	position: relative;
-
-	&:hover {
-		& > .children {
-			visibility: visible;
-			opacity: 1;
-		}
+	a {
+		padding: 8px 0;
 	}
 }
 
@@ -125,7 +151,7 @@ input[type="checkbox"].menu-toggle {
 
 .menu-toggle-button {
 	position: absolute;
-	right: 20px;
+	right: 28px;
 	top: -42px;
 }
 
@@ -626,14 +652,15 @@ figure {
 	}
 
 	.site-navigation li {
-		margin: 0;
-		padding: 0;
 		display: inline-block;
+		height: 100%;
 	}
 
 	.site-navigation a {
-		padding: 33px 12px;
-		display: block;
+		display: flex;
+		height: 100%;
+		align-items: center;
+		padding: 0 12px;
 	}
 
 	.menu-toggle-button {
@@ -641,6 +668,9 @@ figure {
 	}
 
 	.menu-toggle ~ .site-menu {
-		display: block;
+		display: flex;
+		justify-content: flex-end;
+		height: 100%;
+		flex-wrap: wrap;
 	}
 }

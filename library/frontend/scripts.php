@@ -188,11 +188,15 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 			color: <?php echo sanitize_hex_color( $header_color ); ?>;
 		}
 
+		.site-header .hamburger {
+			background: <?php echo sanitize_hex_color( $header_color ); ?>;
+		}
+
 		.site-header a:hover {
 			color: <?php echo sanitize_hex_color( $header_link_over ); ?>;
 		}
 
-		.site-navigation ul .children {
+		.site-navigation ul .children, .site-navigation ul .sub-menu {
 			background: <?php echo sanitize_hex_color( $header_bg ); ?>;
 		}
 
