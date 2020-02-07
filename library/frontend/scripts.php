@@ -133,11 +133,30 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$heading_color    = gl_get_option( 'heading_color', '#383838' );
 		$link_color       = gl_get_option( 'link_color', '#1565C0' );
 		$link_hover       = gl_get_option( 'link_hover', '#0D47A1' );
+		$btn_bg           = gl_get_option( 'button_bg', '#ffffff' );
+		$btn_color        = gl_get_option( 'button_color', '#555555' );
+		$btn_border       = gl_get_option( 'button_border', '#bbbbbb' );
+		$btn_bg_over      = gl_get_option( 'button_hover_bg', '#ffffff' );
+		$btn_color_over   = gl_get_option( 'button_hover_color', '#383838' );
+		$btn_border_over  = gl_get_option( 'button_hover_border', '#383838' );
+		$ip_bg            = gl_get_option( 'input_bg', '#ffffff' );
+		$ip_color         = gl_get_option( 'input_color', '#383838' );
+		$ip_ph            = gl_get_option( 'input_placeholder', '#555555' );
+		$ip_border        = gl_get_option( 'input_border', '#bbbbbb' );
+		$ip_bg_focus      = gl_get_option( 'input_focus_bg', '#ffffff' );
+		$ip_color_focus   = gl_get_option( 'input_focus_color', '#383838' );
+		$ip_ph_focus      = gl_get_option( 'input_focus_placeholder', '#555555' );
+		$ip_border_focus  = gl_get_option( 'input_focus_border', '#383838' );
 
 		$critical_css = gl_get_option( 'critical_css', '' );
 		$defer_css    = gl_get_option( 'defer_css', false );
 
-		list( $raw_width, $raw_height ) = getimagesize( esc_url( greenlet_get_logo() ) );
+		$raw_width  = 0;
+		$raw_height = 0;
+		$logo       = greenlet_get_logo();
+		if ( $logo ) {
+			list( $raw_width, $raw_height ) = getimagesize( esc_url( $logo ) );
+		}
 
 		ob_start();
 		// phpcs:disable
@@ -221,6 +240,10 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 			max-width: <?php echo esc_html( greenlet_css_width( 'footer_width' ) ); ?>;
 		}
 
+		h1, h2, h3, h4, h5, h6, .entry-title a {
+			color: <?php echo sanitize_hex_color( $heading_color ); ?>;
+		}
+
 		a, .entry-meta li {
 			color: <?php echo sanitize_hex_color( $link_color ); ?>;
 		}
@@ -229,8 +252,36 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 			color: <?php echo sanitize_hex_color( $link_hover ); ?>;
 		}
 
-		h1, h2, h3, h4, h5, h6, .entry-title a {
-			color: <?php echo sanitize_hex_color( $heading_color ); ?>;
+		.button, button, input[type="submit"], input[type="reset"], input[type="button"], .pagination li a, .pagination li span {
+			background: <?php echo sanitize_hex_color( $btn_bg ); ?>;
+			color: <?php echo sanitize_hex_color( $btn_color ); ?>;
+			border: <?php echo $btn_border; ?>;
+		}
+
+		.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .pagination li a:hover, .pagination li span:hover {
+			background: <?php echo sanitize_hex_color( $btn_bg_over ); ?>;
+			color: <?php echo sanitize_hex_color( $btn_color_over ); ?>;
+			border: <?php echo $btn_border_over; ?>;
+		}
+
+		input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
+			background: <?php echo sanitize_hex_color( $ip_bg ); ?>;
+			color: <?php echo sanitize_hex_color( $ip_color ); ?>;
+			border: <?php echo $ip_border; ?>;
+		}
+
+		input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="text"]:focus, input[type="tel"]:focus, input[type="url"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+			background: <?php echo sanitize_hex_color( $ip_bg_focus ); ?>;
+			color: <?php echo sanitize_hex_color( $ip_color_focus ); ?>;
+			border: <?php echo $ip_border_focus; ?>;
+		}
+
+		input[type="email"]::placeholder, input[type="number"]::placeholder, input[type="search"]::placeholder, input[type="text"]::placeholder, input[type="tel"]::placeholder, input[type="url"]::placeholder, input[type="password"]::placeholder, textarea::placeholder, select::placeholder {
+			color: <?php echo sanitize_hex_color( $ip_ph ); ?>;
+		}
+
+		input[type="email"]:focus::placeholder, input[type="number"]:focus::placeholder, input[type="search"]:focus::placeholder, input[type="text"]:focus::placeholder, input[type="tel"]:focus::placeholder, input[type="url"]:focus::placeholder, input[type="password"]:focus::placeholder, textarea:focus::placeholder, select:focus::placeholder {
+			color: <?php echo sanitize_hex_color( $ip_ph_focus ); ?>;
 		}
 
 		<?php
