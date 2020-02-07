@@ -32,7 +32,12 @@ function greenlet_options() {
 	$pagetop_columns    = greenlet_cover_columns( array( 'header', 'topbar' ) );
 	$pagebottom_columns = greenlet_cover_columns( array( 'semifooter', 'footer' ) );
 
-	list( $logo_width, $logo_height ) = getimagesize( esc_url( greenlet_get_logo() ) );
+	$logo_width  = 0;
+	$logo_height = 0;
+	$logo        = greenlet_get_logo();
+	if ( $logo ) {
+		list( $logo_width, $logo_height ) = getimagesize( esc_url( $logo ) );
+	}
 
 	$options = array();
 
@@ -105,10 +110,11 @@ function greenlet_options() {
 		'id'    => 'site_bg',
 		'sargs' => array(
 			'default'           => '#f5f5f5',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Site Background', 'greenlet' ),
 		),
@@ -119,10 +125,11 @@ function greenlet_options() {
 		'id'    => 'site_color',
 		'sargs' => array(
 			'default'           => '#383838',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Site Text Color', 'greenlet' ),
 		),
@@ -133,10 +140,11 @@ function greenlet_options() {
 		'id'    => 'topbar_bg',
 		'sargs' => array(
 			'default'           => '#ffffff',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Topbar Background', 'greenlet' ),
 		),
@@ -147,10 +155,11 @@ function greenlet_options() {
 		'id'    => 'topbar_color',
 		'sargs' => array(
 			'default'           => '#212121',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Topbar Text Color', 'greenlet' ),
 		),
@@ -161,10 +170,11 @@ function greenlet_options() {
 		'id'    => 'header_bg',
 		'sargs' => array(
 			'default'           => '#ffffff',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Header Background', 'greenlet' ),
 		),
@@ -175,10 +185,11 @@ function greenlet_options() {
 		'id'    => 'header_color',
 		'sargs' => array(
 			'default'           => '#33691e',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Header Text Color', 'greenlet' ),
 		),
@@ -189,10 +200,11 @@ function greenlet_options() {
 		'id'    => 'header_link_hover',
 		'sargs' => array(
 			'default'           => '#000000',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Header Link Hover Color', 'greenlet' ),
 		),
@@ -203,10 +215,11 @@ function greenlet_options() {
 		'id'    => 'main_bg',
 		'sargs' => array(
 			'default'           => '#f5f5f5',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Content Section Background', 'greenlet' ),
 		),
@@ -217,10 +230,11 @@ function greenlet_options() {
 		'id'    => 'content_bg',
 		'sargs' => array(
 			'default'           => '#ffffff',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Content Background', 'greenlet' ),
 		),
@@ -231,10 +245,11 @@ function greenlet_options() {
 		'id'    => 'semifooter_bg',
 		'sargs' => array(
 			'default'           => '#ffffff',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Semifooter Background', 'greenlet' ),
 		),
@@ -245,10 +260,11 @@ function greenlet_options() {
 		'id'    => 'semifooter_color',
 		'sargs' => array(
 			'default'           => '#212121',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Semifooter Text Color', 'greenlet' ),
 		),
@@ -259,10 +275,11 @@ function greenlet_options() {
 		'id'    => 'footer_bg',
 		'sargs' => array(
 			'default'           => '#212121',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Footer Background', 'greenlet' ),
 		),
@@ -273,10 +290,11 @@ function greenlet_options() {
 		'id'    => 'footer_color',
 		'sargs' => array(
 			'default'           => '#ffffff',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Footer Text Color', 'greenlet' ),
 		),
@@ -287,40 +305,13 @@ function greenlet_options() {
 		'id'    => 'heading_color',
 		'sargs' => array(
 			'default'           => '#383838',
-			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
 		'cargs' => array(
-			'type'    => 'color',
+			'type'    => 'gl-color',
 			'section' => 'colors',
 			'label'   => __( 'Heading Color', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'link_color',
-		'sargs' => array(
-			'default'           => '#1565C0',
-			'sanitize_callback' => 'sanitize_hex_color',
-		),
-		'cargs' => array(
-			'type'    => 'color',
-			'section' => 'colors',
-			'label'   => __( 'Link Color', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'link_hover',
-		'sargs' => array(
-			'default'           => '#0D47A1',
-			'sanitize_callback' => 'sanitize_hex_color',
-		),
-		'cargs' => array(
-			'type'    => 'color',
-			'section' => 'colors',
-			'label'   => __( 'Link Hover Color', 'greenlet' ),
 		),
 	);
 
@@ -989,6 +980,269 @@ function greenlet_options() {
 			'label'       => __( 'Footer Menu Position', 'greenlet' ),
 			'description' => __( 'Column for the Footer Menu to be displayed.', 'greenlet' ),
 			'choices'     => $pagebottom_columns,
+		),
+	);
+
+	$options[] = array(
+		'type' => 'panel',
+		'id'   => 'components',
+		'args' => array(
+			'title'       => __( 'Components', 'greenlet' ),
+			'description' => 'Components Styles',
+			'priority'    => 75,
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'buttons',
+		'args' => array(
+			'title' => __( 'Buttons', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'button_bg',
+		'sargs' => array(
+			'default'   => '#ffffff',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'buttons',
+			'label'   => __( 'Button Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'button_color',
+		'sargs' => array(
+			'default'   => '#555555',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'buttons',
+			'label'   => __( 'Button Text Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'button_hover_bg',
+		'sargs' => array(
+			'default'   => '#ffffff',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'buttons',
+			'label'   => __( 'Button Hover Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'button_hover_color',
+		'sargs' => array(
+			'default'   => '#333333',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'buttons',
+			'label'   => __( 'Button Hover Text', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'button_border',
+		'sargs' => array(
+			'default'   => '1px solid #bbbbbb',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'border',
+			'section' => 'buttons',
+			'label'   => __( 'Button Border', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'button_hover_border',
+		'sargs' => array(
+			'default'   => '1px solid #888888',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'border',
+			'section' => 'buttons',
+			'label'   => __( 'Button Hover Border', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'links',
+		'args' => array(
+			'title' => __( 'Links', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'link_color',
+		'sargs' => array(
+			'default'           => '#1565C0',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'links',
+			'label'   => __( 'Link Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'link_hover',
+		'sargs' => array(
+			'default'           => '#0D47A1',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'links',
+			'label'   => __( 'Link Hover Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'inputs',
+		'args' => array(
+			'title' => __( 'Inputs', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_bg',
+		'sargs' => array(
+			'default'   => '#ffffff',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'inputs',
+			'label'   => __( 'Input Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_focus_bg',
+		'sargs' => array(
+			'default'   => '#ffffff',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'inputs',
+			'label'   => __( 'Input Focus Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_color',
+		'sargs' => array(
+			'default'   => '#383838',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'inputs',
+			'label'   => __( 'Input Text Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_focus_color',
+		'sargs' => array(
+			'default'   => '#ffffff',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'inputs',
+			'label'   => __( 'Input Focus Text', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_placeholder',
+		'sargs' => array(
+			'default'   => '#999999',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'inputs',
+			'label'   => __( 'Input Placeholder', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_focus_placeholder',
+		'sargs' => array(
+			'default'   => '#999999',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'inputs',
+			'label'   => __( 'Input Focus Placeholder', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_border',
+		'sargs' => array(
+			'default'   => '1px solid #bbbbbb',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'border',
+			'section' => 'inputs',
+			'label'   => __( 'Input Border', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_focus_border',
+		'sargs' => array(
+			'default'   => '1px solid #888888',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'border',
+			'section' => 'inputs',
+			'label'   => __( 'Input Focus Border', 'greenlet' ),
 		),
 	);
 

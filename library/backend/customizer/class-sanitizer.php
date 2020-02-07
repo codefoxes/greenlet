@@ -60,4 +60,25 @@ class Sanitizer {
 
 		return ( ! empty( $value ) ) ? $value : array();
 	}
+
+	/**
+	 * Sanitize rgba and hex colors.
+	 *
+	 * @since  1.1.0
+	 * @param  string $color Input color.
+	 * @return string        Sanitized color.
+	 */
+	public static function sanitize_color( $color ) {
+		if ( empty( $color ) || is_array( $color ) ) {
+			return '';
+		}
+
+		if ( false === strpos( $color, 'rgba' ) ) {
+			return sanitize_hex_color( $color );
+		}
+
+		$color = str_replace( ' ', '', $color );
+		sscanf( $color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
+		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+	}
 }

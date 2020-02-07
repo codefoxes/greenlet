@@ -86,24 +86,47 @@
 	margin: 10px -12px;
 }
 
+.gl-color button.wp-color-result .color-alpha, .gl-border button.wp-color-result .color-alpha {
+	height: 28px !important;
+}
+
+.gl-color input.color-picker.wp-color-picker {
+	max-width: 150px;
+	letter-spacing: -.6px;
+}
+
+.gl-color .button.button-small.wp-picker-clear {
+	min-height: 30px;
+}
+
 .customize-control-range {
 	position: relative;
 }
 
-.customize-control-range input {
+.customize-control-range input, .customize-control-border input[type="range"] {
 	width: 100%;
 	background: #689F38;
 	-webkit-appearance: none;
-	height: 4px;
-	border-radius: 4px;
+	height: 3px;
+	border-radius: 3px;
+}
+
+.customize-control-range input:focus, .customize-control-border input[type="range"]:focus {
+	outline: none;
 }
 
 .customize-control-range .dashicons {
 	position: absolute;
 	right: 0;
 	bottom: 12px;
-	font-size: 15px;
+	font-size: 12px;
 	color: #999;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.customize-control-range .dashicons:hover {
+	background: #fff;
 }
 
 .customize-control-checkbox .customize-inside-control-row {
@@ -116,8 +139,10 @@
 	height: 20px;
 	border-radius: 20px;
 	border: 1px solid rgba(0, 0, 0, .2);
+	background: #dadbdd;
 	margin: 0;
 	transition: all .2s;
+	position: relative;
 }
 
 .customize-control-checkbox input:checked {
@@ -127,6 +152,31 @@
 
 .customize-control-checkbox input[type=checkbox]:before {
 	content: '';
+	position: absolute;
+	display: block;
+	margin: 0;
+	width: 6px;
+	height: 6px;
+	top: 50%;
+	right: 6px;
+	border-radius: 50px;
+	border: 1px solid #b4b4b4;
+	transform: translateY(-50%);
+}
+
+.customize-control-checkbox input[type=checkbox]:checked:before {
+	content: '';
+	background: rgba(255, 255, 255, 0.5);
+	width: 1px;
+	height: 8px;
+	display: block;
+	left: 10px;
+	border: none;
+}
+
+.customize-control-checkbox input[type=checkbox]:after {
+	content: '';
+	position: absolute;
 	background: #fff;
 	width: 16px;
 	height: 16px;
@@ -134,15 +184,37 @@
 	border-radius: 10px;
 	margin: 1px;
 	box-shadow: 0 0 2px #666;
-	transform: translateX(0);
 	transition: all .2s;
 }
 
-.customize-control-checkbox input[type=checkbox]:checked:before {
+.customize-control-checkbox input[type=checkbox]:checked:after {
 	transform: translateX(18px);
 }
 
 .customize-control-checkbox input[type=checkbox]:focus {
 	box-shadow: none;
 	border-color: rgba(0, 0, 0, .2);
+}
+
+.gl-border {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.gl-border .width-wrap {
+	flex-grow: 1;
+	height: 30px;
+	line-height: 25px;
+}
+
+.customize-control-border input[type="range"] {
+	width: 95%;
+}
+
+.customize-control-border select {
+	width: 111px;
+	margin-right: 5px;
+	margin-bottom: 10px;
 }

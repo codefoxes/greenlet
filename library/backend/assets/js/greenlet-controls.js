@@ -5,6 +5,14 @@
  */
 
 (function( $ ) {
+
+	$( window ).on(
+		'load',
+		function() {
+			$( 'html' ).addClass( 'window-loaded' );
+		}
+	);
+
 	/**
 	 * Run function when customizer is ready.
 	 */
@@ -21,14 +29,20 @@
 						templateSelectorControl( controlObj )
 					} else if ( controlObj.params.type === 'range' ) {
 						rangeControl( controlObj )
+					} else if ( controlObj.params.type === 'gl-color' ) {
+						colorControl( controlObj )
+					} else if ( controlObj.params.type === 'border' ) {
+						borderControl( controlObj )
 
 						// Manage dependencies.
+					} else if ( controlObj.id === 'custom_logo' ) {
+						manageLogoDependencies( controlObj )
 					} else if ( controlObj.id === 'show_topbar' ) {
-						manage_topbar_dependencies( controlObj )
+						manageTopbarDependencies( controlObj )
 					} else if ( controlObj.id === 'show_semifooter' ) {
-						manage_semifooter_dependencies( controlObj )
+						manageSemifooterDependencies( controlObj )
 					} else if ( controlObj.id === 'sidebars_qty' ) {
-						manage_sidebar_dependencies( controlObj )
+						manageSidebarDependencies( controlObj )
 					}
 				}
 			);
@@ -191,11 +205,126 @@
 	}
 
 	/**
+	 * Set radio-image Controller Values.
+	 *
+	 * @param {object} controlObj radio-image control Object.
+	 */
+	function colorControl( controlObj ) {
+		wp.customize.control(
+			controlObj.id,
+			function ( control ) {
+				var picker  = $( controlObj.selector + ' .color-picker' )
+				var options = {
+					change: function(event, ui) {
+						var color = ui.color.toString();
+						if ( $( 'html' ).hasClass( 'window-loaded' ) ) {
+							control.setting.set( color )
+						}
+					},
+					clear: function() {
+						control.setting.set( '' );
+					}
+				}
+				if ( controlObj.params.palettes.length > 0 ) {
+					options['palettes'] = controlObj.params.palettes
+				}
+				picker.wpColorPicker( options )
+			}
+		)
+	}
+
+	/**
+	 * Set border Controller Values.
+	 *
+	 * @param {object} controlObj border control Object.
+	 */
+	function borderControl( controlObj ) {
+		wp.customize.control(
+			controlObj.id,
+			function ( control ) {
+				// Set initial Values.
+				var widthSelector = $( '#border-width-' + controlObj.id )
+				var styleSelector = $( '#border-style-' + controlObj.id )
+				var colorSelector = $( '#border-color-' + controlObj.id )
+
+				var border      = control.setting._value
+				var borderParts = border.split( ' ' )
+
+				var width = 0
+				var style = 'none'
+				var color = '#000000'
+
+				if ( borderParts.length === 3 ) {
+					width = borderParts[0]
+					style = borderParts[1]
+					color = borderParts[2]
+
+					// Set width.
+					if ( width.indexOf( 'px' ) !== -1 ) {
+						width = width.split( 'px' )[0]
+					}
+
+					// Set style options.
+					var options      = ''
+					var styles       = [ 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden' ]
+					var stylesLength = styles.length
+					for ( var i = 0; i < stylesLength; i++ ) {
+						var selected = ( styles[ i ] === style ) ? 'selected' : ''
+						options     += '<option value="' + styles[ i ] + '" ' + selected + '>' + styles[ i ] + '</option>'
+					}
+					styleSelector.html( options )
+				}
+
+				widthSelector.val( width )
+				styleSelector.val( style )
+				colorSelector.val( color )
+
+				function setBorder() {
+					if ( $( 'html' ).hasClass( 'window-loaded' ) ) {
+						var newValue = widthSelector.val() + 'px ' + styleSelector.val() + ' ' + colorSelector.val()
+						control.setting.set( newValue );
+					}
+				}
+
+				// Listen to changes.
+				widthSelector.on( 'change', setBorder )
+				styleSelector.on( 'change', setBorder )
+				colorSelector.on( 'change', setBorder )
+			}
+		)
+	}
+
+	function manageLogoDependencies( controlObj ) {
+		if ( $( '#customize-control-custom_logo img' ).length === 0 ) {
+			$( '#customize-control-logo_width' ).hide()
+			$( '#customize-control-logo_height' ).hide()
+		}
+
+		controlObj.setting.bind(
+			function() {
+				if ( controlObj.setting._value === '' ) {
+					$( '#customize-control-logo_width' ).hide()
+					$( '#customize-control-logo_height' ).hide()
+					$( '#customize-control-show_title' ).show()
+				} else {
+					$( '#customize-control-logo_width' ).show()
+					$( '#customize-control-logo_height' ).show()
+					$( '#customize-control-show_title' ).hide()
+
+					var logo = document.querySelector( '#customize-control-custom_logo .attachment-thumb' )
+					wp.customize.control( 'logo_width' ).setting.set( logo.naturalWidth )
+					wp.customize.control( 'logo_height' ).setting.set( logo.naturalHeight )
+				}
+			}
+		)
+	}
+
+	/**
 	 * Show and hide topbar dependencies.
 	 *
 	 * @param {object} controlObj topbar control Object.
 	 */
-	function manage_topbar_dependencies( controlObj ) {
+	function manageTopbarDependencies( controlObj ) {
 		var section = controlObj.container.closest( '.control-section' )
 
 		if ( controlObj.setting._value === false ) {
@@ -228,7 +357,7 @@
 	 *
 	 * @param {object} controlObj semifooter control Object.
 	 */
-	function manage_semifooter_dependencies( controlObj ) {
+	function manageSemifooterDependencies( controlObj ) {
 		var section = controlObj.container.closest( '.control-section' )
 
 		if ( controlObj.setting._value === false ) {
@@ -259,7 +388,7 @@
 	 *
 	 * @param {object} controlObj sidebars_qty control Object.
 	 */
-	function manage_sidebar_dependencies( controlObj ) {
+	function manageSidebarDependencies( controlObj ) {
 		var selector = $( '#_customize-input-sidebars_qty' )
 
 		selector.on(
