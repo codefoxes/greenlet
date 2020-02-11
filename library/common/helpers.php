@@ -219,3 +219,45 @@ if ( ! function_exists( 'greenlet_get_logo' ) ) {
 		return apply_filters( 'greenlet_logo', $logo_url );
 	}
 }
+
+if ( ! function_exists( 'greenlet_get_file_contents' ) ) {
+	/**
+	 * Get file Contents.
+	 *
+	 * @since  1.1.0
+	 * @param  string $file_path File Path.
+	 * @return false|string      File Contents.
+	 */
+	function greenlet_get_file_contents( $file_path ) {
+		ob_start();
+		include $file_path;
+		$file_contents = ob_get_contents();
+		ob_end_clean();
+		return $file_contents;
+	}
+}
+
+if ( ! function_exists( 'greenlet_font_defaults' ) ) {
+	/**
+	 * Get font default fallbacks and variants.
+	 *
+	 * @since  1.1.0
+	 * @return array Font defaults.
+	 */
+	function greenlet_font_defaults() {
+		return array(
+			'fallback' => array(
+				'default'     => array( '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji' ),
+				'sans-serif'  => array( 'Helvetica', 'Verdana', 'Arial', 'sans-serif' ),
+				'serif'       => array( 'Times', 'Georgia', 'serif' ),
+				'monospace'   => array( 'Courier', 'monospace' ),
+				'display'     => array( 'Helvetica', 'Verdana', 'Arial', 'sans-serif' ),
+				'handwriting' => array( 'Comic Sans MS', 'cursive', 'sans-serif' ),
+			),
+			'variants' => array(
+				'normal' => array( '100', '200', '300', '400', '500', '600', '700', '800', '900' ),
+				'italic' => array( '100', '200', '300', '400', '500', '600', '700', '800', '900' ),
+			),
+		);
+	}
+}

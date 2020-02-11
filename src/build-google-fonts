@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+
+import os
+import json
+import urllib.request
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
+
+env_vars = []
+with open(current_dir + '/.env') as f:
+	for line in f:
+		if line.startswith('#'):
+			continue
+		key, value = line.strip().split('=', 1)
+		os.environ[key] = value
+
+print('Downloading..')
+
+raw = urllib.request.urlopen( 'https://www.googleapis.com/webfonts/v1/webfonts?key=' + os.environ['GOOGLE_KEY'] ).read().decode('utf-8')
+
+contents = json.loads(raw)
+
+def formatVariant(x):
+	x = x.replace('regular', '400').replace('italic', '')
+	if x == '':
+		x = '400'
+	return x
+
+print('Formatting..')
+newList = {}
+for font in contents['items']:
+	variants = font['variants']
+	newVariantList = {}
+	for variant in variants:
+		if 'italic' in variant:
+			if 'italic' in newVariantList:
+				newVariantList['italic'].append(formatVariant(variant))
+			else:
+				newVariantList['italic'] = [formatVariant(variant)]
+		else:
+			if 'normal' in newVariantList:
+				newVariantList['normal'].append(formatVariant(variant))
+			else:
+				newVariantList['normal'] = [formatVariant(variant)]
+
+	newList[ font['family'] ] = [
+		newVariantList,
+		font['category']
+	]
+
+secondList = {}
+for font in newList:
+	if 'normal' not in newList[font][0]:
+		newList[font][0]['normal'] = []
+	if 'italic' not in newList[font][0]:
+		newList[font][0]['italic'] = []
+	secondList[ font ] = [
+		[newList[font][0]['normal'], newList[font][0]['italic']],
+		newList[font][1]
+	]
+
+newRaw = json.dumps(secondList, separators=(',', ':'))
+
+print('Writing..')
+os.makedirs(current_dir + '/../library/backend/assets/fonts', exist_ok=True)
+with open(current_dir + '/../library/backend/assets/fonts/google-fonts.json', 'w+') as f:
+	f.seek(0)
+	f.write( newRaw + '\n')
+	f.truncate()

@@ -14,6 +14,12 @@ img {
 	height: auto;
 }
 
+%top-heading {
+	font-size: 2.6rem;
+	line-height: 0.8;
+	margin: 0;
+}
+
 .topbar {
 	position: relative;
 	min-height: 50px;
@@ -21,6 +27,10 @@ img {
 	z-index: 990;
 	background: #fff;
 	margin: auto;
+
+	h1 {
+		@extend %top-heading;
+	}
 }
 
 .site-header {
@@ -31,6 +41,10 @@ img {
 	margin: auto;
 	z-index: 99;
 
+	h1 {
+		@extend %top-heading;
+	}
+
 	.header-column {
 		display: flex;
 
@@ -38,42 +52,38 @@ img {
 			justify-content: flex-end;
 		}
 	}
-}
 
-.site-header h1, .topbar h1 {
-	font-size: 2.6rem;
-	line-height: 0.8;
-	margin: 0;
-}
+	a {
+		color: #33691e;
+		display: block;
+		white-space: nowrap;
 
-.site-header a {
-	color: #33691e;
-	display: block;
-	white-space: nowrap;
-}
-
-.site-header a:hover {
-	color: #7CB342;
+		&:hover {
+			color: #7CB342;
+		}
+	}
 }
 
 .site-logo {
+	font-size: 3.6rem;
 	padding: 20px 0;
+
+	.site-url {
+		max-width: 300px;
+		max-height: 50px;
+	}
+
+	img {
+		max-width: 100%;
+		display: block;
+	}
 }
 
 .site-tagline {
 	padding-top: 10px;
 	display: block;
 	line-height: 1;
-}
-
-.site-logo .site-url {
-	max-width: 300px;
-	max-height: 50px;
-}
-
-.site-logo img {
-	max-width: 100%;
-	display: block;
+	font-size: 40%;
 }
 
 .site-navigation {

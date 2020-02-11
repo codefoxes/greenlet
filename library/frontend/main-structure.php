@@ -340,23 +340,6 @@ function greenlet_do_entry_header() {
 	greenlet_markup_close();
 }
 
-
-/**
- * Get file Contents.
- *
- * @since  1.0.0
- * @param  string $file_path File Path.
- * @return false|string      File Contents.
- */
-function greenlet_get_file_contents( $file_path ) {
-	ob_start();
-	include $file_path;
-	$file_contents = ob_get_contents();
-	ob_end_clean();
-	return $file_contents;
-}
-
-
 /**
  * Renders post meta.
  *

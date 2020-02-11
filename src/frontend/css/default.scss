@@ -225,6 +225,9 @@ code {
 	// white-space: nowrap;
 	background: #F1F1F1;
 	border: 1px solid #E1E1E1;
+	display: inline-block;
+	line-height: 1.6;
+	vertical-align: middle;
 }
 pre > code {
 	display: block;

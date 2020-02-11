@@ -1,3 +1,32 @@
+.gl-row {
+	display: flex;
+}
+
+.gl-row .col-1 { width: 8.33333333333%; }
+.gl-row .col-2 { width: 16.6666666667%; }
+.gl-row .col-3 { width: 25%; }
+.gl-row .col-4 { width: 33.3333333333%; }
+.gl-row .col-5 { width: 41.6666666667%; }
+.gl-row .col-6 { width: 50%; }
+.gl-row .col-7 { width: 58.3333333333%; }
+.gl-row .col-8 { width: 66.6666666667%; }
+.gl-row .col-9 { width: 75%; }
+.gl-row .col-10 { width: 83.3333333333%; }
+.gl-row .col-11 { width: 91.6666666667%; }
+.gl-row .col-12 { width: 100%; }
+
+#customize-theme-controls .control-section.customize-pane-child.open {
+	height: 100%;
+}
+
+#accordion-section-framework {
+	margin-bottom: 15px;
+}
+
+#accordion-section-header_layout.control-section {
+	border-top: 1px solid #ddd;
+}
+
 .gl-radio-images {
 	background: #fff;
 	font-size: 0;
@@ -33,7 +62,6 @@
 }
 
 .gl-template-matcher-sequence {
-	display: flex;
 	align-items: center;
 	padding: 10px 0;
 }
@@ -67,19 +95,6 @@
 	color: #aaa;
 }
 
-.gl-template-matcher-sequence .col-1 { width: 8.33333333333%; }
-.gl-template-matcher-sequence .col-2 { width: 16.6666666667%; }
-.gl-template-matcher-sequence .col-3 { width: 25%; }
-.gl-template-matcher-sequence .col-4 { width: 33.3333333333%; }
-.gl-template-matcher-sequence .col-5 { width: 41.6666666667%; }
-.gl-template-matcher-sequence .col-6 { width: 50%; }
-.gl-template-matcher-sequence .col-7 { width: 58.3333333333%; }
-.gl-template-matcher-sequence .col-8 { width: 66.6666666667%; }
-.gl-template-matcher-sequence .col-9 { width: 75%; }
-.gl-template-matcher-sequence .col-10 { width: 83.3333333333%; }
-.gl-template-matcher-sequence .col-11 { width: 91.6666666667%; }
-.gl-template-matcher-sequence .col-12 { width: 100%; }
-
 .greenlet-divider {
 	border-top: 2px solid #dadada;
 	border-bottom: 2px solid #f7f7f7;
@@ -103,7 +118,9 @@
 	position: relative;
 }
 
-.customize-control-range input, .customize-control-border input[type="range"] {
+.customize-control-range input,
+.customize-control-border input[type="range"],
+.customize-control-font input[type="range"] {
 	width: 100%;
 	background: #689F38;
 	-webkit-appearance: none;
@@ -111,7 +128,9 @@
 	border-radius: 3px;
 }
 
-.customize-control-range input:focus, .customize-control-border input[type="range"]:focus {
+.customize-control-range input:focus,
+.customize-control-border input[type="range"]:focus,
+.customize-control-font input[type="range"]:focus {
 	outline: none;
 }
 
@@ -217,4 +236,22 @@
 	width: 111px;
 	margin-right: 5px;
 	margin-bottom: 10px;
+}
+
+.gl-font .size-wrap {
+	margin-top: 10px;
+}
+
+.gl-font .range-wrap {
+	padding-right: 5px;
+	line-height: 1.8;
+}
+
+.gl-font .font-unit {
+	background-position: right 2px top 55%;
+	padding: 0 18px 0 5px;
+}
+
+.customize-control-font {
+	margin-bottom: 25px;
 }

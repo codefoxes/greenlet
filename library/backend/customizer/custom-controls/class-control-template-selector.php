@@ -116,7 +116,7 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 
 			<# var cols = data.value.template.split('-'); #>
 
-			<div class="gl-template-matcher-sequence">
+			<div class="gl-template-matcher-sequence gl-row">
 			<# _.each( cols, function( col, index ){  #>
 				<div class="gl-template-matcher col-{{ col }}">
 					<select class="gl-template-selection" >

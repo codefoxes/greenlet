@@ -33,6 +33,8 @@
 						colorControl( controlObj )
 					} else if ( controlObj.params.type === 'border' ) {
 						borderControl( controlObj )
+					} else if ( controlObj.params.type === 'font' ) {
+						fontControl( controlObj )
 
 						// Manage dependencies.
 					} else if ( controlObj.id === 'custom_logo' ) {
@@ -290,6 +292,175 @@
 				widthSelector.on( 'change', setBorder )
 				styleSelector.on( 'change', setBorder )
 				colorSelector.on( 'change', setBorder )
+			}
+		)
+	}
+
+	/**
+	 * Set Font Controller Values.
+	 *
+	 * @param {object} controlObj font control Object.
+	 */
+	function fontControl( controlObj ) {
+		wp.customize.control(
+			controlObj.id,
+			function ( control ) {
+				var select   = $( '#font-family-' + controlObj.id )
+				var sSelect  = $( '#font-style-' + controlObj.id )
+				var wSelect  = $( '#font-weight-' + controlObj.id )
+				var sRange   = $( '#font-size-' + controlObj.id )
+				var sizeIp   = $( '#font-size-ip-' + controlObj.id )
+				var suSelect = $( '#font-size-unit-' + controlObj.id )
+
+				var currentFontDetails = {}
+				function getFontDetails( fontFamily ) {
+					var details = { 'family': fontFamily, 'source': 'system' }
+					if ( greenletAllFonts.system.hasOwnProperty( fontFamily ) ) {
+						details[ 'variants' ] = controlObj.params.fontDefaults.variants
+						details[ 'category' ] = greenletAllFonts.system[ fontFamily ].category
+					} else if ( greenletAllFonts.google.hasOwnProperty( fontFamily ) ) {
+						var variants = greenletAllFonts.google[ fontFamily ][ 0 ]
+						var category = greenletAllFonts.google[ fontFamily ][ 1 ]
+
+						details[ 'source' ]   = 'google'
+						details[ 'category' ] = category
+						details[ 'variants' ] = {}
+						if ( variants[0].length > 0 ) {
+							details[ 'variants' ][ 'normal' ] = variants[0]
+						}
+						if ( variants[1].length > 0 ) {
+							details[ 'variants' ][ 'italic' ] = variants[1]
+						}
+					}
+					currentFontDetails = details
+					return details;
+				}
+
+				function getNearestWeight( weight, weightsArray ) {
+					return weightsArray.reduce(
+						function ( prev, curr ) {
+							return Math.abs( curr - weight ) < Math.abs( prev - weight ) ? curr : prev
+						}
+					)
+				}
+
+				function setFontOptions( fontFamily = false, fontStyle = false, fontWeight = false, update = false ) {
+					var font = JSON.parse( JSON.stringify( control.setting._value ) )
+
+					// If no details are given ( initial load ) set Font Family options.
+					if ( ! fontFamily && ! fontStyle && ! fontWeight ) {
+						fontFamily      = font.family
+						var systemFonts = greenletAllFonts.system
+						var options     = '<optgroup label="System Fonts">'
+						var selected    = ''
+						for ( var systemFont in systemFonts ) {
+							var display = ( 'Default' === systemFont ) ? 'Default System Font' : systemFont
+							selected    = ( systemFont === fontFamily ) ? 'selected' : ''
+							options    += '<option value="' + systemFont + '" ' + selected + '>' + display + '</option>'
+						}
+						options += '</optgroup>'
+
+						var googleFonts = greenletAllFonts.google
+						options        += '<optgroup label="Google Fonts">'
+						for ( var googleFont in googleFonts ) {
+							selected = ( googleFont === fontFamily ) ? 'selected' : ''
+							options += '<option value="' + googleFont + '" ' + selected + '>' + googleFont + '</option>'
+						}
+						options += '</optgroup>'
+
+						select.html( options )
+					}
+
+					// If fontFamily is given set Font Style options.
+					if ( ! fontStyle && ! fontWeight ) {
+						// fontFamily is given. Update font details.
+						getFontDetails( fontFamily )
+
+						fontStyle    = font.style
+						var sOptions = ''
+
+						// If fontStyle not in currentFontDetails.style set first available style.
+						if ( ! currentFontDetails.variants.hasOwnProperty( fontStyle ) ) {
+							fontStyle = Object.keys( currentFontDetails.variants )[0]
+						}
+
+						for ( var style in currentFontDetails.variants ) {
+							var sSelected = ( style === fontStyle ) ? 'selected="selected"' : ''
+							sOptions     += '<option value="' + style + '" ' + sSelected + '>' + style + '</option>'
+						}
+						sSelect.html( sOptions )
+					}
+
+					// If fontStyle is given set Font Weight options.
+					if ( ! fontWeight ) {
+						currentFontDetails[ 'style' ] = fontStyle
+
+						fontWeight       = font.weight
+						var fontWeights  = currentFontDetails.variants[ fontStyle ]
+						var weightLength = fontWeights.length
+
+						// If fontWeight not in currentFontDetails.style[ fontStyle ] set nearest weight.
+						if ( currentFontDetails.variants[ fontStyle ].indexOf( fontWeight ) === -1 ) {
+							fontWeight = getNearestWeight( fontWeight, currentFontDetails.variants[ fontStyle ] )
+						}
+
+						var wOptions = ''
+						for ( var j = 0; j < weightLength; j++ ) {
+							var wSelected = ( fontWeights[j].toString() === fontWeight ) ? 'selected="selected"' : ''
+							wOptions     += '<option value="' + fontWeights[j] + '" ' + wSelected + '>' + fontWeights[j] + '</option>'
+						}
+						wSelect.html( wOptions )
+					}
+
+					if ( fontWeight ) {
+						currentFontDetails[ 'weight' ] = fontWeight
+					}
+
+					if ( update ) {
+						font[ 'family' ]   = currentFontDetails.family
+						font[ 'style' ]    = currentFontDetails.style
+						font[ 'weight' ]   = currentFontDetails.weight
+						font[ 'source' ]   = currentFontDetails.source
+						font[ 'category' ] = currentFontDetails.category
+						control.setting.set( font );
+					}
+				}
+				setFontOptions()
+
+				new Choices( '#font-family-' + controlObj.id, { 'shouldSort': false } )
+
+				select.on( 'change', function() { setFontOptions( this.value, false, false, true ) } )
+				sSelect.on( 'change', function() { setFontOptions( false, this.value, false, true ) } )
+				wSelect.on( 'change', function() { setFontOptions( false, false, this.value, true ) } )
+
+				function setFontSize() {
+					var size     = control.setting._value.size
+					var matches  = size.match( /^([+-]?(?:\d+|\d*\.\d+))([a-z]*|%)$/ )
+					var fontSize = matches[ 1 ]
+					var sizeUnit = matches[ 2 ]
+					sRange.val( fontSize )
+					sizeIp.val( fontSize )
+					suSelect.val( sizeUnit )
+				}
+				setFontSize()
+
+				function updateFontSize( element ) {
+					var font     = JSON.parse( JSON.stringify( control.setting._value ) )
+					var fontSize = ( element !== suSelect[0] ) ? element.value : sizeIp.val()
+					var sizeUnit = ( element === suSelect[0] ) ? element.value : suSelect.val()
+					if ( element === sRange[0] ) {
+						sizeIp.val( fontSize )
+					} else if ( element === sizeIp[0] ) {
+						sRange.val( fontSize )
+					}
+
+					font[ 'size' ] = '' + fontSize + sizeUnit
+					control.setting.set( font );
+				}
+
+				sRange.on( 'change', function() { updateFontSize( this ) } )
+				sizeIp.on( 'change', function() { updateFontSize( this ) } )
+				suSelect.on( 'change', function() { updateFontSize( this ) } )
 			}
 		)
 	}
