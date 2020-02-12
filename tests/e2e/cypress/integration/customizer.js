@@ -57,30 +57,6 @@ describe('Customizer', () => {
 		})
 	})
 
-	describe('Framework', () => {
-		before( () => {
-			cy.get('#accordion-section-framework').click()
-		})
-
-		after( () => {
-			cy.get('.customize-section-back:visible').click()
-		})
-
-		it('Contains Framework Radio', () => {
-			cy.get('#customize-control-css_framework').find('label')
-				.should('contain', 'Greenlet')
-				.and('contain', 'Bootstrap')
-		})
-
-		it('Contains CSS Path Input', () => {
-			cy.get('#_customize-input-css_path').should('have.attr', 'type', 'url')
-		})
-
-		it('Contains Enabled Defer CSS', () => {
-			cy.get('#_customize-input-defer_css:checkbox').should('be.enabled')
-		})
-	})
-
 	describe('Layout', () => {
 		before( () => {
 			cy.get('#accordion-panel-layout').click()
@@ -97,13 +73,37 @@ describe('Customizer', () => {
 				.and('contain', 'Footer Layout')
 		})
 
+		describe('Framework', () => {
+			before( () => {
+				cy.get('#accordion-section-framework').click()
+			})
+
+			after( () => {
+				cy.get('.customize-section-back:visible').click()
+			})
+
+			it('Contains Framework Radio', () => {
+				cy.get('#customize-control-css_framework').find('label')
+					.should('contain', 'Greenlet')
+					.and('contain', 'Bootstrap')
+			})
+
+			it('Contains CSS Path Input', () => {
+				cy.get('#_customize-input-css_path').should('have.attr', 'type', 'url')
+			})
+
+			it('Contains Enabled Defer CSS', () => {
+				cy.get('#_customize-input-defer_css:checkbox').should('be.enabled')
+			})
+		})
+
 		describe('Header Layout', () => {
 			before( () => {
 				cy.get('#accordion-section-header_layout').click()
 			})
 
 			after( () => {
-				cy.get('#customize-controls .wp-full-overlay-sidebar-content:visible').scrollTo(0, 0)
+				cy.get('#customize-controls .control-section:visible').scrollTo(0, 0)
 				cy.get('.customize-section-back:visible').click()
 			})
 
@@ -201,7 +201,7 @@ describe('Customizer', () => {
 			})
 
 			after( () => {
-				cy.get('#customize-controls .wp-full-overlay-sidebar-content:visible').scrollTo(0, 0)
+				cy.get('#customize-controls .control-section:visible').scrollTo(0, 0)
 				cy.get('.customize-section-back:visible').click()
 			})
 
