@@ -32,9 +32,15 @@ buildcss() {
 	echo 'Build CSS: Complete'
 }
 
+buildfonts() {
+	DIR="$(cd "$(dirname "$0")" && pwd)"
+	python3 $DIR/build-google-fonts
+}
+
 if [ -z "$1" ]; then
 	buildjs
 	buildcss
+	buildfonts
 elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
 elif [ "$1" == "--final" ]; then
@@ -45,6 +51,10 @@ elif [ "$1" == "--final" ]; then
 	cd ~/Desktop
 	zip -r greenlet.zip greenlet
 	cd $current
-else
-	echo 'Building Separately?'
+elif [ "$1" == "fonts" ]; then
+	buildfonts
+elif [ "$1" == "css" ]; then
+	buildcss
+elif [ "$1" == "js" ]; then
+	buildjs
 fi

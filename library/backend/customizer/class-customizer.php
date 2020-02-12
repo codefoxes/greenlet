@@ -46,6 +46,7 @@ class Customizer {
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
 		require_once LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
 		require_once LIBRARY_DIR . '/backend/customizer/options.php';
 
@@ -148,6 +149,9 @@ class Customizer {
 				} elseif ( 'border' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Border( $wp_customize, $option['id'], $option['cargs'] ) );
 
+				} elseif ( 'font' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Font( $wp_customize, $option['id'], $option['cargs'] ) );
+
 				} else {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
 				}
@@ -170,6 +174,7 @@ class Customizer {
 		$wp_customize->register_control_type( 'Greenlet\Control_Divider' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Color' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Border' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Font' );
 	}
 
 	/**
