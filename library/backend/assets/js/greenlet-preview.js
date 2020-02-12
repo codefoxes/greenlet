@@ -151,6 +151,7 @@
 	bindStyle( 'input_font', inputSelector, 'font' )
 	bindStyle( 'para_color', 'p', 'color' )
 	bindStyle( 'para_font', 'p', 'font' )
+	bindStyle( 'icons_color', '.entry-meta svg', 'fill' )
 	bindStyle( 'base_font', 'body', 'font' )
 	bindStyle( 'header_font', '.site-header', 'font' )
 	bindStyle( 'logo_font', '.site-logo, h1.site-name a', 'font' )

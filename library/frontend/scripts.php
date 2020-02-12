@@ -288,6 +288,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$input_font       = gl_get_option( 'input_font', array() );
 		$para_color       = gl_get_option( 'para_color', '#383838' );
 		$para_font        = gl_get_option( 'para_font', array() );
+		$icons_color      = gl_get_option( 'icons_color', '#999999' );
 		$base_font        = gl_get_option( 'base_font', array() );
 		$header_font      = gl_get_option( 'header_font', array() );
 		$content_font     = gl_get_option( 'content_font', array() );
@@ -339,6 +340,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		greenlet_add_style( 'input[type="email"]:focus::placeholder, input[type="number"]:focus::placeholder, input[type="search"]:focus::placeholder, input[type="text"]:focus::placeholder, input[type="tel"]:focus::placeholder, input[type="url"]:focus::placeholder, input[type="password"]:focus::placeholder, textarea:focus::placeholder, select:focus::placeholder', 'color', $ip_ph_focus );
 		greenlet_add_style( 'p', array( array( 'color', $para_color ), array( 'font', $para_font ) ) );
 		greenlet_add_style( '.site-logo, h1.site-name a', 'font', $logo_font );
+		greenlet_add_style( '.entry-meta svg', 'fill', $icons_color );
 
 		ob_start();
 		greenlet_print_inline_styles();

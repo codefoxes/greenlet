@@ -1539,6 +1539,29 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
+		'id'   => 'other_components',
+		'args' => array(
+			'title' => __( 'Others', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'icons_color',
+		'sargs' => array(
+			'default'   => '#999999',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'other_components',
+			'label'   => __( 'Meta Icons Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
 		'id'   => 'blog',
 		'args' => array(
 			'title'    => __( 'Blog Settings', 'greenlet' ),
@@ -1652,6 +1675,29 @@ function greenlet_options() {
 				'name'  => 'Name',
 				'image' => 'Avatar',
 				'bio'   => 'Biographical Info',
+			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'show_meta',
+		'sargs' => array(
+			'default'           => array( 'sticky', 'author', 'date', 'cats', 'tags', 'reply' ),
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
+		),
+		'cargs' => array(
+			'type'    => 'multicheck',
+			'section' => 'blog',
+			'label'   => __( 'Show Meta Info', 'greenlet' ),
+			'choices' => array(
+				'sticky' => 'Featured (Sticky)',
+				'author' => 'Author',
+				'date'   => 'Published Date',
+				'mod'    => 'Updated Date',
+				'cats'   => 'Categories',
+				'tags'   => 'Tags',
+				'reply'  => 'Comments',
 			),
 		),
 	);

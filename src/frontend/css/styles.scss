@@ -263,6 +263,7 @@ input[type="checkbox"].menu-toggle {
 
 .entry-meta svg {
 	fill: #999;
+	display: block;
 }
 
 .more-link {
@@ -486,7 +487,7 @@ input[type="checkbox"].menu-toggle {
 	100%{ stroke: #5c6b80; }
 }
 
-.sticky-icon, .user-icon, .date-icon, .folder-icon, .tag-icon, .comment-icon {
+.sticky-icon, .user-icon, .date-icon, .clock-icon, .folder-icon, .tag-icon, .comment-icon {
 	display: inline-block;
 	width: 14px;
 	height: 14px;
