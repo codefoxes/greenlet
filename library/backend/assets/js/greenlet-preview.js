@@ -88,7 +88,7 @@
 
 	var inputSelector   = 'input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select'
 	var buttonSelector  = '.button, button, input[type="submit"], input[type="reset"], input[type="button"], .pagination li a, .pagination li span'
-	var headingSelector = 'h1, h2, h3, h4, h5, h6'
+	var headingSelector = 'h1, h2, h3, h4, h5, h6, .entry-title a'
 
 	function getPseudo ( selectors, pseudo ) {
 		if ( ! Array.isArray( selectors ) ) {

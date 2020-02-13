@@ -96,6 +96,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 			require_once LIBRARY_DIR . '/backend/options/class-options-admin.php';
 			require_once LIBRARY_DIR . '/backend/customizer/class-customizer.php';
 			require_once LIBRARY_DIR . '/backend/metaboxes/class-metaboxes.php';
+			require_once LIBRARY_DIR . '/backend/editor/class-editor.php';
 		}
 
 		require_once LIBRARY_DIR . '/frontend/helpers.php';

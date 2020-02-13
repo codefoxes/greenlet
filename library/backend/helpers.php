@@ -76,3 +76,24 @@ if ( ! function_exists( 'greenlet_template_images' ) ) {
 		);
 	}
 }
+
+if ( ! function_exists( 'greenlet_is_editor' ) ) {
+	/**
+	 * Check if the current page is a post edit page.
+	 *
+	 * @since  1.1.0
+	 * @param  string $type Whether new post or editing.
+	 * @return boolean
+	 */
+	function greenlet_is_editor( $type = '' ) {
+		global $pagenow;
+
+		if ( 'edit' === $type ) {
+			return in_array( $pagenow, array( 'post.php' ), true );
+		} elseif ( 'new' === $type ) {
+			return in_array( $pagenow, array( 'post-new.php' ), true );
+		} else {
+			return in_array( $pagenow, array( 'post.php', 'post-new.php' ), true );
+		}
+	}
+}

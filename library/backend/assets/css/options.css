@@ -102,13 +102,6 @@
 	text-decoration: none;
 }
 
-#greenlet-options .settings, #greenlet-options .impex {
-	background: #fff;
-	border: 1px solid #ccc;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-	margin-bottom: 20px;
-}
-
 #greenlet-options .heading {
 	font-size: 16px;
 	padding: 10px 15px;
@@ -120,39 +113,28 @@
 	border-bottom: 1px solid #eee;
 }
 
-#greenlet-options .impex-section {
-	padding: 15px;
+#greenlet-options .content-wrap {
+	padding: 15px 15px 30px;
 	position: relative;
 	overflow: hidden;
 }
 
-#greenlet-options .col-impex {
-	margin-bottom: 15px;
-}
-
-#greenlet-options .impex .sub-heading {
-	margin-bottom: 10px;
-}
-
-#greenlet-options .impex textarea {
-	width: 100%;
-	color: #666;
-	background: #f9f9f9;
-	display: block;
+#greenlet-options .btn-wrap {
+	padding-top: 15px;
 }
 
 #greenlet-options .explain {
 	color: #999;
 	font-size: 12px;
 	padding-top: 10px;
+	float: left;
 }
 
-#import-btn {
+#greenlet-options .action-btn {
 	float: right;
-	margin-top: 10px;
 }
 
-.impex-section .message {
+#greenlet-options .message {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -167,21 +149,44 @@
 	transition: all 0.5s;
 }
 
-.impex-section .message.show {
+#greenlet-options .message.show {
 	visibility: visible;
 	opacity: 1;
 	max-height: 50px;
 }
 
-.impex-section .message.import-success{
+#greenlet-options .message.success{
 	background: #7cb342;
 }
-.impex-section .message.import-warning{
+#greenlet-options .message.warning{
 	background: #FFF59D;
 	color: #827717;
 }
-.impex-section .message.import-error{
+#greenlet-options .message.error{
 	background: #cb000b;
+}
+
+#greenlet-options .settings, #greenlet-options .backend, #greenlet-options .impex {
+	background: #fff;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	margin-bottom: 20px;
+}
+
+#greenlet-options .setting-description {
+	font-size: 13px;
+	padding-top: 5px;
+}
+
+#greenlet-options .impex .sub-heading {
+	margin-bottom: 10px;
+}
+
+#greenlet-options .impex textarea {
+	width: 100%;
+	color: #666;
+	background: #f9f9f9;
+	display: block;
 }
 
 .ext-links {
