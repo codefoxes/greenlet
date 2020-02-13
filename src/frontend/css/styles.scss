@@ -653,6 +653,17 @@ figure {
 	max-width: 11.11%;
 }
 
+blockquote {
+	border-left: 4px solid #383838;
+	margin: 0 0 2rem 0;
+	padding-left: 2rem;
+
+	cite {
+		font-size: 1.3rem;
+		font-style: normal;
+	}
+}
+
 @media (min-width: 801px) {
 	.site-header h1, .topbar h1 {
 		font-size: 3.6rem;

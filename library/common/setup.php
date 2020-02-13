@@ -53,9 +53,6 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 			)
 		);
 
-		// Add visual editor style.
-		add_editor_style( get_stylesheet_uri() );
-
 		// Add support for woocommerce.
 		add_theme_support( 'woocommerce' );
 	}
