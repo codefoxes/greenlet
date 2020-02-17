@@ -179,7 +179,7 @@ class Options_Admin {
 											<span>
 												<input id="editor_styles" type="checkbox" <?php checked( $editor_styles, true ); ?>>
 												<label for="editor_styles">Editor Styles</label>
-												<div class="setting-description">Enable to match the Post editor styles to the frontend styles.</div>
+												<div class="setting-description">Match the Post editor styles to the frontend styles.</div>
 											</span>
 											<div class="save-wrap">
 												<a href="#" id="save-btn" class="action-btn button-primary">Save Settings</a>

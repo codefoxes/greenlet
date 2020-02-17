@@ -97,7 +97,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'show_tagline',
 		'sargs' => array(
-			'default' => '1',
+			'default' => false,
 		),
 		'cargs' => array(
 			'type'    => 'checkbox',
@@ -924,7 +924,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_color',
 		'sargs' => array(
-			'default'           => '#33691e',
+			'default'           => '#383838',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
@@ -939,7 +939,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_link_hover',
 		'sargs' => array(
-			'default'           => '#000000',
+			'default'           => '#01579B',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
@@ -1328,7 +1328,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'link_color',
 		'sargs' => array(
-			'default'           => '#1565C0',
+			'default'           => '#0277BD',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
@@ -1343,7 +1343,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'link_hover',
 		'sargs' => array(
-			'default'           => '#0D47A1',
+			'default'           => '#01579B',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
 		),
