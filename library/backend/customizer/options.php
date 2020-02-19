@@ -249,13 +249,11 @@ function greenlet_options() {
 			'default' => '',
 		),
 		'cargs' => array(
-			'type'        => 'text',
+			'type'        => 'template',
 			'section'     => 'header_layout',
 			'label'       => __( 'Topbar Layout', 'greenlet' ),
-			'description' => __( 'Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only integers. Sum should be 12.)', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '4-8', 'greenlet' ),
-			),
+			'description' => __( 'Select Topbar Columns Layout', 'greenlet' ),
+			'choices'     => greenlet_template_images( 'cover' ),
 		),
 	);
 
@@ -323,13 +321,11 @@ function greenlet_options() {
 			'default' => '',
 		),
 		'cargs' => array(
-			'type'        => 'text',
+			'type'        => 'template',
 			'section'     => 'header_layout',
 			'label'       => __( 'Header Layout', 'greenlet' ),
-			'description' => __( 'Enter header columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '3-9', 'greenlet' ),
-			),
+			'description' => __( 'Select Header Columns Layout', 'greenlet' ),
+			'choices'     => greenlet_template_images( 'cover' ),
 		),
 	);
 
@@ -607,13 +603,11 @@ function greenlet_options() {
 			'default' => '',
 		),
 		'cargs' => array(
-			'type'        => 'text',
+			'type'        => 'template',
 			'section'     => 'footer_layout',
 			'label'       => __( 'Semi Footer Layout', 'greenlet' ),
-			'description' => __( 'Enter semifooter columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '4-4-4', 'greenlet' ),
-			),
+			'description' => __( 'Select Semi Footer Columns Layout', 'greenlet' ),
+			'choices'     => greenlet_template_images( 'cover' ),
 		),
 	);
 
@@ -680,13 +674,11 @@ function greenlet_options() {
 			'default' => '',
 		),
 		'cargs' => array(
-			'type'        => 'text',
+			'type'        => 'template',
 			'section'     => 'footer_layout',
 			'label'       => __( 'Footer Layout', 'greenlet' ),
-			'description' => __( 'Enter footer columns in Format: 4-8 or 3-9-3 etc.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => '12',
-			),
+			'description' => __( 'Select Footer Columns Layout', 'greenlet' ),
+			'choices'     => greenlet_template_images( 'cover' ),
 		),
 	);
 

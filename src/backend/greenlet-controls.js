@@ -6,16 +6,13 @@
 
 (function( $ ) {
 
-	$( window ).on(
-		'load',
-		function() {
-			$( 'html' ).addClass( 'window-loaded' );
-		}
-	);
+	require( './helpers' );
 
 	require( './controls/multicheck' );
 
 	require( './controls/radio-image' );
+
+	require( './controls/template' );
 
 	require( './controls/template-selector' );
 
