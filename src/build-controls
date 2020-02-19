@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import os
+import re
+
+backend_dir = os.path.abspath(os.path.dirname(__file__)) + '/backend'
+output_dir = os.path.abspath(os.path.dirname(__file__)) + '/../library/backend/assets/js'
+
+lines = []
+with open(backend_dir + '/greenlet-controls.js') as f:
+	lines = f.readlines()
+	for position, line in enumerate(lines):
+		match = re.search(r"require\((.*?)\)", line)
+
+		if match:
+			file_found = match.group(1).strip(' \'".')
+			with open(backend_dir + file_found + '.js') as ff:
+				content_lines = ff.readlines()
+				lines[position] = ''.join([ lines[position][:match.start()] + x if x != '\n' else x for x in content_lines])
+				lines[position] = lines[position].replace('	 *\n	 * @package greenlet\n	 */\n', '	 */')
+
+print('Writing..')
+os.makedirs(output_dir, exist_ok=True)
+with open(output_dir + '/greenlet-controls.js', 'w+') as f:
+	f.seek(0)
+	f.writelines(lines)
+	f.truncate()

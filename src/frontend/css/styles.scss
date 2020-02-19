@@ -27,6 +27,7 @@ img {
 	z-index: 990;
 	background: #fff;
 	margin: auto;
+	border-bottom: 1px solid #eee;
 
 	h1 {
 		@extend %top-heading;
