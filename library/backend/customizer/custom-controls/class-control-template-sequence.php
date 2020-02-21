@@ -7,14 +7,14 @@
 
 namespace Greenlet;
 
-if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customize_Control' ) ) {
+if ( ! class_exists( 'Control_Template_Sequence' ) && class_exists( 'WP_Customize_Control' ) ) {
 	/**
 	 * Template Selector custom control.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 */
-	class Control_Template_Selector extends \WP_Customize_Control {
+	class Control_Template_Sequence extends \WP_Customize_Control {
 
 		/**
 		 * The type of customize control being rendered.
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Control_Template_Selector' ) && class_exists( 'WP_Customiz
 		 * @access public
 		 * @var    string
 		 */
-		public $type = 'template-selector';
+		public $type = 'template-sequence';
 
 		/**
 		 * Allow templates parameter.

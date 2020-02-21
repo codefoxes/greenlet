@@ -42,7 +42,7 @@ function greenlet_woo_options( $options ) {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'shop_layout',
 			'label'     => __( 'Product Page Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -61,7 +61,7 @@ function greenlet_woo_options( $options ) {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'shop_layout',
 			'label'     => __( 'Product Archive (Shop) Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -80,7 +80,7 @@ function greenlet_woo_options( $options ) {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'shop_layout',
 			'label'     => __( 'Product Category Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -99,7 +99,7 @@ function greenlet_woo_options( $options ) {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'shop_layout',
 			'label'     => __( 'Product Tags Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -118,7 +118,7 @@ function greenlet_woo_options( $options ) {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'shop_layout',
 			'label'     => __( 'Product Search Results Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),

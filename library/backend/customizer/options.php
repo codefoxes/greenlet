@@ -467,7 +467,7 @@ function greenlet_options() {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'main_layout',
 			'label'     => __( 'Home Page (Post List) Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -486,7 +486,7 @@ function greenlet_options() {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'main_layout',
 			'label'     => __( 'Default Page Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -505,7 +505,7 @@ function greenlet_options() {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'main_layout',
 			'label'     => __( 'Single Post Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),
@@ -524,7 +524,7 @@ function greenlet_options() {
 			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_template_selector' ),
 		),
 		'cargs' => array(
-			'type'      => 'template-selector',
+			'type'      => 'template-sequence',
 			'section'   => 'main_layout',
 			'label'     => __( 'Archive Layout', 'greenlet' ),
 			'templates' => greenlet_template_images(),

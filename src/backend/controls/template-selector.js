@@ -4,7 +4,7 @@
  * @package greenlet
  */
 
-wp.customize.controlConstructor['template-selector'] = wp.customize.Control.extend(
+wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.extend(
 	{
 		ready: function() {
 			var control  = this
