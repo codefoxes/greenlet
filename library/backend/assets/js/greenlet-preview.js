@@ -106,8 +106,8 @@
 		return pseudoSelectors.join( ',' )
 	}
 
-	bindStyle( 'logo_width', '.site-logo img', 'width', 'px' )
-	bindStyle( 'logo_height', '.site-logo img', 'height', 'px' )
+	bindStyle( 'logo_width', '.site-logo img', 'width' )
+	bindStyle( 'logo_height', '.site-logo img', 'height' )
 	bindStyle( 'site_bg', 'body', 'background' )
 	bindStyle( 'site_color', 'body', 'color' )
 	bindStyle( 'topbar_bg', '.topbar', 'background' )
@@ -157,4 +157,15 @@
 	bindStyle( 'logo_font', '.site-logo, h1.site-name a', 'font' )
 	bindStyle( 'content_font', '.site-content', 'font' )
 	bindStyle( 'footer_font', '.site-footer', 'font' )
+	bindStyle( 'container_width', '.container', 'max-width' )
+	bindStyle( 'topbar_width', '.topbar', 'max-width' )
+	bindStyle( 'topbar_container', '.topbar .container', 'max-width' )
+	bindStyle( 'header_width', '.site-header', 'max-width' )
+	bindStyle( 'header_container', '.site-header .container', 'max-width' )
+	bindStyle( 'main_width', '.site-content', 'max-width' )
+	bindStyle( 'main_container', '.site-content .container', 'max-width' )
+	bindStyle( 'semifooter_width', '.semifooter', 'max-width' )
+	bindStyle( 'semifooter_container', '.semifooter .container', 'max-width' )
+	bindStyle( 'footer_width', '.site-footer', 'max-width' )
+	bindStyle( 'footer_container', '.site-footer .container', 'max-width' )
 })( jQuery );

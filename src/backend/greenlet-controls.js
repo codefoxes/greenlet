@@ -24,6 +24,8 @@
 
 	require( './controls/font' );
 
+	require( './controls/length' );
+
 	require( './controls/dependencies' );
 
 })( jQuery );

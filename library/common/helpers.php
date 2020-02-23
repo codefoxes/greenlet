@@ -107,11 +107,8 @@ if ( ! function_exists( 'greenlet_css_width' ) ) {
 	 * @return string               Width.
 	 */
 	function greenlet_css_width( $option, $default = false ) {
-		if ( ! $default ) {
-			$default = '100%';
-		}
 		$width = gl_get_option( $option, $default );
-		return ( '' === $width ) ? $default : $width;
+		return ( '' === $width || false === $width ) ? $default : $width;
 	}
 }
 
@@ -159,6 +156,10 @@ if ( ! function_exists( 'greenlet_add_style' ) ) {
 	 * @param string       $media          Media query.
 	 */
 	function greenlet_add_style( $selector, $style_property, $style_value = '', $suffix = '', $media = '' ) {
+		if ( false === $style_property ) {
+			return;
+		}
+
 		global $greenlet_inline;
 		if ( null === $greenlet_inline ) {
 			$greenlet_inline = array( 'media' => array() );

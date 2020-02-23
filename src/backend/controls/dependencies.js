@@ -2,27 +2,87 @@
  * Logo height and width dependencies.
  */
 function manageLogoDependencies() {
-	var control = wp.customize.control( 'custom_logo' )
+	var control  = wp.customize.control( 'custom_logo' )
+	var wControl = wp.customize.control( 'logo_width' )
+	var hControl = wp.customize.control( 'logo_height' )
+
+	var widthContainer  = $( '#customize-control-logo_width' )
+	var heightContainer = $( '#customize-control-logo_height' )
+
+	var widthInput  = document.getElementById( 'length-size-ip-logo_width' )
+	var heightInput = document.getElementById( 'length-size-ip-logo_height' )
+	var widthRange  = document.getElementById( 'length-size-logo_width' )
+	var heightRange = document.getElementById( 'length-size-logo_height' )
+
+	var ratio = widthInput.value / heightInput.value
+
 	if ( $( '#customize-control-custom_logo img' ).length === 0 ) {
-		$( '#customize-control-logo_width' ).hide()
-		$( '#customize-control-logo_height' ).hide()
+		widthContainer.hide()
+		heightContainer.hide()
 	}
+
+	widthContainer.append( '<span class="aspect dashicons dashicons-lock"></span>' )
+	widthContainer.append( '<span class="lock-indicator"></span>' )
 
 	control.setting.bind(
 		function() {
 			if ( control.setting._value === '' ) {
-				$( '#customize-control-logo_width' ).hide()
-				$( '#customize-control-logo_height' ).hide()
+				widthContainer.hide()
+				heightContainer.hide()
 				$( '#customize-control-show_title' ).show()
 			} else {
-				$( '#customize-control-logo_width' ).show()
-				$( '#customize-control-logo_height' ).show()
+				widthContainer.show()
+				heightContainer.show()
 				$( '#customize-control-show_title' ).hide()
 
 				var logo = document.querySelector( '#customize-control-custom_logo .attachment-thumb' )
-				wp.customize.control( 'logo_width' ).setting.set( logo.naturalWidth )
-				wp.customize.control( 'logo_height' ).setting.set( logo.naturalHeight )
+				wControl.setting.set( logo.naturalWidth + 'px' )
+				hControl.setting.set( logo.naturalHeight + 'px' )
+
+				$( '#length-size-logo_width' ).val( logo.naturalWidth )
+				$( '#length-size-ip-logo_width' ).val( logo.naturalWidth )
+				$( '#length-size-logo_height' ).val( logo.naturalHeight )
+				$( '#length-size-ip-logo_height' ).val( logo.naturalHeight )
 			}
+
+			ratio = widthInput.value / heightInput.value
+		}
+	)
+
+	var updateAspectHeight = function() {
+		if ( document.querySelector( '#customize-control-logo_width .aspect' ).classList.contains( 'dashicons-lock' ) ) {
+			var newHeight     = widthInput.value / ratio
+			heightRange.value = newHeight
+			heightInput.value = newHeight
+			hControl.setting.set( newHeight + document.getElementById( 'length-unit-logo_height' ).value )
+		} else {
+			ratio = widthInput.value / heightInput.value
+		}
+	}
+
+	var updateAspectWidth = function() {
+		if ( document.querySelector( '#customize-control-logo_width .aspect' ).classList.contains( 'dashicons-lock' ) ) {
+			var newWidth     = heightInput.value * ratio
+			widthRange.value = newWidth
+			widthInput.value = newWidth
+			wControl.setting.set( newWidth + document.getElementById( 'length-unit-logo_width' ).value )
+		}
+		ratio = widthInput.value / heightInput.value
+	}
+
+	$( widthRange ).on( 'input', updateAspectHeight )
+	$( widthInput ).on( 'input', updateAspectHeight )
+	$( heightRange ).on( 'input', updateAspectWidth )
+	$( heightInput ).on( 'input', updateAspectWidth )
+}
+
+function manageAspectTogglers() {
+	$( '.customize-control' ).on(
+		'click',
+		'.aspect',
+		function() {
+			this.classList.toggle( 'dashicons-lock' )
+			this.classList.toggle( 'dashicons-unlock' )
 		}
 	)
 }
@@ -81,7 +141,7 @@ function getCoverColumns( positions = [ 'topbar', 'header', 'semifooter', 'foote
 /**
  * Set logo and menu position options based on cover columns.
  */
-function setCoverDependentColumns() {
+function setTopCoverDependentColumns() {
 	var control = wp.customize.control( 'show_topbar' )
 	var columns
 	if ( control.setting._value === false ) {
@@ -113,82 +173,107 @@ function setCoverDependentColumns() {
 }
 
 /**
- * Manage Topbar and Header Columns dependencies.
+ * Set menu position options based on cover columns.
+ */
+function setBottomCoverDependentColumns() {
+	var control = wp.customize.control( 'show_semifooter' )
+	var columns
+	if ( control.setting._value === false ) {
+		columns = getCoverColumns( ['footer'] )
+	} else {
+		columns = getCoverColumns( ['semifooter', 'footer'] )
+	}
+
+	var fControl = wp.customize.control( 'fmenu_position' )
+
+	var selected = ''
+	var fOptions = ''
+	for ( var column in columns ) {
+		selected  = ( fControl.setting._value === column ) ? 'selected' : ''
+		fOptions += '<option value="' + column + '" ' + selected + '>' + columns[column] + '</option>'
+	}
+
+	$( '#_customize-input-fmenu_position' ).html( fOptions )
+}
+
+/**
+ * Manage Topbar, Header, Semifooter and Footer Columns dependencies.
  * Used to adjust logo and menu positions.
  */
-function manageTopCoverDependencies() {
-	setCoverDependentColumns()
+function manageCoverDependencies() {
+	setTopCoverDependentColumns()
+	setBottomCoverDependentColumns()
 
-	var showControl = wp.customize.control( 'show_topbar' )
-	showControl.setting.bind( function() { setCoverDependentColumns() } )
+	var showTopControl = wp.customize.control( 'show_topbar' )
+	showTopControl.setting.bind( function() { setTopCoverDependentColumns() } )
 
 	var topbarControl = wp.customize.control( 'topbar_template' )
-	topbarControl.setting.bind( function() { setCoverDependentColumns() } )
+	topbarControl.setting.bind( function() { setTopCoverDependentColumns() } )
 
 	var headerControl = wp.customize.control( 'header_template' )
-	headerControl.setting.bind( function() { setCoverDependentColumns() } )
+	headerControl.setting.bind( function() { setTopCoverDependentColumns() } )
+
+	var showBottomControl = wp.customize.control( 'show_semifooter' )
+	showBottomControl.setting.bind( function() { setBottomCoverDependentColumns() } )
+
+	var semiFooterControl = wp.customize.control( 'semifooter_template' )
+	semiFooterControl.setting.bind( function() { setBottomCoverDependentColumns() } )
+
+	var footerControl = wp.customize.control( 'footer_template' )
+	footerControl.setting.bind( function() { setBottomCoverDependentColumns() } )
 }
 
 /**
  * Show and hide topbar dependencies.
  */
 function manageTopbarDependencies() {
-	var control = wp.customize.control( 'show_topbar' )
-	var section = control.container.closest( '.control-section' )
+	var control  = wp.customize.control( 'show_topbar' )
+	var tDivider = $( '#customize-control-header_divider' )
+	tDivider.prepend( '<div class="toggler"><span class="dashicons dashicons-arrow-up-alt2"></span></div>' )
 
-	if ( control.setting._value === false ) {
-		section.find( '#customize-control-fixed_topbar' ).hide()
-		section.find( '#customize-control-topbar_template' ).hide()
-		section.find( '#customize-control-topbar_content_source' ).hide()
-		section.find( '#customize-control-topbar_width' ).hide()
-		section.find( '#customize-control-topbar_container' ).hide()
-		$( '#customize-control-topbar_bg' ).hide()
-		$( '#customize-control-topbar_color' ).hide()
+	var toggleTopbar = function() {
+		$( '#customize-control-fixed_topbar' ).toggleClass( 'collapse' )
+		$( '#customize-control-topbar_template' ).toggleClass( 'collapse' )
+		$( '#customize-control-topbar_content_source' ).toggleClass( 'collapse' )
+		$( '#customize-control-topbar_width' ).toggleClass( 'collapse' )
+		$( '#customize-control-topbar_container' ).toggleClass( 'collapse' )
+		$( '#customize-control-header_divider .toggler' ).toggleClass( 'toggled' )
+		$( '#customize-control-topbar_bg' ).toggle()
+		$( '#customize-control-topbar_color' ).toggle()
 	}
 
-	var checkboxes = $( control.selector + ' input[type="checkbox"]' )
-	checkboxes.on(
-		'change',
-		function () {
-			section.find( '#customize-control-fixed_topbar' ).toggle()
-			section.find( '#customize-control-topbar_template' ).toggle()
-			section.find( '#customize-control-topbar_content_source' ).toggle()
-			section.find( '#customize-control-topbar_width' ).toggle()
-			section.find( '#customize-control-topbar_container' ).toggle()
-			$( '#customize-control-topbar_bg' ).toggle()
-			$( '#customize-control-topbar_color' ).toggle()
-		}
-	)
+	if ( control.setting._value === false ) {
+		toggleTopbar()
+	}
+
+	$( control.selector + ' input[type="checkbox"]' ).on( 'change', toggleTopbar )
+	tDivider.on( 'click', '.toggler span', toggleTopbar )
 }
 
 /**
  * Show and hide semifooter dependencies.
  */
 function manageSemifooterDependencies() {
-	var control = wp.customize.control( 'show_topbar' )
-	var section = control.container.closest( '.control-section' )
+	var control  = wp.customize.control( 'show_semifooter' )
+	var fDivider = $( '#customize-control-footer_divider' )
+	fDivider.prepend( '<div class="toggler"><span class="dashicons dashicons-arrow-up-alt2"></span></div>' )
 
-	if ( control.setting._value === false ) {
-		section.find( '#customize-control-semifooter_template' ).hide()
-		section.find( '#customize-control-semifooter_content_source' ).hide()
-		section.find( '#customize-control-semifooter_width' ).hide()
-		section.find( '#customize-control-semifooter_container' ).hide()
-		$( '#customize-control-semifooter_bg' ).hide()
-		$( '#customize-control-semifooter_color' ).hide()
+	var toggleSemiFooter = function() {
+		$( '#customize-control-semifooter_template' ).toggleClass( 'collapse' )
+		$( '#customize-control-semifooter_content_source' ).toggleClass( 'collapse' )
+		$( '#customize-control-semifooter_width' ).toggleClass( 'collapse' )
+		$( '#customize-control-semifooter_container' ).toggleClass( 'collapse' )
+		$( '#customize-control-footer_divider .toggler' ).toggleClass( 'toggled' )
+		$( '#customize-control-semifooter_bg' ).toggle()
+		$( '#customize-control-semifooter_color' ).toggle()
 	}
 
-	var checkboxes = $( control.selector + ' input[type="checkbox"]' )
-	checkboxes.on(
-		'change',
-		function () {
-			section.find( '#customize-control-semifooter_template' ).toggle()
-			section.find( '#customize-control-semifooter_content_source' ).toggle()
-			section.find( '#customize-control-semifooter_width' ).toggle()
-			section.find( '#customize-control-semifooter_container' ).toggle()
-			$( '#customize-control-semifooter_bg' ).toggle()
-			$( '#customize-control-semifooter_color' ).toggle()
-		}
-	)
+	if ( control.setting._value === false ) {
+		toggleSemiFooter()
+	}
+
+	$( control.selector + ' input[type="checkbox"]' ).on( 'change', toggleSemiFooter )
+	fDivider.on( 'click', '.toggler span', toggleSemiFooter )
 }
 
 /**
@@ -225,9 +310,10 @@ wp.customize.bind(
 	'ready',
 	function () {
 		manageLogoDependencies()
-		manageTopCoverDependencies()
+		manageCoverDependencies()
 		manageTopbarDependencies()
 		manageSemifooterDependencies()
 		manageSidebarDependencies()
+		manageAspectTogglers()
 	}
 );

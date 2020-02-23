@@ -180,27 +180,25 @@
 	min-height: 30px;
 }
 
-.customize-control-range {
+.customize-control-range, .customize-control-length {
 	position: relative;
 }
 
 .customize-control-range input,
-.customize-control-border input[type="range"],
-.customize-control-font input[type="range"] {
+.customize-control input[type="range"] {
 	width: 100%;
-	background: #689F38;
+	background: #7cb342;
 	-webkit-appearance: none;
 	height: 3px;
 	border-radius: 3px;
 }
 
 .customize-control-range input:focus,
-.customize-control-border input[type="range"]:focus,
-.customize-control-font input[type="range"]:focus {
+.customize-control input[type="range"]:focus {
 	outline: none;
 }
 
-.customize-control-range .dashicons {
+.customize-control-range .dashicons, .gl-length .reset {
 	position: absolute;
 	right: 0;
 	bottom: 12px;
@@ -210,7 +208,11 @@
 	cursor: pointer;
 }
 
-.customize-control-range .dashicons:hover {
+.gl-length .reset {
+	bottom: 35px;
+}
+
+.customize-control-range .dashicons:hover, .gl-length .reset:hover {
 	background: #fff;
 }
 
@@ -308,7 +310,7 @@
 	margin-top: 10px;
 }
 
-.gl-font .range-wrap {
+.gl-row .range-wrap {
 	padding-right: 5px;
 	line-height: 1.8;
 }
@@ -320,4 +322,71 @@
 
 .customize-control-font {
 	margin-bottom: 25px;
+}
+
+.customize-control {
+	max-height: 500px;
+	transition: .5s all;
+	opacity: 1;
+}
+
+.customize-control.collapse {
+	max-height: 0;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+}
+
+.toggler {
+	text-align: center;
+	position: relative;
+}
+
+.toggler span {
+	background: #fff;
+	border-radius: 30px;
+	color: #999;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: .5s all;
+	font-size: 14px;
+	line-height: 1.4;
+}
+
+.toggled span {
+	transform: translateX(-50%) rotate(180deg);
+}
+
+.aspect {
+	position: absolute;
+	left: 40%;
+	top: 115%;
+	color: #999;
+	font-size: 18px;
+	cursor: pointer;
+	display: inline-block;
+	z-index: 10;
+}
+
+.lock-indicator {
+	position: absolute;
+	left: calc(40% + 10px);
+	height: 50px;
+	border-right: 1px dashed #ccc;
+	top: 45px;
+	transition: .2s all;
+	transform: scale(1);
+}
+
+.dashicons-unlock ~ .lock-indicator {
+	transform: scale(0);
+}
+
+.aspect:before {
+	background: #eee;
 }

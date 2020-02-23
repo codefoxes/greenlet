@@ -46,13 +46,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'logo_width',
 		'sargs' => array(
-			'default'   => $logo_width,
+			'default'   => $logo_width . 'px',
 			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'range',
+			'type'        => 'length',
 			'section'     => 'title_tagline',
-			'label'       => __( 'Logo Width', 'greenlet' ),
+			'description' => __( 'Logo Width', 'greenlet' ),
 			'input_attrs' => array(
 				'min' => 0,
 				'max' => 500,
@@ -65,13 +65,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'logo_height',
 		'sargs' => array(
-			'default'   => $logo_height,
+			'default'   => $logo_height . 'px',
 			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'range',
+			'type'        => 'length',
 			'section'     => 'title_tagline',
-			'label'       => __( 'Logo Height', 'greenlet' ),
+			'description' => __( 'Logo Height', 'greenlet' ),
 			'input_attrs' => array(
 				'min' => 0,
 				'max' => 500,
@@ -194,16 +194,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'container_width',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'framework',
-			'label'       => __( 'Container Width', 'greenlet' ),
-			'description' => __( 'Enter container width. Eg: 1170px or 80% (Optional)', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( 'Default', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'framework',
+			'label'   => __( 'Container Width', 'greenlet' ),
 		),
 	);
 
@@ -275,16 +272,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'topbar_width',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'header_layout',
-			'label'       => __( 'Topbar Width', 'greenlet' ),
-			'description' => __( 'Topbar width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '100%', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'header_layout',
+			'label'   => __( 'Topbar Width', 'greenlet' ),
 		),
 	);
 
@@ -292,15 +286,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'topbar_container',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'header_layout',
-			'description' => __( 'Topbar container width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( 'Default', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'header_layout',
+			'label'   => __( 'Topbar container Width', 'greenlet' ),
 		),
 	);
 
@@ -347,16 +339,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_width',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'header_layout',
-			'label'       => __( 'Header Width', 'greenlet' ),
-			'description' => __( 'Enter header width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '100%', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'header_layout',
+			'label'   => __( 'Header Width', 'greenlet' ),
 		),
 	);
 
@@ -364,16 +353,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'header_container',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'header_layout',
-			'label'       => __( 'Header Container Width', 'greenlet' ),
-			'description' => __( 'Enter container width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( 'Default', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'header_layout',
+			'label'   => __( 'Header Container Width', 'greenlet' ),
 		),
 	);
 
@@ -451,7 +437,7 @@ function greenlet_options() {
 			'type'        => 'select',
 			'section'     => 'main_layout',
 			'label'       => __( 'Number of Sidebars ( For Main Container )', 'greenlet' ),
-			'description' => __( 'How many sidebars ro register for main container of page ? (Not for header or footer.)', 'greenlet' ),
+			'description' => __( 'How many sidebars to register for main container of page ? (Not for header or footer.)', 'greenlet' ),
 			'choices'     => $sidebars_qty,
 		),
 	);
@@ -546,15 +532,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'main_width',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
+			'type'        => 'length',
 			'section'     => 'main_layout',
-			'description' => __( 'Content Width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '100%', 'greenlet' ),
-			),
+			'description' => __( 'Content Width', 'greenlet' ),
 		),
 	);
 
@@ -562,15 +546,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'main_container',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
+			'type'        => 'length',
 			'section'     => 'main_layout',
-			'description' => __( 'Content container width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( 'Default', 'greenlet' ),
-			),
+			'description' => __( 'Content container width', 'greenlet' ),
 		),
 	);
 
@@ -629,15 +611,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'semifooter_width',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'footer_layout',
-			'description' => __( 'Semifooter Width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '100%', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'footer_layout',
+			'label'   => __( 'Semifooter Width', 'greenlet' ),
 		),
 	);
 
@@ -645,15 +625,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'semifooter_container',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'footer_layout',
-			'description' => __( 'Semifooter container width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( 'Default', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'footer_layout',
+			'label'   => __( 'Semifooter container width', 'greenlet' ),
 		),
 	);
 
@@ -700,15 +678,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'footer_width',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'footer_layout',
-			'description' => __( 'Semifooter Width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( '100%', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'footer_layout',
+			'label'   => __( 'Footer Width', 'greenlet' ),
 		),
 	);
 
@@ -716,15 +692,13 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'footer_container',
 		'sargs' => array(
-			'default' => '',
+			'default'   => '',
+			'transport' => 'postMessage',
 		),
 		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'footer_layout',
-			'description' => __( 'Semifooter container width in % or px or em.', 'greenlet' ),
-			'input_attrs' => array(
-				'placeholder' => __( 'Default', 'greenlet' ),
-			),
+			'type'    => 'length',
+			'section' => 'footer_layout',
+			'label'   => __( 'Footer container width', 'greenlet' ),
 		),
 	);
 
@@ -1563,20 +1537,6 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'schema',
-		'sargs' => array(
-			'default' => '1',
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'blog',
-			'label'       => __( 'Schema Markup', 'greenlet' ),
-			'description' => __( 'Enable Schema Markup', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
 		'id'    => 'breadcrumb',
 		'sargs' => array(
 			'default' => '1',
@@ -1709,6 +1669,20 @@ function greenlet_options() {
 				'posts' => 'Posts',
 				'pages' => 'Pages',
 			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'schema',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog',
+			'label'       => __( 'Schema Markup', 'greenlet' ),
+			'description' => __( 'Enable Schema Markup', 'greenlet' ),
 		),
 	);
 
