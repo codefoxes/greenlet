@@ -95,7 +95,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$show_title   = gl_get_option( 'show_title', '1' );
 		$show_tagline = gl_get_option( 'show_tagline', false );
 
-		$fixed_topbar = gl_get_option( 'fixed_topbar', false );
+		$fixed_topbar = gl_get_option( 'fixed_topbar', true );
 
 		$logo_width       = gl_get_option( 'logo_width', false );
 		$logo_height      = gl_get_option( 'logo_height', false );

@@ -22,7 +22,9 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 		$array['main'] = 'Main Content';
 
 		foreach ( $GLOBALS['wp_registered_sidebars'] as $sidebar ) {
-			$array[ $sidebar['id'] ] = $sidebar['name'];
+			if ( 0 === strpos( $sidebar['id'], 'sidebar-' ) ) {
+				$array[ $sidebar['id'] ] = $sidebar['name'];
+			}
 		}
 
 		return $array;

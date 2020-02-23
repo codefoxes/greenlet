@@ -6,6 +6,10 @@ function manageLogoDependencies() {
 	var wControl = wp.customize.control( 'logo_width' )
 	var hControl = wp.customize.control( 'logo_height' )
 
+	if ( control.setting._value !== '' ) {
+		$( '#customize-control-show_title' ).hide()
+	}
+
 	var widthContainer  = $( '#customize-control-logo_width' )
 	var heightContainer = $( '#customize-control-logo_height' )
 

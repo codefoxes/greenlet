@@ -100,8 +100,8 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 			// For each positions in the array.
 			foreach ( $position as $pos ) {
 
-				// If the content source set in options is widgets.
-				if ( gl_get_option( $pos . '_content_source', 'manual' ) === 'widgets' ) {
+				// If the show position is enabled in options.
+				if ( ! in_array( $pos, array( 'topbar', 'semifooter' ), true ) || false !== gl_get_option( 'show_' . $pos, false ) ) {
 
 					// Get position template option.
 					$layout_option = $pos . '_template';

@@ -16,11 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array
  */
 function greenlet_options() {
-	$content_source = array(
-		'widgets' => __( 'Widgets', 'greenlet' ),
-		'manual'  => __( 'Manual Edit', 'greenlet' ),
-	);
-
 	$min_sidebars = greenlet_get_min_sidebars();
 
 	$sidebars_qty = array();
@@ -256,20 +251,6 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'topbar_content_source',
-		'sargs' => array(
-			'default' => 'widgets',
-		),
-		'cargs' => array(
-			'type'    => 'radio',
-			'section' => 'header_layout',
-			'label'   => __( 'Topbar Content Source', 'greenlet' ),
-			'choices' => $content_source,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
 		'id'    => 'topbar_width',
 		'sargs' => array(
 			'default'   => '',
@@ -318,20 +299,6 @@ function greenlet_options() {
 			'label'       => __( 'Header Layout', 'greenlet' ),
 			'description' => __( 'Select Header Columns Layout', 'greenlet' ),
 			'choices'     => greenlet_template_images( 'cover' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'header_content_source',
-		'sargs' => array(
-			'default' => 'widgets',
-		),
-		'cargs' => array(
-			'type'    => 'radio',
-			'section' => 'header_layout',
-			'label'   => __( 'Header Content Source', 'greenlet' ),
-			'choices' => $content_source,
 		),
 	);
 
@@ -595,20 +562,6 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'semifooter_content_source',
-		'sargs' => array(
-			'default' => 'widgets',
-		),
-		'cargs' => array(
-			'type'    => 'radio',
-			'section' => 'footer_layout',
-			'label'   => __( 'Semi Footer Content Source', 'greenlet' ),
-			'choices' => $content_source,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
 		'id'    => 'semifooter_width',
 		'sargs' => array(
 			'default'   => '',
@@ -657,20 +610,6 @@ function greenlet_options() {
 			'label'       => __( 'Footer Layout', 'greenlet' ),
 			'description' => __( 'Select Footer Columns Layout', 'greenlet' ),
 			'choices'     => greenlet_template_images( 'cover' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'footer_content_source',
-		'sargs' => array(
-			'default' => 'widgets',
-		),
-		'cargs' => array(
-			'type'    => 'radio',
-			'section' => 'footer_layout',
-			'label'   => __( 'Footer Content Source', 'greenlet' ),
-			'choices' => $content_source,
 		),
 	);
 
