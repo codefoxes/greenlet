@@ -37,9 +37,15 @@ buildfonts() {
 	python3 $DIR/build-google-fonts
 }
 
+buildbackend() {
+	DIR="$(cd "$(dirname "$0")" && pwd)"
+	python3 $DIR/build-controls
+}
+
 if [ -z "$1" ]; then
 	buildjs
 	buildcss
+	buildbackend
 	buildfonts
 elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
@@ -57,4 +63,9 @@ elif [ "$1" == "css" ]; then
 	buildcss
 elif [ "$1" == "js" ]; then
 	buildjs
+elif [ "$1" == "backend" ]; then
+	buildbackend
+	if [ "$2" == "--watch" ]; then
+		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
+	fi
 fi

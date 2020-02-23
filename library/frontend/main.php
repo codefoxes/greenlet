@@ -59,7 +59,6 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 
 		// Set variables.
 		$layout_option = $pos . '_template';
-		$source_option = $pos . '_content_source';
 
 		// Get logo and menu positions from options, else set default values.
 		$logo_position  = gl_get_option( 'logo_position', 'header-1' );
@@ -67,7 +66,15 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 		$smenu_position = gl_get_option( 'smenu_position', 'dont-show' );
 		$fmenu_position = gl_get_option( 'fmenu_position', 'dont-show' );
 		$layout         = gl_get_option( $layout_option, top_bottom_default_columns( $pos ) );
-		$source         = gl_get_option( $source_option, 'manual' );
+
+		/**
+		 * Filters the content sources and their sequence for current cover column.
+		 *
+		 * @since 1.1.0
+		 *
+		 * @param array $content_sources Position content sources. Default array( 'widgets', 'templates' ).
+		 */
+		$sources = apply_filters( $pos . '_content_sources', array( 'widgets', 'templates' ) );
 
 		$layout = ( '' === $layout ) ? top_bottom_default_columns( $pos ) : $layout;
 
@@ -89,37 +96,28 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 			do_action( "greenlet_before_{$pos}_{$i}_content" );
 
 			// If current position has logo or menu, get template part.
-			switch ( $pos . '-' . $i ) {
-
-				case $logo_position:
-					get_template_part( 'templates/logo' );
-					break;
-
-				case $mmenu_position:
-					get_template_part( 'templates/menu/main' );
-					break;
-
-				case $smenu_position:
-					get_template_part( 'templates/menu/secondary' );
-					break;
-
-				case $fmenu_position:
-					get_template_part( 'templates/menu/footer' );
-					break;
+			if ( $logo_position === $pos . '-' . $i ) {
+				get_template_part( 'templates/logo' );
 			}
 
-			// Get content from the option source.
-			switch ( $source ) {
+			if ( $mmenu_position === $pos . '-' . $i ) {
+				get_template_part( 'templates/menu/main' );
+			}
 
-				case 'widgets':
-					// Get dynamic sidebar.
+			if ( $smenu_position === $pos . '-' . $i ) {
+				get_template_part( 'templates/menu/secondary' );
+			}
+
+			if ( $fmenu_position === $pos . '-' . $i ) {
+				get_template_part( 'templates/menu/footer' );
+			}
+
+			foreach ( $sources as $source ) {
+				if ( 'widgets' === $source ) {
 					dynamic_sidebar( $pos . '-sidebar-' . $i );
-					break;
-
-				case 'manual':
-					// Get current column template.
+				} elseif ( 'templates' === $source ) {
 					get_template_part( 'templates/' . $pos . '/column', ( $i ) );
-					break;
+				}
 			}
 
 			do_action( "greenlet_after_{$pos}_{$i}_content" );

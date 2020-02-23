@@ -16,7 +16,9 @@
     "bundle": "./src/build.sh --final",
     "fonts": "./src/build.sh fonts",
     "css": "./src/build.sh css",
-    "js": "./src/build.sh js"
+    "js": "./src/build.sh js",
+    "backend": "./src/build.sh backend",
+    "backend:watch": "./src/build.sh backend --watch"
   },
   "repository": {
     "type": "git",

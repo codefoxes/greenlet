@@ -1,7 +1,10 @@
+.env
+node_modules/
+
 assets/css/*
 assets/js/*
-
-node_modules/
+library/backend/assets/js/greenlet-controls.js
+library/backend/assets/fonts/google-fonts.json
 
 **/cypress.env.json
 **/cypress/videos
@@ -9,5 +12,4 @@ node_modules/
 **/cypress/support
 **/cypress/fixtures
 
-.env
-library/backend/assets/fonts/google-fonts.json
+**/lighthouse/reports

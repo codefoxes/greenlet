@@ -6,7 +6,9 @@
   "scripts": {
     "start": "./node_modules/.bin/cypress run --env ENV=local",
     "cypress": "./node_modules/.bin/cypress run --headed --env ENV=local",
-    "cypress:open": "./node_modules/.bin/cypress open --env ENV=local"
+    "cypress:open": "./node_modules/.bin/cypress open --env ENV=local",
+    "lh": "./run-tests.sh lighthouse",
+    "lhv": "./run-tests.sh lighthouse view"
   },
   "author": "",
   "license": "ISC",

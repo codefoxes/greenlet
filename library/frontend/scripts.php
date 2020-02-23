@@ -33,9 +33,9 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		global $wp_query, $wp, $wp_rewrite;
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		wp_enqueue_script( 'greenlet-custom', SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
+		wp_enqueue_script( 'greenlet-scripts', SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
 		wp_localize_script(
-			'greenlet-custom',
+			'greenlet-scripts',
 			'pagination_ajax',
 			array(
 				'ajaxurl'     => admin_url( 'admin-ajax.php' ),
@@ -93,9 +93,9 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 	 */
 	function greenlet_load_inline_styles() {
 		$show_title   = gl_get_option( 'show_title', '1' );
-		$show_tagline = gl_get_option( 'show_tagline', '1' );
+		$show_tagline = gl_get_option( 'show_tagline', false );
 
-		$fixed_topbar = gl_get_option( 'fixed_topbar', false );
+		$fixed_topbar = gl_get_option( 'fixed_topbar', true );
 
 		$logo_width       = gl_get_option( 'logo_width', false );
 		$logo_height      = gl_get_option( 'logo_height', false );
@@ -104,8 +104,8 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$topbar_bg        = gl_get_option( 'topbar_bg', '#fff' );
 		$topbar_color     = gl_get_option( 'topbar_color', '#212121' );
 		$header_bg        = gl_get_option( 'header_bg', '#fff' );
-		$header_color     = gl_get_option( 'header_color', '#33691e' );
-		$header_link_over = gl_get_option( 'header_link_hover', '#7cb342' );
+		$header_color     = gl_get_option( 'header_color', '#383838' );
+		$header_link_over = gl_get_option( 'header_link_hover', '#01579B' );
 		$main_bg          = gl_get_option( 'main_bg', '#f5f5f5' );
 		$content_bg       = gl_get_option( 'content_bg', '' );
 		$semifooter_bg    = gl_get_option( 'semifooter_bg', '#fff' );
@@ -121,8 +121,8 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$h4_font          = gl_get_option( 'h4_font', array() );
 		$h5_font          = gl_get_option( 'h5_font', array() );
 		$h6_font          = gl_get_option( 'h6_font', array() );
-		$link_color       = gl_get_option( 'link_color', '#1565C0' );
-		$link_hover       = gl_get_option( 'link_hover', '#0D47A1' );
+		$link_color       = gl_get_option( 'link_color', '#0277BD' );
+		$link_hover       = gl_get_option( 'link_hover', '#01579B' );
 		$link_font        = gl_get_option( 'link_font', array() );
 		$btn_bg           = gl_get_option( 'button_bg', '#ffffff' );
 		$btn_color        = gl_get_option( 'button_color', '#555555' );
@@ -160,11 +160,11 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		}
 
 		greenlet_add_style( '.container', 'max-width', greenlet_css_width( 'container_width', '1170px' ), '', 'min-width: 801px' );
-		greenlet_add_style( '.topbar .container', 'max-width', greenlet_css_width( 'topbar_container', '1170px' ), '', 'min-width: 801px' );
-		greenlet_add_style( '.site-header .container', 'max-width', greenlet_css_width( 'header_container', '1170px' ), '', 'min-width: 801px' );
-		greenlet_add_style( '.site-content .container', 'max-width', greenlet_css_width( 'main_container', '1170px' ), '', 'min-width: 801px' );
-		greenlet_add_style( '.semifooter .container', 'max-width', greenlet_css_width( 'semifooter_container', '1170px' ), '', 'min-width: 801px' );
-		greenlet_add_style( '.site-footer .container', 'max-width', greenlet_css_width( 'footer_container', '1170px' ), '', 'min-width: 801px' );
+		greenlet_add_style( '.topbar .container', 'max-width', greenlet_css_width( 'topbar_container' ), '', 'min-width: 801px' );
+		greenlet_add_style( '.site-header .container', 'max-width', greenlet_css_width( 'header_container' ), '', 'min-width: 801px' );
+		greenlet_add_style( '.site-content .container', 'max-width', greenlet_css_width( 'main_container' ), '', 'min-width: 801px' );
+		greenlet_add_style( '.semifooter .container', 'max-width', greenlet_css_width( 'semifooter_container' ), '', 'min-width: 801px' );
+		greenlet_add_style( '.site-footer .container', 'max-width', greenlet_css_width( 'footer_container' ), '', 'min-width: 801px' );
 		greenlet_add_style( 'body', array( array( 'background', $site_bg ), array( 'color', $site_color ), array( 'font', $base_font ) ) );
 		greenlet_add_style( '.topbar', array( array( 'background', $topbar_bg ), array( 'color', $topbar_color ), array( 'max-width', greenlet_css_width( 'topbar_width' ) ) ) );
 		greenlet_add_style( '.site-header', array( array( 'background', $header_bg ), array( 'max-width', greenlet_css_width( 'header_width' ) ), array( 'font', $header_font ) ) );
@@ -200,11 +200,11 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		greenlet_print_inline_styles();
 
 		if ( false !== $logo_width && $raw_width !== $logo_width ) {
-			echo '.site-logo img { width: ' . esc_html( $logo_width ) . 'px;}';
+			echo '.site-logo img { width: ' . esc_html( $logo_width ) . ';}';
 		}
 
 		if ( false !== $logo_height && $raw_height !== $logo_height ) {
-			echo '.site-logo img { height: ' . esc_html( $logo_height ) . 'px;}';
+			echo '.site-logo img { height: ' . esc_html( $logo_height ) . ';}';
 		}
 
 		if ( false === $show_title ) {

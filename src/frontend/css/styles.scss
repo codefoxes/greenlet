@@ -22,14 +22,18 @@ img {
 
 .topbar {
 	position: relative;
-	min-height: 50px;
 	top: 0;
 	z-index: 990;
 	background: #fff;
 	margin: auto;
+	border-bottom: 1px solid #eee;
 
 	h1 {
 		@extend %top-heading;
+	}
+
+	.topbar-column {
+		min-height: 40px;
 	}
 }
 
@@ -47,9 +51,14 @@ img {
 
 	.header-column {
 		display: flex;
+		align-items: center;
 
-		&:last-child {
+		&:last-child:not(:first-child) {
 			justify-content: flex-end;
+		}
+
+		.search-form, .search-field, .search-submit {
+			margin: 0;
 		}
 	}
 
@@ -66,12 +75,7 @@ img {
 
 .site-logo {
 	font-size: 3.6rem;
-	padding: 20px 0;
-
-	.site-url {
-		max-width: 300px;
-		max-height: 50px;
-	}
+	padding: 25px 0;
 
 	img {
 		max-width: 100%;
@@ -86,7 +90,7 @@ img {
 	font-size: 40%;
 }
 
-.site-navigation {
+.nav-menu {
 	height: 100%;
 	width: 100%;
 
@@ -665,20 +669,24 @@ blockquote {
 }
 
 @media (min-width: 801px) {
+	.admin-bar .topbar {
+		top: 32px;
+	}
+
 	.site-header h1, .topbar h1 {
 		font-size: 3.6rem;
 	}
 
-	.site-navigation ul {
+	.nav-menu ul {
 		text-align: right;
 	}
 
-	.site-navigation li {
+	.nav-menu li {
 		display: inline-block;
 		height: 100%;
 	}
 
-	.site-navigation a {
+	.nav-menu a {
 		display: flex;
 		height: 100%;
 		align-items: center;
@@ -689,7 +697,7 @@ blockquote {
 		display: none;
 	}
 
-	.menu-toggle ~ .site-menu {
+	.menu-toggle ~ .site-menu, .nav-menu .site-menu {
 		display: flex;
 		justify-content: flex-end;
 		height: 100%;
