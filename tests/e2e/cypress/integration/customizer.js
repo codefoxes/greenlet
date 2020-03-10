@@ -49,11 +49,11 @@ describe('Customizer', () => {
 		})
 
 		it('Contains Logo Width', () => {
-			cy.get('#_customize-input-logo_width').should('have.attr', 'type', 'range')
+			cy.get('#length-size-logo_width').should('have.attr', 'type', 'range')
 		})
 
 		it('Contains Logo Height', () => {
-			cy.get('#_customize-input-logo_height').should('have.attr', 'type', 'range')
+			cy.get('#length-size-logo_height').should('have.attr', 'type', 'range')
 		})
 	})
 
@@ -115,7 +115,7 @@ describe('Customizer', () => {
 			})
 
 			it('Contains Header Template Placeholder', () => {
-				cy.get('#_customize-input-header_template').should('have.attr', 'placeholder', '3-9')
+				cy.get('#customize-control-header_template .gl-radio-images').should('be.visible')
 			})
 
 			it('Contains Logo Position as Header 1', () => {
@@ -132,12 +132,17 @@ describe('Customizer', () => {
 
 			it('Shows Topbar on Toggle', () => {
 				cy.get('#_customize-input-show_topbar').click()
-				cy.wait(2000)
-				cy.get('#customize-preview iframe').then(($iframe) => {
-					const $body = $iframe.contents().find('body')
-					cy.wrap($body).find('.topbar').should('be.visible')
-					cy.wrap($body).find('.topbar').should('have.css', 'position', 'sticky')
-				})
+
+				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+					const topbar = $iframe.contents().find('body .topbar')
+					return topbar.length > 0;
+				}), { timeout: 10000 })
+
+				// cy.get('#customize-preview iframe').then(($iframe) => {
+				// 	const $body = $iframe.contents().find('body')
+				// 	cy.wrap($body).find('.topbar').should('be.visible')
+				// 	cy.wrap($body).find('.topbar').should('have.css', 'position', 'sticky')
+				// })
 			})
 
 			it('Toggles Sticky Topbar', () => {
@@ -151,14 +156,17 @@ describe('Customizer', () => {
 			})
 
 			it('Updates Topbar Template', () => {
-				cy.get('#_customize-input-topbar_template').type('5-7')
+				cy.get('#customize-control-topbar_template [type="radio"]').check('2-10', { force: true })
+				// cy.get('#_customize-input-topbar_template').type('5-7')
 				cy.wait(2000)
 				cy.get('#customize-preview iframe').then(($iframe) => {
 					const $body = $iframe.contents().find('body')
-					cy.wrap($body).find('.topbar .topbar-1').should('have.class', 'col-5')
-					cy.wrap($body).find('.topbar .topbar-2').should('have.class', 'col-7')
+					cy.wrap($body).find('.topbar .topbar-1').should('have.class', 'col-2')
+					cy.wrap($body).find('.topbar .topbar-2').should('have.class', 'col-10')
 				})
 			})
+
+			// Test manual template Input.
 
 			it('Updates Header Template', () => {
 				cy.get('#_customize-input-header_template').type('2-10')
