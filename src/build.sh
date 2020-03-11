@@ -52,6 +52,8 @@ elif [ "$1" == "--watch" ]; then
 elif [ "$1" == "--final" ]; then
 	buildjs
 	buildcss
+	buildbackend
+	buildfonts
 	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
 	current=$(pwd)
 	cd ~/Desktop
