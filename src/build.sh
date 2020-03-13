@@ -1,5 +1,9 @@
 #!/bin/bash
 
+BGREEN='\033[1;32m'
+BRED='\033[1;31m'
+NC='\033[0m'
+
 declare -a css_files=( 'default' 'styles' 'shop' )
 
 buildjs() {
@@ -50,15 +54,23 @@ if [ -z "$1" ]; then
 elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
 elif [ "$1" == "--final" ]; then
+	printf "${BGREEN}STEP 1: RUNNING TESTS${NC}\n"
+	current=$(pwd)
+	cd tests/e2e && ./run-tests.sh
+	[ $? == 0 ] || exit 1
+	cd $current
+	printf "${BGREEN}STEP 2: BUILDING${NC}\n"
 	buildjs
 	buildcss
 	buildbackend
 	buildfonts
-	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
+	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
+	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build*' --exclude '*src/.env' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
 	current=$(pwd)
 	cd ~/Desktop
 	zip -r greenlet.zip greenlet
 	cd $current
+	printf "${BGREEN}BUILD COMPLETE${NC}\n"
 elif [ "$1" == "fonts" ]; then
 	buildfonts
 elif [ "$1" == "css" ]; then
