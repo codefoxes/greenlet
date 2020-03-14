@@ -1,16 +1,19 @@
 {
   "name": "e2e-testing",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "End to End Testing for Greenlet",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/cypress run --env ENV=local",
     "cypress": "./node_modules/.bin/cypress run --headed --env ENV=local",
-    "cypress:open": "./node_modules/.bin/cypress open --env ENV=local"
+    "cypress:open": "./node_modules/.bin/cypress open --env ENV=local",
+    "lh": "./run-tests.sh lighthouse",
+    "lhv": "./run-tests.sh lighthouse view"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^3.8.2"
+    "cypress": "^4.1.0",
+    "cypress-wait-until": "^1.6.1"
   }
 }

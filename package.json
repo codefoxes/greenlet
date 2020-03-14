@@ -1,6 +1,6 @@
 {
   "name": "greenlet",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Extremely fast and highly customizable WordPress theme.",
   "dependencies": {},
   "devDependencies": {
@@ -13,7 +13,12 @@
   "scripts": {
     "build": "./src/build.sh",
     "start": "./src/build.sh --watch",
-    "bundle": "./src/build.sh --final"
+    "bundle": "./src/build.sh --final",
+    "fonts": "./src/build.sh fonts",
+    "css": "./src/build.sh css",
+    "js": "./src/build.sh js",
+    "backend": "./src/build.sh backend",
+    "backend:watch": "./src/build.sh backend --watch"
   },
   "repository": {
     "type": "git",

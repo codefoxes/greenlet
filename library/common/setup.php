@@ -5,6 +5,8 @@
  * @package greenlet\library\common
  */
 
+use Greenlet\Columns as GreenletColumns;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -51,9 +53,6 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 			)
 		);
 
-		// Add visual editor style.
-		add_editor_style( get_stylesheet_uri() );
-
 		// Add support for woocommerce.
 		add_theme_support( 'woocommerce' );
 	}
@@ -75,12 +74,8 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	 */
 	function greenlet_widget_init() {
 		if ( function_exists( 'register_sidebar' ) ) {
-			$sidebars_qty = 3;
-
-			if ( ! is_customize_preview() ) {
-				// Get number of sidebars from saved options, else set to 3.
-				$sidebars_qty = gl_get_option( 'sidebars_qty', 3 );
-			}
+			// Get number of sidebars from saved options, else set to 3.
+			$sidebars_qty = gl_get_option( 'sidebars_qty', 3 );
 
 			// Register number of sidebars.
 			for ( $i = 1; $i <= $sidebars_qty; $i++ ) {
@@ -105,16 +100,15 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 			// For each positions in the array.
 			foreach ( $position as $pos ) {
 
-				// If the content source set in options is widgets.
-				if ( gl_get_option( $pos . '_content_source', 'manual' ) === 'widgets' ) {
+				// If the show position is enabled in options.
+				if ( ! in_array( $pos, array( 'topbar', 'semifooter' ), true ) || false !== gl_get_option( 'show_' . $pos, false ) ) {
 
 					// Get position template option.
 					$layout_option = $pos . '_template';
 					$layout        = gl_get_option( $layout_option, top_bottom_default_columns( $pos ) );
 
 					// Create new column object.
-					// @see library/classes.php.
-					$cobj = new ColumnObject( $layout );
+					$cobj = new GreenletColumns( $layout );
 
 					// For total number of columns register sidebars.
 					for ( $i = 1; $i <= ( $cobj->total ); $i++ ) {

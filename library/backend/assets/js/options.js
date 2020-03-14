@@ -53,14 +53,15 @@ document.addEventListener(
 				return;
 			}
 
-			var data = e.target.previousElementSibling.value;
+			var data = document.getElementById( 'import-content' ).value;
 
 			if ( data === '' ) {
 				showTemporaryMessage( 'import-default' )
 				return;
 			}
 
-			var nonce = e.target.nextElementSibling.value;
+			e.target.nextElementSibling.classList.add( 'is-active' );
+			var nonce = e.target.nextElementSibling.nextElementSibling.value;
 			var args  = { action: 'greenlet_options_import', value: data, nonce: nonce };
 
 			var xhr = new XMLHttpRequest();
@@ -78,7 +79,27 @@ document.addEventListener(
 						showTemporaryMessage( 'import-error' )
 					}
 				}
+				e.target.nextElementSibling.classList.remove( 'is-active' );
 			}
+		} else if ( e.target && e.target.id === 'save-btn' ) {
+			e.preventDefault();
+			e.target.nextElementSibling.classList.add( 'is-active' );
+			var editorStyle = document.getElementById( 'editor_styles' )
+
+			var bnonce = e.target.nextElementSibling.nextElementSibling.value;
+			var bargs  = { action: 'greenlet_save_backend', settings: JSON.stringify( { editor_styles: editorStyle.checked } ), nonce: bnonce };
+			var req    = xhRequest( { url: ajaxurl, body: jsonToFormData( bargs ), method: 'POST', headers: { 'Content-type': 'application/x-www-form-urlencoded' } } )
+			req.then(
+				function( res ) {
+					if ( res === '0' ) {
+						showTemporaryMessage( 'setting-error' )
+					} else {
+						showTemporaryMessage( 'setting-success' )
+						document.querySelector( '.export-option textarea' ).value = res
+					}
+					e.target.nextElementSibling.classList.remove( 'is-active' )
+				}
+			);
 		}
 	}
 );

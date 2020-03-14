@@ -42,14 +42,20 @@ class Customizer {
 	public function __construct() {
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-multicheck.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-selector.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-sequence.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-length.php';
 		require_once LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
 		require_once LIBRARY_DIR . '/backend/customizer/options.php';
 
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'customize_preview_init', array( $this, 'enqueue_preview_scripts' ) );
 	}
 
 	/**
@@ -60,6 +66,15 @@ class Customizer {
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
+	}
+
+	/**
+	 * Enqueue Customizer Preview Scripts.
+	 *
+	 * @since  1.1.0
+	 */
+	public function enqueue_preview_scripts() {
+		wp_enqueue_script( 'greenlet-preview', LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'jquery', 'customize-preview' ), GREENLET_VERSION, true );
 	}
 
 	/**
@@ -103,7 +118,11 @@ class Customizer {
 				);
 
 			} elseif ( 'control' === $option['type'] ) {
-				$wp_customize->add_control( $option['id'], $option['args'] );
+				if ( 'divider' === $option['args']['type'] ) {
+					$wp_customize->add_control( new Control_Divider( $wp_customize, $option['id'], $option['args'] ) );
+				} else {
+					$wp_customize->add_control( $option['id'], $option['args'] );
+				}
 			} elseif ( 'setting_control' === $option['type'] ) {
 				$wp_customize->add_setting(
 					$option['id'],
@@ -123,11 +142,23 @@ class Customizer {
 				} elseif ( 'radio-image' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Radio_Image( $wp_customize, $option['id'], $option['cargs'] ) );
 
-				} elseif ( 'template-selector' === $option['cargs']['type'] ) {
-					$wp_customize->add_control( new Control_Template_Selector( $wp_customize, $option['id'], $option['cargs'] ) );
+				} elseif ( 'template' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Template( $wp_customize, $option['id'], $option['cargs'] ) );
 
-				} elseif ( 'divider' === $option['cargs']['type'] ) {
-					$wp_customize->add_control( new Control_Divider( $wp_customize, $option['id'], $option['cargs'] ) );
+				} elseif ( 'template-sequence' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Template_Sequence( $wp_customize, $option['id'], $option['cargs'] ) );
+
+				} elseif ( 'gl-color' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Color( $wp_customize, $option['id'], $option['cargs'] ) );
+
+				} elseif ( 'border' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Border( $wp_customize, $option['id'], $option['cargs'] ) );
+
+				} elseif ( 'font' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Font( $wp_customize, $option['id'], $option['cargs'] ) );
+
+				} elseif ( 'length' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Length( $wp_customize, $option['id'], $option['cargs'] ) );
 
 				} else {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
@@ -147,8 +178,13 @@ class Customizer {
 
 		$wp_customize->register_control_type( 'Greenlet\Control_Multicheck' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Radio_Image' );
-		$wp_customize->register_control_type( 'Greenlet\Control_Template_Selector' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Template' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Template_Sequence' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Divider' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Color' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Border' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Font' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Length' );
 	}
 
 	/**

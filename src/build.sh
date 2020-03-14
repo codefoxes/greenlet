@@ -1,6 +1,10 @@
 #!/bin/bash
 
-declare -a css_files=( 'default' 'styles' )
+BGREEN='\033[1;32m'
+BRED='\033[1;31m'
+NC='\033[0m'
+
+declare -a css_files=( 'default' 'styles' 'shop' )
 
 buildjs() {
 	echo 'Build JS: Started'
@@ -23,7 +27,7 @@ buildcss() {
 		# Autoprefix
 		./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output assets/css/$i.css assets/css/$i.css
 
-        # Remove spaced alignment from autoprefixer.
+		# Remove spaced alignment from autoprefixer.
 		sed -i '' 's/\  \ *//g' assets/css/$i.css
 
 		# Uglify
@@ -32,19 +36,50 @@ buildcss() {
 	echo 'Build CSS: Complete'
 }
 
+buildfonts() {
+	DIR="$(cd "$(dirname "$0")" && pwd)"
+	python3 $DIR/build-google-fonts
+}
+
+buildbackend() {
+	DIR="$(cd "$(dirname "$0")" && pwd)"
+	python3 $DIR/build-controls
+}
+
 if [ -z "$1" ]; then
 	buildjs
 	buildcss
+	buildbackend
+	buildfonts
 elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
 elif [ "$1" == "--final" ]; then
+	printf "${BGREEN}STEP 1: RUNNING TESTS${NC}\n"
+	current=$(pwd)
+	cd tests/e2e && ./run-tests.sh
+	[ $? == 0 ] || exit 1
+	cd $current
+	printf "${BGREEN}STEP 2: BUILDING${NC}\n"
 	buildjs
-    buildcss
-    rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build.sh' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
-    current=$(pwd)
-    cd ~/Desktop
-    zip -r greenlet.zip greenlet
-    cd $current
-else
-	echo 'Building Separately?'
+	buildcss
+	buildbackend
+	buildfonts
+	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
+	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build*' --exclude '*src/.env' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
+	current=$(pwd)
+	cd ~/Desktop
+	zip -r greenlet.zip greenlet
+	cd $current
+	printf "${BGREEN}BUILD COMPLETE${NC}\n"
+elif [ "$1" == "fonts" ]; then
+	buildfonts
+elif [ "$1" == "css" ]; then
+	buildcss
+elif [ "$1" == "js" ]; then
+	buildjs
+elif [ "$1" == "backend" ]; then
+	buildbackend
+	if [ "$2" == "--watch" ]; then
+		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
+	fi
 fi

@@ -91,8 +91,6 @@ if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Contr
 			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
 			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
 
-			<input id="_customize-input-{{ data.id }}" type="hidden" {{{ data.link }}} />
-
 			<ul>
 				<# for ( key in data.choices ) { #>
 				<li>

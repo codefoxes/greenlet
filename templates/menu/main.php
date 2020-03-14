@@ -5,7 +5,7 @@
  * @package greenlet\templates\menu
  */
 
-greenlet_markup( 'site-navigation', greenlet_attr( 'site-navigation' ) );
+greenlet_markup( 'site-navigation', greenlet_attr( 'site-navigation nav-menu' ) );
 ?>
 	<input id="menu-toggle" class="menu-toggle" type="checkbox" />
 	<label class="menu-toggle-button" for="menu-toggle">

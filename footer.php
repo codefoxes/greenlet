@@ -19,9 +19,9 @@ do_action( 'greenlet_before_footer' );
 do_action( 'greenlet_footer' );
 do_action( 'greenlet_after_footer' );
 
-do_action( 'greenlet_after' );
+wp_footer();
 
-wp_footer(); ?>
+do_action( 'greenlet_after' ); ?>
 
 </body>
 </html>

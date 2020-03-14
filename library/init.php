@@ -57,7 +57,7 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'CHILD_SCRIPTS_URL', CHILD_ASSETS_URL . '/js' );
 
 		// Define other constants.
-		define( 'GREENLET_VERSION', '1.0.0' );
+		define( 'GREENLET_VERSION', '1.1.0' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
@@ -88,7 +88,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 
 		require_once LIBRARY_DIR . '/common/helpers.php';
 		require_once LIBRARY_DIR . '/common/setup.php';
-		require_once LIBRARY_DIR . '/common/class-columnobject.php';
+		require_once LIBRARY_DIR . '/common/class-columns.php';
 
 		global $wp_customize;
 		if ( is_admin() || isset( $wp_customize ) ) {
@@ -96,6 +96,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 			require_once LIBRARY_DIR . '/backend/options/class-options-admin.php';
 			require_once LIBRARY_DIR . '/backend/customizer/class-customizer.php';
 			require_once LIBRARY_DIR . '/backend/metaboxes/class-metaboxes.php';
+			require_once LIBRARY_DIR . '/backend/editor/class-editor.php';
 		}
 
 		require_once LIBRARY_DIR . '/frontend/helpers.php';
@@ -107,6 +108,8 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		require_once LIBRARY_DIR . '/frontend/main-structure.php';
 		require_once LIBRARY_DIR . '/frontend/footer-structure.php';
 		require_once LIBRARY_DIR . '/frontend/main.php';
+
+		require_once LIBRARY_DIR . '/support/woocommerce/class-woocommerce.php';
 	}
 
 	add_action( 'greenlet_init', 'greenlet_load_framework' );

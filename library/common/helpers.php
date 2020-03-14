@@ -24,7 +24,6 @@ if ( ! function_exists( 'gl_get_option' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'greenlet_defer_style' ) ) {
 	/**
 	 * Defer stylesheet.
@@ -34,11 +33,10 @@ if ( ! function_exists( 'greenlet_defer_style' ) ) {
 	 */
 	function greenlet_defer_style( $href ) {
 		// Todo: Prefetch if external URL.
-		printf( '<link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">', esc_url( $href ) );
+		printf( '<link rel="%1$s" href="%2$s" media="none" onload="this.media=\'all\'">', 'stylesheet', esc_url( $href ) );
 		printf( '<noscript><link rel="%1$s" href="%2$s"></noscript>', 'stylesheet', esc_url( $href ) );
 	}
 }
-
 
 if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	/**
@@ -64,7 +62,6 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'minify_css' ) ) {
 	/**
 	 * Minify CSS.
@@ -85,7 +82,6 @@ if ( ! function_exists( 'minify_css' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'greenlet_enqueue_inline_style' ) ) {
 	/**
 	 * Enqueue inline styles.
@@ -101,6 +97,190 @@ if ( ! function_exists( 'greenlet_enqueue_inline_style' ) ) {
 	}
 }
 
+if ( ! function_exists( 'greenlet_css_width' ) ) {
+	/**
+	 * Get CSS width property for option.
+	 *
+	 * @since  1.0.0
+	 * @param  string      $option  Option name.
+	 * @param  string|bool $default Default Value.
+	 * @return string               Width.
+	 */
+	function greenlet_css_width( $option, $default = false ) {
+		$width = gl_get_option( $option, $default );
+		return ( '' === $width || false === $width ) ? $default : $width;
+	}
+}
+
+if ( ! function_exists( 'greenlet_add_font' ) ) {
+	/**
+	 * Add font details to the fonts list.
+	 *
+	 * @since 1.1.0
+	 * @param array $font Font details array.
+	 */
+	function greenlet_add_font( $font ) {
+		global $greenlet_custom_fonts;
+		if ( null === $greenlet_custom_fonts ) {
+			$greenlet_custom_fonts = array();
+		}
+		$source = $font['source'];
+		$family = $font['family'];
+		$style  = ( 'normal' === $font['style'] ) ? '' : 'i';
+		$weight = $font['weight'] . $style;
+		if ( isset( $greenlet_custom_fonts[ $source ] ) ) {
+			if ( isset( $greenlet_custom_fonts[ $source ][ $family ] ) ) {
+				if ( ! in_array( $weight, $greenlet_custom_fonts[ $source ][ $family ], true ) ) {
+					$greenlet_custom_fonts[ $source ][ $family ][] = $weight;
+				}
+			} else {
+				$greenlet_custom_fonts[ $source ][ $family ] = array( $weight );
+			}
+		} else {
+			$greenlet_custom_fonts[ $source ] = array(
+				$family => array( $weight ),
+			);
+		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_add_style' ) ) {
+	/**
+	 * Add inline style declarations to global array.
+	 *
+	 * @since 1.1.0
+	 * @param string       $selector       CSS Selector.
+	 * @param string|array $style_property CSS Property or array of properties and values..
+	 * @param string|array $style_value    CSS Values.
+	 * @param string       $suffix         Value suffix.
+	 * @param string       $media          Media query.
+	 */
+	function greenlet_add_style( $selector, $style_property, $style_value = '', $suffix = '', $media = '' ) {
+		if ( false === $style_property ) {
+			return;
+		}
+
+		global $greenlet_inline;
+		if ( null === $greenlet_inline ) {
+			$greenlet_inline = array( 'media' => array() );
+		}
+
+		if ( is_array( $style_property ) ) {
+			foreach ( $style_property as $property_values ) {
+				$suffix = isset( $property_values[2] ) ? $property_values[2] : '';
+				$media  = isset( $property_values[3] ) ? $property_values[3] : '';
+				greenlet_add_style( $selector, $property_values[0], $property_values[1], $suffix, $media );
+			}
+			return;
+		}
+
+		if ( 'font' === $style_property ) {
+			if ( ! isset( $style_value['category'] ) ) {
+				return;
+			}
+			$font_family  = ( 'Default' === $style_value['family'] ) ? 'system-ui' : $style_value['family'];
+			$defaults     = greenlet_font_defaults();
+			$all_fonts    = array_unique( array_merge( array( $font_family ), $defaults['fallback'][ $style_value['category'] ] ) );
+			$font_family  = implode( ', ', $all_fonts );
+			$declarations = array(
+				'font-family: ' . $font_family . ';',
+				'font-style: ' . $style_value['style'] . ';',
+				'font-weight: ' . $style_value['weight'] . ';',
+				'font-size: ' . $style_value['size'] . ';',
+			);
+			if ( isset( $style_value['source'] ) && 'system' !== $style_value['source'] ) {
+				greenlet_add_font( $style_value );
+			}
+		} else {
+			$declarations = array( $style_property . ': ' . $style_value . $suffix . ';' );
+		}
+		if ( '' !== $media ) {
+			if ( isset( $greenlet_inline['media'][ $media ] ) ) {
+				if ( isset( $greenlet_inline['media'][ $media ][ $selector ] ) ) {
+					$greenlet_inline['media'][ $media ][ $selector ] = array_merge( $greenlet_inline['media'][ $media ][ $selector ], $declarations );
+				} else {
+					$greenlet_inline['media'][ $media ][ $selector ] = $declarations;
+				}
+			} else {
+				$greenlet_inline['media'][ $media ] = array( $selector => $declarations );
+			}
+		} elseif ( isset( $greenlet_inline[ $selector ] ) ) {
+			$greenlet_inline[ $selector ] = array_merge( $greenlet_inline[ $selector ], $declarations );
+		} else {
+			$greenlet_inline[ $selector ] = $declarations;
+		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_print_inline_styles' ) ) {
+	/**
+	 * Print inline styles.
+	 *
+	 * @since 1.1.0
+	 */
+	function greenlet_print_inline_styles() {
+		global $greenlet_inline;
+		if ( is_array( $greenlet_inline ) ) {
+			foreach ( $greenlet_inline as $selector => $declarations ) {
+				if ( 'media' === $selector ) {
+					foreach ( $declarations as $query => $query_styles ) {
+						echo '@media (' . wp_kses( $query, null ) . ') {';
+						foreach ( $query_styles as $media_selector => $media_declarations ) {
+							echo wp_kses( $media_selector, null ) . '{';
+							foreach ( $media_declarations as $media_declaration ) {
+								echo wp_kses( $media_declaration, null );
+							}
+							echo '}';
+						}
+						echo '}';
+					}
+				} else {
+					echo $selector . '{'; // phpcs:ignore
+					foreach ( $declarations as $declaration ) {
+						echo wp_kses( $declaration, null );
+					}
+					echo '}';
+				}
+			}
+		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_enqueue_fonts' ) ) {
+	/**
+	 * Enqueue fonts.
+	 *
+	 * @since 1.1.0
+	 */
+	function greenlet_enqueue_fonts() {
+		global $greenlet_custom_fonts;
+		if ( ! is_array( $greenlet_custom_fonts ) ) {
+			return;
+		}
+		foreach ( $greenlet_custom_fonts as $source => $fonts ) {
+			if ( ! is_array( $fonts ) ) {
+				return;
+			}
+
+			if ( 'google' === $source ) {
+				$args = array();
+				foreach ( $fonts as $family => $weights ) {
+					$family = str_replace( ' ', '+', $family );
+					$args[] = $family . ':' . implode( ',', $weights );
+				}
+				$font_args = array(
+					'family'  => implode( '|', $args ),
+					'display' => 'fallback',
+				);
+				$font_url  = add_query_arg( $font_args, '//fonts.googleapis.com/css' );
+			} else {
+				$font_url = apply_filters( "greenlet_{$source}_font_url", '', $fonts );
+			}
+
+			greenlet_enqueue_style( 'greenlet-google-fonts', $font_url );
+		}
+	}
+}
 
 if ( ! function_exists( 'is_numeric_array' ) ) {
 	/**
@@ -115,7 +295,6 @@ if ( ! function_exists( 'is_numeric_array' ) ) {
 		return( 0 === count( $nonints ) );
 	}
 }
-
 
 if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 	/**
@@ -198,5 +377,66 @@ if ( ! function_exists( 'top_bottom_default_columns' ) ) {
 			default:
 				return '12';
 		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_get_logo' ) ) {
+	/**
+	 * Get logo URL.
+	 *
+	 * @since  1.1.0
+	 * @return string Logo URL.
+	 */
+	function greenlet_get_logo() {
+		$logo_id  = get_theme_mod( 'custom_logo' );
+		$logo_url = false;
+
+		if ( false !== $logo_id ) {
+			$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
+		}
+
+		return apply_filters( 'greenlet_logo', $logo_url );
+	}
+}
+
+if ( ! function_exists( 'greenlet_get_file_contents' ) ) {
+	/**
+	 * Get file Contents.
+	 *
+	 * @since  1.1.0
+	 * @param  string $file_path File Path.
+	 * @return false|string      File Contents.
+	 */
+	function greenlet_get_file_contents( $file_path ) {
+		ob_start();
+		include $file_path;
+		$file_contents = ob_get_contents();
+		ob_end_clean();
+		return $file_contents;
+	}
+}
+
+if ( ! function_exists( 'greenlet_font_defaults' ) ) {
+	/**
+	 * Get font default fallbacks and variants.
+	 *
+	 * @since  1.1.0
+	 * @return array Font defaults.
+	 */
+	function greenlet_font_defaults() {
+		return array(
+			'fallback' => array(
+				'default'     => array( '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji' ),
+				'sans-serif'  => array( 'Helvetica', 'Verdana', 'Arial', 'sans-serif' ),
+				'serif'       => array( 'Times', 'Georgia', 'serif' ),
+				'monospace'   => array( 'Courier', 'monospace' ),
+				'display'     => array( 'Helvetica', 'Verdana', 'Arial', 'sans-serif' ),
+				'handwriting' => array( 'Comic Sans MS', 'cursive', 'sans-serif' ),
+			),
+			'variants' => array(
+				'normal' => array( '100', '200', '300', '400', '500', '600', '700', '800', '900' ),
+				'italic' => array( '100', '200', '300', '400', '500', '600', '700', '800', '900' ),
+			),
+		);
 	}
 }
