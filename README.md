@@ -31,6 +31,7 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - Change Theme design via customizer
 - Change Theme behaviour via tons of hooks
 - Tons of Color options
+- Tons of Google Fonts
 - Mobile Ready
 - Page Builders Ready
 - Change Logo and Menu Position
@@ -42,6 +43,7 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - Toggle Comments on Posts and Pages
 - Toggle Post Author Info
 - Toggle WP Emoji, WP Embed and Block editor scripts and styles
+- WooCommerce Support
 
 ## Requirements
 - PHP 5.4 or above
