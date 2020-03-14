@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-23 14:16+0000\n"
+"POT-Creation-Date: 2020-03-14 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -14,6 +14,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.1; wp-5.3"
+
+#: 404.php:15
+msgid "Error 404 - Nothing Found"
+msgstr ""
+
+#: 404.php:17
+msgid "It looks like nothing was found here. Maybe try a search?"
+msgstr ""
+
+#: content-none.php:13
+msgid "Nothing found!"
+msgstr ""
 
 #. %s: Number of comments.
 #: comments.php:21
@@ -36,24 +48,8 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: 404.php:15
-msgid "Error 404 - Nothing Found"
-msgstr ""
-
-#: 404.php:17
-msgid "It looks like nothing was found here. Maybe try a search?"
-msgstr ""
-
-#: content-none.php:13
-msgid "Nothing found!"
-msgstr ""
-
 #. Name of the template
 msgid "Side-4, Main-4, Side-4."
-msgstr ""
-
-#. Name of the template
-msgid "Full Width Page."
 msgstr ""
 
 #. Name of the template
@@ -61,550 +57,681 @@ msgid "Main-8, Side-4."
 msgstr ""
 
 #. Name of the template
+msgid "Full Width Page."
+msgstr ""
+
+#. Name of the template
 msgid "Side-4, Main-8."
-msgstr ""
-
-#: templates/breadcrumb.php:63 library/frontend/main-structure.php:253
-msgctxt "Monthly archives date format"
-msgid "F Y"
-msgstr ""
-
-#: templates/breadcrumb.php:67 library/frontend/main-structure.php:256
-msgctxt "Yearly archives date format"
-msgid "Y"
 msgstr ""
 
 #. Name of the template
 msgid "Main-6, Side-6."
 msgstr ""
 
-#: library/frontend/header-structure.php:55
-msgid "Skip to content"
+#: templates/breadcrumb.php:63 library/frontend/main-structure.php:256
+msgctxt "Monthly archives date format"
+msgid "F Y"
+msgstr ""
+
+#: templates/breadcrumb.php:67 library/frontend/main-structure.php:259
+msgctxt "Yearly archives date format"
+msgid "Y"
 msgstr ""
 
 #. phpcs:ignore
-#: library/frontend/main-structure.php:400
+#: library/frontend/main-structure.php:394
 msgid "Featured"
 msgstr ""
 
-#: library/frontend/main-structure.php:450
+#: library/frontend/main-structure.php:458
 msgid "Leave a comment"
 msgstr ""
 
-#: library/frontend/main-structure.php:450
+#: library/frontend/main-structure.php:458
 msgid "One comment"
 msgstr ""
 
-#: library/frontend/main-structure.php:450
+#: library/frontend/main-structure.php:458
 #, php-format
 msgid "View all % comments"
 msgstr ""
 
-#: library/frontend/main-structure.php:457
+#: library/frontend/main-structure.php:465
 msgid "Edit"
 msgstr ""
 
-#: library/frontend/main-structure.php:489
-#: library/frontend/main-structure.php:585
+#: library/frontend/main-structure.php:497
+#: library/frontend/main-structure.php:593
 msgid "<span class=\"more-text\">Read More</span>"
 msgstr ""
 
-#: library/frontend/main-structure.php:559
+#: library/frontend/main-structure.php:567
 msgid "Author:"
 msgstr ""
 
-#: library/frontend/main-structure.php:674
+#: library/frontend/main-structure.php:682
 msgid "&laquo; Newer Posts"
 msgstr ""
 
-#: library/frontend/main-structure.php:675
+#: library/frontend/main-structure.php:683
 msgid "Older Posts &raquo;"
 msgstr ""
 
-#: library/frontend/main-structure.php:893
+#: library/frontend/main-structure.php:901
 msgid "Load More"
 msgstr ""
 
-#: library/frontend/main-structure.php:936
+#: library/frontend/main-structure.php:944
 msgid "Search for:"
 msgstr ""
 
-#: library/frontend/main-structure.php:937
+#: library/frontend/main-structure.php:945
 msgid "Search &hellip;"
 msgstr ""
 
-#: library/frontend/main-structure.php:939
+#: library/frontend/main-structure.php:947
 msgid "Search"
 msgstr ""
 
-#: library/common/setup.php:48
-msgid "Main Menu"
-msgstr ""
-
-#: library/common/setup.php:49
-msgid "Secondary Menu"
+#: library/frontend/header-structure.php:55
+msgid "Skip to content"
 msgstr ""
 
 #: library/common/setup.php:50
+msgid "Main Menu"
+msgstr ""
+
+#: library/common/setup.php:51
+msgid "Secondary Menu"
+msgstr ""
+
+#: library/common/setup.php:52
 msgid "Footer Menu"
 msgstr ""
 
 #. %s: Index of the sidebar.
-#: library/common/setup.php:90
+#: library/common/setup.php:85
 #, php-format
 msgid "Sidebar %s"
 msgstr ""
 
 #. %s: Index of the sidebar.
-#: library/common/setup.php:93
+#: library/common/setup.php:88
 #, php-format
 msgid "Appears on the posts and pages as sidebar %s."
 msgstr ""
 
 #. %1$s: Widget Position. %2$s: Widget Column.
-#: library/common/setup.php:124
+#: library/common/setup.php:118
 #, php-format
 msgid "%1$s Widget Area %2$s"
 msgstr ""
 
 #. %1$s: Widget Position. %2$s: Widget Column.
-#: library/common/setup.php:127
+#: library/common/setup.php:121
 #, php-format
 msgid "Appears on the %1$s as column %2$s."
 msgstr ""
 
 #. %s: Page number.
-#: library/common/setup.php:190
+#: library/common/setup.php:184
 #, php-format
 msgid "Page %s"
 msgstr ""
 
-#: library/backend/customizer/options.php:20
-msgid "Widgets"
+#: library/backend/options/class-options-admin.php:65
+msgid "Greenlet Settings"
 msgstr ""
 
-#: library/backend/customizer/options.php:21
-msgid "Manual Edit"
+#: library/backend/options/class-options-admin.php:66
+msgid "Greenlet Options"
 msgstr ""
 
-#: library/backend/customizer/options.php:59
+#: library/backend/options/class-options-admin.php:127
+msgid "You don't have any options to export. Try saving your options first."
+msgstr ""
+
+#: library/backend/customizer/options.php:50
+msgid "Logo Width"
+msgstr ""
+
+#: library/backend/customizer/options.php:69
+msgid "Logo Height"
+msgstr ""
+
+#: library/backend/customizer/options.php:87
 msgid "Show Title"
 msgstr ""
 
-#: library/backend/customizer/options.php:72
+#: library/backend/customizer/options.php:100
 msgid "Show Tagline"
 msgstr ""
 
-#: library/backend/customizer/options.php:86
-msgid "Site Background"
+#: library/backend/customizer/options.php:117
+msgid "Title Typography"
 msgstr ""
 
-#: library/backend/customizer/options.php:100
-msgid "Site Text Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:114
-msgid "Topbar Background"
-msgstr ""
-
-#: library/backend/customizer/options.php:128
-msgid "Topbar Text Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:142
-msgid "Header Background"
-msgstr ""
-
-#: library/backend/customizer/options.php:156
-msgid "Header Text Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:170
-msgid "Content Section Background"
-msgstr ""
-
-#: library/backend/customizer/options.php:184
-msgid "Content Background"
-msgstr ""
-
-#: library/backend/customizer/options.php:198
-msgid "Semifooter Background"
-msgstr ""
-
-#: library/backend/customizer/options.php:212
-msgid "Semifooter Text Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:226
-msgid "Footer Background"
-msgstr ""
-
-#: library/backend/customizer/options.php:240
-msgid "Footer Text Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:254
-msgid "Heading Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:268
-msgid "Link Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:282
-msgid "Link Hover Color"
-msgstr ""
-
-#: library/backend/customizer/options.php:290
-msgid "Framework"
-msgstr ""
-
-#: library/backend/customizer/options.php:304
-msgid "CSS Framework"
-msgstr ""
-
-#: library/backend/customizer/options.php:306
-msgid "Greenlet Framework"
-msgstr ""
-
-#: library/backend/customizer/options.php:307
-msgid "Bootstrap 4.4.1"
-msgstr ""
-
-#: library/backend/customizer/options.php:321
-msgid "Enter URL if different CDN or CSS Framework"
-msgstr ""
-
-#: library/backend/customizer/options.php:323
-msgid "https://somecdn.com/css_framework.css"
-msgstr ""
-
-#: library/backend/customizer/options.php:337
-msgid "Defer CSS"
-msgstr ""
-
-#: library/backend/customizer/options.php:338
-msgid "Load the CSS framework after page load."
-msgstr ""
-
-#: library/backend/customizer/options.php:349
-msgid "Critical CSS"
-msgstr ""
-
-#: library/backend/customizer/options.php:350
-msgid "If CSS files are defered enter the critical css here."
-msgstr ""
-
-#: library/backend/customizer/options.php:354
-msgid "Leave Blank to not add Critical CSS."
-msgstr ""
-
-#: library/backend/customizer/options.php:368
-msgid "Load Respective JS"
-msgstr ""
-
-#: library/backend/customizer/options.php:369
-msgid "Eg: Load Bootstrap JS if loaded Bootstrap CSS."
-msgstr ""
-
-#: library/backend/customizer/options.php:382
-msgid "Container Width"
-msgstr ""
-
-#: library/backend/customizer/options.php:383
-msgid "Enter container width. Eg: 1170px or 80% (Optional)"
-msgstr ""
-
-#: library/backend/customizer/options.php:385
-#: library/backend/customizer/options.php:494
-#: library/backend/customizer/options.php:571
-#: library/backend/customizer/options.php:772
-#: library/backend/customizer/options.php:857
-#: library/backend/customizer/options.php:932
-msgid "Default"
-msgstr ""
-
-#: library/backend/customizer/options.php:394
+#: library/backend/customizer/options.php:126
 msgid "Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:404
-#: library/backend/customizer/options.php:520
+#: library/backend/customizer/options.php:136
+msgid "Framework"
+msgstr ""
+
+#: library/backend/customizer/options.php:150
+msgid "CSS Framework"
+msgstr ""
+
+#: library/backend/customizer/options.php:152
+msgid "Greenlet Framework"
+msgstr ""
+
+#: library/backend/customizer/options.php:153
+msgid "Bootstrap 4.4.1"
+msgstr ""
+
+#: library/backend/customizer/options.php:167
+msgid "Enter URL if different CDN or CSS Framework"
+msgstr ""
+
+#: library/backend/customizer/options.php:169
+msgid "https://somecdn.com/css_framework.css"
+msgstr ""
+
+#: library/backend/customizer/options.php:183
+msgid "Load Respective JS"
+msgstr ""
+
+#: library/backend/customizer/options.php:184
+msgid "Eg: Load Bootstrap JS if loaded Bootstrap CSS."
+msgstr ""
+
+#: library/backend/customizer/options.php:198
+msgid "Container Width"
+msgstr ""
+
+#: library/backend/customizer/options.php:206
+#: library/backend/customizer/options.php:299
 msgid "Header Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:418
+#: library/backend/customizer/options.php:220
 msgid "Show Topbar"
 msgstr ""
 
-#: library/backend/customizer/options.php:431
+#: library/backend/customizer/options.php:233
 msgid "Fixed Topbar"
 msgstr ""
 
-#: library/backend/customizer/options.php:444
+#: library/backend/customizer/options.php:246
 msgid "Topbar Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:445
-msgid ""
-"Enter topbar columns in Format: 4-8 or 3-9-3 etc. (Separated by hyphen. Only "
-"integers. Sum should be 12.)"
+#: library/backend/customizer/options.php:247
+msgid "Select Topbar Columns Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:447
-msgid "4-8"
-msgstr ""
-
-#: library/backend/customizer/options.php:461
-msgid "Topbar Content Source"
-msgstr ""
-
-#: library/backend/customizer/options.php:475
+#: library/backend/customizer/options.php:262
 msgid "Topbar Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:476
-#, php-format
-msgid "Topbar width in % or px or em."
+#: library/backend/customizer/options.php:276
+msgid "Topbar container Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:478
-#: library/backend/customizer/options.php:554
-#: library/backend/customizer/options.php:756
-#: library/backend/customizer/options.php:841
-#: library/backend/customizer/options.php:916
-msgid "100%"
+#: library/backend/customizer/options.php:300
+msgid "Select Header Columns Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:492
-#, php-format
-msgid "Topbar container width in % or px or em."
-msgstr ""
-
-#: library/backend/customizer/options.php:521
-msgid "Enter header columns in Format: 4-8 or 3-9-3 etc."
-msgstr ""
-
-#: library/backend/customizer/options.php:523
-msgid "3-9"
-msgstr ""
-
-#: library/backend/customizer/options.php:537
-msgid "Header Content Source"
-msgstr ""
-
-#: library/backend/customizer/options.php:551
+#: library/backend/customizer/options.php:315
 msgid "Header Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:552
-#, php-format
-msgid "Enter header width in % or px or em."
-msgstr ""
-
-#: library/backend/customizer/options.php:568
+#: library/backend/customizer/options.php:329
 msgid "Header Container Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:569
-#, php-format
-msgid "Enter container width in % or px or em."
-msgstr ""
-
-#: library/backend/customizer/options.php:597
+#: library/backend/customizer/options.php:352
 msgid "Logo Position"
 msgstr ""
 
-#: library/backend/customizer/options.php:598
+#: library/backend/customizer/options.php:353
 msgid "Column for the logo to be displayed."
 msgstr ""
 
-#: library/backend/customizer/options.php:612
+#: library/backend/customizer/options.php:367
 msgid "Main Menu Position"
 msgstr ""
 
-#: library/backend/customizer/options.php:613
+#: library/backend/customizer/options.php:368
 msgid "Column for the Main Menu to be displayed."
 msgstr ""
 
-#: library/backend/customizer/options.php:627
+#: library/backend/customizer/options.php:382
 msgid "Secondary Menu Position"
 msgstr ""
 
-#: library/backend/customizer/options.php:628
+#: library/backend/customizer/options.php:383
 msgid "Column for the Secondary Menu to be displayed."
 msgstr ""
 
-#: library/backend/customizer/options.php:637
+#: library/backend/customizer/options.php:392
 msgid "Main Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:651
+#: library/backend/customizer/options.php:406
 msgid "Number of Sidebars ( For Main Container )"
 msgstr ""
 
-#: library/backend/customizer/options.php:652
+#: library/backend/customizer/options.php:407
 msgid ""
-"How many sidebars ro register for main container of page ? (Not for header "
+"How many sidebars to register for main container of page ? (Not for header "
 "or footer.)"
 msgstr ""
 
-#: library/backend/customizer/options.php:670
+#: library/backend/customizer/options.php:425
 msgid "Home Page (Post List) Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:689
+#: library/backend/customizer/options.php:444
 msgid "Default Page Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:708
+#: library/backend/customizer/options.php:463
 msgid "Single Post Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:727
+#: library/backend/customizer/options.php:482
 msgid "Archive Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:754
-#, php-format
-msgid "Content Width in % or px or em."
+#: library/backend/customizer/options.php:508
+msgid "Content Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:770
-#, php-format
-msgid "Content container width in % or px or em."
+#: library/backend/customizer/options.php:522
+msgid "Content container width"
 msgstr ""
 
-#: library/backend/customizer/options.php:781
-#: library/backend/customizer/options.php:883
+#: library/backend/customizer/options.php:530
+#: library/backend/customizer/options.php:610
 msgid "Footer Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:795
+#: library/backend/customizer/options.php:544
 msgid "Show Semifooter"
 msgstr ""
 
-#: library/backend/customizer/options.php:808
+#: library/backend/customizer/options.php:557
 msgid "Semi Footer Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:809
-msgid "Enter semifooter columns in Format: 4-8 or 3-9-3 etc."
+#: library/backend/customizer/options.php:558
+msgid "Select Semi Footer Columns Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:811
-msgid "4-4-4"
+#: library/backend/customizer/options.php:573
+msgid "Semifooter Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:825
-msgid "Semi Footer Content Source"
+#: library/backend/customizer/options.php:587
+msgid "Semifooter container width"
 msgstr ""
 
-#: library/backend/customizer/options.php:839
-#: library/backend/customizer/options.php:914
-#, php-format
-msgid "Semifooter Width in % or px or em."
+#: library/backend/customizer/options.php:611
+msgid "Select Footer Columns Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:855
-#: library/backend/customizer/options.php:930
-#, php-format
-msgid "Semifooter container width in % or px or em."
+#: library/backend/customizer/options.php:626
+msgid "Footer Width"
 msgstr ""
 
-#: library/backend/customizer/options.php:884
-msgid "Enter footer columns in Format: 4-8 or 3-9-3 etc."
+#: library/backend/customizer/options.php:640
+msgid "Footer container width"
 msgstr ""
 
-#: library/backend/customizer/options.php:900
-msgid "Footer Content Source"
-msgstr ""
-
-#: library/backend/customizer/options.php:958
+#: library/backend/customizer/options.php:663
 msgid "Footer Menu Position"
 msgstr ""
 
-#: library/backend/customizer/options.php:959
+#: library/backend/customizer/options.php:664
 msgid "Column for the Footer Menu to be displayed."
 msgstr ""
 
-#: library/backend/customizer/options.php:968
-msgid "Blog Settings"
+#: library/backend/customizer/options.php:674
+msgid "Global Design"
 msgstr ""
 
-#: library/backend/customizer/options.php:982
-msgid "Schema Markup"
+#: library/backend/customizer/options.php:685
+msgid "Typography"
 msgstr ""
 
-#: library/backend/customizer/options.php:983
-msgid "Enable Schema Markup"
+#: library/backend/customizer/options.php:699
+msgid "Base Typography"
 msgstr ""
 
-#: library/backend/customizer/options.php:996
-msgid "Breadcrumb"
+#: library/backend/customizer/options.php:712
+msgid "Header Typography"
 msgstr ""
 
-#: library/backend/customizer/options.php:997
-msgid "Enable breadcrumb navigation"
+#: library/backend/customizer/options.php:725
+msgid "Content Section Typography"
 msgstr ""
 
-#: library/backend/customizer/options.php:1010
-msgid "Breadcrumb Separator"
+#: library/backend/customizer/options.php:738
+msgid "Footer Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:747
+msgid "Colors"
+msgstr ""
+
+#: library/backend/customizer/options.php:764
+msgid "Site Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:779
+msgid "Site Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:794
+msgid "Topbar Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:809
+msgid "Topbar Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:824
+msgid "Header Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:839
+msgid "Header Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:854
+msgid "Header Link Hover Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:869
+msgid "Content Section Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:884
+msgid "Content Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:899
+msgid "Semifooter Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:914
+msgid "Semifooter Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:929
+msgid "Footer Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:944
+msgid "Footer Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:953
+msgid "Components"
+msgstr ""
+
+#: library/backend/customizer/options.php:963
+msgid "Headings"
+msgstr ""
+
+#: library/backend/customizer/options.php:979
+msgid "Heading Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:994
+msgid "Heading Hover Color"
 msgstr ""
 
 #: library/backend/customizer/options.php:1011
+msgid "Heading Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1028
+msgid "H1 Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1045
+msgid "H2 Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1062
+msgid "H3 Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1079
+msgid "H4 Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1096
+msgid "H5 Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1113
+msgid "H6 Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1121
+msgid "Buttons"
+msgstr ""
+
+#: library/backend/customizer/options.php:1136
+msgid "Button Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:1150
+msgid "Button Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1164
+msgid "Button Hover Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:1178
+msgid "Button Hover Text"
+msgstr ""
+
+#: library/backend/customizer/options.php:1192
+msgid "Button Border"
+msgstr ""
+
+#: library/backend/customizer/options.php:1206
+msgid "Button Hover Border"
+msgstr ""
+
+#: library/backend/customizer/options.php:1219
+msgid "Button Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1227
+msgid "Links"
+msgstr ""
+
+#: library/backend/customizer/options.php:1243
+msgid "Link Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1258
+msgid "Link Hover Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1271
+msgid "Link Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1279
+msgid "Inputs"
+msgstr ""
+
+#: library/backend/customizer/options.php:1294
+msgid "Input Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:1308
+msgid "Input Focus Background"
+msgstr ""
+
+#: library/backend/customizer/options.php:1322
+msgid "Input Text Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1336
+msgid "Input Focus Text"
+msgstr ""
+
+#: library/backend/customizer/options.php:1350
+msgid "Input Placeholder"
+msgstr ""
+
+#: library/backend/customizer/options.php:1364
+msgid "Input Focus Placeholder"
+msgstr ""
+
+#: library/backend/customizer/options.php:1378
+msgid "Input Border"
+msgstr ""
+
+#: library/backend/customizer/options.php:1392
+msgid "Input Focus Border"
+msgstr ""
+
+#: library/backend/customizer/options.php:1405
+msgid "Input Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1413
+msgid "Paragraphs"
+msgstr ""
+
+#: library/backend/customizer/options.php:1428
+msgid "Paragraph Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1441
+msgid "Paragraph Typography"
+msgstr ""
+
+#: library/backend/customizer/options.php:1449
+msgid "Others"
+msgstr ""
+
+#: library/backend/customizer/options.php:1464
+msgid "Meta Icons Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1472
+msgid "Blog Settings"
+msgstr ""
+
+#: library/backend/customizer/options.php:1486
+msgid "Breadcrumb"
+msgstr ""
+
+#: library/backend/customizer/options.php:1487
+msgid "Enable breadcrumb navigation"
+msgstr ""
+
+#: library/backend/customizer/options.php:1500
+msgid "Breadcrumb Separator"
+msgstr ""
+
+#: library/backend/customizer/options.php:1501
 msgid "Separator between links in breadcrumb. Eg: / or >"
 msgstr ""
 
-#: library/backend/customizer/options.php:1024
+#: library/backend/customizer/options.php:1514
 msgid "Featured Image"
 msgstr ""
 
-#: library/backend/customizer/options.php:1025
+#: library/backend/customizer/options.php:1515
 msgid "Show featured image on post list and archives."
 msgstr ""
 
-#: library/backend/customizer/options.php:1038
+#: library/backend/customizer/options.php:1528
 msgid "Excerpt length"
 msgstr ""
 
-#: library/backend/customizer/options.php:1039
+#: library/backend/customizer/options.php:1529
 msgid "Number of characters in excerpts for post list."
 msgstr ""
 
-#: library/backend/customizer/options.php:1052
+#: library/backend/customizer/options.php:1542
 msgid "Pagination"
 msgstr ""
 
-#: library/backend/customizer/options.php:1053
+#: library/backend/customizer/options.php:1543
 msgid "Paging Navigation display format."
 msgstr ""
 
-#: library/backend/customizer/options.php:1074
+#: library/backend/customizer/options.php:1564
 msgid "Show Author Info"
 msgstr ""
 
-#: library/backend/customizer/options.php:1093
+#: library/backend/customizer/options.php:1583
+msgid "Show Meta Info"
+msgstr ""
+
+#: library/backend/customizer/options.php:1606
 msgid "Show Comments"
 msgstr ""
 
-#: library/backend/customizer/options.php:1105
+#: library/backend/customizer/options.php:1623
+msgid "Schema Markup"
+msgstr ""
+
+#: library/backend/customizer/options.php:1624
+msgid "Enable Schema Markup"
+msgstr ""
+
+#: library/backend/customizer/options.php:1632
 msgid "Performance"
 msgstr ""
 
-#: library/backend/customizer/options.php:1119
+#: library/backend/customizer/options.php:1646
+msgid "Defer CSS"
+msgstr ""
+
+#: library/backend/customizer/options.php:1647
+msgid "Load theme CSS files after page load."
+msgstr ""
+
+#: library/backend/customizer/options.php:1658
+msgid "Critical CSS"
+msgstr ""
+
+#: library/backend/customizer/options.php:1659
+msgid "If CSS files are defered enter the critical css here."
+msgstr ""
+
+#: library/backend/customizer/options.php:1663
+msgid "Leave Blank to not add Critical CSS."
+msgstr ""
+
+#: library/backend/customizer/options.php:1677
 msgid "Disable WP Emojis"
 msgstr ""
 
-#: library/backend/customizer/options.php:1120
+#: library/backend/customizer/options.php:1678
 msgid "Posts with emojis may break, disable with caution."
 msgstr ""
 
-#: library/backend/customizer/options.php:1133
+#: library/backend/customizer/options.php:1691
 msgid "Disable WP Block Editor Style"
 msgstr ""
 
-#: library/backend/customizer/options.php:1134
+#: library/backend/customizer/options.php:1692
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 
@@ -642,16 +769,64 @@ msgstr ""
 msgid "Need help? Use the Help tab in the upper right of your screen."
 msgstr ""
 
-#: library/backend/options/class-options-admin.php:64
-msgid "Greenlet Settings"
+#: library/support/woocommerce/class-woocommerce.php:219
+msgid "View shopping cart"
 msgstr ""
 
-#: library/backend/options/class-options-admin.php:65
-msgid "Greenlet Options"
+#. %d: Cart contents count.
+#: library/support/woocommerce/class-woocommerce.php:223
+#, php-format
+msgid "%d Item"
+msgid_plural "%d Items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: library/support/woocommerce/backend/options.php:29
+msgid "Shop Layout"
 msgstr ""
 
-#: library/backend/options/class-options-admin.php:124
-msgid "You don't have any options to export. Try saving your options first."
+#: library/support/woocommerce/backend/options.php:47
+msgid "Product Page Layout"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:66
+msgid "Product Archive (Shop) Layout"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:85
+msgid "Product Category Layout"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:104
+msgid "Product Tags Layout"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:123
+msgid "Product Search Results Layout"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:133
+msgid "Shop Design"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:147
+msgid "Archive page Products Count."
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:148
+msgid "Number of Products in product archives page."
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:162
+msgid "Number of products in one row. (Number of columns)."
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:176
+msgid "Cart Position"
+msgstr ""
+
+#: library/support/woocommerce/backend/options.php:177
+msgid "Column for the Shopping cart to be displayed."
 msgstr ""
 
 #. Name of the theme
