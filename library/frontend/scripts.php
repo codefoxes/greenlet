@@ -20,6 +20,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 	 * Registers and enqueue styles and scripts.
 	 *
 	 * @since 1.0.0
+	 * @since 1.2.0 Bootstrap is bundled with theme rather than CDN.
 	 *
 	 * @see wp-includes/functions.wp-styles.php.
 	 * @see wp-includes/functions.wp-scripts.php.
@@ -55,8 +56,8 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$default_css = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css';
-				$default_js  = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js';
+				$default_css = STYLES_URL . '/bootstrap' . $min . '.css';
+				$default_js  = SCRIPTS_URL . '/bootstrap' . $min . '.js';
 				$css_path    = gl_get_option( 'css_path', $default_css );
 				$js_path     = gl_get_option( 'js_path', $default_js );
 
