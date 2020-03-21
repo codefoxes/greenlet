@@ -26,6 +26,8 @@
 
 	require( './controls/length' );
 
+	require( './controls/preset' );
+
 	require( './controls/dependencies' );
 
 })( jQuery );

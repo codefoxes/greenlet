@@ -143,6 +143,10 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$input_font       = gl_get_option( 'input_font', array() );
 		$para_color       = gl_get_option( 'para_color', '#383838' );
 		$para_font        = gl_get_option( 'para_font', array() );
+		$code_bg          = gl_get_option( 'code_bg', '#f1f1f1' );
+		$code_color       = gl_get_option( 'code_color', '#383838' );
+		$code_border      = gl_get_option( 'code_border', '1px solid #e1e1e1' );
+		$code_font        = gl_get_option( 'code_font', array() );
 		$icons_color      = gl_get_option( 'icons_color', '#999999' );
 		$base_font        = gl_get_option( 'base_font', array() );
 		$header_font      = gl_get_option( 'header_font', array() );
@@ -173,7 +177,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		greenlet_add_style( '.site-header a:hover', 'color', sanitize_hex_color( $header_link_over ) );
 		greenlet_add_style( '.site-navigation ul .children, .site-navigation ul .sub-menu', 'background', sanitize_hex_color( $header_bg ) );
 		greenlet_add_style( '.site-content', array( array( 'background', $main_bg ), array( 'max-width', greenlet_css_width( 'main_width' ) ), array( 'font', $content_font ) ) );
-		greenlet_add_style( '.entry-article, .sidebar > .wrap, #comments', 'background', $content_bg );
+		greenlet_add_style( '.entry-article, .sidebar > .wrap, #comments, .breadcrumb', 'background', $content_bg );
 		greenlet_add_style( '.semifooter', array( array( 'background', $semifooter_bg ), array( 'color', $semifooter_color ), array( 'max-width', greenlet_css_width( 'semifooter_width' ) ) ) );
 		greenlet_add_style( '.site-footer', array( array( 'background', $footer_bg ), array( 'max-width', greenlet_css_width( 'footer_width' ) ), array( 'font', $footer_font ) ) );
 		greenlet_add_style( '.site-footer, .site-footer p', 'color', $footer_color );
@@ -194,6 +198,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		greenlet_add_style( 'input[type="email"]::placeholder, input[type="number"]::placeholder, input[type="search"]::placeholder, input[type="text"]::placeholder, input[type="tel"]::placeholder, input[type="url"]::placeholder, input[type="password"]::placeholder, textarea::placeholder, select::placeholder', 'color', $ip_ph );
 		greenlet_add_style( 'input[type="email"]:focus::placeholder, input[type="number"]:focus::placeholder, input[type="search"]:focus::placeholder, input[type="text"]:focus::placeholder, input[type="tel"]:focus::placeholder, input[type="url"]:focus::placeholder, input[type="password"]:focus::placeholder, textarea:focus::placeholder, select:focus::placeholder', 'color', $ip_ph_focus );
 		greenlet_add_style( 'p', array( array( 'color', $para_color ), array( 'font', $para_font ) ) );
+		greenlet_add_style( 'code', array( array( 'color', $code_color ), array( 'font', $code_font ), array( 'background', $code_bg ), array( 'border', $code_border ) ) );
 		greenlet_add_style( '.site-logo, h1.site-name a', 'font', $logo_font );
 		greenlet_add_style( '.entry-meta svg', 'fill', $icons_color );
 
