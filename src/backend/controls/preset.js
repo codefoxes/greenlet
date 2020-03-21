@@ -59,6 +59,10 @@ wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 			radios.on(
 				'change',
 				function () {
+					var confirm = window.confirm( 'This will override all customizer settings and\nApply "' + this.value + '" preset.\nProceed?' )
+					if ( confirm === false ) {
+						return
+					}
 					var currentPreset = deepMerge( control.params.presets[ this.value ], defaultPreset )
 					delete currentPreset['all_fonts']
 					for (var prop in currentPreset) {
