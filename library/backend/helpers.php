@@ -101,6 +101,43 @@ if ( ! function_exists( 'greenlet_template_images' ) ) {
 	}
 }
 
+if ( ! function_exists( 'greenlet_get_presets' ) ) {
+	/**
+	 * Get All presets.
+	 *
+	 * @since  1.2.0
+	 *
+	 * @return array Presets array.
+	 */
+	function greenlet_get_presets() {
+		$presets_file = LIBRARY_DIR . '/backend/customizer/presets.json';
+		$presets      = greenlet_get_file_contents( $presets_file );
+		return json_decode( $presets, true );
+	}
+}
+
+if ( ! function_exists( 'greenlet_preset_images' ) ) {
+	/**
+	 * Get Preset Images Array.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @return array  Preset Images Array.
+	 */
+	function greenlet_preset_images() {
+		$imagepath = LIBRARY_URL . '/backend/assets/images/presets/';
+		$presets   = greenlet_get_presets();
+		$images    = array();
+
+		foreach ( $presets as $preset => $preset_data ) {
+			$image_name = strtolower( str_replace( ' ', '-', $preset ) ) . '.svg';
+
+			$images[ $preset ] = $imagepath . $image_name;
+		}
+		return $images;
+	}
+}
+
 if ( ! function_exists( 'greenlet_is_editor' ) ) {
 	/**
 	 * Check if the current page is a post edit page.

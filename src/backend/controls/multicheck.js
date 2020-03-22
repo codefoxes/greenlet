@@ -9,11 +9,11 @@ wp.customize.controlConstructor['multicheck'] = wp.customize.Control.extend(
 		ready: function() {
 			var control    = this
 			var checkboxes = $( control.selector + ' input[type="checkbox"]' )
-			var val        = control.setting._value
 
 			checkboxes.on(
 				'change',
 				function () {
+					var val     = Array.from( control.setting._value )
 					var current = $( this ).val()
 					var index   = val.indexOf( current )
 
@@ -27,7 +27,7 @@ wp.customize.controlConstructor['multicheck'] = wp.customize.Control.extend(
 						}
 					}
 
-					control.setting.set( JSON.stringify( val ) )
+					control.setting.set( val )
 				}
 			)
 		}
