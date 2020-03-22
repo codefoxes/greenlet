@@ -4,11 +4,11 @@
   "description": "Extremely fast and highly customizable WordPress theme.",
   "dependencies": {},
   "devDependencies": {
-    "autoprefixer": "^9.7.3",
+    "autoprefixer": "^9.7.4",
     "clean-css-cli": "^4.3.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss-cli": "^7.1.0",
-    "uglify-js": "^3.7.5"
+    "uglify-js": "^3.8.0"
   },
   "scripts": {
     "build": "./src/build.sh",
