@@ -6,7 +6,7 @@ Tags: blog, custom-background, custom-colors, editor-style, featured-images, foo
 Tested up to: 5.3.2
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -57,23 +57,14 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 - Toggle Post Author Info
 - Toggle WP Emoji, WP Embed and Block editor scripts and styles
 - WooCommerce Support
+- Editor style matching to Frontend
+- Theme Presets
 
 == Changelog ==
 
-- Added Google Fonts
-- Better cover template selector
-- Styles improvement
-- Added more customizer options
-- Multiple Customizer options with Hot reload
-- Added Customizer Border
-- Added Customizer Color
-- Added Customizer Length
-- Editor Styles
-- Better CSS rendering
-- Logo width and Height
-- Meta display options
-- WooCommerce Support
-- Better Template loader
+- Added Customizer Preset
+- Bundle Bootstrap with Theme
+- Add preset selection confirmation
 
 == Copyright ==
 
