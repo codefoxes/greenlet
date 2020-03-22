@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-14 10:10+0000\n"
-"PO-Revision-Date: 2020-03-14 10:42+0000\n"
+"POT-Creation-Date: 2020-03-22 08:05+0000\n"
+"PO-Revision-Date: 2020-03-22 08:08+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -631,121 +631,149 @@ msgid "Paragraph Typography"
 msgstr "Typographie de paragraphe"
 
 #: library/backend/customizer/options.php:1449
+msgid "Code"
+msgstr "Code"
+
+#: library/backend/customizer/options.php:1465
+msgid "Code Background"
+msgstr "Contexte du code"
+
+#: library/backend/customizer/options.php:1479
+msgid "Code Color"
+msgstr "Couleur du code"
+
+#: library/backend/customizer/options.php:1493
+msgid "Code Border"
+msgstr "Bordure de code"
+
+#: library/backend/customizer/options.php:1506
+msgid "Code Typography"
+msgstr "Typographie du code"
+
+#: library/backend/customizer/options.php:1514
 msgid "Others"
 msgstr "Autres"
 
-#: library/backend/customizer/options.php:1464
+#: library/backend/customizer/options.php:1529
 msgid "Meta Icons Color"
 msgstr "Couleur des icônes Meta"
 
-#: library/backend/customizer/options.php:1472
+#: library/backend/customizer/options.php:1537
 msgid "Blog Settings"
 msgstr "Paramètres du blog"
 
-#: library/backend/customizer/options.php:1486
+#: library/backend/customizer/options.php:1551
 msgid "Breadcrumb"
 msgstr "Breadcrumb"
 
-#: library/backend/customizer/options.php:1487
+#: library/backend/customizer/options.php:1552
 msgid "Enable breadcrumb navigation"
 msgstr "Activer la navigation au fil d'Ariane"
 
-#: library/backend/customizer/options.php:1500
+#: library/backend/customizer/options.php:1565
 msgid "Breadcrumb Separator"
 msgstr "Breadcrumb Séparateur"
 
-#: library/backend/customizer/options.php:1501
+#: library/backend/customizer/options.php:1566
 msgid "Separator between links in breadcrumb. Eg: / or >"
 msgstr "Séparateur entre les liens dans le fil d'Ariane. Par exemple: / ou >"
 
-#: library/backend/customizer/options.php:1514
+#: library/backend/customizer/options.php:1579
 msgid "Featured Image"
 msgstr "L'image sélectionnée"
 
-#: library/backend/customizer/options.php:1515
+#: library/backend/customizer/options.php:1580
 msgid "Show featured image on post list and archives."
 msgstr ""
 "Afficher l'image sélectionnée sur la liste des publications et les archives."
 
-#: library/backend/customizer/options.php:1528
+#: library/backend/customizer/options.php:1593
 msgid "Excerpt length"
 msgstr "Extrait longueur"
 
-#: library/backend/customizer/options.php:1529
+#: library/backend/customizer/options.php:1594
 msgid "Number of characters in excerpts for post list."
 msgstr "Nombre de caractères dans les extraits de la liste des articles."
 
-#: library/backend/customizer/options.php:1542
+#: library/backend/customizer/options.php:1607
 msgid "Pagination"
 msgstr "Pagination"
 
-#: library/backend/customizer/options.php:1543
+#: library/backend/customizer/options.php:1608
 msgid "Paging Navigation display format."
 msgstr "Format d'affichage de la navigation de pagination."
 
-#: library/backend/customizer/options.php:1564
+#: library/backend/customizer/options.php:1629
 msgid "Show Author Info"
 msgstr "Afficher les informations sur l'auteur"
 
-#: library/backend/customizer/options.php:1583
+#: library/backend/customizer/options.php:1648
 msgid "Show Meta Info"
 msgstr "Afficher les méta-informations"
 
-#: library/backend/customizer/options.php:1606
+#: library/backend/customizer/options.php:1671
 msgid "Show Comments"
 msgstr "Afficher les commentaires"
 
-#: library/backend/customizer/options.php:1623
+#: library/backend/customizer/options.php:1688
 msgid "Schema Markup"
 msgstr "Balisage de schéma"
 
-#: library/backend/customizer/options.php:1624
+#: library/backend/customizer/options.php:1689
 msgid "Enable Schema Markup"
 msgstr "Activer le balisage de schéma"
 
-#: library/backend/customizer/options.php:1632
+#: library/backend/customizer/options.php:1697
 msgid "Performance"
 msgstr "Performance"
 
-#: library/backend/customizer/options.php:1646
+#: library/backend/customizer/options.php:1711
 msgid "Defer CSS"
 msgstr "Différer CSS"
 
-#: library/backend/customizer/options.php:1647
+#: library/backend/customizer/options.php:1712
 msgid "Load theme CSS files after page load."
 msgstr "Chargez les fichiers CSS de thème après le chargement de la page."
 
-#: library/backend/customizer/options.php:1658
+#: library/backend/customizer/options.php:1723
 msgid "Critical CSS"
 msgstr "Critique CSS"
 
-#: library/backend/customizer/options.php:1659
+#: library/backend/customizer/options.php:1724
 msgid "If CSS files are defered enter the critical css here."
 msgstr "Si les fichiers CSS sont différés, entrez le css critique ici."
 
-#: library/backend/customizer/options.php:1663
+#: library/backend/customizer/options.php:1728
 msgid "Leave Blank to not add Critical CSS."
 msgstr "Laissez vide pour ne pas ajouter de CSS critique."
 
-#: library/backend/customizer/options.php:1677
+#: library/backend/customizer/options.php:1742
 msgid "Disable WP Emojis"
 msgstr "Désactiver WP Emojis"
 
-#: library/backend/customizer/options.php:1678
+#: library/backend/customizer/options.php:1743
 msgid "Posts with emojis may break, disable with caution."
 msgstr ""
 "Les messages contenant des emojis peuvent se casser, désactivez-les avec "
 "prudence."
 
-#: library/backend/customizer/options.php:1691
+#: library/backend/customizer/options.php:1756
 msgid "Disable WP Block Editor Style"
 msgstr "Désactiver le style de l'éditeur de blocs WP"
 
-#: library/backend/customizer/options.php:1692
+#: library/backend/customizer/options.php:1757
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 "Les publications créées avec WP Block Editor peuvent se casser, désactivez-"
 "les avec prudence."
+
+#: library/backend/customizer/options.php:1765
+msgid "Presets"
+msgstr "Préconfigurations"
+
+#: library/backend/customizer/options.php:1780
+msgid "Theme Presets"
+msgstr "Préréglages de thème"
 
 #: library/backend/metaboxes/class-metaboxes.php:86
 msgid "Page Attributes"

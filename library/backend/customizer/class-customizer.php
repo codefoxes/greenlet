@@ -49,6 +49,7 @@ class Customizer {
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
 		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-length.php';
+		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-preset.php';
 		require_once LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
 		require_once LIBRARY_DIR . '/backend/customizer/options.php';
 
@@ -160,6 +161,9 @@ class Customizer {
 				} elseif ( 'length' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Length( $wp_customize, $option['id'], $option['cargs'] ) );
 
+				} elseif ( 'preset' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Preset( $wp_customize, $option['id'], $option['cargs'] ) );
+
 				} else {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
 				}
@@ -185,6 +189,7 @@ class Customizer {
 		$wp_customize->register_control_type( 'Greenlet\Control_Border' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Font' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Length' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Preset' );
 	}
 
 	/**

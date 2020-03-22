@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-14 10:10+0000\n"
+"POT-Creation-Date: 2020-03-22 08:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -624,115 +624,143 @@ msgid "Paragraph Typography"
 msgstr ""
 
 #: library/backend/customizer/options.php:1449
-msgid "Others"
+msgid "Code"
 msgstr ""
 
-#: library/backend/customizer/options.php:1464
-msgid "Meta Icons Color"
+#: library/backend/customizer/options.php:1465
+msgid "Code Background"
 msgstr ""
 
-#: library/backend/customizer/options.php:1472
-msgid "Blog Settings"
+#: library/backend/customizer/options.php:1479
+msgid "Code Color"
 msgstr ""
 
-#: library/backend/customizer/options.php:1486
-msgid "Breadcrumb"
+#: library/backend/customizer/options.php:1493
+msgid "Code Border"
 msgstr ""
 
-#: library/backend/customizer/options.php:1487
-msgid "Enable breadcrumb navigation"
-msgstr ""
-
-#: library/backend/customizer/options.php:1500
-msgid "Breadcrumb Separator"
-msgstr ""
-
-#: library/backend/customizer/options.php:1501
-msgid "Separator between links in breadcrumb. Eg: / or >"
+#: library/backend/customizer/options.php:1506
+msgid "Code Typography"
 msgstr ""
 
 #: library/backend/customizer/options.php:1514
-msgid "Featured Image"
-msgstr ""
-
-#: library/backend/customizer/options.php:1515
-msgid "Show featured image on post list and archives."
-msgstr ""
-
-#: library/backend/customizer/options.php:1528
-msgid "Excerpt length"
+msgid "Others"
 msgstr ""
 
 #: library/backend/customizer/options.php:1529
+msgid "Meta Icons Color"
+msgstr ""
+
+#: library/backend/customizer/options.php:1537
+msgid "Blog Settings"
+msgstr ""
+
+#: library/backend/customizer/options.php:1551
+msgid "Breadcrumb"
+msgstr ""
+
+#: library/backend/customizer/options.php:1552
+msgid "Enable breadcrumb navigation"
+msgstr ""
+
+#: library/backend/customizer/options.php:1565
+msgid "Breadcrumb Separator"
+msgstr ""
+
+#: library/backend/customizer/options.php:1566
+msgid "Separator between links in breadcrumb. Eg: / or >"
+msgstr ""
+
+#: library/backend/customizer/options.php:1579
+msgid "Featured Image"
+msgstr ""
+
+#: library/backend/customizer/options.php:1580
+msgid "Show featured image on post list and archives."
+msgstr ""
+
+#: library/backend/customizer/options.php:1593
+msgid "Excerpt length"
+msgstr ""
+
+#: library/backend/customizer/options.php:1594
 msgid "Number of characters in excerpts for post list."
 msgstr ""
 
-#: library/backend/customizer/options.php:1542
+#: library/backend/customizer/options.php:1607
 msgid "Pagination"
 msgstr ""
 
-#: library/backend/customizer/options.php:1543
+#: library/backend/customizer/options.php:1608
 msgid "Paging Navigation display format."
 msgstr ""
 
-#: library/backend/customizer/options.php:1564
+#: library/backend/customizer/options.php:1629
 msgid "Show Author Info"
 msgstr ""
 
-#: library/backend/customizer/options.php:1583
+#: library/backend/customizer/options.php:1648
 msgid "Show Meta Info"
 msgstr ""
 
-#: library/backend/customizer/options.php:1606
+#: library/backend/customizer/options.php:1671
 msgid "Show Comments"
 msgstr ""
 
-#: library/backend/customizer/options.php:1623
+#: library/backend/customizer/options.php:1688
 msgid "Schema Markup"
 msgstr ""
 
-#: library/backend/customizer/options.php:1624
+#: library/backend/customizer/options.php:1689
 msgid "Enable Schema Markup"
 msgstr ""
 
-#: library/backend/customizer/options.php:1632
+#: library/backend/customizer/options.php:1697
 msgid "Performance"
 msgstr ""
 
-#: library/backend/customizer/options.php:1646
+#: library/backend/customizer/options.php:1711
 msgid "Defer CSS"
 msgstr ""
 
-#: library/backend/customizer/options.php:1647
+#: library/backend/customizer/options.php:1712
 msgid "Load theme CSS files after page load."
 msgstr ""
 
-#: library/backend/customizer/options.php:1658
+#: library/backend/customizer/options.php:1723
 msgid "Critical CSS"
 msgstr ""
 
-#: library/backend/customizer/options.php:1659
+#: library/backend/customizer/options.php:1724
 msgid "If CSS files are defered enter the critical css here."
 msgstr ""
 
-#: library/backend/customizer/options.php:1663
+#: library/backend/customizer/options.php:1728
 msgid "Leave Blank to not add Critical CSS."
 msgstr ""
 
-#: library/backend/customizer/options.php:1677
+#: library/backend/customizer/options.php:1742
 msgid "Disable WP Emojis"
 msgstr ""
 
-#: library/backend/customizer/options.php:1678
+#: library/backend/customizer/options.php:1743
 msgid "Posts with emojis may break, disable with caution."
 msgstr ""
 
-#: library/backend/customizer/options.php:1691
+#: library/backend/customizer/options.php:1756
 msgid "Disable WP Block Editor Style"
 msgstr ""
 
-#: library/backend/customizer/options.php:1692
+#: library/backend/customizer/options.php:1757
 msgid "Posts created with WP Block Editor may break, disable with caution."
+msgstr ""
+
+#: library/backend/customizer/options.php:1765
+msgid "Presets"
+msgstr ""
+
+#: library/backend/customizer/options.php:1780
+msgid "Theme Presets"
 msgstr ""
 
 #: library/backend/metaboxes/class-metaboxes.php:86

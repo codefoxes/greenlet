@@ -34,6 +34,13 @@ buildcss() {
 		cleancss -o assets/css/$i.min.css assets/css/$i.css
 	done
 	echo 'Build CSS: Complete'
+
+	echo 'Copying vendor css files'
+	cp ./src/frontend/css/bootstrap.css ./assets/css/bootstrap.css
+	cp ./src/frontend/css/bootstrap.min.css ./assets/css/bootstrap.min.css
+	cp ./src/frontend/js/bootstrap.js ./assets/js/bootstrap.js
+	cp ./src/frontend/js/bootstrap.min.js ./assets/js/bootstrap.min.js
+	echo 'Copy complete'
 }
 
 buildfonts() {

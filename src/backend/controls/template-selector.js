@@ -47,7 +47,7 @@ wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.exte
 						sequence: sequence
 					}
 
-					control.setting.set( JSON.stringify( val ) )
+					control.setting.set( val )
 				}
 			)
 
@@ -69,7 +69,7 @@ wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.exte
 						sequence: sequence
 					}
 
-					control.setting.set( JSON.stringify( val ) )
+					control.setting.set( val )
 				}
 			)
 		}

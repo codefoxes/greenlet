@@ -1444,6 +1444,71 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
+		'id'   => 'code',
+		'args' => array(
+			'title' => __( 'Code', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'code_bg',
+		'sargs' => array(
+			'default'           => '#f1f1f1',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_color' ),
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'code',
+			'label'   => __( 'Code Background', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'code_color',
+		'sargs' => array(
+			'default'   => '#383838',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'gl-color',
+			'section' => 'code',
+			'label'   => __( 'Code Color', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'code_border',
+		'sargs' => array(
+			'default'   => '1px solid #e1e1e1',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'border',
+			'section' => 'code',
+			'label'   => __( 'Code Border', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'code_font',
+		'sargs' => array(
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'font',
+			'section' => 'code',
+			'label'   => __( 'Code Typography', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
 		'id'   => 'other_components',
 		'args' => array(
 			'title' => __( 'Others', 'greenlet' ),
@@ -1690,6 +1755,30 @@ function greenlet_options() {
 			'section'     => 'performance',
 			'label'       => __( 'Disable WP Block Editor Style', 'greenlet' ),
 			'description' => __( 'Posts created with WP Block Editor may break, disable with caution.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'presets',
+		'args' => array(
+			'title'    => __( 'Presets', 'greenlet' ),
+			'priority' => 300,
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'theme_presets',
+		'sargs' => array(
+			'default'   => 'default',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'preset',
+			'section' => 'presets',
+			'label'   => __( 'Theme Presets', 'greenlet' ),
+			'choices' => greenlet_preset_images(),
 		),
 	);
 
