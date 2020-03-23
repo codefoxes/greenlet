@@ -1,3 +1,5 @@
+import { $ } from '../helpers'
+
 /**
  * Logo height and width dependencies.
  */

@@ -4,14 +4,16 @@
  * @package greenlet
  */
 
+export const $ = jQuery
+
 $( window ).on(
 	'load',
 	function() {
 		$( 'html' ).addClass( 'window-loaded' );
 	}
-);
+)
 
-var gl = {
+export const gl = {
 	debounce: function debounce( wait, func, immediate ) {
 		var timeout
 		return function() {

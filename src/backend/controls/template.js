@@ -4,6 +4,8 @@
  * @package greenlet
  */
 
+import { $, gl } from '../helpers'
+
 wp.customize.controlConstructor['template'] = wp.customize.Control.extend(
 	{
 		ready: function () {
