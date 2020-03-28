@@ -1,3 +1,5 @@
+import { $ } from '../helpers'
+
 /**
  * Logo height and width dependencies.
  */
@@ -70,8 +72,9 @@ function manageLogoDependencies() {
 			widthRange.value = newWidth
 			widthInput.value = newWidth
 			wControl.setting.set( newWidth + document.getElementById( 'length-unit-logo_width' ).value )
+		} else {
+			ratio = widthInput.value / heightInput.value
 		}
-		ratio = widthInput.value / heightInput.value
 	}
 
 	$( widthRange ).on( 'input', updateAspectHeight )
@@ -310,10 +313,18 @@ function manageSidebarDependencies() {
 	)
 }
 
+const logoLoaded = { width: false, height: false }
+window.addEventListener( 'componentMounted', ( e ) => {
+	if ( e.detail === 'logo_width' ) logoLoaded.width = true
+	if ( e.detail === 'logo_height' ) logoLoaded.height = true
+} )
+
 wp.customize.bind(
 	'ready',
 	function () {
-		manageLogoDependencies()
+		if ( logoLoaded.width && logoLoaded.height ) {
+			manageLogoDependencies()
+		}
 		manageCoverDependencies()
 		manageTopbarDependencies()
 		manageSemifooterDependencies()

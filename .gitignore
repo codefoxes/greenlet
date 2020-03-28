@@ -3,7 +3,7 @@ node_modules/
 
 assets/css/*
 assets/js/*
-library/backend/assets/js/greenlet-controls.js
+library/backend/assets/js/greenlet-controls.*
 library/backend/assets/fonts/google-fonts.json
 
 **/cypress.env.json

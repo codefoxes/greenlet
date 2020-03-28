@@ -49,8 +49,7 @@ buildfonts() {
 }
 
 buildbackend() {
-	DIR="$(cd "$(dirname "$0")" && pwd)"
-	python3 $DIR/build-controls
+	./node_modules/.bin/rollup -c
 }
 
 if [ -z "$1" ]; then

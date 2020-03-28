@@ -1209,6 +1209,21 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'button_radius',
+		'sargs' => array(
+			'default'   => '0px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'     => 'length',
+			'sub_type' => 'radius',
+			'section'  => 'buttons',
+			'label'    => __( 'Button Border Radius', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'button_font',
 		'sargs' => array(
 			'transport' => 'postMessage',
@@ -1390,6 +1405,21 @@ function greenlet_options() {
 			'type'    => 'border',
 			'section' => 'inputs',
 			'label'   => __( 'Input Focus Border', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'input_radius',
+		'sargs' => array(
+			'default'   => '0px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'     => 'length',
+			'sub_type' => 'radius',
+			'section'  => 'inputs',
+			'label'    => __( 'Input Border Radius', 'greenlet' ),
 		),
 	);
 

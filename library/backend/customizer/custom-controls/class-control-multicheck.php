@@ -42,7 +42,8 @@ if ( ! class_exists( 'Control_Multicheck' ) && class_exists( 'WP_Customize_Contr
 		 * @return void
 		 */
 		public function enqueue() {
-			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
+			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'jquery' ), GREENLET_VERSION, true );
 		}
 
 		/**

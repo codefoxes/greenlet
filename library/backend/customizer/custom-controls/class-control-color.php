@@ -42,8 +42,9 @@ if ( ! class_exists( 'Control_Color' ) && class_exists( 'WP_Customize_Control' )
 		 * @return void
 		 */
 		public function enqueue() {
+			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 			wp_enqueue_script( 'color-picker-alpha', LIBRARY_URL . '/backend/assets/js/wp-color-picker-alpha.min.js', array( 'jquery', 'wp-color-picker' ), GREENLET_VERSION, true );
-			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls.js', array( 'jquery' ), GREENLET_VERSION, true );
+			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'jquery' ), GREENLET_VERSION, true );
 			wp_enqueue_style( 'greenlet-controls', LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array( 'wp-color-picker' ), GREENLET_VERSION );
 		}
 
