@@ -26,6 +26,15 @@ if ( ! class_exists( 'Control_Length' ) && class_exists( 'WP_Customize_Control' 
 		public $type = 'length';
 
 		/**
+		 * The sub type of length: border-radius, padding etc.
+		 *
+		 * @since  1.2.0
+		 * @access public
+		 * @var    string
+		 */
+		public $sub_type = '';
+
+		/**
 		 * Enqueue scripts/styles.
 		 *
 		 * @since  1.1.0
@@ -64,6 +73,8 @@ if ( ! class_exists( 'Control_Length' ) && class_exists( 'WP_Customize_Control' 
 
 			// Control Type.
 			$this->json['type'] = $this->type;
+
+			$this->json['subType'] = $this->sub_type;
 		}
 
 		/**
@@ -75,33 +86,7 @@ if ( ! class_exists( 'Control_Length' ) && class_exists( 'WP_Customize_Control' 
 		 */
 		protected function content_template() {
 			?>
-			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
-			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
-
-			<div class="gl-length gl-row">
-				<div class="col-7 range-wrap">
-					<input id="length-size-{{ data.id }}" type="range" step="0.1" min="0" max="2000" />
-				</div>
-				<div class="col-3">
-					<input id="length-size-ip-{{ data.id }}" type="number" step="0.1" min="0" max="4000" />
-				</div>
-				<select id="length-unit-{{ data.id }}" class="col-2 length-unit">
-					<option value="px">px</option>
-					<option value="pt">pt</option>
-					<option value="pc">pc</option>
-					<option value="cm">cm</option>
-					<option value="mm">mm</option>
-					<option value="in">in</option>
-					<option value="rem">rem</option>
-					<option value="em">em</option>
-					<option value="ex">ex</option>
-					<option value="ch">ch</option>
-					<option value="vh">vh</option>
-					<option value="vw">vw</option>
-					<option value="%">%</option>
-				</select>
-				<span class="reset dashicons dashicons-undo"></span>
-			</div>
+			<div id="{{ data.id }}-root"></div>
 			<?php
 		}
 

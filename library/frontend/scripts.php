@@ -128,6 +128,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$btn_bg           = gl_get_option( 'button_bg', '#ffffff' );
 		$btn_color        = gl_get_option( 'button_color', '#555555' );
 		$btn_border       = gl_get_option( 'button_border', '1px solid #bbbbbb' );
+		$btn_radius       = gl_get_option( 'button_radius', '0px' );
 		$btn_bg_over      = gl_get_option( 'button_hover_bg', '#ffffff' );
 		$btn_color_over   = gl_get_option( 'button_hover_color', '#383838' );
 		$btn_border_over  = gl_get_option( 'button_hover_border', '1px solid #383838' );
@@ -136,6 +137,7 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$ip_color         = gl_get_option( 'input_color', '#383838' );
 		$ip_ph            = gl_get_option( 'input_placeholder', '#555555' );
 		$ip_border        = gl_get_option( 'input_border', '1px solid #bbbbbb' );
+		$ip_radius        = gl_get_option( 'input_radius', '0px' );
 		$ip_bg_focus      = gl_get_option( 'input_focus_bg', '#ffffff' );
 		$ip_color_focus   = gl_get_option( 'input_focus_color', '#383838' );
 		$ip_ph_focus      = gl_get_option( 'input_focus_placeholder', '#555555' );
@@ -191,9 +193,9 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		greenlet_add_style( 'h6', 'font', $h6_font );
 		greenlet_add_style( 'a, .entry-meta li', array( array( 'color', $link_color ), array( 'font', $link_font ) ) );
 		greenlet_add_style( 'a:hover', 'color', sanitize_hex_color( $link_hover ) );
-		greenlet_add_style( '.button, button, input[type="submit"], input[type="reset"], input[type="button"], .pagination li a, .pagination li span', array( array( 'background', $btn_bg ), array( 'color', $btn_color ), array( 'border', $btn_border ), array( 'font', $btn_font ) ) );
+		greenlet_add_style( '.button, button, input[type="submit"], input[type="reset"], input[type="button"], .pagination li a, .pagination li span', array( array( 'background', $btn_bg ), array( 'color', $btn_color ), array( 'border', $btn_border ), array( 'border-radius', $btn_radius ), array( 'font', $btn_font ) ) );
 		greenlet_add_style( '.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .pagination li a:hover, .pagination li span:hover', array( array( 'background', $btn_bg_over ), array( 'color', $btn_color_over ), array( 'border', $btn_border_over ) ) );
-		greenlet_add_style( 'input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select', array( array( 'background', $ip_bg ), array( 'color', $ip_color ), array( 'border', $ip_border ), array( 'font', $input_font ) ) );
+		greenlet_add_style( 'input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select', array( array( 'background', $ip_bg ), array( 'color', $ip_color ), array( 'border', $ip_border ), array( 'border-radius', $ip_radius ), array( 'font', $input_font ) ) );
 		greenlet_add_style( 'input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="text"]:focus, input[type="tel"]:focus, input[type="url"]:focus, input[type="password"]:focus, textarea:focus, select:focus', array( array( 'background', $ip_bg_focus ), array( 'color', $ip_color_focus ), array( 'border', $ip_border_focus ) ) );
 		greenlet_add_style( 'input[type="email"]::placeholder, input[type="number"]::placeholder, input[type="search"]::placeholder, input[type="text"]::placeholder, input[type="tel"]::placeholder, input[type="url"]::placeholder, input[type="password"]::placeholder, textarea::placeholder, select::placeholder', 'color', $ip_ph );
 		greenlet_add_style( 'input[type="email"]:focus::placeholder, input[type="number"]:focus::placeholder, input[type="search"]:focus::placeholder, input[type="text"]:focus::placeholder, input[type="tel"]:focus::placeholder, input[type="url"]:focus::placeholder, input[type="password"]:focus::placeholder, textarea:focus::placeholder, select:focus::placeholder', 'color', $ip_ph_focus );
