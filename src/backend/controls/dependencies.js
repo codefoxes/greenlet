@@ -330,5 +330,8 @@ wp.customize.bind(
 		manageSemifooterDependencies()
 		manageSidebarDependencies()
 		manageAspectTogglers()
+
+		$( '<div class="section-title">Elements</div>' ).insertBefore( $( wp.customize.section('headings').container[0] ) )
+		$( '<div class="section-title">Components</div>' ).insertBefore( $( wp.customize.section('articles').container[0] ) )
 	}
 );

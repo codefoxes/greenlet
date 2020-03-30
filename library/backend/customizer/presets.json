@@ -167,7 +167,12 @@
 		"schema": "1",
 		"defer_css": "1",
 		"critical_css": "",
-		"disable_emojis": false
+		"disable_emojis": false,
+		"button_radius": "0px",
+		"input_radius": "0px",
+		"article_radius": "0px",
+		"sidebar_radius": "0px",
+		"breadcrumb_radius": "0px"
 	},
 	"Midnight Dark": {
 		"header_bg": "#000000",
@@ -235,7 +240,12 @@
 		},
 		"content_font": {
 			"size": "1.5rem"
-		}
+		},
+		"button_radius": "5px",
+		"input_radius": "5px",
+		"article_radius": "10px",
+		"sidebar_radius": "10px",
+		"breadcrumb_radius": "10px"
 	},
 	"Way Up North": {
 		"all_fonts": {

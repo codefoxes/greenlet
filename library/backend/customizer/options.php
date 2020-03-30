@@ -1562,6 +1562,78 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
+		'id'   => 'articles',
+		'args' => array(
+			'title' => __( 'Article Cards', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'article_radius',
+		'sargs' => array(
+			'default'   => '0px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'     => 'length',
+			'sub_type' => 'radius',
+			'section'  => 'articles',
+			'label'    => __( 'Article Border Radius', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'sidebars',
+		'args' => array(
+			'title' => __( 'Sidebars', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'sidebar_radius',
+		'sargs' => array(
+			'default'   => '0px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'     => 'length',
+			'sub_type' => 'radius',
+			'section'  => 'sidebars',
+			'label'    => __( 'Sidebar Border Radius', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'breadcrumb',
+		'args' => array(
+			'title' => __( 'Breadcrumb', 'greenlet' ),
+			'panel' => 'components',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'breadcrumb_radius',
+		'sargs' => array(
+			'default'   => '0px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'     => 'length',
+			'sub_type' => 'radius',
+			'section'  => 'breadcrumb',
+			'label'    => __( 'Breadcrumb Border Radius', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
 		'id'   => 'blog',
 		'args' => array(
 			'title'    => __( 'Blog Settings', 'greenlet' ),

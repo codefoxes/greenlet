@@ -50,7 +50,7 @@ class LengthTab extends React.Component {
 	}
 
 	reset = () => {
-		const [ main, unit ] = this.getLength()
+		const [ main, unit ] = this.getLength( this.resetValue )
 		this.setState( { main, unit }, this.handleChange )
 	}
 

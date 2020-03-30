@@ -174,4 +174,7 @@
 	bindStyle( 'semifooter_container', '.semifooter .container', 'max-width' )
 	bindStyle( 'footer_width', '.site-footer', 'max-width' )
 	bindStyle( 'footer_container', '.site-footer .container', 'max-width' )
+	bindStyle( 'article_radius', '.entry-article', 'border-radius' )
+	bindStyle( 'sidebar_radius', '.sidebar > .wrap', 'border-radius' )
+	bindStyle( 'breadcrumb_radius', '.breadcrumb', 'border-radius' )
 })( jQuery );

@@ -155,9 +155,12 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$content_font     = gl_get_option( 'content_font', array() );
 		$footer_font      = gl_get_option( 'footer_font', array() );
 		$logo_font        = gl_get_option( 'logo_font', array() );
+		$article_radius   = gl_get_option( 'article_radius', '0px' );
+		$sidebar_radius   = gl_get_option( 'sidebar_radius', '0px' );
+		$b_crumb_radius   = gl_get_option( 'breadcrumb_radius', '0px' );
 
 		$critical_css = gl_get_option( 'critical_css', '' );
-		$defer_css    = gl_get_option( 'defer_css', false );
+		$defer_css    = gl_get_option( 'defer_css', '1' );
 
 		$raw_width  = 0;
 		$raw_height = 0;
@@ -203,6 +206,9 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		greenlet_add_style( 'code', array( array( 'color', $code_color ), array( 'font', $code_font ), array( 'background', $code_bg ), array( 'border', $code_border ) ) );
 		greenlet_add_style( '.site-logo, h1.site-name a', 'font', $logo_font );
 		greenlet_add_style( '.entry-meta svg', 'fill', $icons_color );
+		greenlet_add_style( '.entry-article', 'border-radius', $article_radius );
+		greenlet_add_style( '.sidebar > .wrap', 'border-radius', $sidebar_radius );
+		greenlet_add_style( '.breadcrumb', 'border-radius', $b_crumb_radius );
 
 		ob_start();
 		greenlet_print_inline_styles();

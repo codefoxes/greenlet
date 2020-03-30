@@ -442,3 +442,9 @@
 .aspect:before {
 	background: #eee;
 }
+
+.section-title {
+	font-size: 14px;
+	font-weight: 600;
+	margin: 20px 18px 10px;
+}
