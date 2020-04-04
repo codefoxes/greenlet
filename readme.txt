@@ -80,3 +80,28 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
+
+= Screenshot License =
+
+Screenshot used in the theme is created using the illustrations from https://undraw.co
+All vectors published on unDraw can be used for free (https://undraw.co/license)
+https://undraw.co/illustrations
+
+= Icons Licenses =
+
+All the icons used in the theme are created using Inkscape and can be distributed under the terms of the GNU GPL v2.
+
+= WP Color Picker Alpha License =
+
+WP Color Picker Alpha is used to Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker By Sergio. (https://github.com/kallookoo/wp-color-picker-alpha)
+Distributed under the terms of the GNU GPL v2.
+
+= Choices.js License =
+
+choices.js is used to create configurable select box by Josh Johnson. (https://github.com/jshjohnson/Choices)
+Distributed under the MIT License
+
+= Bootstrap Licence =
+
+Bootstrap is HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. (https://github.com/twbs/bootstrap)
+Distributed under the MIT License
