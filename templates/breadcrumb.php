@@ -10,7 +10,7 @@ $separator = gl_get_option( 'breadcrumb_sep', '&raquo;' );
 
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb' ), null ) );
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
-echo '<a href="' . esc_html( home_url() ) . '" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></div>' . esc_html( $separator );
+echo '<a href="' . esc_html( home_url() ) . '" itemprop="item"><span itemprop="name">' . esc_html__( 'Home', 'greenlet' ) . '</span></a><meta itemprop="position" content="1" /></div>' . esc_html( $separator );
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 
 if ( is_single() ) {
@@ -68,7 +68,7 @@ if ( is_single() ) {
 	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_search() ) {
-	printf( '<span itemprop="name">%s</span>', 'Search: ' . get_search_query() );
+	printf( '<span itemprop="name">%s</span>', esc_html__( 'Search: ', 'greenlet' ) . get_search_query() );
 	echo '<meta itemprop="position" content="2" /></div>';
 
 } elseif ( is_404() ) {

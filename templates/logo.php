@@ -12,7 +12,7 @@ printf( '<div %s role="banner">', wp_kses( greenlet_attr( 'site-logo' ), null ) 
 
 if ( false !== $logo_url ) {
 	printf( '<a %s href=', wp_kses( greenlet_attr( 'site-url' ), null ) );
-	echo esc_url( home_url( '/' ) ) . ' title="Home Page">';
+	echo esc_url( home_url( '/' ) ) . ' title="' . esc_attr__( 'Home Page', 'greenlet' ) . '">';
 	echo '<img src="' . esc_url( $logo_url ) . '" alt="' . esc_html( $blog_name ) . '">';
 	echo '</a>';
 } else {

@@ -130,20 +130,20 @@ class Options_Admin {
 		}
 
 		$setting_links = array(
-			'title_tagline' => 'Title and Tagline',
-			'framework'     => 'CSS Framework',
-			'header_layout' => 'Header Layout',
-			'main_layout'   => 'Main Layout',
-			'footer_layout' => 'Footer Layout',
-			'typography'    => 'Typography',
-			'colors'        => 'Colours',
-			'headings'      => 'Heading Design',
-			'buttons'       => 'Buttons Design',
-			'links'         => 'Links Design',
-			'inputs'        => 'Inputs Design',
-			'paragraphs'    => 'Paragraphs Design',
-			'blog'          => 'Blog Settings',
-			'performance'   => 'Performance',
+			'title_tagline' => __( 'Title and Tagline', 'greenlet' ),
+			'framework'     => __( 'CSS Framework', 'greenlet' ),
+			'header_layout' => __( 'Header Layout', 'greenlet' ),
+			'main_layout'   => __( 'Main Layout', 'greenlet' ),
+			'footer_layout' => __( 'Footer Layout', 'greenlet' ),
+			'typography'    => __( 'Typography', 'greenlet' ),
+			'colors'        => __( 'Colours', 'greenlet' ),
+			'headings'      => __( 'Heading Design', 'greenlet' ),
+			'buttons'       => __( 'Buttons Design', 'greenlet' ),
+			'links'         => __( 'Links Design', 'greenlet' ),
+			'inputs'        => __( 'Inputs Design', 'greenlet' ),
+			'paragraphs'    => __( 'Paragraphs Design', 'greenlet' ),
+			'blog'          => __( 'Blog Settings', 'greenlet' ),
+			'performance'   => __( 'Performance', 'greenlet' ),
 		);
 		?>
 
@@ -159,7 +159,7 @@ class Options_Admin {
 					<div class="row">
 						<div class="col-6">
 							<div class="settings">
-								<div class="heading">Customizer Controls</div>
+								<div class="heading"><?php esc_html_e( 'Customizer Controls', 'greenlet' ); ?></div>
 								<div class="links-wrap">
 									<?php
 									foreach ( $setting_links as $section => $title ) {
@@ -172,46 +172,46 @@ class Options_Admin {
 								</div>
 							</div>
 							<div class="backend">
-								<div class="heading">Backend Settings</div>
+								<div class="heading"><?php esc_html_e( 'Backend Settings', 'greenlet' ); ?></div>
 								<div class="content-wrap">
 									<div class="row">
 										<div class="col-12">
 											<span>
 												<input id="editor_styles" type="checkbox" <?php checked( $editor_styles, true ); ?>>
-												<label for="editor_styles">Editor Styles</label>
-												<div class="setting-description">Match the Post editor styles to the frontend styles.</div>
+												<label for="editor_styles"><?php esc_html_e( 'Editor Styles', 'greenlet' ); ?></label>
+												<div class="setting-description"><?php esc_html_e( 'Match the Post editor styles to the frontend styles.', 'greenlet' ); ?></div>
 											</span>
 											<div class="save-wrap">
-												<a href="#" id="save-btn" class="action-btn button-primary">Save Settings</a>
+												<a href="#" id="save-btn" class="action-btn button-primary"><?php esc_html_e( 'Save Settings', 'greenlet' ); ?></a>
 												<span class="spinner"></span>
 												<?php wp_nonce_field( 'greenlet_backend', 'options_nonce' ); ?>
 											</div>
 										</div>
 									</div>
 									<div class="row setting-messages">
-										<div class="message success setting-success">Settings saved successfully.</div>
-										<div class="message error setting-error">Sorry. Saving Failed.</div>
+										<div class="message success setting-success"><?php esc_html_e( 'Settings saved successfully.', 'greenlet' ); ?></div>
+										<div class="message error setting-error"><?php esc_html_e( 'Sorry. Saving Failed.', 'greenlet' ); ?></div>
 									</div>
 								</div>
 							</div>
 							<div class="impex">
-								<div class="heading">Import / Export Theme Settings</div>
+								<div class="heading"><?php esc_html_e( 'Import / Export Theme Settings', 'greenlet' ); ?></div>
 								<div class="content-wrap impex-section">
 									<div class="row">
 										<div class="col-6 col-impex export">
-											<div class="sub-heading">Export Settings</div>
+											<div class="sub-heading"><?php esc_html_e( 'Export Settings', 'greenlet' ); ?></div>
 											<div class="export-option">
 												<textarea rows="8" readonly><?php echo esc_html( $val ); ?></textarea>
-												<div class="explain">Copy the contents to export.</div>
+												<div class="explain"><?php esc_html_e( 'Copy the contents to export.', 'greenlet' ); ?></div>
 											</div>
 										</div>
 										<div class="col-6 col-impex import">
-											<div class="sub-heading">Import Settings</div>
+											<div class="sub-heading"><?php esc_html_e( 'Import Settings', 'greenlet' ); ?></div>
 											<div class="import-option">
 												<textarea id="import-content" rows="8"></textarea>
-												<div class="explain">Paste the contents to import.</div>
+												<div class="explain"><?php esc_html_e( 'Paste the contents to import.', 'greenlet' ); ?></div>
 												<div class="btn-wrap">
-													<a href="#" id="import-btn" class="button-primary action-btn">Import Settings</a>
+													<a href="#" id="import-btn" class="button-primary action-btn"><?php esc_html_e( 'Import Settings', 'greenlet' ); ?></a>
 													<span class="spinner"></span>
 													<?php wp_nonce_field( 'greenlet_options', 'options_nonce' ); ?>
 												</div>
@@ -219,19 +219,19 @@ class Options_Admin {
 										</div>
 									</div>
 									<div class="row">
-										<div class="message success import-success">Import Settings successful. Reload page to get imported settings.</div>
-										<div class="message warning import-warning">Import successful. Your settings and Import settings are same!!</div>
-										<div class="message error import-error">Sorry. Import Failed. Please check the code.</div>
-										<div class="message default import-default">There is nothing to import!</div>
+										<div class="message success import-success"><?php esc_html_e( 'Import Settings successful. Reload page to get imported settings.', 'greenlet' ); ?></div>
+										<div class="message warning import-warning"><?php esc_html_e( 'Import successful. Your settings and Import settings are same!!', 'greenlet' ); ?></div>
+										<div class="message error import-error"><?php esc_html_e( 'Sorry. Import Failed. Please check the code.', 'greenlet' ); ?></div>
+										<div class="message default import-default"><?php esc_html_e( 'There is nothing to import!', 'greenlet' ); ?></div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="ext-links">
-								<div class="link-wrap"><a href="https://greenletwp.com/pro/" target="_blank">Get Pro Version</a></div>
-								<div class="link-wrap"><a href="https://greenletwp.com/docs/" target="_blank">Documentation</a></div>
-								<div class="link-wrap"><a href="https://github.com/codefoxes/greenlet/tree/dev" target="_blank">Latest dev branch</a></div>
+								<div class="link-wrap"><a href="https://greenletwp.com/pro/" target="_blank"><?php esc_html_e( 'Get Pro Version', 'greenlet' ); ?></a></div>
+								<div class="link-wrap"><a href="https://greenletwp.com/docs/" target="_blank"><?php esc_html_e( 'Documentation', 'greenlet' ); ?></a></div>
+								<div class="link-wrap"><a href="https://github.com/codefoxes/greenlet/tree/dev" target="_blank"><?php esc_html_e( 'Latest dev branch', 'greenlet' ); ?></a></div>
 							</div>
 							<div id="xhr-section"></div>
 						</div>

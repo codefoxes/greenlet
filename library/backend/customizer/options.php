@@ -124,7 +124,7 @@ function greenlet_options() {
 		'id'   => 'layout',
 		'args' => array(
 			'title'       => __( 'Layout', 'greenlet' ),
-			'description' => 'Site Layout.',
+			'description' => __( 'Site Layout.', 'greenlet' ),
 			'priority'    => 35,
 		),
 	);
@@ -672,7 +672,7 @@ function greenlet_options() {
 		'id'   => 'global',
 		'args' => array(
 			'title'       => __( 'Global Design', 'greenlet' ),
-			'description' => 'Site Layout.',
+			'description' => __( 'Site Wide Designs and Styles.', 'greenlet' ),
 			'priority'    => 35,
 		),
 	);
@@ -951,7 +951,7 @@ function greenlet_options() {
 		'id'   => 'components',
 		'args' => array(
 			'title'       => __( 'Components', 'greenlet' ),
-			'description' => 'Components Styles',
+			'description' => __( 'Components and Elements specific Styles', 'greenlet' ),
 			'priority'    => 75,
 		),
 	);
