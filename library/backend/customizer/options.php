@@ -1732,20 +1732,6 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'disable_emojis',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'performance',
-			'label'       => __( 'Disable WP Emojis', 'greenlet' ),
-			'description' => __( 'Posts with emojis may break, disable with caution.', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
 		'id'    => 'disable_block_editor',
 		'sargs' => array(
 			'default' => false,
