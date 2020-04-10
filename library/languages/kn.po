@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-10 06:52+0000\n"
-"PO-Revision-Date: 2020-04-10 08:06+0000\n"
+"POT-Creation-Date: 2020-04-10 15:03+0000\n"
+"PO-Revision-Date: 2020-04-10 15:04+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -153,6 +153,7 @@ msgstr "ಇದಕ್ಕಾಗಿ ಹುಡುಕು"
 msgid "Search &hellip;"
 msgstr "ಹುಡುಕು &hellip;"
 
+#: library/frontend/main-structure.php:945
 #: library/frontend/main-structure.php:947
 msgid "Search"
 msgstr "ಹುಡುಕು"
@@ -211,6 +212,10 @@ msgstr "%1$ ನಲ್ಲಿ %2$s ಕಾಲಮ್‌ನಂತೆ ಗೋಚರಿ�
 #, php-format
 msgid "Page %s"
 msgstr "ಪುಟ %s"
+
+#: templates/menu/main.php:11
+msgid "Toggle Menu"
+msgstr "ಟಾಗಲ್ ಮೆನು"
 
 #: library/backend/options/class-options-admin.php:65
 msgid "Greenlet Settings"

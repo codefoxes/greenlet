@@ -942,7 +942,7 @@ function greenlet_search_form() {
 	$html = '<form role="search" method="get" class="search-form" action="' . home_url( '/' ) . '">
 		<label for="search-input">
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
-			<input type="search" class="search-field" id="search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="Search">
+			<input type="search" class="search-field" id="search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
 		</label>
 		<input type="submit" class="search-submit" value="' . esc_attr__( 'Search', 'greenlet' ) . '">
 	</form>';

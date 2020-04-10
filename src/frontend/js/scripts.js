@@ -152,3 +152,30 @@ function jsonToFormData( srcjson ) {
 	}
 	return urljson;
 }
+
+function fixMenu() {
+	document.body.addEventListener( 'keyup', function ( e ) {
+		if ( e.key === 'Tab' || e.keyCode === '9' ) {
+			var parent = document.activeElement.parentNode
+			if ( ! parent.classList.contains( 'menu-item' ) ) {
+				var focused = document.querySelector( '.menu-item.focus' )
+				;( focused !== null ) && focused.classList.remove( 'focus' )
+				document.getElementById( 'menu-toggle' ).checked = false
+			}
+			;( parent.previousElementSibling !== null ) && parent.previousElementSibling.classList.remove( 'focus' )
+			;( parent.nextElementSibling !== null ) && parent.nextElementSibling.classList.remove( 'focus' )
+			;( parent.classList.contains( 'menu-item-has-children' ) ) && parent.classList.add( 'focus' )
+			;( document.activeElement.id === 'menu-toggle' ) && ( document.activeElement.checked = true )
+		}
+	});
+
+	var fixToggle = function() {
+		var header = document.querySelector( '.header-column' )
+		document.querySelector( '.menu-toggle-button' ).style.top = '-' + ( ( header.offsetHeight / 2 ) + 12 ) + 'px'
+	}
+
+	window.addEventListener('load', fixToggle );
+	window.addEventListener('resize', fixToggle );
+}
+
+fixMenu()

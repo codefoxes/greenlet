@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-10 06:52+0000\n"
+"POT-Creation-Date: 2020-04-10 15:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -154,6 +154,7 @@ msgstr ""
 msgid "Search &hellip;"
 msgstr ""
 
+#: library/frontend/main-structure.php:945
 #: library/frontend/main-structure.php:947
 msgid "Search"
 msgstr ""
@@ -211,6 +212,10 @@ msgstr ""
 #: library/common/setup.php:184
 #, php-format
 msgid "Page %s"
+msgstr ""
+
+#: templates/menu/main.php:11
+msgid "Toggle Menu"
 msgstr ""
 
 #: library/backend/options/class-options-admin.php:65
