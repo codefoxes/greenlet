@@ -216,7 +216,7 @@ class WooCommerce {
 
 		$cart  = '<a class="cart-button" href="';
 		$cart .= wc_get_cart_url() . '" title="';
-		$cart .= __( 'View shopping cart', 'greenlet' ) . '"><div class="cart-icon">';
+		$cart .= esc_attr__( 'View shopping cart', 'greenlet' ) . '"><div class="cart-icon">';
 		$cart .= greenlet_get_file_contents( LIBRARY_DIR . '/support/woocommerce/frontend/cart.svg' );
 		$cart .= '</div><div class="cart-contents">';
 		// translators: %d: Cart contents count.

@@ -124,7 +124,7 @@ function greenlet_options() {
 		'id'   => 'layout',
 		'args' => array(
 			'title'       => __( 'Layout', 'greenlet' ),
-			'description' => 'Site Layout.',
+			'description' => __( 'Site Layout.', 'greenlet' ),
 			'priority'    => 35,
 		),
 	);
@@ -672,7 +672,7 @@ function greenlet_options() {
 		'id'   => 'global',
 		'args' => array(
 			'title'       => __( 'Global Design', 'greenlet' ),
-			'description' => 'Site Layout.',
+			'description' => __( 'Site Wide Designs and Styles.', 'greenlet' ),
 			'priority'    => 35,
 		),
 	);
@@ -951,7 +951,7 @@ function greenlet_options() {
 		'id'   => 'components',
 		'args' => array(
 			'title'       => __( 'Components', 'greenlet' ),
-			'description' => 'Components Styles',
+			'description' => __( 'Components and Elements specific Styles', 'greenlet' ),
 			'priority'    => 75,
 		),
 	);
@@ -1691,6 +1691,21 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'editor_styles',
+		'sargs' => array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog',
+			'label'       => __( 'Editor Styles', 'greenlet' ),
+			'description' => __( 'Match the Post editor styles to the frontend styles.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
 		'type' => 'section',
 		'id'   => 'performance',
 		'args' => array(
@@ -1727,20 +1742,6 @@ function greenlet_options() {
 			'input_attrs' => array(
 				'placeholder' => __( 'Leave Blank to not add Critical CSS.', 'greenlet' ),
 			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'disable_emojis',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'performance',
-			'label'       => __( 'Disable WP Emojis', 'greenlet' ),
-			'description' => __( 'Posts with emojis may break, disable with caution.', 'greenlet' ),
 		),
 	);
 

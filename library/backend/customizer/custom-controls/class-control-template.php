@@ -105,7 +105,8 @@ if ( ! class_exists( 'Control_Template' ) && class_exists( 'WP_Customize_Control
 			<div class="more-wrap">
 				<input type="checkbox" />
 				<div class="more-content">
-					<label for="{{ data.id }}-text" class="description customize-control-description">Enter column numbers separated by hyphen.<br>Eg: 4-8 or 9-3<br>Sum should be 12</label>
+					<label for="{{ data.id }}-text" class="description customize-control-description">
+						<?php echo esc_html__( 'Enter column numbers separated by hyphen.', 'greenlet' ) . '<br>' . esc_html__( 'Eg: 4-8 or 9-3', 'greenlet' ) . '<br>' . esc_html__( 'Sum should be 12', 'greenlet' ); ?></label>
 					<input type="text" id="{{ data.id }}-text" value="{{ data.value }}">
 				</div>
 			</div>

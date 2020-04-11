@@ -8,7 +8,7 @@
 greenlet_markup( 'site-navigation', greenlet_attr( 'site-navigation nav-menu' ) );
 ?>
 	<input id="menu-toggle" class="menu-toggle" type="checkbox" />
-	<label class="menu-toggle-button" for="menu-toggle">
+	<label class="menu-toggle-button" for="menu-toggle" aria-label="<?php esc_attr_e( 'Toggle Menu', 'greenlet' ); ?>">
 		<span class="hamburger hamburger-1"></span>
 		<span class="hamburger hamburger-2"></span>
 		<span class="hamburger hamburger-3"></span>
