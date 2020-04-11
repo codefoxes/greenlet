@@ -226,7 +226,7 @@ function greenlet_do_archive_header() {
 
 	switch ( true ) {
 		case is_author():
-			$archive_title = apply_filters( 'greenlet_author_archive_title', ucfirst( get_the_author() ) . ' Archives' );
+			$archive_title = apply_filters( 'greenlet_author_archive_title', ucfirst( get_the_author() ) . __( ' Archives', 'greenlet' ) );
 
 			// If the author bio exists, display it.
 			if ( get_the_author_meta( 'description' ) ) {
@@ -234,7 +234,7 @@ function greenlet_do_archive_header() {
 			}
 			break;
 		case is_category():
-			$archive_title = apply_filters( 'greenlet_category_archive_title', single_cat_title( '', false ) . ' Archives' );
+			$archive_title = apply_filters( 'greenlet_category_archive_title', single_cat_title( '', false ) . __( ' Archives', 'greenlet' ) );
 
 			// Show an optional category description.
 			if ( category_description() ) {
@@ -242,7 +242,7 @@ function greenlet_do_archive_header() {
 			}
 			break;
 		case is_tag():
-			$archive_title = apply_filters( 'greenlet_tag_archive_title', single_tag_title( '', false ) . ' Archives' );
+			$archive_title = apply_filters( 'greenlet_tag_archive_title', single_tag_title( '', false ) . __( ' Archives', 'greenlet' ) );
 
 			// Show an optional tag description.
 			if ( tag_description() ) {
@@ -250,13 +250,13 @@ function greenlet_do_archive_header() {
 			}
 			break;
 		case is_day():
-			$archive_title = apply_filters( 'greenlet_daily_archive_title', get_the_date() . ' Archives' );
+			$archive_title = apply_filters( 'greenlet_daily_archive_title', get_the_date() . __( ' Archives', 'greenlet' ) );
 			break;
 		case is_month():
-			$archive_title = apply_filters( 'greenlet_monthly_archive_title', get_the_date( _x( 'F Y', 'Monthly archives date format', 'greenlet' ) ) . ' Archives' );
+			$archive_title = apply_filters( 'greenlet_monthly_archive_title', get_the_date( _x( 'F Y', 'Monthly archives date format', 'greenlet' ) ) . __( ' Archives', 'greenlet' ) );
 			break;
 		case is_year():
-			$archive_title = apply_filters( 'greenlet_yearly_archive_title', get_the_date( _x( 'Y', 'Yearly archives date format', 'greenlet' ) ) . ' Archives' );
+			$archive_title = apply_filters( 'greenlet_yearly_archive_title', get_the_date( _x( 'Y', 'Yearly archives date format', 'greenlet' ) ) . __( ' Archives', 'greenlet' ) );
 			break;
 	}
 
@@ -711,7 +711,7 @@ function greenlet_get_paginated() {
 	$current_location = array_key_exists( 'location', $_POST ) ? esc_url_raw( wp_unslash( $_POST['location'] ) ) : '';
 
 	$options = array(
-		'no_posts_message' => 'There are no posts meeting your criteria',
+		'no_posts_message' => esc_html__( 'There are no posts meeting your criteria', 'greenlet' ),
 		'no_posts_class'   => '',
 	);
 	$options = apply_filters( 'greenlet_pagination_options', $options );
@@ -942,9 +942,9 @@ function greenlet_search_form() {
 	$html = '<form role="search" method="get" class="search-form" action="' . home_url( '/' ) . '">
 		<label for="search-input">
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
-			<input type="search" class="search-field" id="search-input" placeholder="' . __( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="Search">
+			<input type="search" class="search-field" id="search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
 		</label>
-		<input type="submit" class="search-submit" value="' . __( 'Search', 'greenlet' ) . '">
+		<input type="submit" class="search-submit" value="' . esc_attr__( 'Search', 'greenlet' ) . '">
 	</form>';
 
 	return $html;

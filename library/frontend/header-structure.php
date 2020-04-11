@@ -26,10 +26,6 @@ function greenlet_do_head() {
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<?php
-	$show_meta = apply_filters( 'greenlet_add_meta_description', true );
-	if ( $show_meta ) {
-		echo '<meta name="description" content="' . esc_html( greenlet_meta_description() ) . '" />';
-	}
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
 	$fixed_topbar = gl_get_option( 'fixed_topbar', false );

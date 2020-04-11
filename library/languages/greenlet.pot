@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-22 08:05+0000\n"
+"POT-Creation-Date: 2020-04-11 12:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -68,6 +68,14 @@ msgstr ""
 msgid "Main-6, Side-6."
 msgstr ""
 
+#: templates/logo.php:15
+msgid "Home Page"
+msgstr ""
+
+#: templates/breadcrumb.php:13
+msgid "Home"
+msgstr ""
+
 #: templates/breadcrumb.php:63 library/frontend/main-structure.php:256
 msgctxt "Monthly archives date format"
 msgid "F Y"
@@ -76,6 +84,19 @@ msgstr ""
 #: templates/breadcrumb.php:67 library/frontend/main-structure.php:259
 msgctxt "Yearly archives date format"
 msgid "Y"
+msgstr ""
+
+#: templates/breadcrumb.php:71
+msgid "Search: "
+msgstr ""
+
+#: library/frontend/main-structure.php:229
+#: library/frontend/main-structure.php:237
+#: library/frontend/main-structure.php:245
+#: library/frontend/main-structure.php:253
+#: library/frontend/main-structure.php:256
+#: library/frontend/main-structure.php:259
+msgid " Archives"
 msgstr ""
 
 #. phpcs:ignore
@@ -117,6 +138,10 @@ msgstr ""
 msgid "Older Posts &raquo;"
 msgstr ""
 
+#: library/frontend/main-structure.php:714
+msgid "There are no posts meeting your criteria"
+msgstr ""
+
 #: library/frontend/main-structure.php:901
 msgid "Load More"
 msgstr ""
@@ -129,12 +154,22 @@ msgstr ""
 msgid "Search &hellip;"
 msgstr ""
 
+#: library/frontend/main-structure.php:945
 #: library/frontend/main-structure.php:947
 msgid "Search"
 msgstr ""
 
-#: library/frontend/header-structure.php:55
+#: library/frontend/header-structure.php:51
 msgid "Skip to content"
+msgstr ""
+
+#: library/frontend/footer-structure.php:54
+msgid "Powered By"
+msgstr ""
+
+#. Name of the theme
+#: library/frontend/footer-structure.php:55
+msgid "Greenlet"
 msgstr ""
 
 #: library/common/setup.php:50
@@ -179,16 +214,97 @@ msgstr ""
 msgid "Page %s"
 msgstr ""
 
-#: library/backend/options/class-options-admin.php:65
+#: templates/menu/main.php:11
+msgid "Toggle Menu"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:62
 msgid "Greenlet Settings"
 msgstr ""
 
-#: library/backend/options/class-options-admin.php:66
+#: library/backend/options/class-options-admin.php:63
 msgid "Greenlet Options"
 msgstr ""
 
+#: library/backend/options/class-options-admin.php:118
+msgid "Title and Tagline"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:119
+#: library/backend/customizer/options.php:150
+msgid "CSS Framework"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:120
+#: library/backend/customizer/options.php:206
+#: library/backend/customizer/options.php:299
+msgid "Header Layout"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:121
+#: library/backend/customizer/options.php:392
+msgid "Main Layout"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:122
+#: library/backend/customizer/options.php:530
+#: library/backend/customizer/options.php:610
+msgid "Footer Layout"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:123
+#: library/backend/customizer/options.php:685
+msgid "Typography"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:124
+msgid "Colours"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:125
+msgid "Heading Design"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:126
+msgid "Buttons Design"
+msgstr ""
+
 #: library/backend/options/class-options-admin.php:127
-msgid "You don't have any options to export. Try saving your options first."
+msgid "Links Design"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:128
+msgid "Inputs Design"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:129
+msgid "Paragraphs Design"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:130
+#: library/backend/customizer/options.php:1537
+msgid "Blog Settings"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:131
+#: library/backend/customizer/options.php:1712
+msgid "Performance"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:147
+msgid "Customizer Controls"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:163
+msgid "Get Pro Version"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:164
+msgid "Documentation"
+msgstr ""
+
+#: library/backend/options/class-options-admin.php:165
+msgid "Latest dev branch"
 msgstr ""
 
 #: library/backend/customizer/options.php:50
@@ -215,12 +331,12 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: library/backend/customizer/options.php:136
-msgid "Framework"
+#: library/backend/customizer/options.php:127
+msgid "Site Layout."
 msgstr ""
 
-#: library/backend/customizer/options.php:150
-msgid "CSS Framework"
+#: library/backend/customizer/options.php:136
+msgid "Framework"
 msgstr ""
 
 #: library/backend/customizer/options.php:152
@@ -249,11 +365,6 @@ msgstr ""
 
 #: library/backend/customizer/options.php:198
 msgid "Container Width"
-msgstr ""
-
-#: library/backend/customizer/options.php:206
-#: library/backend/customizer/options.php:299
-msgid "Header Layout"
 msgstr ""
 
 #: library/backend/customizer/options.php:220
@@ -316,10 +427,6 @@ msgstr ""
 msgid "Column for the Secondary Menu to be displayed."
 msgstr ""
 
-#: library/backend/customizer/options.php:392
-msgid "Main Layout"
-msgstr ""
-
 #: library/backend/customizer/options.php:406
 msgid "Number of Sidebars ( For Main Container )"
 msgstr ""
@@ -352,11 +459,6 @@ msgstr ""
 
 #: library/backend/customizer/options.php:522
 msgid "Content container width"
-msgstr ""
-
-#: library/backend/customizer/options.php:530
-#: library/backend/customizer/options.php:610
-msgid "Footer Layout"
 msgstr ""
 
 #: library/backend/customizer/options.php:544
@@ -403,8 +505,8 @@ msgstr ""
 msgid "Global Design"
 msgstr ""
 
-#: library/backend/customizer/options.php:685
-msgid "Typography"
+#: library/backend/customizer/options.php:675
+msgid "Site Wide Designs and Styles."
 msgstr ""
 
 #: library/backend/customizer/options.php:699
@@ -481,6 +583,10 @@ msgstr ""
 
 #: library/backend/customizer/options.php:953
 msgid "Components"
+msgstr ""
+
+#: library/backend/customizer/options.php:954
+msgid "Components and Elements specific Styles"
 msgstr ""
 
 #: library/backend/customizer/options.php:963
@@ -651,10 +757,6 @@ msgstr ""
 msgid "Meta Icons Color"
 msgstr ""
 
-#: library/backend/customizer/options.php:1537
-msgid "Blog Settings"
-msgstr ""
-
 #: library/backend/customizer/options.php:1551
 msgid "Breadcrumb"
 msgstr ""
@@ -715,51 +817,47 @@ msgstr ""
 msgid "Enable Schema Markup"
 msgstr ""
 
-#: library/backend/customizer/options.php:1697
-msgid "Performance"
+#: library/backend/customizer/options.php:1703
+msgid "Editor Styles"
 msgstr ""
 
-#: library/backend/customizer/options.php:1711
+#: library/backend/customizer/options.php:1704
+msgid "Match the Post editor styles to the frontend styles."
+msgstr ""
+
+#: library/backend/customizer/options.php:1726
 msgid "Defer CSS"
 msgstr ""
 
-#: library/backend/customizer/options.php:1712
+#: library/backend/customizer/options.php:1727
 msgid "Load theme CSS files after page load."
 msgstr ""
 
-#: library/backend/customizer/options.php:1723
+#: library/backend/customizer/options.php:1738
 msgid "Critical CSS"
 msgstr ""
 
-#: library/backend/customizer/options.php:1724
+#: library/backend/customizer/options.php:1739
 msgid "If CSS files are defered enter the critical css here."
 msgstr ""
 
-#: library/backend/customizer/options.php:1728
+#: library/backend/customizer/options.php:1743
 msgid "Leave Blank to not add Critical CSS."
 msgstr ""
 
-#: library/backend/customizer/options.php:1742
-msgid "Disable WP Emojis"
-msgstr ""
-
-#: library/backend/customizer/options.php:1743
-msgid "Posts with emojis may break, disable with caution."
-msgstr ""
-
-#: library/backend/customizer/options.php:1756
+#: library/backend/customizer/options.php:1757
 msgid "Disable WP Block Editor Style"
 msgstr ""
 
-#: library/backend/customizer/options.php:1757
+#: library/backend/customizer/options.php:1758
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 
-#: library/backend/customizer/options.php:1765
+#: library/backend/customizer/options.php:1766
 msgid "Presets"
 msgstr ""
 
-#: library/backend/customizer/options.php:1780
+#: library/backend/customizer/options.php:1781
 msgid "Theme Presets"
 msgstr ""
 
@@ -809,6 +907,18 @@ msgid_plural "%d Items"
 msgstr[0] ""
 msgstr[1] ""
 
+#: library/backend/customizer/custom-controls/class-control-template.php:109
+msgid "Enter column numbers separated by hyphen."
+msgstr ""
+
+#: library/backend/customizer/custom-controls/class-control-template.php:109
+msgid "Eg: 4-8 or 9-3"
+msgstr ""
+
+#: library/backend/customizer/custom-controls/class-control-template.php:109
+msgid "Sum should be 12"
+msgstr ""
+
 #: library/support/woocommerce/backend/options.php:29
 msgid "Shop Layout"
 msgstr ""
@@ -855,10 +965,6 @@ msgstr ""
 
 #: library/support/woocommerce/backend/options.php:177
 msgid "Column for the Shopping cart to be displayed."
-msgstr ""
-
-#. Name of the theme
-msgid "Greenlet"
 msgstr ""
 
 #. Description of the theme

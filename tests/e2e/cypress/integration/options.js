@@ -43,10 +43,6 @@ describe('Backend', () => {
 			cy.get('#greenlet-options').find('.settings .heading').should('contain', 'Customizer')
 		})
 
-		it('Should have Import Export', () => {
-			cy.get('#greenlet-options').find('.impex .heading').should('contain', 'Import')
-		})
-
 		it('Should have Customizer Link', () => {
 			cy.get('#greenlet-options').find('.settings a').should('have.attr', 'href')
 				.and('include', 'customize.php?autofocus%5Bsection%5D=title_tagline')
