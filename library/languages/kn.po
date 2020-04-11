@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-10 15:03+0000\n"
-"PO-Revision-Date: 2020-04-10 15:04+0000\n"
+"POT-Creation-Date: 2020-04-11 12:23+0000\n"
+"PO-Revision-Date: 2020-04-11 12:23+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -158,7 +158,7 @@ msgstr "ಹುಡುಕು &hellip;"
 msgid "Search"
 msgstr "ಹುಡುಕು"
 
-#: library/frontend/header-structure.php:55
+#: library/frontend/header-structure.php:51
 msgid "Skip to content"
 msgstr "ವಿಷಯಕ್ಕೆ ತೆರಳಿ"
 
@@ -217,163 +217,92 @@ msgstr "ಪುಟ %s"
 msgid "Toggle Menu"
 msgstr "ಟಾಗಲ್ ಮೆನು"
 
-#: library/backend/options/class-options-admin.php:65
+#: library/backend/options/class-options-admin.php:62
 msgid "Greenlet Settings"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ಸಂಯೋಜನೆಗಳು"
 
-#: library/backend/options/class-options-admin.php:66
+#: library/backend/options/class-options-admin.php:63
 msgid "Greenlet Options"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ಆಯ್ಕೆಗಳು"
 
-#: library/backend/options/class-options-admin.php:127
-msgid "You don't have any options to export. Try saving your options first."
-msgstr ""
-"ರಫ್ತು ಮಾಡಲು ನಿಮಗೆ ಯಾವುದೇ ಆಯ್ಕೆಗಳಿಲ್ಲ. ಮೊದಲು ನಿಮ್ಮ ಆಯ್ಕೆಗಳನ್ನು ಉಳಿಸಲು "
-"ಪ್ರಯತ್ನಿಸಿ."
-
-#: library/backend/options/class-options-admin.php:133
+#: library/backend/options/class-options-admin.php:118
 msgid "Title and Tagline"
 msgstr "ಶೀರ್ಷಿಕೆ ಮತ್ತು ಟ್ಯಾಗ್‌ಲೈನ್"
 
-#: library/backend/options/class-options-admin.php:134
+#: library/backend/options/class-options-admin.php:119
 #: library/backend/customizer/options.php:150
 msgid "CSS Framework"
 msgstr "ಸಿಎಸ್ಎಸ್ ಚೌಕಟ್ಟು"
 
-#: library/backend/options/class-options-admin.php:135
+#: library/backend/options/class-options-admin.php:120
 #: library/backend/customizer/options.php:206
 #: library/backend/customizer/options.php:299
 msgid "Header Layout"
 msgstr "ಶಿರೋಲೇಖ ನಕ್ಷೆ"
 
-#: library/backend/options/class-options-admin.php:136
+#: library/backend/options/class-options-admin.php:121
 #: library/backend/customizer/options.php:392
 msgid "Main Layout"
 msgstr "ಮುಖ್ಯ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:137
+#: library/backend/options/class-options-admin.php:122
 #: library/backend/customizer/options.php:530
 #: library/backend/customizer/options.php:610
 msgid "Footer Layout"
 msgstr "ಅಡಿಟಿಪ್ಪಣಿ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:138
+#: library/backend/options/class-options-admin.php:123
 #: library/backend/customizer/options.php:685
 msgid "Typography"
 msgstr "ಮುದ್ರಣಕಲೆ"
 
-#: library/backend/options/class-options-admin.php:139
+#: library/backend/options/class-options-admin.php:124
 msgid "Colours"
 msgstr "ಬಣ್ಣಗಳು"
 
-#: library/backend/options/class-options-admin.php:140
+#: library/backend/options/class-options-admin.php:125
 msgid "Heading Design"
 msgstr "ಶಿರೋನಾಮೆ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:141
+#: library/backend/options/class-options-admin.php:126
 msgid "Buttons Design"
 msgstr "ಗುಂಡಿಗಳ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:142
+#: library/backend/options/class-options-admin.php:127
 msgid "Links Design"
 msgstr "ಲಿಂಕ್ಸ್ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:143
+#: library/backend/options/class-options-admin.php:128
 msgid "Inputs Design"
 msgstr "ಇನ್‌ಪುಟ್‌ಗಳ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:144
+#: library/backend/options/class-options-admin.php:129
 msgid "Paragraphs Design"
 msgstr "ಪ್ಯಾರಾಗಳ ವಿನ್ಯಾಸ"
 
-#: library/backend/options/class-options-admin.php:145
+#: library/backend/options/class-options-admin.php:130
 #: library/backend/customizer/options.php:1537
 msgid "Blog Settings"
 msgstr "ಬ್ಲಾಗ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 
-#: library/backend/options/class-options-admin.php:146
-#: library/backend/customizer/options.php:1697
+#: library/backend/options/class-options-admin.php:131
+#: library/backend/customizer/options.php:1712
 msgid "Performance"
 msgstr "ಸಾಮರ್ಥ್ಯ"
 
-#: library/backend/options/class-options-admin.php:162
+#: library/backend/options/class-options-admin.php:147
 msgid "Customizer Controls"
 msgstr "ಗ್ರಾಹಕ ನಿಯಂತ್ರಣಗಳು"
 
-#: library/backend/options/class-options-admin.php:175
-msgid "Backend Settings"
-msgstr "ಬ್ಯಾಕೆಂಡ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
-
-#: library/backend/options/class-options-admin.php:181
-msgid "Editor Styles"
-msgstr "ಸಂಪಾದಕ ಶೈಲಿಗಳು"
-
-#: library/backend/options/class-options-admin.php:182
-msgid "Match the Post editor styles to the frontend styles."
-msgstr "ಪೋಸ್ಟ್ ಎಡಿಟರ್ ಶೈಲಿಗಳನ್ನು ಮುಂಭಾಗದ ಶೈಲಿಗಳಿಗೆ ಹೊಂದಿಸಿ."
-
-#: library/backend/options/class-options-admin.php:185
-msgid "Save Settings"
-msgstr "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಿ"
-
-#: library/backend/options/class-options-admin.php:192
-msgid "Settings saved successfully."
-msgstr "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಉಳಿಸಲಾಗಿದೆ."
-
-#: library/backend/options/class-options-admin.php:193
-msgid "Sorry. Saving Failed."
-msgstr "ಕ್ಷಮಿಸಿ. ಉಳಿತಾಯ ವಿಫಲವಾಗಿದೆ."
-
-#: library/backend/options/class-options-admin.php:198
-msgid "Import / Export Theme Settings"
-msgstr "ಥೀಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಮದು / ರಫ್ತು ಮಾಡಿ"
-
-#: library/backend/options/class-options-admin.php:202
-msgid "Export Settings"
-msgstr "ರಫ್ತು ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
-
-#: library/backend/options/class-options-admin.php:205
-msgid "Copy the contents to export."
-msgstr "ರಫ್ತು ಮಾಡಲು ವಿಷಯಗಳನ್ನು ನಕಲಿಸಿ."
-
-#: library/backend/options/class-options-admin.php:209
-#: library/backend/options/class-options-admin.php:214
-msgid "Import Settings"
-msgstr "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಿ"
-
-#: library/backend/options/class-options-admin.php:212
-msgid "Paste the contents to import."
-msgstr "ಆಮದು ಮಾಡಲು ವಿಷಯಗಳನ್ನು ಅಂಟಿಸಿ."
-
-#: library/backend/options/class-options-admin.php:222
-msgid "Import Settings successful. Reload page to get imported settings."
-msgstr ""
-"ಆಮದು ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಯಶಸ್ವಿಯಾಗಿವೆ. ಆಮದು ಮಾಡಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪಡೆಯಲು ಪುಟವನ್ನು "
-"ಮರುಲೋಡ್ ಮಾಡಿ."
-
-#: library/backend/options/class-options-admin.php:223
-msgid "Import successful. Your settings and Import settings are same!!"
-msgstr ""
-"ಆಮದು ಯಶಸ್ವಿಯಾಗಿದೆ. ನಿಮ್ಮ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಆಮದು ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಒಂದೇ "
-"ಆಗಿರುತ್ತವೆ !!"
-
-#: library/backend/options/class-options-admin.php:224
-msgid "Sorry. Import Failed. Please check the code."
-msgstr "ಕ್ಷಮಿಸಿ. ಆಮದು ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಕೋಡ್ ಪರಿಶೀಲಿಸಿ."
-
-#: library/backend/options/class-options-admin.php:225
-msgid "There is nothing to import!"
-msgstr "ಆಮದು ಮಾಡಲು ಏನೂ ಇಲ್ಲ!"
-
-#: library/backend/options/class-options-admin.php:232
+#: library/backend/options/class-options-admin.php:163
 msgid "Get Pro Version"
 msgstr "ಪ್ರೊ ಆವೃತ್ತಿ ಪಡೆಯಿರಿ"
 
-#: library/backend/options/class-options-admin.php:233
+#: library/backend/options/class-options-admin.php:164
 msgid "Documentation"
 msgstr "ದಾಖಲೆ"
 
-#: library/backend/options/class-options-admin.php:234
+#: library/backend/options/class-options-admin.php:165
 msgid "Latest dev branch"
 msgstr "ಇತ್ತೀಚಿನ ಡೆವ್ ಶಾಖೆ"
 
@@ -889,50 +818,49 @@ msgstr "ಸ್ಕೀಮಾ ಮಾರ್ಕಪ್"
 msgid "Enable Schema Markup"
 msgstr "ಸ್ಕೀಮಾ ಮಾರ್ಕಪ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
 
-#: library/backend/customizer/options.php:1711
+#: library/backend/customizer/options.php:1703
+msgid "Editor Styles"
+msgstr "ಸಂಪಾದಕ ಶೈಲಿಗಳು"
+
+#: library/backend/customizer/options.php:1704
+msgid "Match the Post editor styles to the frontend styles."
+msgstr "ಪೋಸ್ಟ್ ಎಡಿಟರ್ ಶೈಲಿಗಳನ್ನು ಮುಂಭಾಗದ ಶೈಲಿಗಳಿಗೆ ಹೊಂದಿಸಿ."
+
+#: library/backend/customizer/options.php:1726
 msgid "Defer CSS"
 msgstr "CSS ಮುಂದೂಡಿ"
 
-#: library/backend/customizer/options.php:1712
+#: library/backend/customizer/options.php:1727
 msgid "Load theme CSS files after page load."
 msgstr "ಪುಟ ಲೋಡ್ ನಂತರ ಥೀಮ್ CSS ಫೈಲ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಿ."
 
-#: library/backend/customizer/options.php:1723
+#: library/backend/customizer/options.php:1738
 msgid "Critical CSS"
 msgstr "ನಿರ್ಣಾಯಕ ಸಿಎಸ್ಎಸ್"
 
-#: library/backend/customizer/options.php:1724
+#: library/backend/customizer/options.php:1739
 msgid "If CSS files are defered enter the critical css here."
 msgstr "CSS ಫೈಲುಗಳು ಮುಂದೂಡಿದರೆ ಇಲ್ಲಿ ನಿರ್ಣಾಯಕ CSS ಅನ್ನು ನಮೂದಿಸಿ."
 
-#: library/backend/customizer/options.php:1728
+#: library/backend/customizer/options.php:1743
 msgid "Leave Blank to not add Critical CSS."
 msgstr "ನಿರ್ಣಾಯಕ CSS ಅನ್ನು ಸೇರಿಸದಿರಲು ಖಾಲಿ ಬಿಡಿ."
 
-#: library/backend/customizer/options.php:1742
-msgid "Disable WP Emojis"
-msgstr "WP ಎಮೋಜಿಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
-
-#: library/backend/customizer/options.php:1743
-msgid "Posts with emojis may break, disable with caution."
-msgstr ""
-"ಎಮೋಜಿಗಳೊಂದಿಗಿನ ಪೋಸ್ಟ್‌ಗಳು ಮುರಿಯಬಹುದು, ಎಚ್ಚರಿಕೆಯಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಬಹುದು."
-
-#: library/backend/customizer/options.php:1756
+#: library/backend/customizer/options.php:1757
 msgid "Disable WP Block Editor Style"
 msgstr "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕ ಶೈಲಿಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
 
-#: library/backend/customizer/options.php:1757
+#: library/backend/customizer/options.php:1758
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕದೊಂದಿಗೆ ರಚಿಸಲಾದ ಪೋಸ್ಟ್‌ಗಳು ಮುರಿಯಬಹುದು, ಎಚ್ಚರಿಕೆಯಿಂದ "
 "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ."
 
-#: library/backend/customizer/options.php:1765
+#: library/backend/customizer/options.php:1766
 msgid "Presets"
 msgstr "ಪೂರ್ವನಿಗದಿಗಳು"
 
-#: library/backend/customizer/options.php:1780
+#: library/backend/customizer/options.php:1781
 msgid "Theme Presets"
 msgstr "ಥೀಮ್ ಪೂರ್ವನಿಗದಿಗಳು"
 

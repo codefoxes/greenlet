@@ -163,6 +163,8 @@ input[type="checkbox"].menu-toggle {
 	position: absolute;
 	height: 0;
 	width: 0;
+	left: 120%;
+	overflow: hidden;
 }
 
 .menu-toggle-button {

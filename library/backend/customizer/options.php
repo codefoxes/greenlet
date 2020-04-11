@@ -1691,6 +1691,21 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'editor_styles',
+		'sargs' => array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog',
+			'label'       => __( 'Editor Styles', 'greenlet' ),
+			'description' => __( 'Match the Post editor styles to the frontend styles.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
 		'type' => 'section',
 		'id'   => 'performance',
 		'args' => array(

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-10 15:03+0000\n"
-"PO-Revision-Date: 2020-04-10 15:05+0000\n"
+"POT-Creation-Date: 2020-04-11 12:23+0000\n"
+"PO-Revision-Date: 2020-04-11 12:23+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -159,7 +159,7 @@ msgstr "Chercher &hellip;"
 msgid "Search"
 msgstr "Chercher"
 
-#: library/frontend/header-structure.php:55
+#: library/frontend/header-structure.php:51
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
@@ -219,165 +219,92 @@ msgstr "Page %s"
 msgid "Toggle Menu"
 msgstr "Basculer le menu"
 
-#: library/backend/options/class-options-admin.php:65
+#: library/backend/options/class-options-admin.php:62
 msgid "Greenlet Settings"
 msgstr "Paramètres de Greenlet"
 
-#: library/backend/options/class-options-admin.php:66
+#: library/backend/options/class-options-admin.php:63
 msgid "Greenlet Options"
 msgstr "Options de Greenlet"
 
-#: library/backend/options/class-options-admin.php:127
-msgid "You don't have any options to export. Try saving your options first."
-msgstr ""
-"Vous n'avez aucune option à exporter. Essayez d'abord d'enregistrer vos "
-"options."
-
-#: library/backend/options/class-options-admin.php:133
+#: library/backend/options/class-options-admin.php:118
 msgid "Title and Tagline"
 msgstr "Titre et slogan"
 
-#: library/backend/options/class-options-admin.php:134
+#: library/backend/options/class-options-admin.php:119
 #: library/backend/customizer/options.php:150
 msgid "CSS Framework"
 msgstr "CSS Cadre"
 
-#: library/backend/options/class-options-admin.php:135
+#: library/backend/options/class-options-admin.php:120
 #: library/backend/customizer/options.php:206
 #: library/backend/customizer/options.php:299
 msgid "Header Layout"
 msgstr "Disposition des en-têtes"
 
-#: library/backend/options/class-options-admin.php:136
+#: library/backend/options/class-options-admin.php:121
 #: library/backend/customizer/options.php:392
 msgid "Main Layout"
 msgstr "Disposition principale"
 
-#: library/backend/options/class-options-admin.php:137
+#: library/backend/options/class-options-admin.php:122
 #: library/backend/customizer/options.php:530
 #: library/backend/customizer/options.php:610
 msgid "Footer Layout"
 msgstr "Disposition du pied de page"
 
-#: library/backend/options/class-options-admin.php:138
+#: library/backend/options/class-options-admin.php:123
 #: library/backend/customizer/options.php:685
 msgid "Typography"
 msgstr "Typographie"
 
-#: library/backend/options/class-options-admin.php:139
+#: library/backend/options/class-options-admin.php:124
 msgid "Colours"
 msgstr "Couleurs"
 
-#: library/backend/options/class-options-admin.php:140
+#: library/backend/options/class-options-admin.php:125
 msgid "Heading Design"
 msgstr "Conception de la rubrique"
 
-#: library/backend/options/class-options-admin.php:141
+#: library/backend/options/class-options-admin.php:126
 msgid "Buttons Design"
 msgstr "Conception des boutons"
 
-#: library/backend/options/class-options-admin.php:142
+#: library/backend/options/class-options-admin.php:127
 msgid "Links Design"
 msgstr "Conception de liens"
 
-#: library/backend/options/class-options-admin.php:143
+#: library/backend/options/class-options-admin.php:128
 msgid "Inputs Design"
 msgstr "Conception des entrées"
 
-#: library/backend/options/class-options-admin.php:144
+#: library/backend/options/class-options-admin.php:129
 msgid "Paragraphs Design"
 msgstr "Conception des paragraphes"
 
-#: library/backend/options/class-options-admin.php:145
+#: library/backend/options/class-options-admin.php:130
 #: library/backend/customizer/options.php:1537
 msgid "Blog Settings"
 msgstr "Paramètres du blog"
 
-#: library/backend/options/class-options-admin.php:146
-#: library/backend/customizer/options.php:1697
+#: library/backend/options/class-options-admin.php:131
+#: library/backend/customizer/options.php:1712
 msgid "Performance"
 msgstr "Performance"
 
-#: library/backend/options/class-options-admin.php:162
+#: library/backend/options/class-options-admin.php:147
 msgid "Customizer Controls"
 msgstr "Commandes de personnalisation"
 
-#: library/backend/options/class-options-admin.php:175
-msgid "Backend Settings"
-msgstr "Paramètres du backend"
-
-#: library/backend/options/class-options-admin.php:181
-msgid "Editor Styles"
-msgstr "Styles de l'éditeur"
-
-#: library/backend/options/class-options-admin.php:182
-msgid "Match the Post editor styles to the frontend styles."
-msgstr ""
-"Faites correspondre les styles de l'éditeur de publication aux styles "
-"frontaux."
-
-#: library/backend/options/class-options-admin.php:185
-msgid "Save Settings"
-msgstr "Enregistrer les paramètres"
-
-#: library/backend/options/class-options-admin.php:192
-msgid "Settings saved successfully."
-msgstr "Les paramètres ont bien été enregistrés."
-
-#: library/backend/options/class-options-admin.php:193
-msgid "Sorry. Saving Failed."
-msgstr "Désolé. Échec de l'enregistrement."
-
-#: library/backend/options/class-options-admin.php:198
-msgid "Import / Export Theme Settings"
-msgstr "Importer / exporter les paramètres de thème"
-
-#: library/backend/options/class-options-admin.php:202
-msgid "Export Settings"
-msgstr "Exporter les paramètres"
-
-#: library/backend/options/class-options-admin.php:205
-msgid "Copy the contents to export."
-msgstr "Copiez le contenu à exporter."
-
-#: library/backend/options/class-options-admin.php:209
-#: library/backend/options/class-options-admin.php:214
-msgid "Import Settings"
-msgstr "Importer les configurations"
-
-#: library/backend/options/class-options-admin.php:212
-msgid "Paste the contents to import."
-msgstr "Collez le contenu à importer."
-
-#: library/backend/options/class-options-admin.php:222
-msgid "Import Settings successful. Reload page to get imported settings."
-msgstr ""
-"Importation des paramètres réussie. Recharger la page pour obtenir les "
-"paramètres importés."
-
-#: library/backend/options/class-options-admin.php:223
-msgid "Import successful. Your settings and Import settings are same!!"
-msgstr ""
-"Importation réussie. Vos paramètres et paramètres d'importation sont les "
-"mêmes !!"
-
-#: library/backend/options/class-options-admin.php:224
-msgid "Sorry. Import Failed. Please check the code."
-msgstr "Désolé. Échec de l'importation. Veuillez vérifier le code."
-
-#: library/backend/options/class-options-admin.php:225
-msgid "There is nothing to import!"
-msgstr "Il n'y a rien à importer!"
-
-#: library/backend/options/class-options-admin.php:232
+#: library/backend/options/class-options-admin.php:163
 msgid "Get Pro Version"
 msgstr "Obtenez la version Pro"
 
-#: library/backend/options/class-options-admin.php:233
+#: library/backend/options/class-options-admin.php:164
 msgid "Documentation"
 msgstr "Documentation"
 
-#: library/backend/options/class-options-admin.php:234
+#: library/backend/options/class-options-admin.php:165
 msgid "Latest dev branch"
 msgstr "Dernière branche de développement"
 
@@ -896,51 +823,51 @@ msgstr "Balisage de schéma"
 msgid "Enable Schema Markup"
 msgstr "Activer le balisage de schéma"
 
-#: library/backend/customizer/options.php:1711
+#: library/backend/customizer/options.php:1703
+msgid "Editor Styles"
+msgstr "Styles de l'éditeur"
+
+#: library/backend/customizer/options.php:1704
+msgid "Match the Post editor styles to the frontend styles."
+msgstr ""
+"Faites correspondre les styles de l'éditeur de publication aux styles "
+"frontaux."
+
+#: library/backend/customizer/options.php:1726
 msgid "Defer CSS"
 msgstr "Différer CSS"
 
-#: library/backend/customizer/options.php:1712
+#: library/backend/customizer/options.php:1727
 msgid "Load theme CSS files after page load."
 msgstr "Chargez les fichiers CSS de thème après le chargement de la page."
 
-#: library/backend/customizer/options.php:1723
+#: library/backend/customizer/options.php:1738
 msgid "Critical CSS"
 msgstr "Critique CSS"
 
-#: library/backend/customizer/options.php:1724
+#: library/backend/customizer/options.php:1739
 msgid "If CSS files are defered enter the critical css here."
 msgstr "Si les fichiers CSS sont différés, entrez le css critique ici."
 
-#: library/backend/customizer/options.php:1728
+#: library/backend/customizer/options.php:1743
 msgid "Leave Blank to not add Critical CSS."
 msgstr "Laissez vide pour ne pas ajouter de CSS critique."
 
-#: library/backend/customizer/options.php:1742
-msgid "Disable WP Emojis"
-msgstr "Désactiver WP Emojis"
-
-#: library/backend/customizer/options.php:1743
-msgid "Posts with emojis may break, disable with caution."
-msgstr ""
-"Les messages contenant des emojis peuvent se casser, désactivez-les avec "
-"prudence."
-
-#: library/backend/customizer/options.php:1756
+#: library/backend/customizer/options.php:1757
 msgid "Disable WP Block Editor Style"
 msgstr "Désactiver le style de l'éditeur de blocs WP"
 
-#: library/backend/customizer/options.php:1757
+#: library/backend/customizer/options.php:1758
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 "Les publications créées avec WP Block Editor peuvent se casser, désactivez-"
 "les avec prudence."
 
-#: library/backend/customizer/options.php:1765
+#: library/backend/customizer/options.php:1766
 msgid "Presets"
 msgstr "Préconfigurations"
 
-#: library/backend/customizer/options.php:1780
+#: library/backend/customizer/options.php:1781
 msgid "Theme Presets"
 msgstr "Préréglages de thème"
 
