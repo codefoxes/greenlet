@@ -57,7 +57,7 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'CHILD_SCRIPTS_URL', CHILD_ASSETS_URL . '/js' );
 
 		// Define other constants.
-		define( 'GREENLET_VERSION', '1.2.1' );
+		define( 'GREENLET_VERSION', '1.2.2' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
