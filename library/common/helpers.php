@@ -43,16 +43,31 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	 * Enqueue stylesheet.
 	 *
 	 * @since 1.0.0
+	 * @since 1.3.0            Added $inline, Moved $defer to last parameter.
 	 * @param string           $handle Stylesheet handle.
 	 * @param string           $src    Link href.
-	 * @param bool|null        $defer  Whether to defer.
 	 * @param array            $deps   An array of registered stylesheet handles.
 	 * @param string|bool|null $ver    Stylesheet version number.
+	 * @param bool|null        $inline Whether to enqueue inline.
+	 * @param bool|null        $defer  Whether to defer.
 	 */
-	function greenlet_enqueue_style( $handle, $src, $defer = null, $deps = array(), $ver = false ) {
+	function greenlet_enqueue_style( $handle, $src, $deps = array(), $ver = false, $inline = null, $defer = null ) {
+		if ( null === $inline ) {
+			$inline = gl_get_option( 'inline_css', '1' );
+		}
+
 		if ( null === $defer ) {
 			$defer = gl_get_option( 'defer_css', '1' );
 		}
+
+		if ( false !== $inline ) {
+			$path = str_replace( get_home_url(), ABSPATH, $src );
+			ob_start();
+			require_once $path;
+			greenlet_enqueue_inline_style( $handle, ob_get_clean() );
+			return;
+		}
+
 		if ( false !== $defer ) {
 			greenlet_defer_style( $src );
 			return;
@@ -94,6 +109,49 @@ if ( ! function_exists( 'greenlet_enqueue_inline_style' ) ) {
 		wp_register_style( $handle, false, array(), GREENLET_VERSION );
 		wp_enqueue_style( $handle );
 		wp_add_inline_style( $handle, minify_css( $data ) );
+	}
+}
+
+if ( ! function_exists( 'greenlet_enqueue_script' ) ) {
+	/**
+	 * Enqueue script.
+	 *
+	 * @since 1.3.0
+	 * @param string           $handle    Script handle.
+	 * @param string           $src       Script src.
+	 * @param array            $deps      An array of registered script handles.
+	 * @param string|bool|null $ver       Script version number.
+	 * @param bool             $in_footer Whether to enqueue in footer.
+	 * @param bool|null        $inline    Whether to enqueue inline.
+	 */
+	function greenlet_enqueue_script( $handle, $src, $deps = array(), $ver = false, $in_footer = true, $inline = null ) {
+		if ( null === $inline ) {
+			$inline = gl_get_option( 'inline_js', '1' );
+		}
+		if ( false !== $inline ) {
+			$path = str_replace( get_home_url(), ABSPATH, $src );
+			ob_start();
+			require_once $path;
+			greenlet_enqueue_inline_script( $handle, ob_get_clean() );
+			return;
+		}
+
+		wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
+	}
+}
+
+if ( ! function_exists( 'greenlet_enqueue_inline_script' ) ) {
+	/**
+	 * Enqueue inline script.
+	 *
+	 * @since 1.3.0
+	 * @param string $handle Script handle.
+	 * @param string $data   CSS Data.
+	 */
+	function greenlet_enqueue_inline_script( $handle, $data ) {
+		wp_register_script( $handle, false, array(), GREENLET_VERSION, true );
+		wp_enqueue_script( $handle );
+		wp_add_inline_script( $handle, $data );
 	}
 }
 

@@ -82,16 +82,16 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 	add  = typeof add !== 'undefined' ? add : false;
 	act  = typeof act !== 'undefined' ? act : 'greenlet_get_paginated';
 	args = {
-		location: pagination_ajax.current_url,
-		page: pagination_ajax.page,
-		query_vars: pagination_ajax.query_vars,
+		location: greenlet_object.current_url,
+		page: greenlet_object.page,
+		query_vars: greenlet_object.query_vars,
 		current: cur_page,
 		append: add,
 		action: act,
 		nonce: nonce
 	};
 
-	if ( pagination_ajax.permalinks ) {
+	if ( greenlet_object.permalinks ) {
 		if ( ! parseInt( cur_page ) ) {
 			cur_page = location.href.replace( /.+\/page\/([0-9]+).+/, "$1" )
 		}
@@ -104,7 +104,7 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 	}
 
 	var xhr = new XMLHttpRequest();
-	xhr.open( 'POST', pagination_ajax.ajaxurl, true );
+	xhr.open( 'POST', greenlet_object.ajaxurl, true );
 	xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 	xhr.send( jsonToFormData( args ) );
 
