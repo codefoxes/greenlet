@@ -92,6 +92,11 @@ class Columns {
 			global $wp_query;
 
 			$default_layout = array(
+				'template' => '12',
+				'sequence' => array( 'main' ),
+			);
+
+			$default_home_layout = array(
 				'template' => '8-4',
 				'sequence' => array( 'main', 'sidebar-1' ),
 			);
@@ -130,7 +135,7 @@ class Columns {
 			} elseif ( is_home() ) {
 				// If is home (post list) page.
 
-				$layout = gl_get_option( 'home_template', $default_layout );
+				$layout = gl_get_option( 'home_template', $default_home_layout );
 
 				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '9-3';
 				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main', 'sidebar-1' );
