@@ -27,6 +27,12 @@ describe('Posts', () => {
 		let url = Cypress.env( Cypress.env('ENV') );
 		url = `${url}/wp-admin/post-new.php`
 		cy.visit(url).then((contentWindow) => {
+			cy.get("body").then($body => {
+				if ($body.find(".edit-post-welcome-guide button[aria-label='Close dialog']").length > 0) {
+					cy.get(".edit-post-welcome-guide button[aria-label='Close dialog']").click();
+				}
+			})
+
 			cy.get('#page_template').should('exist')
 			cy.get('#sequence').should('exist')
 		})
@@ -34,7 +40,7 @@ describe('Posts', () => {
 
 	it('Should update sequence on template change', () => {
 		cy.server()
-		cy.route('POST', '/wp-admin/admin-ajax.php').as('template')
+		cy.route('POST', '/wp-admin/admin-ajax.php**').as('template')
 		cy.get('#page_template').select('templates/6-6.php')
 		cy.wait('@template')
 		cy.get('.of-input').eq(0).should('have.value', 'main')
