@@ -1746,6 +1746,20 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
+		'id'    => 'inline_css',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Inline CSS', 'greenlet' ),
+			'description' => __( 'Load theme CSS files inline, saves network requests.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
 		'id'    => 'defer_css',
 		'sargs' => array(
 			'default' => '1',
@@ -1772,6 +1786,20 @@ function greenlet_options() {
 			'input_attrs' => array(
 				'placeholder' => __( 'Leave Blank to not add Critical CSS.', 'greenlet' ),
 			),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'inline_js',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Inline Javascript', 'greenlet' ),
+			'description' => __( 'Load theme JS files inline, saves a network request.', 'greenlet' ),
 		),
 	);
 

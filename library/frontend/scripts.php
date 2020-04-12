@@ -34,18 +34,16 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		global $wp_query, $wp, $wp_rewrite;
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		wp_enqueue_script( 'greenlet-scripts', SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
-		wp_localize_script(
-			'greenlet-scripts',
-			'pagination_ajax',
-			array(
-				'ajaxurl'     => admin_url( 'admin-ajax.php' ),
-				'current_url' => preg_replace( '~paged?/[0-9]+/?~', '', home_url( $wp->request ) ),
-				'page'        => get_query_var( 'paged', 1 ),
-				'permalinks'  => $wp_rewrite->using_permalinks(),
-				'query_vars'  => wp_json_encode( $wp_query->query_vars ),
-			)
+		greenlet_enqueue_script( 'greenlet-scripts', SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION );
+		$l10n = array(
+			'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+			'current_url' => preg_replace( '~paged?/[0-9]+/?~', '', home_url( $wp->request ) ),
+			'page'        => get_query_var( 'paged', 1 ),
+			'permalinks'  => $wp_rewrite->using_permalinks(),
+			'query_vars'  => wp_json_encode( $wp_query->query_vars ),
 		);
+		$l10n = apply_filters( 'greenlet_l10n_object', $l10n );
+		wp_localize_script( 'greenlet-scripts', 'greenlet_object', $l10n );
 
 		$css_framework = gl_get_option( 'css_framework', 'default' );
 		$load_js       = gl_get_option( 'load_js', false );
