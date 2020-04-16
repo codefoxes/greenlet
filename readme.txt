@@ -83,11 +83,11 @@ GNU General Public License for more details.
 
 = Screenshot License =
 
-Screenshot used in the theme is a bespoke image created using Inkscape and can be distributed under the terms of the GNU GPL v2.
+screenshot used in the theme is a bespoke image created by the theme author and can be distributed under the license: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
 = Icons Licenses =
 
-All the icons used in the theme are created using Inkscape and can be distributed under the terms of the GNU GPL v2.
+All the icons used in the theme are created by the theme author and can be distributed under the terms of the GNU GPL v2.
 
 = WP Color Picker Alpha License =
 
