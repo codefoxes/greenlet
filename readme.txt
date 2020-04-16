@@ -6,7 +6,7 @@ Tags: blog, custom-background, custom-colors, editor-style, featured-images, foo
 Tested up to: 5.3.2
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 Extremely fast and highly customizable WordPress theme.
 
