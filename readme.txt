@@ -83,7 +83,7 @@ GNU General Public License for more details.
 
 = Screenshot License =
 
-screenshot used in the theme is a bespoke image created by the theme author and can be distributed under the license: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
+Screenshot used in the theme is a bespoke image created by the theme author and can be distributed under the license: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
 = Icons Licenses =
 
