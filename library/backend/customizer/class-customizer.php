@@ -75,7 +75,9 @@ class Customizer {
 	 * @since  1.1.0
 	 */
 	public function enqueue_preview_scripts() {
-		wp_enqueue_script( 'greenlet-preview', LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'jquery', 'customize-preview' ), GREENLET_VERSION, true );
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'greenlet-preview', LIBRARY_URL . '/backend/assets/js/greenlet-preview' . $min . '.js', array( 'jquery', 'react-dom', 'customize-preview' ), GREENLET_VERSION, true );
+		wp_enqueue_style( 'greenlet-preview', LIBRARY_URL . '/backend/assets/css/greenlet-preview' . $min . '.css', array(), GREENLET_VERSION );
 	}
 
 	/**
