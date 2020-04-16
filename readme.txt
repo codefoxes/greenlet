@@ -6,7 +6,7 @@ Tags: blog, custom-background, custom-colors, editor-style, featured-images, foo
 Tested up to: 5.3.2
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -83,11 +83,11 @@ GNU General Public License for more details.
 
 = Screenshot License =
 
-Screenshot used in the theme is a bespoke image created using Inkscape and can be distributed under the terms of the GNU GPL v2.
+Screenshot used in the theme is a bespoke image created by the theme author and can be distributed under the license: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
 = Icons Licenses =
 
-All the icons used in the theme are created using Inkscape and can be distributed under the terms of the GNU GPL v2.
+All the icons used in the theme are created by the theme author and can be distributed under the terms of the GNU GPL v2.
 
 = WP Color Picker Alpha License =
 
