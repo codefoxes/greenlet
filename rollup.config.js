@@ -18,14 +18,16 @@ const EXTERNAL = [
 	'jQuery',
 	'react',
 	'react-dom',
+	'React',
+	'ReactDOM'
 ]
 
 const paths = [{
-	inputPath : 'src/backend/greenlet-controls.js',
+	inputPath : 'src/backend/js/customizer/greenlet-controls.js',
 	outputPath: 'library/backend/assets/js/greenlet-controls.js',
 	outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
 }, {
-	inputPath : 'src/backend/preview/greenlet-preview.js',
+	inputPath : 'src/backend/js/preview/greenlet-preview.js',
 	outputPath: 'library/backend/assets/js/greenlet-preview.js',
 	outputMin : 'library/backend/assets/js/greenlet-preview.min.js',
 }]

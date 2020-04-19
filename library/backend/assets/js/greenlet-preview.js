@@ -1,23 +1,7 @@
-(function (React$1, reactDom) {
+(function () {
   'use strict';
 
-  var React$1__default = 'default' in React$1 ? React$1['default'] : React$1;
-
-  function _typeof(obj) {
-    "@babel/helpers - typeof";
-
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
-  }
+  window.cw = window.parent.cw;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -56,22 +40,38 @@
     return obj;
   }
 
-  function _extends() {
-    _extends = Object.assign || function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
 
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
       }
+    }
 
-      return target;
-    };
-
-    return _extends.apply(this, arguments);
+    return target;
   }
 
   function _inherits(subClass, superClass) {
@@ -118,42 +118,6 @@
     }
   }
 
-  function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
-    }
-
-    return target;
-  }
-
-  function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-
-    var key, i;
-
-    if (Object.getOwnPropertySymbols) {
-      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-      for (i = 0; i < sourceSymbolKeys.length; i++) {
-        key = sourceSymbolKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-        target[key] = source[key];
-      }
-    }
-
-    return target;
-  }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -185,36 +149,6 @@
 
       return _possibleConstructorReturn(this, result);
     };
-  }
-
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-
-    return object;
-  }
-
-  function _get(target, property, receiver) {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get;
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-
-        if (desc.get) {
-          return desc.get.call(receiver);
-        }
-
-        return desc.value;
-      };
-    }
-
-    return _get(target, property, receiver || target);
   }
 
   function _slicedToArray(arr, i) {
@@ -452,7 +386,9 @@
       style: {},
       selector: ''
     },
-    focused: false
+    focused: false,
+    focusOpacity: 1,
+    detailsOpacity: 1
   };
 
   var FocusClass = /*#__PURE__*/function (_Store) {
@@ -494,6 +430,26 @@
       value: function isFocused() {
         return this.get().focused;
       }
+    }, {
+      key: "reduceFocusOpacity",
+      value: function reduceFocusOpacity() {
+        this.set(function () {
+          return {
+            focusOpacity: 0,
+            detailsOpacity: 0
+          };
+        });
+      }
+    }, {
+      key: "increaseFocusOpacity",
+      value: function increaseFocusOpacity() {
+        this.set(function () {
+          return {
+            focusOpacity: 1,
+            detailsOpacity: 1
+          };
+        });
+      }
     }]);
 
     return FocusClass;
@@ -501,76 +457,10 @@
 
   var FocusStore = new FocusClass(initialState);
 
-  var EventEmitter = /*#__PURE__*/function () {
-    function EventEmitter() {
-      _classCallCheck(this, EventEmitter);
+  var _cw = cw,
+      Evt = _cw.Evt;
 
-      this.events = {};
-    }
-
-    _createClass(EventEmitter, [{
-      key: "on",
-      value: function on(event, listener) {
-        var _this = this;
-
-        if (_typeof(this.events[event]) !== 'object') {
-          this.events[event] = [];
-        }
-
-        this.events[event].push(listener);
-        return function () {
-          return _this.removeListener(event, listener);
-        };
-      }
-    }, {
-      key: "removeListener",
-      value: function removeListener(event, listener) {
-        if (_typeof(this.events[event]) === 'object') {
-          var idx = this.events[event].indexOf(listener);
-
-          if (idx > -1) {
-            this.events[event].splice(idx, 1);
-          }
-        }
-      }
-    }, {
-      key: "emit",
-      value: function emit(event) {
-        var _this2 = this;
-
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-
-        if (_typeof(this.events[event]) === 'object') {
-          this.events[event].forEach(function (listener) {
-            return listener.apply(_this2, args);
-          });
-        }
-      }
-    }, {
-      key: "once",
-      value: function once(event, listener) {
-        var _this3 = this;
-
-        var remove = this.on(event, function () {
-          remove();
-
-          for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
-          }
-
-          listener.apply(_this3, args);
-        });
-      }
-    }]);
-
-    return EventEmitter;
-  }();
-
-  var Evt = new EventEmitter();
-
-  function getSelector(el) {
+  var getSelector = function getSelector(el) {
     if (el === document.body) {
       return 'body';
     }
@@ -600,50 +490,51 @@
     }
 
     return "".concat(parentSelector, " ").concat(selector);
-  }
+  };
+
+  var getFocusLinesNewState = function getFocusLinesNewState(client) {
+    var offsetTop = window.pageYOffset + client.top;
+    return {
+      top: {
+        borderTopWidth: '1px',
+        width: client.width,
+        left: client.left,
+        top: offsetTop
+      },
+      right: {
+        borderRightWidth: '1px',
+        height: client.height,
+        left: client.right,
+        top: offsetTop
+      },
+      bottom: {
+        borderTopWidth: '1px',
+        width: client.width + 1,
+        left: client.left,
+        top: window.pageYOffset + client.bottom
+      },
+      left: {
+        borderRightWidth: '1px',
+        height: client.height,
+        left: client.left,
+        top: offsetTop
+      }
+    };
+  };
+
+  var currentTarget;
 
   var moveFocus = function moveFocus(e) {
-    // if (
-    // 	e.target.id.includes( 'cw-focus' ) ||
-    // 	e.target.id.includes( 'cw-canvas' ) ||
-    // 	e.target.id.includes( 'cw-edit' )
-    // ) {
-    // 	return
-    // }
     if (FocusStore.isFocused()) {
       return;
     }
 
-    var client = e.target.getBoundingClientRect();
+    currentTarget = e.target;
+    var client = currentTarget.getBoundingClientRect();
     var offsetTop = window.pageYOffset + client.top;
     var detailsTop = offsetTop - 24 < window.pageYOffset ? offsetTop + client.height : offsetTop - 24;
     var newState = {
-      focusLines: {
-        top: {
-          borderTop: '1px solid #7CB342',
-          width: client.width,
-          left: client.left,
-          top: offsetTop
-        },
-        right: {
-          borderRight: '1px solid #7CB342',
-          height: client.height,
-          left: client.right,
-          top: offsetTop
-        },
-        bottom: {
-          borderTop: '1px solid #7CB342',
-          width: client.width + 1,
-          left: client.left,
-          top: window.pageYOffset + client.bottom
-        },
-        left: {
-          borderRight: '1px solid #7CB342',
-          height: client.height,
-          left: client.left,
-          top: offsetTop
-        }
-      },
+      focusLines: getFocusLinesNewState(client),
       focusDetails: {
         style: {
           left: client.left,
@@ -657,7 +548,7 @@
     FocusStore.moveFocus(newState);
   };
 
-  function lockUnlockFocus(e) {
+  var lockUnlockFocus = function lockUnlockFocus(e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -666,79 +557,90 @@
       Evt.emit('focusUnlocked', FocusStore.get().focusDetails.selector);
     } else {
       FocusStore.lockFocus();
-      Evt.emit('focusLocked', FocusStore.get().focusDetails.selector);
+      Evt.emit('focusLocked', {
+        currentSelector: FocusStore.get().focusDetails.selector,
+        currentTarget: currentTarget
+      });
     }
-  }
+  };
 
+  var reduceFocus = function reduceFocus() {
+    FocusStore.reduceFocusOpacity();
+  };
+
+  var increaseFocus = function increaseFocus() {
+    FocusStore.increaseFocusOpacity();
+  };
+
+  var updateFocus = function updateFocus() {
+    var client = currentTarget.getBoundingClientRect();
+    var newState = {
+      focusLines: getFocusLinesNewState(client)
+    };
+    FocusStore.moveFocus(newState);
+  };
   var bodyContent = document.querySelectorAll('body > *:not(script):not(style):not(#color-wings)');
   bodyContent.forEach(function (el) {
     el.addEventListener('mouseover', moveFocus);
     el.addEventListener('click', lockUnlockFocus, true);
-  }); // document.body.addEventListener( 'mouseover', moveFocus )
-  // document.addEventListener( 'click', lockUnlockFocus, true )
+  });
+  document.body.addEventListener('mouseleave', reduceFocus);
+  document.body.addEventListener('mouseenter', increaseFocus);
 
-  var initialState$1 = {
-    currentSelector: '',
-    openSection: false
+  var $ = jQuery;
+  function debounce(callback, wait) {
+    var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var timeout = null;
+    return function () {
+      var _arguments = arguments,
+          _this = this;
+
+      var callNow = immediate && !timeout;
+
+      var next = function next() {
+        return callback.apply(_this, _arguments);
+      };
+
+      clearTimeout(timeout);
+      timeout = setTimeout(next, wait);
+
+      if (callNow) {
+        next();
+      }
+    };
+  }
+
+  var styleTag;
+
+  var addCWStylesTag = function addCWStylesTag() {
+    styleTag = document.createElement('style');
+    styleTag.id = 'cw-applied-styles';
+    document.head.appendChild(styleTag);
   };
 
-  var EditorClass = /*#__PURE__*/function (_Store) {
-    _inherits(EditorClass, _Store);
+  addCWStylesTag();
 
-    var _super = _createSuper(EditorClass);
+  var addStyles = function addStyles() {
+    var _cw$StylesStore$get = cw.StylesStore.get(),
+        output = _cw$StylesStore$get.output;
 
-    function EditorClass() {
-      _classCallCheck(this, EditorClass);
+    styleTag.innerHTML = output;
+  };
 
-      return _super.apply(this, arguments);
-    }
-
-    _createClass(EditorClass, [{
-      key: "test",
-      value: function test(newState) {
-        _get(_getPrototypeOf(EditorClass.prototype), "set", this).call(this, function () {
-          return newState;
-        });
-      }
-    }, {
-      key: "toggleSection",
-      value: function toggleSection(section) {
-        this.set(function (state) {
-          return state.openSection === section ? {
-            openSection: false
-          } : {
-            openSection: section
-          };
-        });
-      }
-    }]);
-
-    return EditorClass;
-  }(Store);
-
-  var EditorStore = new EditorClass(initialState$1);
-
-  Evt.on('focusLocked', function (currentSelector) {
-    EditorStore.set(function () {
-      return {
-        currentSelector: currentSelector
-      };
-    });
-  });
-  Evt.on('focusUnlocked', function () {
-    EditorStore.set(function () {
-      return {
-        currentSelector: ''
-      };
-    });
-  });
+  var debouncedUpdateFocus = debounce(updateFocus, 500, true);
+  cw.StylesStore.subscribe(addStyles);
+  cw.StylesStore.subscribe(debouncedUpdateFocus);
 
   function Focuser() {
     var _useStore = useStore(FocusStore),
-        focusLines = _useStore.focusLines;
+        focusLines = _useStore.focusLines,
+        focusOpacity = _useStore.focusOpacity;
 
     return /*#__PURE__*/React.createElement("div", {
-      id: "cw-focuser"
+      id: "cw-focuser",
+      style: {
+        opacity: focusOpacity
+      }
     }, /*#__PURE__*/React.createElement("div", {
       className: "cw-focus-line",
       id: "cw-focuser-top",
@@ -760,780 +662,27 @@
 
   function FocusDetails() {
     var _useStore = useStore(FocusStore),
-        focusDetails = _useStore.focusDetails;
+        focusDetails = _useStore.focusDetails,
+        detailsOpacity = _useStore.detailsOpacity;
+
+    var styles = _objectSpread2({}, focusDetails.style, {
+      opacity: detailsOpacity
+    });
 
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-focus-details",
       className: "cw-focus-details",
-      style: focusDetails.style
+      style: styles
     }, /*#__PURE__*/React.createElement("div", {
       id: "cw-focus-selector",
       className: "cw-selector"
     }, focusDetails.selector));
   }
 
-  var LengthTab = /*#__PURE__*/function (_React$Component) {
-    _inherits(LengthTab, _React$Component);
-
-    var _super = _createSuper(LengthTab);
-
-    function LengthTab(props) {
-      var _this;
-
-      _classCallCheck(this, LengthTab);
-
-      _this = _super.call(this, props);
-
-      _defineProperty(_assertThisInitialized(_this), "showShortHand", ['radius', 'padding', 'margin'].includes(_this.props.subType));
-
-      _defineProperty(_assertThisInitialized(_this), "units", {
-        'px': {
-          step: 1,
-          min: 0,
-          max: 2000
-        },
-        'pc': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'cm': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'mm': {
-          step: 1,
-          min: 0,
-          max: 2000
-        },
-        'rem': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'em': {
-          step: 0.01,
-          min: 0,
-          max: 100
-        },
-        'ex': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'ch': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'vh': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'vw': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        },
-        'in': {
-          step: 0.01,
-          min: 0,
-          max: 100
-        },
-        '%': {
-          step: 0.1,
-          min: 0,
-          max: 200
-        }
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "resetValue", _this.props.val);
-
-      _defineProperty(_assertThisInitialized(_this), "getLength", function () {
-        var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-        var size = '';
-
-        if (false !== value) {
-          size = value;
-        } else {
-          size = _this.props.val;
-          var splits = size.split(' ');
-
-          if (splits.length === 4) {
-            size = _this.props.tab === 0 ? '0px' : splits[_this.props.tab - 1];
-          }
-        }
-
-        var matches = size.match(/^([+-]?(?:\d+|\d*\.\d+))([a-z]*|%)$/);
-        return [null === matches ? '' : matches[1], null === matches ? 'px' : matches[2]];
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "reset", function () {
-        var _this$getLength = _this.getLength(),
-            _this$getLength2 = _slicedToArray(_this$getLength, 2),
-            main = _this$getLength2[0],
-            unit = _this$getLength2[1];
-
-        _this.setState({
-          main: main,
-          unit: unit
-        }, _this.handleChange);
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleChange", function () {
-        _this.props.handleChange(_this.props.tab, _this.state.main + _this.state.unit);
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleLengthChange", function (e) {
-        e.persist();
-
-        _this.setState({
-          main: e.target.value
-        }, _this.handleChange);
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleUnitChange", function (e) {
-        e.persist();
-        var unit = e.target.value;
-
-        _this.setState({
-          unit: unit,
-          step: _this.units[unit].step,
-          min: _this.units[unit].min,
-          max: _this.units[unit].max
-        }, _this.handleChange);
-      });
-
-      var _this$getLength3 = _this.getLength(),
-          _this$getLength4 = _slicedToArray(_this$getLength3, 2),
-          _main = _this$getLength4[0],
-          _unit = _this$getLength4[1];
-
-      _this.state = {
-        main: _main,
-        unit: _unit,
-        step: _this.units[_unit].step,
-        min: _this.units[_unit].min,
-        max: _this.units[_unit].max
-      };
-      return _this;
-    }
-
-    _createClass(LengthTab, [{
-      key: "render",
-      value: function render() {
-        var main = this.state.main;
-        return /*#__PURE__*/React.createElement("div", {
-          className: "tab-content " + (this.showShortHand ? 'shorthand' : '') + (this.props.hidden ? ' hidden' : '')
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "cw-row"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "col-7 range-wrap"
-        }, /*#__PURE__*/React.createElement("input", {
-          type: "range",
-          step: this.state.step,
-          min: this.state.min,
-          max: this.state.max,
-          value: main,
-          onChange: this.handleLengthChange
-        })), /*#__PURE__*/React.createElement("div", {
-          className: "col-3"
-        }, /*#__PURE__*/React.createElement("input", {
-          type: "number",
-          step: this.state.step,
-          min: this.state.min,
-          max: this.state.max,
-          value: main,
-          onChange: this.handleLengthChange
-        })), /*#__PURE__*/React.createElement("select", {
-          className: "col-2 length-unit",
-          onChange: this.handleUnitChange,
-          value: this.state.unit
-        }, Object.keys(this.units).map(function (unit) {
-          return /*#__PURE__*/React.createElement("option", {
-            key: unit,
-            value: unit
-          }, unit);
-        })), /*#__PURE__*/React.createElement("span", {
-          className: "reset",
-          onClick: this.reset
-        }, /*#__PURE__*/React.createElement("svg", {
-          width: "15px",
-          height: "14.7px",
-          viewBox: "0 0 50 49",
-          version: "1.1",
-          xmlns: "http://www.w3.org/2000/svg"
-        }, /*#__PURE__*/React.createElement("path", {
-          d: "M0,20 L14,0 C14,6 14,9 14,9 C40,-3 65,30 38,49 C58,27 36,7 18,17 C18,17 20,19 24,23 L0,20 Z",
-          fill: "#7CB342"
-        })))));
-      }
-    }]);
-
-    return LengthTab;
-  }(React.Component);
-
-  function LengthIcon(props) {
-    var subType = props.subType,
-        tab = props.tab;
-    var mainShape, extraShape;
-
-    if (subType === 'radius') {
-      mainShape = /*#__PURE__*/React.createElement("rect", {
-        stroke: "#999",
-        fill: "none",
-        x: "1",
-        y: "1",
-        width: "14",
-        height: "14",
-        rx: "3"
-      });
-      extraShape = /*#__PURE__*/React.createElement("rect", {
-        stroke: "#7CB342",
-        strokeWidth: "2",
-        fill: "none",
-        x: "1",
-        y: "1",
-        width: "14",
-        height: "14",
-        rx: "4"
-      });
-
-      if (tab === 1) {
-        extraShape = /*#__PURE__*/React.createElement("path", {
-          d: "M8,0 L8,2 L5,2 C3.34,2 2,3.34 2,5 L2,8 L0,8 L0,5 C0,2.24 2.24,0 5,0 L8,0 Z",
-          fill: "#7CB342"
-        });
-      } else if (tab === 2) {
-        extraShape = /*#__PURE__*/React.createElement("path", {
-          d: "M8,0 L11,0 C13.76,0 16,2.24 16,5 L16,8 L14,8 L14,5 C14,3.34 12.66,2 11,2 L8,2 L8,0 Z",
-          fill: "#7CB342"
-        });
-      } else if (tab === 3) {
-        extraShape = /*#__PURE__*/React.createElement("path", {
-          d: "M16,8 L16,11 C16,13.76 13.76,16 11,16 L8,16 L8,14 L11,14 C12.66,14 14,12.66 14,11 L14,8 L16,8 Z",
-          fill: "#7CB342"
-        });
-      } else if (tab === 4) {
-        extraShape = /*#__PURE__*/React.createElement("path", {
-          d: "M8,16 L5,16 C2.24,16 0,13.76 0,11 L0,8 L2,8 L2,11 C2,12.66 3.34,14 5,14 L8,14 L8,16 Z",
-          fill: "#7CB342"
-        });
-      }
-    } else if (subType === 'padding') {
-      mainShape = /*#__PURE__*/React.createElement("rect", {
-        stroke: "#000",
-        strokeWidth: ".6",
-        fill: "none",
-        x: "1",
-        y: "1",
-        width: "14",
-        height: "14",
-        rx: "1"
-      });
-      extraShape = /*#__PURE__*/React.createElement("rect", {
-        stroke: "#7CB342",
-        strokeWidth: "4",
-        fill: "none",
-        x: "3",
-        y: "3",
-        width: "10",
-        height: "10",
-        rx: "0",
-        opacity: ".6"
-      });
-
-      if (tab === 1) {
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#7CB342",
-          x: "1",
-          y: "1",
-          width: "14",
-          height: "5",
-          opacity: ".6"
-        });
-      } else if (tab === 2) {
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#7CB342",
-          x: "10",
-          y: "1",
-          width: "5",
-          height: "14",
-          opacity: ".6"
-        });
-      } else if (tab === 3) {
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#7CB342",
-          x: "1",
-          y: "10",
-          width: "14",
-          height: "5",
-          opacity: ".6"
-        });
-      } else if (tab === 4) {
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#7CB342",
-          x: "1",
-          y: "1",
-          width: "5",
-          height: "14",
-          opacity: ".6"
-        });
-      }
-    } else if (subType === 'margin') {
-      mainShape = /*#__PURE__*/React.createElement("rect", {
-        stroke: "#000",
-        strokeWidth: ".6",
-        fill: "none",
-        x: "2.5",
-        y: "2.5",
-        width: "11",
-        height: "11",
-        rx: "1"
-      });
-      extraShape = /*#__PURE__*/React.createElement("rect", {
-        stroke: "#F9CDA0",
-        strokeWidth: "2.5",
-        fill: "none",
-        x: "1",
-        y: "1",
-        width: "14",
-        height: "14",
-        rx: "1"
-      });
-
-      if (tab === 1) {
-        mainShape = /*#__PURE__*/React.createElement("rect", {
-          stroke: "#000",
-          strokeWidth: ".6",
-          fill: "none",
-          x: "1",
-          y: "5.5",
-          width: "14",
-          height: "9.5",
-          rx: "1"
-        });
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#F9CDA0",
-          x: "1",
-          y: "0",
-          width: "14",
-          height: "5"
-        });
-      } else if (tab === 2) {
-        mainShape = /*#__PURE__*/React.createElement("rect", {
-          stroke: "#000",
-          strokeWidth: ".6",
-          fill: "none",
-          x: "1",
-          y: "1",
-          width: "9.5",
-          height: "14",
-          rx: "1"
-        });
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#F9CDA0",
-          x: "11",
-          y: "1",
-          width: "5",
-          height: "14"
-        });
-      } else if (tab === 3) {
-        mainShape = /*#__PURE__*/React.createElement("rect", {
-          stroke: "#000",
-          strokeWidth: ".6",
-          fill: "none",
-          x: "1",
-          y: "1",
-          width: "14",
-          height: "9.5",
-          rx: "1"
-        });
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#F9CDA0",
-          x: "1",
-          y: "11",
-          width: "14",
-          height: "5"
-        });
-      } else if (tab === 4) {
-        mainShape = /*#__PURE__*/React.createElement("rect", {
-          stroke: "#000",
-          strokeWidth: ".6",
-          fill: "none",
-          x: "5.5",
-          y: "1",
-          width: "9.5",
-          height: "14",
-          rx: "1"
-        });
-        extraShape = /*#__PURE__*/React.createElement("rect", {
-          fill: "#F9CDA0",
-          x: "0",
-          y: "1",
-          width: "5",
-          height: "14"
-        });
-      }
-    }
-
-    return /*#__PURE__*/React.createElement("svg", {
-      width: "16px",
-      height: "16px",
-      viewBox: "0 0 16 16",
-      style: {
-        pointerEvents: 'bounding-box'
-      }
-    }, mainShape, extraShape);
-  }
-
-  var Length = /*#__PURE__*/function (_React$Component) {
-    _inherits(Length, _React$Component);
-
-    var _super = _createSuper(Length);
-
-    function Length(props) {
-      var _this;
-
-      _classCallCheck(this, Length);
-
-      _this = _super.call(this, props);
-
-      _defineProperty(_assertThisInitialized(_this), "showShortHand", ['radius', 'padding', 'margin'].includes(_this.props.subType));
-
-      _defineProperty(_assertThisInitialized(_this), "onTab", function (e, i) {
-        e.currentTarget.parentNode.childNodes.forEach(function (tab) {
-          return tab.classList.remove('active');
-        });
-        e.currentTarget.classList.add('active');
-
-        _this.setState({
-          tab: i
-        });
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleChange", function (tab, val) {
-        var values = _this.state.values;
-        values[tab] = val;
-        var currentVal = val;
-
-        if (tab !== 0 && tab !== undefined) {
-          currentVal = "".concat(values[1], " ").concat(values[2], " ").concat(values[3], " ").concat(values[4]);
-        }
-
-        _this.setState({
-          currentVal: currentVal
-        });
-
-        _this.setState({
-          values: values
-        });
-
-        _this.props.onChange(currentVal);
-      });
-
-      var size = _this.props.val;
-      var splits = size.split(' ');
-      var _values = [size, size, size, size, size];
-
-      if (splits.length === 4) {
-        _values = ['0px', splits[0], splits[1], splits[2], splits[3]];
-      }
-
-      _this.state = {
-        tab: 0,
-        values: _values,
-        currentVal: _this.props.val
-      };
-      return _this;
-    }
-
-    _createClass(Length, [{
-      key: "render",
-      value: function render() {
-        var _this2 = this;
-
-        this.onTab = this.onTab.bind(this);
-        var tabs = this.showShortHand && /*#__PURE__*/React.createElement("div", {
-          className: "tabs"
-        }, [0, 1, 2, 3, 4].map(function (i) {
-          return /*#__PURE__*/React.createElement("div", {
-            key: i,
-            className: "tab tab-".concat(i, " ").concat(i === 0 ? 'active' : ''),
-            onClick: function onClick(e) {
-              return _this2.onTab(e, i);
-            }
-          }, /*#__PURE__*/React.createElement(LengthIcon, {
-            tab: i,
-            subType: _this2.props.subType
-          }));
-        }));
-        var tabContent;
-
-        if (this.showShortHand) {
-          tabContent = [0, 1, 2, 3, 4].map(function (i) {
-            return /*#__PURE__*/React.createElement(LengthTab, _extends({}, _this2.props, {
-              key: i,
-              tab: i,
-              hidden: i !== _this2.state.tab,
-              handleChange: _this2.handleChange
-            }));
-          });
-        } else {
-          tabContent = /*#__PURE__*/React.createElement(LengthTab, _extends({}, this.props, {
-            handleChange: this.handleChange
-          }));
-        }
-
-        var output = this.showShortHand && /*#__PURE__*/React.createElement("div", {
-          className: "output"
-        }, "Output: ", this.state.currentVal);
-        return /*#__PURE__*/React.createElement("div", {
-          className: "cw-length"
-        }, this.props.label && /*#__PURE__*/React.createElement("span", {
-          className: "customize-control-title"
-        }, this.props.label), this.props.description && /*#__PURE__*/React.createElement("span", {
-          className: "description customize-control-description"
-        }, this.props.description), tabs, tabContent, output);
-      }
-    }]);
-
-    return Length;
-  }(React.Component);
-
-  function useEnsuredForwardedRef(forwardedRef) {
-    var ensuredRef = React$1.useRef(forwardedRef && forwardedRef.current);
-    React$1.useEffect(function () {
-      if (!forwardedRef) {
-        return;
-      }
-
-      forwardedRef.current = ensuredRef.current;
-    }, [forwardedRef]);
-    return ensuredRef;
-  }
-
-  var Context = React.createContext(null);
-  function handleError(_ref) {
-    var error = _ref.error,
-        styleSheets = _ref.styleSheets,
-        root = _ref.root;
-
-    switch (error.name) {
-      case 'NotSupportedError':
-        styleSheets.length > 0 && (root.adoptedStyleSheets = styleSheets);
-        break;
-
-      default:
-        throw error;
-    }
-  }
-
-  function ShadowContent(_ref) {
-    var root = _ref.root,
-        children = _ref.children;
-    return reactDom.createPortal(children, root);
-  }
-
-  ShadowContent.defaultProps = {
-    children: null
-  };
-  function create(options) {
-    var ShadowRoot = React$1.forwardRef(function (_ref2, ref) {
-      var mode = _ref2.mode,
-          delegatesFocus = _ref2.delegatesFocus,
-          styleSheets = _ref2.styleSheets,
-          ssr = _ref2.ssr,
-          children = _ref2.children,
-          props = _objectWithoutProperties(_ref2, ["mode", "delegatesFocus", "styleSheets", "ssr", "children"]);
-
-      var node = useEnsuredForwardedRef(ref);
-
-      var _useState = React$1.useState(null),
-          _useState2 = _slicedToArray(_useState, 2),
-          root = _useState2[0],
-          setRoot = _useState2[1];
-
-      var key = "node_".concat(mode).concat(delegatesFocus);
-      React$1.useEffect(function () {
-        if (node.current) {
-          try {
-            typeof ref === 'function' && ref(node.current);
-
-            if (ssr) {
-              var _root2 = node.current.shadowRoot;
-              setRoot(_root2);
-              return;
-            }
-
-            var _root = node.current.attachShadow({
-              mode: mode,
-              delegatesFocus: delegatesFocus
-            });
-
-            styleSheets.length > 0 && (_root.adoptedStyleSheets = styleSheets);
-            setRoot(_root);
-          } catch (error) {
-            handleError({
-              error: error,
-              styleSheets: styleSheets,
-              root: root
-            });
-          }
-        }
-      }, [ref, node, styleSheets]);
-      return /*#__PURE__*/React$1__default.createElement(React$1__default.Fragment, null, /*#__PURE__*/React$1__default.createElement(options.tag, _extends({
-        key: key,
-        ref: node
-      }, props), (root || ssr) && /*#__PURE__*/React$1__default.createElement(Context.Provider, {
-        value: root
-      }, ssr ? /*#__PURE__*/React$1__default.createElement("template", {
-        shadowroot: "open"
-      }, options.render({
-        root: root,
-        ssr: ssr,
-        children: children
-      })) : /*#__PURE__*/React$1__default.createElement(ShadowContent, {
-        root: root
-      }, options.render({
-        root: root,
-        ssr: ssr,
-        children: children
-      })))));
-    });
-    ShadowRoot.defaultProps = {
-      mode: 'open',
-      delegatesFocus: false,
-      styleSheets: [],
-      ssr: false,
-      children: null
-    };
-    return ShadowRoot;
-  }
-
-  var tags = new Map();
-
-  var separateWords = function separateWords(string, options) {
-    options = options || {};
-    var separator = options.separator || '_';
-    var split = options.split || /(?=[A-Z])/;
-    return string.split(split).join(separator);
-  };
-
-  var decamelize = function decamelize(string, options) {
-    return separateWords(string, options).toLowerCase();
-  };
-
-  function createProxy() {
-    var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'core';
-    var render = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (_ref) {
-      var children = _ref.children;
-      return children;
-    };
-    return new Proxy(target, {
-      get: function get(_, name) {
-        var tag = decamelize(name, {
-          separator: '-'
-        });
-        var key = "".concat(id, "-").concat(tag);
-        if (!tags.has(key)) tags.set(key, create({
-          tag: tag,
-          render: render
-        }));
-        return tags.get(key);
-      }
-    });
-  }
-  var root = createProxy();
-
-  var styles = "input {\n  display: inline-block;\n  box-sizing: border-box;\n  width: 100%; }\n\n.hidden {\n  display: none; }\n\n.cw-row {\n  display: flex; }\n  .cw-row .col-2 {\n    width: 16.667%; }\n  .cw-row .col-3 {\n    width: 25%; }\n  .cw-row .col-7 {\n    width: 58.333%; }\n\n#cw-editor-wrap ul, #cw-editor-wrap li {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\n#cw-editor-wrap .cw-panel {\n  position: fixed;\n  top: 18%;\n  left: 1%;\n  display: block;\n  width: 16%;\n  height: 80%;\n  background: #eee;\n  font-size: 13px;\n  color: #444;\n  border: 1px solid #ddd;\n  box-shadow: 0 0 2px 0 rgba(124, 179, 66, 0.2); }\n\n#cw-editor-wrap .cw-panel-title {\n  border-bottom: 1px solid #ddd;\n  font-size: 14px;\n  padding: 12px 16px;\n  color: #444;\n  line-height: 16px;\n  margin: 0; }\n\n#cw-editor-wrap .cw-panel-main {\n  height: calc(100% - 41px);\n  overflow-y: auto; }\n\n#cw-editor-wrap h3.cw-section-title {\n  border-bottom: 1px solid #ddd;\n  background: #fff;\n  font-size: 14px;\n  padding: 12px 16px;\n  font-weight: 600;\n  color: #444;\n  line-height: 16px;\n  margin: 0; }\n\n.cw-section-content {\n  border-bottom: 1px solid #ddd;\n  max-height: 0;\n  transform: scaleY(0);\n  overflow: auto;\n  transition: max-height .7s linear, transform .7s linear; }\n\n.open .cw-section-content {\n  transform: scaleY(1);\n  max-height: 600px; }\n\n.cw-control .cw-length .tabs {\n  display: flex;\n  margin: 0 0 -1px -1px;\n  position: relative;\n  z-index: 2; }\n\n.cw-control .cw-length .tab {\n  padding: 8px 10px;\n  border: 1px solid transparent;\n  border-top: none;\n  cursor: pointer; }\n  .cw-control .cw-length .tab.active {\n    border: 1px solid #ccc;\n    border-bottom-color: #eee;\n    border-top: none;\n    background: #eee; }\n\n.cw-control .cw-length .tab-content {\n  position: relative; }\n  .cw-control .cw-length .tab-content.shorthand {\n    border-top: 1px solid #ccc;\n    padding: 30px 5px 15px; }\n\n.cw-control .cw-length .output {\n  padding: 5px;\n  border-top: 1px solid #ccc;\n  font-size: 11px;\n  margin-top: -1px; }\n\n.cw-control .cw-length .reset {\n  position: absolute;\n  right: 6px;\n  bottom: 47px;\n  padding: 4px;\n  cursor: pointer; }\n  .cw-control .cw-length .reset:hover {\n    background: #fff; }\n\n.cw-control .cw-length svg {\n  display: block; }\n";
-
-  function Editor() {
-    var _useStore = useStore(EditorStore),
-        currentSelector = _useStore.currentSelector,
-        openSection = _useStore.openSection;
-
-    var onChange = function onChange(data) {
-      return console.log(data);
-    };
-
-    var sections = [{
-      id: 'padding',
-      title: 'Padding',
-      controls: [{
-        id: 'padding',
-        Component: Length,
-        params: {
-          subType: 'padding',
-          val: '2px',
-          onChange: onChange
-        }
-      }]
-    }, {
-      id: 'margin',
-      title: 'Margin',
-      controls: [{
-        id: 'margin',
-        Component: Length,
-        params: {
-          subType: 'margin',
-          val: '2px',
-          onChange: onChange
-        }
-      }]
-    }];
-    return /*#__PURE__*/React.createElement(root.div, {
-      id: "cw-editor"
-    }, /*#__PURE__*/React.createElement("div", {
-      id: "cw-editor-wrap"
-    }, /*#__PURE__*/React.createElement("div", {
-      id: "cw-editor-panel",
-      className: "cw-panel"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "cw-panel-title"
-    }, currentSelector ? currentSelector : 'No Element Selected'), /*#__PURE__*/React.createElement("div", {
-      className: "cw-panel-main"
-    }, currentSelector !== '' && /*#__PURE__*/React.createElement("ul", {
-      className: "cw-panel-sections"
-    }, sections.map(function (section) {
-      return /*#__PURE__*/React.createElement("li", {
-        key: section.id,
-        className: "cw-panel-section ".concat(openSection === section.id ? 'open' : '')
-      }, /*#__PURE__*/React.createElement("h3", {
-        className: "cw-section-title",
-        onClick: function onClick() {
-          return EditorStore.toggleSection(section.id);
-        }
-      }, section.title), /*#__PURE__*/React.createElement("div", {
-        className: "cw-section-content"
-      }, section.controls.map(function (control) {
-        return /*#__PURE__*/React.createElement("div", {
-          key: control.id,
-          className: "cw-control"
-        }, /*#__PURE__*/React.createElement(control.Component, control.params));
-      })));
-    }), /*#__PURE__*/React.createElement("li", {
-      key: "text",
-      className: "cw-padding-section"
-    }, /*#__PURE__*/React.createElement("h3", {
-      className: "cw-section-title"
-    }, "Text")), /*#__PURE__*/React.createElement("li", {
-      key: "bg",
-      className: "cw-padding-section"
-    }, /*#__PURE__*/React.createElement("h3", {
-      className: "cw-section-title"
-    }, "Background")))))), /*#__PURE__*/React.createElement("style", {
-      type: "text/css"
-    }, styles));
-  }
-
   function Canvas() {
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-canvas"
-    }, /*#__PURE__*/React.createElement(FocusDetails, null), /*#__PURE__*/React.createElement(Focuser, null), /*#__PURE__*/React.createElement(Editor, null));
+    }, /*#__PURE__*/React.createElement(FocusDetails, null), /*#__PURE__*/React.createElement(Focuser, null));
   }
 
   /**
@@ -1548,21 +697,25 @@
     wp.customize.bind('preview-ready', function () {
       // Send Example
       // wp.customize.preview.send( 'test-event', 'Reply' )
-      wp.customize.preview.bind('init-wings', function (data) {
-        if (data === true) {
-          var canvas = document.createElement('div');
-          canvas.id = 'color-wings';
-          document.body.appendChild(canvas);
-          ReactDOM.render( /*#__PURE__*/React.createElement(Canvas, null), canvas);
-        }
+      var canvas = document.createElement('div');
+      canvas.id = 'color-wings';
+      document.body.appendChild(canvas);
+      cw.Evt.on('mount-colorwings', function () {
+        ReactDOM.render( /*#__PURE__*/React.createElement(Canvas, null), canvas);
+      });
+      cw.Evt.on('unmount-colorwings', function () {
+        ReactDOM.unmountComponentAtNode(canvas);
       });
     });
-  } else {
-    var canvas = document.createElement('div');
-    canvas.id = 'color-wings';
-    document.body.appendChild(canvas);
-    ReactDOM.render( /*#__PURE__*/React.createElement(Canvas, null), canvas);
-  }
+  } // else {
+  // 	const canvas = document.createElement( 'div' )
+  // 	canvas.id = 'color-wings';
+  // 	document.body.appendChild( canvas )
+  // 	ReactDOM.render(
+  // 		<Canvas />,
+  // 		canvas
+  // 	)
+  // }
 
   /**
   * Greenlet Customizer Preview.
@@ -1752,5 +905,5 @@
    */
   legacy();
 
-}(React, ReactDOM));
+}());
 //# sourceMappingURL=greenlet-preview.js.map
