@@ -28,7 +28,11 @@ class LengthTab extends React.Component {
 		}
 	}
 
-	resetValue = this.props.val
+	resetValue = []
+
+	componentDidMount() {
+		this.resetValue = this.getLength()
+	}
 
 	getLength = ( value = false ) => {
 		let size = ''
@@ -36,9 +40,8 @@ class LengthTab extends React.Component {
 			size = value
 		} else {
 			size = this.props.val
-			const splits = size.split(' ')
-			if ( splits.length === 4 ) {
-				size = ( this.props.tab === 0 ) ? '0px' : splits[ this.props.tab - 1 ]
+			if ( 'values' in this.props ) {
+				size = this.props.values[ this.props.tab ]
 			}
 		}
 		const matches = size.match( /^([+-]?(?:\d+|\d*\.\d+))([a-z]*|%)$/ )
@@ -46,7 +49,7 @@ class LengthTab extends React.Component {
 	}
 
 	reset = () => {
-		const [ main, unit ] = this.getLength()
+		const [ main, unit ] = this.resetValue
 		this.setState( { main, unit }, this.handleChange )
 	}
 

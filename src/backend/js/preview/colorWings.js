@@ -3,8 +3,8 @@
  */
 
 import './global/Setup'
-
 import './global/StylesHandler'
+
 import Canvas from './components/Canvas'
 
 function isCustomizer() {
@@ -29,12 +29,3 @@ if ( isCustomizer() ) {
 		})
 	})
 }
-// else {
-// 	const canvas = document.createElement( 'div' )
-// 	canvas.id = 'color-wings';
-// 	document.body.appendChild( canvas )
-// 	ReactDOM.render(
-// 		<Canvas />,
-// 		canvas
-// 	)
-// }

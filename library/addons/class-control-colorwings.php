@@ -26,6 +26,18 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		public $type = 'color-wings';
 
 		/**
+		 * Enqueue scripts/styles.
+		 *
+		 * @since  1.3.0
+		 * @access public
+		 * @return void
+		 */
+		public function enqueue() {
+			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			wp_enqueue_script( 'codemirror-format', LIBRARY_URL . '/addons/js/formatting' . $min . '.js', array( 'wp-codemirror' ), GREENLET_VERSION, true );
+		}
+
+		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
 		 * @since  1.3.0

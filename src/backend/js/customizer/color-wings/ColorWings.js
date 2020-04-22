@@ -3,21 +3,10 @@
  */
 
 import './global/Setup'
-
 import './global/StylesHandler'
-import './components/editor/EditorHandler'
+import './components/Editor/EditorHandler'
 
-import Editor from './components/editor/Editor'
-import styles from './ColorWings.scss'
-
-function Canvas () {
-	return (
-		<div id="cw-canvas" >
-			<Editor />
-			<style type="text/css">{ styles }</style>
-		</div>
-	)
-}
+import Canvas from './components/Canvas/Canvas'
 
 wp.customize.controlConstructor['color-wings'] = wp.customize.Control.extend(
 	{

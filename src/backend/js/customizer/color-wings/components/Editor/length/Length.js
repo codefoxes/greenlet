@@ -12,7 +12,12 @@ class Length extends React.Component {
 		let values = [ size, size, size, size, size ]
 		if ( splits.length === 4 ) {
 			values = [ '0px', splits[ 0 ], splits[ 1 ], splits[ 2 ], splits[ 3 ] ]
+		} else if ( splits.length === 3 ) {
+			values = [ '0px', splits[ 0 ], splits[ 1 ], splits[ 2 ], splits[ 1 ] ]
+		} else if ( splits.length === 2 ) {
+			values = [ '0px', splits[ 0 ], splits[ 1 ], splits[ 0 ], splits[ 1 ] ]
 		}
+		this.values = values
 
 		this.state = {
 			tab: 0,
@@ -63,7 +68,7 @@ class Length extends React.Component {
 		let tabContent
 		if ( this.showShortHand ) {
 			tabContent = [0, 1, 2, 3, 4].map( ( i ) =>
-				<LengthTab { ...this.props } key={ i } tab={ i } hidden={ i !== this.state.tab } handleChange={ this.handleChange } />
+				<LengthTab { ...this.props } values={ this.values } key={ i } tab={ i } hidden={ i !== this.state.tab } handleChange={ this.handleChange } />
 			)
 		} else {
 			tabContent = <LengthTab { ...this.props } handleChange={ this.handleChange } />

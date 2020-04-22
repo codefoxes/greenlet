@@ -4,6 +4,43 @@
 	margin-top: -15px;
 }
 
-#cw-canvas {
-	background: red;
+.cw-row {
+	display: flex;
+
+	.col-6 {
+		width: 50%;
+	}
+}
+
+.cw-panel-heading {
+	padding: 10px;
+	align-items: center;
+}
+
+.cw-panel-title {
+	padding: 0 10px 10px;
+}
+
+.tabs {
+	margin: 0 -1px;
+	position: relative;
+	z-index: 2;
+
+	.tab {
+		padding: 8px;
+		background: #ddd;
+		border: 1px solid transparent;
+		border-bottom-color: #ccc;
+		border-top: none;
+		cursor: pointer;
+		text-align: center;
+
+		&.active {
+			border: 1px solid #ccc;
+			border-bottom-color: #fff;
+			/* border-top: none; */
+			background: #fff;
+			cursor: auto;
+		}
+	}
 }
