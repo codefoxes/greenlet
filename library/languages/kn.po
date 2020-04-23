@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-11 12:23+0000\n"
-"PO-Revision-Date: 2020-04-11 12:23+0000\n"
+"POT-Creation-Date: 2020-04-23 16:49+0000\n"
+"PO-Revision-Date: 2020-04-23 16:50+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.3.2"
+"X-Loco-Version: 2.3.1; wp-5.4"
 
 #: 404.php:15
 msgid "Error 404 - Nothing Found"
@@ -206,12 +206,6 @@ msgstr "%1$s ವಿಜೆಟ್ ಪ್ರದೇಶ %2$s"
 #, php-format
 msgid "Appears on the %1$s as column %2$s."
 msgstr "%1$ ನಲ್ಲಿ %2$s ಕಾಲಮ್‌ನಂತೆ ಗೋಚರಿಸುತ್ತದೆ"
-
-#. %s: Page number.
-#: library/common/setup.php:184
-#, php-format
-msgid "Page %s"
-msgstr "ಪುಟ %s"
 
 #: templates/menu/main.php:11
 msgid "Toggle Menu"
@@ -863,40 +857,6 @@ msgstr "ಪೂರ್ವನಿಗದಿಗಳು"
 #: library/backend/customizer/options.php:1781
 msgid "Theme Presets"
 msgstr "ಥೀಮ್ ಪೂರ್ವನಿಗದಿಗಳು"
-
-#: library/backend/metaboxes/class-metaboxes.php:86
-msgid "Page Attributes"
-msgstr "ಪುಟ ಗುಣಲಕ್ಷಣಗಳು"
-
-#: library/backend/metaboxes/class-metaboxes.php:123
-msgid "(no parent)"
-msgstr "(ಪೋಷಕ ಇಲ್ಲ)"
-
-#: library/backend/metaboxes/class-metaboxes.php:141
-#: library/backend/metaboxes/class-metaboxes.php:142
-msgid "Parent"
-msgstr "ಪೋಷಕ"
-
-#: library/backend/metaboxes/class-metaboxes.php:151
-msgid "Template"
-msgstr "ವಿನ್ಯಾಸ"
-
-#: library/backend/metaboxes/class-metaboxes.php:152
-msgid "Page Template"
-msgstr "ಪುಟ ವಿನ್ಯಾಸ"
-
-#: library/backend/metaboxes/class-metaboxes.php:154
-msgid "Default Template"
-msgstr "ಇದ್ದಾಯ್ಕೆ ವಿನ್ಯಾಸ"
-
-#: library/backend/metaboxes/class-metaboxes.php:168
-#: library/backend/metaboxes/class-metaboxes.php:169
-msgid "Order"
-msgstr "ಆದೇಶ"
-
-#: library/backend/metaboxes/class-metaboxes.php:170
-msgid "Need help? Use the Help tab in the upper right of your screen."
-msgstr "ಸಹಾಯ ಬೇಕೇ? ನಿಮ್ಮ ಪರದೆಯ ಮೇಲಿನ ಬಲಭಾಗದಲ್ಲಿರುವ ಸಹಾಯ ಟ್ಯಾಬ್ ಬಳಸಿ."
 
 #: library/support/woocommerce/class-woocommerce.php:219
 msgid "View shopping cart"

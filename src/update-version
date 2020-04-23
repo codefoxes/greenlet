@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+if len( sys.argv ) < 3:
+	print( 'Supply old version and new version\nnpm run upgrade -- old new')
+	exit()
+
+files = [
+	{
+		'path': 'readme.txt',
+		'tokens': [ 'Stable tag: @VERSION@' ]
+	},
+	{
+		'path': 'style.css',
+		'tokens': [ 'Version: @VERSION@' ]
+	},
+	{
+		'path': 'package.json',
+		'tokens': [ '"version": "@VERSION@"' ]
+	},
+	{
+		'path': 'tests/e2e/package.json',
+		'tokens': [ '"version": "@VERSION@"' ]
+	},
+	{
+		'path': 'library/init.php',
+		'tokens': [ 'define( \'GREENLET_VERSION\', \'@VERSION@\' );' ]
+	}
+]
+
+for file in files:
+	file_path = os.path.abspath(os.path.dirname(__file__)) + '/../' + file[ 'path' ]
+
+	with open( file_path, 'r+' ) as f:
+		content = f.read()
+
+		for token in file[ 'tokens' ]:
+			old_version = token.replace( '@VERSION@', sys.argv[ 1 ] )
+			new_version = token.replace( '@VERSION@', sys.argv[ 2 ] )
+
+			content = content.replace( old_version, new_version )
+
+		f.seek( 0 )
+		f.write( content )
+		f.truncate()
