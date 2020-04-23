@@ -53,6 +53,12 @@ buildbackend() {
 	python3 $DIR/build-controls
 }
 
+removePOBackups() {
+	echo "Removing po backups"
+	rm -rf library/languages/*.po~
+	rm -rf library/languages/*.pot~
+}
+
 if [ -z "$1" ]; then
 	buildjs
 	buildcss
@@ -71,6 +77,7 @@ elif [ "$1" == "--final" ]; then
 	buildcss
 	buildbackend
 	buildfonts
+	removePOBackups
 	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
 	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build*' --exclude '*src/.env' --exclude 'library/pro*' --exclude 'pro*' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
 	current=$(pwd)
