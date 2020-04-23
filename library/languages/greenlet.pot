@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-11 12:23+0000\n"
+"POT-Creation-Date: 2020-04-23 16:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -206,12 +206,6 @@ msgstr ""
 #: library/common/setup.php:121
 #, php-format
 msgid "Appears on the %1$s as column %2$s."
-msgstr ""
-
-#. %s: Page number.
-#: library/common/setup.php:184
-#, php-format
-msgid "Page %s"
 msgstr ""
 
 #: templates/menu/main.php:11
@@ -859,40 +853,6 @@ msgstr ""
 
 #: library/backend/customizer/options.php:1781
 msgid "Theme Presets"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:86
-msgid "Page Attributes"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:123
-msgid "(no parent)"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:141
-#: library/backend/metaboxes/class-metaboxes.php:142
-msgid "Parent"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:151
-msgid "Template"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:152
-msgid "Page Template"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:154
-msgid "Default Template"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:168
-#: library/backend/metaboxes/class-metaboxes.php:169
-msgid "Order"
-msgstr ""
-
-#: library/backend/metaboxes/class-metaboxes.php:170
-msgid "Need help? Use the Help tab in the upper right of your screen."
 msgstr ""
 
 #: library/support/woocommerce/class-woocommerce.php:219
