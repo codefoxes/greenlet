@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-11 12:23+0000\n"
-"PO-Revision-Date: 2020-04-11 12:23+0000\n"
+"POT-Creation-Date: 2020-04-23 16:49+0000\n"
+"PO-Revision-Date: 2020-04-23 16:50+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.3.2"
+"X-Loco-Version: 2.3.1; wp-5.4"
 
 #: 404.php:15
 msgid "Error 404 - Nothing Found"
@@ -208,12 +208,6 @@ msgstr "%1$s Zone de widget %2$s"
 #, php-format
 msgid "Appears on the %1$s as column %2$s."
 msgstr "Apparaît sur le %1$s dans la colonne %2$s."
-
-#. %s: Page number.
-#: library/common/setup.php:184
-#, php-format
-msgid "Page %s"
-msgstr "Page %s"
 
 #: templates/menu/main.php:11
 msgid "Toggle Menu"
@@ -870,40 +864,6 @@ msgstr "Préconfigurations"
 #: library/backend/customizer/options.php:1781
 msgid "Theme Presets"
 msgstr "Préréglages de thème"
-
-#: library/backend/metaboxes/class-metaboxes.php:86
-msgid "Page Attributes"
-msgstr "Attributs de page"
-
-#: library/backend/metaboxes/class-metaboxes.php:123
-msgid "(no parent)"
-msgstr "(pas de parent)"
-
-#: library/backend/metaboxes/class-metaboxes.php:141
-#: library/backend/metaboxes/class-metaboxes.php:142
-msgid "Parent"
-msgstr "Parent"
-
-#: library/backend/metaboxes/class-metaboxes.php:151
-msgid "Template"
-msgstr "Modèle"
-
-#: library/backend/metaboxes/class-metaboxes.php:152
-msgid "Page Template"
-msgstr "Modèle de page"
-
-#: library/backend/metaboxes/class-metaboxes.php:154
-msgid "Default Template"
-msgstr "Modèle par défaut"
-
-#: library/backend/metaboxes/class-metaboxes.php:168
-#: library/backend/metaboxes/class-metaboxes.php:169
-msgid "Order"
-msgstr "Commande"
-
-#: library/backend/metaboxes/class-metaboxes.php:170
-msgid "Need help? Use the Help tab in the upper right of your screen."
-msgstr "Besoin d'aide? Utilisez l'onglet Aide en haut à droite de votre écran."
 
 #: library/support/woocommerce/class-woocommerce.php:219
 msgid "View shopping cart"

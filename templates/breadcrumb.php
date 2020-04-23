@@ -10,13 +10,13 @@ $separator = gl_get_option( 'breadcrumb_sep', '&raquo;' );
 
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb' ), null ) );
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
-echo '<a href="' . esc_html( home_url() ) . '" itemprop="item"><span itemprop="name">' . esc_html__( 'Home', 'greenlet' ) . '</span></a><meta itemprop="position" content="1" /></div>' . esc_html( $separator );
+echo '<a href="' . esc_url( home_url() ) . '" itemprop="item"><span itemprop="name">' . esc_html__( 'Home', 'greenlet' ) . '</span></a><meta itemprop="position" content="1" /></div>' . esc_html( $separator );
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 
 if ( is_single() ) {
 	$category = get_the_category();
 	if ( $category ) {
-		echo '<a href="' . esc_html( get_category_link( $category[0]->term_id ) );
+		echo '<a href="' . esc_url( get_category_link( $category[0]->term_id ) );
 		echo '" itemprop="item"><span itemprop="name">' . esc_html( $category[0]->cat_name ) . '</span></a><meta itemprop="position" content="2" /></div>' . esc_html( $separator );
 		printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 	}
@@ -30,18 +30,18 @@ if ( is_single() ) {
 	for ( $i = $ancestors_count - 1; $i >= 0; $i-- ) {
 		if ( ( $home->ID ) !== ( $post->ancestors[ $i ] ) ) {
 			echo '<a href="';
-			echo esc_html( get_permalink( $post->ancestors[ $i ] ) );
+			echo esc_url( get_permalink( $post->ancestors[ $i ] ) );
 			echo '" itemprop="item"><span itemprop="name">';
 			echo esc_html( get_the_title( $post->ancestors[ $i ] ) );
 			echo '</span></a>';
-			printf( '<meta itemprop="position" content="%s" /></div>', esc_html( ( $i * -1 ) + $ancestors_count + 1 ) );
+			printf( '<meta itemprop="position" content="%s" /></div>', esc_attr( ( $i * -1 ) + $ancestors_count + 1 ) );
 			echo esc_html( $separator );
 			printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 		}
 	}
 
 	printf( '<span itemprop="name">%s</span>', esc_html( get_the_title() ) );
-	printf( '<meta itemprop="position" content="%s" /></div>', esc_html( $ancestors_count + 2 ) );
+	printf( '<meta itemprop="position" content="%s" /></div>', esc_attr( $ancestors_count + 2 ) );
 
 } elseif ( is_category() || is_tag() ) {
 	printf( '<span itemprop="name">%s</span>', single_cat_title( '', false ) );

@@ -57,7 +57,7 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'CHILD_SCRIPTS_URL', CHILD_ASSETS_URL . '/js' );
 
 		// Define other constants.
-		define( 'GREENLET_VERSION', '1.2.3' );
+		define( 'GREENLET_VERSION', '1.2.4' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
@@ -95,7 +95,6 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 			require_once LIBRARY_DIR . '/backend/helpers.php';
 			require_once LIBRARY_DIR . '/backend/options/class-options-admin.php';
 			require_once LIBRARY_DIR . '/backend/customizer/class-customizer.php';
-			require_once LIBRARY_DIR . '/backend/metaboxes/class-metaboxes.php';
 			require_once LIBRARY_DIR . '/backend/editor/class-editor.php';
 		}
 

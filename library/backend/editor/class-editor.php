@@ -62,26 +62,27 @@ class Editor {
 		$heading_col  = gl_get_option( 'heading_color', '#383838' );
 
 		greenlet_add_style( 'html', 'font-size', '62.5%' );
-		greenlet_add_style( '.edit-post-layout__content', 'background', $main_bg );
-		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper', array( array( 'padding-top', '0' ), array( 'color', $site_color ), array( 'font-family', '-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji' ) ) );
-		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper', 'font', $base_font );
-		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper', 'font', $content_font );
-		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper > div', 'padding-top', '50px' );
+		greenlet_add_style( '.edit-post-layout__content, .block-editor-editor-skeleton__content', 'background', $main_bg );
+		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper, .block-editor-editor-skeleton__content .editor-styles-wrapper', array( array( 'padding-top', '0' ), array( 'color', $site_color ), array( 'font-family', '-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji' ) ) );
+		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper, .block-editor-editor-skeleton__content .editor-styles-wrapper', 'font', $base_font );
+		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper, .block-editor-editor-skeleton__content .editor-styles-wrapper', 'font', $content_font );
+		greenlet_add_style( '.edit-post-layout__content .editor-styles-wrapper > div, .block-editor-editor-skeleton__content .editor-styles-wrapper > div', 'padding-top', '50px' );
 		greenlet_add_style( '.wp-block', 'max-width', 'calc(' . $width . ' - 6em)' );
 		greenlet_add_style( '.editor-post-title__block .editor-post-title__input', array( array( 'font-family', 'inherit' ), array( 'font-weight', '300' ), array( 'color', $heading_col . ' !important' ) ) );
 		greenlet_add_style( '.editor-post-title__block .editor-post-title__input', 'font', $heading_font );
 		greenlet_add_style( '.editor-post-title__block .editor-post-title__input', 'font', $h1_font );
 		greenlet_add_style( '.wp-block-heading h2, .wp-block-heading h3, .wp-block-heading h4, .wp-block-heading h5, .wp-block-heading h6', array( array( 'font-weight', '300' ), array( 'color', $heading_col . ' !important' ) ) );
-		greenlet_add_style( '.wp-block-heading h2', 'font', $h2_font );
-		greenlet_add_style( '.wp-block-heading h3', 'font', $h3_font );
-		greenlet_add_style( '.wp-block-heading h4', 'font', $h4_font );
-		greenlet_add_style( '.wp-block-heading h5', 'font', $h5_font );
-		greenlet_add_style( '.wp-block-heading h6', 'font', $h6_font );
-		greenlet_add_style( '.editor-rich-text a', 'font', $link_font );
+		greenlet_add_style( '[data-type="core/heading"] h2, [data-type="core/heading"] h3, [data-type="core/heading"] h4, [data-type="core/heading"] h5, [data-type="core/heading"] h6', array( array( 'font-weight', '300' ), array( 'color', $heading_col . ' !important' ) ) );
+		greenlet_add_style( '.wp-block-heading h2, [data-type="core/heading"] h2', 'font', $h2_font );
+		greenlet_add_style( '.wp-block-heading h3, [data-type="core/heading"] h3', 'font', $h3_font );
+		greenlet_add_style( '.wp-block-heading h4, [data-type="core/heading"] h4', 'font', $h4_font );
+		greenlet_add_style( '.wp-block-heading h5, [data-type="core/heading"] h5', 'font', $h5_font );
+		greenlet_add_style( '.wp-block-heading h6, [data-type="core/heading"] h6', 'font', $h6_font );
+		greenlet_add_style( '.editor-rich-text a, .wp-block .rich-text a', 'font', $link_font );
 
 		ob_start();
 		?>
-		.edit-post-layout__content .editor-styles-wrapper:before {
+		.edit-post-layout__content .editor-styles-wrapper:before, .block-editor-editor-skeleton__content .editor-styles-wrapper:before {
 			content: '';
 			display: block;
 			width: <?php echo esc_html( $width ); ?>;
