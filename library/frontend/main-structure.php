@@ -506,7 +506,7 @@ function greenlet_do_entry_content() {
 
 		if ( $is_more ) {
 			the_content( $more );
-		} elseif ( 0 !== greenlet_excerpt_length() ) {
+		} elseif ( 0 !== greenlet_excerpt_length( 55 ) ) {
 			the_excerpt();
 		}
 	}
@@ -586,12 +586,17 @@ function greenlet_do_entry_footer() {
  * Defines read more button.
  *
  * @since  1.0.0
- * @return string more button
+ * @param  string $more More button html.
+ * @return string       Filtered More button html
  */
-function greenlet_excerpt_more() {
+function greenlet_excerpt_more( $more ) {
+	if ( is_admin() ) {
+		return $more;
+	}
+
 	global $post;
-	$more = apply_filters( 'greenlet_more_text', __( '<span class="more-text">Read More</span>', 'greenlet' ) );
-	return '<a class="more-link" href="' . get_permalink( $post->ID ) . '">' . $more . '</a>';
+	$more = apply_filters( 'greenlet_more_text', '<span class="more-text">' . __( 'Read More', 'greenlet' ) . '</span>' );
+	return '<a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>';
 }
 
 
@@ -599,9 +604,14 @@ function greenlet_excerpt_more() {
  * Defines excerpt words length.
  *
  * @since  1.0.0
+ * @param  int $length Excerpt Length.
  * @return int length
  */
-function greenlet_excerpt_length() {
+function greenlet_excerpt_length( $length ) {
+	if ( is_admin() ) {
+		return $length;
+	}
+
 	$length = gl_get_option( 'excerpt_length', 55 );
 	$length = apply_filters( 'greenlet_excerpt_length', $length );
 	return $length;
@@ -693,6 +703,18 @@ function greenlet_paging_nav( $query = null ) {
 }
 
 /**
+ * Add post classes.
+ *
+ * @since 1.2.5
+ * @param array $classes Classes Array.
+ * @return array         Classes Array with added class.
+ */
+function greenlet_add_post_classes( $classes ) {
+	$classes[] = 'post';
+	return $classes;
+}
+
+/**
  * Ajax Pagination functions.
  *
  * @since  1.0.0
@@ -716,13 +738,7 @@ function greenlet_get_paginated() {
 	);
 	$options = apply_filters( 'greenlet_pagination_options', $options );
 
-	add_filter(
-		'post_class',
-		function ( $classes ) {
-			$classes[] = 'post';
-			return $classes;
-		}
-	);
+	add_filter( 'post_class', 'greenlet_add_post_classes' );
 	add_filter( 'greenlet_pagination_args', 'greenlet_pagination_args' );
 
 	$args = wp_unslash( json_decode( sanitize_textarea_field( wp_unslash( $_POST['query_vars'] ) ), true ) );
@@ -939,7 +955,7 @@ function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
  * @return string Search form HTML.
  */
 function greenlet_search_form() {
-	$html = '<form role="search" method="get" class="search-form" action="' . home_url( '/' ) . '">
+	$html = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 		<label for="search-input">
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
 			<input type="search" class="search-field" id="search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">

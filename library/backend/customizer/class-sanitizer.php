@@ -15,19 +15,6 @@ namespace Greenlet;
 class Sanitizer {
 
 	/**
-	 * Sanitizes css string.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  string $css CSS String.
-	 *
-	 * @return string Sanitized CSS.
-	 */
-	public static function sanitize_css( $css ) {
-		return $css;
-	}
-
-	/**
 	 * Sanitizes multiple checkbox control.
 	 *
 	 * @since  1.0.0

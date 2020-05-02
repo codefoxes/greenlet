@@ -166,7 +166,6 @@
 		],
 		"schema": "1",
 		"defer_css": "1",
-		"critical_css": "",
 		"disable_emojis": false
 	},
 	"Midnight Dark": {

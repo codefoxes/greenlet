@@ -35,28 +35,26 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 		wp_enqueue_script( 'greenlet-scripts', GL_SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
-		wp_localize_script(
-			'greenlet-scripts',
-			'pagination_ajax',
-			array(
-				'ajaxurl'     => admin_url( 'admin-ajax.php' ),
-				'current_url' => preg_replace( '~paged?/[0-9]+/?~', '', home_url( $wp->request ) ),
-				'page'        => get_query_var( 'paged', 1 ),
-				'permalinks'  => $wp_rewrite->using_permalinks(),
-				'query_vars'  => wp_json_encode( $wp_query->query_vars ),
-			)
+		$l10n = array(
+			'ajaxurl'     => esc_url( admin_url( 'admin-ajax.php' ) ),
+			'current_url' => preg_replace( '~paged?/[0-9]+/?~', '', esc_url( home_url( $wp->request ) ) ),
+			'page'        => get_query_var( 'paged', 1 ),
+			'permalinks'  => $wp_rewrite->using_permalinks(),
+			'query_vars'  => wp_json_encode( $wp_query->query_vars ),
 		);
+		$l10n = apply_filters( 'greenlet_l10n_object', $l10n );
+		wp_localize_script( 'greenlet-scripts', 'greenlet_object', $l10n );
 
 		$css_framework = gl_get_option( 'css_framework', 'default' );
 		$load_js       = gl_get_option( 'load_js', false );
 
 		switch ( $css_framework ) {
 			case 'default':
-				$default_href =  GL_STYLES_URL . '/default' . $min . '.css';
+				$default_href = GL_STYLES_URL . '/default' . $min . '.css';
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$default_css =  GL_STYLES_URL . '/bootstrap' . $min . '.css';
+				$default_css = GL_STYLES_URL . '/bootstrap' . $min . '.css';
 				$default_js  = GL_SCRIPTS_URL . '/bootstrap' . $min . '.js';
 				$css_path    = gl_get_option( 'css_path', $default_css );
 				$js_path     = gl_get_option( 'js_path', $default_js );
@@ -65,7 +63,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				$js_path  = ( '' === $js_path ) ? $default_js : $js_path;
 				break;
 			default:
-				$css_path =  GL_STYLES_URL . '/default' . $min . '.css';
+				$css_path = GL_STYLES_URL . '/default' . $min . '.css';
 				$js_path  = '';
 				break;
 		}
@@ -77,7 +75,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			}
 		}
 
-		$styles_href =  GL_STYLES_URL . '/styles' . $min . '.css';
+		$styles_href = GL_STYLES_URL . '/styles' . $min . '.css';
 		greenlet_enqueue_style( 'greenlet-styles', $styles_href );
 	}
 }
@@ -154,9 +152,6 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		$footer_font      = gl_get_option( 'footer_font', array() );
 		$logo_font        = gl_get_option( 'logo_font', array() );
 
-		$critical_css = gl_get_option( 'critical_css', '' );
-		$defer_css    = gl_get_option( 'defer_css', false );
-
 		$raw_width  = 0;
 		$raw_height = 0;
 		$logo       = greenlet_get_logo();
@@ -225,9 +220,5 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 		}
 
 		greenlet_enqueue_inline_style( 'greenlet-inline', ob_get_clean() );
-
-		if ( false !== $defer_css && '' !== $critical_css ) {
-			greenlet_enqueue_inline_style( 'greenlet-critical', $critical_css );
-		}
 	}
 }

@@ -4,14 +4,14 @@
  * @package greenlet\library\js
  */
 
-var greenlet_loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><circle class="loader-ring" cx="25" cy="25" r="22" /><circle class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
+var greenletLoader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><circle class="loader-ring" cx="25" cy="25" r="22" /><circle class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
 
 /**
  * Page loader Listener.
  *
  * @param {Event} e Click event.
  */
-function greenlet_loader_listener(e) {
+function greenletLoaderListener(e) {
 	e.preventDefault();
 	var thisElement = e.target;
 	var add         = false;
@@ -27,40 +27,40 @@ function greenlet_loader_listener(e) {
 	} else {
 		next_page = thisElement.textContent;
 	}
-	greenlet_page_loader( this, next_page, add )
+	greenletPageLoader( this, next_page, add )
 }
 
 /**
  * Initialize Pagination Listeners.
  */
-function pagination_init() {
+function greenletPaginationInit() {
 	var loadElements = document.querySelectorAll( '.pagination.load a' );
 	var ajaxElements = document.querySelectorAll( '.pagination.ajax a' );
 	if ( loadElements.length > 0 ) {
-		loadElements[0].addEventListener( 'click', greenlet_loader_listener );
+		loadElements[0].addEventListener( 'click', greenletLoaderListener );
 	}
 	var ajaxElementsLength = ajaxElements.length;
 	for (var i = 0; i < ajaxElementsLength; i++) {
-		ajaxElements[i].addEventListener( 'click', greenlet_loader_listener );
+		ajaxElements[i].addEventListener( 'click', greenletLoaderListener );
 	}
 }
 
-pagination_init();
+greenletPaginationInit();
 
 window.onscroll = function (e) {
 	var infinite = document.getElementsByClassName( 'pagination infinite' );
 	if (infinite.length > 0) {
 
-		var offset  = infinite[0].getBoundingClientRect();
+		var offset  = infinite[ infinite.length - 1 ].getBoundingClientRect();
 		var loadpos = offset.top + 100; // 500
 		var wheight = window.innerHeight;
 		var sheight	= window.scrollY;
 		if ( ( wheight + sheight ) > loadpos ) {
-			var link = infinite[0].querySelector( 'a' );
+			var link = infinite[ infinite.length - 1 ].querySelector( 'a' );
 			if ( link !== null ) {
 				var next_page      = link.getAttribute( 'data-next' );
 				link.style.display = 'none';
-				greenlet_page_loader( link, next_page, true );
+				greenletPageLoader( link, next_page, true );
 			}
 		}
 	}
@@ -74,24 +74,24 @@ window.onscroll = function (e) {
  * @param {bool}   add      Append or Replace.
  * @param {string} act      WordPress action.
  */
-function greenlet_page_loader( obj, cur_page, add, act ) {
+function greenletPageLoader( obj, cur_page, add, act ) {
 	var nonce = document.getElementById( 'greenlet_generic_nonce' ).value;
 
-	obj.parentNode.parentNode.innerHTML = '<span id="page-loader">' + greenlet_loader + '</span>';
+	obj.parentNode.parentNode.innerHTML = '<span id="page-loader">' + greenletLoader + '</span>';
 
 	add  = typeof add !== 'undefined' ? add : false;
 	act  = typeof act !== 'undefined' ? act : 'greenlet_get_paginated';
 	args = {
-		location: pagination_ajax.current_url,
-		page: pagination_ajax.page,
-		query_vars: pagination_ajax.query_vars,
+		location: greenlet_object.current_url,
+		page: greenlet_object.page,
+		query_vars: greenlet_object.query_vars,
 		current: cur_page,
 		append: add,
 		action: act,
 		nonce: nonce
 	};
 
-	if ( pagination_ajax.permalinks ) {
+	if ( greenlet_object.permalinks ) {
 		if ( ! parseInt( cur_page ) ) {
 			cur_page = location.href.replace( /.+\/page\/([0-9]+).+/, "$1" )
 		}
@@ -104,9 +104,9 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 	}
 
 	var xhr = new XMLHttpRequest();
-	xhr.open( 'POST', pagination_ajax.ajaxurl, true );
+	xhr.open( 'POST', greenlet_object.ajaxurl, true );
 	xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
-	xhr.send( jsonToFormData( args ) );
+	xhr.send( greenletJsonToFormData( args ) );
 
 	xhr.onload = function () {
 		var res = JSON.parse( xhr.responseText );
@@ -121,7 +121,7 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
 			if ( pageLoader !== null ) {
 				pageLoader.parentElement.removeChild( pageLoader );
 			}
-			pagination_init();
+			greenletPaginationInit();
 		}
 	}
 }
@@ -132,7 +132,7 @@ function greenlet_page_loader( obj, cur_page, add, act ) {
  * @param {object} srcjson Source JSON object.
  * @returns {string}       Form Data.
  */
-function jsonToFormData( srcjson ) {
+function greenletJsonToFormData( srcjson ) {
 	if ( (typeof srcjson !== 'object') && (typeof console !== 'undefined') ) {
 		console.log( '"srcjson" is not a JSON object' );
 		return null;
@@ -153,7 +153,7 @@ function jsonToFormData( srcjson ) {
 	return urljson;
 }
 
-function fixMenu() {
+function greenletFixMenu() {
 	document.body.addEventListener( 'keyup', function ( e ) {
 		if ( e.key === 'Tab' || e.keyCode === '9' ) {
 			var parent = document.activeElement.parentNode
@@ -178,4 +178,4 @@ function fixMenu() {
 	window.addEventListener('resize', fixToggle );
 }
 
-fixMenu()
+greenletFixMenu()
