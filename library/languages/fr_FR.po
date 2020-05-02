@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 16:49+0000\n"
-"PO-Revision-Date: 2020-04-23 16:50+0000\n"
+"POT-Creation-Date: 2020-05-02 20:27+0000\n"
+"PO-Revision-Date: 2020-05-02 20:28+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.4"
+"X-Loco-Version: 2.3.1; wp-5.4.1"
 
 #: 404.php:15
 msgid "Error 404 - Nothing Found"
@@ -122,7 +122,6 @@ msgid "Edit"
 msgstr "Éditer"
 
 #: library/frontend/main-structure.php:497
-#: library/frontend/main-structure.php:593
 msgid "<span class=\"more-text\">Read More</span>"
 msgstr "<span class=\"more-text\">Lire la suite</span>"
 
@@ -130,38 +129,46 @@ msgstr "<span class=\"more-text\">Lire la suite</span>"
 msgid "Author:"
 msgstr "Auteur:"
 
-#: library/frontend/main-structure.php:682
+#: library/frontend/main-structure.php:598
+msgid "Read More"
+msgstr "Lire la suite"
+
+#: library/frontend/main-structure.php:692
 msgid "&laquo; Newer Posts"
 msgstr "&laquo; Messages plus récents"
 
-#: library/frontend/main-structure.php:683
+#: library/frontend/main-structure.php:693
 msgid "Older Posts &raquo;"
 msgstr "Articles plus anciens &raquo;"
 
-#: library/frontend/main-structure.php:714
+#: library/frontend/main-structure.php:736
 msgid "There are no posts meeting your criteria"
 msgstr "Aucun post ne correspond à vos critères"
 
-#: library/frontend/main-structure.php:901
+#: library/frontend/main-structure.php:917
 msgid "Load More"
 msgstr "Charger plus"
 
-#: library/frontend/main-structure.php:944
+#: library/frontend/main-structure.php:960
 msgid "Search for:"
 msgstr "Rechercher:"
 
-#: library/frontend/main-structure.php:945
+#: library/frontend/main-structure.php:961
 msgid "Search &hellip;"
 msgstr "Chercher &hellip;"
 
-#: library/frontend/main-structure.php:945
-#: library/frontend/main-structure.php:947
+#: library/frontend/main-structure.php:961
+#: library/frontend/main-structure.php:963
 msgid "Search"
 msgstr "Chercher"
 
-#: library/frontend/header-structure.php:51
+#: library/frontend/header-structure.php:57
 msgid "Skip to content"
 msgstr "Aller au contenu"
+
+#: library/frontend/footer-structure.php:51
+msgid "Y"
+msgstr "Y"
 
 #: library/frontend/footer-structure.php:54
 msgid "Powered By"
@@ -835,33 +842,21 @@ msgstr "Différer CSS"
 msgid "Load theme CSS files after page load."
 msgstr "Chargez les fichiers CSS de thème après le chargement de la page."
 
-#: library/backend/customizer/options.php:1738
-msgid "Critical CSS"
-msgstr "Critique CSS"
-
-#: library/backend/customizer/options.php:1739
-msgid "If CSS files are defered enter the critical css here."
-msgstr "Si les fichiers CSS sont différés, entrez le css critique ici."
-
-#: library/backend/customizer/options.php:1743
-msgid "Leave Blank to not add Critical CSS."
-msgstr "Laissez vide pour ne pas ajouter de CSS critique."
-
-#: library/backend/customizer/options.php:1757
+#: library/backend/customizer/options.php:1740
 msgid "Disable WP Block Editor Style"
 msgstr "Désactiver le style de l'éditeur de blocs WP"
 
-#: library/backend/customizer/options.php:1758
+#: library/backend/customizer/options.php:1741
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 "Les publications créées avec WP Block Editor peuvent se casser, désactivez-"
 "les avec prudence."
 
-#: library/backend/customizer/options.php:1766
+#: library/backend/customizer/options.php:1749
 msgid "Presets"
 msgstr "Préconfigurations"
 
-#: library/backend/customizer/options.php:1781
+#: library/backend/customizer/options.php:1764
 msgid "Theme Presets"
 msgstr "Préréglages de thème"
 
