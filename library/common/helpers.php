@@ -309,7 +309,7 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 
 		// Get file names in the template directory, exclude current and parent.
 		$files = array_filter(
-			scandir( TEMPLATES_DIR ),
+			scandir( GL_TEMPLATES_DIR ),
 			function( $item ) {
 				return '.' !== $item[0];
 			}

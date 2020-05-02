@@ -390,7 +390,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %s><span class="sticky-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-featured-post list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/pin-icon.svg' ), $svg_tags ),
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/pin-icon.svg' ), $svg_tags ),
 				esc_html__( 'Featured', 'greenlet' )
 			);
 		}
@@ -400,7 +400,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %1$s><span class="user-icon">%2$s</span><a href="%3$s" rel="author"> %4$s</a></li>',
 				wp_kses( greenlet_attr( 'meta-author list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/user-icon.svg' ), $svg_tags ),
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/user-icon.svg' ), $svg_tags ),
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				get_the_author()
 			);
@@ -411,7 +411,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %s><span class="date-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-date list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/date-icon.svg' ), $svg_tags ),
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/date-icon.svg' ), $svg_tags ),
 				get_the_date()
 			);
 		}
@@ -421,7 +421,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %s><span class="clock-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-modified list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/clock-icon.svg' ), $svg_tags ),
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/clock-icon.svg' ), $svg_tags ),
 				get_the_modified_date() // phpcs:ignore
 			);
 		}
@@ -432,7 +432,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %s><span class="folder-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-categories list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/folder-icon.svg' ), $svg_tags ),
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/folder-icon.svg' ), $svg_tags ),
 				wp_kses( $category_list, $term_list_tags )
 			);
 		}
@@ -443,7 +443,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %s><span class="tag-icon">%s</span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-tags list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/tag-icon.svg' ), $svg_tags ),
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/tag-icon.svg' ), $svg_tags ),
 				wp_kses( $tag_list, $term_list_tags )
 			);
 		}
@@ -453,7 +453,7 @@ function greenlet_post_meta( $show_meta ) {
 			printf(
 				'<li %s><span class="comment-icon">%s</span> ',
 				wp_kses( greenlet_attr( 'meta-reply list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( IMAGES_DIR . '/icons/comment-icon.svg' ), $svg_tags )
+				wp_kses( greenlet_get_file_contents( GL_IMAGES_DIR . '/icons/comment-icon.svg' ), $svg_tags )
 			);
 			comments_popup_link( __( 'Leave a comment', 'greenlet' ), __( 'One comment', 'greenlet' ), __( 'View all % comments', 'greenlet' ) );
 			echo '</li>';
