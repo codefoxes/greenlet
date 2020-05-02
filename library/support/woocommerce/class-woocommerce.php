@@ -76,7 +76,7 @@ class WooCommerce {
 	 */
 	public function enqueue_scripts() {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		greenlet_enqueue_style( 'greenlet-shop',  GL_STYLES_URL . '/shop' . $min . '.css' );
+		greenlet_enqueue_style( 'greenlet-shop', GL_STYLES_URL . '/shop' . $min . '.css' );
 	}
 
 	/**

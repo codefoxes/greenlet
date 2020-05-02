@@ -46,7 +46,7 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'GL_CHILD_URL', get_stylesheet_directory_uri() );
 
 		// Define other constants.
-		define( 'GREENLET_VERSION', '1.2.4' );
+		define( 'GREENLET_VERSION', '1.2.5' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
