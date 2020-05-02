@@ -20,6 +20,7 @@ if ( isCustomizer() ) {
 		canvas.id = 'color-wings';
 		document.body.appendChild( canvas )
 
+		// Todo: This might occur before preview-ready.
 		cw.Evt.on( 'mount-colorwings', () => {
 			ReactDOM.render( <Canvas />, canvas )
 		})

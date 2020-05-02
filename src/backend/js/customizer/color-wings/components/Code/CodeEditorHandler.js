@@ -3,6 +3,21 @@ import { waitUntil } from '../../../../common/Helpers'
 import { StylesStore } from '../../global/StylesStore'
 
 let cm = false
+let isRunningChange = false
+let isProgrammaticalChange = false
+let changeOrigin
+
+function onChange( i, changeObj ) {
+	changeOrigin = changeObj.origin
+
+	if ( isProgrammaticalChange === true || isRunningChange === true ) {
+		return
+	}
+
+	isRunningChange = true
+	StylesStore.addFromString( cm.getValue() )
+	setTimeout( () => { isRunningChange = false }, 100 )
+}
 
 function mountCodeMirror( args ) {
 	if ( cm !== false ) {
@@ -33,13 +48,23 @@ function mountCodeMirror( args ) {
 	const [ resolved ] = waitUntil( !!( typeof wp !== 'undefined' && wp.hasOwnProperty( 'CodeMirror' ) ) )
 	resolved( function() {
 		cm = wp.CodeMirror.fromTextArea( document.getElementById( args.textAreaId ), editorSettings )
+		cm.on( 'change', onChange )
 	} )
 }
 
 StylesStore.subscribe( () => {
 	// Todo: Debounce the Update
-	cm.getDoc().setValue( StylesStore.get().output )
-	cm.autoFormatRange( { line: 0, ch: 0 }, { line: cm.lineCount() } )
+
+	isProgrammaticalChange = true
+
+	if ( isRunningChange !== true ) {
+		cm.getDoc().setValue( StylesStore.get().output )
+	}
+	if ( changeOrigin === 'setValue' ) {
+		cm.autoFormatRange( { line: 0, ch: 0 }, { line: cm.lineCount() } )
+	}
+
+	setTimeout( () => { isProgrammaticalChange = false }, 100 )
 } )
 
 Evt.on( 'textarea-ready', mountCodeMirror )

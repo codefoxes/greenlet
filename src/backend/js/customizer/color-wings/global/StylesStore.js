@@ -1,4 +1,5 @@
 import { Store, useStore } from '../../../common/Store'
+import CssParser from '../../../common/lib/CssParser'
 
 const initialState = {
 	styles: {
@@ -8,6 +9,10 @@ const initialState = {
 }
 
 class StylesClass extends Store {
+	addInitialStyle( styles ) {
+		this.overrideInitialState( { ...initialState, output: styles } )
+	}
+
 	generateOutput( styles ) {
 		let styleString = ''
 		for ( const media in styles ) {
@@ -46,6 +51,36 @@ class StylesClass extends Store {
 		} )
 
 		// console.log( this.get() )
+	}
+
+	addFromString( cssString ) {
+		const getStylesFromRules = ( rules, media = 'all' ) => {
+			const styles = {}
+			styles[ media ] = {}
+			rules.forEach( ( rule ) => {
+				if ( rule.type === 'rule' ) {
+					const declarations = {}
+					rule.declarations.forEach( ( declaration ) => {
+						declarations[ declaration.property ] = declaration.value
+					} )
+					styles[ media ][ rule.selectors.join(', ') ] = declarations
+				} else if ( rule.type === 'media' ) {
+					styles[ rule.media ] = getStylesFromRules( rule.rules, rule.media )[ rule.media ]
+				}
+			} )
+			return styles
+		}
+
+		try {
+			const parsed = CssParser( cssString )
+			const styles = getStylesFromRules( parsed.stylesheet.rules )
+
+			this.set( () => ( { styles, output: cssString } ) )
+		}
+		catch( error ) {
+			console.log( error )
+			// If error show notice
+		}
 	}
 }
 

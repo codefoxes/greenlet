@@ -48,6 +48,11 @@ export class Store {
 	unsubscribe(fn) {
 		this._listeners = this._listeners.filter(f => f !== fn);
 	}
+	overrideInitialState( state ) {
+		// Hack method to override initialState
+		STORE[this.idx] = state
+		this.initialState = state
+	}
 }
 
 // React Specific.

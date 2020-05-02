@@ -15,10 +15,48 @@
 .cw-panel-heading {
 	padding: 10px;
 	align-items: center;
+	position: relative;
+
+	.popup-content {
+		width: 100%;
+		box-sizing: border-box;
+		position: absolute;
+		z-index: 5;
+		background: #fff;
+		right: 0;
+		border: 1px solid #ccc;
+	}
+
+	.popup-overlay {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.popup-arrow {
+		width: 14px;
+		height: 14px;
+		background: white;
+		position: absolute;
+		right: 100px;
+		top: -6px;
+		transform: rotate(135deg);
+		z-index: -1;
+		box-shadow: rgba(0, 0, 0, 0.3) -1px 1px 1px;
+	}
+
+	.page-selector li {
+		padding: 10px 20px;
+		margin: 0;
+		cursor: pointer;
+	}
 }
 
-.cw-panel-title {
-	padding: 0 10px 10px;
+.button.button-block {
+	width: 100%;
+	text-align: center;
 }
 
 .tabs {
@@ -43,4 +81,8 @@
 			cursor: auto;
 		}
 	}
+}
+
+#cw-code-editor {
+	width: 100%;
 }

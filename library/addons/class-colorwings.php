@@ -38,6 +38,23 @@ class ColorWings {
 		require_once dirname( __FILE__ ) . '/class-control-colorwings.php';
 
 		add_action( 'customize_register', array( $this, 'add_controls' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ), 20 );
+	}
+
+	/**
+	 * Enqueue Customizer Preview Scripts.
+	 *
+	 * @since  1.3.0
+	 */
+	public function enqueue_preview_scripts() {
+		$pages = array(
+			'is_front_page' => is_front_page(),
+			'is_home'       => is_home(),
+			'is_archive'    => is_archive(),
+			'is_page'       => is_page(),
+			'is_single'     => is_single(),
+		);
+		wp_localize_script( 'greenlet-preview', 'previewObject', $pages );
 	}
 
 	/**
@@ -61,9 +78,10 @@ class ColorWings {
 		$wp_customize->add_setting(
 			'color_wings',
 			array(
-				'type'       => 'theme_mod',
-				'capability' => 'edit_theme_options',
-				'transport'  => 'postMessage',
+				'type'              => 'option',
+				'capability'        => 'edit_theme_options',
+				'transport'         => 'postMessage',
+				'sanitize_callback' => array( $this, 'sanitize' ),
 			)
 		);
 
@@ -74,6 +92,19 @@ class ColorWings {
 				array( 'section' => 'extra_styles' )
 			)
 		);
+	}
+
+	/**
+	 * Sanitizes ColorWings Settings.
+	 *
+	 * @since  1.3.0
+	 * @access public
+	 * @param  array $settings ColorWings Settings.
+	 *
+	 * @return array Sanitized Settings.
+	 */
+	public static function sanitize( $settings ) {
+		return $settings;
 	}
 
 	/**
