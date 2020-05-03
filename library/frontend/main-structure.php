@@ -662,7 +662,6 @@ function greenlet_paging_nav( $query = null ) {
 	}
 
 	$current_page = max( 1, $paged );
-	// Not sure. Maybe get $paged from $_POST['current'].
 
 	if ( 'number' === $format || 'ajax' === $format ) {
 
@@ -699,7 +698,34 @@ function greenlet_paging_nav( $query = null ) {
 	$op .= '<input type="hidden" id="greenlet_generic_nonce" value="' . wp_create_nonce( 'greenlet_generic' ) . '" />';
 	$op .= "</ul>\n";
 
-	echo apply_filters( 'greenlet_paging_nav', $op, $pages, $pag_attr ); // phpcs:ignore
+	$pagination_tags = array(
+		'ul'    => array(
+			'class' => true,
+			'id'    => true,
+		),
+		'li'    => array(
+			'class' => true,
+			'id'    => true,
+		),
+		'a'     => array(
+			'class'     => true,
+			'id'        => true,
+			'href'      => true,
+			'data-next' => true,
+		),
+		'span'  => array(
+			'class' => true,
+			'id'    => true,
+		),
+		'input' => array(
+			'class' => true,
+			'id'    => true,
+			'type'  => true,
+			'value' => true,
+		),
+	);
+
+	echo wp_kses( apply_filters( 'greenlet_paging_nav', $op, $pages, $pag_attr ), $pagination_tags );
 }
 
 /**
