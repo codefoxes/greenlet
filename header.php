@@ -15,6 +15,7 @@ wp_head(); ?>
 
 $body_attribute = greenlet_attr( 'body ' . implode( ' ', get_body_class() ) );
 printf( '<body %s>', wp_kses( $body_attribute, null ) );
+wp_body_open();
 
 do_action( 'greenlet_before_topbar' );
 do_action( 'greenlet_topbar' );

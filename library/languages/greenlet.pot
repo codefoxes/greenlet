@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 16:49+0000\n"
+"POT-Creation-Date: 2020-05-02 20:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -122,7 +122,6 @@ msgid "Edit"
 msgstr ""
 
 #: library/frontend/main-structure.php:497
-#: library/frontend/main-structure.php:593
 msgid "<span class=\"more-text\">Read More</span>"
 msgstr ""
 
@@ -130,37 +129,45 @@ msgstr ""
 msgid "Author:"
 msgstr ""
 
-#: library/frontend/main-structure.php:682
+#: library/frontend/main-structure.php:598
+msgid "Read More"
+msgstr ""
+
+#: library/frontend/main-structure.php:692
 msgid "&laquo; Newer Posts"
 msgstr ""
 
-#: library/frontend/main-structure.php:683
+#: library/frontend/main-structure.php:693
 msgid "Older Posts &raquo;"
 msgstr ""
 
-#: library/frontend/main-structure.php:714
+#: library/frontend/main-structure.php:736
 msgid "There are no posts meeting your criteria"
 msgstr ""
 
-#: library/frontend/main-structure.php:901
+#: library/frontend/main-structure.php:917
 msgid "Load More"
 msgstr ""
 
-#: library/frontend/main-structure.php:944
+#: library/frontend/main-structure.php:960
 msgid "Search for:"
 msgstr ""
 
-#: library/frontend/main-structure.php:945
+#: library/frontend/main-structure.php:961
 msgid "Search &hellip;"
 msgstr ""
 
-#: library/frontend/main-structure.php:945
-#: library/frontend/main-structure.php:947
+#: library/frontend/main-structure.php:961
+#: library/frontend/main-structure.php:963
 msgid "Search"
 msgstr ""
 
-#: library/frontend/header-structure.php:51
+#: library/frontend/header-structure.php:57
 msgid "Skip to content"
+msgstr ""
+
+#: library/frontend/footer-structure.php:51
+msgid "Y"
 msgstr ""
 
 #: library/frontend/footer-structure.php:54
@@ -827,31 +834,19 @@ msgstr ""
 msgid "Load theme CSS files after page load."
 msgstr ""
 
-#: library/backend/customizer/options.php:1738
-msgid "Critical CSS"
-msgstr ""
-
-#: library/backend/customizer/options.php:1739
-msgid "If CSS files are defered enter the critical css here."
-msgstr ""
-
-#: library/backend/customizer/options.php:1743
-msgid "Leave Blank to not add Critical CSS."
-msgstr ""
-
-#: library/backend/customizer/options.php:1757
+#: library/backend/customizer/options.php:1740
 msgid "Disable WP Block Editor Style"
 msgstr ""
 
-#: library/backend/customizer/options.php:1758
+#: library/backend/customizer/options.php:1741
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 
-#: library/backend/customizer/options.php:1766
+#: library/backend/customizer/options.php:1749
 msgid "Presets"
 msgstr ""
 
-#: library/backend/customizer/options.php:1781
+#: library/backend/customizer/options.php:1764
 msgid "Theme Presets"
 msgstr ""
 

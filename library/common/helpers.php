@@ -9,6 +9,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Escape array theme mod.
+ *
+ * @since  1.2.5
+ * @param  mixed $item Theme mod item.
+ * @return array|string
+ */
+function greenlet_esc_array_mod( $item ) {
+	if ( 'array' === gettype( $item ) ) {
+		$escaped = array_map( 'greenlet_esc_array_mod', $item );
+	} else {
+		$escaped = esc_html( $item );
+	}
+	return $escaped;
+}
+
 if ( ! function_exists( 'gl_get_option' ) ) {
 	/**
 	 * Retrieve Greenlet theme option.
@@ -20,7 +36,16 @@ if ( ! function_exists( 'gl_get_option' ) ) {
 	 * @return mixed                     Option Value.
 	 */
 	function gl_get_option( $option_name, $default = false ) {
-		return get_theme_mod( $option_name, $default );
+		$mod  = get_theme_mod( $option_name, $default );
+		$type = gettype( $mod );
+		if ( 'boolean' === $type ) {
+			$mod = ( true === $mod || 'true' === $mod || 1 === $mod || '1' === $mod ) ? true : false;
+		} elseif ( in_array( $type, array( 'string', 'double', 'integer' ), true ) ) {
+			$mod = esc_html( $mod );
+		} elseif ( 'array' === $type ) {
+			$mod = array_map( 'greenlet_esc_array_mod', $mod );
+		}
+		return $mod;
 	}
 }
 
@@ -309,7 +334,7 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 
 		// Get file names in the template directory, exclude current and parent.
 		$files = array_filter(
-			scandir( TEMPLATES_DIR ),
+			scandir( GL_TEMPLATES_DIR ),
 			function( $item ) {
 				return '.' !== $item[0];
 			}
