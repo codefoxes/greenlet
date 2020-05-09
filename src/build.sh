@@ -78,7 +78,8 @@ elif [ "$1" == "--final" ]; then
 	buildfonts
 	removePOBackups
 	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
-	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build*' --exclude '*src/.env' --exclude 'library/pro*' --exclude 'pro*' --exclude 'todo.txt' ./* --delete ~/Desktop/greenlet
+	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build*' --exclude '*src/update-version' \
+	--exclude '*src/.env' --exclude 'library/pro*' --exclude 'pro*' --exclude 'todo.txt' --exclude '*.map' ./* --delete ~/Desktop/greenlet
 	current=$(pwd)
 	cd ~/Desktop
 	zip -r greenlet.zip greenlet

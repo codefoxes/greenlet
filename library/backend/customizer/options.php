@@ -1760,23 +1760,6 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'critical_css',
-		'sargs' => array(
-			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_css' ),
-		),
-		'cargs' => array(
-			'label'       => __( 'Critical CSS', 'greenlet' ),
-			'description' => __( 'If CSS files are defered enter the critical css here.', 'greenlet' ),
-			'type'        => 'textarea',
-			'section'     => 'performance',
-			'input_attrs' => array(
-				'placeholder' => __( 'Leave Blank to not add Critical CSS.', 'greenlet' ),
-			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
 		'id'    => 'disable_block_editor',
 		'sargs' => array(
 			'default' => false,

@@ -40,18 +40,18 @@ class Customizer {
 	 * @return void
 	 */
 	public function __construct() {
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-multicheck.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-sequence.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-length.php';
-		require_once LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-preset.php';
-		require_once LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
-		require_once LIBRARY_DIR . '/backend/customizer/options.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-multicheck.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-sequence.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-length.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-preset.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/options.php';
 
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );
@@ -75,7 +75,7 @@ class Customizer {
 	 * @since  1.1.0
 	 */
 	public function enqueue_preview_scripts() {
-		wp_enqueue_script( 'greenlet-preview', LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'jquery', 'customize-preview' ), GREENLET_VERSION, true );
+		wp_enqueue_script( 'greenlet-preview', GL_LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'jquery', 'customize-preview' ), GREENLET_VERSION, true );
 	}
 
 	/**

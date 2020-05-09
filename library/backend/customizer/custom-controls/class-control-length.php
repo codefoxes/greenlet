@@ -43,8 +43,8 @@ if ( ! class_exists( 'Control_Length' ) && class_exists( 'WP_Customize_Control' 
 		 */
 		public function enqueue() {
 			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-			wp_enqueue_script( 'greenlet-controls', LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'jquery', 'react-dom' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'greenlet-controls', LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
+			wp_enqueue_script( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'jquery', 'react-dom' ), GREENLET_VERSION, true );
+			wp_enqueue_style( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 		}
 
 		/**
