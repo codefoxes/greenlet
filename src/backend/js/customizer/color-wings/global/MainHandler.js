@@ -24,6 +24,10 @@ StylesStore.subscribe( sendUpdateControlEvent )
 MainStore.subscribe( updateOnPageChange )
 
 function addInitialStyles( control ) {
+	if ( ! control.setting._value ) {
+		return
+	}
+
 	let current
 	if ( 'global' in control.setting._value ) {
 		current = control.setting._value.global

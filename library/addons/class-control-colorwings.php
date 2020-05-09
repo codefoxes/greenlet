@@ -34,7 +34,7 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		 */
 		public function enqueue() {
 			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-			wp_enqueue_script( 'codemirror-format', LIBRARY_URL . '/addons/js/formatting' . $min . '.js', array( 'wp-codemirror' ), GREENLET_VERSION, true );
+			wp_enqueue_script( 'codemirror-format', GL_LIBRARY_URL . '/addons/js/formatting' . $min . '.js', array( 'wp-codemirror' ), GREENLET_VERSION, true );
 		}
 
 		/**
@@ -75,5 +75,12 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 			<div id="color-wings"></div>
 			<?php
 		}
+
+		/**
+		 * Render Content.
+		 *
+		 * @since 1.3.0
+		 */
+		protected function render_content() {}
 	}
 }

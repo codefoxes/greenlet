@@ -15,6 +15,18 @@ add_action( 'greenlet_topbar', 'greenlet_do_topbar' );
 add_action( 'greenlet_header', 'greenlet_do_header' );
 
 /**
+ * Add body classes.
+ *
+ * @since 1.2.5
+ * @param array $classes Classes Array.
+ * @return array         Classes Array with added class.
+ */
+function greenlet_add_body_classes( $classes ) {
+	$classes[] = 'fixed-topbar';
+	return $classes;
+}
+
+/**
  * Print the head.
  *
  * @since 1.0.0
@@ -30,13 +42,7 @@ function greenlet_do_head() {
 
 	$fixed_topbar = gl_get_option( 'fixed_topbar', false );
 	if ( false !== $fixed_topbar ) {
-		add_filter(
-			'body_class',
-			function ( $classes ) {
-				$classes[] = 'fixed-topbar';
-				return $classes;
-			}
-		);
+		add_filter( 'body_class', 'greenlet_add_body_classes' );
 	}
 }
 

@@ -102,10 +102,10 @@ class Options_Admin {
 		}
 
 		// Styles.
-		wp_enqueue_style( 'greenlet-options', LIBRARY_URL . '/backend/assets/css/options.css', array(), GREENLET_VERSION );
+		wp_enqueue_style( 'greenlet-options', GL_LIBRARY_URL . '/backend/assets/css/options.css', array(), GREENLET_VERSION );
 
 		// Scripts.
-		wp_enqueue_script( 'greenlet-options', LIBRARY_URL . '/backend/assets/js/options.js', array(), GREENLET_VERSION, true );
+		wp_enqueue_script( 'greenlet-options', GL_LIBRARY_URL . '/backend/assets/js/options.js', array(), GREENLET_VERSION, true );
 	}
 
 	/**
