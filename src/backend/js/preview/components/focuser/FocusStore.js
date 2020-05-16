@@ -34,7 +34,7 @@ class FocusClass extends Store {
 	}
 
 	reduceFocusOpacity() {
-		this.set( () => ( { focusOpacity: 0, detailsOpacity: 0 } ) )
+		this.set( () => ( { focusOpacity: 0, detailsOpacity: 1 } ) )
 	}
 
 	increaseFocusOpacity() {

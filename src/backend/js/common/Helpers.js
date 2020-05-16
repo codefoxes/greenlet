@@ -28,7 +28,7 @@ export function waitUntil( condition, interval = 100, timeout = 10000 ) {
 	let counter = timeout / interval
 	const intId = setInterval( () => {
 		counter--
-		if ( ( condition === true ) && ( typeof resolveCb === 'function' ) ) {
+		if ( ( ( typeof condition === 'function' ) && ( condition() === true ) ) || ( ( condition === true ) && ( typeof resolveCb === 'function' ) ) ) {
 			resolveCb()
 			clearInterval( intId )
 		}

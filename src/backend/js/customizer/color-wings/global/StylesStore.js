@@ -1,5 +1,6 @@
 import { Store, useStore } from '../../../common/Store'
 import CssParser from '../../../common/lib/CssParser'
+import { debounce } from '../../../common/Helpers'
 
 const initialState = {
 	styles: {
@@ -35,7 +36,17 @@ class StylesClass extends Store {
 		return styleString
 	}
 
+	registerTempStyler( fn ) {
+		this.tempStyler = fn
+		this.debouncedSetStyles = debounce( this.setStyles, 500 )
+	}
+
 	addStyle( selector, property, value, media = 'all' ) {
+		this.tempStyler( `${selector} { ${property}: ${value}; }` )
+		this.debouncedSetStyles( selector, property, value, media )
+	}
+
+	setStyles( selector, property, value, media = 'all' ) {
 		this.set( ( state ) => {
 			const { styles } = state
 			if ( ! styles.hasOwnProperty( media ) ) {

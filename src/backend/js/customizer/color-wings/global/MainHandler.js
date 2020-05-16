@@ -1,11 +1,20 @@
 import { StylesStore } from './StylesStore'
 import { MainStore } from './MainStore'
 
+let control
+const isObject = obj => ( obj === Object( obj ) )
+
 const sendUpdateControlEvent = () => {
 	const styles = StylesStore.get().output
 	const { currentPage, currentPageType } = MainStore.get()
 
-	const currentStylesDetails = {}
+	let currentStylesDetails
+	if ( ! isObject( control.setting._value ) ) {
+		currentStylesDetails = {}
+	} else {
+		currentStylesDetails = JSON.parse( JSON.stringify( control.setting._value ) )
+	}
+
 	currentStylesDetails[ currentPage ] = { type: currentPageType, styles }
 
 	cw.Evt.emit( 'update-control', currentStylesDetails )
@@ -15,6 +24,13 @@ let { currentPage } = MainStore.get()
 const updateOnPageChange = () => {
 	const page = MainStore.get().currentPage
 	if ( page !== currentPage ) {
+		if ( isObject( control.setting._value ) && ( page in control.setting._value ) ) {
+			const currentStyles = control.setting._value[ page ].styles
+			StylesStore.addFromString( currentStyles )
+		} else {
+			StylesStore.addFromString( '' )
+		}
+
 		sendUpdateControlEvent()
 		currentPage = page
 	}
@@ -23,8 +39,9 @@ const updateOnPageChange = () => {
 StylesStore.subscribe( sendUpdateControlEvent )
 MainStore.subscribe( updateOnPageChange )
 
-function addInitialStyles( control ) {
-	if ( ! control.setting._value ) {
+function addInitialStyles( api ) {
+	control = api
+	if ( ! api.setting._value ) {
 		return
 	}
 

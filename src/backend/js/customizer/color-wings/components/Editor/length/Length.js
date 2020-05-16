@@ -77,8 +77,8 @@ class Length extends React.Component {
 		const output = this.showShortHand && ( <div className="output">Output: { this.state.currentVal }</div> )
 
 		return (
-			<div className="cw-length">
-				{ this.props.label && <span className="customize-control-title">{ this.props.label }</span> }
+			<div className={ "cw-length " + (this.showShortHand ? '' : 'single-length') }>
+				{ this.props.label && <span className="cw-control-title">{ this.props.label }</span> }
 				{ this.props.description && <span className="description customize-control-description">{ this.props.description }</span> }
 				{ tabs }
 				{ tabContent }

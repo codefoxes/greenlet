@@ -1,22 +1,25 @@
 import { updateFocus } from '../components/focuser/FocusHandler'
 import { debounce } from '../../common/Helpers'
 
-let styleTag
-
-const addCWStylesTag = () => {
-	styleTag = document.createElement( 'style' )
-	styleTag.id  = 'cw-applied-styles'
+const addCWStylesTag = ( id  = 'cw-applied-styles' ) => {
+	const styleTag = document.createElement( 'style' )
+	styleTag.id  = id
 	document.head.appendChild( styleTag )
+	return styleTag
 }
 
-addCWStylesTag()
+const styleTagMain = addCWStylesTag()
+const styleTagTemp = addCWStylesTag( 'cw-temp-styles' )
 
 const addStyles = () => {
 	const { output } = cw.StylesStore.get()
-	styleTag.innerHTML = output
+	styleTagMain.innerHTML = output
 }
+
+const addTempStyles = ( styleOutput ) => ( styleTagTemp.innerHTML = styleOutput )
 
 const debouncedUpdateFocus = debounce( updateFocus, 500, true )
 
+cw.StylesStore.registerTempStyler( addTempStyles )
 cw.StylesStore.subscribe( addStyles )
 cw.StylesStore.subscribe( debouncedUpdateFocus )

@@ -109,6 +109,10 @@ const reduceFocus = () => { FocusStore.reduceFocusOpacity() }
 const increaseFocus = () => { FocusStore.increaseFocusOpacity() }
 
 export const updateFocus = () => {
+	if ( currentTarget === undefined ) {
+		return
+	}
+
 	const client = currentTarget.getBoundingClientRect()
 
 	const newState = {

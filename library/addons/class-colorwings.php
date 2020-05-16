@@ -30,81 +30,64 @@ class ColorWings {
 	 * @return void
 	 */
 	public function __construct() {
-		$enable_color_wings = apply_filters( 'enable_color_wings', true );
-		if ( ! $enable_color_wings ) {
-			return;
+		global $wp_customize;
+		if ( is_admin() || isset( $wp_customize ) ) {
+			require_once dirname( __FILE__ ) . '/class-colorwings-admin.php';
+			ColorWings_Admin::get_instance();
 		}
 
-		require_once dirname( __FILE__ ) . '/class-control-colorwings.php';
-
-		add_action( 'customize_register', array( $this, 'add_controls' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ), 20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_filter( 'wp_get_custom_css', array( $this, 'append_styles' ) );
 	}
 
 	/**
-	 * Enqueue Customizer Preview Scripts.
-	 *
-	 * @since  1.3.0
-	 */
-	public function enqueue_preview_scripts() {
-		$pages = array(
-			'is_front_page' => is_front_page(),
-			'is_home'       => is_home(),
-			'is_archive'    => is_archive(),
-			'is_page'       => is_page(),
-			'is_single'     => is_single(),
-		);
-		wp_localize_script( 'greenlet-preview', 'previewObject', $pages );
-	}
-
-	/**
-	 * Add Custom Control.
-	 *
-	 * @since 1.3.0
-	 * @param object $wp_customize WP_Customize_Manager.
-	 */
-	public function add_controls( $wp_customize ) {
-		$wp_customize->register_control_type( 'ColorWings\Control_ColorWings' );
-
-		$wp_customize->add_section(
-			'extra_styles',
-			array(
-				'title'      => __( 'Extra Styles' ),
-				'priority'   => 900,
-				'capability' => 'edit_theme_options',
-			)
-		);
-
-		$wp_customize->add_setting(
-			'color_wings',
-			array(
-				'type'              => 'option',
-				'capability'        => 'edit_theme_options',
-				'transport'         => 'postMessage',
-				'sanitize_callback' => array( $this, 'sanitize' ),
-			)
-		);
-
-		$wp_customize->add_control(
-			new Control_ColorWings(
-				$wp_customize,
-				'color_wings',
-				array( 'section' => 'extra_styles' )
-			)
-		);
-	}
-
-	/**
-	 * Sanitizes ColorWings Settings.
+	 * Enqueue scripts.
 	 *
 	 * @since  1.3.0
 	 * @access public
-	 * @param  array $settings ColorWings Settings.
-	 *
-	 * @return array Sanitized Settings.
+	 * @return void
 	 */
-	public static function sanitize( $settings ) {
-		return $settings;
+	public function enqueue_scripts() {
+		$cw = get_option( 'color_wings' );
+		if ( false === $cw ) {
+			return;
+		}
+
+		global $cw_styles;
+		$cw_styles = '';
+		foreach ( $cw as $page => $value ) {
+			if ( 'global' === $value['type'] ) {
+				$cw_styles .= $value['styles'];
+			} elseif ( 'template' === $value['type'] ) {
+				if (
+					( 'is_front_page' === $page && is_front_page() )
+					|| ( 'is_home' === $page && is_home() )
+					|| ( 'is_archive' === $page && is_archive() )
+					|| ( 'is_page' === $page && is_page() )
+					|| ( 'is_single' === $page && is_page() )
+				) {
+					$cw_styles .= $value['styles'];
+				}
+			}
+		}
+	}
+
+	/**
+	 * Append Color Wings styles.
+	 *
+	 * @since  1.3.0
+	 * @param  string $css WP custom styles.
+	 * @return string      CW Appended styles.
+	 */
+	public function append_styles( $css ) {
+		global $cw_styles;
+		$cw_styles = trim( $cw_styles );
+		if ( '' === $cw_styles ) {
+			return $css;
+		}
+
+		$css .= $cw_styles;
+		return $css;
 	}
 
 	/**
@@ -124,7 +107,4 @@ class ColorWings {
 	}
 }
 
-global $wp_customize;
-if ( is_admin() || isset( $wp_customize ) ) {
-	ColorWings::get_instance();
-}
+ColorWings::get_instance();

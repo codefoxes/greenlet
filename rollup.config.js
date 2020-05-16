@@ -5,6 +5,9 @@
  */
 
 import babel from 'rollup-plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import replace from '@rollup/plugin-replace'
 import { terser } from "rollup-plugin-terser"
 import scss from 'rollup-plugin-scss'
 
@@ -52,6 +55,13 @@ const config = paths.map(( path ) => ({
 	plugins: [
 		babel({
 			exclude: 'node_modules/**',
+		}),
+		resolve({
+			browser: true,
+		}),
+		commonjs(),
+		replace({
+			'process.env.NODE_ENV': JSON.stringify( 'production' )
 		}),
 		scss({ output: false })
 	]
