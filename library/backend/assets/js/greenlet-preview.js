@@ -470,13 +470,21 @@
     }
 
     var selector = '';
+    var selectors = [];
     el.classList.forEach(function (cls) {
-      // Ignore classes
-      if (selector.length > 20) {
+      if (selectors.length >= 2) {
+        return false;
+      } //Ignore autogen sequential classes
+
+
+      var regex = /\w*-\d*/;
+
+      if (regex.test("".concat(cls))) {
         return false;
       }
 
       selector += ".".concat(cls);
+      selectors.push(cls);
     });
 
     if (el.classList.length === 0) {
@@ -679,10 +687,118 @@
     }, focusDetails.selector));
   }
 
+  var initialState$1 = {
+    currentTarget: '',
+    showDomTree: false
+  };
+
+  var DomTreeClass = /*#__PURE__*/function (_Store) {
+    _inherits(DomTreeClass, _Store);
+
+    var _super = _createSuper(DomTreeClass);
+
+    function DomTreeClass() {
+      _classCallCheck(this, DomTreeClass);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(DomTreeClass, [{
+      key: "showDomTree",
+      value: function showDomTree(data) {
+        this.set(function () {
+          return {
+            currentTarget: data.currentTarget
+          };
+        });
+        this.set(function () {
+          return {
+            showDomTree: true
+          };
+        });
+        console.log(data);
+      }
+    }]);
+
+    return DomTreeClass;
+  }(Store);
+
+  var DomTreeStore = new DomTreeClass(initialState$1);
+
+  var Evt$1 = window.cw.Evt;
+  Evt$1.on('focusLocked', function (data) {
+    DomTreeStore.showDomTree(data);
+  });
+  var getSelector$1 = function getSelector(el) {
+    var domTree = [];
+    var element = {
+      tag: '',
+      id: '',
+      "class": []
+    };
+
+    if (el === document.body) {
+      element.tag = 'body';
+      domTree.push(element);
+      return domTree;
+    }
+
+    element.tag = el.tagName.toLowerCase();
+
+    if (el.id !== '') {
+      element.id = el.id;
+    }
+
+    var selectors = [];
+    el.classList.forEach(function (cls) {
+      if (selectors.length >= 4) {
+        return false;
+      } //Ignore autogen sequential classes
+
+
+      var regex = /\w*-\d*/;
+
+      if (regex.test("".concat(cls))) {
+        return false;
+      }
+
+      selectors.push(cls);
+    });
+    element["class"] = selectors;
+    var parentDomTree = getSelector(el.parentElement);
+    parentDomTree.push(element); //domTree.push(element)
+
+    return parentDomTree;
+  };
+
+  var styles = "#cw-domtree {\n  width: 100%;\n  border-top: 1px solid #dddddd;\n  bottom: 0px;\n  position: fixed;\n  background: #eeeeee;\n  overflow: scroll;\n  font-size: 14px;\n  color: #444444;\n  line-height: 16px;\n  margin: 0px; }\n  #cw-domtree .cw-domtree-list {\n    overflow: hidden;\n    white-space: nowrap;\n    list-style-type: none; }\n  #cw-domtree .cw-domtree-elements {\n    display: inline-block;\n    padding: 0px 20px;\n    background-color: #ddd;\n    line-height: 2; }\n  #cw-domtree .cw-domtree-elements:hover, #cw-domtree .cw-domtree-elements:hover::after {\n    background-color: #7cb342;\n    color: #fff; }\n  #cw-domtree .cw-domtree-elements::after {\n    content: \"\";\n    position: absolute;\n    display: inline-block;\n    width: 30px;\n    height: 30px;\n    top: 0;\n    background-color: #ddd;\n    border-top-right-radius: 5px;\n    transform: scale(0.707) rotate(45deg);\n    box-shadow: 1px -1px rgba(0, 0, 0, 0.25);\n    z-index: 1;\n    margin-left: 5px; }\n";
+
+  function DomTree() {
+    var _useStore = useStore(DomTreeStore),
+        currentTarget = _useStore.currentTarget,
+        showDomTree = _useStore.showDomTree;
+
+    return /*#__PURE__*/React.createElement("div", {
+      id: "cw-domtree"
+    }, showDomTree ? DomTreeElement(getSelector$1(currentTarget)) : 'Click any element to show DOM element tree here', /*#__PURE__*/React.createElement("style", {
+      type: "text/css"
+    }, styles));
+  }
+
+  function DomTreeElement(domTree) {
+    return /*#__PURE__*/React.createElement("ul", {
+      className: "cw-domtree-list"
+    }, domTree.map(function (element) {
+      return /*#__PURE__*/React.createElement("li", {
+        className: "cw-domtree-elements"
+      }, element.tag);
+    })); //return "Constructed DOM Tree"
+  }
+
   function Canvas() {
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-canvas"
-    }, /*#__PURE__*/React.createElement(FocusDetails, null), /*#__PURE__*/React.createElement(Focuser, null));
+    }, /*#__PURE__*/React.createElement(FocusDetails, null), /*#__PURE__*/React.createElement(Focuser, null), /*#__PURE__*/React.createElement(DomTree, null));
   }
 
   /**

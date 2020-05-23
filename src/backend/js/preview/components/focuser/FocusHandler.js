@@ -2,23 +2,33 @@ import { FocusStore } from './FocusStore'
 
 const { Evt } = cw
 
+let isTag = true
+let tagCount = 0;
+let classLevel = 0;
 const getSelector = ( el ) => {
 	if ( el === document.body ) {
 		return 'body'
 	}
 
 	if ( el.id !== '' ) {
+		isTag = false
 		return `#${el.id}`
 	}
 
 	let selector = ''
+	let selectors = []
 	el.classList.forEach(cls => {
-		// Ignore classes
-		if ( selector.length > 20 ) {
+		if ( selectors.length >= 2 ) {
 			return false
 		}
 
+		//Ignore autogen sequential classes
+		var regex = /\w*-\d*/
+		if ( regex.test(`${cls}`) ) {
+			return false
+		}
 		selector += `.${cls}`
+		selectors.push(cls)
 	})
 
 	if ( el.classList.length === 0 ) {
