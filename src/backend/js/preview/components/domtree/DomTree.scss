@@ -2,21 +2,43 @@ $baseWidth: 20px;
 
 #cw-domtree {
     width: 100%;
-    height: 30px;
     border-top: 1px solid rgb(221, 221, 221);
     bottom: 0px;
     position: fixed;
     background: rgb(238, 238, 238);
-    overflow: scroll;
     font-size: 14px;
     color: rgb(68, 68, 68);
     line-height: 16px;
     margin: 0px;
 
     .cw-domtree-list {
-        overflow: hidden;
         white-space: nowrap;
         list-style-type: none;
+        margin: 0;
+
+        .cw-node-attributes {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            background: rgb(238, 238, 238);
+            height: auto;
+            min-width: 15em;
+            color: #444;
+            line-height: 16px;
+            margin: 0;
+            transition: all .5s ease-in-out;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            left: 0;
+        }
+
+        .cw-node-attributes li {
+            list-style-type: none;
+        }
+    }
+
+    .cw-domtree-elements:hover > .cw-node-attributes {
+        display: block;
     }
 
     .cw-domtree-elements {
@@ -24,7 +46,10 @@ $baseWidth: 20px;
         padding: 0px 20px;
         background-color: #ddd;
         line-height: 2;
+        margin: 0;
+        position: relative;
     }
+
     .cw-domtree-elements:hover, .cw-domtree-elements:hover::after{
         background-color: rgb(124, 179, 66);
         color: #fff;
@@ -44,5 +69,11 @@ $baseWidth: 20px;
         z-index: 1;
         margin-left: 5px;
     }
+}
+
+h3.cw-selection-title {
+    font-size: 14px;
+    padding: 12px 5px;
+    font-weight: 600;
 }
 

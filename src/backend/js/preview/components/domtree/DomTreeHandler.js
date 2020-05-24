@@ -41,7 +41,10 @@ export const getSelector = ( el ) => {
     const parentDomTree = getSelector( el.parentElement )
     
     parentDomTree.push(element)
-    //domTree.push(element)
 
     return parentDomTree
+}
+
+export const selectOptions = ( element ) => {
+    
 }
