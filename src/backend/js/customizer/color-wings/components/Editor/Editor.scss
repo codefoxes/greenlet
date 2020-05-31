@@ -27,6 +27,7 @@
 		color: #444;
 		line-height: 16px;
 		margin: 0;
+		cursor: pointer;
 
 		.selector {
 			background: #fff6e8;
@@ -62,7 +63,7 @@
 
 .cw-panel .open .cw-section-content {
 	opacity: 1;
-	max-height: 600px;
+	max-height: 1000px;
 }
 
 .cw-control {

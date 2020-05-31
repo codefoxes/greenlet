@@ -80,7 +80,6 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		require_once GL_LIBRARY_DIR . '/common/class-columns.php';
 
 		require_once GL_LIBRARY_DIR . '/addons/class-colorwings.php';
-		require_once GL_LIBRARY_DIR . '/addons/class-colorwings-old.php';
 
 		global $wp_customize;
 		if ( is_admin() || isset( $wp_customize ) ) {

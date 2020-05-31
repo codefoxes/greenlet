@@ -2,7 +2,7 @@
 /**
  * Color Wings Control.
  *
- * @package greenlet\library\addons
+ * @package ColorWings
  */
 
 namespace ColorWings;
@@ -11,7 +11,7 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 	/**
 	 * Color Wings custom control.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	class Control_ColorWings extends \WP_Customize_Control {
@@ -19,7 +19,7 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		/**
 		 * The type of customize control being rendered.
 		 *
-		 * @since  1.3.0
+		 * @since  1.0.0
 		 * @access public
 		 * @var    string
 		 */
@@ -28,19 +28,22 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		/**
 		 * Enqueue scripts/styles.
 		 *
-		 * @since  1.3.0
+		 * @since  1.0.0
 		 * @access public
 		 * @return void
 		 */
 		public function enqueue() {
 			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-			wp_enqueue_script( 'codemirror-format', GL_LIBRARY_URL . '/addons/js/formatting' . $min . '.js', array( 'wp-codemirror' ), GREENLET_VERSION, true );
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'wp-color-picker' );
+			wp_enqueue_script( 'codemirror-format', COLORWINGS_URL . '/js/formatting' . $min . '.js', array( 'wp-codemirror' ), COLORWINGS_VERSION, true );
+			wp_enqueue_script( 'color-wings-controls', COLORWINGS_URL . '/js/color-wings' . $min . '.js', array( 'jquery', 'react-dom' ), COLORWINGS_VERSION, true );
 		}
 
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
-		 * @since  1.3.0
+		 * @since  1.0.0
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
@@ -66,7 +69,7 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		/**
 		 * Displays the control content.
 		 *
-		 * @since  1.3.0
+		 * @since  1.0.0
 		 * @access public
 		 * @return void
 		 */
@@ -79,7 +82,7 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		/**
 		 * Render Content.
 		 *
-		 * @since 1.3.0
+		 * @since 1.0.0
 		 */
 		protected function render_content() {}
 	}

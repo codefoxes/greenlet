@@ -25,14 +25,29 @@ const EXTERNAL = [
 	'ReactDOM'
 ]
 
+const getCWBanner = filename => `/** @license ColorWings v1.0.0
+* ${ filename }
+*
+* Copyright (c) Color Wings and its affiliates.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE file in the root directory of this source tree.
+*/`
+
 const paths = [{
 	inputPath : 'src/backend/js/customizer/greenlet-controls.js',
 	outputPath: 'library/backend/assets/js/greenlet-controls.js',
 	outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
 }, {
-	inputPath : 'src/backend/js/preview/greenlet-preview.js',
-	outputPath: 'library/backend/assets/js/greenlet-preview.js',
-	outputMin : 'library/backend/assets/js/greenlet-preview.min.js',
+	inputPath : 'src/backend/js/customizer/color-wings/ColorWings.js',
+	outputPath: 'library/addons/js/color-wings.js',
+	outputMin : 'library/addons/js/color-wings.min.js',
+	banner: getCWBanner( 'color-wings.js' ),
+}, {
+	inputPath : 'src/backend/js/preview/colorWings.js',
+	outputPath: 'library/addons/js/color-wings-preview.js',
+	outputMin : 'library/addons/js/color-wings-preview.min.js',
+	banner: getCWBanner( 'color-wings-preview.js' ),
 }]
 
 const config = paths.map(( path ) => ({
@@ -43,6 +58,7 @@ const config = paths.map(( path ) => ({
 		name: 'app',
 		file: path.outputPath,
 		globals: GLOBALS,
+		banner: ( 'banner' in path ) ? path.banner : ''
 	}, {
 		sourcemap: false,
 		format: 'iife',

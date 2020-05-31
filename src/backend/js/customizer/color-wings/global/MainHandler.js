@@ -5,8 +5,8 @@ let control
 const isObject = obj => ( obj === Object( obj ) )
 
 const sendUpdateControlEvent = () => {
-	const styles = StylesStore.get().output
-	const { currentPage, currentPageType } = MainStore.get()
+	const { currentPage, currentPageType, allFonts } = MainStore.get()
+	const styles = StylesStore.get().allOutputs[ currentPage ]
 
 	let currentStylesDetails
 	if ( ! isObject( control.setting._value ) ) {
@@ -15,7 +15,7 @@ const sendUpdateControlEvent = () => {
 		currentStylesDetails = JSON.parse( JSON.stringify( control.setting._value ) )
 	}
 
-	currentStylesDetails[ currentPage ] = { type: currentPageType, styles }
+	currentStylesDetails[ currentPage ] = { type: currentPageType, styles, fonts: allFonts[ currentPage ] }
 
 	cw.Evt.emit( 'update-control', currentStylesDetails )
 }
@@ -55,7 +55,8 @@ function addInitialStyles( api ) {
 			MainStore.changePage( keys[0], current.type )
 		}
 	}
-	StylesStore.addInitialStyle( current.styles )
+	MainStore.addInitialSettings( control.setting._value )
+	StylesStore.addInitialStyle( current.styles, control.setting._value )
 }
 
 function addPreviewObject( previewObject ) {

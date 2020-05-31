@@ -1,17 +1,23 @@
 import { Store, useStore } from '../../../common/Store'
 import CssParser from '../../../common/lib/CssParser'
 import { debounce } from '../../../common/Helpers'
+import { MainStore } from './MainStore'
 
 const initialState = {
 	styles: {
 		all: {}
 	},
-	output: ''
+	allOutputs: {}
 }
 
 class StylesClass extends Store {
-	addInitialStyle( styles ) {
-		this.overrideInitialState( { ...initialState, output: styles } )
+	addInitialStyle( styles, settings ) {
+		let allOutputs = {}
+		for ( const page in settings ) {
+			if ( ! settings.hasOwnProperty( page ) ) { continue }
+			allOutputs[ page ] = settings[ page ].styles
+		}
+		this.overrideInitialState( { ...initialState, allOutputs } )
 	}
 
 	generateOutput( styles ) {
@@ -36,14 +42,24 @@ class StylesClass extends Store {
 		return styleString
 	}
 
-	registerTempStyler( fn ) {
-		this.tempStyler = fn
+	registerSpecialSubscriber( fn, name = 'tempStyler' ) {
+		if ( name === 'tempStyler' ) {
+			this.tempStyler = fn
+		} else if ( name === 'fontManager' ) {
+			this.addFont = fn
+		}
 		this.debouncedSetStyles = debounce( this.setStyles, 500 )
 	}
 
 	addStyle( selector, property, value, media = 'all' ) {
 		this.tempStyler( `${selector} { ${property}: ${value}; }` )
 		this.debouncedSetStyles( selector, property, value, media )
+	}
+
+	addStyleNow( selector, property, value, media = 'all' ) {
+		// Add style without debounce.
+		this.tempStyler( `${selector} { ${property}: ${value}; }` )
+		this.setStyles( selector, property, value, media )
 	}
 
 	setStyles( selector, property, value, media = 'all' ) {
@@ -57,8 +73,9 @@ class StylesClass extends Store {
 			}
 			styles[ media ][ selector ][ property ] = value
 
-			const output = this.generateOutput( styles )
-			return { styles, output }
+			const { currentPage } = MainStore.get()
+			state.allOutputs[ currentPage ] = this.generateOutput( styles )
+			return { styles, allOutputs: state.allOutputs }
 		} )
 
 		// console.log( this.get() )
@@ -86,7 +103,11 @@ class StylesClass extends Store {
 			const parsed = CssParser( cssString )
 			const styles = getStylesFromRules( parsed.stylesheet.rules )
 
-			this.set( () => ( { styles, output: cssString } ) )
+			this.set( ( state ) => {
+				const { currentPage } = MainStore.get()
+				state.allOutputs[ currentPage ] = cssString
+				return { styles, allOutputs: state.allOutputs }
+			} )
 		}
 		catch( error ) {
 			console.log( error )

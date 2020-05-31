@@ -1,6 +1,7 @@
 import { Evt } from '../../global/Event'
 import { waitUntil } from '../../../../common/Helpers'
 import { StylesStore } from '../../global/StylesStore'
+import { MainStore } from '../../global/MainStore'
 
 let cm = false
 let isRunningChange = false
@@ -58,7 +59,7 @@ StylesStore.subscribe( () => {
 	isProgrammaticalChange = true
 
 	if ( isRunningChange !== true ) {
-		cm.getDoc().setValue( StylesStore.get().output )
+		cm.getDoc().setValue( StylesStore.get().allOutputs[ MainStore.get().currentPage ] )
 	}
 	if ( changeOrigin === 'setValue' ) {
 		cm.autoFormatRange( { line: 0, ch: 0 }, { line: cm.lineCount() } )

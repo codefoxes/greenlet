@@ -9,6 +9,120 @@ import selectStyles from './Select.scss'
 
 function Editor() {
 	const { currentSelector, openSection, currentStyles } = useStore( MainStore )
+	const [ font, setFontParams ] = React.useState( {
+		styleOptions: ['normal', 'italic'],
+		weightOptions: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+	} )
+
+	React.useEffect( () => {
+		setFontParams( prev => ( { ...prev, family: currentStyles.fontFamily, style: currentStyles.fontStyle, weight: currentStyles.fontWeight } ) )
+	}, [ currentStyles ] )
+
+	const getFontsOptions = () => {
+		const options = []
+		for ( const fontSet in colorWingsFonts.allFonts ) {
+			let setName = fontSet
+			if ( 'system' === fontSet ) {
+				setName = 'System Fonts'
+			} else if ( 'google' === fontSet ) {
+				setName = 'Google Fonts'
+			}
+			const families = []
+			for ( const family in colorWingsFonts.allFonts[ fontSet ] ) {
+				const name = ( 'Default' === family ) ? 'Default System Font' : family
+				families.push( { name, value: family } )
+			}
+			options.push( {
+				type: 'group',
+				name: setName,
+				items: families
+			} )
+		}
+		return options
+	}
+
+	const getFontDetails = ( fontFamily ) => {
+		const details = { 'family': fontFamily, 'source': 'system' }
+		if ( colorWingsFonts.allFonts.system.hasOwnProperty( fontFamily ) ) {
+			details[ 'variants' ] = colorWingsFonts.defaults.variants
+			details[ 'category' ] = colorWingsFonts.allFonts.system[ fontFamily ].category
+		} else if ( colorWingsFonts.allFonts.google.hasOwnProperty( fontFamily ) ) {
+			const variants = colorWingsFonts.allFonts.google[ fontFamily ][ 0 ]
+			const category = colorWingsFonts.allFonts.google[ fontFamily ][ 1 ]
+
+			details[ 'source' ]   = 'google'
+			details[ 'category' ] = category
+			details[ 'variants' ] = {}
+			if ( variants[0].length > 0 ) {
+				details[ 'variants' ][ 'normal' ] = variants[0]
+			}
+			if ( variants[1].length > 0 ) {
+				details[ 'variants' ][ 'italic' ] = variants[1]
+			}
+		}
+		return details;
+	}
+
+	const getNearestWeight = ( weight, weightsArray ) => {
+		return weightsArray.reduce(
+			function ( prev, curr ) {
+				return Math.abs( curr - weight ) < Math.abs( prev - weight ) ? curr : prev
+			}
+		)
+	}
+
+	const setFontOptions = ( fontFamily = false, fontStyle = false, fontWeight = false ) => {
+		// Todo: Get latest currentStyles
+		fontFamily = fontFamily ? fontFamily : font.family
+		const currentFontDetails = getFontDetails( fontFamily )
+
+		// If fontFamily is given set Font Style options.
+		if ( ! fontStyle ) {
+			fontStyle    = font.style
+
+			// If fontStyle not in currentFontDetails.style set first available style.
+			if ( ! currentFontDetails.variants.hasOwnProperty( fontStyle ) ) {
+				fontStyle = Object.keys( currentFontDetails.variants )[0]
+			}
+		}
+
+		// If fontStyle is given set Font Weight options.
+		if ( ! fontWeight ) {
+			fontWeight = font.weight
+
+			// If fontWeight not in currentFontDetails.style[ fontStyle ] set nearest weight.
+			if ( currentFontDetails.variants[ fontStyle ].indexOf( fontWeight ) === -1 ) {
+				fontWeight = getNearestWeight( fontWeight, currentFontDetails.variants[ fontStyle ] )
+			}
+		}
+
+		setFontParams( {
+			styleOptions: Object.keys( currentFontDetails.variants ),
+			weightOptions: currentFontDetails.variants[ fontStyle ],
+			family: fontFamily,
+			style: fontStyle,
+			weight: fontWeight.toString()
+		} )
+
+		const newFont = {
+			family: fontFamily,
+			style: fontStyle,
+			weight: fontWeight,
+			source: currentFontDetails.source,
+			category: currentFontDetails.category
+		}
+
+		MainStore.addFont( newFont )
+		StylesStore.addFont()
+
+		;( font.family !== fontFamily ) && StylesStore.addStyleNow( currentSelector, 'font-family', fontFamily )
+		;( font.style !== fontStyle ) && StylesStore.addStyleNow( currentSelector, 'font-style', fontStyle )
+		;( font.weight !== fontWeight ) && StylesStore.addStyleNow( currentSelector, 'font-weight', fontWeight )
+	}
+
+	const onFontChange = val => ( setFontOptions( val, false, false ) )
+	const onStyleChange = val => ( setFontOptions( false, val, false ) )
+	const onWeightChange = val => ( setFontOptions( false, false, val ) )
 
 	const sections = [
 		{
@@ -84,13 +198,37 @@ function Editor() {
 					}
 				},
 				{
+					property: 'font-family',
+					Component: Select,
+					params: {
+						label: 'Font Family',
+						name: 'font-family',
+						options: getFontsOptions(),
+						val: font.family,
+						search: true,
+						onChange: onFontChange
+					}
+				},
+				{
+					property: 'font-style',
+					Component: Select,
+					params: {
+						label: 'Font Style',
+						name: 'font-style',
+						options: font.styleOptions,
+						val: font.style,
+						onChange: onStyleChange
+					}
+				},
+				{
 					property: 'font-weight',
 					Component: Select,
 					params: {
 						label: 'Font Weight',
 						name: 'font-weight',
-						options: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-						val: currentStyles.fontWeight,
+						options: font.weightOptions,
+						val: font.weight,
+						onChange: onWeightChange
 					}
 				},
 				{
@@ -102,8 +240,71 @@ function Editor() {
 						val: currentStyles.letterSpacing,
 					}
 				},
+				{
+					property: 'text-align',
+					Component: Select,
+					params: {
+						label: 'Text Align',
+						name: 'text-align',
+						options: ['none', 'center', 'left', 'right', 'justify'],
+						val: currentStyles.textAlign,
+					}
+				},
+				{
+					property: 'text-decoration',
+					Component: Select,
+					params: {
+						label: 'Text Decoration',
+						name: 'text-decoration',
+						options: ['none', 'overline', 'underline', 'line-through'],
+						val: currentStyles.textDecoration,
+					}
+				},
+				{
+					property: 'text-transform',
+					Component: Select,
+					params: {
+						label: 'Text Transform',
+						name: 'text-transform',
+						options: ['none', 'capitalize', 'lowercase', 'uppercase'],
+						val: currentStyles.textTransform,
+					}
+				},
+				{
+					property: 'word-spacing',
+					Component: Length,
+					params: {
+						label: 'Word Spacing',
+						subType: 'size',
+						val: currentStyles.wordSpacing,
+					}
+				},
+				{
+					property: 'text-indent',
+					Component: Length,
+					params: {
+						label: 'Text Indent',
+						subType: 'size',
+						val: currentStyles.textIndent,
+					}
+				}
 			]
-		}
+		},
+		{
+			id: 'border',
+			title: 'Border',
+			controls: [
+				{
+					property: 'border-radius',
+					Component: Length,
+					params: {
+						label: 'Border Radius',
+						subType: 'radius',
+						val: currentStyles.borderRadius,
+					}
+				}
+			]
+		},
 	]
 
 	sections.forEach( ( section ) => { section.controls.forEach( ( control ) => {

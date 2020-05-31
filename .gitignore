@@ -8,6 +8,8 @@ library/backend/assets/js/greenlet-controls.*
 library/backend/assets/js/greenlet-preview.*
 library/backend/assets/fonts/google-fonts.json
 
+library/addons/js/color-wings*
+
 **/cypress.env.json
 **/cypress/videos
 **/cypress/screenshots

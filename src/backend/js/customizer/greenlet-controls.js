@@ -16,5 +16,3 @@ import './controls/font'
 import './controls/length'
 import './controls/preset'
 import './controls/dependencies'
-
-import './color-wings/ColorWings'

@@ -16,10 +16,12 @@ function Select( props ) {
 		formattedOptions = options.map( option => ( { name: option, value: option } ) )
 	}
 
+	const params = { search: false, printOptions: 'auto', ...props }
+
 	return (
 		<div className="cw-control-content color-picker">
 			<span className="cw-control-title">{ props.label } </span>
-			<SelectSearch options={ formattedOptions } defaultValue={ props.val } name={ props.name } onChange={ props.onChange } />
+			<SelectSearch options={ formattedOptions } value={ props.val } name={ props.name } onChange={ props.onChange } search={ params.search } printOptions={ params.printOptions } />
 		</div>
 	)
 }

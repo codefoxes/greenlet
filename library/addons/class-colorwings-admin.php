@@ -2,7 +2,7 @@
 /**
  * Color Wings Admin Manager.
  *
- * @package greenlet\library\addons
+ * @package ColorWings
  */
 
 namespace ColorWings;
@@ -10,13 +10,13 @@ namespace ColorWings;
 /**
  * Class Color Wings Admin.
  *
- * @since 1.3.0
+ * @since 1.0.0
  */
 class ColorWings_Admin {
 	/**
 	 * Holds the instances of this class.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 * @access private
 	 * @var    object
 	 */
@@ -25,7 +25,7 @@ class ColorWings_Admin {
 	/**
 	 * Sets up Color Wings admin features.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -44,9 +44,12 @@ class ColorWings_Admin {
 	/**
 	 * Enqueue Customizer Preview Scripts.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 */
 	public function enqueue_preview_scripts() {
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'color-wings-preview', COLORWINGS_URL . '/js/color-wings-preview' . $min . '.js', array( 'react-dom', 'customize-preview' ), COLORWINGS_VERSION, true );
+
 		$pages = array(
 			'is_front_page' => is_front_page(),
 			'is_home'       => is_home(),
@@ -54,13 +57,13 @@ class ColorWings_Admin {
 			'is_page'       => is_page(),
 			'is_single'     => is_single(),
 		);
-		wp_localize_script( 'greenlet-preview', 'previewObject', $pages );
+		wp_localize_script( 'color-wings-preview', 'cwPreviewObject', $pages );
 	}
 
 	/**
 	 * Add Custom Control.
 	 *
-	 * @since 1.3.0
+	 * @since 1.0.0
 	 * @param object $wp_customize WP_Customize_Manager.
 	 */
 	public function add_controls( $wp_customize ) {
@@ -97,7 +100,7 @@ class ColorWings_Admin {
 	/**
 	 * Sanitizes ColorWings Settings.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 * @access public
 	 * @param  array $settings ColorWings Settings.
 	 *
@@ -110,7 +113,7 @@ class ColorWings_Admin {
 	/**
 	 * Returns the instance.
 	 *
-	 * @since  1.3.0
+	 * @since  1.0.0
 	 * @access public
 	 * @return object
 	 */
