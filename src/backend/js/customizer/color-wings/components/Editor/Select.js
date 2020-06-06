@@ -19,7 +19,7 @@ function Select( props ) {
 	const params = { search: false, printOptions: 'auto', ...props }
 
 	return (
-		<div className="cw-control-content color-picker">
+		<div className="cw-control-content">
 			<span className="cw-control-title">{ props.label } </span>
 			<SelectSearch options={ formattedOptions } value={ props.val } name={ props.name } onChange={ props.onChange } search={ params.search } printOptions={ params.printOptions } />
 		</div>

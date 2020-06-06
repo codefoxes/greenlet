@@ -66,15 +66,25 @@ const getFocusLinesNewState = ( client ) => {
 }
 
 let currentTarget
-const moveFocus = (e) => {
+const moveFocus = ( ip ) => {
 	if ( FocusStore.isFocused() ) {
 		return
 	}
 
-	currentTarget = e.target
+	let isSelector = false
+	if ( ip.target === undefined ) {
+		currentTarget = document.querySelector( ip )
+		isSelector = true
+	} else {
+		currentTarget = ip.target
+	}
+
 	const client = currentTarget.getBoundingClientRect()
 	const offsetTop = window.pageYOffset + client.top
-	const detailsTop = ( ( offsetTop - 24 ) < window.pageYOffset ) ? ( offsetTop + client.height ) : ( offsetTop - 24 )
+	let detailsTop = ( ( offsetTop - 24 ) < window.pageYOffset ) ? ( offsetTop + client.height ) : ( offsetTop - 24 )
+	if ( detailsTop >= document.body.clientHeight ) {
+		detailsTop = 0
+	}
 
 	const newState = {
 		focusLines: getFocusLinesNewState( client ),
@@ -85,16 +95,18 @@ const moveFocus = (e) => {
 				height: '24px',
 				background: '#7CB342'
 			},
-			selector: getSelector( e.target )
+			selector: isSelector ? ip : getSelector( currentTarget )
 		}
 	}
 
 	FocusStore.moveFocus( newState )
 }
 
-const lockUnlockFocus = (e) => {
-	e.preventDefault()
-	e.stopPropagation()
+const lockUnlockFocus = ( e ) => {
+	if ( e ) {
+		e.preventDefault()
+		e.stopPropagation()
+	}
 
 	if ( FocusStore.isFocused() ) {
 		FocusStore.unlockFocus()
@@ -129,3 +141,29 @@ bodyContent.forEach( el => {
 
 document.body.addEventListener( 'mouseleave', reduceFocus )
 document.body.addEventListener( 'mouseenter', increaseFocus )
+
+// Quick Select
+const selectors = [
+	{ name: 'Body', sel: 'body' },
+	{ name: 'Header', sel: '.site-header' },
+	{ name: 'Content Wrapper', sel: '.site-content' },
+	{ name: 'Main Content', sel: '.main' },
+	{ name: 'Sidebar', sel: '.sidebar' },
+	{ name: 'Footer', sel: '.site-footer' },
+	{ name: 'Buttons', sel: 'button' },
+	{ name: 'Links', sel: 'a' },
+	{ name: 'Inputs', sel: 'input' },
+	{ name: 'H1', sel: 'h1' },
+	{ name: 'H2', sel: 'h2' },
+	{ name: 'Paragraphs', sel: 'p' },
+	{ name: 'Code', sel: 'code' },
+	{ name: 'Article Card', sel: '.entry-article' },
+]
+
+const filtered = selectors.filter( item => ( null !== document.querySelector( item.sel ) ) )
+cw.MainStore.setQuickSelectors( filtered )
+
+cw.Evt.on( 'select-element', ( selector ) => {
+	moveFocus( selector )
+	lockUnlockFocus()
+})

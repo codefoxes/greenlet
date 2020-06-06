@@ -3,12 +3,13 @@ import { StylesStore } from '../../global/StylesStore'
 import Length from './length/Length'
 import Color from './Color'
 import Select from './Select'
+import QuickSelect from './QuickSelect/QuickSelect'
 
 import styles from './Editor.scss'
 import selectStyles from './Select.scss'
 
 function Editor() {
-	const { currentSelector, openSection, currentStyles } = useStore( MainStore )
+	const { currentSelector, openSection, currentStyles, quickSelectors } = useStore( MainStore )
 	const [ font, setFontParams ] = React.useState( {
 		styleOptions: ['normal', 'italic'],
 		weightOptions: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
@@ -305,6 +306,30 @@ function Editor() {
 				}
 			]
 		},
+		{
+			id: 'size',
+			title: 'Size',
+			controls: [
+				{
+					property: 'width',
+					Component: Length,
+					params: {
+						label: 'Width',
+						subType: 'size',
+						val: currentStyles.width,
+					}
+				},
+				{
+					property: 'height',
+					Component: Length,
+					params: {
+						label: 'Height',
+						subType: 'size',
+						val: currentStyles.height,
+					}
+				}
+			]
+		},
 	]
 
 	sections.forEach( ( section ) => { section.controls.forEach( ( control ) => {
@@ -318,28 +343,29 @@ function Editor() {
 	return (
 		<div id="cw-editor-wrap" >
 			<div id="cw-editor-panel" className="cw-panel">
-				<div className="cw-panel-title">
-					<span>{ currentSelector ? 'You are editing: ' : 'No Element Selected' }</span>
-					{ ( currentSelector !== '' ) && ( <span className="selector">{ currentSelector }</span> ) }
-				</div>
-				{ ( currentSelector !== '' ) && (
-					<div className="cw-panel-main">
-						<ul className="cw-panel-sections">
-							{ sections.map( ( section ) => (
-								<li key={ section.id } className={ `cw-panel-section ${ ( openSection === section.id ) ? 'open' : '' }` }>
-									<h3 className="cw-section-title" onClick={ () => MainStore.toggleSection( section.id ) }>{ section.title }</h3>
-									<div className="cw-section-content">
-										{ section.controls.map( ( control ) => (
-											<div key={ control.property } className="cw-control">
-												<control.Component { ...control.params } />
-											</div>
-										) ) }
-									</div>
-								</li>
-							) ) }
-						</ul>
-					</div>
-				) }
+				{ ( currentSelector !== '' ) ? (
+					<>
+						<div className="cw-panel-title">
+							<span>You are editing: <span className="selector">{ currentSelector }</span></span>
+						</div>
+						<div className="cw-panel-main">
+							<ul className="cw-panel-sections">
+								{ sections.map( ( section ) => (
+									<li key={ section.id } className={ `cw-panel-section ${ ( openSection === section.id ) ? 'open' : '' }` }>
+										<h3 className="cw-section-title" onClick={ () => MainStore.toggleSection( section.id ) }>{ section.title }</h3>
+										<div className="cw-section-content">
+											{ section.controls.map( ( control ) => (
+												<div key={ control.property } className={`cw-control ${ control.property }`}>
+													<control.Component { ...control.params } />
+												</div>
+											) ) }
+										</div>
+									</li>
+								) ) }
+							</ul>
+						</div>
+					</>
+				) : <QuickSelect selectors={ quickSelectors } /> }
 			</div>
 			<style type="text/css">{ styles } { selectStyles }</style>
 		</div>

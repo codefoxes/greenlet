@@ -7,7 +7,8 @@ const initialState = {
 	openSection: false,
 	currentStyles: {},
 	previewObject: {},
-	allFonts: {}
+	allFonts: {},
+	quickSelectors: []
 }
 
 class MainStoreClass extends Store {
@@ -64,6 +65,10 @@ class MainStoreClass extends Store {
 
 			return { allFonts }
 		} )
+	}
+
+	setQuickSelectors( quickSelectors ) {
+		this.set( () => ( { quickSelectors } ) )
 	}
 }
 
