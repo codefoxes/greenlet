@@ -12,13 +12,19 @@ const getSelector = ( el ) => {
 	}
 
 	let selector = ''
+	const selectors = []
 	el.classList.forEach(cls => {
 		// Ignore classes
-		if ( selector.length > 20 ) {
+		if ( selectors.length >= 2 ) {
 			return false
 		}
 
+		// Ignore autogen sequential classes
+		if ( /\w*-\d*/.test(`${cls}`) ) {
+			return false
+		}
 		selector += `.${cls}`
+		selectors.push(cls)
 	})
 
 	if ( el.classList.length === 0 ) {
