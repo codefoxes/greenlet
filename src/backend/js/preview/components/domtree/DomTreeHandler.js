@@ -44,7 +44,3 @@ export const getSelector = ( el ) => {
 
     return parentDomTree
 }
-
-export const selectOptions = ( element ) => {
-    
-}

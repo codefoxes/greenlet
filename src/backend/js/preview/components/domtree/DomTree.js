@@ -21,40 +21,10 @@ function DomTreeElement(domTree) {
         <ul className="cw-domtree-list">
             { 
                 domTree.map( ( element, i ) => (
-                    //onClick={ () => doNothingForNow( element ) }
                     <li key={ `${element.tag}-${i}` } className="cw-domtree-elements">
                         { element.tag }
                         { ( element.id || ( element.class && element.class.length > 0 ) ) ?
                             <div className="cw-node-attributes">
-                                {/*
-                                <DomIdAttribute id={ element.id } />
-                                <DomClassAttribute classes={ element.class } />
-                                 <SelectSearch options={[
-                                    {
-                                        name: 'Select Id',
-                                        type: 'group',
-                                        items: [{
-                                            value: 'hamburger',
-                                            name: 'Hamburger',
-                                        }, {
-                                            value: 'pizza',
-                                            name: 'Pizza',
-                                        }]
-                                    },
-                                    {
-                                        name: 'Select Classes',
-                                        type: 'group',
-                                        items: [{
-                                            value: 'soft',
-                                            name: 'Soft drink',
-                                        }, {
-                                            value: 'beer',
-                                            name: 'Beer',
-                                        }]
-                                    }
-                                ]}
-                                multiple
-                                /> */}
                                 <DomAttributeSelectSearch element={ element } />
                             </div>
                         : null
@@ -64,7 +34,6 @@ function DomTreeElement(domTree) {
             }
         </ul> 
     )
-    //return "Constructed DOM Tree"
 }
 function DomAttributeSelectSearch( { element } ) {
     const selectOptions = []
@@ -97,35 +66,6 @@ function DomAttributeSelectSearch( { element } ) {
 
     return (
         <SelectSearch options={ selectOptions } multiple />
-    )
-}
-
-function DomIdAttribute( { id } ) {
-    if ( !id ) {
-        return null;
-    }
-
-    return (
-        <>
-            <h3 className="cw-selection-title">Select Id</h3>
-            <span> { id } </span>
-        </>
-    )
-}
-function DomClassAttribute( { classes } ) {
-    if ( !classes || classes.length === 0 ) {
-        return null;
-    }
-   
-    return (
-        <>
-            <h3 className="cw-selection-title">Select class</h3>
-            <ul>
-                { classes.map( ( cls, i ) => (
-                <li key={ i }> { cls } </li>
-                ) ) }
-            </ul>
-        </>
     )
 }
 

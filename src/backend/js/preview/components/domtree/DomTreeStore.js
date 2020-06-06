@@ -12,7 +12,6 @@ class DomTreeClass extends Store {
     }
 }
 
-
 const DomTreeStore = new DomTreeClass( initialState )
 
 export { DomTreeStore, useStore }
