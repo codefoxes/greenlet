@@ -11,7 +11,8 @@ export const getSelector = ( el ) => {
 		id: '',
 		class: []
 	}
-	if ( el === document.body ) {
+	// Todo: what if el === null ?
+	if ( el === document.body || null === el ) {
 		element.tag = 'body'
 		domTree.push( element )
 		return domTree

@@ -7,8 +7,7 @@ const initialState = {
 
 class DomTreeClass extends Store {
 	showDomTree( data ) {
-		this.set( () => ( { currentTarget: data.currentTarget } ) )
-		this.set( () => ( { showDomTree: true } ) )
+		this.set( () => ( { currentTarget: data.currentTarget, showDomTree: true } ) )
 	}
 }
 

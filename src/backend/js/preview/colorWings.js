@@ -22,7 +22,8 @@ if ( isCustomizer() ) {
 
 		// Todo: This might occur before preview-ready.
 		cw.Evt.on( 'mount-colorwings', () => {
-			ReactDOM.render( <Canvas />, canvas )
+			// Todo: Without setTimeout browser hangs, not sure why.
+			setTimeout( () => ReactDOM.render( <Canvas />, canvas ), 100 )
 		})
 
 		cw.Evt.on( 'unmount-colorwings', () => {

@@ -3,6 +3,8 @@ import { StylesStore } from '../../global/StylesStore'
 import Length from './length/Length'
 import Color from './Color'
 import Select from './Select'
+import Shadow from './Shadow'
+import Border from './Border/Border'
 import QuickSelect from './QuickSelect/QuickSelect'
 
 import styles from './Editor.scss'
@@ -124,6 +126,17 @@ function Editor() {
 	const onFontChange = val => ( setFontOptions( val, false, false ) )
 	const onStyleChange = val => ( setFontOptions( false, val, false ) )
 	const onWeightChange = val => ( setFontOptions( false, false, val ) )
+
+	const onBorderChange = ( values, tab ) => {
+		if ( values.every( (val, i, arr) => val === arr[0] ) || ( 0 === tab ) ) {
+			StylesStore.addStyleNow( currentSelector, 'border', `${ values[ 0 ][ 0 ] } ${ values[ 0 ][ 1 ] } ${ values[ 0 ][ 2 ] }` )
+		} else {
+			StylesStore.addStyleNow( currentSelector, 'border-top', `${ values[ 1 ][ 0 ] } ${ values[ 1 ][ 1 ] } ${ values[ 1 ][ 2 ] }` )
+			StylesStore.addStyleNow( currentSelector, 'border-right', `${ values[ 2 ][ 0 ] } ${ values[ 2 ][ 1 ] } ${ values[ 2 ][ 2 ] }` )
+			StylesStore.addStyleNow( currentSelector, 'border-bottom', `${ values[ 3 ][ 0 ] } ${ values[ 3 ][ 1 ] } ${ values[ 3 ][ 2 ] }` )
+			StylesStore.addStyleNow( currentSelector, 'border-left', `${ values[ 4 ][ 0 ] } ${ values[ 4 ][ 1 ] } ${ values[ 4 ][ 2 ] }` )
+		}
+	}
 
 	const sections = [
 		{
@@ -303,6 +316,15 @@ function Editor() {
 						subType: 'radius',
 						val: currentStyles.borderRadius,
 					}
+				},
+				{
+					property: 'border',
+					Component: Border,
+					params: {
+						label: 'Border',
+						val: currentStyles,
+						onChange: onBorderChange
+					}
 				}
 			]
 		},
@@ -326,6 +348,20 @@ function Editor() {
 						label: 'Height',
 						subType: 'size',
 						val: currentStyles.height,
+					}
+				}
+			]
+		},
+		{
+			id: 'shadow',
+			title: 'Shadow',
+			controls: [
+				{
+					property: 'box-shadow',
+					Component: Shadow,
+					params: {
+						label: 'Box Shadow',
+						val: currentStyles.boxShadow,
 					}
 				}
 			]

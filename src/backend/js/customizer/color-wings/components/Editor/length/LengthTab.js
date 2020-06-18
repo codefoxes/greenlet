@@ -34,6 +34,13 @@ class LengthTab extends React.Component {
 		this.resetValue = this.getLength()
 	}
 
+	componentDidUpdate( prev ) {
+		if ( this.props.val !== prev.val ) {
+			const [ main, unit ] = this.getLength()
+			this.setState( { main, unit } )
+		}
+	}
+
 	getLength = ( value = false ) => {
 		let size = ''
 		if ( false !== value ) {

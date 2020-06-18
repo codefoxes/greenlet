@@ -42,6 +42,18 @@ function LengthIcon( props ) {
 			mainShape = <rect stroke="#000" strokeWidth=".6" fill="none" x="5.5" y="1" width="9.5" height="14" rx="1" />
 			extraShape = <rect fill="#F9CDA0" x="0" y="1" width="5" height="14" />
 		}
+	} else if ( subType === 'border' ) {
+		mainShape = <rect stroke="#000" strokeWidth=".6" fill="none" x="1" y="1" width="14" height="14" rx="1" />
+		extraShape = <rect stroke="#000" strokeWidth="2" fill="none" x="1" y="1" width="14" height="14" rx="1" />
+		if ( tab === 1 ) {
+			extraShape = <rect fill="#000" x="1" y="1" width="14" height="2" />
+		} else if ( tab === 2 ) {
+			extraShape = <rect fill="#000" x="13" y="1" width="2" height="14" />
+		} else if ( tab === 3 ) {
+			extraShape = <rect fill="#000" x="1" y="13" width="14" height="2" />
+		} else if ( tab === 4 ) {
+			extraShape = <rect fill="#000" x="1" y="1" width="2" height="14" />
+		}
 	}
 
 	return (

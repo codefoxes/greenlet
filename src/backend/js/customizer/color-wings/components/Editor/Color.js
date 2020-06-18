@@ -29,7 +29,7 @@ function Color( props ) {
 
 	const irisRef = React.createRef()
 	const refIsNotNull = () => ( irisRef.current !== null )
-	const initIris = () => ( $( irisRef.current ).wpColorPicker( irisOptions ) )
+	const initIris = () => { $( irisRef.current ).wpColorPicker( irisOptions ); $( irisRef.current ).iris( 'color', defaultColor ) }
 
 	const [ resolved ] = waitUntil( refIsNotNull )
 	resolved( initIris )

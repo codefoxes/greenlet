@@ -140,10 +140,19 @@ export const updateFocus = () => {
 }
 
 const bodyContent = document.querySelectorAll( 'body > *:not(script):not(style):not(#color-wings)' )
-bodyContent.forEach( el => {
-	el.addEventListener( 'mouseover', moveFocus )
-	el.addEventListener( 'click', lockUnlockFocus, true )
-} )
+bodyContent.forEach( el => { el.addEventListener( 'mouseover', moveFocus ) } )
+
+cw.Evt.on( 'mount-colorwings', () => {
+	bodyContent.forEach( el => {
+		el.addEventListener( 'click', lockUnlockFocus, true )
+	} )
+})
+
+cw.Evt.on( 'unmount-colorwings', () => {
+	bodyContent.forEach( el => {
+		el.removeEventListener( 'click', lockUnlockFocus, true )
+	} )
+})
 
 document.body.addEventListener( 'mouseleave', reduceFocus )
 document.body.addEventListener( 'mouseenter', increaseFocus )

@@ -17,7 +17,7 @@ class StylesClass extends Store {
 			if ( ! settings.hasOwnProperty( page ) ) { continue }
 			allOutputs[ page ] = settings[ page ].styles
 		}
-		this.overrideInitialState( { ...initialState, allOutputs } )
+		this.overrideInitialState( { styles: this.parseStyles( styles ), allOutputs } )
 	}
 
 	generateOutput( styles ) {
@@ -81,7 +81,7 @@ class StylesClass extends Store {
 		// console.log( this.get() )
 	}
 
-	addFromString( cssString ) {
+	parseStyles( cssString ) {
 		const getStylesFromRules = ( rules, media = 'all' ) => {
 			const styles = {}
 			styles[ media ] = {}
@@ -101,18 +101,24 @@ class StylesClass extends Store {
 
 		try {
 			const parsed = CssParser( cssString )
-			const styles = getStylesFromRules( parsed.stylesheet.rules )
-
-			this.set( ( state ) => {
-				const { currentPage } = MainStore.get()
-				state.allOutputs[ currentPage ] = cssString
-				return { styles, allOutputs: state.allOutputs }
-			} )
+			return getStylesFromRules( parsed.stylesheet.rules )
 		}
 		catch( error ) {
 			console.log( error )
 			// If error show notice
+			return false
 		}
+	}
+
+	addFromString( cssString ) {
+		const styles = this.parseStyles( cssString )
+		if ( ! styles ) return false
+
+		this.set( ( state ) => {
+			const { currentPage } = MainStore.get()
+			state.allOutputs[ currentPage ] = cssString
+			return { styles, allOutputs: state.allOutputs }
+		} )
 	}
 }
 
