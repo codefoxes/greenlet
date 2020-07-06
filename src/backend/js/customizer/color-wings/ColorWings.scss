@@ -63,12 +63,14 @@
 	text-align: center;
 }
 
-.tabs {
+.cw-tabs {
+	display: flex;
 	margin: 0 -1px;
 	position: relative;
 	z-index: 2;
 
 	.tab {
+		flex: 1;
 		padding: 8px;
 		background: #ddd;
 		border: 1px solid transparent;

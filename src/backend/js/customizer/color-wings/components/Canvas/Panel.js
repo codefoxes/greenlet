@@ -67,9 +67,9 @@ function Panel() {
 				</div>
 			</div>
 			<div className="panel-main">
-				<div className="tabs cw-row">
-					<div className={ 'editor-tab col-6 tab' + ( tab === 'editor' ? ' active' : '' ) } onClick={ () => setTab( 'editor' ) } >Visual Editor</div>
-					<div className={ "code-tab col-6 tab" + ( tab === 'code' ? ' active' : '' ) } onClick={ () => setTab( 'code' ) }>Code Editor</div>
+				<div className="cw-tabs">
+					<div className={ 'editor-tab tab' + ( tab === 'editor' ? ' active' : '' ) } onClick={ () => setTab( 'editor' ) } >Visual Editor</div>
+					<div className={ "code-tab tab" + ( tab === 'code' ? ' active' : '' ) } onClick={ () => setTab( 'code' ) }>Code Editor</div>
 				</div>
 				<div className={ 'tab-content' + ( tab !== 'editor' ? ' hidden' : '' ) }>
 					<Editor />

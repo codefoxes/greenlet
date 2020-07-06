@@ -41,11 +41,15 @@ function Shadow( props ) {
 	return (
 		<div className="cw-control-content border">
 			{ props.label && <span className="cw-control-title">{ props.label }</span> }
+			<span className="cw-control-title">X Offset</span>
 			<LengthTab val={ values[ 0 ] } tab={ 0 } hidden={ false } handleChange={ onXChange } />
+			<span className="cw-control-title">Y Offset</span>
 			<LengthTab val={ values[ 1 ] } tab={ 0 } hidden={ false } handleChange={ onYChange } />
+			<span className="cw-control-title">Blur Radius</span>
 			<LengthTab val={ values[ 2 ] } tab={ 0 } hidden={ false } handleChange={ onBlurChange } />
+			<span className="cw-control-title">Spread Radius</span>
 			<LengthTab val={ values[ 3 ] } tab={ 0 } hidden={ false } handleChange={ onSpreadChange } />
-			<Color val={ values[ 4 ] } onChange={ onColorChange } />
+			<Color val={ values[ 4 ] } onChange={ onColorChange } label="Color" />
 		</div>
 	)
 }

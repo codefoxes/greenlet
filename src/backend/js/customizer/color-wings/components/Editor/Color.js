@@ -1,5 +1,16 @@
 import { $, waitUntil } from '../../../../common/Helpers'
 
+function handlePickerPosition( irisRefNode ) {
+	const cp = irisRefNode.parentNode.parentNode.parentNode
+	if ( ! cp.classList.contains( 'fixed' ) ) {
+		const left = cp.getBoundingClientRect().left
+		const holder = cp.querySelector( '.wp-picker-holder' )
+		holder.style.left = `-${ left - 12 }px`
+		holder.style.position = 'absolute'
+		cp.classList.add( 'fixed' )
+	}
+}
+
 function Color( props ) {
 	const componentToHex = ( c ) => {
 		const hex = c.toString( 16 )
@@ -29,13 +40,13 @@ function Color( props ) {
 
 	const irisRef = React.createRef()
 	const refIsNotNull = () => ( irisRef.current !== null )
-	const initIris = () => { $( irisRef.current ).wpColorPicker( irisOptions ); $( irisRef.current ).iris( 'color', defaultColor ) }
+	const initIris = () => { $( irisRef.current ).wpColorPicker( irisOptions ); $( irisRef.current ).iris( 'color', defaultColor ); handlePickerPosition( irisRef.current ) }
 
 	const [ resolved ] = waitUntil( refIsNotNull )
 	resolved( initIris )
 
 	return (
-		<div className="cw-control-content color-picker">
+		<div className="cw-control-content cw-color">
 			{ props.label && <span className="cw-control-title">{ props.label }</span> }
 			<input type="text" ref={ irisRef } data-alpha="true" defaultValue={ defaultColor } />
 		</div>

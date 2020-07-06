@@ -62,6 +62,9 @@ function Editor() {
 			if ( variants[1].length > 0 ) {
 				details[ 'variants' ][ 'italic' ] = variants[1]
 			}
+		} else if ( fontFamily.includes( 'system-ui' ) ) {
+			details[ 'variants' ] = colorWingsFonts.defaults.variants
+			details[ 'category' ] = 'sans-serif'
 		}
 		return details;
 	}
@@ -186,14 +189,6 @@ function Editor() {
 			title: 'Text',
 			controls: [
 				{
-					property: 'color',
-					Component: Color,
-					params: {
-						label: 'Font Color',
-						val: currentStyles.color,
-					}
-				},
-				{
 					property: 'font-size',
 					Component: Length,
 					params: {
@@ -224,15 +219,13 @@ function Editor() {
 					}
 				},
 				{
-					property: 'font-style',
-					Component: Select,
+					property: 'color',
+					Component: Color,
 					params: {
-						label: 'Font Style',
-						name: 'font-style',
-						options: font.styleOptions,
-						val: font.style,
-						onChange: onStyleChange
-					}
+						label: 'Font Color',
+						val: currentStyles.color,
+					},
+					cls: 'col-8',
 				},
 				{
 					property: 'font-weight',
@@ -242,17 +235,23 @@ function Editor() {
 						name: 'font-weight',
 						options: font.weightOptions,
 						val: font.weight,
-						onChange: onWeightChange
-					}
+						onChange: onWeightChange,
+					},
+					cls: 'col-4',
 				},
 				{
-					property: 'letter-spacing',
-					Component: Length,
+					property: 'font-style',
+					Component: Select,
 					params: {
-						label: 'Letter Spacing',
-						subType: 'size',
-						val: currentStyles.letterSpacing,
-					}
+						label: 'Font Style',
+						name: 'font-style',
+						options: font.styleOptions,
+						val: font.style,
+						onChange: onStyleChange,
+						printOptions: 'always',
+						horizontal: true,
+					},
+					cls: 'col-5',
 				},
 				{
 					property: 'text-align',
@@ -260,9 +259,17 @@ function Editor() {
 					params: {
 						label: 'Text Align',
 						name: 'text-align',
-						options: ['none', 'center', 'left', 'right', 'justify'],
+						options: [
+							{ name: '', value: 'left', clsName: 'dashicons dashicons-editor-alignleft' },
+							{ name: '', value: 'right', clsName: 'dashicons dashicons-editor-alignright' },
+							{ name: '', value: 'center', clsName: 'dashicons dashicons-editor-aligncenter' },
+							{ name: '', value: 'justify', clsName: 'dashicons dashicons-editor-justify' }
+						],
 						val: currentStyles.textAlign,
-					}
+						printOptions: 'always',
+						horizontal: true,
+					},
+					cls: 'col-7',
 				},
 				{
 					property: 'text-decoration',
@@ -270,9 +277,17 @@ function Editor() {
 					params: {
 						label: 'Text Decoration',
 						name: 'text-decoration',
-						options: ['none', 'overline', 'underline', 'line-through'],
+						options: [
+							{ name: 'A', value: 'none' },
+							{ name: 'A', value: 'overline' },
+							{ name: 'A', value: 'underline' },
+							{ name: 'A', value: 'line-through' }
+						],
 						val: currentStyles.textDecoration,
-					}
+						printOptions: 'always',
+						horizontal: true,
+					},
+					cls: 'col-6',
 				},
 				{
 					property: 'text-transform',
@@ -280,8 +295,25 @@ function Editor() {
 					params: {
 						label: 'Text Transform',
 						name: 'text-transform',
-						options: ['none', 'capitalize', 'lowercase', 'uppercase'],
+						options: [
+							{ name: 'no', value: 'none' },
+							{ name: 'Aa', value: 'capitalize' },
+							{ name: 'aa', value: 'lowercase' },
+							{ name: 'AA', value: 'uppercase' }
+						],
 						val: currentStyles.textTransform,
+						printOptions: 'always',
+						horizontal: true,
+					},
+					cls: 'col-6',
+				},
+				{
+					property: 'letter-spacing',
+					Component: Length,
+					params: {
+						label: 'Letter Spacing',
+						subType: 'size',
+						val: ( currentStyles.letterSpacing === 'normal' ) ? '0px' : currentStyles.letterSpacing,
 					}
 				},
 				{
@@ -321,7 +353,7 @@ function Editor() {
 					property: 'border',
 					Component: Border,
 					params: {
-						label: 'Border',
+						label: 'Border Width',
 						val: currentStyles,
 						onChange: onBorderChange
 					}
@@ -360,7 +392,6 @@ function Editor() {
 					property: 'box-shadow',
 					Component: Shadow,
 					params: {
-						label: 'Box Shadow',
 						val: currentStyles.boxShadow,
 					}
 				}
@@ -391,7 +422,7 @@ function Editor() {
 										<h3 className="cw-section-title" onClick={ () => MainStore.toggleSection( section.id ) }>{ section.title }</h3>
 										<div className="cw-section-content">
 											{ section.controls.map( ( control ) => (
-												<div key={ control.property } className={`cw-control ${ control.property }`}>
+												<div key={ control.property } className={`cw-control ${ control.property } ${ control.cls ? control.cls : '' }`}>
 													<control.Component { ...control.params } />
 												</div>
 											) ) }

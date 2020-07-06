@@ -32,6 +32,7 @@ const addStyles = () => {
 		}
 	}
 	styleTagMain.innerHTML = output
+	styleTagTemp.innerHTML = ''
 }
 
 const addTempStyles = ( styleOutput ) => ( styleTagTemp.innerHTML = styleOutput )

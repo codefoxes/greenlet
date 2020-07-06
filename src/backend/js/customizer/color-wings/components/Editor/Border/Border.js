@@ -26,11 +26,11 @@ function Border( props ) {
 	}
 
 	const tabs = (
-		<div className="tabs cw-row">
+		<div className="cw-tabs">
 			{ [0, 1, 2, 3, 4].map( ( i ) => {
 				return (
 					<div key={i}
-						 className={ `tab tab-${i} col ${ ( i === 0 ) ? 'active' : '' }` }
+						 className={ `tab tab-${i} ${ ( i === 0 ) ? 'active' : '' }` }
 						 onClick={ ( e ) => onTab( e, i ) } >
 						<LengthIcon tab={ i } subType={ 'border' } />
 					</div>
@@ -55,16 +55,23 @@ function Border( props ) {
 		props.onChange( values, tab )
 	}
 
+	const styleOptions = [
+		{ name: 'x', value: 'none' },
+		{ name: '', value: 'solid' },
+		{ name: '', value: 'dotted' },
+		{ name: '', value: 'dashed' }
+	]
+
 	const tabContent = (
-		<div>
+		<div className="cw-tab-wrap">
 			<LengthTab val={ values[ tab ][ 0 ] } tab={ 0 } hidden={ false } handleChange={ onWidthChange } />
-			<Select options={ ['none', 'solid', 'dotted', 'dashed' ] } val={ values[ tab ][ 1 ] } onChange={ onStyleChange } />
-			<Color val={ values[ tab ][ 2 ] } onChange={ onColorChange } />
+			<Color val={ values[ tab ][ 2 ] } onChange={ onColorChange } label="Color" />
+			<Select options={ styleOptions } val={ values[ tab ][ 1 ] } onChange={ onStyleChange } printOptions="always" horizontal="true" label="Style" />
 		</div>
 	)
 
 	return (
-		<div className="cw-control-content border">
+		<div className="cw-control-content cw-border">
 			{ props.label && <span className="cw-control-title">{ props.label }</span> }
 			{ tabs }
 			{ tabContent }

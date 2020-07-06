@@ -52,7 +52,7 @@ class Length extends React.Component {
 		this.onTab = this.onTab.bind(this)
 
 		const tabs = this.showShortHand && (
-			<div className="tabs">
+			<div className="cw-tabs">
 				{ [0, 1, 2, 3, 4].map( ( i ) => {
 					return (
 						<div key={i}
@@ -77,7 +77,7 @@ class Length extends React.Component {
 		const output = this.showShortHand && ( <div className="output">Output: { this.state.currentVal }</div> )
 
 		return (
-			<div className={ "cw-length " + (this.showShortHand ? '' : 'single-length') }>
+			<div className={ "cw-control-content cw-length " + (this.showShortHand ? 'shorthand' : 'single-length') }>
 				{ this.props.label && <span className="cw-control-title">{ this.props.label }</span> }
 				{ this.props.description && <span className="description customize-control-description">{ this.props.description }</span> }
 				{ tabs }

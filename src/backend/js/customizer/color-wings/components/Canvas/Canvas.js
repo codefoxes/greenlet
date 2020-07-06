@@ -4,8 +4,8 @@ import Panel from './Panel'
 function Canvas () {
 	return (
 		<div id="cw-canvas" >
-			<Panel />
 			<style type="text/css">{ styles }</style>
+			<Panel />
 		</div>
 	)
 }

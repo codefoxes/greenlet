@@ -3,7 +3,6 @@
  */
 .select-search {
 	position: relative;
-	font-family: 'Nunito Sans', sans-serif;
 	box-sizing: border-box;
 }
 
@@ -36,12 +35,11 @@
  */
 .select-search__input {
 	display: block;
-	height: 36px;
+	height: 30px;
 	width: 100%;
 	padding: 0 16px;
 	background: #fff !important;
-	border: 1px solid transparent;
-	box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, 0.15);
+	border: 1px solid #7cb342;
 	border-radius: 3px;
 	outline: none;
 	font-family: 'Noto Sans', sans-serif;
@@ -97,7 +95,6 @@
 	background: #fff;
 	border: none;
 	outline: none;
-	font-family: 'Noto Sans', sans-serif;
 	font-size: 14px;
 	text-align: left;
 	cursor: pointer;
@@ -185,7 +182,6 @@
 
 
 .select-search:not(.select-search--multiple) .select-search__select {
-	position: absolute;
 	z-index: 2;
 	top: 38px;
 	right: 0;
@@ -193,7 +189,7 @@
 	border-radius: 3px;
 	overflow: auto;
 	max-height: 360px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	border: 1px solid #7cb342;
 }
 
 .select-search--multiple .select-search__select {
@@ -202,4 +198,78 @@
 	max-height: 260px;
 	border-top: 1px solid #eee;
 	border-radius: 0 0 3px 3px;
+}
+
+.select-search.horizontal {
+	.select-search__value {
+		display: none;
+	}
+
+	.select-search__select {
+		top: 0;
+		box-shadow: none;
+	}
+
+	.select-search__options {
+		display: flex;
+	}
+
+	.select-search__option {
+		height: 28px;
+		position: relative;
+		text-align: center;
+		padding: 0 10px;
+	}
+
+	.select-search__row {
+		flex: 1;
+
+		&:not(:first-child) {
+			border-top: none;
+		}
+	}
+}
+
+.select-search__row[data-value="italic"] .select-search__option {
+	font-style: italic;
+}
+
+.select-search__row[data-value="overline"] .select-search__option {
+	text-decoration: overline;
+}
+
+.select-search__row[data-value="underline"] .select-search__option {
+	text-decoration: underline;
+}
+
+.select-search__row[data-value="line-through"] .select-search__option {
+	text-decoration: line-through;
+}
+
+.cw-border .select-search__row .select-search__option:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	width: 70%;
+}
+
+.cw-border .select-search__row[data-value="solid"] .select-search__option:after {
+	border-top: 2px solid #000;
+}
+
+.cw-border .select-search__row[data-value="dotted"] .select-search__option:after {
+	border-top: 2px dotted #000;
+}
+
+.cw-border .select-search__row[data-value="dashed"] .select-search__option:after {
+	border-top: 2px dashed #000;
+}
+
+.font-weight {
+	@for $i from 1 through 9 {
+		.select-search__row[data-value="#{$i * 100}"]  .select-search__option {
+			font-weight: #{$i * 100};
+		}
+	}
 }
