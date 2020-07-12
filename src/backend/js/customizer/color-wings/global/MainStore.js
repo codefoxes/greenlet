@@ -4,11 +4,13 @@ const initialState = {
 	currentPage: 'global',
 	currentPageType: 'global',
 	currentSelector: '',
+	currentPseudo: '',
 	openSection: false,
 	currentStyles: {},
 	previewObject: {},
 	allFonts: {},
-	quickSelectors: []
+	quickSelectors: [],
+	selectorClass: ''
 }
 
 class MainStoreClass extends Store {
@@ -69,6 +71,14 @@ class MainStoreClass extends Store {
 
 	setQuickSelectors( quickSelectors ) {
 		this.set( () => ( { quickSelectors } ) )
+	}
+
+	togglePseudo( currentPseudo = '' ) {
+		this.set( () => ( { currentPseudo } ) )
+	}
+
+	setSelectorClass ( selectorClass = '' ) {
+		this.set( () => ( { selectorClass } ) )
 	}
 }
 

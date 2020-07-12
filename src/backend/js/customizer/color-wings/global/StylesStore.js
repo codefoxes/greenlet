@@ -64,6 +64,8 @@ class StylesClass extends Store {
 
 	setStyles( selector, property, value, media = 'all' ) {
 		this.set( ( state ) => {
+			const { currentPseudo } = MainStore.get()
+			selector = ( currentPseudo !== '' ) ? `${ selector }:${ currentPseudo }` : selector
 			const { styles } = state
 			if ( ! styles.hasOwnProperty( media ) ) {
 				styles[ media ] = {}
@@ -77,8 +79,6 @@ class StylesClass extends Store {
 			state.allOutputs[ currentPage ] = this.generateOutput( styles )
 			return { styles, allOutputs: state.allOutputs }
 		} )
-
-		// console.log( this.get() )
 	}
 
 	parseStyles( cssString ) {

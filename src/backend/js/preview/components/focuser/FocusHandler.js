@@ -72,8 +72,8 @@ const getFocusLinesNewState = ( client ) => {
 }
 
 let currentTarget
-const moveFocus = ( ip ) => {
-	if ( FocusStore.isFocused() ) {
+const moveFocus = ( ip, force = false ) => {
+	if ( FocusStore.isFocused() && force === false ) {
 		return
 	}
 
@@ -108,19 +108,20 @@ const moveFocus = ( ip ) => {
 	FocusStore.moveFocus( newState )
 }
 
-const lockUnlockFocus = ( e ) => {
+const lockUnlockFocus = ( e, op = null ) => {
 	if ( e ) {
 		e.preventDefault()
 		e.stopPropagation()
 	}
 
-	if ( FocusStore.isFocused() ) {
+	if ( FocusStore.isFocused() && op !== 'lock' ) {
 		FocusStore.unlockFocus()
 		Evt.emit( 'focusUnlocked', FocusStore.get().focusDetails.selector )
 	} else {
 		FocusStore.lockFocus()
 		Evt.emit( 'focusLocked', { currentSelector: FocusStore.get().focusDetails.selector, currentTarget } )
 	}
+	cw.MainStore.setSelectorClass()
 }
 
 const reduceFocus = () => { FocusStore.reduceFocusOpacity() }
@@ -137,6 +138,18 @@ export const updateFocus = () => {
 		focusLines: getFocusLinesNewState( client )
 	}
 	FocusStore.moveFocus( newState )
+}
+
+const updateSelector = ( selector ) => {
+	let el = null
+	try { el = document.querySelector( selector ) } catch {}
+
+	if ( el === null ) {
+		cw.MainStore.setSelectorClass( 'invalid' )
+	} else {
+		moveFocus( selector, true )
+		lockUnlockFocus( false, 'lock' )
+	}
 }
 
 const bodyContent = document.querySelectorAll( 'body > *:not(script):not(style):not(#color-wings)' )
@@ -181,4 +194,8 @@ cw.MainStore.setQuickSelectors( filtered )
 cw.Evt.on( 'select-element', ( selector ) => {
 	moveFocus( selector )
 	lockUnlockFocus()
+})
+
+cw.Evt.on( 'update-selector', ( selector ) => {
+	updateSelector( selector )
 })

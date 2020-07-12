@@ -6,12 +6,13 @@ import Select from './Select'
 import Shadow from './Shadow'
 import Border from './Border/Border'
 import QuickSelect from './QuickSelect/QuickSelect'
+import Pseudo from './Pseudo'
 
 import styles from './Editor.scss'
 import selectStyles from './Select.scss'
 
 function Editor() {
-	const { currentSelector, openSection, currentStyles, quickSelectors } = useStore( MainStore )
+	const { currentSelector, openSection, currentStyles, quickSelectors, selectorClass } = useStore( MainStore )
 	const [ font, setFontParams ] = React.useState( {
 		styleOptions: ['normal', 'italic'],
 		weightOptions: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
@@ -279,9 +280,9 @@ function Editor() {
 						name: 'text-decoration',
 						options: [
 							{ name: 'A', value: 'none' },
-							{ name: 'A', value: 'overline' },
-							{ name: 'A', value: 'underline' },
-							{ name: 'A', value: 'line-through' }
+							{ name: 'O', value: 'overline' },
+							{ name: 'U', value: 'underline' },
+							{ name: 'S', value: 'line-through' }
 						],
 						val: currentStyles.textDecoration,
 						printOptions: 'always',
@@ -296,7 +297,7 @@ function Editor() {
 						label: 'Text Transform',
 						name: 'text-transform',
 						options: [
-							{ name: 'no', value: 'none' },
+							{ name: 'x', value: 'none' },
 							{ name: 'Aa', value: 'capitalize' },
 							{ name: 'aa', value: 'lowercase' },
 							{ name: 'AA', value: 'uppercase' }
@@ -397,6 +398,66 @@ function Editor() {
 				}
 			]
 		},
+		{
+			id: 'position',
+			title: 'Position',
+			controls: [
+				{
+					property: 'position',
+					Component: Select,
+					params: {
+						label: 'Position',
+						name: 'position',
+						options: [
+							{ name: 'Relative', value: 'relative' },
+							{ name: 'Absolute', value: 'absolute' },
+							{ name: 'Static', value: 'static' },
+							{ name: 'Fixed', value: 'fixed' },
+							{ name: 'Sticky', value: 'sticky' },
+						],
+						val: currentStyles.position,
+						printOptions: 'always',
+						horizontal: true,
+					},
+				},
+				{
+					property: 'top',
+					Component: Length,
+					params: {
+						label: 'Top',
+						subType: 'size',
+						val: currentStyles.top,
+					}
+				},
+				{
+					property: 'right',
+					Component: Length,
+					params: {
+						label: 'Right',
+						subType: 'size',
+						val: currentStyles.right,
+					}
+				},
+				{
+					property: 'bottom',
+					Component: Length,
+					params: {
+						label: 'Bottom',
+						subType: 'size',
+						val: currentStyles.bottom,
+					}
+				},
+				{
+					property: 'left',
+					Component: Length,
+					params: {
+						label: 'Left',
+						subType: 'size',
+						val: currentStyles.left,
+					}
+				},
+			]
+		},
 	]
 
 	sections.forEach( ( section ) => { section.controls.forEach( ( control ) => {
@@ -407,13 +468,21 @@ function Editor() {
 		}
 	} ) } )
 
+	const onSelectorChange = ( e ) => {
+		cw.Evt.emit( 'update-selector', e.target.value )
+	}
+
 	return (
 		<div id="cw-editor-wrap" >
 			<div id="cw-editor-panel" className="cw-panel">
 				{ ( currentSelector !== '' ) ? (
 					<>
 						<div className="cw-panel-title">
-							<span>You are editing: <span className="selector">{ currentSelector }</span></span>
+							<div className="title-inner">
+								<span className="title-desc">You're editing:</span>
+								<input type="text" className={ `selector ${ selectorClass }` } defaultValue={ currentSelector } onChange={ onSelectorChange } />
+							</div>
+							<Pseudo />
 						</div>
 						<div className="cw-panel-main">
 							<ul className="cw-panel-sections">
