@@ -78,7 +78,9 @@ const moveFocus = ( ip, force = false ) => {
 	}
 
 	let isSelector = false
-	if ( ip.target === undefined ) {
+	if ( ( ip === undefined || ip === false ) && currentTarget !== undefined) {
+		// Use existing currentTarget.
+	} else if ( ip.target === undefined ) {
 		currentTarget = document.querySelector( ip )
 		isSelector = true
 	} else {
@@ -132,12 +134,7 @@ export const updateFocus = () => {
 		return
 	}
 
-	const client = currentTarget.getBoundingClientRect()
-
-	const newState = {
-		focusLines: getFocusLinesNewState( client )
-	}
-	FocusStore.moveFocus( newState )
+	moveFocus( false, true )
 }
 
 const updateSelector = ( selector ) => {

@@ -2,6 +2,7 @@ import { Store, useStore } from '../../../common/Store'
 import CssParser from '../../../common/lib/CssParser'
 import { debounce } from '../../../common/Helpers'
 import { MainStore } from './MainStore'
+import { MediaStore } from '../components/Media/MediaStore'
 
 const initialState = {
 	styles: {
@@ -17,7 +18,10 @@ class StylesClass extends Store {
 			if ( ! settings.hasOwnProperty( page ) ) { continue }
 			allOutputs[ page ] = settings[ page ].styles
 		}
-		this.overrideInitialState( { styles: this.parseStyles( styles ), allOutputs } )
+		const parsedStyles = this.parseStyles( styles )
+		this.overrideInitialState( { styles: parsedStyles, allOutputs } )
+
+		MediaStore.setInitialMediaQueries( Object.keys( parsedStyles ) )
 	}
 
 	generateOutput( styles ) {
@@ -25,7 +29,9 @@ class StylesClass extends Store {
 		for ( const media in styles ) {
 			if ( ! styles.hasOwnProperty( media ) ) { continue }
 
-			// Handle if not 'all'
+			if ( 'all' !== media ) {
+				styleString += `@media ${media}{`
+			}
 
 			for ( const selector in styles[ media ] ) {
 				if ( ! styles[ media ].hasOwnProperty( selector ) ) { continue }
@@ -37,6 +43,10 @@ class StylesClass extends Store {
 					styleString += `${ property }:${ styles[ media ][ selector ][ property ] };`
 				}
 				styleString += '}'
+			}
+
+			if ( 'all' !== media ) {
+				styleString += `}`
 			}
 		}
 		return styleString
@@ -63,6 +73,8 @@ class StylesClass extends Store {
 	}
 
 	setStyles( selector, property, value, media = 'all' ) {
+		// Todo: Maybe get media while calling setStyles
+		media = MediaStore.get().currentMedia.query
 		this.set( ( state ) => {
 			const { currentPseudo } = MainStore.get()
 			selector = ( currentPseudo !== '' ) ? `${ selector }:${ currentPseudo }` : selector
@@ -117,6 +129,15 @@ class StylesClass extends Store {
 		this.set( ( state ) => {
 			const { currentPage } = MainStore.get()
 			state.allOutputs[ currentPage ] = cssString
+			return { styles, allOutputs: state.allOutputs }
+		} )
+	}
+
+	removeMediaStyles( queries ) {
+		this.set( ( state ) => {
+			const { styles } = state
+			queries.forEach( ( query ) => { delete styles[ query ] } )
+			state.allOutputs[ MainStore.get().currentPage ] = this.generateOutput( styles )
 			return { styles, allOutputs: state.allOutputs }
 		} )
 	}

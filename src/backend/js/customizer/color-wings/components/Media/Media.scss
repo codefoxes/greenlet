@@ -1,0 +1,303 @@
+$bar-height: 24px;
+
+#color-wings-media {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+
+	* {
+		box-sizing: border-box;
+	}
+}
+
+.cwm-enabled {
+	#color-wings-media {
+		display: block;
+	}
+
+	#customize-preview {
+		height: calc( 100% - #{ $bar-height } );
+		top: $bar-height;
+		left: 0;
+		margin: auto 0 auto 1px;
+
+		iframe { z-index: 2; }
+	}
+}
+
+.cwm-bar {
+	position: fixed;
+	top: 0;
+	left: 301px;
+	right: 0;
+	height: $bar-height;
+	background: #444;
+	color: #eee;
+	border-bottom: 1px solid #555;
+	z-index: 5;
+}
+
+@media screen and (min-width: 1667px) {
+	.cwm-bar {
+		left: calc( 18% + 1px );
+	}
+}
+
+.collapsed .cwm-bar {
+	left: 1px !important;
+}
+
+.cwm-resizer {
+	position: absolute;
+	left: 100%;
+	height: 100%;
+	width: 14px;
+	background: #666;
+	cursor: ew-resize;
+
+	&:before {
+		content: '';
+		width: 2px;
+		height: 26px;
+		top: 50%;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-right: 2px solid #888;
+		border-left: 2px solid #888;
+	}
+}
+
+.cwm-resizing {
+	#color-wings-media {
+		z-index: 3;
+	}
+
+	#customize-preview {
+		transition: none !important;
+	}
+}
+
+.cwm-resizer-tip {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.cwm-indicator {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 26px;
+	width: 0;
+	border-top: 1px solid #eee;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	border-left: 1px solid #69e000;
+}
+
+#cwm-resizer-details {
+	position: absolute;
+	top: 2px;
+	color: #fff;
+	left: 16px;
+	background: #444444;
+	padding: 0 10px;
+}
+
+.cwm-breakpoint-adder {
+	position: absolute;
+	background: #eee;
+	box-shadow: 0 0 3px #000;
+	color: #000;
+	left: 0;
+	top: 0;
+	padding: 0 5px 0 5px;
+	border-radius: 0 0 2px 0;
+	max-height: 18px;
+	white-space: nowrap;
+	cursor: pointer;
+	z-index: 5;
+
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 0;
+		height: 0;
+		border-top: 6px solid #eee;
+		border-right: 8px solid transparent;
+		border-bottom: 0 solid transparent;
+		border-left: 0 solid transparent;
+	}
+
+	.plus-sign {
+		font-size: 18px;
+	}
+
+	.adder-text {
+		display: none;
+	}
+
+	&:hover {
+		.adder-text {
+			display: block;
+		}
+
+		.plus-sign {
+			display: none;
+		}
+	}
+}
+
+.cwm-resizing .cwm-breakpoint-adder {
+	display: none;
+}
+
+.cwm-queries, .cwm-breakpoints {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.cwm-breakpoints {
+	height: 0;
+}
+
+.cwm-breakpoint {
+	position: absolute;
+	height: $bar-height;
+	width: 10px;
+	cursor: pointer;
+	transform: translateX(-50%);
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		height: 100%;
+		width: 1px;
+		background: #7cb342;
+	}
+}
+
+.cwm-query {
+	position: absolute;
+	height: 30%;
+	line-height: $bar-height;
+	color: #444;
+	cursor: pointer;
+	display: none;
+
+	&.enabled {
+		color: #fff;
+		display: block;
+	}
+}
+
+.cwm-bar.expanded {
+	.cwm-queries {
+		height: 250px;
+		background: #fff;
+		box-shadow: 0 0 100px 50px #000;
+	}
+
+	.cwm-query {
+		display: block;
+		height: 24px;
+		border-radius: 3px;
+
+		&:not(.active) .cwm-query-enabler {
+			display: block;
+		}
+	}
+
+	.cwm-query-details {
+		display: block;
+	}
+}
+
+.cwm-bar-toggler {
+	position: absolute;
+	right: 0;
+	background: #7cb342;
+	cursor: pointer;
+
+	.dashicons {
+		line-height: $bar-height;
+		height: $bar-height;
+		width: 24px;
+		transform: rotateZ(90deg);
+	}
+}
+
+.cwm-query-enabler {
+	position: absolute;
+	font-size: 14px;
+	line-height: 24px;
+	height: 24px;
+	padding: 0 6px;
+	width: max-content;
+	background: rgba(0, 0, 0, .1);
+	border-radius: 3px;
+	display: none;
+
+	&:hover {
+		background: rgba(0, 0, 0, .2);
+	}
+}
+
+.cwm-query-details {
+	font-size: 12px;
+	white-space: nowrap;
+	padding-left: 34px;
+	display: none;
+
+	&:hover {
+		background: #7cb342;
+		color: #fff;
+	}
+}
+
+.cwm-query.active {
+	height: $bar-height;
+
+	.cwm-query-details {
+		display: block;
+		padding-left: 8px;
+	}
+}
+
+.cwm-context-bg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.cwm-context-menu {
+	position: fixed;
+	padding: 4px 0 5px;
+	background: rgba(239, 239, 239, 0.95);
+	box-shadow: 0 4px 9px rgba(0, 0, 0, 0.34);
+	border-radius: 4px;
+	color: #000;
+}
+
+.cwm-context-item {
+	padding: 1px 20px;
+	cursor: default;
+
+	&:hover {
+		background: #4195fa;
+		color: #fff;
+	}
+}

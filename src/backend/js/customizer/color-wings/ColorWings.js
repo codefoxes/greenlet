@@ -5,6 +5,7 @@
 import './global/Setup'
 import './global/MainHandler'
 import './components/Editor/EditorHandler'
+import { toggleMediaEditor, changeDevice } from './components/Media/Media'
 
 import Canvas from './components/Canvas/Canvas'
 
@@ -20,11 +21,15 @@ wp.customize.controlConstructor['color-wings'] = wp.customize.Control.extend(
 					if ( isExpanded ) {
 						// api.state( 'paneVisible' ).set( false )
 						cw.Evt.emit( 'mount-colorwings' )
+						toggleMediaEditor( 'enable' )
 					} else {
 						cw.Evt.emit( 'unmount-colorwings' )
+						toggleMediaEditor( 'disable' )
 					}
 				} )
 			} )
+
+			wp.customize.state( 'previewedDevice' ).bind( changeDevice )
 
 			cw.Evt.on( 'update-control', ( currentStylesDetails ) => {
 				console.log( currentStylesDetails )

@@ -84,3 +84,5 @@ cw.StylesStore.registerSpecialSubscriber( addTempStyles )
 cw.StylesStore.registerSpecialSubscriber( addFont, 'fontManager' )
 cw.StylesStore.subscribe( addStyles )
 cw.StylesStore.subscribe( debouncedUpdateFocus )
+
+window.addEventListener( 'resize', debouncedUpdateFocus )
