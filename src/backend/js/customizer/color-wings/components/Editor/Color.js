@@ -8,6 +8,8 @@ function handlePickerPosition( irisRefNode ) {
 		holder.style.left = `-${ left - 12 }px`
 		holder.style.position = 'absolute'
 		cp.classList.add( 'fixed' )
+		// If color picker is under transition.
+		setTimeout( () => { holder.style.left = `-${ cp.getBoundingClientRect().left - 12 }px` }, 1000 )
 	}
 }
 
@@ -21,6 +23,12 @@ function Color( props ) {
 		if ( rgb.indexOf( 'rgb(' ) !== -1 ) {
 			const [ r, g, b ] = rgb.substring(4, rgb.length-1).replace(/ /g, '').split(',')
 			return '#' + componentToHex( parseInt( r, 10 ) ) + componentToHex( parseInt( g, 10 ) ) + componentToHex( parseInt( b, 10 ) )
+		}
+		if ( rgb.indexOf( 'rgba(' ) !== -1 ) {
+			const [ r, g, b, a ] = rgb.substring(5, rgb.length-1).replace(/ /g, '').split(',')
+			if ( a === '0' ) {
+				return '#' + componentToHex( parseInt( r, 10 ) ) + componentToHex( parseInt( g, 10 ) ) + componentToHex( parseInt( b, 10 ) )
+			}
 		}
 		return rgb.replace(/ /g, '')
 	}

@@ -189,8 +189,8 @@ const filtered = selectors.filter( item => ( null !== document.querySelector( it
 cw.MainStore.setQuickSelectors( filtered )
 
 cw.Evt.on( 'select-element', ( selector ) => {
-	moveFocus( selector )
-	lockUnlockFocus()
+	moveFocus( selector, true )
+	lockUnlockFocus( false, 'lock' )
 })
 
 cw.Evt.on( 'update-selector', ( selector ) => {

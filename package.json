@@ -33,6 +33,7 @@
     "js": "./src/build.sh js",
     "backend": "./src/build.sh backend",
     "backend:watch": "./src/build.sh backend --watch",
+    "colorwings": "./src/build.sh colorwings",
     "upgrade": "./src/update-version"
   },
   "repository": {

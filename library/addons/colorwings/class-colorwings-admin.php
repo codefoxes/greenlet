@@ -35,10 +35,20 @@ class ColorWings_Admin {
 			return;
 		}
 
-		require_once dirname( __FILE__ ) . '/class-control-colorwings.php';
-
+		add_action( 'customize_register', array( $this, 'require_control_classes' ) );
+		add_action( 'customize_register', array( $this, 'register_controls' ) );
 		add_action( 'customize_register', array( $this, 'add_controls' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ), 20 );
+	}
+
+	/**
+	 * Require control classes.
+	 *
+	 * @since  1.0.0
+	 */
+	public function require_control_classes() {
+		require_once dirname( __FILE__ ) . '/class-control-colorwings.php';
+		require_once dirname( __FILE__ ) . '/class-control-link.php';
 	}
 
 	/**
@@ -61,14 +71,23 @@ class ColorWings_Admin {
 	}
 
 	/**
+	 * Register Custom Control.
+	 *
+	 * @since 1.0.0
+	 * @param object $wp_customize WP_Customize_Manager.
+	 */
+	public function register_controls( $wp_customize ) {
+		$wp_customize->register_control_type( 'ColorWings\Control_ColorWings' );
+		$wp_customize->register_control_type( 'ColorWings\Control_Link' );
+	}
+
+	/**
 	 * Add Custom Control.
 	 *
 	 * @since 1.0.0
 	 * @param object $wp_customize WP_Customize_Manager.
 	 */
 	public function add_controls( $wp_customize ) {
-		$wp_customize->register_control_type( 'ColorWings\Control_ColorWings' );
-
 		$wp_customize->add_section(
 			'extra_styles',
 			array(

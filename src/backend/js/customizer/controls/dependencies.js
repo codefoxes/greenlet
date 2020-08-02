@@ -238,7 +238,7 @@ function manageTopbarDependencies() {
 	var tDivider = $( '#customize-control-header_divider' )
 	tDivider.prepend( '<div class="toggler"><span class="dashicons dashicons-arrow-up-alt2"></span></div>' )
 
-	const togglables = [ 'customize-control-fixed_topbar', 'customize-control-topbar_template', 'customize-control-topbar_width', 'customize-control-topbar_container', 'customize-control-topbar_bg', 'customize-control-topbar_color' ]
+	const togglables = [ 'customize-control-fixed_topbar', 'customize-control-topbar_template', 'customize-control-topbar_width' ]
 	togglables.forEach( ( togglableId ) => { document.getElementById( togglableId ).classList.add( 'togglable' ) } )
 
 	const toggleTopbar = function() {
@@ -262,7 +262,7 @@ function manageSemifooterDependencies() {
 	var fDivider = $( '#customize-control-footer_divider' )
 	fDivider.prepend( '<div class="toggler"><span class="dashicons dashicons-arrow-up-alt2"></span></div>' )
 
-	const togglables = [ 'customize-control-semifooter_template', 'customize-control-semifooter_width', 'customize-control-semifooter_container', 'customize-control-semifooter_bg', 'customize-control-semifooter_color' ]
+	const togglables = [ 'customize-control-semifooter_template', 'customize-control-semifooter_width' ]
 	togglables.forEach( ( togglableId ) => { document.getElementById( togglableId ).classList.add( 'togglable' ) } )
 
 	const toggleSemiFooter = function() {

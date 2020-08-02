@@ -90,3 +90,39 @@
 #cw-code-editor {
 	width: 100%;
 }
+
+.customize-control .cw-link-wrap {
+	background: #fff;
+	padding: 6px 10px;
+	cursor: pointer;
+	border-left: 2px solid transparent;
+	transition: all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;
+	box-shadow: 0 0 0 1px #ddd;
+	position: relative;
+
+	&:hover {
+		color: #0073aa;
+		background: #f3f3f5;
+		border-left: 2px solid #0073aa;
+
+		&:after {
+			color: #0073aa;
+		}
+	}
+
+	&:after {
+		content: '\f345';
+		font: normal 16px/1 dashicons;
+		color: #a0a5aa;
+		position: absolute;
+		right: 6px;
+		top: calc(50% - 8px);
+	}
+}
+
+.customize-control .cw-link-text {
+	position: absolute;
+	right: 26px;
+	top: calc(50% - 9px);
+	font-size: 11px;
+}

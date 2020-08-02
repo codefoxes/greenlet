@@ -39,3 +39,15 @@ wp.customize.controlConstructor['color-wings'] = wp.customize.Control.extend(
 		}
 	}
 )
+
+wp.customize.controlConstructor['cw-link'] = wp.customize.Control.extend(
+	{
+		ready: function() {
+			this.container[0].addEventListener( 'click', () => {
+				cw.Evt.emit( 'focusUnlocked' )
+				wp.customize.control( 'color_wings' ).focus()
+				cw.Evt.emit( 'select-element', this.params.options.selector )
+			} )
+		}
+	}
+)

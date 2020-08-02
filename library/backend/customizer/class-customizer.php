@@ -154,6 +154,8 @@ class Customizer {
 				} elseif ( 'preset' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Preset( $wp_customize, $option['id'], $option['cargs'] ) );
 
+				} elseif ( 'cw-link' === $option['cargs']['type'] ) {
+					class_exists( 'ColorWings\Control_Link' ) && $wp_customize->add_control( new \ColorWings\Control_Link( $wp_customize, $option['id'], $option['cargs'] ) );
 				} else {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
 				}

@@ -40,13 +40,13 @@ const paths = [{
 	outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
 }, {
 	inputPath : 'src/backend/js/customizer/color-wings/ColorWings.js',
-	outputPath: 'library/addons/js/color-wings.js',
-	outputMin : 'library/addons/js/color-wings.min.js',
+	outputPath: 'library/addons/colorwings/js/color-wings.js',
+	outputMin : 'library/addons/colorwings/js/color-wings.min.js',
 	banner: getCWBanner( 'color-wings.js' ),
 }, {
 	inputPath : 'src/backend/js/preview/colorWings.js',
-	outputPath: 'library/addons/js/color-wings-preview.js',
-	outputMin : 'library/addons/js/color-wings-preview.min.js',
+	outputPath: 'library/addons/colorwings/js/color-wings-preview.js',
+	outputMin : 'library/addons/colorwings/js/color-wings-preview.min.js',
 	banner: getCWBanner( 'color-wings-preview.js' ),
 }]
 

@@ -64,6 +64,10 @@ removePOBackups() {
 	rm -rf library/languages/*.pot~
 }
 
+copyColorwings() {
+	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
+}
+
 if [ -z "$1" ]; then
 	buildjs
 	buildcss
@@ -102,4 +106,7 @@ elif [ "$1" == "backend" ]; then
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
+elif [ "$1" == "colorwings" ]; then
+	buildbackend
+	copyColorwings
 fi

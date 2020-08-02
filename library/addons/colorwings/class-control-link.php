@@ -1,20 +1,20 @@
 <?php
 /**
- * Color Wings Control.
+ * Color Wings Link Control.
  *
  * @package ColorWings
  */
 
 namespace ColorWings;
 
-if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Customize_Control' ) ) {
+if ( ! class_exists( 'ColorWings\Control_Link' ) && class_exists( 'WP_Customize_Control' ) ) {
 	/**
-	 * Color Wings custom control.
+	 * Color Wings Link custom control.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 */
-	class Control_ColorWings extends \WP_Customize_Control {
+	class Control_Link extends \WP_Customize_Control {
 
 		/**
 		 * The type of customize control being rendered.
@@ -23,22 +23,16 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		 * @access public
 		 * @var    string
 		 */
-		public $type = 'color-wings';
+		public $type = 'cw-link';
 
 		/**
-		 * Enqueue scripts/styles.
+		 * Allow options parameter.
 		 *
 		 * @since  1.0.0
 		 * @access public
-		 * @return void
+		 * @var    array
 		 */
-		public function enqueue() {
-			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_script( 'wp-color-picker' );
-			wp_enqueue_script( 'codemirror-format', COLORWINGS_URL . '/js/formatting' . $min . '.js', array( 'wp-codemirror' ), COLORWINGS_VERSION, true );
-			wp_enqueue_script( 'color-wings-controls', COLORWINGS_URL . '/js/color-wings' . $min . '.js', array( 'jquery', 'react-dom' ), COLORWINGS_VERSION, true );
-		}
+		public $options = array();
 
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
@@ -64,6 +58,8 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 
 			// Control Type.
 			$this->json['type'] = $this->type;
+
+			$this->json['options'] = $this->options;
 		}
 
 		/**
@@ -75,7 +71,10 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 		 */
 		protected function content_template() {
 			?>
-			<div id="color-wings"></div>
+			<div class="cw-link-wrap">
+				<# if ( data.label ) { #><div class="cw-link">{{{ data.label }}}</div><# } #>
+				<div class="cw-link-text">Link</div>
+			</div>
 			<?php
 		}
 
