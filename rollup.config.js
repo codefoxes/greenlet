@@ -35,16 +35,16 @@ const getCWBanner = filename => `/** @license ColorWings v1.0.0
 */`
 
 const paths = [{
-	inputPath : 'src/backend/js/customizer/greenlet-controls.js',
+	inputPath : 'src/backend/main/customizer/greenlet-controls.js',
 	outputPath: 'library/backend/assets/js/greenlet-controls.js',
 	outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
 }, {
-	inputPath : 'src/backend/js/customizer/color-wings/ColorWings.js',
+	inputPath : 'src/backend/colorwings/customizer/ColorWings.js',
 	outputPath: 'library/addons/colorwings/js/color-wings.js',
 	outputMin : 'library/addons/colorwings/js/color-wings.min.js',
 	banner: getCWBanner( 'color-wings.js' ),
 }, {
-	inputPath : 'src/backend/js/preview/colorWings.js',
+	inputPath : 'src/backend/colorwings/preview/colorWings.js',
 	outputPath: 'library/addons/colorwings/js/color-wings-preview.js',
 	outputMin : 'library/addons/colorwings/js/color-wings-preview.min.js',
 	banner: getCWBanner( 'color-wings-preview.js' ),
