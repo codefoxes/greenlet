@@ -55,7 +55,6 @@ buildfonts() {
 
 buildbackend() {
 	./node_modules/.bin/rollup -c
-	# generatecss src/backend/css/preview.scss library/backend/assets/css/greenlet-preview.css library/backend/assets/css/greenlet-preview.min.css
 }
 
 removePOBackups() {
