@@ -94,6 +94,18 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 		}
 
 		if ( false !== $defer ) {
+			if ( null !== $ver ) {
+				if ( false === $ver ) {
+					if ( strpos( $handle, 'wp-' ) === 0 ) {
+						global $wp_version;
+						$src .= ( wp_parse_url( $src, PHP_URL_QUERY ) ? '&' : '?' ) . 'ver=' . $wp_version;
+					} else {
+						$src .= ( wp_parse_url( $src, PHP_URL_QUERY ) ? '&' : '?' ) . 'ver=' . GREENLET_VERSION;
+					}
+				} else {
+					$src .= ( wp_parse_url( $src, PHP_URL_QUERY ) ? '&' : '?' ) . 'ver=' . $ver;
+				}
+			}
 			greenlet_defer_style( $src );
 			return;
 		}

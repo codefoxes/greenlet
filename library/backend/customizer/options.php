@@ -835,6 +835,20 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'defer_block_css',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Defer WP Block Editor CSS', 'greenlet' ),
+			'description' => __( 'Load Block Editor CSS files after page load.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
 		'type' => 'section',
 		'id'   => 'presets',
 		'args' => array(

@@ -308,6 +308,24 @@ function manageSidebarDependencies() {
 	)
 }
 
+function managePerformanceDependencies() {
+	var control  = wp.customize.control( 'disable_block_editor' )
+
+	if ( control.setting._value !== false ) {
+		$( '#customize-control-defer_block_css' ).hide()
+	}
+
+	control.setting.bind(
+		function() {
+			if ( control.setting._value !== false ) {
+				$( '#customize-control-defer_block_css' ).hide()
+			} else {
+				$( '#customize-control-defer_block_css' ).show()
+			}
+		}
+	)
+}
+
 const logoLoaded = { width: false, height: false }
 window.addEventListener( 'componentMounted', ( e ) => {
 	if ( e.detail === 'logo_width' ) logoLoaded.width = true
@@ -325,5 +343,6 @@ wp.customize.bind(
 		manageSemifooterDependencies()
 		manageSidebarDependencies()
 		manageAspectTogglers()
+		managePerformanceDependencies()
 	}
 );
