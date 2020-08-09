@@ -86,7 +86,11 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 		}
 
 		if ( false !== $inline ) {
-			$path = str_replace( get_home_url(), ABSPATH, $src );
+			if ( '/' === substr( $src, 0, 1 ) ) {
+				$path = ABSPATH . $src;
+			} else {
+				$path = str_replace( get_home_url(), ABSPATH, $src );
+			}
 			ob_start();
 			require_once $path;
 			greenlet_enqueue_inline_style( $handle, ob_get_clean() );
