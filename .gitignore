@@ -3,8 +3,13 @@ node_modules/
 
 assets/css/*
 assets/js/*
-library/backend/assets/js/greenlet-controls.js
-library/backend/assets/fonts/google-fonts.json
+library/backend/assets/css/greenlet-preview.*
+library/backend/assets/js/greenlet-controls.*
+library/backend/assets/js/greenlet-preview.*
+
+library/addons/colorwings/js/color-wings.js.map
+library/addons/colorwings/js/color-wings-preview.js.map
+library/addons/colorwings/fonts/google-fonts.json
 
 **/cypress.env.json
 **/cypress/videos

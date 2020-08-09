@@ -62,8 +62,8 @@ for font in newList:
 newRaw = json.dumps(secondList, separators=(',', ':'))
 
 print('Writing..')
-os.makedirs(current_dir + '/../library/backend/assets/fonts', exist_ok=True)
-with open(current_dir + '/../library/backend/assets/fonts/google-fonts.json', 'w+') as f:
+os.makedirs(current_dir + '/../library/addons/colorwings/fonts', exist_ok=True)
+with open(current_dir + '/../library/addons/colorwings/fonts/google-fonts.json', 'w+') as f:
 	f.seek(0)
 	f.write( newRaw + '\n')
 	f.truncate()

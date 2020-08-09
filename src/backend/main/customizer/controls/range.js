@@ -4,6 +4,8 @@
  * @package greenlet
  */
 
+import { $ } from '../Helpers'
+
 wp.customize.controlConstructor['range'] = wp.customize.Control.extend(
 	{
 		ready: function() {

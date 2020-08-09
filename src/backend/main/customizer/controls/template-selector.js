@@ -4,6 +4,8 @@
  * @package greenlet
  */
 
+import { $ } from '../Helpers'
+
 wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.extend(
 	{
 		ready: function() {

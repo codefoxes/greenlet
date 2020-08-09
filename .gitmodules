@@ -1,3 +1,6 @@
 [submodule "library/pro"]
 	path = library/pro
 	url = git@greenlet-pro.git
+[submodule "src/backend/colorwings"]
+	path = src/backend/colorwings
+	url = git@colorwings-source.git

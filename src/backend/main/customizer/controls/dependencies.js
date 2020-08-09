@@ -1,3 +1,5 @@
+import { $ } from '../Helpers'
+
 /**
  * Logo height and width dependencies.
  */
@@ -70,8 +72,9 @@ function manageLogoDependencies() {
 			widthRange.value = newWidth
 			widthInput.value = newWidth
 			wControl.setting.set( newWidth + document.getElementById( 'length-unit-logo_width' ).value )
+		} else {
+			ratio = widthInput.value / heightInput.value
 		}
-		ratio = widthInput.value / heightInput.value
 	}
 
 	$( widthRange ).on( 'input', updateAspectHeight )
@@ -235,15 +238,12 @@ function manageTopbarDependencies() {
 	var tDivider = $( '#customize-control-header_divider' )
 	tDivider.prepend( '<div class="toggler"><span class="dashicons dashicons-arrow-up-alt2"></span></div>' )
 
-	var toggleTopbar = function() {
-		$( '#customize-control-fixed_topbar' ).toggleClass( 'collapse' )
-		$( '#customize-control-topbar_template' ).toggleClass( 'collapse' )
-		$( '#customize-control-topbar_content_source' ).toggleClass( 'collapse' )
-		$( '#customize-control-topbar_width' ).toggleClass( 'collapse' )
-		$( '#customize-control-topbar_container' ).toggleClass( 'collapse' )
+	const togglables = [ 'customize-control-fixed_topbar', 'customize-control-topbar_template', 'customize-control-topbar_width' ]
+	togglables.forEach( ( togglableId ) => { document.getElementById( togglableId ).classList.add( 'togglable' ) } )
+
+	const toggleTopbar = function() {
+		togglables.forEach( ( togglableId ) => { document.getElementById( togglableId ).classList.toggle( 'collapse' ) } )
 		$( '#customize-control-header_divider .toggler' ).toggleClass( 'toggled' )
-		$( '#customize-control-topbar_bg' ).toggle()
-		$( '#customize-control-topbar_color' ).toggle()
 	}
 
 	if ( control.setting._value === false ) {
@@ -262,14 +262,12 @@ function manageSemifooterDependencies() {
 	var fDivider = $( '#customize-control-footer_divider' )
 	fDivider.prepend( '<div class="toggler"><span class="dashicons dashicons-arrow-up-alt2"></span></div>' )
 
-	var toggleSemiFooter = function() {
-		$( '#customize-control-semifooter_template' ).toggleClass( 'collapse' )
-		$( '#customize-control-semifooter_content_source' ).toggleClass( 'collapse' )
-		$( '#customize-control-semifooter_width' ).toggleClass( 'collapse' )
-		$( '#customize-control-semifooter_container' ).toggleClass( 'collapse' )
+	const togglables = [ 'customize-control-semifooter_template', 'customize-control-semifooter_width' ]
+	togglables.forEach( ( togglableId ) => { document.getElementById( togglableId ).classList.add( 'togglable' ) } )
+
+	const toggleSemiFooter = function() {
+		togglables.forEach( ( togglableId ) => { document.getElementById( togglableId ).classList.toggle( 'collapse' ) } )
 		$( '#customize-control-footer_divider .toggler' ).toggleClass( 'toggled' )
-		$( '#customize-control-semifooter_bg' ).toggle()
-		$( '#customize-control-semifooter_color' ).toggle()
 	}
 
 	if ( control.setting._value === false ) {
@@ -310,14 +308,41 @@ function manageSidebarDependencies() {
 	)
 }
 
+function managePerformanceDependencies() {
+	var control  = wp.customize.control( 'disable_block_editor' )
+
+	if ( control.setting._value !== false ) {
+		$( '#customize-control-defer_block_css' ).hide()
+	}
+
+	control.setting.bind(
+		function() {
+			if ( control.setting._value !== false ) {
+				$( '#customize-control-defer_block_css' ).hide()
+			} else {
+				$( '#customize-control-defer_block_css' ).show()
+			}
+		}
+	)
+}
+
+const logoLoaded = { width: false, height: false }
+window.addEventListener( 'componentMounted', ( e ) => {
+	if ( e.detail === 'logo_width' ) logoLoaded.width = true
+	if ( e.detail === 'logo_height' ) logoLoaded.height = true
+} )
+
 wp.customize.bind(
 	'ready',
 	function () {
-		manageLogoDependencies()
+		if ( logoLoaded.width && logoLoaded.height ) {
+			manageLogoDependencies()
+		}
 		manageCoverDependencies()
 		manageTopbarDependencies()
 		manageSemifooterDependencies()
 		manageSidebarDependencies()
 		manageAspectTogglers()
+		managePerformanceDependencies()
 	}
 );
