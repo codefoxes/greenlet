@@ -4,7 +4,7 @@
  * @package greenlet
  */
 
-import { $, gl } from '../helpers'
+import { $, debounce } from '../Helpers'
 
 wp.customize.controlConstructor['template'] = wp.customize.Control.extend(
 	{
@@ -22,7 +22,7 @@ wp.customize.controlConstructor['template'] = wp.customize.Control.extend(
 				control.setting.set( value )
 			}
 
-			rawInput.on( 'input', gl.debounce( 500, function() { setValue( this.value, 'radios' ) } ) )
+			rawInput.on( 'input', debounce( function() { setValue( this.value, 'radios' ) }, 500 ) )
 			radios.on( 'change', function () { setValue( this.value, 'input' ) } )
 		}
 	}

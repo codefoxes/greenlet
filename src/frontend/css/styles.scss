@@ -1,3 +1,5 @@
+@import "variables";
+
 * {
 	text-shadow: 1px 1px 1px rgba(0,0,0,.004);
 	-webkit-font-smoothing: antialiased;
@@ -40,7 +42,7 @@ img {
 .site-header {
 	position: relative;
 	background: #FFF;
-	color: #33691e;
+	color: $header-color;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	margin: auto;
 	z-index: 99;
@@ -63,12 +65,12 @@ img {
 	}
 
 	a {
-		color: #33691e;
+		color: $header-link-color;
 		display: block;
 		white-space: nowrap;
 
 		&:hover {
-			color: #7CB342;
+			color: $header-link-hover;
 		}
 	}
 }
@@ -80,6 +82,11 @@ img {
 	img {
 		max-width: 100%;
 		display: block;
+	}
+
+	a {
+		font-size: 3.6rem;
+		font-weight: 300;
 	}
 }
 
@@ -686,6 +693,10 @@ blockquote {
 @media (min-width: 801px) {
 	.admin-bar .topbar {
 		top: 32px;
+	}
+
+	.container {
+		max-width: 1170px;
 	}
 
 	.site-header h1, .topbar h1 {

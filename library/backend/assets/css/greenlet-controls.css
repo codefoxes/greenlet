@@ -376,7 +376,7 @@
 	margin-bottom: 25px;
 }
 
-.customize-control {
+.customize-control.togglable {
 	max-height: 500px;
 	transition: .5s all;
 	opacity: 1;

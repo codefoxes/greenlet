@@ -4,7 +4,7 @@
  * @package greenlet
  */
 
-import { $ } from '../helpers'
+import { $ } from '../Helpers'
 
 wp.customize.controlConstructor['font'] = wp.customize.Control.extend(
 	{

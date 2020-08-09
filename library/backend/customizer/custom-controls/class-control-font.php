@@ -72,6 +72,12 @@ if ( ! class_exists( 'Control_Font' ) && class_exists( 'WP_Customize_Control' ) 
 			wp_enqueue_script( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'choices' ), GREENLET_VERSION, true );
 			wp_enqueue_style( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 			wp_localize_script( 'greenlet-controls', 'greenletAllFonts', $this->get_all_fonts() );
+
+			$color_wings_fonts = array(
+				'allFonts' => $this->get_all_fonts(),
+				'defaults' => greenlet_font_defaults(),
+			);
+			wp_localize_script( 'greenlet-controls', 'colorWingsFonts', $color_wings_fonts );
 		}
 
 		/**

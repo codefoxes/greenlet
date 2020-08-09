@@ -15,23 +15,28 @@ buildjs() {
 	echo 'Build JS: Complete'
 }
 
+generatecss() {
+	# $1 = src path
+	# $2 = dest path
+	# $3 = dest min path
+
+	# Compile SCSS to CSS
+	./node_modules/.bin/node-sass --output-style expanded --indent-type tab --indent-width 1 --source-map true $1 $2
+	# Autoprefix
+	./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output $2 $2
+	# Remove spaced alignment from autoprefixer.
+	sed -i '' 's/\  \ *//g' $2
+	# Uglify
+	cleancss -o $3 $2
+}
+
 buildcss() {
 	echo 'Build CSS: Started'
 	rm -rf assets/css
 	mkdir -p assets/css
 
 	for i in "${css_files[@]}"; do
-		# Compile SCSS to CSS
-		./node_modules/.bin/node-sass --output-style expanded --indent-type tab --indent-width 1 --source-map true src/frontend/css/$i.scss assets/css/$i.css
-
-		# Autoprefix
-		./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output assets/css/$i.css assets/css/$i.css
-
-		# Remove spaced alignment from autoprefixer.
-		sed -i '' 's/\  \ *//g' assets/css/$i.css
-
-		# Uglify
-		cleancss -o assets/css/$i.min.css assets/css/$i.css
+		generatecss src/frontend/css/$i.scss assets/css/$i.css assets/css/$i.min.css
 	done
 	echo 'Build CSS: Complete'
 
@@ -56,6 +61,10 @@ removePOBackups() {
 	echo "Removing po backups"
 	rm -rf library/languages/*.po~
 	rm -rf library/languages/*.pot~
+}
+
+copyColorwings() {
+	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
 }
 
 if [ -z "$1" ]; then
@@ -96,4 +105,7 @@ elif [ "$1" == "backend" ]; then
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
+elif [ "$1" == "colorwings" ]; then
+	buildbackend
+	copyColorwings
 fi
