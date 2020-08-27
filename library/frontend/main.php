@@ -5,6 +5,7 @@
  * @package greenlet\library\frontend
  */
 
+use Greenlet\Rows as GreenletRows;
 use Greenlet\Columns as GreenletColumns;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -57,16 +58,6 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 	 */
 	function greenlet_cover( $pos = 'header' ) {
 
-		// Set variables.
-		$layout_option = $pos . '_template';
-
-		// Get logo and menu positions from options, else set default values.
-		$logo_position  = gl_get_option( 'logo_position', 'header-1' );
-		$mmenu_position = gl_get_option( 'mmenu_position', 'header-2' );
-		$smenu_position = gl_get_option( 'smenu_position', 'dont-show' );
-		$fmenu_position = gl_get_option( 'fmenu_position', 'dont-show' );
-		$layout         = gl_get_option( $layout_option, top_bottom_default_columns( $pos ) );
-
 		/**
 		 * Filters the content sources and their sequence for current cover column.
 		 *
@@ -75,55 +66,74 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 		 * @param array $content_sources Position content sources. Default array( 'widgets', 'templates' ).
 		 */
 		$sources = apply_filters( $pos . '_content_sources', array( 'widgets', 'templates' ) );
+		$items   = greenlet_cover_layout_items( $pos );
 
-		$layout = ( '' === $layout ) ? top_bottom_default_columns( $pos ) : $layout;
+		$cover_rows = gl_get_option( $pos . '_layout', greenlet_cover_layout_defaults( $pos ) );
 
-		// Create new column object with current layout as parameter.
-		// @see library/classes.php.
-		$cobj = new GreenletColumns( $layout );
+		$k = 1;
+		foreach ( $cover_rows as $row ) {
+			$markup_context = ( 'header' === $pos ) ? 'sub-header' : 'sub-footer';
+			$class_name     = ( 'header' === $pos ) ? 'header-section ' : 'footer-section ';
 
-		// For each columns in the array.
-		$i = 1;
-		foreach ( $cobj->array as $col ) {
-
-			$args = array(
-				'primary' => "{$pos}-{$i} {$pos}-column",
-				'width'   => $col,
-			);
-
-			printf( '<div %s>', wp_kses( greenlet_attr( $args ), null ) );
-
-			do_action( "greenlet_before_{$pos}_{$i}_content" );
-
-			// If current position has logo or menu, get template part.
-			if ( $logo_position === $pos . '-' . $i ) {
-				get_template_part( 'templates/logo' );
+			if ( isset( $row['primary'] ) && $row['primary'] ) {
+				$markup_context = ( 'header' === $pos ) ? 'site-header' : 'site-footer';
+				$class_name    .= ( 'header' === $pos ) ? 'site-header ' : 'site-footer ';
 			}
 
-			if ( $mmenu_position === $pos . '-' . $i ) {
-				get_template_part( 'templates/menu/main' );
+			if ( isset( $row['sticky'] ) && $row['sticky'] ) {
+				$class_name .= 'sticky ';
 			}
 
-			if ( $smenu_position === $pos . '-' . $i ) {
-				get_template_part( 'templates/menu/secondary' );
+			if ( isset( $row['vertical'] ) && ( 'no' !== $row['vertical'] ) ) {
+				$class_name .= 'vertical ' . $row['vertical'] . ' ';
 			}
 
-			if ( $fmenu_position === $pos . '-' . $i ) {
-				get_template_part( 'templates/menu/footer' );
-			}
+			greenlet_markup( $markup_context, greenlet_attr( $class_name . 'header-' . $k ) );
+			printf( '<div %s>', wp_kses( greenlet_attr( 'container header-contents' ), null ) );
+			printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
 
-			foreach ( $sources as $source ) {
-				if ( 'widgets' === $source ) {
-					dynamic_sidebar( $pos . '-sidebar-' . $i );
-				} elseif ( 'templates' === $source ) {
-					get_template_part( 'templates/' . $pos . '/column', ( $i ) );
+			// Create new column object with current layout as parameter.
+			// @see library/classes.php.
+			$cobj = new GreenletColumns( $row['columns'] );
+
+			// For each columns in the array.
+			$i = 1;
+			foreach ( $cobj->array as $col ) {
+
+				$args = array(
+					'primary'  => "{$pos}-column {$pos}-column-{$i}",
+					'width'    => $col,
+					'data-loc' => "{$k}-{$i}",
+				);
+
+				printf( '<div %s>', wp_kses( greenlet_attr( $args ), null ) );
+
+				do_action( "greenlet_before_{$pos}_{$i}_content" );
+
+				if ( isset( $row['items'] ) && isset( $row['items'][ $i ] ) ) {
+					foreach ( $row['items'][ $i ] as $id ) {
+						$item = $items[ $id ];
+						get_template_part( $item['template'] );
+					}
 				}
+
+				foreach ( $sources as $source ) {
+					if ( 'widgets' === $source ) {
+						dynamic_sidebar( $pos . '-sidebar-' . $i );
+					} elseif ( 'templates' === $source ) {
+						get_template_part( 'templates/' . $pos . '/column', ( $i ) );
+					}
+				}
+
+				do_action( "greenlet_after_{$pos}_{$i}_content" );
+
+				echo '</div>';
+				$i++;
 			}
 
-			do_action( "greenlet_after_{$pos}_{$i}_content" );
-
-			echo '</div>';
-			$i++;
+			echo '</div></div>';
+			greenlet_markup_close();
+			$k++;
 		}
 	}
 }

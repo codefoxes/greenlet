@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action( 'greenlet_semifooter', 'greenlet_do_semifooter' );
+// add_action( 'greenlet_semifooter', 'greenlet_do_semifooter' );
 add_action( 'greenlet_footer', 'greenlet_do_footer' );
 
 /**
@@ -41,20 +41,24 @@ function greenlet_do_semifooter() {
  * @return void
  */
 function greenlet_do_footer() {
-	greenlet_markup( 'site-footer', greenlet_attr( 'site-footer' ) );
-	printf( '<div %s>', wp_kses( greenlet_attr( 'container' ), null ) );
-	printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
 	greenlet_cover( 'footer' );
-	$text  = sprintf( '<div %s><p>', greenlet_attr( 'copyright' ) );
-	$text .= sprintf(
-		'&copy; %1$s &middot; <a href="%2$s">%3$s</a> &middot; %4$s <a href="https://greenletwp.com/" target="_blank" rel="nofollow noopener">%5$s</a></p></div>',
-		date_i18n( __( 'Y', 'greenlet' ) ),
-		esc_url( get_home_url() ),
-		get_bloginfo( 'name' ),
-		__( 'Powered By', 'greenlet' ),
-		__( 'Greenlet', 'greenlet' )
-	);
-	echo wp_kses_post( apply_filters( 'greenlet_copyright', $text ) );
-	echo '</div></div>';
-	greenlet_markup_close();
 }
+
+//function greenlet_do_footer() {
+//	greenlet_markup( 'site-footer', greenlet_attr( 'site-footer' ) );
+//	printf( '<div %s>', wp_kses( greenlet_attr( 'container' ), null ) );
+//	printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
+//	greenlet_cover( 'footer' );
+//	$text  = sprintf( '<div %s><p>', greenlet_attr( 'copyright' ) );
+//	$text .= sprintf(
+//		'&copy; %1$s &middot; <a href="%2$s">%3$s</a> &middot; %4$s <a href="https://greenletwp.com/" target="_blank" rel="nofollow noopener">%5$s</a></p></div>',
+//		date_i18n( __( 'Y', 'greenlet' ) ),
+//		esc_url( get_home_url() ),
+//		get_bloginfo( 'name' ),
+//		__( 'Powered By', 'greenlet' ),
+//		__( 'Greenlet', 'greenlet' )
+//	);
+//	echo wp_kses_post( apply_filters( 'greenlet_copyright', $text ) );
+//	echo '</div></div>';
+//	greenlet_markup_close();
+//}

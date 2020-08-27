@@ -54,7 +54,11 @@ buildfonts() {
 }
 
 buildbackend() {
-	./node_modules/.bin/rollup -c
+	if [ "$1" == "only_main" ]; then
+		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
+	else
+		./node_modules/.bin/rollup -c
+	fi
 }
 
 removePOBackups() {
@@ -101,7 +105,7 @@ elif [ "$1" == "css" ]; then
 elif [ "$1" == "js" ]; then
 	buildjs
 elif [ "$1" == "backend" ]; then
-	buildbackend
+	buildbackend only_main
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi

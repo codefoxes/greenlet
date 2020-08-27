@@ -171,6 +171,7 @@ function greenletFixMenu() {
 
 	var fixToggle = function() {
 		var header = document.querySelector( '.header-column' )
+		// Todo: .menu-toggle-button may not exist.
 		document.querySelector( '.menu-toggle-button' ).style.top = '-' + ( ( header.offsetHeight / 2 ) + 12 ) + 'px'
 	}
 

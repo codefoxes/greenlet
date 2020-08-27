@@ -44,6 +44,7 @@ class Customizer {
 		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
 		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template.php';
 		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-sequence.php';
+		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-cover-layout.php';
 		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
 		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
 		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
@@ -56,6 +57,7 @@ class Customizer {
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'customize_preview_init', array( $this, 'enqueue_preview_scripts' ) );
 	}
 
 	/**
@@ -66,6 +68,15 @@ class Customizer {
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
+	}
+
+	/**
+	 * Enqueue Customizer Preview Scripts.
+	 *
+	 * @since  1.1.0
+	 */
+	public function enqueue_preview_scripts() {
+		wp_enqueue_script( 'greenlet-preview', GL_LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'customize-preview', 'react-dom' ), GREENLET_VERSION, true );
 	}
 
 	/**
@@ -139,6 +150,9 @@ class Customizer {
 				} elseif ( 'template-sequence' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Template_Sequence( $wp_customize, $option['id'], $option['cargs'] ) );
 
+				} elseif ( 'cover-layout' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Cover_Layout( $wp_customize, $option['id'], $option['cargs'] ) );
+
 				} elseif ( 'gl-color' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Color( $wp_customize, $option['id'], $option['cargs'] ) );
 
@@ -160,6 +174,18 @@ class Customizer {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
 				}
 			}
+
+			if ( isset( $option['pargs'] ) ) {
+				$wp_customize->selective_refresh->add_partial(
+					$option['id'] . '_partial',
+					array(
+						'selector'            => $option['pargs']['selector'],
+						'settings'            => array( $option['id'] ),
+						'render_callback'     => $option['pargs']['render_callback'],
+						'container_inclusive' => $option['pargs']['container_inclusive'],
+					)
+				);
+			}
 		}
 	}
 
@@ -176,6 +202,7 @@ class Customizer {
 		$wp_customize->register_control_type( 'Greenlet\Control_Radio_Image' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Template' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Template_Sequence' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Cover_Layout' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Divider' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Color' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Border' );

@@ -54,7 +54,7 @@ function greenlet_markup_tag( $context ) {
 		case 'site-content':
 		case 'entry-content':
 		case 'comments-area':
-		case 'semifooter':
+		case 'sub-header':
 			$tag = 'section';
 			break;
 		case 'main':

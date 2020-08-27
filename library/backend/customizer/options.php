@@ -198,10 +198,26 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
-		'id'   => 'header_layout',
+		'id'   => 'header_section',
 		'args' => array(
 			'title' => __( 'Header Layout', 'greenlet' ),
 			'panel' => 'layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'header_layout',
+		'sargs' => array(
+			'default' => greenlet_cover_layout_defaults( 'header' ),
+		),
+		'cargs' => array(
+			'type'     => 'cover-layout',
+			'section'  => 'header_section',
+			'label'    => __( 'Header Layout', 'greenlet' ),
+			'position' => 'header',
+			'choices'  => greenlet_template_images( 'cover' ),
+			'items'    => greenlet_cover_layout_items( 'header' ),
 		),
 	);
 
@@ -480,10 +496,26 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
-		'id'   => 'footer_layout',
+		'id'   => 'footer_section',
 		'args' => array(
 			'title' => __( 'Footer Layout', 'greenlet' ),
 			'panel' => 'layout',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'footer_layout',
+		'sargs' => array(
+			'default' => greenlet_cover_layout_defaults( 'footer' ),
+		),
+		'cargs' => array(
+			'type'     => 'cover-layout',
+			'section'  => 'footer_section',
+			'label'    => __( 'Footer Layout', 'greenlet' ),
+			'position' => 'footer',
+			'choices'  => greenlet_template_images( 'cover' ),
+			'items'    => greenlet_cover_layout_items( 'footer' ),
 		),
 	);
 

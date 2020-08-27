@@ -479,6 +479,99 @@ if ( ! function_exists( 'top_bottom_default_columns' ) ) {
 	}
 }
 
+if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
+	/**
+	 * Get cover layout items.
+	 *
+	 * @since 1.3.5
+	 *
+	 * @param  string $pos Cover layout position.
+	 * @return array       Cover layout items Array.
+	 */
+	function greenlet_cover_layout_items( $pos = 'header' ) {
+		$items = array(
+			array(
+				'id'        => 'logo',
+				'name'      => 'Logo',
+				'type'      => 'logo',
+				'template'  => 'templates/logo',
+				'positions' => array( 'header', 'footer' ),
+			),
+			array(
+				'id'        => 'main-menu',
+				'name'      => 'Main Menu',
+				'type'      => 'menu',
+				'template'  => 'templates/menu/main',
+				'positions' => array( 'header' ),
+			),
+			array(
+				'id'        => 'secondary-menu',
+				'name'      => 'Secondary Menu',
+				'type'      => 'menu',
+				'template'  => 'templates/menu/secondary',
+				'positions' => array( 'header', 'footer' ),
+			),
+			array(
+				'id'        => 'footer-menu',
+				'name'      => 'Footer Menu',
+				'type'      => 'menu',
+				'template'  => 'templates/menu/footer',
+				'positions' => array( 'footer' ),
+			),
+		);
+
+		$items = apply_filters( 'greenlet_cover_layout_items', $items );
+
+		$cover_items = array();
+		foreach ( $items as $item ) {
+			if ( ! isset( $item['positions'] ) || in_array( $pos, $item['positions'], true ) ) {
+				$cover_items[ $item['id'] ] = $item;
+			}
+		}
+
+		return $cover_items;
+	}
+}
+
+if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
+	/**
+	 * Gets cover (header, footer) columns.
+	 *
+	 * @since  1.3.5
+	 * @param  string $position Cover position.
+	 * @return array            List of columns
+	 */
+	function greenlet_cover_layout_defaults( $position = 'header' ) {
+		$header = array(
+			array(
+				'columns' => '12',
+				'sticky'  => true,
+				'items'   => array(
+					1 => array( 'secondary-menu' ),
+				),
+			),
+			array(
+				'columns' => '4-8',
+				'primary' => true,
+				'items'   => array(
+					1 => array( 'logo' ),
+					2 => array( 'main-menu' ),
+				),
+			),
+		);
+		$footer = array(
+			array(
+				'columns' => '12',
+				'primary' => true,
+				'items'   => array(
+					1 => array( 'footer-menu' ),
+				),
+			),
+		);
+		return $$position;
+	}
+}
+
 if ( ! function_exists( 'greenlet_get_logo' ) ) {
 	/**
 	 * Get logo URL.

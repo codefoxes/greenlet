@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'greenlet_before_topbar', 'greenlet_skip_link' );
 add_action( 'greenlet_head', 'greenlet_do_head' );
-add_action( 'greenlet_topbar', 'greenlet_do_topbar' );
+// add_action( 'greenlet_topbar', 'greenlet_do_topbar' );
 add_action( 'greenlet_header', 'greenlet_do_header' );
 
 /**
@@ -84,10 +84,5 @@ function greenlet_do_topbar() {
  * @since 1.0.0
  */
 function greenlet_do_header() {
-	greenlet_markup( 'site-header', greenlet_attr( 'site-header' ) );
-	printf( '<div %s>', wp_kses( greenlet_attr( 'container header-contents' ), null ) );
-	printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
 	greenlet_cover( 'header' );
-	echo '</div></div>';
-	greenlet_markup_close();
 }

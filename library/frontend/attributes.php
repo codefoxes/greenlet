@@ -28,6 +28,10 @@ function greenlet_attr( $args, $get_array = false ) {
 	// Set width to null.
 	$width = null;
 
+	$class_names = $args;
+
+	$attributes = array();
+
 	// If arguments is array.
 	if ( is_array( $args ) ) {
 
@@ -44,17 +48,22 @@ function greenlet_attr( $args, $get_array = false ) {
 		$width = $args['width'];
 
 		// Get classes from merged array.
-		$args = $args['primary'];
+		$class_names = $args['primary'];
+
+		unset( $args['primary'] );
+		unset( $args['width'] );
+
+		$attributes = $args;
 	}
 
 	// Separate multiple classes if provided.
-	$class_array = explode( ' ', $args );
+	$class_array = explode( ' ', $class_names );
 
 	// First element is primary class.
 	$primary = $class_array[0];
 
 	// Default attributes array.
-	$attributes = array( 'class' => $args );
+	$attributes = array_merge( array( 'class' => $class_names ), $attributes );
 
 	$media = apply_filters( "greenlet_media_{$primary}", array() );
 

@@ -338,9 +338,9 @@ wp.customize.bind(
 		if ( logoLoaded.width && logoLoaded.height ) {
 			manageLogoDependencies()
 		}
-		manageCoverDependencies()
-		manageTopbarDependencies()
-		manageSemifooterDependencies()
+		// manageCoverDependencies()
+		// manageTopbarDependencies()
+		// manageSemifooterDependencies()
 		manageSidebarDependencies()
 		manageAspectTogglers()
 		managePerformanceDependencies()
