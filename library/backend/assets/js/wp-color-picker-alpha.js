@@ -14,6 +14,10 @@
 		return
 	}
 
+	if ( wpColorPickerL10n === undefined ) {
+		var wpColorPickerL10n = {}
+	}
+
 	// Variable for some backgrounds ( grid )
 	var image       = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==',
 		// html stuff for wpColorPicker copy of the original color-picker.js
@@ -30,6 +34,14 @@
 			_wrappingLabel     = '<label></label>',
 			_wrappingLabelText = '<span class="screen-reader-text"></span>'
 	}
+
+	var __ = function( text, domain ) {
+		if ( wp && wp.i18n && wp.i18n.__ ) {
+			return wp.i18n.__( text, domain )
+		}
+		return text
+	}
+
 	/**
 	 * Overwrite Color
 	 * for enable support rbga
@@ -116,7 +128,7 @@
 						.css( { backgroundColor: self.initialValue } )
 						.attr(
 							'title',
-							wpColorPickerL10n.pick
+							__( 'Select Color' )
 						)
 						.attr(
 							'data-current',
@@ -135,7 +147,7 @@
 						// Insert the default label text.
 						self.wrappingLabelText = $( _wrappingLabelText )
 							.insertBefore( el )
-							.text( wpColorPickerL10n.defaultLabel )
+							.text( __( 'Color value' ) )
 					}
 
 					/*
@@ -153,7 +165,7 @@
 						.insertBefore( self.wrappingLabel )
 						.css( { backgroundColor: self.initialValue } )
 					// Set the toggle button span element text.
-					self.toggler.find( '.wp-color-result-text' ).text( wpColorPickerL10n.pick )
+					self.toggler.find( '.wp-color-result-text' ).text( __( 'Select Color' ) )
 					// Set up the Iris container and insert it after the wrapping label.
 					self.pickerContainer = $( _after ).insertAfter( self.wrappingLabel )
 					// Store a reference to the Clear/Default button.
@@ -162,19 +174,19 @@
 
 				// Set up the Clear/Default button.
 				if ( self.options.defaultColor ) {
-					self.button.addClass( 'wp-picker-default' ).val( wpColorPickerL10n.defaultString )
+					self.button.addClass( 'wp-picker-default' ).val( __( 'Default' ) )
 					if ( !_deprecated ) {
 						self.button.attr(
 							'aria-label',
-							wpColorPickerL10n.defaultAriaLabel
+							__( 'Select default color' )
 						)
 					}
 				} else {
-					self.button.addClass( 'wp-picker-clear' ).val( wpColorPickerL10n.clear )
+					self.button.addClass( 'wp-picker-clear' ).val( __( 'Clear' ) )
 					if ( !_deprecated ) {
 						self.button.attr(
 							'aria-label',
-							wpColorPickerL10n.clearAriaLabel
+							__( 'Clear color' )
 						)
 					}
 				}
