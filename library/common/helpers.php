@@ -518,6 +518,33 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 				'template'  => 'templates/menu/footer',
 				'positions' => array( 'footer' ),
 			),
+			array(
+				'id'        => 'menu-toggler',
+				'name'      => 'Menu Toggler',
+				'template'  => 'templates/menu/toggler',
+				'positions' => array( 'header', 'footer' ),
+				'meta'      => array(
+					'target' => array(
+						'name'  => 'Target',
+						'type'  => 'select',
+						'items' => array_merge( get_registered_nav_menus(), array( 'query' => 'Query' ) ),
+					),
+					'query'  => array(
+						'name' => 'Query',
+						'type' => 'input',
+					),
+					'effect' => array(
+						'name'  => 'Effect',
+						'type'  => 'select',
+						'items' => array(
+							'from-top'    => 'From Top',
+							'from-bottom' => 'From Bottom',
+							'from-right'  => 'From Right',
+							'from-left'   => 'From Left',
+						),
+					),
+				),
+			),
 		);
 
 		$items = apply_filters( 'greenlet_cover_layout_items', $items );

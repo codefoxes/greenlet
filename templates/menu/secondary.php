@@ -5,7 +5,7 @@
  * @package greenlet\templates\menu
  */
 
-greenlet_markup( 'secondary-navigation', greenlet_attr( 'secondary-navigation nav-menu' ) );
+greenlet_markup( 'secondary-navigation', greenlet_attr( 'secondary-menu nav-menu' ) );
 
 wp_nav_menu(
 	array(

@@ -111,15 +111,18 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 				do_action( "greenlet_before_{$pos}_{$i}_content" );
 
 				if ( isset( $row['items'] ) && isset( $row['items'][ $i ] ) ) {
-					foreach ( $row['items'][ $i ] as $id ) {
-						$item = $items[ $id ];
-						get_template_part( $item['template'] );
+					foreach ( $row['items'][ $i ] as $item ) {
+						$meta = isset( $item['meta'] ) ? $item['meta'] : array();
+						$id   = isset( $item['id'] ) ? $item['id'] : $item;
+
+						$item_obj = $items[ $id ];
+						get_template_part( $item_obj['template'], null, $meta );
 					}
 				}
 
 				foreach ( $sources as $source ) {
 					if ( 'widgets' === $source ) {
-						dynamic_sidebar( $pos . '-sidebar-' . $i );
+						dynamic_sidebar( "{$pos}-sidebar-{$k}-{$i}" );
 					} elseif ( 'templates' === $source ) {
 						get_template_part( 'templates/' . $pos . '/column', ( $i ) );
 					}

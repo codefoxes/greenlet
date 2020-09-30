@@ -110,7 +110,7 @@ function Layout( { control, updateSettings } ) {
 								{ Object.entries( choices ).map( ( [ key, choice ] ) => (
 									<div key={ key } className="gl-radio-image">
 										<label>
-											<input type="radio" name={ `${ pos }-${ i }-template` } value={ key } onChange={ ( e ) => changeColumns( e, i ) } />
+											<input type="radio" name={ `${ pos }-${ i }-template` } value={ key } onChange={ ( e ) => changeColumns( e, i ) } defaultChecked={ row.columns === key } />
 											<img src={ choice } alt={ key } />
 											<span className="template-name">{ key }</span>
 										</label>
@@ -118,7 +118,7 @@ function Layout( { control, updateSettings } ) {
 								) ) }
 							</div>
 						</div>
-						<RowItems props={ { row, i, pos, updateRows } } />
+						<RowItems props={ { row, i, pos, updateRows, items: control.params.items } } />
 						<div className={ `advanced ${ advanced[ i ] ? 'open': '' }` }>
 							<div className="layout-control">
 								<label>

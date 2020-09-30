@@ -196,6 +196,25 @@ img {
 	}
 }
 
+.menu-toggler {
+	position: relative;
+	width: 25px;
+	height: 25px;
+}
+
+$sides: ( "top": translate3D(0, -100%, 0), "bottom": translate3D(0, 100%, 0), "left": translate3D(-100%, 0, 0), "right": translate3D(100%, 0, 0) );
+
+@each $side, $trans in $sides {
+	.from-#{ $side } {
+		transition: .2s all;
+		transform: $trans;
+
+		&.visible {
+			transform: translate3D(0, 0, 0);
+		}
+	}
+}
+
 input[type="checkbox"].menu-toggle {
 	position: absolute;
 	height: 0;
@@ -410,12 +429,12 @@ input[type="checkbox"].menu-toggle {
 	color: #FFF;
 }
 
-.footer-navigation {
+.footer-menu {
 	padding: 3em 0;
-}
 
-.footer-navigation li {
-	list-style: none;
+	li {
+		list-style: none;
+	}
 }
 
 .breadcrumb {

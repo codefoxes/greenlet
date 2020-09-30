@@ -180,3 +180,21 @@ function greenletFixMenu() {
 }
 
 greenletFixMenu()
+
+function greenletToggleMenu() {
+	var togglers = document.getElementsByClassName( 'menu-toggler' )
+
+	var toggleMenu = function( target ) {
+		target.classList.toggle( 'visible' )
+	}
+
+	for ( var i = 0; i < togglers.length; i++ ) {
+		var dataSet = togglers[ i ].dataset
+		var target = ( 'query' === dataSet.target && 'query' in dataSet ) ? document.querySelector( dataSet.query ) : document.querySelector( '.' + dataSet.target )
+		if ( null === target ) continue;
+		target.classList.add( ( 'effect' in dataSet ) ? dataSet.effect: 'left' )
+		togglers[ i ].addEventListener( 'click', toggleMenu.bind( this, target ) )
+	}
+}
+
+greenletToggleMenu()

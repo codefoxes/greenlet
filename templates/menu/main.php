@@ -5,7 +5,7 @@
  * @package greenlet\templates\menu
  */
 
-greenlet_markup( 'site-navigation', greenlet_attr( 'site-navigation nav-menu' ) );
+greenlet_markup( 'site-navigation', greenlet_attr( 'main-menu nav-menu' ) );
 ?>
 	<input id="menu-toggle" class="menu-toggle" type="checkbox" />
 	<label class="menu-toggle-button" for="menu-toggle" aria-label="<?php esc_attr_e( 'Toggle Menu', 'greenlet' ); ?>">

@@ -5,7 +5,7 @@
  * @package greenlet\templates\menu
  */
 
-greenlet_markup( 'footer-navigation', greenlet_attr( 'footer-navigation' ) );
+greenlet_markup( 'footer-navigation', greenlet_attr( 'footer-menu' ) );
 
 wp_nav_menu(
 	array(
