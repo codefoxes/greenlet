@@ -56,6 +56,8 @@ buildfonts() {
 buildbackend() {
 	if [ "$1" == "only_main" ]; then
 		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
+	elif [ "$1" == "only_cw" ]; then
+		ONLY_CW=1 ./node_modules/.bin/rollup -c
 	else
 		./node_modules/.bin/rollup -c
 	fi
@@ -110,6 +112,6 @@ elif [ "$1" == "backend" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
 elif [ "$1" == "colorwings" ]; then
-	buildbackend
+	buildbackend only_cw
 	copyColorwings
 fi

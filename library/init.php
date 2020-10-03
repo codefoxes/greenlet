@@ -86,6 +86,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 			require_once GL_LIBRARY_DIR . '/backend/helpers.php';
 			require_once GL_LIBRARY_DIR . '/backend/options/class-options-admin.php';
 			require_once GL_LIBRARY_DIR . '/backend/customizer/class-customizer.php';
+			require_once GL_LIBRARY_DIR . '/backend/editor/class-postmeta.php';
 			require_once GL_LIBRARY_DIR . '/backend/editor/class-editor.php';
 		}
 

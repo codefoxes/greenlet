@@ -60,7 +60,6 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 	add_action( 'after_setup_theme', 'greenlet_setup' );
 }
 
-
 if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	/**
 	 * Registers widget areas.
@@ -132,6 +131,37 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	add_action( 'widgets_init', 'greenlet_widget_init' );
 }
 
+if ( ! function_exists( 'greenlet_register_meta' ) ) {
+	/**
+	 * Register Layout meta fields.
+	 *
+	 * @since 1.3.5
+	 */
+	function greenlet_register_meta() {
+		register_post_meta(
+			'',
+			'greenlet_layout',
+			array(
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'       => 'object',
+						'properties' => array(
+							'template' => array( 'type' => 'string' ),
+							'sequence' => array(
+								'type'  => 'array',
+								'items' => array( 'type' => 'string' ),
+							),
+						),
+					),
+				),
+				'single'       => true,
+				'type'         => 'object',
+			)
+		);
+	}
+
+	add_action( 'init', 'greenlet_register_meta' );
+}
 
 if ( ! function_exists( 'set_content_width' ) ) {
 	/**
