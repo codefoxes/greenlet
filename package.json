@@ -4,7 +4,7 @@
   "description": "Extremely fast and highly customizable WordPress theme.",
   "dependencies": {
     "react-color": "^2.18.1",
-    "react-select-search": "^2.0.1"
+    "react-select-search": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

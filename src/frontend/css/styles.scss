@@ -200,6 +200,7 @@ img {
 	position: relative;
 	width: 25px;
 	height: 25px;
+	cursor: pointer;
 }
 
 $sides: ( "top": translate3D(0, -100%, 0), "bottom": translate3D(0, 100%, 0), "left": translate3D(-100%, 0, 0), "right": translate3D(100%, 0, 0) );
