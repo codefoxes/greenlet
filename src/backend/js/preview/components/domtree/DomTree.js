@@ -6,7 +6,6 @@ import SelectStyles from './Select.scss'
 
 function DomTree() {
 	const { currentTarget, showDomTree } = useStore( DomTreeStore )
-
 	return (
 		<div id="cw-domtree">
 			{ showDomTree ? DomTreeElement( getSelector( currentTarget ) ) : 'Click any element to show DOM element tree here'}
@@ -16,12 +15,13 @@ function DomTree() {
 }
 
 function DomTreeElement( domTree ) {
+	console.log(domTree)
 	return (
 		<ul className="cw-domtree-list">
 			{ domTree.map( ( element, i ) => (
-                <li key={ `${ element.tag }-${ i }` } className="cw-domtree-elements">
-                    { element.tag }
-                    { ( element.id || ( element.class && element.class.length > 0 ) ) ? (
+                <li key={ `${ element.tag.name }-${ i }` } className={ `cw-domtree-elements ${ element.tag.selected === true ? 'selected' : '' }`}>
+                    { element.tag.name }
+                    { ( element.id.name || ( element.class && element.class.length > 0 ) ) ? (
                         <div className="cw-node-attributes">
                             <DomAttributeSelectSearch element={ element } />
                         </div>
@@ -34,13 +34,15 @@ function DomTreeElement( domTree ) {
 
 function DomAttributeSelectSearch( { element } ) {
 	const selectOptions = []
-	if ( element.id ) {
+	if ( element.id && element.id.name ) {
 		selectOptions.push( {
 			name: 'Select Id',
 			type: 'group',
 			items: [ {
-				value: element.id,
-				name: element.id,
+				value: element.id.name,
+				name: element.id.name,
+				selected: element.id.selected,
+				highlighted: element.id.selected,
 			} ]
 		} )
 	}
@@ -49,8 +51,10 @@ function DomAttributeSelectSearch( { element } ) {
 		const classOptions = []
 		element.class.map( ( cls ) => (
 			classOptions.push( {
-				value: cls,
-				name: cls,
+				value: cls.name,
+				name: cls.name,
+				selected: cls.selected,
+				highlighted: cls.selected,
 			} )
 		) )
 

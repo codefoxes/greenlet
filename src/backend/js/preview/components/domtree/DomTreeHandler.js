@@ -5,34 +5,35 @@ const { Evt } = window.cw
 Evt.on( 'focusLocked', ( data ) => DomTreeStore.showDomTree( data ) )
 
 export const getSelector = ( el ) => {
+	//console.log(el.cw_selected)
 	const domTree = []
 	const element = {
-		tag: '',
-		id: '',
+		tag:{},
+		id: {},
 		class: []
 	}
-	// Todo: what if el === null ?
+
 	if ( el === document.body || null === el ) {
-		element.tag = 'body'
+		element.tag.name = 'body'
+		element.tag.selected = el.cw_selected ? el.cw_selected.tagSelected : false
 		domTree.push( element )
 		return domTree
 	}
-	element.tag = el.tagName.toLowerCase()
+	element.tag.name = el.tagName.toLowerCase()
+	element.tag.selected = el.cw_selected ? el.cw_selected.tagSelected : false
+
 	if ( el.id !== '' ) {
-		element.id = el.id
+		element.id.name = el.id
+		element.id.selected = el.cw_selected ? el.cw_selected.idSelected : false
 	}
 
 	const selectors = []
 	el.classList.forEach( cls => {
-		if ( selectors.length >= 4 ) {
-			return false
+		const clsObject = {
+			name: cls,
+			selected: el.cw_selected ? el.cw_selected.classSelected.includes( cls ) : false
 		}
-
-		// Ignore autogen sequential classes.
-		if ( /\w*-\d*/.test( `${cls}` ) ) {
-			return false
-		}
-		selectors.push( cls )
+		selectors.push( clsObject )
 	} )
 	element.class = selectors
 

@@ -35,6 +35,11 @@ $baseWidth: 20px;
 		.cw-node-attributes li {
 			list-style-type: none;
 		}
+
+		.selected, .selected::after{
+			background-color: rgb(124, 179, 66);
+			color: #fff;
+		}
 	}
 
 	.cw-domtree-elements:hover > .cw-node-attributes {

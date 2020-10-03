@@ -1,13 +1,21 @@
 import { FocusStore } from './FocusStore'
 
 const { Evt } = cw
+const maxSelectorLength = 30
 
-const getSelector = ( el ) => {
-	if ( el === document.body ) {
+const getSelector = ( elt, currentLength ) => {
+	var el = elt
+	if ( el === document.body || null === el ) {
+		if (parseInt('body'.length) + parseInt(currentLength) >= maxSelectorLength ) return ''
+		el.cw_selected.tagSelected = true
 		return 'body'
 	}
-
+	el.cw_selected = {
+		classSelected: []
+	}
 	if ( el.id !== '' ) {
+		if (parseInt(`#${el.id}`.length) + parseInt(currentLength) >= maxSelectorLength ) return ''
+		el.cw_selected.idSelected = true;
 		return `#${el.id}`
 	}
 
@@ -23,18 +31,24 @@ const getSelector = ( el ) => {
 		if ( /\w*-\d*/.test(`${cls}`) ) {
 			return false
 		}
+
+		if (parseInt(selector.length) + parseInt(currentLength) >= maxSelectorLength ) return false
+
+		el.cw_selected.classSelected.push(cls)
 		selector += `.${cls}`
 		selectors.push(cls)
 	})
 
 	if ( el.classList.length === 0 ) {
 		selector = el.tagName.toLowerCase()
+		if (parseInt(selector.length) + parseInt(currentLength) >= maxSelectorLength ) return ''
+		el.cw_selected.tagSelected = true
 	}
 
-	const parentSelector = getSelector( el.parentElement )
+	const parentSelector = getSelector( el.parentElement, (parseInt(selector.length) + parseInt(currentLength)) )
 
 	// Ignore classes
-	if ( `${parentSelector} ${selector}`.length > 30 ) {
+	if ( `${parentSelector} ${selector}`.length > maxSelectorLength ) {
 		return selector
 	}
 
@@ -101,7 +115,7 @@ const moveFocus = ( ip, force = false ) => {
 				height: '24px',
 				background: '#7CB342'
 			},
-			selector: isSelector ? ip : getSelector( currentTarget )
+			selector: isSelector ? ip : getSelector( currentTarget, 0 )
 		}
 	}
 
