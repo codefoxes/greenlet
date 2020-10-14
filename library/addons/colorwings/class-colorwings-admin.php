@@ -60,14 +60,20 @@ class ColorWings_Admin {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_script( 'color-wings-preview', COLORWINGS_URL . '/js/color-wings-preview' . $min . '.js', array( 'react-dom', 'customize-preview' ), COLORWINGS_VERSION, true );
 
-		$pages = array(
-			'is_front_page' => is_front_page(),
-			'is_home'       => is_home(),
-			'is_archive'    => is_archive(),
-			'is_page'       => is_page(),
-			'is_single'     => is_single(),
+		$preview_object = array(
+			'pages' => array(
+				'is_front_page' => is_front_page(),
+				'is_home'       => is_home(),
+				'is_archive'    => is_archive(),
+				'is_page'       => is_page(),
+				'is_single'     => is_single(),
+			),
+			'page'  => array(
+				'id'    => get_the_ID(),
+				'title' => get_the_title(),
+			),
 		);
-		wp_localize_script( 'color-wings-preview', 'cwPreviewObject', $pages );
+		wp_localize_script( 'color-wings-preview', 'cwPreviewObject', $preview_object );
 	}
 
 	/**
