@@ -239,6 +239,7 @@ function greenlet_attribute( $attributes, $primary ) {
 
 		// Is entry-thumbnail or image, add image prop.
 		case 'entry-thumbnail':
+		case 'featured-image':
 		case 'image':
 			$attributes['itemprop'] = 'image';
 			break;

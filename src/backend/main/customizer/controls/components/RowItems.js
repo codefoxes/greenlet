@@ -1,11 +1,37 @@
 import SelectSearch from 'react-select-search'
-import { debounce } from '../../Helpers'
+import Popup from './Popup/Popup'
+import { debounce, arrayMoveMutate } from '../../Helpers'
 
 function RowItems( { props } ) {
 	const { row, i, pos, updateRows, items } = props
+	const cols = row.columns.split( '-' )
+	const [ expanded, setExpanded ] = React.useState( -1 )
 
-	const expandItem = ( e ) => {
-		e.currentTarget.parentNode.classList.toggle( 'open' )
+	let closePop = () => {}
+	const onClose = ( cb ) => {
+		closePop = cb
+	}
+
+	const toggleRow = ( e, i ) => {
+		e.preventDefault()
+		e.stopPropagation()
+		setExpanded( prev => ( prev === i ) ? -1 : i )
+	}
+
+	const addItem = ( col, item ) => {
+		updateRows( ( prev ) => {
+			if ( 'items' in prev[ i ] ) {
+				if ( col in prev[ i ].items ) {
+					prev[ i ].items[ col ].push( item.id )
+				} else {
+					prev[ i ].items[ col ] = [ item.id ]
+				}
+			} else {
+				prev[ i ].items = { [ col ]: [ item.id ] }
+			}
+			return prev
+		} )
+		closePop()
 	}
 
 	const removeItem = ( col, item ) => {
@@ -16,7 +42,7 @@ function RowItems( { props } ) {
 	}
 
 	const hasItems = () => {
-		return ( 'items' in row ) ? Object.entries( row.items ).some( ( [ c, items ] ) => ( items.length > 0 ) ) : false
+		return ( 'items' in row ) ? Object.entries( row.items ).some( ( [ c, items ] ) => ( ( items !== null ) && ( items.length > 0 ) ) ) : false
 	}
 
 	const ColItemProps = ( { col, index, item } ) => {
@@ -26,12 +52,12 @@ function RowItems( { props } ) {
 
 		const onChange = ( val, propKey ) => {
 			updateRows( ( prev ) => {
-				if ( 'meta' in prev[ i ].items[ col ][ index ] ) {
+				const colItem = prev[ i ].items[ col ][ index ]
+				if ( typeof colItem === 'object' && 'meta' in colItem ) {
 					prev[ i ].items[ col ][ index ].meta[ propKey ] = val
 				} else {
 					prev[ i ].items[ col ][ index ] = { id: item, meta: { [ propKey ]: val } }
 				}
-				console.log(prev)
 				return prev
 			} )
 		}
@@ -39,16 +65,17 @@ function RowItems( { props } ) {
 		const debouncedChange = debounce( onChange, 500 )
 
 		const renderProp = ( propKey, prop ) => {
+			const defaultValue = ( currentMeta !== undefined ) ? currentMeta[ propKey ] : ''
 			if ( 'select' === prop.type ) {
 				const forwardProps = {
 					options: Object.entries( prop.items ).map( ( [ value, name ] ) => ( { name, value } ) ),
-					value: currentMeta[ propKey ],
+					value: defaultValue,
 					onChange: val => onChange( val, propKey ),
 				}
 
 				return <SelectSearch { ...forwardProps } />
 			} else if ( 'input' === prop.type ) {
-				return <input type="text" className="prop-control" defaultValue={ currentMeta[ propKey ] } onChange={ e => debouncedChange( e.target.value, propKey ) } />
+				return <input type="text" className="prop-control" defaultValue={ defaultValue } onChange={ e => debouncedChange( e.target.value, propKey ) } />
 			}
 		}
 
@@ -64,31 +91,57 @@ function RowItems( { props } ) {
 		) : null
 	}
 
+	const DragHandle = SortableHOC.SortableHandle(() => <span className="drag-handle">::</span>)
+	const ColItem = SortableHOC.SortableElement(( { children } ) => ( children ) )
+	const ColItems = SortableHOC.SortableContainer(( { children } ) => <div className="col-items col-10">{ children }</div> )
+
+	const onSortEnd = ( col, from, to ) => {
+		updateRows( ( prev ) => {
+			arrayMoveMutate( prev[ i ].items[ col ], from, to )
+			return prev
+		} )
+	}
+
 	return (
 		<div className="layout-control layout-control-items">
-			{ ! hasItems() ? (
-				<div className="cols-title">{ pos } { i + 1 } does not have any items in it's columns. Drag items from below or add widgets via { pos } Widget Areas.</div>
-			) : ( <>
-				<div className="cols-title">{ pos } { i + 1 } Items</div>
-				<div className="cover-layout-cols-items">
-					{ Object.entries( row.items ).map( ( [ col, items ] ) => {
-						return ( items.length !== 0 ) ? (
-							<div key={ col } className="cover-layout-col gl-row">
-								<div className="col-name col-2">col-{ col }</div>
-								<div className="col-items col-10">
-									{ items.map( ( item, j ) => (
-										<div key={ item } className="col-item">
-											<div className="item-id" tabIndex="0" onClick={ ( e ) => expandItem( e ) }>{ item.id ? item.id : item }</div>
-											<div className="item-x" tabIndex="0" onClick={ () => removeItem( col, item ) }>X</div>
-											<ColItemProps col={ col } index={ j } item={ item.id ? item.id : item } />
+			<div className="cols-title">{ pos } { i + 1 } Items</div>
+			<div className="cover-layout-cols-items">
+				{ cols.map( ( width, j ) => {
+					const col = j + 1
+					console.log( col )
+					console.log( row )
+					const rowItems = ( row.items && ( col in row.items ) ) ? row.items[ col ] : []
+					return (
+						<div key={ col } className="cover-layout-col gl-row">
+							<div className="col-name col-2">col-{ col }</div>
+							<ColItems axis="xy" helperClass="gl-sort-clone" useDragHandle onSortEnd={ ( { oldIndex, newIndex } ) => onSortEnd( col, oldIndex, newIndex ) }>
+								{ rowItems.map( ( item, k ) => (
+									<ColItem key={ `${col}-${k}` } index={ k }>
+										<div className={ `gl-col-item${ ( expanded === `${col}-${k}` ) ? ' open' : '' }` }>
+											<div className="item-id" tabIndex="0" onClick={ ( e ) => toggleRow( e, `${col}-${k}` ) }>
+												<DragHandle />
+												<span>{ item.id ? item.id : item }</span>
+											</div>
+											<div className="item-x" tabIndex="0" onClick={ () => removeItem( col, item ) }>
+												<span className="dashicons dashicons-trash" />
+											</div>
+											<ColItemProps col={ col } index={ k } item={ item.id ? item.id : item } />
 										</div>
-									) ) }
-								</div>
-							</div>
-						) : null
-					} ) }
-				</div>
-			</> ) }
+									</ColItem>
+								) ) }
+								<Popup className="add-button" widthSelector=".col-items" onClose={ onClose }>
+									<span className="dashicons dashicons-plus-alt2" />
+									<div className="layout-items">
+										{ Object.entries( items ).map( ( [ id, item ] ) => (
+											<button key={ id } className="layout-item" type="button" onClick={ () => addItem( col, item ) }>{ item.name }</button>
+										) ) }
+									</div>
+								</Popup>
+							</ColItems>
+						</div>
+					)
+				} ) }
+			</div>
 		</div>
 	)
 }

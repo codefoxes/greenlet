@@ -22,19 +22,6 @@ img {
 	margin: 0;
 }
 
-//.topbar {
-//	position: relative;
-//	top: 0;
-//	z-index: 990;
-//	background: #fff;
-//	margin: auto;
-//	border-bottom: 1px solid #eee;
-//
-//	.topbar-column {
-//		min-height: 40px;
-//	}
-//}
-
 .site-header {
 	position: relative;
 	background: #FFF;
@@ -410,12 +397,6 @@ input[type="checkbox"].menu-toggle {
 	list-style: none;
 }
 
-.semifooter {
-	min-height: 50px;
-	background: #fff;
-	margin: auto;
-}
-
 .site-footer {
 	background: #212121;
 	color: #fff;
@@ -641,6 +622,11 @@ input[type="checkbox"].menu-toggle {
 
 /* ----------- IMAGES ----------- */
 
+.entry-thumbnail img {
+	width: 100%;
+	margin-bottom: 14px;
+}
+
 figure {
 	margin: 0;
 }
@@ -741,7 +727,7 @@ blockquote {
 }
 
 @media (min-width: 801px) {
-	.admin-bar .topbar {
+	.admin-bar .header-section.sticky {
 		top: 32px;
 	}
 
@@ -749,7 +735,7 @@ blockquote {
 		max-width: 1170px;
 	}
 
-	.site-header h1, .topbar h1 {
+	.site-header h1 {
 		font-size: 3.6rem;
 	}
 
@@ -784,3 +770,5 @@ blockquote {
 		flex-flow: column;
 	}
 }
+
+@import "blocks";

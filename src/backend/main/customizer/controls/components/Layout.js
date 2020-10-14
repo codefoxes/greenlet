@@ -1,5 +1,4 @@
 import RowItems from './RowItems'
-import LayoutItems from './LayoutItems'
 
 function Layout( { control, updateSettings } ) {
 	const { position, choices } = control.params
@@ -154,8 +153,6 @@ function Layout( { control, updateSettings } ) {
 			<div className="add-wrap add-after">
 				<button className="add-button" onClick={ ( e ) => addRow( e ) } ><span className="dashicons dashicons-plus-alt2" /></button>
 			</div>
-
-			<LayoutItems control={ control } updateRows={ updateRows } />
 		</div>
 	)
 }

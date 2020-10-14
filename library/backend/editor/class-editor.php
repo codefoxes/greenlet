@@ -35,6 +35,7 @@ class Editor {
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_editor_styles' ) );
 			add_action( 'admin_enqueue_scripts', 'greenlet_enqueue_fonts', 90 );
 		}
+		add_action( 'init', array( $this, 'register_patterns' ) );
 	}
 
 	/**
@@ -92,10 +93,81 @@ class Editor {
 			left: 50%;
 			transform: translateX(-50%);
 		}
+
+		/* Pattern Styles */
+		.wp-block-cover.full-width {
+			width: calc(100vw - 280px);
+			max-width: 100vw;
+			left: calc(50% - 140px);
+			right: calc(50% - 140px);
+			margin-left: calc(-50vw + 280px);
+			margin-right: calc(-50vw + 280px);
+		}
+
+		.full-width .wp-block {
+			max-width: 100%;
+		}
+
+		.wp-block-group.full-width-box .wp-block-cover {
+			width: calc(100vw - 280px);
+			max-width: 100vw;
+			position: absolute;
+			left: calc(50% - 140px);
+			right: calc(50% - 140px);
+			margin-left: calc(-50vw + 280px);
+			margin-right: calc(-50vw + 280px);
+			min-height: auto;
+			height: 100%;
+			margin-top: 0;
+			z-index: 1;
+		}
+
+		.wp-block-group.full-width-box .wp-block-cover > *:not(.components-placeholder) {
+			display: none
+		}
+
+		.wp-block-group.full-width-box .wp-block-cover ~ * {
+			position: relative;
+			z-index: 2;
+		}
 		<?php
 		greenlet_print_inline_styles();
 
 		greenlet_enqueue_inline_style( 'greenlet-inline', ob_get_clean() );
+	}
+
+	/**
+	 * Register block patterns.
+	 *
+	 * @since 1.3.5
+	 */
+	public function register_patterns() {
+		register_block_pattern_category(
+			'greenlet',
+			array( 'label' => __( 'Greenlet', 'greenlet' ) )
+		);
+
+		if ( function_exists( 'register_block_pattern' ) ) {
+			register_block_pattern(
+				'greenlet/full-width-banner',
+				array(
+					'title'       => __( 'Full Width Banner', 'greenlet' ),
+					'description' => __( 'Full width Banner Cover.', 'greenlet' ),
+					'categories'  => array( 'greenlet', 'header' ),
+					'content'     => '<!-- wp:cover {"customOverlayColor":"#ffecb3","className":"full-width"} --><div class="wp-block-cover has-background-dim full-width" style="background-color:#ffecb3"><div class="wp-block-cover__inner-container"><!-- wp:heading {"align":"center","textColor":"black","style":{"color":{"background":"#9ccc65"}}} --><h2 class="has-text-align-center has-black-color has-text-color has-background" style="background-color:#9ccc65">Full width banner</h2><!-- /wp:heading --></div></div><!-- /wp:cover -->',
+				)
+			);
+
+			register_block_pattern(
+				'greenlet/full-width-box',
+				array(
+					'title'       => __( 'Full Width Banner with Container', 'greenlet' ),
+					'description' => __( 'Full width Banner Cover with contents inside a container.', 'greenlet' ),
+					'categories'  => array( 'greenlet', 'header' ),
+					'content'     => '<!-- wp:group {"className":"full-width-box"} --><div class="wp-block-group full-width-box"><div class="wp-block-group__inner-container"><!-- wp:cover {"customOverlayColor":"#ffecb3"} --><div class="wp-block-cover has-background-dim" style="background-color:#ffecb3"><div class="wp-block-cover__inner-container"></div></div><!-- /wp:cover --><!-- wp:heading {"align":"center","textColor":"black","style":{"color":{"background":"#9ccc65"}}} --><h2 class="has-text-align-center has-black-color has-text-color has-background" style="background-color:#9ccc65">Full width banner</h2><!-- /wp:heading --></div></div><!-- /wp:group -->',
+				)
+			);
+		}
 	}
 
 	/**

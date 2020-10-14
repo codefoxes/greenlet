@@ -9,28 +9,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// add_action( 'greenlet_semifooter', 'greenlet_do_semifooter' );
 add_action( 'greenlet_footer', 'greenlet_do_footer' );
 
 /**
- * Display the semifooter.
+ * Display the footer text.
  *
- * @since  1.0.0
- * @see    greenlet_cover() to display semifooter columns.
+ * @since  1.3.5
  * @return void
  */
-function greenlet_do_semifooter() {
-
-	$sfshow = gl_get_option( 'show_semifooter', false );
-
-	if ( false !== $sfshow ) {
-		greenlet_markup( 'semifooter', greenlet_attr( 'semifooter' ) );
-		printf( '<div %s>', wp_kses( greenlet_attr( 'container' ), null ) );
-		printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
-		greenlet_cover( 'semifooter' );
-		echo '</div></div>';
-		greenlet_markup_close();
-	}
+function greenlet_footer_text() {
+	$text  = sprintf( '<div %s><p>', greenlet_attr( 'copyright' ) );
+	$text .= sprintf(
+		'&copy; %1$s &middot; <a href="%2$s">%3$s</a> &middot; %4$s <a href="https://greenletwp.com/" target="_blank" rel="nofollow noopener">%5$s</a></p></div>',
+		date_i18n( __( 'Y', 'greenlet' ) ),
+		esc_url( get_home_url() ),
+		get_bloginfo( 'name' ),
+		__( 'Powered By', 'greenlet' ),
+		__( 'Greenlet', 'greenlet' )
+	);
+	echo wp_kses_post( apply_filters( 'greenlet_copyright', $text ) );
 }
 
 /**
@@ -41,24 +38,10 @@ function greenlet_do_semifooter() {
  * @return void
  */
 function greenlet_do_footer() {
+	$cover_rows  = gl_get_option( 'footer_layout', greenlet_cover_layout_defaults( 'footer' ) );
+	$last_footer = count( $cover_rows );
+
+	add_action( "greenlet_after_footer_{$last_footer}_columns", 'greenlet_footer_text' );
+
 	greenlet_cover( 'footer' );
 }
-
-//function greenlet_do_footer() {
-//	greenlet_markup( 'site-footer', greenlet_attr( 'site-footer' ) );
-//	printf( '<div %s>', wp_kses( greenlet_attr( 'container' ), null ) );
-//	printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
-//	greenlet_cover( 'footer' );
-//	$text  = sprintf( '<div %s><p>', greenlet_attr( 'copyright' ) );
-//	$text .= sprintf(
-//		'&copy; %1$s &middot; <a href="%2$s">%3$s</a> &middot; %4$s <a href="https://greenletwp.com/" target="_blank" rel="nofollow noopener">%5$s</a></p></div>',
-//		date_i18n( __( 'Y', 'greenlet' ) ),
-//		esc_url( get_home_url() ),
-//		get_bloginfo( 'name' ),
-//		__( 'Powered By', 'greenlet' ),
-//		__( 'Greenlet', 'greenlet' )
-//	);
-//	echo wp_kses_post( apply_filters( 'greenlet_copyright', $text ) );
-//	echo '</div></div>';
-//	greenlet_markup_close();
-//}

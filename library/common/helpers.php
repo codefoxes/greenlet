@@ -479,6 +479,20 @@ if ( ! function_exists( 'top_bottom_default_columns' ) ) {
 	}
 }
 
+if ( ! function_exists( 'greenlet_get_menus' ) ) {
+	/**
+	 * Get all menus.
+	 */
+	function greenlet_get_menus() {
+		$menus     = array();
+		$nav_menus = wp_get_nav_menus();
+		foreach ( $nav_menus as $menu ) {
+			$menus[ $menu->slug ] = $menu->name;
+		}
+		return $menus;
+	}
+}
+
 if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 	/**
 	 * Get cover layout items.
@@ -498,25 +512,25 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 				'positions' => array( 'header', 'footer' ),
 			),
 			array(
-				'id'        => 'main-menu',
-				'name'      => 'Main Menu',
-				'type'      => 'menu',
-				'template'  => 'templates/menu/main',
-				'positions' => array( 'header' ),
-			),
-			array(
-				'id'        => 'secondary-menu',
-				'name'      => 'Secondary Menu',
-				'type'      => 'menu',
-				'template'  => 'templates/menu/secondary',
+				'id'        => 'menu',
+				'name'      => 'Menu',
+				'template'  => 'templates/menu/menu',
 				'positions' => array( 'header', 'footer' ),
-			),
-			array(
-				'id'        => 'footer-menu',
-				'name'      => 'Footer Menu',
-				'type'      => 'menu',
-				'template'  => 'templates/menu/footer',
-				'positions' => array( 'footer' ),
+				'meta'      => array(
+					'slug'    => array(
+						'name'  => 'Menu',
+						'type'  => 'select',
+						'items' => greenlet_get_menus(),
+					),
+					'toggler' => array(
+						'name'  => 'Mobile toggler',
+						'type'  => 'select',
+						'items' => array(
+							'enable'  => 'Enable',
+							'disable' => 'Disable',
+						),
+					),
+				),
 			),
 			array(
 				'id'        => 'menu-toggler',
@@ -571,18 +585,19 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 	function greenlet_cover_layout_defaults( $position = 'header' ) {
 		$header = array(
 			array(
-				'columns' => '12',
-				'sticky'  => true,
-				'items'   => array(
-					1 => array( 'secondary-menu' ),
-				),
-			),
-			array(
 				'columns' => '4-8',
 				'primary' => true,
 				'items'   => array(
 					1 => array( 'logo' ),
-					2 => array( 'main-menu' ),
+					2 => array(
+						array(
+							'id'   => 'menu',
+							'meta' => array(
+								'slug'    => false,
+								'toggler' => 'enable',
+							),
+						),
+					),
 				),
 			),
 		);
@@ -590,9 +605,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 			array(
 				'columns' => '12',
 				'primary' => true,
-				'items'   => array(
-					1 => array( 'footer-menu' ),
-				),
+				'items'   => array(),
 			),
 		);
 		return $$position;

@@ -88,9 +88,11 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 				$class_name .= 'vertical ' . $row['vertical'] . ' ';
 			}
 
-			greenlet_markup( $markup_context, greenlet_attr( $class_name . 'header-' . $k ) );
-			printf( '<div %s>', wp_kses( greenlet_attr( 'container header-contents' ), null ) );
+			greenlet_markup( $markup_context, greenlet_attr( $class_name . $pos . '-' . $k ) );
+			printf( '<div %s>', wp_kses( greenlet_attr( 'container ' . $pos . '-contents' ), null ) );
 			printf( '<div %s>', wp_kses( greenlet_attr( 'row' ), null ) );
+
+			do_action( "greenlet_before_{$pos}_{$k}_columns" );
 
 			// Create new column object with current layout as parameter.
 			// @see library/classes.php.
@@ -133,6 +135,8 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 				echo '</div>';
 				$i++;
 			}
+
+			do_action( "greenlet_after_{$pos}_{$k}_columns" );
 
 			echo '</div></div>';
 			greenlet_markup_close();

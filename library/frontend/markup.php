@@ -55,6 +55,7 @@ function greenlet_markup_tag( $context ) {
 		case 'entry-content':
 		case 'comments-area':
 		case 'sub-header':
+		case 'sub-footer':
 			$tag = 'section';
 			break;
 		case 'main':
@@ -72,6 +73,7 @@ function greenlet_markup_tag( $context ) {
 			$tag = 'header';
 			break;
 		case 'entry-thumbnail':
+		case 'featured-image':
 			$tag = 'figure';
 			break;
 		case 'entry':

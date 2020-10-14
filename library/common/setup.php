@@ -44,14 +44,11 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 		// Add support for post thumbnails.
 		add_theme_support( 'post-thumbnails' );
 
+		// Add support for Wide and full width blocks.
+		add_theme_support( 'align-wide' );
+
 		// Register nav menus.
-		register_nav_menus(
-			array(
-				'main-menu'      => __( 'Main Menu', 'greenlet' ),
-				'secondary-menu' => __( 'Secondary Menu', 'greenlet' ),
-				'footer-menu'    => __( 'Footer Menu', 'greenlet' ),
-			)
-		);
+		register_nav_menus( array( 'main-menu' => __( 'Main Menu', 'greenlet' ) ) );
 
 		// Add support for woocommerce.
 		add_theme_support( 'woocommerce' );

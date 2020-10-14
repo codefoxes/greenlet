@@ -25,9 +25,26 @@ function Canvas ( { pos } ) {
 
 	const hideDropZone = () => setZoneShown( false )
 
+	const div = document.createElement( 'div' )
+	div.classList.add( 'scroll-disabled' )
+	div.innerText = 'Infinite scrolling is temporarily disabled to edit footer.'
+
+	const toggleInfiniteScroll = ( enable = true ) => {
+		greenletToggleScroll( enable )
+		const button = document.querySelector( '.pagination.infinite a' )
+		if ( null === button ) return
+		if ( ! enable ) {
+			button.style.display = 'none'
+			button.parentNode.appendChild( div )
+		} else {
+			button.parentNode.removeChild( div )
+			button.style.display = 'inline'
+		}
+	}
+
 	React.useEffect( () => {
 		const initialPosition = [ document.documentElement.scrollLeft, document.documentElement.scrollTop ]
-		// Todo: Disable infinite scroller.
+		toggleInfiniteScroll( false )
 		window.scrollTo( 0, ( 'header' === pos ) ? 0 : 1000000 )
 
 		wp.customize.preview.bind( 'start-drag-item', showDropZone )
@@ -39,6 +56,7 @@ function Canvas ( { pos } ) {
 
 		return () => {
 			if ( ! isDirty ) window.scrollTo( initialPosition[ 0 ], initialPosition[ 1 ] )
+			toggleInfiniteScroll()
 			wp.customize.preview.unbind( 'start-drag-item', showDropZone )
 			wp.customize.preview.unbind( 'end-drag-item', hideDropZone )
 			window.removeEventListener( 'scroll', setDirty )

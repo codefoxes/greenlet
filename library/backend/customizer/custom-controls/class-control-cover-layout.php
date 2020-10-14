@@ -61,6 +61,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		 */
 		public function enqueue() {
 			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			wp_enqueue_script( 'react-sortable-hoc', GL_LIBRARY_URL . '/backend/assets/js/react-sortable-hoc.umd' . $min . '.js', array( 'react-dom' ), GREENLET_VERSION, true );
 			wp_enqueue_script( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'jquery', 'react-dom' ), GREENLET_VERSION, true );
 			wp_enqueue_style( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 		}
