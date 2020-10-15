@@ -3,6 +3,8 @@ import Popup from './Popup/Popup'
 import { debounce, arrayMoveMutate } from '../../Helpers'
 
 function RowItems( { props } ) {
+	const { __ } = wp.i18n
+
 	const { row, i, pos, updateRows, items } = props
 	const cols = row.columns.split( '-' )
 	const [ expanded, setExpanded ] = React.useState( -1 )
@@ -104,12 +106,10 @@ function RowItems( { props } ) {
 
 	return (
 		<div className="layout-control layout-control-items">
-			<div className="cols-title">{ pos } { i + 1 } Items</div>
+			<div className="cols-title">{ pos } { i + 1 } { __( 'Items', 'greenlet' ) }</div>
 			<div className="cover-layout-cols-items">
 				{ cols.map( ( width, j ) => {
 					const col = j + 1
-					console.log( col )
-					console.log( row )
 					const rowItems = ( row.items && ( col in row.items ) ) ? row.items[ col ] : []
 					return (
 						<div key={ col } className="cover-layout-col gl-row">

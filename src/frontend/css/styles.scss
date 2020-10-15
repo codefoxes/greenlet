@@ -98,12 +98,13 @@ img {
 
 	img {
 		max-width: 100%;
-		display: block;
 	}
 
 	a {
 		font-size: 3.6rem;
 		font-weight: 300;
+		display: flex;
+		align-items: center;
 	}
 }
 

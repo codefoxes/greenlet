@@ -5,6 +5,7 @@ const { PluginDocumentSettingPanel } = wp.editPost
 const { withSelect, withDispatch } = wp.data
 const { Button, ButtonGroup } = wp.components
 const { useState } = wp.element
+const { __ } = wp.i18n
 
 const LayoutMetaField = withDispatch( ( dispatch ) => {
 	return {
@@ -33,8 +34,8 @@ const LayoutMetaField = withDispatch( ( dispatch ) => {
 	return (
 		<div className="gl-layout">
 			<ButtonGroup className="gl-layout-control gl-layout-options" aria-label="options">
-				<Button isSmall className={ ( 'default' === primary ) ? 'is-primary' : 'is-secondary' } onClick={ () => updateOption( 'default' ) }>Default</Button>
-				<Button isSmall className={ ( 'default' === primary ) ? 'is-secondary' : 'is-primary' } onClick={ () => updateOption( 'custom' ) }>Custom</Button>
+				<Button isSmall className={ ( 'default' === primary ) ? 'is-primary' : 'is-secondary' } onClick={ () => updateOption( 'default' ) }>{ __( 'Default', 'greenlet' ) }</Button>
+				<Button isSmall className={ ( 'default' === primary ) ? 'is-secondary' : 'is-primary' } onClick={ () => updateOption( 'custom' ) }>{ __( 'Custom', 'greenlet' ) }</Button>
 			</ButtonGroup>
 			{ 'default' !== primary && (
 				<div className="gl-layout-control gl-meta-template">
@@ -91,7 +92,7 @@ const LayoutMetaField = withDispatch( ( dispatch ) => {
 const GreenletLayout = () => (
 	<PluginDocumentSettingPanel
 		name="greenlet-layout"
-		title="Page Layout"
+		title={ __( 'Page Layout', 'greenlet' ) }
 		className="greenlet-layout"
 		icon="greenlet-layout"
 	>

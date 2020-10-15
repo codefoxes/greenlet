@@ -506,55 +506,55 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 		$items = array(
 			array(
 				'id'        => 'logo',
-				'name'      => 'Logo',
+				'name'      => __( 'Logo', 'greenlet' ),
 				'type'      => 'logo',
 				'template'  => 'templates/logo',
 				'positions' => array( 'header', 'footer' ),
 			),
 			array(
 				'id'        => 'menu',
-				'name'      => 'Menu',
+				'name'      => __( 'Menu', 'greenlet' ),
 				'template'  => 'templates/menu/menu',
 				'positions' => array( 'header', 'footer' ),
 				'meta'      => array(
 					'slug'    => array(
-						'name'  => 'Menu',
+						'name'  => __( 'Menu', 'greenlet' ),
 						'type'  => 'select',
 						'items' => greenlet_get_menus(),
 					),
 					'toggler' => array(
-						'name'  => 'Mobile toggler',
+						'name'  => __( 'Mobile toggler', 'greenlet' ),
 						'type'  => 'select',
 						'items' => array(
-							'enable'  => 'Enable',
-							'disable' => 'Disable',
+							'enable'  => __( 'Enable', 'greenlet' ),
+							'disable' => __( 'Disable', 'greenlet' ),
 						),
 					),
 				),
 			),
 			array(
 				'id'        => 'menu-toggler',
-				'name'      => 'Menu Toggler',
+				'name'      => __( 'Menu Toggler', 'greenlet' ),
 				'template'  => 'templates/menu/toggler',
 				'positions' => array( 'header', 'footer' ),
 				'meta'      => array(
 					'target' => array(
-						'name'  => 'Target',
+						'name'  => __( 'Target', 'greenlet' ),
 						'type'  => 'select',
 						'items' => array_merge( get_registered_nav_menus(), array( 'query' => 'Query' ) ),
 					),
 					'query'  => array(
-						'name' => 'Query',
+						'name' => __( 'Query', 'greenlet' ),
 						'type' => 'input',
 					),
 					'effect' => array(
-						'name'  => 'Effect',
+						'name'  => __( 'Effect', 'greenlet' ),
 						'type'  => 'select',
 						'items' => array(
-							'from-top'    => 'From Top',
-							'from-bottom' => 'From Bottom',
-							'from-right'  => 'From Right',
-							'from-left'   => 'From Left',
+							'from-top'    => __( 'From Top', 'greenlet' ),
+							'from-bottom' => __( 'From Bottom', 'greenlet' ),
+							'from-right'  => __( 'From Right', 'greenlet' ),
+							'from-left'   => __( 'From Left', 'greenlet' ),
 						),
 					),
 				),

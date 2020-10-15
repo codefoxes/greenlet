@@ -71,6 +71,7 @@ removePOBackups() {
 
 copyColorwings() {
 	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
+	# Todo: Replace text domain.
 }
 
 if [ -z "$1" ]; then
@@ -114,4 +115,12 @@ elif [ "$1" == "backend" ]; then
 elif [ "$1" == "colorwings" ]; then
 	buildbackend only_cw
 	copyColorwings
+elif [ "$1" == "i18n" ]; then
+	current=$(pwd)
+	cd library/languages
+	wp i18n make-json kn.po --no-purge
+	for x in kn-*; do
+		mv "$x" "greenlet-$x"
+	done
+	cd $current
 fi

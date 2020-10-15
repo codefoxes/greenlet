@@ -10,17 +10,15 @@ $blog_name = get_bloginfo( 'name' );
 
 printf( '<div %s role="banner">', wp_kses( greenlet_attr( 'site-logo' ), null ) );
 
+printf( '<a %s href=', wp_kses( greenlet_attr( 'site-url' ), null ) );
+echo esc_url( home_url( '/' ) ) . ' title="' . esc_attr__( 'Home Page', 'greenlet' ) . '">';
 if ( false !== $logo_url ) {
-	printf( '<a %s href=', wp_kses( greenlet_attr( 'site-url' ), null ) );
-	echo esc_url( home_url( '/' ) ) . ' title="' . esc_attr__( 'Home Page', 'greenlet' ) . '">';
 	echo '<img src="' . esc_url( $logo_url ) . '" alt="' . esc_attr( $blog_name ) . '">';
-	echo '</a>';
-} else {
-	printf( '<h1 %s><a %s href=', wp_kses( greenlet_attr( 'site-name' ), null ), wp_kses( greenlet_attr( 'site-url' ), null ) );
-	echo esc_url( home_url( '/' ) ) . '>';
-	echo esc_html( $blog_name );
-	echo '</a></h1>';
 }
+printf( '<h1 %s>', wp_kses( greenlet_attr( 'site-name' ), null ) );
+echo esc_html( $blog_name );
+echo '</h1>';
+echo '</a>';
 
 echo '<small class="site-tagline">';
 bloginfo( 'description' );

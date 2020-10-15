@@ -1,6 +1,7 @@
 import styles from './Canvas.scss'
 
 function Canvas ( { pos } ) {
+	const { __ } = wp.i18n
 	const [ isZoneShown, setZoneShown ] = React.useState( false )
 	const [ dropZones, setDropZones ] = React.useState( [] )
 
@@ -27,7 +28,7 @@ function Canvas ( { pos } ) {
 
 	const div = document.createElement( 'div' )
 	div.classList.add( 'scroll-disabled' )
-	div.innerText = 'Infinite scrolling is temporarily disabled to edit footer.'
+	div.innerText = __( 'Infinite scrolling is temporarily disabled to edit footer.', 'greenlet' )
 
 	const toggleInfiniteScroll = ( enable = true ) => {
 		greenletToggleScroll( enable )

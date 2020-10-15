@@ -1,6 +1,8 @@
 import RowItems from './RowItems'
 
 function Layout( { control, updateSettings } ) {
+	const { __ } = wp.i18n
+
 	const { position, choices } = control.params
 
 	const [ expanded, setExpanded ] = React.useState( 0 )
@@ -93,18 +95,18 @@ function Layout( { control, updateSettings } ) {
 			{ coverRows.map( ( row, i ) => (
 				<div key={ i } className={ `row ${ ( expanded === i ) ? 'expanded' : '' }` }>
 					<div className="row-title" onClick={ ( e ) => toggleRow( e, i ) }>
-						{ row.primary ? `${ pos } ${ i + 1 } (Main)` : `${ pos } ${ i + 1 }` }
+						{ row.primary ? `${ pos } ${ i + 1 } (${ __( 'Main', 'greenlet' ) })` : `${ pos } ${ i + 1 }` }
 						<button className="toggler" onClick={ ( e ) => toggleRow( e, i ) }><span className="dashicons dashicons-arrow-down" /></button>
 					</div>
 					<div className="row-content">
 						<div className="layout-control customize-control-checkbox">
 							<span className="customize-inside-control-row">
 								<input id={ `_customize-input-cover_layout_${ pos }-${ i }-sticky` } type="checkbox" defaultChecked={ row.sticky } onChange={ () => changeSticky( i ) }/>
-								<label htmlFor={ `_customize-input-cover_layout_${ pos }-${ i }-sticky` }>Sticky</label>
+								<label htmlFor={ `_customize-input-cover_layout_${ pos }-${ i }-sticky` }>{ __( 'Sticky', 'greenlet' ) }</label>
 							</span>
 						</div>
 						<div className="layout-control customize-control-template">
-							<span className="title">Select Columns Layout</span>
+							<span className="title">{ __( 'Select Columns Layout', 'greenlet' ) }</span>
 							<div className="gl-radio-images">
 								{ Object.entries( choices ).map( ( [ key, choice ] ) => (
 									<div key={ key } className="gl-radio-image">
@@ -121,29 +123,29 @@ function Layout( { control, updateSettings } ) {
 						<div className={ `advanced ${ advanced[ i ] ? 'open': '' }` }>
 							<div className="layout-control">
 								<label>
-									<span className="title">Enter column numbers separated by hyphen.<br />Eg: <code>5-7</code> or <code>6-3-3</code>. Sum should be <code>12</code></span>
+									<span className="title">{ __( 'Enter column numbers separated by hyphen.', 'greenlet' ) }<br />Eg: <code>5-7</code> or <code>6-3-3</code>. { __( 'Sum should be', 'greenlet' ) } <code>12</code></span>
 									<input type="text" onChange={ ( e ) => changeColumns( e, i ) } />
 								</label>
 							</div>
 							<div className="layout-control gl-row">
 								<div className="col-4">
-									<label htmlFor={ `_customize-input-cover_layout_${ pos }-${ i }-vertical` }>Vertical</label>
+									<label htmlFor={ `_customize-input-cover_layout_${ pos }-${ i }-vertical` }>{ __( 'Vertical', 'greenlet' ) }</label>
 								</div>
 								<div className="col-8">
 									<select id={ `_customize-input-cover_layout_${ pos }-${ i }-vertical` } defaultValue={ row.vertical } onChange={ ( e ) => changeVertical( e, i ) } >
-										<option value="no">No</option>
-										<option value="left">Left</option>
-										<option value="right">Right</option>
+										<option value="no">{ __( 'No', 'greenlet' ) }</option>
+										<option value="left">{ __( 'Left', 'greenlet' ) }</option>
+										<option value="right">{ __( 'Right', 'greenlet' ) }</option>
 									</select>
 								</div>
 							</div>
 							<div className="layout-control">
-								<button className="delete" onClick={ ( e ) => deleteRow( e, i ) }>{ `Delete ${ pos } ${ i + 1 }` } <span className="dashicons dashicons-trash" /></button>
+								<button className="delete" onClick={ ( e ) => deleteRow( e, i ) }>{ `${ __( 'Delete', 'greenlet' ) } ${ pos } ${ i + 1 }` } <span className="dashicons dashicons-trash" /></button>
 							</div>
 						</div>
 						<div className="advanced-toggle">
 							<label>
-								<span>{ advanced[ i ] ? 'Hide' : 'Show' } Advanced</span>
+								<span>{ advanced[ i ] ? __( 'Hide', 'greenlet' ) : __( 'Show', 'greenlet' ) } { __( 'Advanced', 'greenlet' ) }</span>
 								<input type="checkbox" className="check" onChange={ ( e ) => toggleAdvanced( e, i ) } />
 							</label>
 						</div>

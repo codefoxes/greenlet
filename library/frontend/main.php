@@ -117,8 +117,14 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 						$meta = isset( $item['meta'] ) ? $item['meta'] : array();
 						$id   = isset( $item['id'] ) ? $item['id'] : $item;
 
-						$item_obj = $items[ $id ];
-						get_template_part( $item_obj['template'], null, $meta );
+						$item_obj = isset( $items[ $id ] ) ? $items[ $id ] : null;
+						if ( isset( $item_obj['template'] ) ) {
+							get_template_part( $item_obj['template'], null, $meta );
+						}
+
+						if ( isset( $item_obj['function'] ) ) {
+							call_user_func( $item_obj['function'] );
+						}
 					}
 				}
 
