@@ -390,30 +390,6 @@
 	opacity: 0;
 }
 
-/*.toggler {*/
-/*	text-align: center;*/
-/*	position: relative;*/
-/*}*/
-
-/*.toggler span {*/
-/*	background: #fff;*/
-/*	border-radius: 30px;*/
-/*	color: #999;*/
-/*	border: 1px solid #ccc;*/
-/*	cursor: pointer;*/
-/*	position: absolute;*/
-/*	top: 0;*/
-/*	left: 50%;*/
-/*	transform: translateX(-50%);*/
-/*	transition: .5s all;*/
-/*	font-size: 14px;*/
-/*	line-height: 1.4;*/
-/*}*/
-
-/*.toggled span {*/
-/*	transform: translateX(-50%) rotate(180deg);*/
-/*}*/
-
 .aspect {
 	position: absolute;
 	left: 40%;

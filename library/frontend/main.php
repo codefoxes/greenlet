@@ -5,7 +5,6 @@
  * @package greenlet\library\frontend
  */
 
-use Greenlet\Rows as GreenletRows;
 use Greenlet\Columns as GreenletColumns;
 
 if ( ! defined( 'ABSPATH' ) ) {
