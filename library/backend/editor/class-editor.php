@@ -108,7 +108,7 @@ class Editor {
 			max-width: 100%;
 		}
 
-		.wp-block-group.full-width-box .wp-block-cover {
+		.wp-block-group.full-width-box .wp-block-cover:first-child {
 			width: calc(100vw - 280px);
 			max-width: 100vw;
 			position: absolute;
@@ -122,7 +122,7 @@ class Editor {
 			z-index: 1;
 		}
 
-		.wp-block-group.full-width-box .wp-block-cover > *:not(.components-placeholder) {
+		.wp-block-group.full-width-box .wp-block-cover:first-child > *:not(.components-placeholder) {
 			display: none
 		}
 

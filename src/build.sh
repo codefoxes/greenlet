@@ -72,6 +72,7 @@ removePOBackups() {
 copyColorwings() {
 	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
 	# Todo: Replace text domain.
+	sed -i '' 's/greenlet/colorwings/g' class-colorwings-admin.php
 }
 
 if [ -z "$1" ]; then

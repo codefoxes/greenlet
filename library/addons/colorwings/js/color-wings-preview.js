@@ -431,8 +431,9 @@
 	    margin: {}
 	  },
 	  similarStyles: '',
-	  currentTarget: '',
-	  showDomTree: false
+	  currentTarget: false,
+	  showDomTree: false,
+	  domTree: []
 	};
 
 	var PreviewClass = /*#__PURE__*/function (_Store) {
@@ -514,11 +515,12 @@
 	    }
 	  }, {
 	    key: "showDomTree",
-	    value: function showDomTree(data) {
+	    value: function showDomTree(data, domTree) {
 	      this.set(function () {
 	        return {
 	          currentTarget: data.currentTarget,
-	          showDomTree: true
+	          showDomTree: true,
+	          domTree: domTree
 	        };
 	      });
 	    }
@@ -527,7 +529,8 @@
 	    value: function hideDomTree() {
 	      this.set(function () {
 	        return {
-	          showDomTree: false
+	          showDomTree: false,
+	          domTree: []
 	        };
 	      });
 	    }
@@ -628,70 +631,83 @@
 	    Evt = _cw.Evt;
 	var maxSelectorLength = 30;
 
-	var unselectParents = function unselectParents(el, toReturn) {
-	  if (null !== el.parentElement) {
-	    delete el.parentElement.cwSelected;
-	    return unselectParents(el.parentElement, toReturn);
-	  }
-
-	  return toReturn;
-	};
-
-	var getSelector = function getSelector(el, currentLength) {
-	  // Todo: throws error if el === null
-	  // Maybe this?
-	  if (null === el) {
-	    return '';
-	  }
-
-	  el.cwSelected = {
-	    classSelected: []
-	  };
-
-	  if (el === document.body || null === el) {
-	    if ('body'.length + parseInt(currentLength) >= maxSelectorLength) return unselectParents(el, '');
-	    el.cwSelected.tagSelected = true;
-	    return unselectParents(el, 'body');
-	  }
-
-	  if (el.id !== '' && !/\w*-\d+/g.test("".concat(el.id))) {
-	    if ("#".concat(el.id).length + parseInt(currentLength) >= maxSelectorLength) return unselectParents(el, '');
-	    el.cwSelected.idSelected = true;
-	    return unselectParents(el, "#".concat(el.id));
-	  }
-
-	  var selector = '';
-	  var selectors = [];
-	  el.classList.forEach(function (cls) {
-	    // Ignore classes
-	    if (selectors.length >= 2) {
-	      return false;
-	    } // Ignore autogen sequential classes
-
-
-	    if (/\w*-\d+/g.test("".concat(cls))) {
-	      return false;
-	    }
-
-	    if (selector.length + parseInt(currentLength) >= maxSelectorLength) return false;
-	    el.cwSelected.classSelected.push(cls);
-	    selector += ".".concat(cls);
-	    selectors.push(cls);
+	var getTree = function getTree(el) {
+	  var tree = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+	  tree.push({
+	    el: el
 	  });
 
-	  if (el.classList.length === 0) {
-	    selector = el.tagName.toLowerCase();
-	    if (selector.length + parseInt(currentLength) >= maxSelectorLength) return unselectParents(el, '');
-	    el.cwSelected.tagSelected = true;
+	  if (el.parentNode !== document) {
+	    getTree(el.parentNode, tree);
 	  }
 
-	  var parentSelector = getSelector(el.parentElement, selector.length + parseInt(currentLength)); // Ignore classes
+	  return tree;
+	};
 
-	  if ("".concat(parentSelector, " ").concat(selector).length > maxSelectorLength) {
-	    return unselectParents(el, selector);
-	  }
+	var getSelectorFromTree = function getSelectorFromTree(tree) {
+	  // Changes tree object. So don't call this directly.
+	  var selector = '';
+	  tree.forEach(function (elObj, i) {
+	    var el = elObj.el;
+	    elObj.cwSelected = {
+	      classSelected: []
+	    };
+	    var elSelector = '';
 
-	  return "".concat(parentSelector, " ").concat(selector);
+	    if (el.id !== '' && !/\w*-\d+/g.test("".concat(el.id))) {
+	      if ("#".concat(el.id, " ").concat(selector).length <= maxSelectorLength) {
+	        elObj.cwSelected.idSelected = true;
+	        selector = 0 === i ? "#".concat(el.id) : "#".concat(el.id, " ").concat(selector);
+	        return;
+	      }
+	    }
+
+	    var clsList = [];
+	    el.classList.forEach(function (cls) {
+	      // Ignore classes
+	      if (clsList.length >= 2) return; // Ignore autogen sequential classes
+
+	      if (/\w*-\d+/g.test("".concat(cls))) return;
+	      if ("".concat(elSelector, ".").concat(cls, " ").concat(selector).length >= maxSelectorLength) return;
+	      elObj.cwSelected.classSelected.push(cls);
+	      elSelector = "".concat(elSelector, ".").concat(cls);
+	      clsList.push(cls);
+	    });
+
+	    if (el.classList.length === 0) {
+	      var tagName = el.tagName.toLowerCase();
+
+	      if ("".concat(tagName).concat(elSelector, " ").concat(selector).length <= maxSelectorLength) {
+	        elSelector = "".concat(tagName).concat(elSelector);
+	        elObj.cwSelected.tagSelected = true;
+	      }
+	    }
+
+	    if ("".concat(elSelector, " ").concat(selector).length >= maxSelectorLength) {
+	      elObj.cwSelected = {
+	        classSelected: []
+	      };
+	      return;
+	    }
+
+	    selector = 0 === i ? elSelector : "".concat('' === elSelector ? '' : elSelector + ' ').concat(selector);
+	  });
+	  return selector;
+	};
+
+	var getSelector = function getSelector(el) {
+	  // Todo: throws error if el === null
+	  // Maybe this?
+	  if (null === el) return '';
+	  var selectorTree = getTree(el);
+	  return getSelectorFromTree(selectorTree);
+	};
+
+	var getSelectorTree = function getSelectorTree(el) {
+	  if (null === el) return '';
+	  var selectorTree = getTree(el);
+	  getSelectorFromTree(selectorTree);
+	  return selectorTree;
 	};
 
 	var getFocusLinesNewState = function getFocusLinesNewState(client) {
@@ -767,7 +783,7 @@
 	        height: '24px',
 	        background: '#7CB342'
 	      },
-	      selector: isSelector ? ip : getSelector(currentTarget, 0)
+	      selector: isSelector ? ip : getSelector(currentTarget)
 	    }
 	  };
 	  PreviewStore.moveFocus(newState);
@@ -1036,50 +1052,45 @@
 	cw.Evt.on('highlight-elements', highlightElements);
 	cw.Evt.on('de-highlight-elements', deHighlight);
 
+	var getTree$1 = function getTree(el) {
+	  if (false === el) return [];
+	  var domTree = [];
+	  var selectorTree = getSelectorTree(el);
+	  selectorTree.forEach(function (elObj) {
+	    var element = {
+	      tag: {},
+	      id: {},
+	      cls: {}
+	    };
+	    element.tag.name = elObj.el.tagName.toLowerCase();
+	    element.tag.selected = !!(elObj.cwSelected && elObj.cwSelected.tagSelected);
+
+	    if (elObj.el.id !== '') {
+	      element.id.name = "#".concat(elObj.el.id);
+	      element.id.selected = !!(elObj.cwSelected && elObj.cwSelected.idSelected);
+	    }
+
+	    elObj.el.classList.forEach(function (cls) {
+	      element.cls[".".concat(cls)] = {
+	        name: ".".concat(cls),
+	        selected: elObj.cwSelected ? elObj.cwSelected.classSelected.includes(cls) : false
+	      };
+	    });
+	    domTree.unshift(element);
+	  });
+	  return domTree;
+	};
 	var showTree = function showTree(data) {
 	  var _PreviewStore$get = PreviewStore.get(),
 	      currentTarget = _PreviewStore$get.currentTarget,
 	      showDomTree = _PreviewStore$get.showDomTree;
 
 	  if (currentTarget !== data.currentTarget || !showDomTree) {
-	    PreviewStore.showDomTree(data);
+	    PreviewStore.showDomTree(data, getTree$1(data.currentTarget));
 	  }
 	};
 	var hideTree = function hideTree() {
 	  return PreviewStore.hideDomTree();
-	};
-	var getTree = function getTree(el) {
-	  var domTree = [];
-	  var element = {
-	    tag: {},
-	    id: {},
-	    cls: {}
-	  }; // Todo: what if el === null ?
-
-	  if (el === document.body || null === el) {
-	    element.tag.name = 'body';
-	    element.tag.selected = !!(el && el.cwSelected && el.cwSelected.tagSelected);
-	    domTree.push(element);
-	    return domTree;
-	  }
-
-	  element.tag.name = el.tagName.toLowerCase();
-	  element.tag.selected = !!(el.cwSelected && el.cwSelected.tagSelected);
-
-	  if (el.id !== '') {
-	    element.id.name = "#".concat(el.id);
-	    element.id.selected = !!(el.cwSelected && el.cwSelected.idSelected);
-	  }
-
-	  el.classList.forEach(function (cls) {
-	    element.cls[".".concat(cls)] = {
-	      name: ".".concat(cls),
-	      selected: el.cwSelected ? el.cwSelected.classSelected.includes(cls) : false
-	    };
-	  });
-	  var parentDomTree = getTree(el.parentElement);
-	  parentDomTree.push(element);
-	  return parentDomTree;
 	};
 
 	var getSelector$1 = function getSelector(domTree) {
@@ -1123,9 +1134,12 @@
 	};
 
 	var changeTarget = function changeTarget(ri) {
-	  return cw.Evt.emit('select-element', {
-	    target: getTarget(ri)
-	  });
+	  PreviewStore.hideDomTree();
+	  setTimeout(function () {
+	    cw.Evt.emit('select-element', {
+	      target: getTarget(ri)
+	    });
+	  }, 0);
 	};
 	var highlightToggle = function highlightToggle(ri) {
 	  var deHighlight = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -1192,12 +1206,12 @@
 
 	function DomTree() {
 	  var _useStore = useStore(PreviewStore),
-	      currentTarget = _useStore.currentTarget,
-	      showDomTree = _useStore.showDomTree;
+	      showDomTree = _useStore.showDomTree,
+	      domTree = _useStore.domTree;
 
 	  return /*#__PURE__*/React.createElement("div", {
 	    id: "cw-domtree"
-	  }, showDomTree ? DomTreeList(getTree(currentTarget)) : '', /*#__PURE__*/React.createElement("style", {
+	  }, showDomTree ? DomTreeList(domTree) : '', /*#__PURE__*/React.createElement("style", {
 	    type: "text/css"
 	  }, styles));
 	}

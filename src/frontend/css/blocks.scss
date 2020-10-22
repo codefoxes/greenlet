@@ -6,7 +6,7 @@
 	padding: 16px;
 }
 
-.full-width-box .wp-block-cover {
+.full-width-box .wp-block-cover:first-child {
 	width: 100vw;
 	max-width: 100vw;
 	position: absolute;

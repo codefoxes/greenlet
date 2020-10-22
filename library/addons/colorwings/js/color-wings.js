@@ -2231,9 +2231,13 @@
         state = _React$useState2[0],
         setState = _React$useState2[1];
 
-    var resetValue = [];
+    var _React$useState3 = React.useState([]),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        resetVal = _React$useState4[0],
+        setReset = _React$useState4[1];
+
     React.useEffect(function () {
-      resetValue = getLength();
+      setReset(getLength());
     }, []);
     React.useEffect(function () {
       var _getLength3 = getLength(),
@@ -2254,15 +2258,17 @@
     };
 
     var reset = function reset() {
-      var _resetValue = resetValue,
-          _resetValue2 = _slicedToArray(_resetValue, 2),
-          main = _resetValue2[0],
-          unit = _resetValue2[1];
+      setState(function (prev) {
+        var _resetVal = _slicedToArray(resetVal, 2),
+            main = _resetVal[0],
+            unit = _resetVal[1];
 
-      setState({
-        main: main,
-        unit: unit
-      }, handleChange);
+        handleChange("".concat(main).concat(unit));
+        return _objectSpread2({}, prev, {
+          main: main,
+          unit: unit
+        });
+      });
     };
 
     var handleLengthChange = function handleLengthChange(e) {

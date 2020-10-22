@@ -502,7 +502,9 @@ function greenlet_do_entry_content() {
 		if ( ( false !== $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
 
 			greenlet_markup( 'entry-thumbnail', greenlet_attr( 'entry-thumbnail' ) );
+			echo '<a href="' . esc_url( get_permalink() ) . '" title="' . esc_html( get_the_title() ) . '">';
 			the_post_thumbnail( 'medium' );
+			echo '</a>';
 			greenlet_markup_close();
 		}
 
