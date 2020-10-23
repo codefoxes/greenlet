@@ -56,4 +56,28 @@ class Sanitizer {
 		sscanf( $color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
 		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
 	}
+
+	/**
+	 * Sanitize cover layout item.
+	 *
+	 * @since  1.3.5
+	 * @param  mixed $item Cover layout single item.
+	 */
+	public static function sanitize_cover_item( &$item ) {
+		if ( 'string' === gettype( $item ) ) {
+			$item = wp_kses_post( $item );
+		}
+	}
+
+	/**
+	 * Sanitize cover layout value.
+	 *
+	 * @since  1.3.5
+	 * @param  array $value Input layout.
+	 * @return array        Sanitized layout.
+	 */
+	public static function sanitize_cover( $value ) {
+		array_walk_recursive( $value, array( 'Greenlet\Sanitizer', 'sanitize_cover_item' ) );
+		return $value;
+	}
 }

@@ -23,10 +23,6 @@ function greenlet_options() {
 		$sidebars_qty[ $i ] = $i;
 	}
 
-	// Page top and bottom columns.
-	$pagetop_columns    = greenlet_cover_columns( array( 'header', 'topbar' ) );
-	$pagebottom_columns = greenlet_cover_columns( array( 'semifooter', 'footer' ) );
-
 	$logo_width  = 0;
 	$logo_height = 0;
 	$logo        = greenlet_get_logo();
@@ -198,7 +194,7 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
-		'id'   => 'header_layout',
+		'id'   => 'header_section',
 		'args' => array(
 			'title' => __( 'Header Layout', 'greenlet' ),
 			'panel' => 'layout',
@@ -207,150 +203,17 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'show_topbar',
+		'id'    => 'header_layout',
 		'sargs' => array(
-			'default' => false,
+			'default' => greenlet_cover_layout_defaults( 'header' ),
 		),
 		'cargs' => array(
-			'type'    => 'checkbox',
-			'section' => 'header_layout',
-			'label'   => __( 'Show Topbar', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'fixed_topbar',
-		'sargs' => array(
-			'default' => '1',
-		),
-		'cargs' => array(
-			'type'    => 'checkbox',
-			'section' => 'header_layout',
-			'label'   => __( 'Fixed Topbar', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'topbar_template',
-		'sargs' => array(
-			'default' => '',
-		),
-		'cargs' => array(
-			'type'        => 'template',
-			'section'     => 'header_layout',
-			'label'       => __( 'Topbar Layout', 'greenlet' ),
-			'description' => __( 'Select Topbar Columns Layout', 'greenlet' ),
-			'choices'     => greenlet_template_images( 'cover' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'topbar_width',
-		'sargs' => array(),
-		'cargs' => array(
-			'type'    => 'cw-link',
-			'section' => 'header_layout',
-			'label'   => __( 'Topbar Styles', 'greenlet' ),
-			'options' => array(
-				'selector' => '.topbar',
-			),
-		),
-	);
-
-	$options[] = array(
-		'type' => 'control',
-		'id'   => 'header_divider',
-		'args' => array(
-			'type'     => 'divider',
-			'settings' => array(),
-			'section'  => 'header_layout',
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'header_template',
-		'sargs' => array(
-			'default' => '',
-		),
-		'cargs' => array(
-			'type'        => 'template',
-			'section'     => 'header_layout',
-			'label'       => __( 'Header Layout', 'greenlet' ),
-			'description' => __( 'Select Header Columns Layout', 'greenlet' ),
-			'choices'     => greenlet_template_images( 'cover' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'header_width',
-		'sargs' => array(),
-		'cargs' => array(
-			'type'    => 'cw-link',
-			'section' => 'header_layout',
-			'label'   => __( 'Header Styles', 'greenlet' ),
-			'options' => array(
-				'selector' => '.site-header',
-			),
-		),
-	);
-
-	$options[] = array(
-		'type' => 'control',
-		'id'   => 'logo_divider',
-		'args' => array(
-			'type'     => 'divider',
-			'settings' => array(),
-			'section'  => 'header_layout',
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'logo_position',
-		'sargs' => array(
-			'default' => 'header-1',
-		),
-		'cargs' => array(
-			'type'        => 'select',
-			'section'     => 'header_layout',
-			'label'       => __( 'Logo Position', 'greenlet' ),
-			'description' => __( 'Column for the logo to be displayed.', 'greenlet' ),
-			'choices'     => $pagetop_columns,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'mmenu_position',
-		'sargs' => array(
-			'default' => 'header-2',
-		),
-		'cargs' => array(
-			'type'        => 'select',
-			'section'     => 'header_layout',
-			'label'       => __( 'Main Menu Position', 'greenlet' ),
-			'description' => __( 'Column for the Main Menu to be displayed.', 'greenlet' ),
-			'choices'     => $pagetop_columns,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'smenu_position',
-		'sargs' => array(
-			'default' => 'dont-show',
-		),
-		'cargs' => array(
-			'type'        => 'select',
-			'section'     => 'header_layout',
-			'label'       => __( 'Secondary Menu Position', 'greenlet' ),
-			'description' => __( 'Column for the Secondary Menu to be displayed.', 'greenlet' ),
-			'choices'     => $pagetop_columns,
+			'type'     => 'cover-layout',
+			'section'  => 'header_section',
+			'label'    => __( 'Header Layout', 'greenlet' ),
+			'position' => 'header',
+			'choices'  => greenlet_template_images( 'cover' ),
+			'items'    => greenlet_cover_layout_items( 'header' ),
 		),
 	);
 
@@ -480,7 +343,7 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
-		'id'   => 'footer_layout',
+		'id'   => 'footer_section',
 		'args' => array(
 			'title' => __( 'Footer Layout', 'greenlet' ),
 			'panel' => 'layout',
@@ -489,107 +352,17 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'show_semifooter',
+		'id'    => 'footer_layout',
 		'sargs' => array(
-			'default' => false,
+			'default' => greenlet_cover_layout_defaults( 'footer' ),
 		),
 		'cargs' => array(
-			'type'    => 'checkbox',
-			'section' => 'footer_layout',
-			'label'   => __( 'Show Semifooter', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'semifooter_template',
-		'sargs' => array(
-			'default' => '',
-		),
-		'cargs' => array(
-			'type'        => 'template',
-			'section'     => 'footer_layout',
-			'label'       => __( 'Semi Footer Layout', 'greenlet' ),
-			'description' => __( 'Select Semi Footer Columns Layout', 'greenlet' ),
-			'choices'     => greenlet_template_images( 'cover' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'semifooter_width',
-		'sargs' => array(),
-		'cargs' => array(
-			'type'    => 'cw-link',
-			'section' => 'footer_layout',
-			'label'   => __( 'Semi Footer Styles', 'greenlet' ),
-			'options' => array(
-				'selector' => '.semifooter',
-			),
-		),
-	);
-
-	$options[] = array(
-		'type' => 'control',
-		'id'   => 'footer_divider',
-		'args' => array(
-			'type'     => 'divider',
-			'settings' => array(),
-			'section'  => 'footer_layout',
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'footer_template',
-		'sargs' => array(
-			'default' => '',
-		),
-		'cargs' => array(
-			'type'        => 'template',
-			'section'     => 'footer_layout',
-			'label'       => __( 'Footer Layout', 'greenlet' ),
-			'description' => __( 'Select Footer Columns Layout', 'greenlet' ),
-			'choices'     => greenlet_template_images( 'cover' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'footer_width',
-		'sargs' => array(),
-		'cargs' => array(
-			'type'    => 'cw-link',
-			'section' => 'footer_layout',
-			'label'   => __( 'Footer Styles', 'greenlet' ),
-			'options' => array(
-				'selector' => '.site-footer',
-			),
-		),
-	);
-
-	$options[] = array(
-		'type' => 'control',
-		'id'   => 'fmenu_divider',
-		'args' => array(
-			'type'     => 'divider',
-			'settings' => array(),
-			'section'  => 'footer_layout',
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'fmenu_position',
-		'sargs' => array(
-			'default' => 'dont-show',
-		),
-		'cargs' => array(
-			'type'        => 'select',
-			'section'     => 'footer_layout',
-			'label'       => __( 'Footer Menu Position', 'greenlet' ),
-			'description' => __( 'Column for the Footer Menu to be displayed.', 'greenlet' ),
-			'choices'     => $pagebottom_columns,
+			'type'     => 'cover-layout',
+			'section'  => 'footer_section',
+			'label'    => __( 'Footer Layout', 'greenlet' ),
+			'position' => 'footer',
+			'choices'  => greenlet_template_images( 'cover' ),
+			'items'    => greenlet_cover_layout_items( 'footer' ),
 		),
 	);
 

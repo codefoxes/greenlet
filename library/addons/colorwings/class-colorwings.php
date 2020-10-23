@@ -101,7 +101,12 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 				return;
 			}
 
-			foreach ( $cw as $page => $value ) {
+			$theme = get_stylesheet();
+			if ( ! isset( $cw[ $theme ] ) ) {
+				return;
+			}
+
+			foreach ( $cw[ $theme ] as $page => $value ) {
 				if ( 'global' === $value['type'] ) {
 					$this->styles .= $value['styles'];
 					$this->add_font( $value );
@@ -111,7 +116,7 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 						|| ( 'is_home' === $page && is_home() )
 						|| ( 'is_archive' === $page && is_archive() )
 						|| ( 'is_page' === $page && is_page() )
-						|| ( 'is_single' === $page && is_page() )
+						|| ( 'is_single' === $page && is_single() )
 					) {
 						$this->styles .= $value['styles'];
 					}

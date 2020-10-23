@@ -54,7 +54,13 @@ buildfonts() {
 }
 
 buildbackend() {
-	./node_modules/.bin/rollup -c
+	if [ "$1" == "only_main" ]; then
+		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
+	elif [ "$1" == "only_cw" ]; then
+		ONLY_CW=1 ./node_modules/.bin/rollup -c
+	else
+		./node_modules/.bin/rollup -c
+	fi
 }
 
 removePOBackups() {
@@ -65,6 +71,8 @@ removePOBackups() {
 
 copyColorwings() {
 	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
+	# Todo: Replace text domain.
+	sed -i '' 's/greenlet/colorwings/g' ../../plugins/colorwings/class-colorwings-admin.php
 }
 
 if [ -z "$1" ]; then
@@ -101,11 +109,19 @@ elif [ "$1" == "css" ]; then
 elif [ "$1" == "js" ]; then
 	buildjs
 elif [ "$1" == "backend" ]; then
-	buildbackend
+	buildbackend only_main
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
 elif [ "$1" == "colorwings" ]; then
-	buildbackend
+	buildbackend only_cw
 	copyColorwings
+elif [ "$1" == "i18n" ]; then
+	current=$(pwd)
+	cd library/languages
+	wp i18n make-json kn.po --no-purge
+	for x in kn-*; do
+		mv "$x" "greenlet-$x"
+	done
+	cd $current
 fi

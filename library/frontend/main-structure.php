@@ -484,7 +484,9 @@ function greenlet_do_entry_content() {
 	if ( is_single() || is_page() ) {
 
 		if ( has_post_thumbnail() ) {
+			greenlet_markup( 'featured-image', greenlet_attr( 'featured-image' ) );
 			the_post_thumbnail();
+			greenlet_markup_close();
 		}
 
 		the_content();
@@ -500,7 +502,9 @@ function greenlet_do_entry_content() {
 		if ( ( false !== $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
 
 			greenlet_markup( 'entry-thumbnail', greenlet_attr( 'entry-thumbnail' ) );
+			echo '<a href="' . esc_url( get_permalink() ) . '" title="' . esc_html( get_the_title() ) . '">';
 			the_post_thumbnail( 'medium' );
+			echo '</a>';
 			greenlet_markup_close();
 		}
 
@@ -982,9 +986,9 @@ function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
  */
 function greenlet_search_form() {
 	$html = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
-		<label for="search-input">
+		<label>
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
-			<input type="search" class="search-field" id="search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
+			<input type="search" class="search-field search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
 		</label>
 		<input type="submit" class="search-submit" value="' . esc_attr__( 'Search', 'greenlet' ) . '">
 	</form>';

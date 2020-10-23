@@ -60,14 +60,20 @@ class ColorWings_Admin {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_script( 'color-wings-preview', COLORWINGS_URL . '/js/color-wings-preview' . $min . '.js', array( 'react-dom', 'customize-preview' ), COLORWINGS_VERSION, true );
 
-		$pages = array(
-			'is_front_page' => is_front_page(),
-			'is_home'       => is_home(),
-			'is_archive'    => is_archive(),
-			'is_page'       => is_page(),
-			'is_single'     => is_single(),
+		$preview_object = array(
+			'pages' => array(
+				'is_front_page' => is_front_page(),
+				'is_home'       => is_home(),
+				'is_archive'    => is_archive(),
+				'is_page'       => is_page(),
+				'is_single'     => is_single(),
+			),
+			'page'  => array(
+				'id'    => get_the_ID(),
+				'title' => get_the_title(),
+			),
 		);
-		wp_localize_script( 'color-wings-preview', 'cwPreviewObject', $pages );
+		wp_localize_script( 'color-wings-preview', 'cwPreviewObject', $preview_object );
 	}
 
 	/**
@@ -91,7 +97,7 @@ class ColorWings_Admin {
 		$wp_customize->add_section(
 			'extra_styles',
 			array(
-				'title'      => __( 'Extra Styles' ),
+				'title'      => __( 'Extra Styles', 'greenlet' ),
 				'priority'   => 900,
 				'capability' => 'edit_theme_options',
 			)
@@ -103,7 +109,7 @@ class ColorWings_Admin {
 				'type'              => 'option',
 				'capability'        => 'edit_theme_options',
 				'transport'         => 'postMessage',
-				'sanitize_callback' => array( $this, 'sanitize' ),
+				'validate_callback' => array( $this, 'validate' ),
 			)
 		);
 
@@ -117,16 +123,25 @@ class ColorWings_Admin {
 	}
 
 	/**
-	 * Sanitizes ColorWings Settings.
+	 * Validate ColorWings Settings.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 * @access public
-	 * @param  array $settings ColorWings Settings.
+	 * @param \WP_Error $validity True if the input was validated, otherwise WP_Error.
+	 * @param array     $settings ColorWings Settings.
 	 *
-	 * @return array Sanitized Settings.
+	 * @return \WP_Error          Validity object.
 	 */
-	public static function sanitize( $settings ) {
-		return $settings;
+	public static function validate( $validity, $settings ) {
+		foreach ( $settings as $theme => $theme_data ) {
+			foreach ( $theme_data as $type => $data ) {
+				if ( isset( $data['styles'] ) && preg_match( '#</?\w+#', $data['styles'] ) ) {
+					$validity->add( 'illegal_markup', __( 'Markup is not allowed in CSS.' ) );
+				}
+			}
+		}
+
+		return $validity;
 	}
 
 	/**

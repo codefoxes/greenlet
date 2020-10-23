@@ -103,3 +103,18 @@ Distributed under the MIT License
 
 Bootstrap is HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. (https://github.com/twbs/bootstrap)
 Distributed under the MIT License
+
+= Colorwings Licence =
+
+Colorwings is a visual style editor for WordPress by Karthik Bhat. (https://github.com/karthikax/colorwings/)
+Distributed under the MIT License
+
+= React Sortable HOC Licence =
+
+React Sortable HOC is a components sorting library by Claudéric Demers. (https://github.com/clauderic/react-sortable-hoc)
+Distributed under the MIT License
+
+= react-select-search Licence =
+
+react-select-search is a lightweight select component library by tbleckert. (https://github.com/tbleckert/react-select-search)
+Distributed under the MIT License

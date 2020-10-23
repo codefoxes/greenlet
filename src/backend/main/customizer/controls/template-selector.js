@@ -9,6 +9,7 @@ import { $ } from '../Helpers'
 wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.extend(
 	{
 		ready: function() {
+			const { __ } = wp.i18n
 			var control  = this
 			var radios   = $( control.selector + ' input[type="radio"]' )
 			var val      = control.setting._value
@@ -29,10 +30,10 @@ wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.exte
 						matcherHtml += '<div class="gl-template-matcher col-' + cols[ i - 1 ] + '">'
 						matcherHtml += '<select class="gl-template-selection">'
 						var selected = ( i === 1 ) ? 'selected' : ''
-						matcherHtml += '<option value="main" ' + selected + '>Main Content</option>'
+						matcherHtml += `<option value="main" ${ selected }>${ __( 'Main Content', 'greenlet' ) }</option>`
 						for ( var j = 1; j <= sidebars; j ++ ) {
 							selected     = ( i === ( j + 1 ) ) ? 'selected' : ''
-							matcherHtml += '<option value="sidebar-' + j + '" ' + selected + '>Sidebar ' + j + '</option>'
+							matcherHtml += `<option value="sidebar-${ j }" ${ selected }>${ __( 'Sidebar', 'greenlet' ) } ${ j }</option>`
 						}
 						matcherHtml += '</select>'
 						matcherHtml += '<div class="gl-template-matcher-column">col ' + i + ' (' + cols[ i - 1 ] + ')</div>'

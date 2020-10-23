@@ -37,13 +37,16 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'color-picker-alpha', COLORWINGS_URL . '/js/wp-color-picker-alpha.min' . $min . '.js', array( 'jquery', 'wp-color-picker' ), COLORWINGS_VERSION, true );
 			wp_enqueue_script( 'codemirror-format', COLORWINGS_URL . '/js/formatting' . $min . '.js', array( 'wp-codemirror' ), COLORWINGS_VERSION, true );
-			wp_enqueue_script( 'color-wings-controls', COLORWINGS_URL . '/js/color-wings' . $min . '.js', array( 'jquery', 'react-dom' ), COLORWINGS_VERSION, true );
+			wp_enqueue_script( 'color-wings-controls', COLORWINGS_URL . '/js/color-wings' . $min . '.js', array( 'jquery', 'react-dom', 'wp-media-utils' ), COLORWINGS_VERSION, true );
 
-			$color_wings_fonts = array(
-				'allFonts' => $this->get_all_fonts(),
-				'defaults' => $this->get_font_defaults(),
+			$color_wings_control = array(
+				'fonts' => array(
+					'allFonts' => $this->get_all_fonts(),
+					'defaults' => $this->get_font_defaults(),
+				),
+				'theme' => get_stylesheet(),
 			);
-			wp_localize_script( 'color-wings-controls', 'colorWingsFonts', $color_wings_fonts );
+			wp_localize_script( 'color-wings-controls', 'cwControlObject', $color_wings_control );
 		}
 
 		/**

@@ -44,19 +44,6 @@ if ( ! class_exists( 'Control_Template_Sequence' ) && class_exists( 'WP_Customiz
 		public $columns = array();
 
 		/**
-		 * Enqueue scripts/styles.
-		 *
-		 * @since  1.0.0
-		 * @access public
-		 * @return void
-		 */
-		public function enqueue() {
-			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-			wp_enqueue_script( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'jquery' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
-		}
-
-		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
 		 * @since  1.0.0

@@ -19,7 +19,7 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 	 */
 	function greenlet_column_content_options() {
 
-		$array['main'] = 'Main Content';
+		$array['main'] = __( 'Main Content', 'greenlet' );
 
 		foreach ( $GLOBALS['wp_registered_sidebars'] as $sidebar ) {
 			if ( 0 === strpos( $sidebar['id'], 'sidebar-' ) ) {
@@ -28,32 +28,6 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 		}
 
 		return $array;
-	}
-}
-
-
-if ( ! function_exists( 'greenlet_cover_columns' ) ) {
-	/**
-	 * Gets cover (header, footer) columns.
-	 *
-	 * @since  1.0.0
-	 * @param  array $positions Cover positions.
-	 * @return array            List of columns
-	 */
-	function greenlet_cover_columns( $positions = array( 'topbar', 'header', 'semifooter', 'footer' ) ) {
-
-		$cover_columns = array( 'dont-show' => 'Do Not Show' );
-
-		foreach ( $positions as $key => $position ) {
-			$cols  = gl_get_option( "{$position}_template", top_bottom_default_columns( $position ) );
-			$array = explode( '-', $cols );
-			foreach ( $array as $id => $width ) {
-				$id++;
-				$cover_columns[ $position . '-' . $id ] = ucfirst( $position ) . ' Column ' . $id . ' (width = ' . $width . ')';
-			}
-		}
-
-		return $cover_columns;
 	}
 }
 
@@ -156,5 +130,32 @@ if ( ! function_exists( 'greenlet_is_editor' ) ) {
 		} else {
 			return in_array( $pagenow, array( 'post.php', 'post-new.php' ), true );
 		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_add_script_dependencies' ) ) {
+	/**
+	 * Add dependency to registered script.
+	 *
+	 * @since  1.3.5
+	 * @param  string $handle Script handle.
+	 * @param  array  $deps   Dependencies array.
+	 * @return bool           Whether addition is successful.
+	 */
+	function greenlet_add_script_dependencies( $handle, $deps = array() ) {
+		global $wp_scripts;
+
+		$script = $wp_scripts->query( $handle, 'registered' );
+		if ( ! $script ) {
+			return false;
+		}
+
+		foreach ( $deps as $dep ) {
+			if ( ! in_array( $dep, $script->deps, true ) ) {
+				$script->deps[] = $dep;
+			}
+		}
+
+		return true;
 	}
 }

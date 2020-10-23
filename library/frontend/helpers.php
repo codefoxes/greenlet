@@ -19,3 +19,19 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 		do_action( 'wp_body_open' );
 	}
 }
+
+/**
+ * Get page data.
+ *
+ * @since  1.3.5
+ * @return string Page data.
+ */
+function greenlet_page_data() {
+	if ( is_front_page() ) {
+		$data = get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
+	} else {
+		$data = get_bloginfo( 'name' ) . wp_title( '&raquo;', false );
+	}
+
+	return $data;
+}

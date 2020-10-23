@@ -41,6 +41,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			'page'        => get_query_var( 'paged', 1 ),
 			'permalinks'  => $wp_rewrite->using_permalinks(),
 			'query_vars'  => wp_json_encode( $wp_query->query_vars ),
+			'page_data'   => greenlet_page_data(),
 		);
 		$l10n = apply_filters( 'greenlet_l10n_object', $l10n );
 		wp_localize_script( 'greenlet-scripts', 'greenlet_object', $l10n );
@@ -96,26 +97,8 @@ if ( ! function_exists( 'greenlet_load_inline_styles' ) ) {
 
 		$fixed_topbar = gl_get_option( 'fixed_topbar', true );
 
-		$logo_width  = gl_get_option( 'logo_width', false );
-		$logo_height = gl_get_option( 'logo_height', false );
-
-		$raw_width  = 0;
-		$raw_height = 0;
-		$logo       = greenlet_get_logo();
-		if ( $logo ) {
-			list( $raw_width, $raw_height ) = getimagesize( esc_url( $logo ) );
-		}
-
 		ob_start();
 		greenlet_print_inline_styles();
-
-		if ( false !== $logo_width && $raw_width !== $logo_width ) {
-			echo '.site-logo img { width: ' . esc_html( $logo_width ) . ';}';
-		}
-
-		if ( false !== $logo_height && $raw_height !== $logo_height ) {
-			echo '.site-logo img { height: ' . esc_html( $logo_height ) . ';}';
-		}
 
 		if ( false === $show_title ) {
 			echo '.site-name { display: none; }';

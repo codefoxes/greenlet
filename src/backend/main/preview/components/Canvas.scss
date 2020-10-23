@@ -1,0 +1,32 @@
+html, body {
+	scroll-behavior: smooth;
+}
+
+#glp-canvas {
+	.cover-drop-zone-wrap {
+		z-index: 9999;
+	}
+
+	.cover-drop-zone {
+		position: fixed;
+		border: 1px dashed #0285ba;
+		box-shadow: 0 0 1px #0285ba;
+		min-height: 10px;
+
+		&.drag-over {
+			box-shadow: 0 0 2px 1px #0285ba;
+		}
+	}
+}
+
+.header-column, .footer-column {
+	.customize-partial-edit-shortcut {
+		display: none;
+	}
+}
+
+.scroll-disabled {
+	background: #fff;
+	padding: 10px 0;
+	color: #888;
+}

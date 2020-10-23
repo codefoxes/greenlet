@@ -164,21 +164,6 @@ function greenlet_woo_options( $options ) {
 		),
 	);
 
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'cart_position',
-		'sargs' => array(
-			'default' => 'dont-show',
-		),
-		'cargs' => array(
-			'type'        => 'select',
-			'section'     => 'shop_design',
-			'label'       => __( 'Cart Position', 'greenlet' ),
-			'description' => __( 'Column for the Shopping cart to be displayed.', 'greenlet' ),
-			'choices'     => greenlet_cover_columns( array( 'header', 'topbar' ) ),
-		),
-	);
-
 	return $options;
 }
 

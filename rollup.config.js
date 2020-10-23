@@ -34,21 +34,37 @@ const getCWBanner = filename => `/** @license ColorWings v1.0.0
 * LICENSE file in the root directory of this source tree.
 */`
 
-const paths = [{
-	inputPath : 'src/backend/main/customizer/greenlet-controls.js',
-	outputPath: 'library/backend/assets/js/greenlet-controls.js',
-	outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
-}, {
-	inputPath : 'src/backend/colorwings/customizer/ColorWings.js',
-	outputPath: 'library/addons/colorwings/js/color-wings.js',
-	outputMin : 'library/addons/colorwings/js/color-wings.min.js',
-	banner: getCWBanner( 'color-wings.js' ),
-}, {
-	inputPath : 'src/backend/colorwings/preview/colorWings.js',
-	outputPath: 'library/addons/colorwings/js/color-wings-preview.js',
-	outputMin : 'library/addons/colorwings/js/color-wings-preview.min.js',
-	banner: getCWBanner( 'color-wings-preview.js' ),
-}]
+const paths = []
+
+if ( process.env.ONLY_CW !== '1' ) {
+	paths.push({
+		inputPath : 'src/backend/main/customizer/greenlet-controls.js',
+		outputPath: 'library/backend/assets/js/greenlet-controls.js',
+		outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
+	}, {
+		inputPath : 'src/backend/main/preview/greenlet-preview.js',
+		outputPath: 'library/backend/assets/js/greenlet-preview.js',
+		outputMin : 'library/backend/assets/js/greenlet-preview.min.js',
+	}, {
+		inputPath : 'src/backend/main/editor/greenlet-meta.js',
+		outputPath: 'library/backend/assets/js/greenlet-meta.js',
+		outputMin : 'library/backend/assets/js/greenlet-meta.min.js',
+	})
+}
+
+if ( process.env.ONLY_MAIN !== '1' ) {
+	paths.push({
+		inputPath : 'src/backend/colorwings/customizer/ColorWings.js',
+		outputPath: 'library/addons/colorwings/js/color-wings.js',
+		outputMin : 'library/addons/colorwings/js/color-wings.min.js',
+		banner: getCWBanner( 'color-wings.js' ),
+	}, {
+		inputPath : 'src/backend/colorwings/preview/colorWings.js',
+		outputPath: 'library/addons/colorwings/js/color-wings-preview.js',
+		outputMin : 'library/addons/colorwings/js/color-wings-preview.min.js',
+		banner: getCWBanner( 'color-wings-preview.js' ),
+	})
+}
 
 const config = paths.map(( path ) => ({
 	input: path.inputPath,
