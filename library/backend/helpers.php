@@ -137,7 +137,7 @@ if ( ! function_exists( 'greenlet_add_script_dependencies' ) ) {
 	/**
 	 * Add dependency to registered script.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @param  string $handle Script handle.
 	 * @param  array  $deps   Dependencies array.
 	 * @return bool           Whether addition is successful.

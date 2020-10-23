@@ -60,7 +60,7 @@ class Sanitizer {
 	/**
 	 * Sanitize cover layout item.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @param  mixed $item Cover layout single item.
 	 */
 	public static function sanitize_cover_item( &$item ) {
@@ -72,7 +72,7 @@ class Sanitizer {
 	/**
 	 * Sanitize cover layout value.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @param  array $value Input layout.
 	 * @return array        Sanitized layout.
 	 */

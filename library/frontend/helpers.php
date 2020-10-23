@@ -23,7 +23,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 /**
  * Get page data.
  *
- * @since  1.3.5
+ * @since  2.0.0
  * @return string Page data.
  */
 function greenlet_page_data() {

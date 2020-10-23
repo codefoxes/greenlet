@@ -68,7 +68,7 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	 * Enqueue stylesheet.
 	 *
 	 * @since 1.0.0
-	 * @since 1.3.0            Added $inline, Moved $defer to last parameter.
+	 * @since 2.0.0            Added $inline, Moved $defer to last parameter.
 	 * @param string           $handle Stylesheet handle.
 	 * @param string           $src    Link href.
 	 * @param array            $deps   An array of registered stylesheet handles.
@@ -157,7 +157,7 @@ if ( ! function_exists( 'greenlet_enqueue_script' ) ) {
 	/**
 	 * Enqueue script.
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @param string           $handle    Script handle.
 	 * @param string           $src       Script src.
 	 * @param array            $deps      An array of registered script handles.
@@ -185,7 +185,7 @@ if ( ! function_exists( 'greenlet_enqueue_inline_script' ) ) {
 	/**
 	 * Enqueue inline script.
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @param string $handle Script handle.
 	 * @param string $data   CSS Data.
 	 */
@@ -497,7 +497,7 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 	/**
 	 * Get cover layout items.
 	 *
-	 * @since 1.3.5
+	 * @since 2.0.0
 	 *
 	 * @param  string $pos Cover layout position.
 	 * @return array       Cover layout items Array.
@@ -578,7 +578,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 	/**
 	 * Gets cover (header, footer) columns.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @param  string $position Cover position.
 	 * @return array            List of columns
 	 */

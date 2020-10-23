@@ -11,7 +11,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 	/**
 	 * Cover Layout custom control.
 	 *
-	 * @since  1.3.0
+	 * @since  2.0.0
 	 * @access public
 	 */
 	class Control_Cover_Layout extends \WP_Customize_Control {
@@ -19,7 +19,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * The type of customize control being rendered.
 		 *
-		 * @since  1.3.0
+		 * @since  2.0.0
 		 * @access public
 		 * @var    string
 		 */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * The cover position to control.
 		 *
-		 * @since  1.3.0
+		 * @since  2.0.0
 		 * @access public
 		 * @var    string
 		 */
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * Allow choices parameter.
 		 *
-		 * @since  1.3.0
+		 * @since  2.0.0
 		 * @access public
 		 * @var    array
 		 */
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * Allow items parameter.
 		 *
-		 * @since  1.3.5
+		 * @since  2.0.0
 		 * @access public
 		 * @var    array
 		 */
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * Enqueue scripts/styles.
 		 *
-		 * @since  1.3.0
+		 * @since  2.0.0
 		 * @access public
 		 * @return void
 		 */
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
-		 * @since  1.3.0
+		 * @since  2.0.0
 		 * @see WP_Customize_Control::to_json()
 		 */
 		public function to_json() {
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * Displays the control content.
 		 *
-		 * @since  1.3.0
+		 * @since  2.0.0
 		 * @access public
 		 * @return void
 		 */
@@ -118,7 +118,7 @@ if ( ! class_exists( 'Control_Cover_Layout' ) && class_exists( 'WP_Customize_Con
 		/**
 		 * Render Content.
 		 *
-		 * @since 1.3.0
+		 * @since 2.0.0
 		 */
 		protected function render_content() {}
 	}

@@ -14,7 +14,7 @@ add_action( 'greenlet_footer', 'greenlet_do_footer' );
 /**
  * Display the footer text.
  *
- * @since  1.3.5
+ * @since  2.0.0
  * @return void
  */
 function greenlet_footer_text() {

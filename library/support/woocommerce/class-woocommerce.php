@@ -206,7 +206,7 @@ class WooCommerce {
 	/**
 	 * Add cart option to layout items.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @param  array $items Layout items.
 	 * @return array        Added items.
 	 */

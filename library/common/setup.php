@@ -132,7 +132,7 @@ if ( ! function_exists( 'greenlet_register_meta' ) ) {
 	/**
 	 * Register Layout meta fields.
 	 *
-	 * @since 1.3.5
+	 * @since 2.0.0
 	 */
 	function greenlet_register_meta() {
 		register_post_meta(

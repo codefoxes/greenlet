@@ -10,13 +10,13 @@ namespace Greenlet;
 /**
  * Class PostMeta.
  *
- * @since 1.3.5
+ * @since 2.0.0
  */
 class PostMeta {
 	/**
 	 * Holds the instances of this class.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @access private
 	 * @var    object
 	 */
@@ -25,7 +25,7 @@ class PostMeta {
 	/**
 	 * Sets up Post Meta Features.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -36,7 +36,7 @@ class PostMeta {
 	/**
 	 * Enqueue Post Meta Scripts.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 */
 	public function enqueue_scripts() {
 		$meta = array(
@@ -53,7 +53,7 @@ class PostMeta {
 	/**
 	 * Returns the instance.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @access public
 	 * @return object
 	 */
