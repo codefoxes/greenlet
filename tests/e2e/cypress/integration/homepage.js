@@ -20,7 +20,7 @@ describe('Default Homepage', () => {
     })
 
     it('Should have Header Section', () => {
-        cy.get('header').should('have.id', 'header')
+        cy.get('header').should('have.class', 'site-header')
     })
 
     it('Should have Main Content Section', () => {
@@ -28,7 +28,7 @@ describe('Default Homepage', () => {
     })
 
     it('Should have Footer Section', () => {
-        cy.get('footer').should('have.id', 'footer')
+        cy.get('footer').should('have.class', 'site-footer')
     })
 
     it('Should have Menu', () => {
@@ -37,8 +37,8 @@ describe('Default Homepage', () => {
 
     describe('Layout', () => {
         it('Header should be 3-9', () => {
-            cy.get('header').find('.header-1').should('have.class', 'col-3')
-            cy.get('header').find('.header-2').should('have.class', 'col-9')
+            cy.get('header .header-column-1').should('have.class', 'col-3')
+            cy.get('header .header-column-2').should('have.class', 'col-9')
         })
 
         it('Content should be 8-4', () => {
@@ -47,7 +47,7 @@ describe('Default Homepage', () => {
         })
 
         it('Footer should be 12', () => {
-            cy.get('footer').find('.footer-1').should('have.class', 'col-12')
+            cy.get('footer .footer-column-1').should('have.class', 'col-12')
         })
     })
 })

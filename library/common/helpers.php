@@ -585,7 +585,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 	function greenlet_cover_layout_defaults( $position = 'header' ) {
 		$header = array(
 			array(
-				'columns' => '4-8',
+				'columns' => '3-9',
 				'primary' => true,
 				'items'   => array(
 					1 => array( 'logo' ),

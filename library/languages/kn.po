@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-15 21:36+0000\n"
-"PO-Revision-Date: 2020-10-15 21:37+0000\n"
+"POT-Creation-Date: 2020-10-23 14:17+0000\n"
+"PO-Revision-Date: 2020-10-23 14:24+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -103,40 +103,40 @@ msgstr "ತಿದ್ದು"
 msgid "<span class=\"more-text\">Read More</span>"
 msgstr "<span class=\"more-text\">ಮುಂದಕ್ಕೆ ಓದಿ</span>"
 
-#: library/frontend/main-structure.php:569
+#: library/frontend/main-structure.php:571
 msgid "Author:"
 msgstr "ಲೇಖಕ:"
 
-#: library/frontend/main-structure.php:600
+#: library/frontend/main-structure.php:602
 msgid "Read More"
 msgstr "ಮತ್ತಷ್ಟು ಓದು"
 
-#: library/frontend/main-structure.php:693
+#: library/frontend/main-structure.php:695
 msgid "&laquo; Newer Posts"
 msgstr "&laquo; ಹೊಸ ಪೋಸ್ಟ್‌ಗಳು"
 
-#: library/frontend/main-structure.php:694
+#: library/frontend/main-structure.php:696
 msgid "Older Posts &raquo;"
 msgstr "ಹಳೆಯ ಪೋಸ್ಟ್‌ಗಳು &raquo;"
 
-#: library/frontend/main-structure.php:764
+#: library/frontend/main-structure.php:766
 msgid "There are no posts meeting your criteria"
 msgstr "ನಿಮ್ಮ ಮಾನದಂಡಗಳನ್ನು ಪೂರೈಸುವ ಯಾವುದೇ ಪೋಸ್ಟ್‌ಗಳಿಲ್ಲ"
 
-#: library/frontend/main-structure.php:945
+#: library/frontend/main-structure.php:947
 msgid "Load More"
 msgstr "ಇನ್ನಷ್ಟು ಲೋಡ್ ಮಾಡಿ"
 
-#: library/frontend/main-structure.php:988
+#: library/frontend/main-structure.php:990
 msgid "Search for:"
 msgstr "ಇದಕ್ಕಾಗಿ ಹುಡುಕು"
 
-#: library/frontend/main-structure.php:989
+#: library/frontend/main-structure.php:991
 msgid "Search &hellip;"
 msgstr "ಹುಡುಕು &hellip;"
 
-#: library/frontend/main-structure.php:989
 #: library/frontend/main-structure.php:991
+#: library/frontend/main-structure.php:993
 msgid "Search"
 msgstr "ಹುಡುಕು"
 
@@ -262,8 +262,8 @@ msgid "Greenlet Options"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ಆಯ್ಕೆಗಳು"
 
 #: library/backend/options/class-options-admin.php:118
-msgid "Title and Tagline"
-msgstr "ಶೀರ್ಷಿಕೆ ಮತ್ತು ಟ್ಯಾಗ್‌ಲೈನ್"
+msgid "Logo, Title & Tagline"
+msgstr "ಲೋಗೋ, ಶೀರ್ಷಿಕೆ ಮತ್ತು ಟ್ಯಾಗ್‌ಲೈನ್"
 
 #: library/backend/options/class-options-admin.php:119
 #: library/backend/customizer/options.php:143
@@ -288,56 +288,37 @@ msgid "Footer Layout"
 msgstr "ಅಡಿಟಿಪ್ಪಣಿ ವಿನ್ಯಾಸ"
 
 #: library/backend/options/class-options-admin.php:123
-msgid "Typography"
-msgstr "ಮುದ್ರಣಕಲೆ"
-
-#: library/backend/options/class-options-admin.php:124
-msgid "Colours"
-msgstr "ಬಣ್ಣಗಳು"
-
-#: library/backend/options/class-options-admin.php:125
-msgid "Heading Design"
-msgstr "ಶಿರೋನಾಮೆ ವಿನ್ಯಾಸ"
-
-#: library/backend/options/class-options-admin.php:126
-msgid "Buttons Design"
-msgstr "ಗುಂಡಿಗಳ ವಿನ್ಯಾಸ"
-
-#: library/backend/options/class-options-admin.php:127
-msgid "Links Design"
-msgstr "ಲಿಂಕ್ಸ್ ವಿನ್ಯಾಸ"
-
-#: library/backend/options/class-options-admin.php:128
-msgid "Inputs Design"
-msgstr "ಇನ್‌ಪುಟ್‌ಗಳ ವಿನ್ಯಾಸ"
-
-#: library/backend/options/class-options-admin.php:129
-msgid "Paragraphs Design"
-msgstr "ಪ್ಯಾರಾಗಳ ವಿನ್ಯಾಸ"
-
-#: library/backend/options/class-options-admin.php:130
 #: library/backend/customizer/options.php:374
 msgid "Blog Settings"
 msgstr "ಬ್ಲಾಗ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 
-#: library/backend/options/class-options-admin.php:131
+#: library/backend/options/class-options-admin.php:124
 #: library/backend/customizer/options.php:549
 msgid "Performance"
 msgstr "ಸಾಮರ್ಥ್ಯ"
 
-#: library/backend/options/class-options-admin.php:147
+#: library/backend/options/class-options-admin.php:125
+#: library/backend/customizer/options.php:643
+msgid "Theme Presets"
+msgstr "ಥೀಮ್ ಪೂರ್ವನಿಗದಿಗಳು"
+
+#: library/backend/options/class-options-admin.php:126
+msgid "Visual Style Editor"
+msgstr "ವಿಷುಯಲ್ ಸ್ಟೈಲ್ ಎಡಿಟರ್"
+
+#: library/backend/options/class-options-admin.php:142
 msgid "Customizer Controls"
 msgstr "ಗ್ರಾಹಕ ನಿಯಂತ್ರಣಗಳು"
 
-#: library/backend/options/class-options-admin.php:163
+#: library/backend/options/class-options-admin.php:158
 msgid "Get Pro Version"
 msgstr "ಪ್ರೊ ಆವೃತ್ತಿ ಪಡೆಯಿರಿ"
 
-#: library/backend/options/class-options-admin.php:164
+#: library/backend/options/class-options-admin.php:159
 msgid "Documentation"
 msgstr "ದಾಖಲೆ"
 
-#: library/backend/options/class-options-admin.php:165
+#: library/backend/options/class-options-admin.php:160
 msgid "Latest dev branch"
 msgstr "ಇತ್ತೀಚಿನ ಡೆವ್ ಶಾಖೆ"
 
@@ -551,10 +532,6 @@ msgstr "ಪುಟ ಲೋಡ್ ನಂತರ ಬ್ಲಾಕ್ ಸಂಪಾದ�
 msgid "Presets"
 msgstr "ಪೂರ್ವನಿಗದಿಗಳು"
 
-#: library/backend/customizer/options.php:643
-msgid "Theme Presets"
-msgstr "ಥೀಮ್ ಪೂರ್ವನಿಗದಿಗಳು"
-
 #: library/backend/editor/class-editor.php:154
 msgid "Full Width Banner"
 msgstr "ಪೂರ್ಣ ಅಗಲ ಬ್ಯಾನರ್"
@@ -716,8 +693,29 @@ msgid "Advanced"
 msgstr "ಹೆಚ್ಚುವರಿ"
 
 #. Description of the theme
-msgid "Lightweight, Fast, Best SEO WordPress theme"
-msgstr "ಹಗುರವಾದ, ವೇಗದ, ಅತ್ಯುತ್ತಮ SEO ವರ್ಡ್ಪ್ರೆಸ್ ಥೀಮ್"
+msgid ""
+"Greenlet is an extremely fast, lightweight best SEO WordPress theme made for "
+"blogs, personal portfolio, business, and Woocommerce Stores. While Greenlet "
+"setup is quick and easy, it provides dozens of options for customization "
+"without affecting the speed and size of your website. Features: 100/100 "
+"Google Page Speed score | Extremely Lightweight (~25KB) | Schema Markup "
+"Added | No jQuery | 12 Column Design System | 8 Predefined Layouts "
+"(extendable) | Unlimited Post Layout | Unlimited Header and Footer layout | "
+"Pagination ( Default, Numbered, Ajax, Load More, Infinite Scroll ) | ML "
+"Support | RTL Support | Visual style edtor | Mobile Ready | Breadcrumb | "
+"WooCommerce Support | Theme Presets and so much more."
+msgstr ""
+"ಗ್ರೀನ್‌ಲೆಟ್ ಬ್ಲಾಗ್‌ಗಳು, ವೈಯಕ್ತಿಕ ಜಾಲತಾಣ, ವ್ಯಾಪಾರ ಮತ್ತು ಆನ್ಲೈನ್ ಮಳಿಗೆಗಳಿಗಾಗಿ "
+"ತಯಾರಿಸಿದ ಅತ್ಯಂತ ವೇಗವಾದ, ಹಗುರವಾದ ಅತ್ಯುತ್ತಮ ಎಸ್‌ಇಒ ವರ್ಡ್ಪ್ರೆಸ್ ಥೀಮ್ ಆಗಿದೆ. "
+"ಗ್ರೀನ್‌ಲೆಟ್ ಸೆಟಪ್ ತ್ವರಿತ ಮತ್ತು ಸುಲಭವಾಗಿದ್ದರೂ, ಇದು ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನ ವೇಗ "
+"ಮತ್ತು ಗಾತ್ರಕ್ಕೆ ಧಕ್ಕೆಯಾಗದಂತೆ ಕಸ್ಟಮೈಸ್ ಮಾಡಲು ಡಜನ್ಗಟ್ಟಲೆ ಆಯ್ಕೆಗಳನ್ನು "
+"ಒದಗಿಸುತ್ತದೆ. ವೈಶಿಷ್ಟ್ಯಗಳು: 100/100 ಗೂಗಲ್ ಪೇಜ್ ಸ್ಪೀಡ್ ಸ್ಕೋರ್ | ಅತ್ಯಂತ ಹಗುರವಾದ "
+"(~ 25 ಕೆಬಿ) | ಸ್ಕೀಮಾ ಮಾರ್ಕಪ್ ಸೇರಿಸಲಾಗಿದೆ | JQuery ಇಲ್ಲ | 12 ಕಾಲಮ್ ವಿನ್ಯಾಸ "
+"ವ್ಯವಸ್ಥೆ | 8 ಪೂರ್ವನಿರ್ಧರಿತ ವಿನ್ಯಾಸಗಳು (ವಿಸ್ತರಿಸಬಹುದಾದ) | ಅನಿಯಮಿತ ಪೋಸ್ಟ್ "
+"ವಿನ್ಯಾಸ | ಅನಿಯಮಿತ ಹೆಡರ್ ಮತ್ತು ಅಡಿಟಿಪ್ಪಣಿ ವಿನ್ಯಾಸ | ವಿನ್ಯಾಸ (ಡೀಫಾಲ್ಟ್, "
+"ಸಂಖ್ಯೆಯ, ಅಜಾಕ್ಸ್, ಇನ್ನಷ್ಟು ಲೋಡ್ ಮಾಡಿ, ಅನಂತ ಸ್ಕ್ರಾಲ್) | ಎಂಎಲ್ ಬೆಂಬಲ | "
+"ಆರ್ಟಿಎಲ್ ಬೆಂಬಲ | ವಿಷುಯಲ್ ಸ್ಟೈಲ್ ಎಡ್ಟರ್ | ಮೊಬೈಲ್ ಸಿದ್ಧ | ಬ್ರೆಡ್‌ಕ್ರಂಬ್ | "
+"WooCommerce ಬೆಂಬಲ | ಥೀಮ್ ಪೂರ್ವನಿಗದಿಗಳು ಮತ್ತು ಇನ್ನಷ್ಟು."
 
 #. URI of the theme
 msgid "https://greenletwp.com"
