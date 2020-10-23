@@ -41,6 +41,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			'page'        => get_query_var( 'paged', 1 ),
 			'permalinks'  => $wp_rewrite->using_permalinks(),
 			'query_vars'  => wp_json_encode( $wp_query->query_vars ),
+			'page_data'   => greenlet_page_data(),
 		);
 		$l10n = apply_filters( 'greenlet_l10n_object', $l10n );
 		wp_localize_script( 'greenlet-scripts', 'greenlet_object', $l10n );

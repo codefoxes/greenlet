@@ -5260,7 +5260,7 @@
       });
       wp.customize.state('previewedDevice').bind(changeDevice);
       cw.Evt.on('update-control', function (currentStylesDetails) {
-        console.log(currentStylesDetails); // Todo: Append current style details to the settings
+        console.log(currentStylesDetails); // Todo: cleanup fonts
 
         control.setting.set(currentStylesDetails);
       });

@@ -109,7 +109,7 @@ class ColorWings_Admin {
 				'type'              => 'option',
 				'capability'        => 'edit_theme_options',
 				'transport'         => 'postMessage',
-				'sanitize_callback' => array( $this, 'sanitize' ),
+				'validate_callback' => array( $this, 'validate' ),
 			)
 		);
 
@@ -123,16 +123,25 @@ class ColorWings_Admin {
 	}
 
 	/**
-	 * Sanitizes ColorWings Settings.
+	 * Validate ColorWings Settings.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 * @access public
-	 * @param  array $settings ColorWings Settings.
+	 * @param \WP_Error $validity True if the input was validated, otherwise WP_Error.
+	 * @param array     $settings ColorWings Settings.
 	 *
-	 * @return array Sanitized Settings.
+	 * @return \WP_Error          Validity object.
 	 */
-	public static function sanitize( $settings ) {
-		return $settings;
+	public static function validate( $validity, $settings ) {
+		foreach ( $settings as $theme => $theme_data ) {
+			foreach ( $theme_data as $type => $data ) {
+				if ( isset( $data['styles'] ) && preg_match( '#</?\w+#', $data['styles'] ) ) {
+					$validity->add( 'illegal_markup', __( 'Markup is not allowed in CSS.' ) );
+				}
+			}
+		}
+
+		return $validity;
 	}
 
 	/**

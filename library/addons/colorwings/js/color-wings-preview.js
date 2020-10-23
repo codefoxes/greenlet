@@ -676,6 +676,7 @@
 
 	    if (el.classList.length === 0) {
 	      var tagName = el.tagName.toLowerCase();
+	      if ('html' === tagName && 0 !== selector.length) return;
 
 	      if ("".concat(tagName).concat(elSelector, " ").concat(selector).length <= maxSelectorLength) {
 	        elSelector = "".concat(tagName).concat(elSelector);

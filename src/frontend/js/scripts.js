@@ -141,6 +141,19 @@ function greenletToggleScroll( op ) {
 }
 
 /**
+ * Fix tag.
+ */
+function greenletFixTag() {
+	var current = document.querySelector('meta[name="description"]');
+	if ( null === current ) {
+		var tag = document.createElement('meta');
+		tag.name = "description";
+		tag.content = greenlet_object.page_data;
+		document.getElementsByTagName('head')[0].appendChild(tag);
+	}
+}
+
+/**
  * Convert JSON to Form data.
  *
  * @param {object} srcjson Source JSON object.
@@ -224,5 +237,6 @@ function greenletToggleMenu() {
 
 greenletPaginationInit();
 greenletToggleScroll();
+greenletFixTag()
 greenletFixMenu();
 greenletToggleMenu();
