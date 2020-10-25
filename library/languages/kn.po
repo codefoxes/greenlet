@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 11:04+0000\n"
-"PO-Revision-Date: 2020-10-25 11:05+0000\n"
+"POT-Creation-Date: 2020-10-25 12:45+0000\n"
+"PO-Revision-Date: 2020-10-25 12:46+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -299,8 +299,8 @@ msgid "Greenlet Framework"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ಚೌಕಟ್ಟು"
 
 #: library/backend/customizer/options.php:146
-msgid "Bootstrap 4.4.1"
-msgstr "ಬೂಟ್ ಸ್ಟ್ರಾಪ್ 4.4.1"
+msgid "Bootstrap 4.5.3"
+msgstr "ಬೂಟ್ ಸ್ಟ್ರಾಪ್ 4.5.3"
 
 #: library/backend/customizer/options.php:160
 msgid "Enter URL if different CDN or CSS Framework"
