@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-23 14:17+0000\n"
-"PO-Revision-Date: 2020-10-23 14:25+0000\n"
+"POT-Creation-Date: 2020-10-25 11:04+0000\n"
+"PO-Revision-Date: 2020-10-25 11:06+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -22,10 +22,6 @@ msgstr "Erreur 404 - Rien trouvé"
 msgid "It looks like nothing was found here. Maybe try a search?"
 msgstr ""
 "On dirait que rien n'a été trouvé ici. Peut-être essayer une recherche?"
-
-#: content-none.php:13
-msgid "Nothing found!"
-msgstr "Rien n'a été trouvé!"
 
 #. %s: Number of comments.
 #: comments.php:21
@@ -48,9 +44,9 @@ msgstr "Commentaires récents &rarr;"
 msgid "Comments are closed."
 msgstr "Les commentaires sont fermés."
 
-#: templates/logo.php:14
-msgid "Home Page"
-msgstr "Page d'accueil"
+#: content-none.php:13
+msgid "Nothing found!"
+msgstr "Rien n'a été trouvé!"
 
 #: templates/breadcrumb.php:13
 msgid "Home"
@@ -69,6 +65,115 @@ msgstr "Y"
 #: templates/breadcrumb.php:72
 msgid "Search: "
 msgstr "Chercher:"
+
+#: templates/logo.php:14
+msgid "Home Page"
+msgstr "Page d'accueil"
+
+#: library/backend/helpers.php:22
+#: library/backend/assets/js/greenlet-controls.js:291
+#: library/backend/assets/js/greenlet-controls.js:2013
+msgid "Main Content"
+msgstr "Contenu principal"
+
+#: library/common/helpers.php:509
+msgid "Logo"
+msgstr "Logo"
+
+#: library/common/helpers.php:516 library/common/helpers.php:521
+msgid "Menu"
+msgstr "Menu"
+
+#: library/common/helpers.php:526
+msgid "Mobile toggler"
+msgstr "Bascule mobile"
+
+#: library/common/helpers.php:529
+msgid "Enable"
+msgstr "Activer"
+
+#: library/common/helpers.php:530
+msgid "Disable"
+msgstr "Désactiver"
+
+#: library/common/helpers.php:537
+msgid "Menu Toggler"
+msgstr "Menu Toggler"
+
+#: library/common/helpers.php:542
+msgid "Target"
+msgstr "Cible"
+
+#: library/common/helpers.php:547
+msgid "Query"
+msgstr "Requete"
+
+#: library/common/helpers.php:551
+msgid "Effect"
+msgstr "Effet"
+
+#: library/common/helpers.php:554
+msgid "From Top"
+msgstr "De haut"
+
+#: library/common/helpers.php:555
+msgid "From Bottom"
+msgstr "Du bas"
+
+#: library/common/helpers.php:556
+msgid "From Right"
+msgstr "De droite"
+
+#: library/common/helpers.php:557
+msgid "From Left"
+msgstr "De gauche"
+
+#: library/common/setup.php:51
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#. %s: Index of the sidebar.
+#: library/common/setup.php:81
+#, php-format
+msgid "Sidebar %s"
+msgstr "Barre latérale %s"
+
+#. %s: Index of the sidebar.
+#: library/common/setup.php:84
+#, php-format
+msgid "Appears on the posts and pages as sidebar %s."
+msgstr ""
+"Apparaît sur les publications et les pages sous forme de barre latérale %s."
+
+#. %1$s: Widget Position. %2$s: Widget Column.
+#: library/common/setup.php:111
+#, php-format
+msgid "%1$s %2$s - Column %3$s"
+msgstr "Colonne"
+
+#. %1$s: Widget Position. %2$s: Widget Column.
+#: library/common/setup.php:114
+#, php-format
+msgid "Appears on the %1$s %2$s at column %3$s."
+msgstr "Apparaît sur le %1$s %2$s la colonne %3$s."
+
+#: library/frontend/footer-structure.php:24
+msgid "Y"
+msgstr "Y"
+
+#: library/frontend/footer-structure.php:27
+msgid "Powered By"
+msgstr "Alimenté par"
+
+#. Name of the theme
+#: library/frontend/footer-structure.php:28
+#: library/backend/editor/class-editor.php:147
+msgid "Greenlet"
+msgstr "Greenlet"
+
+#: library/frontend/header-structure.php:39
+msgid "Skip to content"
+msgstr "Aller au contenu"
 
 #: library/frontend/main-structure.php:229
 #: library/frontend/main-structure.php:237
@@ -141,111 +246,6 @@ msgstr "Chercher &hellip;"
 msgid "Search"
 msgstr "Chercher"
 
-#: library/frontend/header-structure.php:39
-msgid "Skip to content"
-msgstr "Aller au contenu"
-
-#: library/frontend/footer-structure.php:24
-msgid "Y"
-msgstr "Y"
-
-#: library/frontend/footer-structure.php:27
-msgid "Powered By"
-msgstr "Alimenté par"
-
-#. Name of the theme
-#: library/frontend/footer-structure.php:28
-#: library/backend/editor/class-editor.php:147
-msgid "Greenlet"
-msgstr "Greenlet"
-
-#: library/backend/helpers.php:22
-#: library/backend/assets/js/greenlet-controls.js:274
-#: library/backend/assets/js/greenlet-controls.js:1991
-msgid "Main Content"
-msgstr "Contenu principal"
-
-#: library/common/setup.php:51
-msgid "Main Menu"
-msgstr "Menu principal"
-
-#. %s: Index of the sidebar.
-#: library/common/setup.php:81
-#, php-format
-msgid "Sidebar %s"
-msgstr "Barre latérale %s"
-
-#. %s: Index of the sidebar.
-#: library/common/setup.php:84
-#, php-format
-msgid "Appears on the posts and pages as sidebar %s."
-msgstr ""
-"Apparaît sur les publications et les pages sous forme de barre latérale %s."
-
-#. %1$s: Widget Position. %2$s: Widget Column.
-#: library/common/setup.php:111
-#, php-format
-msgid "%1$s %2$s - Column %3$s"
-msgstr "Colonne"
-
-#. %1$s: Widget Position. %2$s: Widget Column.
-#: library/common/setup.php:114
-#, php-format
-msgid "Appears on the %1$s %2$s at column %3$s."
-msgstr "Apparaît sur le %1$s %2$s la colonne %3$s."
-
-#: library/common/helpers.php:509
-msgid "Logo"
-msgstr "Logo"
-
-#: library/common/helpers.php:516 library/common/helpers.php:521
-msgid "Menu"
-msgstr "Menu"
-
-#: library/common/helpers.php:526
-msgid "Mobile toggler"
-msgstr "Bascule mobile"
-
-#: library/common/helpers.php:529
-msgid "Enable"
-msgstr "Activer"
-
-#: library/common/helpers.php:530
-msgid "Disable"
-msgstr "Désactiver"
-
-#: library/common/helpers.php:537
-msgid "Menu Toggler"
-msgstr "Menu Toggler"
-
-#: library/common/helpers.php:542
-msgid "Target"
-msgstr "Cible"
-
-#: library/common/helpers.php:547
-msgid "Query"
-msgstr "Requete"
-
-#: library/common/helpers.php:551
-msgid "Effect"
-msgstr "Effet"
-
-#: library/common/helpers.php:554
-msgid "From Top"
-msgstr "De haut"
-
-#: library/common/helpers.php:555
-msgid "From Bottom"
-msgstr "Du bas"
-
-#: library/common/helpers.php:556
-msgid "From Right"
-msgstr "De droite"
-
-#: library/common/helpers.php:557
-msgid "From Left"
-msgstr "De gauche"
-
 #: templates/menu/main.php:11 templates/menu/menu.php:16
 #: templates/menu/toggler.php:9
 msgid "Toggle Menu"
@@ -255,74 +255,9 @@ msgstr "Basculer le menu"
 msgid "Extra Styles"
 msgstr "Styles supplémentaires"
 
-#: library/backend/options/class-options-admin.php:62
-msgid "Greenlet Settings"
-msgstr "Paramètres de Greenlet"
-
-#: library/backend/options/class-options-admin.php:63
-msgid "Greenlet Options"
-msgstr "Options de Greenlet"
-
-#: library/backend/options/class-options-admin.php:118
-msgid "Logo, Title & Tagline"
-msgstr "Logo, titre et slogan"
-
-#: library/backend/options/class-options-admin.php:119
-#: library/backend/customizer/options.php:143
-msgid "CSS Framework"
-msgstr "CSS Cadre"
-
-#: library/backend/options/class-options-admin.php:120
-#: library/backend/customizer/options.php:199
-#: library/backend/customizer/options.php:213
-msgid "Header Layout"
-msgstr "Disposition des en-têtes"
-
-#: library/backend/options/class-options-admin.php:121
-#: library/backend/customizer/options.php:224
-msgid "Main Layout"
-msgstr "Disposition principale"
-
-#: library/backend/options/class-options-admin.php:122
-#: library/backend/customizer/options.php:348
-#: library/backend/customizer/options.php:362
-msgid "Footer Layout"
-msgstr "Disposition du pied de page"
-
-#: library/backend/options/class-options-admin.php:123
-#: library/backend/customizer/options.php:374
-msgid "Blog Settings"
-msgstr "Paramètres du blog"
-
-#: library/backend/options/class-options-admin.php:124
-#: library/backend/customizer/options.php:549
-msgid "Performance"
-msgstr "Performance"
-
-#: library/backend/options/class-options-admin.php:125
-#: library/backend/customizer/options.php:643
-msgid "Theme Presets"
-msgstr "Préréglages de thème"
-
-#: library/backend/options/class-options-admin.php:126
-msgid "Visual Style Editor"
-msgstr "Éditeur de style visuel"
-
-#: library/backend/options/class-options-admin.php:142
-msgid "Customizer Controls"
-msgstr "Commandes de personnalisation"
-
-#: library/backend/options/class-options-admin.php:158
-msgid "Get Pro Version"
-msgstr "Obtenez la version Pro"
-
-#: library/backend/options/class-options-admin.php:159
-msgid "Documentation"
-msgstr "Documentation"
-
-#: library/backend/options/class-options-admin.php:160
-msgid "Latest dev branch"
-msgstr "Dernière branche de développement"
+#: library/addons/colorwings/class-colorwings-admin.php:157
+msgid "Markup is not allowed in CSS."
+msgstr "Le balisage n'est pas autorisé dans CSS."
 
 #: library/backend/customizer/options.php:46
 msgid "Logo Width"
@@ -356,6 +291,11 @@ msgstr "Disposition du site."
 msgid "Framework"
 msgstr "Cadre"
 
+#: library/backend/customizer/options.php:143
+#: library/backend/options/class-options-admin.php:119
+msgid "CSS Framework"
+msgstr "CSS Cadre"
+
 #: library/backend/customizer/options.php:145
 msgid "Greenlet Framework"
 msgstr "Cadre de Greenlet"
@@ -383,6 +323,17 @@ msgstr "Par exemple: chargez Bootstrap JS si vous chargez Bootstrap CSS."
 #: library/backend/customizer/options.php:191
 msgid "Container Width"
 msgstr "Largeur du conteneur"
+
+#: library/backend/customizer/options.php:199
+#: library/backend/customizer/options.php:213
+#: library/backend/options/class-options-admin.php:120
+msgid "Header Layout"
+msgstr "Disposition des en-têtes"
+
+#: library/backend/customizer/options.php:224
+#: library/backend/options/class-options-admin.php:121
+msgid "Main Layout"
+msgstr "Disposition principale"
 
 #: library/backend/customizer/options.php:238
 msgid "Number of Sidebars ( For Main Container )"
@@ -415,6 +366,17 @@ msgstr "Disposition des archives"
 #: library/backend/customizer/options.php:337
 msgid "Main Layout Styles"
 msgstr "Styles de disposition principaux"
+
+#: library/backend/customizer/options.php:348
+#: library/backend/customizer/options.php:362
+#: library/backend/options/class-options-admin.php:122
+msgid "Footer Layout"
+msgstr "Disposition du pied de page"
+
+#: library/backend/customizer/options.php:374
+#: library/backend/options/class-options-admin.php:123
+msgid "Blog Settings"
+msgstr "Paramètres du blog"
 
 #: library/backend/customizer/options.php:388
 msgid "Breadcrumb"
@@ -487,6 +449,11 @@ msgstr ""
 "Faites correspondre les styles de l'éditeur de publication aux styles "
 "frontaux."
 
+#: library/backend/customizer/options.php:549
+#: library/backend/options/class-options-admin.php:124
+msgid "Performance"
+msgstr "Performance"
+
 #: library/backend/customizer/options.php:563
 msgid "Inline CSS"
 msgstr "CSS en ligne"
@@ -537,6 +504,11 @@ msgstr ""
 msgid "Presets"
 msgstr "Préconfigurations"
 
+#: library/backend/customizer/options.php:643
+#: library/backend/options/class-options-admin.php:125
+msgid "Theme Presets"
+msgstr "Préréglages de thème"
+
 #: library/backend/editor/class-editor.php:154
 msgid "Full Width Banner"
 msgstr "Bannière pleine largeur"
@@ -555,12 +527,44 @@ msgstr ""
 "Couverture de bannière pleine largeur avec contenu à l'intérieur d'un "
 "conteneur."
 
+#: library/backend/options/class-options-admin.php:62
+msgid "Greenlet Settings"
+msgstr "Paramètres de Greenlet"
+
+#: library/backend/options/class-options-admin.php:63
+msgid "Greenlet Options"
+msgstr "Options de Greenlet"
+
+#: library/backend/options/class-options-admin.php:118
+msgid "Logo, Title & Tagline"
+msgstr "Logo, titre et slogan"
+
+#: library/backend/options/class-options-admin.php:126
+msgid "Visual Style Editor"
+msgstr "Éditeur de style visuel"
+
+#: library/backend/options/class-options-admin.php:142
+msgid "Customizer Controls"
+msgstr "Commandes de personnalisation"
+
+#: library/backend/options/class-options-admin.php:158
+msgid "Get Pro Version"
+msgstr "Obtenez la version Pro"
+
+#: library/backend/options/class-options-admin.php:159
+msgid "Documentation"
+msgstr "Documentation"
+
+#: library/backend/options/class-options-admin.php:160
+msgid "Latest dev branch"
+msgstr "Dernière branche de développement"
+
 #: library/support/woocommerce/class-woocommerce.php:216
 msgid "Shopping Cart"
 msgstr "Panier"
 
 #: library/backend/customizer/custom-controls/class-control-template.php:97
-#: library/backend/assets/js/greenlet-controls.js:1742
+#: library/backend/assets/js/greenlet-controls.js:1759
 msgid "Enter column numbers separated by hyphen."
 msgstr "Saisissez les numéros de colonne séparés par un tiret."
 
@@ -571,18 +575,6 @@ msgstr "Par exemple: 4-8 ou 9-3"
 #: library/backend/customizer/custom-controls/class-control-template.php:97
 msgid "Sum should be 12"
 msgstr "La somme doit être de 12"
-
-#: library/support/woocommerce/frontend/helpers.php:20
-msgid "View shopping cart"
-msgstr "Voir Panier d'achat"
-
-#. %d: Cart contents count.
-#: library/support/woocommerce/frontend/helpers.php:24
-#, php-format
-msgid "%d Item"
-msgid_plural "%d Items"
-msgstr[0] "%d élément"
-msgstr[1] ""
 
 #: library/support/woocommerce/backend/options.php:29
 msgid "Shop Layout"
@@ -624,11 +616,74 @@ msgstr "Nombre de produits dans la page des archives de produits."
 msgid "Number of products in one row. (Number of columns)."
 msgstr "Nombre de produits sur une ligne. (Le nombre de colonnes)."
 
-#: library/backend/assets/js/greenlet-preview.js:127
-msgid "Infinite scrolling is temporarily disabled to edit footer."
-msgstr ""
-"Le défilement infini est temporairement désactivé pour modifier le pied de "
-"page."
+#: library/support/woocommerce/frontend/helpers.php:20
+msgid "View shopping cart"
+msgstr "Voir Panier d'achat"
+
+#. %d: Cart contents count.
+#: library/support/woocommerce/frontend/helpers.php:24
+#, php-format
+msgid "%d Item"
+msgid_plural "%d Items"
+msgstr[0] "%d élément"
+msgstr[1] ""
+
+#: library/backend/assets/js/greenlet-controls.js:295
+#: library/backend/assets/js/greenlet-controls.js:2017
+msgid "Sidebar"
+msgstr "Barre latérale"
+
+#: library/backend/assets/js/greenlet-controls.js:1480
+msgid "Items"
+msgstr "Articles"
+
+#: library/backend/assets/js/greenlet-controls.js:1695
+msgid "Main"
+msgstr "Principale"
+
+#: library/backend/assets/js/greenlet-controls.js:1717
+msgid "Sticky"
+msgstr "Gluante"
+
+#: library/backend/assets/js/greenlet-controls.js:1721
+msgid "Select Columns Layout"
+msgstr "Sélectionnez la disposition des colonnes"
+
+#: library/backend/assets/js/greenlet-controls.js:1759
+msgid "Sum should be"
+msgstr "La somme doit être"
+
+#: library/backend/assets/js/greenlet-controls.js:1770
+msgid "Vertical"
+msgstr "Verticale"
+
+#: library/backend/assets/js/greenlet-controls.js:1780
+msgid "No"
+msgstr "Non"
+
+#: library/backend/assets/js/greenlet-controls.js:1782
+msgid "Left"
+msgstr "La gauche"
+
+#: library/backend/assets/js/greenlet-controls.js:1784
+msgid "Right"
+msgstr "Droite"
+
+#: library/backend/assets/js/greenlet-controls.js:1791
+msgid "Delete"
+msgstr "Effacer"
+
+#: library/backend/assets/js/greenlet-controls.js:1795
+msgid "Hide"
+msgstr "Cacher"
+
+#: library/backend/assets/js/greenlet-controls.js:1795
+msgid "Show"
+msgstr "Spectacle"
+
+#: library/backend/assets/js/greenlet-controls.js:1795
+msgid "Advanced"
+msgstr "Avancée"
 
 #: library/backend/assets/js/greenlet-meta.js:132
 msgid "Default"
@@ -642,62 +697,11 @@ msgstr "Douane"
 msgid "Page Layout"
 msgstr "Mise en page"
 
-#: library/backend/assets/js/greenlet-controls.js:278
-#: library/backend/assets/js/greenlet-controls.js:1995
-msgid "Sidebar"
-msgstr "Barre latérale"
-
-#: library/backend/assets/js/greenlet-controls.js:1463
-msgid "Items"
-msgstr "Articles"
-
-#: library/backend/assets/js/greenlet-controls.js:1678
-msgid "Main"
-msgstr "Principale"
-
-#: library/backend/assets/js/greenlet-controls.js:1700
-msgid "Sticky"
-msgstr "Gluante"
-
-#: library/backend/assets/js/greenlet-controls.js:1704
-msgid "Select Columns Layout"
-msgstr "Sélectionnez la disposition des colonnes"
-
-#: library/backend/assets/js/greenlet-controls.js:1742
-msgid "Sum should be"
-msgstr "La somme doit être"
-
-#: library/backend/assets/js/greenlet-controls.js:1753
-msgid "Vertical"
-msgstr "Verticale"
-
-#: library/backend/assets/js/greenlet-controls.js:1763
-msgid "No"
-msgstr "Non"
-
-#: library/backend/assets/js/greenlet-controls.js:1765
-msgid "Left"
-msgstr "La gauche"
-
-#: library/backend/assets/js/greenlet-controls.js:1767
-msgid "Right"
-msgstr "Droite"
-
-#: library/backend/assets/js/greenlet-controls.js:1774
-msgid "Delete"
-msgstr "Effacer"
-
-#: library/backend/assets/js/greenlet-controls.js:1778
-msgid "Hide"
-msgstr "Cacher"
-
-#: library/backend/assets/js/greenlet-controls.js:1778
-msgid "Show"
-msgstr "Spectacle"
-
-#: library/backend/assets/js/greenlet-controls.js:1778
-msgid "Advanced"
-msgstr "Avancée"
+#: library/backend/assets/js/greenlet-preview.js:127
+msgid "Infinite scrolling is temporarily disabled to edit footer."
+msgstr ""
+"Le défilement infini est temporairement désactivé pour modifier le pied de "
+"page."
 
 #. Description of the theme
 msgid ""
