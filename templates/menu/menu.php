@@ -9,6 +9,12 @@ greenlet_markup( 'site-navigation', greenlet_attr( 'main-menu nav-menu' ) );
 
 $slug = ( isset( $args ) && isset( $args['slug'] ) ) ? $args['slug'] : false;
 
+$menu_args = array(
+	'menu'       => $slug,
+	'menu_class' => 'site-menu menu-list list-inline inline-list',
+	'container'  => false,
+);
+
 if ( false !== $slug ) {
 	if ( isset( $args['toggler'] ) && ( 'enable' === $args['toggler'] ) ) {
 		?>
@@ -21,13 +27,7 @@ if ( false !== $slug ) {
 		<?php
 	}
 
-	wp_nav_menu(
-		array(
-			'menu'       => $slug,
-			'menu_class' => 'site-menu menu-list list-inline inline-list',
-			'container'  => false,
-		)
-	);
+	wp_nav_menu( $menu_args );
 }
 
 greenlet_markup_close();
