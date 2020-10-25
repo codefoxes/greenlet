@@ -39,10 +39,10 @@ if ( ! function_exists( 'greenlet_template_images' ) ) {
 	 * @return array  Templates Images Array.
 	 */
 	function greenlet_template_images( $section = 'main' ) {
-		$imagepath = GL_LIBRARY_URL . '/backend/assets/images/main/';
+		$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/main/';
 
 		if ( 'cover' === $section ) {
-			$imagepath = GL_LIBRARY_URL . '/backend/assets/images/cover/';
+			$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/cover/';
 
 			$templates = array(
 				'12'      => $imagepath . '12.svg',
@@ -84,7 +84,7 @@ if ( ! function_exists( 'greenlet_get_presets' ) ) {
 	 * @return array Presets array.
 	 */
 	function greenlet_get_presets() {
-		$presets_file = GL_LIBRARY_DIR . '/backend/customizer/presets.json';
+		$presets_file = GREENLET_LIBRARY_DIR . '/backend/customizer/presets.json';
 		$presets      = greenlet_get_file_contents( $presets_file );
 		return json_decode( $presets, true );
 	}
@@ -99,7 +99,7 @@ if ( ! function_exists( 'greenlet_preset_images' ) ) {
 	 * @return array  Preset Images Array.
 	 */
 	function greenlet_preset_images() {
-		$imagepath = GL_LIBRARY_URL . '/backend/assets/images/presets/';
+		$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/presets/';
 		$presets   = greenlet_get_presets();
 		$images    = array();
 

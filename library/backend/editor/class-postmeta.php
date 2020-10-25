@@ -45,7 +45,7 @@ class PostMeta {
 		);
 
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		wp_enqueue_script( 'greenlet-meta', GL_LIBRARY_URL . '/backend/assets/js/greenlet-meta' . $min . '.js', array( 'wp-i18n', 'wp-plugins', 'wp-edit-post', 'wp-element' ), GREENLET_VERSION, true );
+		wp_enqueue_script( 'greenlet-meta', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-meta' . $min . '.js', array( 'wp-i18n', 'wp-plugins', 'wp-edit-post', 'wp-element' ), GREENLET_VERSION, true );
 		wp_localize_script( 'greenlet-meta', 'greenletMeta', $meta );
 		wp_set_script_translations( 'greenlet-meta', 'greenlet' );
 	}

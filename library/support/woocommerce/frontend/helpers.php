@@ -18,7 +18,7 @@ function greenlet_cart_button( $echo = true ) {
 	$cart  = '<a class="cart-button" href="';
 	$cart .= wc_get_cart_url() . '" title="';
 	$cart .= esc_attr__( 'View shopping cart', 'greenlet' ) . '"><div class="cart-icon">';
-	$cart .= greenlet_get_file_contents( GL_LIBRARY_DIR . '/support/woocommerce/frontend/cart.svg' );
+	$cart .= greenlet_get_file_contents( GREENLET_LIBRARY_DIR . '/support/woocommerce/frontend/cart.svg' );
 	$cart .= '</div><div class="cart-contents">';
 	// translators: %d: Cart contents count.
 	$cart .= sprintf( _n( '%d Item', '%d Items', $woocommerce->cart->cart_contents_count, 'greenlet' ), $woocommerce->cart->cart_contents_count ) . ' - ';
