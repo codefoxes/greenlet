@@ -21,8 +21,9 @@ if ( is_single() ) {
 		printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 	}
 
-	printf( '<span itemprop="name">%s</span>', esc_html( get_the_title() ) );
-	echo '<meta itemprop="position" content="3" /></div>';
+	$post_title = wp_strip_all_tags( get_the_title() );
+	printf( '<span itemprop="name">%s</span>', esc_html( $post_title ) );
+	echo '<meta itemprop="position" content="' . ( $category ? '3' : '2' ) . '" /></div>';
 
 } elseif ( is_page() && $post->post_parent ) {
 	$home            = get_post( get_option( 'page_on_front' ) );

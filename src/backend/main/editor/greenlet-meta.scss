@@ -1,0 +1,142 @@
+$grid-columns: 12 !default;
+
+@mixin make-col($size, $columns: $grid-columns) {
+	width: percentage($size / $columns);
+}
+
+svg.svg-def {
+	display: block;
+}
+
+.gl-row {
+	display: flex;
+
+	@for $i from 1 through $grid-columns {
+		.col-#{$i} {
+			@include make-col($i, $grid-columns);
+		}
+	}
+}
+
+.gl-layout {
+	.gl-layout-control {
+		padding-top: 10px;
+	}
+}
+
+.gl-layout-options {
+	display: flex;
+
+	.components-button {
+		width: 50%;
+		justify-content: center;
+	}
+}
+
+.gl-radio-images {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -4px;
+}
+
+.gl-radio-image {
+	max-width: 25%;
+	padding: 10px 4px;
+
+	label {
+		display: block;
+		position: relative;
+	}
+
+	input[type="radio"] {
+		position: absolute;
+		width: 0;
+		height: 0;
+		opacity: 0;
+
+		&:checked + img, &:focus + img {
+			outline: 3px solid #7cb342;
+		}
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	.template-name {
+		position: absolute;
+		width: 100%;
+		height: 10px;
+		line-height: 1;
+		font-size: 11px;
+		text-align: center;
+		bottom: 110%;
+		visibility: hidden;
+	}
+
+	&:hover .template-name {
+		visibility: visible;
+	}
+}
+
+.gl-sequence {
+	margin-right: -4px;
+	margin-left: -4px;
+	margin-bottom: 10px;
+}
+
+.gl-sequence-col {
+	padding-top: 0;
+	border: 1px solid #7e8993;
+	background: #fff;
+	position: relative;
+
+	&:not(:last-child) {
+		border-right: none;
+	}
+
+	&:first-child {
+		border-radius: 3px 0 0 3px;
+	}
+
+	&:last-child {
+		border-radius: 0 3px 3px 0;
+	}
+
+	select {
+		width: 100%;
+		margin: 0;
+		border: none;
+		font-size: 12px;
+	}
+}
+
+.gl-sequence-name {
+	position: absolute;
+	top: 110%;
+	left: -1px;
+	font-size: 10px;
+	color: #aaa;
+	width: calc( 100% + 2px);
+	text-align: center;
+	overflow: hidden;
+
+	svg.gl-arrow {
+		position: absolute;
+		left: 0;
+		top: 4px;
+
+		&.right {
+			transform: rotateZ( 180deg );
+			right: 0;
+			left: auto;
+		}
+	}
+
+	&> span {
+		background: #fff;
+		position: relative;
+		padding: 0 4px;
+	}
+}

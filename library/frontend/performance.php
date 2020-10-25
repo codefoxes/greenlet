@@ -16,12 +16,21 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return void
  */
 function greenlet_remove_block_library_css() {
-	$disable = gl_get_option( 'disable_block_editor', false );
-	if ( false === $disable ) {
+	global $wp_styles, $wp_version;
+	$registered = $wp_styles->registered;
+
+	if ( ! array_key_exists( 'wp-block-library', $registered ) ) {
 		return;
 	}
 
+	$block_style = $registered['wp-block-library'];
 	wp_dequeue_style( 'wp-block-library' );
+
+	$disable = gl_get_option( 'disable_block_editor', false );
+	if ( false === $disable ) {
+		$defered = gl_get_option( 'defer_block_css', '1' );
+		greenlet_enqueue_style( 'wp-block-library', $block_style->src, $defered, array(), $wp_version );
+	}
 }
 
-add_action( 'wp_enqueue_scripts', 'greenlet_remove_block_library_css' );
+add_action( 'wp_enqueue_scripts', 'greenlet_remove_block_library_css', 20 );

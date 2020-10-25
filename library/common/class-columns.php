@@ -92,6 +92,11 @@ class Columns {
 			global $wp_query;
 
 			$default_layout = array(
+				'template' => '12',
+				'sequence' => array( 'main' ),
+			);
+
+			$default_home_layout = array(
 				'template' => '8-4',
 				'sequence' => array( 'main', 'sidebar-1' ),
 			);
@@ -100,8 +105,12 @@ class Columns {
 				// If is single page or post.
 
 				// Get template_name from post meta.
-				$this->template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
-				$this->template_name = $this->template_name ? $this->template_name : 'default';
+				$layout = get_post_meta( $wp_query->post->ID, 'greenlet_layout', true );
+
+				$this->template_name = isset( $layout['template'] ) ? $layout['template'] : 'default';
+
+				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
+				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 
 				// If template_name is default.
 				if ( 'default' === $this->template_name ) {
@@ -121,16 +130,11 @@ class Columns {
 						$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '12';
 						$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main' );
 					}
-				} else {
-
-					// Get template name from template file, sequence from post meta.
-					$this->columns  = str_replace( '.php', '', basename( $this->template_name ) );
-					$this->sequence = get_post_meta( $wp_query->post->ID, '_template_sequence', true );
 				}
 			} elseif ( is_home() ) {
 				// If is home (post list) page.
 
-				$layout = gl_get_option( 'home_template', $default_layout );
+				$layout = gl_get_option( 'home_template', $default_home_layout );
 
 				$this->columns  = isset( $layout['template'] ) ? $layout['template'] : '9-3';
 				$this->sequence = isset( $layout['sequence'] ) ? $layout['sequence'] : array( 'main', 'sidebar-1' );

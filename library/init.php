@@ -26,27 +26,27 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 	function greenlet_constants() {
 
 		// Define constants for parent theme directories.
-		define( 'GL_PARENT_DIR', get_template_directory() );
-		define( 'GL_ASSETS_DIR', GL_PARENT_DIR . '/assets' );
-		define( 'GL_IMAGES_DIR', GL_ASSETS_DIR . '/images' );
-		define( 'GL_TEMPLATES_DIR', GL_PARENT_DIR . '/templates' );
-		define( 'GL_LIBRARY_DIR', GL_PARENT_DIR . '/library' );
-		define( 'GL_LANGUAGES_DIR', GL_LIBRARY_DIR . '/languages' );
+		define( 'GREENLET_PARENT_DIR', get_template_directory() );
+		define( 'GREENLET_ASSET_DIR', GREENLET_PARENT_DIR . '/assets' );
+		define( 'GREENLET_IMAGE_DIR', GREENLET_ASSET_DIR . '/images' );
+		define( 'GREENLET_TEMPLATE_DIR', GREENLET_PARENT_DIR . '/templates' );
+		define( 'GREENLET_LIBRARY_DIR', GREENLET_PARENT_DIR . '/library' );
+		define( 'GREENLET_LANGUAGE_DIR', GREENLET_LIBRARY_DIR . '/languages' );
 
 		// Define constants for parent theme URLs.
-		define( 'GL_PARENT_URL', get_template_directory_uri() );
-		define( 'GL_LIBRARY_URL', GL_PARENT_URL . '/library' );
-		define( 'GL_ASSETS_URL', GL_PARENT_URL . '/assets' );
-		define( 'GL_IMAGES_URL', GL_ASSETS_URL . '/images' );
-		define( 'GL_STYLES_URL', GL_ASSETS_URL . '/css' );
-		define( 'GL_SCRIPTS_URL', GL_ASSETS_URL . '/js' );
+		define( 'GREENLET_PARENT_URL', get_template_directory_uri() );
+		define( 'GREENLET_LIBRARY_URL', GREENLET_PARENT_URL . '/library' );
+		define( 'GREENLET_ASSET_URL', GREENLET_PARENT_URL . '/assets' );
+		define( 'GREENLET_IMAGE_URL', GREENLET_ASSET_URL . '/images' );
+		define( 'GREENLET_STYLE_URL', GREENLET_ASSET_URL . '/css' );
+		define( 'GREENLET_SCRIPT_URL', GREENLET_ASSET_URL . '/js' );
 
 		// Define constants for child theme directory and URLs.
-		define( 'GL_CHILD_DIR', get_stylesheet_directory() );
-		define( 'GL_CHILD_URL', get_stylesheet_directory_uri() );
+		define( 'GREENLET_CHILD_DIR', get_stylesheet_directory() );
+		define( 'GREENLET_CHILD_URL', get_stylesheet_directory_uri() );
 
 		// Define other constants.
-		define( 'GREENLET_VERSION', '1.2.5' );
+		define( 'GREENLET_VERSION', '2.0.0' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
@@ -75,29 +75,32 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 			return;
 		}
 
-		require_once GL_LIBRARY_DIR . '/common/helpers.php';
-		require_once GL_LIBRARY_DIR . '/common/setup.php';
-		require_once GL_LIBRARY_DIR . '/common/class-columns.php';
+		require_once GREENLET_LIBRARY_DIR . '/common/helpers.php';
+		require_once GREENLET_LIBRARY_DIR . '/common/setup.php';
+		require_once GREENLET_LIBRARY_DIR . '/common/class-columns.php';
+
+		require_once GREENLET_LIBRARY_DIR . '/addons/colorwings/class-colorwings.php';
 
 		global $wp_customize;
 		if ( is_admin() || isset( $wp_customize ) ) {
-			require_once GL_LIBRARY_DIR . '/backend/helpers.php';
-			require_once GL_LIBRARY_DIR . '/backend/options/class-options-admin.php';
-			require_once GL_LIBRARY_DIR . '/backend/customizer/class-customizer.php';
-			require_once GL_LIBRARY_DIR . '/backend/editor/class-editor.php';
+			require_once GREENLET_LIBRARY_DIR . '/backend/helpers.php';
+			require_once GREENLET_LIBRARY_DIR . '/backend/options/class-options-admin.php';
+			require_once GREENLET_LIBRARY_DIR . '/backend/customizer/class-customizer.php';
+			require_once GREENLET_LIBRARY_DIR . '/backend/editor/class-postmeta.php';
+			require_once GREENLET_LIBRARY_DIR . '/backend/editor/class-editor.php';
 		}
 
-		require_once GL_LIBRARY_DIR . '/frontend/helpers.php';
-		require_once GL_LIBRARY_DIR . '/frontend/performance.php';
-		require_once GL_LIBRARY_DIR . '/frontend/scripts.php';
-		require_once GL_LIBRARY_DIR . '/frontend/markup.php';
-		require_once GL_LIBRARY_DIR . '/frontend/attributes.php';
-		require_once GL_LIBRARY_DIR . '/frontend/header-structure.php';
-		require_once GL_LIBRARY_DIR . '/frontend/main-structure.php';
-		require_once GL_LIBRARY_DIR . '/frontend/footer-structure.php';
-		require_once GL_LIBRARY_DIR . '/frontend/main.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/helpers.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/performance.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/scripts.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/markup.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/attributes.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/header-structure.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/main-structure.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/footer-structure.php';
+		require_once GREENLET_LIBRARY_DIR . '/frontend/main.php';
 
-		require_once GL_LIBRARY_DIR . '/support/woocommerce/class-woocommerce.php';
+		require_once GREENLET_LIBRARY_DIR . '/support/woocommerce/class-woocommerce.php';
 	}
 
 	add_action( 'greenlet_init', 'greenlet_load_framework' );

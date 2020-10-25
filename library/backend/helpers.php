@@ -19,7 +19,7 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 	 */
 	function greenlet_column_content_options() {
 
-		$array['main'] = 'Main Content';
+		$array['main'] = __( 'Main Content', 'greenlet' );
 
 		foreach ( $GLOBALS['wp_registered_sidebars'] as $sidebar ) {
 			if ( 0 === strpos( $sidebar['id'], 'sidebar-' ) ) {
@@ -31,32 +31,6 @@ if ( ! function_exists( 'greenlet_column_content_options' ) ) {
 	}
 }
 
-
-if ( ! function_exists( 'greenlet_cover_columns' ) ) {
-	/**
-	 * Gets cover (header, footer) columns.
-	 *
-	 * @since  1.0.0
-	 * @param  array $positions Cover positions.
-	 * @return array            List of columns
-	 */
-	function greenlet_cover_columns( $positions = array( 'topbar', 'header', 'semifooter', 'footer' ) ) {
-
-		$cover_columns = array( 'dont-show' => 'Do Not Show' );
-
-		foreach ( $positions as $key => $position ) {
-			$cols  = gl_get_option( "{$position}_template", top_bottom_default_columns( $position ) );
-			$array = explode( '-', $cols );
-			foreach ( $array as $id => $width ) {
-				$id++;
-				$cover_columns[ $position . '-' . $id ] = ucfirst( $position ) . ' Column ' . $id . ' (width = ' . $width . ')';
-			}
-		}
-
-		return $cover_columns;
-	}
-}
-
 if ( ! function_exists( 'greenlet_template_images' ) ) {
 	/**
 	 * Get Templates Images Array.
@@ -65,10 +39,10 @@ if ( ! function_exists( 'greenlet_template_images' ) ) {
 	 * @return array  Templates Images Array.
 	 */
 	function greenlet_template_images( $section = 'main' ) {
-		$imagepath = GL_LIBRARY_URL . '/backend/assets/images/main/';
+		$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/main/';
 
 		if ( 'cover' === $section ) {
-			$imagepath = GL_LIBRARY_URL . '/backend/assets/images/cover/';
+			$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/cover/';
 
 			$templates = array(
 				'12'      => $imagepath . '12.svg',
@@ -110,7 +84,7 @@ if ( ! function_exists( 'greenlet_get_presets' ) ) {
 	 * @return array Presets array.
 	 */
 	function greenlet_get_presets() {
-		$presets_file = GL_LIBRARY_DIR . '/backend/customizer/presets.json';
+		$presets_file = GREENLET_LIBRARY_DIR . '/backend/customizer/presets.json';
 		$presets      = greenlet_get_file_contents( $presets_file );
 		return json_decode( $presets, true );
 	}
@@ -125,7 +99,7 @@ if ( ! function_exists( 'greenlet_preset_images' ) ) {
 	 * @return array  Preset Images Array.
 	 */
 	function greenlet_preset_images() {
-		$imagepath = GL_LIBRARY_URL . '/backend/assets/images/presets/';
+		$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/presets/';
 		$presets   = greenlet_get_presets();
 		$images    = array();
 
@@ -156,5 +130,32 @@ if ( ! function_exists( 'greenlet_is_editor' ) ) {
 		} else {
 			return in_array( $pagenow, array( 'post.php', 'post-new.php' ), true );
 		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_add_script_dependencies' ) ) {
+	/**
+	 * Add dependency to registered script.
+	 *
+	 * @since  2.0.0
+	 * @param  string $handle Script handle.
+	 * @param  array  $deps   Dependencies array.
+	 * @return bool           Whether addition is successful.
+	 */
+	function greenlet_add_script_dependencies( $handle, $deps = array() ) {
+		global $wp_scripts;
+
+		$script = $wp_scripts->query( $handle, 'registered' );
+		if ( ! $script ) {
+			return false;
+		}
+
+		foreach ( $deps as $dep ) {
+			if ( ! in_array( $dep, $script->deps, true ) ) {
+				$script->deps[] = $dep;
+			}
+		}
+
+		return true;
 	}
 }

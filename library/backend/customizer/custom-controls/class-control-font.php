@@ -66,11 +66,18 @@ if ( ! class_exists( 'Control_Font' ) && class_exists( 'WP_Customize_Control' ) 
 		 * @return void
 		 */
 		public function enqueue() {
-			wp_enqueue_script( 'choices', GL_LIBRARY_URL . '/backend/assets/js/choices.min.js', array( 'jquery' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'choices', GL_LIBRARY_URL . '/backend/assets/css/choices.css', array(), GREENLET_VERSION );
-			wp_enqueue_script( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/js/greenlet-controls.js', array( 'choices' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'greenlet-controls', GL_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
+			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			wp_enqueue_script( 'choices', GREENLET_LIBRARY_URL . '/backend/assets/js/choices.min.js', array( 'jquery' ), GREENLET_VERSION, true );
+			wp_enqueue_style( 'choices', GREENLET_LIBRARY_URL . '/backend/assets/css/choices.css', array(), GREENLET_VERSION );
+			wp_enqueue_script( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'choices' ), GREENLET_VERSION, true );
+			wp_enqueue_style( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 			wp_localize_script( 'greenlet-controls', 'greenletAllFonts', $this->get_all_fonts() );
+
+			$color_wings_fonts = array(
+				'allFonts' => $this->get_all_fonts(),
+				'defaults' => greenlet_font_defaults(),
+			);
+			wp_localize_script( 'greenlet-controls', 'colorWingsFonts', $color_wings_fonts );
 		}
 
 		/**
@@ -132,7 +139,7 @@ if ( ! class_exists( 'Control_Font' ) && class_exists( 'WP_Customize_Control' ) 
 		 * @return array Google fonts array.
 		 */
 		public function get_google_fonts() {
-			$fonts_file   = GL_LIBRARY_DIR . '/backend/assets/fonts/google-fonts.json';
+			$fonts_file   = GREENLET_LIBRARY_DIR . '/backend/assets/fonts/google-fonts.json';
 			$font_content = greenlet_get_file_contents( $fonts_file );
 			return json_decode( $font_content, true );
 		}

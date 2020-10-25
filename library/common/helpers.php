@@ -68,17 +68,48 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 	 * Enqueue stylesheet.
 	 *
 	 * @since 1.0.0
+	 * @since 2.0.0            Added $inline, Moved $defer to last parameter.
 	 * @param string           $handle Stylesheet handle.
 	 * @param string           $src    Link href.
-	 * @param bool|null        $defer  Whether to defer.
 	 * @param array            $deps   An array of registered stylesheet handles.
 	 * @param string|bool|null $ver    Stylesheet version number.
+	 * @param bool|null        $inline Whether to enqueue inline.
+	 * @param bool|null        $defer  Whether to defer.
 	 */
-	function greenlet_enqueue_style( $handle, $src, $defer = null, $deps = array(), $ver = false ) {
+	function greenlet_enqueue_style( $handle, $src, $deps = array(), $ver = false, $inline = null, $defer = null ) {
+		if ( null === $inline ) {
+			$inline = gl_get_option( 'inline_css', '1' );
+		}
+
 		if ( null === $defer ) {
 			$defer = gl_get_option( 'defer_css', '1' );
 		}
+
+		if ( false !== $inline ) {
+			if ( '/' === substr( $src, 0, 1 ) ) {
+				$path = ABSPATH . $src;
+			} else {
+				$path = str_replace( get_home_url(), ABSPATH, $src );
+			}
+			ob_start();
+			require_once $path;
+			greenlet_enqueue_inline_style( $handle, ob_get_clean() );
+			return;
+		}
+
 		if ( false !== $defer ) {
+			if ( null !== $ver ) {
+				if ( false === $ver ) {
+					if ( strpos( $handle, 'wp-' ) === 0 ) {
+						global $wp_version;
+						$src .= ( wp_parse_url( $src, PHP_URL_QUERY ) ? '&' : '?' ) . 'ver=' . $wp_version;
+					} else {
+						$src .= ( wp_parse_url( $src, PHP_URL_QUERY ) ? '&' : '?' ) . 'ver=' . GREENLET_VERSION;
+					}
+				} else {
+					$src .= ( wp_parse_url( $src, PHP_URL_QUERY ) ? '&' : '?' ) . 'ver=' . $ver;
+				}
+			}
 			greenlet_defer_style( $src );
 			return;
 		}
@@ -119,6 +150,49 @@ if ( ! function_exists( 'greenlet_enqueue_inline_style' ) ) {
 		wp_register_style( $handle, false, array(), GREENLET_VERSION );
 		wp_enqueue_style( $handle );
 		wp_add_inline_style( $handle, minify_css( $data ) );
+	}
+}
+
+if ( ! function_exists( 'greenlet_enqueue_script' ) ) {
+	/**
+	 * Enqueue script.
+	 *
+	 * @since 2.0.0
+	 * @param string           $handle    Script handle.
+	 * @param string           $src       Script src.
+	 * @param array            $deps      An array of registered script handles.
+	 * @param string|bool|null $ver       Script version number.
+	 * @param bool             $in_footer Whether to enqueue in footer.
+	 * @param bool|null        $inline    Whether to enqueue inline.
+	 */
+	function greenlet_enqueue_script( $handle, $src, $deps = array(), $ver = false, $in_footer = true, $inline = null ) {
+		if ( null === $inline ) {
+			$inline = gl_get_option( 'inline_js', '1' );
+		}
+		if ( false !== $inline ) {
+			$path = str_replace( get_home_url(), ABSPATH, $src );
+			ob_start();
+			require_once $path;
+			greenlet_enqueue_inline_script( $handle, ob_get_clean() );
+			return;
+		}
+
+		wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
+	}
+}
+
+if ( ! function_exists( 'greenlet_enqueue_inline_script' ) ) {
+	/**
+	 * Enqueue inline script.
+	 *
+	 * @since 2.0.0
+	 * @param string $handle Script handle.
+	 * @param string $data   CSS Data.
+	 */
+	function greenlet_enqueue_inline_script( $handle, $data ) {
+		wp_register_script( $handle, false, array(), GREENLET_VERSION, true );
+		wp_enqueue_script( $handle );
+		wp_add_inline_script( $handle, $data );
 	}
 }
 
@@ -334,7 +408,7 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 
 		// Get file names in the template directory, exclude current and parent.
 		$files = array_filter(
-			scandir( GL_TEMPLATES_DIR ),
+			scandir( GREENLET_TEMPLATE_DIR ),
 			function( $item ) {
 				return '.' !== $item[0];
 			}
@@ -402,6 +476,139 @@ if ( ! function_exists( 'top_bottom_default_columns' ) ) {
 			default:
 				return '12';
 		}
+	}
+}
+
+if ( ! function_exists( 'greenlet_get_menus' ) ) {
+	/**
+	 * Get all menus.
+	 */
+	function greenlet_get_menus() {
+		$menus     = array();
+		$nav_menus = wp_get_nav_menus();
+		foreach ( $nav_menus as $menu ) {
+			$menus[ $menu->slug ] = $menu->name;
+		}
+		return $menus;
+	}
+}
+
+if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
+	/**
+	 * Get cover layout items.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param  string $pos Cover layout position.
+	 * @return array       Cover layout items Array.
+	 */
+	function greenlet_cover_layout_items( $pos = 'header' ) {
+		$items = array(
+			array(
+				'id'        => 'logo',
+				'name'      => __( 'Logo', 'greenlet' ),
+				'type'      => 'logo',
+				'template'  => 'templates/logo',
+				'positions' => array( 'header', 'footer' ),
+			),
+			array(
+				'id'        => 'menu',
+				'name'      => __( 'Menu', 'greenlet' ),
+				'template'  => 'templates/menu/menu',
+				'positions' => array( 'header', 'footer' ),
+				'meta'      => array(
+					'slug'    => array(
+						'name'  => __( 'Menu', 'greenlet' ),
+						'type'  => 'select',
+						'items' => greenlet_get_menus(),
+					),
+					'toggler' => array(
+						'name'  => __( 'Mobile toggler', 'greenlet' ),
+						'type'  => 'select',
+						'items' => array(
+							'enable'  => __( 'Enable', 'greenlet' ),
+							'disable' => __( 'Disable', 'greenlet' ),
+						),
+					),
+				),
+			),
+			array(
+				'id'        => 'menu-toggler',
+				'name'      => __( 'Menu Toggler', 'greenlet' ),
+				'template'  => 'templates/menu/toggler',
+				'positions' => array( 'header', 'footer' ),
+				'meta'      => array(
+					'target' => array(
+						'name'  => __( 'Target', 'greenlet' ),
+						'type'  => 'select',
+						'items' => array_merge( get_registered_nav_menus(), array( 'query' => 'Query' ) ),
+					),
+					'query'  => array(
+						'name' => __( 'Query', 'greenlet' ),
+						'type' => 'input',
+					),
+					'effect' => array(
+						'name'  => __( 'Effect', 'greenlet' ),
+						'type'  => 'select',
+						'items' => array(
+							'from-top'    => __( 'From Top', 'greenlet' ),
+							'from-bottom' => __( 'From Bottom', 'greenlet' ),
+							'from-right'  => __( 'From Right', 'greenlet' ),
+							'from-left'   => __( 'From Left', 'greenlet' ),
+						),
+					),
+				),
+			),
+		);
+
+		$items = apply_filters( 'greenlet_cover_layout_items', $items );
+
+		$cover_items = array();
+		foreach ( $items as $item ) {
+			if ( ! isset( $item['positions'] ) || in_array( $pos, $item['positions'], true ) ) {
+				$cover_items[ $item['id'] ] = $item;
+			}
+		}
+
+		return $cover_items;
+	}
+}
+
+if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
+	/**
+	 * Gets cover (header, footer) columns.
+	 *
+	 * @since  2.0.0
+	 * @param  string $position Cover position.
+	 * @return array            List of columns
+	 */
+	function greenlet_cover_layout_defaults( $position = 'header' ) {
+		$header = array(
+			array(
+				'columns' => '3-9',
+				'primary' => true,
+				'items'   => array(
+					1 => array( 'logo' ),
+					2 => array(
+						array(
+							'id'   => 'menu',
+							'meta' => array(
+								'slug'    => false,
+								'toggler' => 'enable',
+							),
+						),
+					),
+				),
+			),
+		);
+		$footer = array(
+			array(
+				'columns' => '12',
+				'primary' => true,
+				'items'   => array(),
+			),
+		);
+		return $$position;
 	}
 }
 

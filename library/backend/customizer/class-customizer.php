@@ -40,22 +40,23 @@ class Customizer {
 	 * @return void
 	 */
 	public function __construct() {
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-multicheck.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-sequence.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-length.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-preset.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
-		require_once GL_LIBRARY_DIR . '/backend/customizer/options.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-multicheck.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-radio-image.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-template-sequence.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-cover-layout.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-divider.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-color.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-border.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-font.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-length.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/custom-controls/class-control-preset.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/class-sanitizer.php';
+		require_once GREENLET_LIBRARY_DIR . '/backend/customizer/options.php';
 
 		add_action( 'customize_register', array( $this, 'greenlet_add_custom_controls' ), 0 );
 		add_action( 'customize_register', array( $this, 'greenlet_customize_register' ) );
-		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_scripts' ), 9 );
 		add_action( 'customize_preview_init', array( $this, 'enqueue_preview_scripts' ) );
 	}
 
@@ -65,8 +66,10 @@ class Customizer {
 	 * @since  1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker' );
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'wp-i18n', 'jquery' ), GREENLET_VERSION, true );
+		wp_enqueue_style( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
+		wp_set_script_translations( 'greenlet-controls', 'greenlet' );
 	}
 
 	/**
@@ -75,7 +78,8 @@ class Customizer {
 	 * @since  1.1.0
 	 */
 	public function enqueue_preview_scripts() {
-		wp_enqueue_script( 'greenlet-preview', GL_LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'jquery', 'customize-preview' ), GREENLET_VERSION, true );
+		wp_enqueue_script( 'greenlet-preview', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'customize-preview', 'react-dom', 'wp-i18n' ), GREENLET_VERSION, true );
+		wp_set_script_translations( 'greenlet-preview', 'greenlet' );
 	}
 
 	/**
@@ -149,6 +153,9 @@ class Customizer {
 				} elseif ( 'template-sequence' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Template_Sequence( $wp_customize, $option['id'], $option['cargs'] ) );
 
+				} elseif ( 'cover-layout' === $option['cargs']['type'] ) {
+					$wp_customize->add_control( new Control_Cover_Layout( $wp_customize, $option['id'], $option['cargs'] ) );
+
 				} elseif ( 'gl-color' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Color( $wp_customize, $option['id'], $option['cargs'] ) );
 
@@ -164,9 +171,23 @@ class Customizer {
 				} elseif ( 'preset' === $option['cargs']['type'] ) {
 					$wp_customize->add_control( new Control_Preset( $wp_customize, $option['id'], $option['cargs'] ) );
 
+				} elseif ( 'cw-link' === $option['cargs']['type'] ) {
+					class_exists( 'ColorWings\Control_Link' ) && $wp_customize->add_control( new \ColorWings\Control_Link( $wp_customize, $option['id'], $option['cargs'] ) );
 				} else {
 					$wp_customize->add_control( $option['id'], $option['cargs'] );
 				}
+			}
+
+			if ( isset( $option['pargs'] ) ) {
+				$wp_customize->selective_refresh->add_partial(
+					$option['id'] . '_partial',
+					array(
+						'selector'            => $option['pargs']['selector'],
+						'settings'            => array( $option['id'] ),
+						'render_callback'     => $option['pargs']['render_callback'],
+						'container_inclusive' => $option['pargs']['container_inclusive'],
+					)
+				);
 			}
 		}
 	}
@@ -184,6 +205,7 @@ class Customizer {
 		$wp_customize->register_control_type( 'Greenlet\Control_Radio_Image' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Template' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Template_Sequence' );
+		$wp_customize->register_control_type( 'Greenlet\Control_Cover_Layout' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Divider' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Color' );
 		$wp_customize->register_control_type( 'Greenlet\Control_Border' );

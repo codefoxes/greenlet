@@ -15,23 +15,28 @@ buildjs() {
 	echo 'Build JS: Complete'
 }
 
+generatecss() {
+	# $1 = src path
+	# $2 = dest path
+	# $3 = dest min path
+
+	# Compile SCSS to CSS
+	./node_modules/.bin/node-sass --output-style expanded --indent-type tab --indent-width 1 --source-map true $1 $2
+	# Autoprefix
+	./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output $2 $2
+	# Remove spaced alignment from autoprefixer.
+	sed -i '' 's/\  \ *//g' $2
+	# Uglify
+	cleancss -o $3 $2
+}
+
 buildcss() {
 	echo 'Build CSS: Started'
 	rm -rf assets/css
 	mkdir -p assets/css
 
 	for i in "${css_files[@]}"; do
-		# Compile SCSS to CSS
-		./node_modules/.bin/node-sass --output-style expanded --indent-type tab --indent-width 1 --source-map true src/frontend/css/$i.scss assets/css/$i.css
-
-		# Autoprefix
-		./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output assets/css/$i.css assets/css/$i.css
-
-		# Remove spaced alignment from autoprefixer.
-		sed -i '' 's/\  \ *//g' assets/css/$i.css
-
-		# Uglify
-		cleancss -o assets/css/$i.min.css assets/css/$i.css
+		generatecss src/frontend/css/$i.scss assets/css/$i.css assets/css/$i.min.css
 	done
 	echo 'Build CSS: Complete'
 
@@ -49,14 +54,25 @@ buildfonts() {
 }
 
 buildbackend() {
-	DIR="$(cd "$(dirname "$0")" && pwd)"
-	python3 $DIR/build-controls
+	if [ "$1" == "only_main" ]; then
+		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
+	elif [ "$1" == "only_cw" ]; then
+		ONLY_CW=1 ./node_modules/.bin/rollup -c
+	else
+		./node_modules/.bin/rollup -c
+	fi
 }
 
 removePOBackups() {
 	echo "Removing po backups"
 	rm -rf library/languages/*.po~
 	rm -rf library/languages/*.pot~
+}
+
+copyColorwings() {
+	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
+	# Todo: Replace text domain.
+	sed -i '' 's/greenlet/colorwings/g' ../../plugins/colorwings/class-colorwings-admin.php
 }
 
 if [ -z "$1" ]; then
@@ -79,12 +95,16 @@ elif [ "$1" == "--final" ]; then
 	buildfonts
 	removePOBackups
 	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
-	rsync -avP --exclude '*.git*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*.DS_Store*' --exclude '*src/build*' --exclude '*src/update-version' \
-	--exclude '*src/.env' --exclude 'library/pro*' --exclude 'pro*' --exclude 'todo.txt' --exclude '*.map' ./* --delete ~/Desktop/greenlet
+	rm -rf ~/Desktop/greenlet.zip ~/Desktop/greenlet
+	rsync -avP --exclude '.*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*src/build*' --exclude '*src/update-version' \
+	--exclude 'library/pro*' --exclude 'pro*' --exclude 'todo*' --exclude '*.map' --exclude '*src/backend/colorwings*' --exclude 'rollup.config.js' ./* --delete ~/Desktop/greenlet
 	current=$(pwd)
 	cd ~/Desktop
 	zip -r greenlet.zip greenlet
 	cd $current
+	rm -rf ../greenlet-final
+	cp -R ~/Desktop/greenlet ../greenlet-final
+	sed -i '' 's/Theme Name: Greenlet/Theme Name: Greenlet Final/g' ../greenlet-final/style.css
 	printf "${BGREEN}BUILD COMPLETE${NC}\n"
 elif [ "$1" == "fonts" ]; then
 	buildfonts
@@ -93,8 +113,19 @@ elif [ "$1" == "css" ]; then
 elif [ "$1" == "js" ]; then
 	buildjs
 elif [ "$1" == "backend" ]; then
-	buildbackend
+	buildbackend only_main
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
+elif [ "$1" == "colorwings" ]; then
+	buildbackend only_cw
+	copyColorwings
+elif [ "$1" == "i18n" ]; then
+	current=$(pwd)
+	cd library/languages
+	wp i18n make-json kn.po --no-purge
+	for x in kn-*; do
+		mv "$x" "greenlet-$x"
+	done
+	cd $current
 fi

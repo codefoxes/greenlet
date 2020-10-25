@@ -3,10 +3,10 @@ Contributors: greenlet
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, custom-background, custom-colors, editor-style, featured-images, footer-widgets, full-width-template, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks, custom-menu, custom-logo, entertainment, one-column, two-columns, three-columns, four-columns, right-sidebar, left-sidebar, e-commerce, post-formats
-Tested up to: 5.3.2
-Requires at least: 4.9
-Requires PHP: 5.4
-Stable tag: 1.2.5
+Tested up to: 5.5.1
+Requires at least: 5.0
+Requires PHP: 5.4 or higher
+Stable tag: 2.0.0
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -32,8 +32,7 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 - Customize Column Sequence
 - 8 Global Predefined Layouts (extendable)
 - Unlimited Individual Post Layout
-- Unlimited Header and Footer layout
-- Optional Topbar and Semi-Footer
+- Unlimited Header and Footer layout (Rows & Columns)
 - Pagination - Default (Newer and Older Posts)
 - Pagination - Numbered
 - Pagination - Numbered Ajax
@@ -47,7 +46,7 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 - Tons of Google Fonts
 - Mobile Ready
 - Page Builders Ready
-- Change Logo and Menu Position
+- Add Logo, Menu & Togglers to headers & footers
 - Header and Footer Contents from Widgets or Template File
 - 2 to 12 Sidebars Customizable
 - Enable or Disable Breadcrumb
@@ -62,9 +61,13 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 
 == Changelog ==
 
-- Added Customizer Preset
-- Bundle Bootstrap with Theme
-- Add preset selection confirmation
+- New: Visual CSS editor under "Extra Styles".
+- New: Unlimited Headers and Footers creator.
+- New: Individual post/page layout selector
+- Improvement: All visual styles are moved to "Extra Styles".
+- Improvement: Bootstrap update to 4.5.3.
+- Improvement: Show logo, title & tagline independently.
+- Improvement: Full-width & full-width container block support
 
 == Copyright ==
 
@@ -102,4 +105,19 @@ Distributed under the MIT License
 = Bootstrap Licence =
 
 Bootstrap is HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. (https://github.com/twbs/bootstrap)
+Distributed under the MIT License
+
+= Colorwings Licence =
+
+Colorwings is a visual style editor for WordPress by Karthik Bhat. (https://github.com/karthikax/colorwings/)
+Distributed under the MIT License
+
+= React Sortable HOC Licence =
+
+React Sortable HOC is a components sorting library by Claudéric Demers. (https://github.com/clauderic/react-sortable-hoc)
+Distributed under the MIT License
+
+= react-select-search Licence =
+
+react-select-search is a lightweight select component library by tbleckert. (https://github.com/tbleckert/react-select-search)
 Distributed under the MIT License

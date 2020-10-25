@@ -45,27 +45,6 @@ function greenletPaginationInit() {
 	}
 }
 
-greenletPaginationInit();
-
-window.onscroll = function (e) {
-	var infinite = document.getElementsByClassName( 'pagination infinite' );
-	if (infinite.length > 0) {
-
-		var offset  = infinite[ infinite.length - 1 ].getBoundingClientRect();
-		var loadpos = offset.top + 100; // 500
-		var wheight = window.innerHeight;
-		var sheight	= window.scrollY;
-		if ( ( wheight + sheight ) > loadpos ) {
-			var link = infinite[ infinite.length - 1 ].querySelector( 'a' );
-			if ( link !== null ) {
-				var next_page      = link.getAttribute( 'data-next' );
-				link.style.display = 'none';
-				greenletPageLoader( link, next_page, true );
-			}
-		}
-	}
-}
-
 /**
  * Load Paginated content.
  *
@@ -127,6 +106,54 @@ function greenletPageLoader( obj, cur_page, add, act ) {
 }
 
 /**
+ * Infinite scroll.
+ */
+function greenletInfiniteScroll() {
+	var infinite = document.getElementsByClassName( 'pagination infinite' );
+	if (infinite.length > 0) {
+
+		var offset  = infinite[ infinite.length - 1 ].getBoundingClientRect();
+		var loadpos = offset.top + 100; // 500
+		var wheight = window.innerHeight;
+		var sheight	= window.scrollY;
+		if ( ( wheight + sheight ) > loadpos ) {
+			var link = infinite[ infinite.length - 1 ].querySelector( 'a' );
+			if ( link !== null ) {
+				var next_page      = link.getAttribute( 'data-next' );
+				link.style.display = 'none';
+				greenletPageLoader( link, next_page, true );
+			}
+		}
+	}
+}
+
+/**
+ * Toggle Infinite scroll.
+ *
+ * @param {string} op Enable or Disable.
+ */
+function greenletToggleScroll( op ) {
+	if ( ( 'undefined' === typeof op ) || ( false !== op ) ) {
+		window.addEventListener( 'scroll', greenletInfiniteScroll )
+	} else {
+		window.removeEventListener( 'scroll', greenletInfiniteScroll )
+	}
+}
+
+/**
+ * Fix tag.
+ */
+function greenletFixTag() {
+	var current = document.querySelector('meta[name="description"]');
+	if ( null === current ) {
+		var tag = document.createElement('meta');
+		tag.name = "description";
+		tag.content = greenlet_object.page_data;
+		document.getElementsByTagName('head')[0].appendChild(tag);
+	}
+}
+
+/**
  * Convert JSON to Form data.
  *
  * @param {object} srcjson Source JSON object.
@@ -153,6 +180,9 @@ function greenletJsonToFormData( srcjson ) {
 	return urljson;
 }
 
+/**
+ * Fix Toggle Menu position.
+ */
 function greenletFixMenu() {
 	document.body.addEventListener( 'keyup', function ( e ) {
 		if ( e.key === 'Tab' || e.keyCode === '9' ) {
@@ -170,12 +200,43 @@ function greenletFixMenu() {
 	});
 
 	var fixToggle = function() {
-		var header = document.querySelector( '.header-column' )
-		document.querySelector( '.menu-toggle-button' ).style.top = '-' + ( ( header.offsetHeight / 2 ) + 12 ) + 'px'
+		var togglers = document.getElementsByClassName( 'menu-toggle-button' )
+		for ( var i = 0; i < togglers.length; i++ ) {
+			var container = togglers[ i ].closest( '.header-section' )
+			if ( null === container ) {
+				container = togglers[ i ].closest( '.footer-section' )
+			}
+			togglers[ i ].style.top = '-' + ( ( container.offsetHeight / 2 ) + 12 ) + 'px'
+		}
 	}
 
 	window.addEventListener('load', fixToggle );
 	window.addEventListener('resize', fixToggle );
 }
 
-greenletFixMenu()
+/**
+ * Enable additional menu togglers.
+ */
+function greenletToggleMenu() {
+	var togglers = document.getElementsByClassName( 'menu-toggler' )
+
+	var toggleMenu = function( target ) {
+		target.classList.toggle( 'visible' )
+	}
+
+	for ( var i = 0; i < togglers.length; i++ ) {
+		var dataSet = togglers[ i ].dataset
+		var target = ( 'query' === dataSet.target && 'query' in dataSet ) ? document.querySelector( dataSet.query ) : document.querySelector( '.' + dataSet.target )
+		if ( null === target ) {
+			target = togglers[ i ].parentElement.querySelector( '.menu-list')
+		}
+		target.classList.add( ( 'effect' in dataSet ) ? dataSet.effect: 'left' )
+		togglers[ i ].addEventListener( 'click', toggleMenu.bind( this, target ) )
+	}
+}
+
+greenletPaginationInit();
+greenletToggleScroll();
+greenletFixTag()
+greenletFixMenu();
+greenletToggleMenu();

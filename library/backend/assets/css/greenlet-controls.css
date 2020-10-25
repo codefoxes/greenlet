@@ -72,7 +72,7 @@
 	padding: 10px 4px;
 }
 
-.customize-control-template .gl-radio-image input[type="radio"]:checked + img {
+.customize-control-template .gl-radio-image input[type="radio"]:checked + img, .gl-radio-image input[type="radio"]:focus + img {
 	outline: 3px solid #FFA726;
 }
 
@@ -199,7 +199,7 @@
 	min-height: 30px;
 }
 
-.customize-control-range, .customize-control-length {
+.customize-control-range, .customize-control-length, .customize-control-length .tab-content .gl-row {
 	position: relative;
 }
 
@@ -217,7 +217,7 @@
 	outline: none;
 }
 
-.customize-control-range .dashicons, .gl-length .reset {
+.customize-control-range .reset, .gl-length .reset {
 	position: absolute;
 	right: 0;
 	bottom: 12px;
@@ -229,6 +229,39 @@
 
 .gl-length .reset {
 	bottom: 35px;
+}
+
+.gl-length .tabs {
+	display: flex;
+	margin-bottom: -1px;
+}
+
+.gl-length .tabs .tab {
+	padding: 5px 7px;
+	border: 1px solid transparent;
+	border-radius: 5px 5px 0 0;
+	cursor: pointer;
+}
+
+.gl-length .tabs .tab.active {
+	border: 1px solid #ddd;
+	border-bottom-color: #eee;
+}
+
+.gl-length .tabs svg {
+	display: block;
+}
+
+.gl-length .tab-content.shorthand {
+	border: 1px solid #ddd;
+	padding: 30px 5px 15px;
+}
+
+.gl-length .output {
+	padding: 5px;
+	border: 1px solid #ddd;
+	font-size: 11px;
+	margin-top: -1px;
 }
 
 .customize-control-range .dashicons:hover, .gl-length .reset:hover {
@@ -298,8 +331,8 @@
 }
 
 .customize-control-checkbox input[type=checkbox]:focus {
-	box-shadow: none;
-	border-color: rgba(0, 0, 0, .2);
+	box-shadow: 0 0 0 1px #7cb342;
+	border-color: rgb(124 179 66);
 }
 
 .gl-border {
@@ -343,7 +376,7 @@
 	margin-bottom: 25px;
 }
 
-.customize-control {
+.customize-control.togglable {
 	max-height: 500px;
 	transition: .5s all;
 	opacity: 1;
@@ -355,30 +388,6 @@
 	margin: 0;
 	padding: 0;
 	opacity: 0;
-}
-
-.toggler {
-	text-align: center;
-	position: relative;
-}
-
-.toggler span {
-	background: #fff;
-	border-radius: 30px;
-	color: #999;
-	border: 1px solid #ccc;
-	cursor: pointer;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	transition: .5s all;
-	font-size: 14px;
-	line-height: 1.4;
-}
-
-.toggled span {
-	transform: translateX(-50%) rotate(180deg);
 }
 
 .aspect {

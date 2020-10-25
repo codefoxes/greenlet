@@ -44,15 +44,53 @@ describe('Customizer', () => {
 		})
 
 		after( () => {
+			const initHeight = Cypress.config( 'viewportHeight' )
+			cy.viewport( Cypress.config( 'viewportWidth' ), 300 )
+			cy.get('#customize-controls .control-section:visible').scrollTo(0, 0 )
+			cy.get('.customize-section-back:visible').click( { force: true } )
+			cy.viewport( Cypress.config( 'viewportWidth' ), initHeight )
+		})
+
+		it('Can hide title', () => {
+			cy.get('#_customize-input-show_title').click()
+
+			cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+				return $iframe.contents().find('.site-name').css( 'display' ) === 'none'
+			}), { timeout: 5000 })
+		})
+
+		it('Can show title', () => {
+			cy.get('#_customize-input-show_title').click()
+
+			cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+				return $iframe.contents().find('.site-name').css( 'display' ) !== 'none'
+			}), { timeout: 5000 })
+		})
+
+		it('Can show tagline', () => {
+			cy.get('#_customize-input-show_tagline').click()
+
+			cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+				return $iframe.contents().find('.site-tagline').css( 'display' ) !== 'none'
+			}), { timeout: 5000 })
+		})
+	})
+
+	describe('Performance', () => {
+		before( () => {
+			cy.get('#accordion-section-performance').click()
+		})
+
+		after( () => {
 			cy.get('.customize-section-back:visible').click()
 		})
 
-		it('Contains Logo Width', () => {
-			cy.get('#length-size-logo_width').should('have.attr', 'type', 'range')
+		it('Contains Enabled Inline CSS', () => {
+			cy.get('#_customize-input-inline_css:checkbox').should('be.enabled')
 		})
 
-		it('Contains Logo Height', () => {
-			cy.get('#length-size-logo_height').should('have.attr', 'type', 'range')
+		it('Contains Enabled Defer CSS', () => {
+			cy.get('#_customize-input-defer_css:checkbox').should('be.enabled')
 		})
 	})
 
@@ -89,123 +127,6 @@ describe('Customizer', () => {
 
 			it('Contains CSS Path Input', () => {
 				cy.get('#_customize-input-css_path').should('have.attr', 'type', 'url')
-			})
-
-			it('Contains Enabled Defer CSS', () => {
-				cy.get('#_customize-input-defer_css:checkbox').should('be.enabled')
-			})
-		})
-
-		describe('Header Layout', () => {
-			before( () => {
-				cy.get('#accordion-section-header_layout').click()
-			})
-
-			after( () => {
-				cy.get('#customize-controls .control-section:visible').scrollTo(0, 0)
-				cy.get('.customize-section-back:visible').click()
-			})
-
-			it('Contains Disabled Topbar', () => {
-				// Why not directly accessible via should('be.disabled')
-				cy.get('#_customize-input-show_topbar').then(($st) => {
-					expect($st.prop('checked')).to.be.false
-				})
-			})
-
-			it('Contains Header Template Placeholder', () => {
-				cy.get('#customize-control-header_template .gl-radio-images').should('be.visible')
-			})
-
-			it('Contains Logo Position as Header 1', () => {
-				cy.get('#_customize-input-logo_position').should('have.value', 'header-1')
-			})
-
-			it('Contains Menu Position as Header 2', () => {
-				cy.get('#_customize-input-mmenu_position').should('have.value', 'header-2')
-			})
-
-			it('Contains Secondary Menu Hidden', () => {
-				cy.get('#_customize-input-smenu_position').should('have.value', 'dont-show')
-			})
-
-			it('Shows Topbar on Toggle', () => {
-				cy.get('#_customize-input-show_topbar').click()
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const topbar = $iframe.contents().find('body .topbar')
-					if (topbar.length > 0) {
-						return topbar.css('position') === 'sticky'
-					}
-					return false;
-				}), { timeout: 5000 })
-			})
-
-			it('Toggles Sticky Topbar', () => {
-				cy.get('#_customize-input-fixed_topbar').click()
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const topbar = $iframe.contents().find('body .topbar')
-					if (topbar.length > 0) {
-						return topbar.css('position') !== 'sticky'
-					}
-					return false;
-				}), { timeout: 5000 })
-			})
-
-			it('Updates Topbar Template', () => {
-				cy.get('#customize-control-topbar_template [type="radio"]').check('2-10', { force: true })
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const body = $iframe.contents().find('body')
-					if (body.length > 0) {
-						return (body.find('.topbar .topbar-1').hasClass('col-2')
-							&& body.find('.topbar .topbar-2').hasClass('col-10'))
-					}
-					return false;
-				}), { timeout: 5000 })
-			})
-
-			// Test manual template Input.
-
-			it('Updates Header Template', () => {
-				cy.get('#customize-control-header_template [type="radio"]').check('2-10', { force: true })
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const body = $iframe.contents().find('body')
-					if (body.length > 0) {
-						return (body.find('header .header-1').hasClass('col-2')
-							&& body.find('header .header-2').hasClass('col-10'))
-					}
-					return false;
-				}), { timeout: 5000 })
-			})
-
-			it('Updates Logo Position', () => {
-				cy.get('#_customize-input-logo_position').select('topbar-1')
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const logo = $iframe.contents().find('body .topbar-1 .site-logo')
-					return logo.length > 0;
-				}), { timeout: 5000 })
-			})
-
-			it('Updates Menu Position', () => {
-				cy.get('#_customize-input-mmenu_position').select('topbar-2')
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const menu = $iframe.contents().find('body .topbar-2 nav')
-					return menu.length > 0;
-				}), { timeout: 5000 })
-			})
-
-			it('Updates Secondary Menu Position', () => {
-				cy.get('#_customize-input-smenu_position').select('header-2')
-
-				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
-					const menu = $iframe.contents().find('body .header-2 nav')
-					return menu.length > 0;
-				}), { timeout: 5000 })
 			})
 		})
 

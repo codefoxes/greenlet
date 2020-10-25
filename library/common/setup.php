@@ -21,7 +21,7 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 	 */
 	function greenlet_setup() {
 		// Make the theme available for translation.
-		load_theme_textdomain( 'greenlet', GL_LANGUAGES_DIR );
+		load_theme_textdomain( 'greenlet', GREENLET_LANGUAGE_DIR );
 
 		// Switch to html5 support.
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
@@ -44,14 +44,11 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 		// Add support for post thumbnails.
 		add_theme_support( 'post-thumbnails' );
 
+		// Add support for Wide and full width blocks.
+		add_theme_support( 'align-wide' );
+
 		// Register nav menus.
-		register_nav_menus(
-			array(
-				'main-menu'      => __( 'Main Menu', 'greenlet' ),
-				'secondary-menu' => __( 'Secondary Menu', 'greenlet' ),
-				'footer-menu'    => __( 'Footer Menu', 'greenlet' ),
-			)
-		);
+		register_nav_menus( array( 'main-menu' => __( 'Main Menu', 'greenlet' ) ) );
 
 		// Add support for woocommerce.
 		add_theme_support( 'woocommerce' );
@@ -59,7 +56,6 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 
 	add_action( 'after_setup_theme', 'greenlet_setup' );
 }
-
 
 if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	/**
@@ -94,31 +90,28 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 				);
 			}
 
-			// Crate position array to loop through.
-			$position = array( 'topbar', 'header', 'semifooter', 'footer' );
+			// Create position array to loop through.
+			$position = array( 'header', 'footer' );
 
-			// For each positions in the array.
+			// For each cover positions.
 			foreach ( $position as $pos ) {
+				// Get position layout option.
+				$cover_rows = gl_get_option( $pos . '_layout', greenlet_cover_layout_defaults( $pos ) );
 
-				// If the show position is enabled in options.
-				if ( ! in_array( $pos, array( 'topbar', 'semifooter' ), true ) || false !== gl_get_option( 'show_' . $pos, false ) ) {
-
-					// Get position template option.
-					$layout_option = $pos . '_template';
-					$layout        = gl_get_option( $layout_option, top_bottom_default_columns( $pos ) );
-
-					// Create new column object.
-					$cobj = new GreenletColumns( $layout );
+				$k = 1;
+				// For each row in the cover position.
+				foreach ( $cover_rows as $row ) {
+					$cobj = new GreenletColumns( $row['columns'] );
 
 					// For total number of columns register sidebars.
 					for ( $i = 1; $i <= ( $cobj->total ); $i++ ) {
 						register_sidebar(
 							array(
 								// translators: %1$s: Widget Position. %2$s: Widget Column.
-								'name'          => sprintf( __( '%1$s Widget Area %2$s', 'greenlet' ), ucfirst( $pos ), $i ),
-								'id'            => $pos . '-sidebar-' . $i,
+								'name'          => sprintf( __( '%1$s %2$s - Column %3$s', 'greenlet' ), ucfirst( $pos ), $k, $i ),
+								'id'            => "{$pos}-sidebar-{$k}-{$i}",
 								// translators: %1$s: Widget Position. %2$s: Widget Column.
-								'description'   => sprintf( __( 'Appears on the %1$s as column %2$s.', 'greenlet' ), $pos, $i ),
+								'description'   => sprintf( __( 'Appears on the %1$s %2$s at column %3$s.', 'greenlet' ), $pos, $k, $i ),
 								'before_widget' => '<div id="%1$s" class="widget %2$s">',
 								'after_widget'  => '</div> <!-- end widget -->',
 								'before_title'  => '<h5 class="widget-title">',
@@ -126,6 +119,7 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 							)
 						);
 					}
+					$k++;
 				}
 			}
 		}
@@ -134,6 +128,37 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 	add_action( 'widgets_init', 'greenlet_widget_init' );
 }
 
+if ( ! function_exists( 'greenlet_register_meta' ) ) {
+	/**
+	 * Register Layout meta fields.
+	 *
+	 * @since 2.0.0
+	 */
+	function greenlet_register_meta() {
+		register_post_meta(
+			'',
+			'greenlet_layout',
+			array(
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'       => 'object',
+						'properties' => array(
+							'template' => array( 'type' => 'string' ),
+							'sequence' => array(
+								'type'  => 'array',
+								'items' => array( 'type' => 'string' ),
+							),
+						),
+					),
+				),
+				'single'       => true,
+				'type'         => 'object',
+			)
+		);
+	}
+
+	add_action( 'init', 'greenlet_register_meta' );
+}
 
 if ( ! function_exists( 'set_content_width' ) ) {
 	/**
