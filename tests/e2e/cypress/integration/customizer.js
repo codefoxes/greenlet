@@ -44,8 +44,11 @@ describe('Customizer', () => {
 		})
 
 		after( () => {
-			cy.get('#customize-controls .control-section:visible').scrollTo(0, 0)
-			cy.get('.customize-section-back:visible').click()
+			const initHeight = Cypress.config( 'viewportHeight' )
+			cy.viewport( Cypress.config( 'viewportWidth' ), 300 )
+			cy.get('#customize-controls .control-section:visible').scrollTo(0, 0 )
+			cy.get('.customize-section-back:visible').click( { force: true } )
+			cy.viewport( Cypress.config( 'viewportWidth' ), initHeight )
 		})
 
 		it('Can hide title', () => {

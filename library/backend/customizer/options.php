@@ -143,7 +143,7 @@ function greenlet_options() {
 			'label'   => __( 'CSS Framework', 'greenlet' ),
 			'choices' => array(
 				'default'   => __( 'Greenlet Framework', 'greenlet' ),
-				'bootstrap' => __( 'Bootstrap 4.4.1', 'greenlet' ),
+				'bootstrap' => __( 'Bootstrap 4.5.3', 'greenlet' ),
 			),
 		),
 	);
