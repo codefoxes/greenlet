@@ -139,7 +139,7 @@ class Editor {
 	/**
 	 * Register block patterns.
 	 *
-	 * @since 1.3.5
+	 * @since 2.0.0
 	 */
 	public function register_patterns() {
 		register_block_pattern_category(

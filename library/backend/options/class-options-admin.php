@@ -102,10 +102,10 @@ class Options_Admin {
 		}
 
 		// Styles.
-		wp_enqueue_style( 'greenlet-options', GL_LIBRARY_URL . '/backend/assets/css/options.css', array(), GREENLET_VERSION );
+		wp_enqueue_style( 'greenlet-options', GREENLET_LIBRARY_URL . '/backend/assets/css/options.css', array(), GREENLET_VERSION );
 
 		// Scripts.
-		wp_enqueue_script( 'greenlet-options', GL_LIBRARY_URL . '/backend/assets/js/options.js', array(), GREENLET_VERSION, true );
+		wp_enqueue_script( 'greenlet-options', GREENLET_LIBRARY_URL . '/backend/assets/js/options.js', array(), GREENLET_VERSION, true );
 	}
 
 	/**
@@ -115,20 +115,15 @@ class Options_Admin {
 	 */
 	public function options_page() {
 		$setting_links = array(
-			'title_tagline' => __( 'Title and Tagline', 'greenlet' ),
-			'framework'     => __( 'CSS Framework', 'greenlet' ),
-			'header_layout' => __( 'Header Layout', 'greenlet' ),
-			'main_layout'   => __( 'Main Layout', 'greenlet' ),
-			'footer_layout' => __( 'Footer Layout', 'greenlet' ),
-			'typography'    => __( 'Typography', 'greenlet' ),
-			'colors'        => __( 'Colours', 'greenlet' ),
-			'headings'      => __( 'Heading Design', 'greenlet' ),
-			'buttons'       => __( 'Buttons Design', 'greenlet' ),
-			'links'         => __( 'Links Design', 'greenlet' ),
-			'inputs'        => __( 'Inputs Design', 'greenlet' ),
-			'paragraphs'    => __( 'Paragraphs Design', 'greenlet' ),
-			'blog'          => __( 'Blog Settings', 'greenlet' ),
-			'performance'   => __( 'Performance', 'greenlet' ),
+			array( __( 'Logo, Title & Tagline', 'greenlet' ), 'title_tagline', 'embed-photo' ),
+			array( __( 'CSS Framework', 'greenlet' ), 'framework', 'align-left' ),
+			array( __( 'Header Layout', 'greenlet' ), 'header_section', 'insert-before' ),
+			array( __( 'Main Layout', 'greenlet' ), 'main_layout', 'align-wide' ),
+			array( __( 'Footer Layout', 'greenlet' ), 'footer_section', 'insert-after' ),
+			array( __( 'Blog Settings', 'greenlet' ), 'blog', 'edit-page' ),
+			array( __( 'Performance', 'greenlet' ), 'performance', 'superhero' ),
+			array( __( 'Theme Presets', 'greenlet' ), 'presets', 'layout' ),
+			array( __( 'Visual Style Editor', 'greenlet' ), 'extra_styles', 'admin-customizer' ),
 		);
 		?>
 
@@ -147,10 +142,10 @@ class Options_Admin {
 								<div class="heading"><?php esc_html_e( 'Customizer Controls', 'greenlet' ); ?></div>
 								<div class="links-wrap">
 									<?php
-									foreach ( $setting_links as $section => $title ) {
-										$link = admin_url( '/customize.php?autofocus[section]=' . $section );
+									foreach ( $setting_links as $section ) {
+										$link = admin_url( '/customize.php?autofocus[section]=' . $section[1] );
 										echo '<div class="link">';
-										printf( '<a href="%1$s" target="_blank" >%2$s</a>', esc_url( $link ), wp_kses( $title, null ) );
+										printf( '<a href="%1$s" target="_blank" ><span class="dashicons dashicons-%2$s"></span>%3$s</a>', esc_url( $link ), esc_attr( $section[2] ), wp_kses( $section[0], null ) );
 										echo '</div>';
 									}
 									?>

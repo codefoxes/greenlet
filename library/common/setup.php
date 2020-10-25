@@ -21,7 +21,7 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 	 */
 	function greenlet_setup() {
 		// Make the theme available for translation.
-		load_theme_textdomain( 'greenlet', GL_LANGUAGES_DIR );
+		load_theme_textdomain( 'greenlet', GREENLET_LANGUAGE_DIR );
 
 		// Switch to html5 support.
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
@@ -132,7 +132,7 @@ if ( ! function_exists( 'greenlet_register_meta' ) ) {
 	/**
 	 * Register Layout meta fields.
 	 *
-	 * @since 1.3.5
+	 * @since 2.0.0
 	 */
 	function greenlet_register_meta() {
 		register_post_meta(

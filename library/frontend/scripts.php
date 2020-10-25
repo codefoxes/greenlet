@@ -34,7 +34,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		global $wp_query, $wp, $wp_rewrite;
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		greenlet_enqueue_script( 'greenlet-scripts', GL_SCRIPTS_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
+		greenlet_enqueue_script( 'greenlet-scripts', GREENLET_SCRIPT_URL . '/scripts' . $min . '.js', array(), GREENLET_VERSION, true );
 		$l10n = array(
 			'ajaxurl'     => esc_url( admin_url( 'admin-ajax.php' ) ),
 			'current_url' => preg_replace( '~paged?/[0-9]+/?~', '', esc_url( home_url( $wp->request ) ) ),
@@ -51,12 +51,12 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 
 		switch ( $css_framework ) {
 			case 'default':
-				$default_href = GL_STYLES_URL . '/default' . $min . '.css';
+				$default_href = GREENLET_STYLE_URL . '/default' . $min . '.css';
 				greenlet_enqueue_style( 'greenlet-default', $default_href );
 				break;
 			case 'bootstrap':
-				$default_css = GL_STYLES_URL . '/bootstrap' . $min . '.css';
-				$default_js  = GL_SCRIPTS_URL . '/bootstrap' . $min . '.js';
+				$default_css = GREENLET_STYLE_URL . '/bootstrap' . $min . '.css';
+				$default_js  = GREENLET_SCRIPT_URL . '/bootstrap' . $min . '.js';
 				$css_path    = gl_get_option( 'css_path', $default_css );
 				$js_path     = gl_get_option( 'js_path', $default_js );
 
@@ -64,7 +64,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				$js_path  = ( '' === $js_path ) ? $default_js : $js_path;
 				break;
 			default:
-				$css_path = GL_STYLES_URL . '/default' . $min . '.css';
+				$css_path = GREENLET_STYLE_URL . '/default' . $min . '.css';
 				$js_path  = '';
 				break;
 		}
@@ -76,7 +76,7 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			}
 		}
 
-		$styles_href = GL_STYLES_URL . '/styles' . $min . '.css';
+		$styles_href = GREENLET_STYLE_URL . '/styles' . $min . '.css';
 		greenlet_enqueue_style( 'greenlet-styles', $styles_href );
 	}
 }

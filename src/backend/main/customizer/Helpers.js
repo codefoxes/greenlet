@@ -32,3 +32,19 @@ export function arrayMove(array, from, to) {
 	arrayMoveMutate(array, from, to)
 	return array
 }
+
+export function clone( o ) {
+	// If Date or Proto disabling is needed, use: https://github.com/davidmarkclements/rfdc
+	let out, val, key
+
+	if ( typeof o !== "object" || o === null ) { return o }
+
+	out = Array.isArray( o ) ? [] : {}
+
+	for ( key in o ) {
+		val = o[ key ]
+		out[ key ] = clone( val )
+	}
+
+	return out
+}

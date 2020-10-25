@@ -50,7 +50,7 @@ class WooCommerce {
 	public function init_backend() {
 		global $wp_customize;
 		if ( is_admin() || isset( $wp_customize ) ) {
-			require_once GL_LIBRARY_DIR . '/support/woocommerce/backend/options.php';
+			require_once GREENLET_LIBRARY_DIR . '/support/woocommerce/backend/options.php';
 		}
 	}
 
@@ -60,8 +60,8 @@ class WooCommerce {
 	 * @since  1.1.0
 	 */
 	public function init_frontend() {
-		require_once GL_LIBRARY_DIR . '/support/woocommerce/frontend/helpers.php';
-		require_once GL_LIBRARY_DIR . '/support/woocommerce/frontend/class-woo-columns.php';
+		require_once GREENLET_LIBRARY_DIR . '/support/woocommerce/frontend/helpers.php';
+		require_once GREENLET_LIBRARY_DIR . '/support/woocommerce/frontend/class-woo-columns.php';
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_filter( 'woocommerce_template_loader_files', array( $this, 'template_loader_files' ), 10, 2 );
 		add_action( 'template_redirect', array( $this, 'adjust_woocommerce_actions' ) );
@@ -76,7 +76,7 @@ class WooCommerce {
 	 */
 	public function enqueue_scripts() {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		greenlet_enqueue_style( 'greenlet-shop', GL_STYLES_URL . '/shop' . $min . '.css' );
+		greenlet_enqueue_style( 'greenlet-shop', GREENLET_STYLE_URL . '/shop' . $min . '.css' );
 	}
 
 	/**
@@ -206,7 +206,7 @@ class WooCommerce {
 	/**
 	 * Add cart option to layout items.
 	 *
-	 * @since  1.3.5
+	 * @since  2.0.0
 	 * @param  array $items Layout items.
 	 * @return array        Added items.
 	 */

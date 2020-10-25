@@ -4,7 +4,7 @@
  * @package greenlet
  */
 
-import { $ } from '../Helpers'
+import { $, clone } from '../Helpers'
 
 wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 	{
@@ -13,6 +13,9 @@ wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 			var radios  = $( control.selector + ' input[type="radio"]' )
 
 			var defaultPreset = control.params.presets['Default']
+			const cw = clone( defaultPreset.color_wings )
+			defaultPreset.color_wings = wp.customize.control( 'color_wings' ).setting._value
+			defaultPreset.color_wings[ cwControlObject.theme ] = cw
 
 			var deepMerge = function(targetObject, source) {
 				var target   = Object.assign( {}, targetObject )
@@ -36,7 +39,9 @@ wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 					if ( confirm === false ) {
 						return
 					}
-					var currentPreset = deepMerge( control.params.presets[ this.value ], defaultPreset )
+					const preset = clone( control.params.presets[ this.value ] )
+					preset.color_wings = { [ cwControlObject.theme ]: preset.color_wings }
+					var currentPreset = ( this.value === 'Default' ) ? defaultPreset : deepMerge( preset, defaultPreset )
 					for (var prop in currentPreset) {
 						const singleControl = wp.customize.control( prop )
 						if( undefined !== singleControl ) {
