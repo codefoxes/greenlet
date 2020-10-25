@@ -1610,17 +1610,23 @@
         try {
           var parsed = CssParser(cssString);
           return getStylesFromRules(parsed.stylesheet.rules);
-        } catch (error) {
-          console.log(error); // If error show notice
-
-          return false;
+        } catch (e) {
+          return e;
         }
       }
     }, {
       key: "addFromString",
       value: function addFromString(cssString) {
         var styles = this.parseStyles(cssString);
-        if (!styles) return false;
+
+        if (styles instanceof Error) {
+          var e = styles;
+          cw.Evt.emit('toggle-notice', 'invalid', "Invalid CSS: ".concat(e.reason, " at ").concat(e.line, ":").concat(e.column));
+          return false;
+        } else {
+          cw.Evt.emit('toggle-notice', 'invalid', false);
+        }
+
         this.set(function (state) {
           var _MainStore$get3 = MainStore.get(),
               currentPage = _MainStore$get3.currentPage;
@@ -2099,9 +2105,26 @@
     MainStore.subscribe(updateOnPageChange);
   };
 
+  var toggleNotice = function toggleNotice(code, notice) {
+    if (false === notice) {
+      control.notifications.remove(code);
+    } else {
+      var notification = new wp.customize.Notification(code, {
+        message: notice
+      });
+      control.notifications.add(code, notification);
+    }
+  };
+
+  var debouncedNotice = debounce(toggleNotice, 1000);
+  var toggleDebouncedNotice = function toggleDebouncedNotice(code, notice) {
+    debouncedNotice(code, notice);
+  };
+
   subscribeToStores();
   cw.Evt.on('colorwings-will-mount', addInitialStyles);
   cw.Evt.on('preview-object-ready', addPreviewObject);
+  cw.Evt.on('toggle-notice', toggleDebouncedNotice);
 
   var Evt$1 = window.cw.Evt;
   Evt$1.on('focusLocked', function (data) {
@@ -2125,7 +2148,7 @@
     });
   });
 
-  var styles$1 = "#color-wings {\n  margin-left: -12px;\n  margin-right: -12px;\n  margin-top: -15px; }\n\n.cw-row {\n  display: flex; }\n  .cw-row .col {\n    flex: 1; }\n  .cw-row .col-1 {\n    flex: 0 0 8.33333%; }\n  .cw-row .col-2 {\n    flex: 0 0 16.66667%; }\n  .cw-row .col-3 {\n    flex: 0 0 25%; }\n  .cw-row .col-4 {\n    flex: 0 0 33.33333%; }\n  .cw-row .col-5 {\n    flex: 0 0 41.66667%; }\n  .cw-row .col-6 {\n    flex: 0 0 50%; }\n  .cw-row .col-7 {\n    flex: 0 0 58.33333%; }\n  .cw-row .col-8 {\n    flex: 0 0 66.66667%; }\n  .cw-row .col-9 {\n    flex: 0 0 75%; }\n  .cw-row .col-10 {\n    flex: 0 0 83.33333%; }\n  .cw-row .col-11 {\n    flex: 0 0 91.66667%; }\n  .cw-row .col-12 {\n    flex: 0 0 100%; }\n\n.cw-panel-heading {\n  padding: 10px;\n  align-items: center;\n  position: relative; }\n  .cw-panel-heading .popup-content {\n    width: 100%;\n    box-sizing: border-box;\n    position: absolute;\n    z-index: 5;\n    background: #fff;\n    right: 0;\n    border: 1px solid #ccc; }\n  .cw-panel-heading .popup-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0; }\n  .cw-panel-heading .popup-arrow {\n    width: 14px;\n    height: 14px;\n    background: white;\n    position: absolute;\n    right: 100px;\n    top: -6px;\n    transform: rotate(135deg);\n    z-index: -1;\n    box-shadow: rgba(0, 0, 0, 0.3) -1px 1px 1px; }\n  .cw-panel-heading .cw-current-page {\n    max-height: 30px;\n    white-space: pre-wrap;\n    overflow: auto; }\n  .cw-panel-heading .page-selector .button {\n    border-color: transparent;\n    background: none;\n    padding: 10px 20px; }\n    .cw-panel-heading .page-selector .button:focus {\n      border-color: #0071a1; }\n  .cw-panel-heading .cw-pause {\n    margin: 0 0 0 auto;\n    display: block;\n    line-height: 1; }\n\n.button.button-block {\n  width: 100%;\n  text-align: center; }\n\n.cw-tabs {\n  display: flex;\n  margin: 0 -1px;\n  position: relative;\n  z-index: 2; }\n  .cw-tabs .tab {\n    flex: 1;\n    padding: 8px;\n    background: #ddd;\n    border: 1px solid transparent;\n    border-bottom-color: #ccc;\n    cursor: pointer;\n    text-align: center; }\n    .cw-tabs .tab.active {\n      border: 1px solid #ccc;\n      border-bottom-color: #fff;\n      background: #fff;\n      cursor: auto; }\n\n#cw-code-editor {\n  width: 100%; }\n\n.cw-code-editor .CodeMirror {\n  height: calc( 100vh - 255px);\n  margin-bottom: -22px;\n  overflow: hidden; }\n\n.customize-control .cw-link-wrap {\n  background: #fff;\n  padding: 6px 10px;\n  cursor: pointer;\n  border-left: 2px solid transparent;\n  transition: all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;\n  box-shadow: 0 0 0 1px #ddd;\n  position: relative; }\n  .customize-control .cw-link-wrap:hover {\n    color: #0073aa;\n    background: #f3f3f5;\n    border-left: 2px solid #0073aa; }\n    .customize-control .cw-link-wrap:hover:after {\n      color: #0073aa; }\n  .customize-control .cw-link-wrap:after {\n    content: '\\f345';\n    font: normal 16px/1 dashicons;\n    color: #a0a5aa;\n    position: absolute;\n    right: 6px;\n    top: calc(50% - 8px); }\n\n.customize-control .cw-link-text {\n  position: absolute;\n  right: 26px;\n  top: calc(50% - 9px);\n  font-size: 11px; }\n";
+  var styles$1 = "#color-wings {\n  margin-left: -12px;\n  margin-right: -12px; }\n\n[style=\"display: none;\"] + #color-wings {\n  margin-top: -15px; }\n\n.cw-row {\n  display: flex; }\n  .cw-row .col {\n    flex: 1; }\n  .cw-row .col-1 {\n    flex: 0 0 8.33333%; }\n  .cw-row .col-2 {\n    flex: 0 0 16.66667%; }\n  .cw-row .col-3 {\n    flex: 0 0 25%; }\n  .cw-row .col-4 {\n    flex: 0 0 33.33333%; }\n  .cw-row .col-5 {\n    flex: 0 0 41.66667%; }\n  .cw-row .col-6 {\n    flex: 0 0 50%; }\n  .cw-row .col-7 {\n    flex: 0 0 58.33333%; }\n  .cw-row .col-8 {\n    flex: 0 0 66.66667%; }\n  .cw-row .col-9 {\n    flex: 0 0 75%; }\n  .cw-row .col-10 {\n    flex: 0 0 83.33333%; }\n  .cw-row .col-11 {\n    flex: 0 0 91.66667%; }\n  .cw-row .col-12 {\n    flex: 0 0 100%; }\n\n.cw-panel-heading {\n  padding: 10px;\n  align-items: center;\n  position: relative; }\n  .cw-panel-heading .popup-content {\n    width: 100%;\n    box-sizing: border-box;\n    position: absolute;\n    z-index: 5;\n    background: #fff;\n    right: 0;\n    border: 1px solid #ccc; }\n  .cw-panel-heading .popup-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0; }\n  .cw-panel-heading .popup-arrow {\n    width: 14px;\n    height: 14px;\n    background: white;\n    position: absolute;\n    right: 100px;\n    top: -6px;\n    transform: rotate(135deg);\n    z-index: -1;\n    box-shadow: rgba(0, 0, 0, 0.3) -1px 1px 1px; }\n  .cw-panel-heading .cw-current-page {\n    max-height: 30px;\n    white-space: pre-wrap;\n    overflow: auto; }\n  .cw-panel-heading .page-selector .button {\n    border-color: transparent;\n    background: none;\n    padding: 10px 20px; }\n    .cw-panel-heading .page-selector .button:focus {\n      border-color: #0071a1; }\n  .cw-panel-heading .cw-pause {\n    margin: 0 0 0 auto;\n    display: block;\n    line-height: 1; }\n\n.button.button-block {\n  width: 100%;\n  text-align: center; }\n\n.cw-tabs {\n  display: flex;\n  margin: 0 -1px;\n  position: relative;\n  z-index: 2; }\n  .cw-tabs .tab {\n    flex: 1;\n    padding: 8px;\n    background: #ddd;\n    border: 1px solid transparent;\n    border-bottom-color: #ccc;\n    cursor: pointer;\n    text-align: center; }\n    .cw-tabs .tab.active {\n      border: 1px solid #ccc;\n      border-bottom-color: #fff;\n      background: #fff;\n      cursor: auto; }\n\n#cw-code-editor {\n  width: 100%; }\n\n.cw-code-editor .CodeMirror {\n  height: calc( 100vh - 255px);\n  margin-bottom: -22px;\n  overflow: hidden; }\n\n.customize-control .cw-link-wrap {\n  background: #fff;\n  padding: 6px 10px;\n  cursor: pointer;\n  border-left: 2px solid transparent;\n  transition: all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;\n  box-shadow: 0 0 0 1px #ddd;\n  position: relative; }\n  .customize-control .cw-link-wrap:hover {\n    color: #0073aa;\n    background: #f3f3f5;\n    border-left: 2px solid #0073aa; }\n    .customize-control .cw-link-wrap:hover:after {\n      color: #0073aa; }\n  .customize-control .cw-link-wrap:after {\n    content: '\\f345';\n    font: normal 16px/1 dashicons;\n    color: #a0a5aa;\n    position: absolute;\n    right: 6px;\n    top: calc(50% - 8px); }\n\n.customize-control .cw-link-text {\n  position: absolute;\n  right: 26px;\n  top: calc(50% - 9px);\n  font-size: 11px; }\n";
 
   function LengthTab(props) {
     var showShortHand = ['radius', 'padding', 'margin'].includes(props.subType);
