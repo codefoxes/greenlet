@@ -40,6 +40,7 @@ class PostMeta {
 	 */
 	public function enqueue_scripts() {
 		$meta = array(
+			'hasMeta'   => post_type_supports( get_post_type(), 'custom-fields' ),
 			'templates' => greenlet_template_images(),
 			'contents'  => greenlet_column_content_options(),
 		);

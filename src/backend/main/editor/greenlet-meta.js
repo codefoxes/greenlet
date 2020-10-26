@@ -16,8 +16,13 @@ const LayoutMetaField = withDispatch( ( dispatch ) => {
 		}
 	}
 } )( withSelect( ( select ) => {
-	return { greenlet_layout: select( 'core/editor' ).getEditedPostAttribute( 'meta' ).greenlet_layout }
+	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
+	if ( ( undefined === meta ) || ! ( 'greenlet_layout' in meta ) ) {
+		return {}
+	}
+	return { greenlet_layout: meta.greenlet_layout }
 } )( ( props ) => {
+	if ( ! ( 'greenlet_layout' in props ) ) return null
 	const template = ( 'template' in props.greenlet_layout ) ? props.greenlet_layout.template : 'default'
 	const sequence  = ( 'sequence' in props.greenlet_layout ) ? props.greenlet_layout.sequence : [ 'main', 'sidebar-1', 'sidebar-2', 'sidebar-3' ]
 
@@ -101,6 +106,8 @@ const GreenletLayout = () => (
 	</PluginDocumentSettingPanel>
 )
 
-registerPlugin( 'greenlet-layout', {
-	render: GreenletLayout
-} )
+if ( greenletMeta.hasMeta ) {
+	registerPlugin( 'greenlet-layout', {
+		render: GreenletLayout
+	} )
+}
