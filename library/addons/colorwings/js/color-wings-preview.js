@@ -163,11 +163,13 @@
 	}
 
 	function _createSuper(Derived) {
-	  return function () {
+	  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+	  return function _createSuperInternal() {
 	    var Super = _getPrototypeOf(Derived),
 	        result;
 
-	    if (_isNativeReflectConstruct()) {
+	    if (hasNativeReflectConstruct) {
 	      var NewTarget = _getPrototypeOf(this).constructor;
 
 	      result = Reflect.construct(Super, arguments, NewTarget);
@@ -231,7 +233,7 @@
 	  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
 	  var n = Object.prototype.toString.call(o).slice(8, -1);
 	  if (n === "Object" && o.constructor) n = o.constructor.name;
-	  if (n === "Map" || n === "Set") return Array.from(n);
+	  if (n === "Map" || n === "Set") return Array.from(o);
 	  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 	}
 
@@ -1189,7 +1191,7 @@
 	      focusDetails = _useStore.focusDetails,
 	      detailsOpacity = _useStore.detailsOpacity;
 
-	  var styles = _objectSpread2({}, focusDetails.style, {
+	  var styles = _objectSpread2(_objectSpread2({}, focusDetails.style), {}, {
 	    opacity: detailsOpacity
 	  });
 
@@ -1347,7 +1349,7 @@
 	      value = _ref5.value,
 	      onChange = _ref5.onChange;
 	  var cOptions = clone(options).map(function (option) {
-	    return _objectSpread2({}, option, {
+	    return _objectSpread2(_objectSpread2({}, option), {}, {
 	      selected: value.includes(option.value)
 	    });
 	  });
