@@ -4,7 +4,7 @@
  * @package greenlet
  */
 
-import babel from 'rollup-plugin-babel'
+import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
@@ -14,7 +14,8 @@ import scss from 'rollup-plugin-scss'
 const GLOBALS = {
 	jQuery: 'jQuery',
 	react: 'React',
-	'react-dom': 'ReactDOM'
+	'react-dom': 'ReactDOM',
+	'prop-types': 'PropTypes'
 }
 
 const EXTERNAL = [
@@ -22,7 +23,8 @@ const EXTERNAL = [
 	'react',
 	'react-dom',
 	'React',
-	'ReactDOM'
+	'ReactDOM',
+	'prop-types'
 ]
 
 const getCWBanner = filename => `/** @license ColorWings v1.0.0
@@ -87,6 +89,7 @@ const config = paths.map(( path ) => ({
 	plugins: [
 		babel({
 			exclude: 'node_modules/**',
+			babelHelpers: 'bundled',
 		}),
 		resolve({
 			browser: true,

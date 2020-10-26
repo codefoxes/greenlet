@@ -1,3 +1,8 @@
+Version 2.0.1 / Release: 26-10-2020
+===================
+- Fix: Bug in Extra styles.
+- Fix: Unknown font family is gracefully handled
+
 Version 2.0.0 / Release: 25-10-2020
 ===================
 - New: Visual CSS editor under "Extra Styles".

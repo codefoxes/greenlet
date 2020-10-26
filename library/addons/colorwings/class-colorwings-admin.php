@@ -111,6 +111,14 @@ class ColorWings_Admin {
 				'transport'         => 'postMessage',
 				'sanitize_callback' => array( $this, 'sanitize' ),
 				'validate_callback' => array( $this, 'validate' ),
+				'default'           => array(
+					get_stylesheet() => array(
+						'global' => array(
+							'type'   => 'global',
+							'styles' => '',
+						),
+					),
+				),
 			)
 		);
 
