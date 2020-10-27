@@ -9,7 +9,9 @@
 
 do_action( 'greenlet_before_entry' );
 
-greenlet_markup( 'entry', greenlet_attr( 'entry entry-article ' . implode( ' ', get_post_class() ) ) );
+$post_class = apply_filters( 'greenlet_post_class', '' );
+
+greenlet_markup( 'entry', greenlet_attr( 'entry entry-article ' . implode( ' ', get_post_class( $post_class ) ) ) );
 
 	do_action( 'greenlet_entry_header' );
 
