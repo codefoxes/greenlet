@@ -100,6 +100,8 @@ elif [ "$1" == "--final" ]; then
 	--exclude 'library/pro*' --exclude 'pro*' --exclude 'todo*' --exclude '*.map' --exclude '*src/backend/colorwings*' --exclude 'rollup.config.js' ./* --delete ~/Desktop/greenlet
 	current=$(pwd)
 	cd ~/Desktop
+	awk '/pro\/class-pro\.php/{n=2}; n {n--; next}; 1' < ./greenlet/library/init.php > ./greenlet/library/init-awk.php
+	mv ./greenlet/library/init-awk.php ./greenlet/library/init.php
 	zip -r greenlet.zip greenlet
 	cd $current
 	rm -rf ../greenlet-final
