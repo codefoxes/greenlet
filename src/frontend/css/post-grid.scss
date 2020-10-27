@@ -1,0 +1,27 @@
+$post_grid_cols: 12;
+
+@mixin make-col($size) {
+	width: percentage(1 / $size) + (4 / $size) - 4;
+	margin-right: 2%;
+	margin-left: 2%;
+}
+
+.posts-list.grid {
+	display: flex;
+	flex-wrap: wrap;
+
+	@for $i from 1 through $post_grid_cols {
+		&.cols-#{$i} .entry{
+			@include make-col($i);
+		}
+	}
+
+	.entry {
+		&.first {
+			margin-left: 0;
+		}
+		&.last {
+			margin-right: 0;
+		}
+	}
+}

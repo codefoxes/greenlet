@@ -23,6 +23,25 @@ function manageSidebarDependencies() {
 }
 
 /**
+ * Manage Post List dependencies.
+ */
+function managePostListDependencies() {
+	const control  = wp.customize.control( 'post_list_layout' )
+
+	if ( control.setting._value !== 'grid' ) {
+		document.getElementById( 'customize-control-posts_columns' ).style.display = 'none'
+	}
+
+	control.setting.bind( () => {
+		if ( control.setting._value !== 'grid' ) {
+			document.getElementById( 'customize-control-posts_columns' ).style.display = 'none'
+		} else {
+			document.getElementById( 'customize-control-posts_columns' ).style.display = ''
+		}
+	} )
+}
+
+/**
  * Manage Performance dependencies.
  */
 function managePerformanceDependencies() {
@@ -43,5 +62,6 @@ function managePerformanceDependencies() {
 
 wp.customize.bind( 'ready', () => {
 	manageSidebarDependencies()
+	managePostListDependencies()
 	managePerformanceDependencies()
 } )
