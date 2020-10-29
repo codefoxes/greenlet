@@ -159,3 +159,20 @@ if ( ! function_exists( 'greenlet_add_script_dependencies' ) ) {
 		return true;
 	}
 }
+
+if ( ! function_exists( 'greenlet_is_assoc' ) ) {
+	/**
+	 * Check if is associative array.
+	 *
+	 * @since  2.1.0
+	 * @param  array $arr Input array.
+	 * @return bool
+	 */
+	function greenlet_is_assoc( $arr ) {
+		if ( array() === $arr ) {
+			return false;
+		}
+
+		return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
+	}
+}

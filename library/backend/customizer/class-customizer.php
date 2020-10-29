@@ -69,7 +69,9 @@ class Customizer {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_script( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'wp-i18n', 'jquery' ), GREENLET_VERSION, true );
 		wp_enqueue_style( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
-		wp_set_script_translations( 'greenlet-controls', 'greenlet' );
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations( 'greenlet-controls', 'greenlet' );
+		}
 	}
 
 	/**
@@ -79,7 +81,9 @@ class Customizer {
 	 */
 	public function enqueue_preview_scripts() {
 		wp_enqueue_script( 'greenlet-preview', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'customize-preview', 'react-dom', 'wp-i18n' ), GREENLET_VERSION, true );
-		wp_set_script_translations( 'greenlet-preview', 'greenlet' );
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations( 'greenlet-preview', 'greenlet' );
+		}
 	}
 
 	/**
