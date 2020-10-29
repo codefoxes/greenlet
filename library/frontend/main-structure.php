@@ -16,6 +16,7 @@ add_action( 'greenlet_main_container', 'greenlet_do_main_container' );
 add_action( 'greenlet_before_loop', 'greenlet_breadcrumb', 2 );
 add_action( 'greenlet_before_loop', 'greenlet_archive_header_template' );
 add_action( 'greenlet_archive_header', 'greenlet_do_archive_header' );
+add_action( 'greenlet_loop', 'greenlet_meta_icons' );
 add_action( 'greenlet_loop', 'greenlet_do_loop' );
 add_action( 'greenlet_entry_header', 'greenlet_do_entry_header' );
 add_action( 'greenlet_entry_content', 'greenlet_do_entry_content' );
@@ -390,14 +391,15 @@ function greenlet_do_entry_header() {
 }
 
 /**
- * Renders post meta.
+ * Meta icons definition holder.
  *
- * @since  1.0.0
- * @param  array $show_meta Meta info display details.
- * @return void
+ * @since 2.1.0
  */
-function greenlet_post_meta( $show_meta ) {
-	greenlet_markup( 'entry-meta', greenlet_attr( 'list-inline entry-meta' ) );
+function greenlet_meta_icons() {
+	$show_meta = gl_get_option( 'show_meta', array( 'sticky', 'author', 'date', 'cats', 'tags', 'reply' ) );
+	if ( empty( $show_meta ) ) {
+		return;
+	}
 
 	$svg_tags = array(
 		'svg'   => array(
@@ -410,7 +412,11 @@ function greenlet_post_meta( $show_meta ) {
 			'height'          => true,
 			'viewbox'         => true,
 		),
-		'g'     => array( 'fill' => true ),
+		'defs'  => true,
+		'g'     => array(
+			'id'   => true,
+			'fill' => true,
+		),
 		'title' => array( 'title' => true ),
 		'path'  => array(
 			'd'    => true,
@@ -425,6 +431,21 @@ function greenlet_post_meta( $show_meta ) {
 		),
 	);
 
+	echo '<div class="meta-icons">';
+	echo wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/icon-defs.svg' ), $svg_tags );
+	echo '</div>';
+}
+
+/**
+ * Renders post meta.
+ *
+ * @since  1.0.0
+ * @param  array $show_meta Meta info display details.
+ * @return void
+ */
+function greenlet_post_meta( $show_meta ) {
+	greenlet_markup( 'entry-meta', greenlet_attr( 'list-inline entry-meta' ) );
+
 	$term_list_tags = array(
 		'a' => array(
 			'href' => true,
@@ -436,9 +457,9 @@ function greenlet_post_meta( $show_meta ) {
 		// If the post is sticky, mark it.
 		if ( is_sticky() && in_array( 'sticky', $show_meta, true ) ) {
 			printf(
-				'<li %s><span class="sticky-icon">%s</span> %s </li>',
+				'<li %s><span class="meta-icon sticky-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-featured-post list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/pin-icon.svg' ), $svg_tags ),
+				'pin',
 				esc_html__( 'Featured', 'greenlet' )
 			);
 		}
@@ -446,9 +467,9 @@ function greenlet_post_meta( $show_meta ) {
 		// Get the post author.
 		if ( in_array( 'author', $show_meta, true ) ) {
 			printf(
-				'<li %1$s><span class="user-icon">%2$s</span><a href="%3$s" rel="author"> %4$s</a></li>',
+				'<li %s><span class="meta-icon user-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span><a href="%s" rel="author"> %s</a></li>',
 				wp_kses( greenlet_attr( 'meta-author list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/user-icon.svg' ), $svg_tags ),
+				'user',
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				get_the_author()
 			);
@@ -457,9 +478,9 @@ function greenlet_post_meta( $show_meta ) {
 		// Get the date.
 		if ( in_array( 'date', $show_meta, true ) ) {
 			printf(
-				'<li %s><span class="date-icon">%s</span> %s </li>',
+				'<li %s><span class="meta-icon date-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-date list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/date-icon.svg' ), $svg_tags ),
+				'date',
 				get_the_date()
 			);
 		}
@@ -467,9 +488,9 @@ function greenlet_post_meta( $show_meta ) {
 		// Get the date.
 		if ( in_array( 'mod', $show_meta, true ) ) {
 			printf(
-				'<li %s><span class="clock-icon">%s</span> %s </li>',
+				'<li %s><span class="meta-icon clock-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-modified list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/clock-icon.svg' ), $svg_tags ),
+				'clock',
 				get_the_modified_date() // phpcs:ignore
 			);
 		}
@@ -478,9 +499,9 @@ function greenlet_post_meta( $show_meta ) {
 		$category_list = get_the_category_list( ', ' );
 		if ( $category_list && in_array( 'cats', $show_meta, true ) ) {
 			printf(
-				'<li %s><span class="folder-icon">%s</span> %s </li>',
+				'<li %s><span class="meta-icon folder-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-categories list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/folder-icon.svg' ), $svg_tags ),
+				'folder',
 				wp_kses( $category_list, $term_list_tags )
 			);
 		}
@@ -489,9 +510,9 @@ function greenlet_post_meta( $show_meta ) {
 		$tag_list = get_the_tag_list( '', ', ' );
 		if ( $tag_list && in_array( 'tags', $show_meta, true ) ) {
 			printf(
-				'<li %s><span class="tag-icon">%s</span> %s </li>',
+				'<li %s><span class="meta-icon tag-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-tags list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/tag-icon.svg' ), $svg_tags ),
+				'tag',
 				wp_kses( $tag_list, $term_list_tags )
 			);
 		}
@@ -499,9 +520,9 @@ function greenlet_post_meta( $show_meta ) {
 		// Comments link.
 		if ( comments_open() && in_array( 'reply', $show_meta, true ) ) {
 			printf(
-				'<li %s><span class="comment-icon">%s</span> ',
+				'<li %s><span class="meta-icon comment-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> ',
 				wp_kses( greenlet_attr( 'meta-reply list-inline-item' ), null ),
-				wp_kses( greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/comment-icon.svg' ), $svg_tags )
+				'comment'
 			);
 			comments_popup_link( __( 'Leave a comment', 'greenlet' ), __( 'One comment', 'greenlet' ), __( 'View all % comments', 'greenlet' ) );
 			echo '</li>';
@@ -545,7 +566,7 @@ function greenlet_do_entry_content() {
 
 		global $post;
 		$is_more = strpos( $post->post_content, '<!--more-->' );
-		$more    = apply_filters( 'greenlet_more_text', __( '<span class="more-text">Read More</span>', 'greenlet' ) );
+		$more    = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
 
 		// If the post has a thumbnail and not password protected, display.
 		if ( ( false !== $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
@@ -648,8 +669,8 @@ function greenlet_excerpt_more( $more ) {
 	}
 
 	global $post;
-	$more = apply_filters( 'greenlet_more_text', '<span class="more-text">' . __( 'Read More', 'greenlet' ) . '</span>' );
-	return '<a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>';
+	$more = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
+	return apply_filters( 'greenlet_more_link', '<a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>' );
 }
 
 /**

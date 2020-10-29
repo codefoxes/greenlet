@@ -528,6 +528,20 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'read_more',
+		'sargs' => array(
+			'default' => __( 'continue reading', 'greenlet' ),
+		),
+		'cargs' => array(
+			'type'        => 'text',
+			'section'     => 'blog_list',
+			'label'       => __( 'Continue reading text', 'greenlet' ),
+			'description' => __( 'Post excerpt more link text', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
 		'type' => 'section',
 		'id'   => 'blog_single',
 		'args' => array(
