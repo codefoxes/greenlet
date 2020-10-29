@@ -121,7 +121,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 							get_template_part( $item_obj['template'], null, $meta );
 						}
 
-						if ( isset( $item_obj['function'] ) ) {
+						if ( isset( $item_obj['function'] ) && function_exists( $item_obj['function'] ) ) {
 							call_user_func( $item_obj['function'] );
 						}
 					}
