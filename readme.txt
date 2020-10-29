@@ -4,8 +4,8 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, custom-background, custom-colors, editor-style, featured-images, footer-widgets, full-width-template, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks, custom-menu, custom-logo, entertainment, one-column, two-columns, three-columns, four-columns, right-sidebar, left-sidebar, e-commerce, post-formats
 Tested up to: 5.5.1
-Requires at least: 5.0
-Requires PHP: 5.4 or higher
+Requires at least: 5.3
+Requires PHP: 5.6
 Stable tag: 2.0.1
 
 Extremely fast and highly customizable WordPress theme.
