@@ -23,56 +23,12 @@ function greenlet_options() {
 		$sidebars_qty[ $i ] = $i;
 	}
 
-	$logo_width  = 0;
-	$logo_height = 0;
-	$logo        = greenlet_get_logo();
-	if ( $logo ) {
-		list( $logo_width, $logo_height ) = getimagesize( esc_url( $logo ) );
-	}
-
 	$posts_count   = array_combine( range( 1, 40 ), range( 1, 40 ) );
 	$posts_columns = array_combine( range( 1, 12 ), range( 1, 12 ) );
 
 	$options = array();
 
 	// Site Identity.
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'logo_width',
-		'sargs' => array(
-			'default'   => $logo_width . 'px',
-			'transport' => 'postMessage',
-		),
-		'cargs' => array(
-			'type'        => 'length',
-			'section'     => 'title_tagline',
-			'description' => __( 'Logo Width', 'greenlet' ),
-			'input_attrs' => array(
-				'min' => 0,
-				'max' => 500,
-			),
-			'priority'    => 8,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'logo_height',
-		'sargs' => array(
-			'default'   => $logo_height . 'px',
-			'transport' => 'postMessage',
-		),
-		'cargs' => array(
-			'type'        => 'length',
-			'section'     => 'title_tagline',
-			'description' => __( 'Logo Height', 'greenlet' ),
-			'input_attrs' => array(
-				'min' => 0,
-				'max' => 500,
-			),
-			'priority'    => 8,
-		),
-	);
 
 	$options[] = array(
 		'type'  => 'setting_control',
@@ -178,20 +134,6 @@ function greenlet_options() {
 			'section'     => 'framework',
 			'label'       => __( 'Load Respective JS', 'greenlet' ),
 			'description' => __( 'Eg: Load Bootstrap JS if loaded Bootstrap CSS.', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'container_width',
-		'sargs' => array(
-			'default'   => '',
-			'transport' => 'postMessage',
-		),
-		'cargs' => array(
-			'type'    => 'length',
-			'section' => 'framework',
-			'label'   => __( 'Container Width', 'greenlet' ),
 		),
 	);
 
