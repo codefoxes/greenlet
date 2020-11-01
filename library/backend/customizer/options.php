@@ -646,6 +646,44 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type' => 'section',
+		'id'   => 'blog_extra',
+		'args' => array(
+			'title' => __( 'Others', 'greenlet' ),
+			'panel' => 'blog',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'to_top',
+		'sargs' => array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog_extra',
+			'label'       => __( 'Back to top', 'greenlet' ),
+			'description' => __( 'Show back to top scroll button.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'to_top_at',
+		'sargs' => array(
+			'default'   => '100px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'length',
+			'section' => 'blog_extra',
+			'label'   => __( 'Show back to top button at position.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
 		'id'   => 'performance',
 		'args' => array(
 			'title'    => __( 'Performance', 'greenlet' ),

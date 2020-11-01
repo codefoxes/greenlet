@@ -60,8 +60,28 @@ function managePerformanceDependencies() {
 	} )
 }
 
+/**
+ * Manage Back to top dependencies.
+ */
+function manageToTopDependencies() {
+	const control  = wp.customize.control( 'to_top' )
+
+	if ( control.setting._value === false ) {
+		document.getElementById( 'customize-control-to_top_at' ).style.display = 'none'
+	}
+
+	control.setting.bind( () => {
+		if ( control.setting._value === false ) {
+			document.getElementById( 'customize-control-to_top_at' ).style.display = 'none'
+		} else {
+			document.getElementById( 'customize-control-to_top_at' ).style.display = ''
+		}
+	} )
+}
+
 wp.customize.bind( 'ready', () => {
 	manageSidebarDependencies()
 	managePostListDependencies()
 	managePerformanceDependencies()
+	manageToTopDependencies()
 } )

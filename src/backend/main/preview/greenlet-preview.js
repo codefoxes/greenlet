@@ -4,6 +4,7 @@
  * @package greenlet
  */
 
+import { toggleToTop, dScrollTo } from './actions'
 import Canvas from './components/Canvas'
 
 function isCustomizer() {
@@ -23,5 +24,9 @@ if ( isCustomizer() ) {
 		wp.customize.preview.bind( 'stop-customize', () => {
 			ReactDOM.unmountComponentAtNode( canvas )
 		} )
+
+		wp.customize( 'to_top', setting => setting.bind( toggleToTop ) )
+
+		wp.customize( 'to_top_at', setting => setting.bind( dScrollTo ) )
 	} )
 }

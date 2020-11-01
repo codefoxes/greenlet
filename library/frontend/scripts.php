@@ -42,9 +42,10 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 			'permalinks'  => $wp_rewrite->using_permalinks(),
 			'query_vars'  => wp_json_encode( $wp_query->query_vars ),
 			'page_data'   => greenlet_page_data(),
+			'to_top_at'   => gl_get_option( 'to_top_at', '100px' ),
 		);
 		$l10n = apply_filters( 'greenlet_l10n_object', $l10n );
-		wp_localize_script( 'greenlet-scripts', 'greenlet_object', $l10n );
+		wp_localize_script( 'greenlet-scripts', 'greenletData', $l10n );
 
 		$css_framework = gl_get_option( 'css_framework', 'default' );
 		$load_js       = gl_get_option( 'load_js', false );

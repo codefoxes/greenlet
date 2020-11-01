@@ -61,16 +61,16 @@ function greenletPageLoader( obj, cur_page, add, act ) {
 	add  = typeof add !== 'undefined' ? add : false;
 	act  = typeof act !== 'undefined' ? act : 'greenlet_get_paginated';
 	args = {
-		location: greenlet_object.current_url,
-		page: greenlet_object.page,
-		query_vars: greenlet_object.query_vars,
+		location: greenletData.current_url,
+		page: greenletData.page,
+		query_vars: greenletData.query_vars,
 		current: cur_page,
 		append: add,
 		action: act,
 		nonce: nonce
 	};
 
-	if ( greenlet_object.permalinks ) {
+	if ( greenletData.permalinks ) {
 		if ( ! parseInt( cur_page ) ) {
 			cur_page = location.href.replace( /.+\/page\/([0-9]+).+/, "$1" )
 		}
@@ -83,7 +83,7 @@ function greenletPageLoader( obj, cur_page, add, act ) {
 	}
 
 	var xhr = new XMLHttpRequest();
-	xhr.open( 'POST', greenlet_object.ajaxurl, true );
+	xhr.open( 'POST', greenletData.ajaxurl, true );
 	xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 	xhr.send( greenletJsonToFormData( args ) );
 
@@ -148,7 +148,7 @@ function greenletFixTag() {
 	if ( null === current ) {
 		var tag = document.createElement('meta');
 		tag.name = "description";
-		tag.content = greenlet_object.page_data;
+		tag.content = greenletData.page_data;
 		document.getElementsByTagName('head')[0].appendChild(tag);
 	}
 }
@@ -235,8 +235,29 @@ function greenletToggleMenu() {
 	}
 }
 
-greenletPaginationInit();
-greenletToggleScroll();
+function greenletToTop() {
+	var btn = document.getElementsByClassName( 'to-top' )
+	if ( 0 === btn.length ) return
+	var showTop = function() {
+		var at = greenletData.to_top_at;
+		if ( -1 !== at.indexOf( 'px' ) ) {
+			at = parseInt( at.split( 'px' )[ 0 ], 10 )
+		} else if ( -1 !== at.indexOf( '%' ) ) {
+			at = ( parseInt( at.split( '%' )[ 0 ], 10 ) * ( document.body.offsetHeight - window.innerHeight ) / 100 )
+		}
+		if ( window.scrollY >= at ) {
+			btn[ 0 ].classList.add( 'show' )
+		} else {
+			btn[ 0 ].classList.remove( 'show' )
+		}
+	}
+	window.addEventListener( 'scroll', showTop )
+	window.addEventListener( 'load', showTop )
+}
+
+greenletToTop()
+greenletPaginationInit()
+greenletToggleScroll()
 greenletFixTag()
-greenletFixMenu();
-greenletToggleMenu();
+greenletFixMenu()
+greenletToggleMenu()

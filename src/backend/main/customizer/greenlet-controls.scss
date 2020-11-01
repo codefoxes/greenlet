@@ -313,3 +313,61 @@
 		display: none;
 	}
 }
+
+.gl-ext-link {
+	margin-bottom: 1px;
+
+	a {
+		padding: 10px 10px 11px 14px;
+		background: #fff;
+		border-left: 4px solid #fff;
+		transition: .15s color ease-in-out, .15s background-color ease-in-out, .15s border-color ease-in-out;
+		box-shadow: 0 0 0 1px #7cb342;
+		display: block;
+		font-size: 14px;
+		font-weight: 600;
+		text-decoration: none;
+		position: relative;
+		line-height: 1.55;
+
+		&:hover, &:focus {
+			background: #f3f3f5;
+			border-left-color: #0073aa;
+
+			&:after {
+				color: #0073aa;
+			}
+		}
+
+		&:after {
+			content: '\f345';
+			font: normal 20px/1 dashicons;
+			color: #a0a5aa;
+			position: absolute;
+			right: 10px;
+			top: calc(50% - 10px);
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+	}
+
+	&.control {
+		width: 100%;
+		float: left;
+		clear: both;
+		margin-bottom: 12px;
+
+		a {
+			border-left-width: 2px;
+			padding: 6px 10px;
+			font-size: 13px;
+			font-weight: 500;
+
+			&:after {
+				content: "\f504";
+				font: normal 16px/1 dashicons;
+				top: calc(50% - 8px);
+			}
+		}
+	}
+}
