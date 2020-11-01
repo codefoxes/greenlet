@@ -6,11 +6,10 @@
 * This source code is licensed under the MIT license found in the
 * LICENSE file in the root directory of this source tree.
 */
-(function (React$1, PropTypes) {
+(function (React$1) {
   'use strict';
 
   var React$1__default = 'default' in React$1 ? React$1['default'] : React$1;
-  PropTypes = PropTypes && Object.prototype.hasOwnProperty.call(PropTypes, 'default') ? PropTypes['default'] : PropTypes;
 
   function _typeof(obj) {
     "@babel/helpers - typeof";
@@ -1106,6 +1105,34 @@
     }, interval);
     return [resolved, rejected];
   }
+  function clone(o) {
+    // If Date or Proto disabling is needed, use: https://github.com/davidmarkclements/rfdc
+    var out, val, key;
+
+    if (_typeof(o) !== "object" || o === null) {
+      return o;
+    }
+
+    out = Array.isArray(o) ? [] : {};
+
+    for (key in o) {
+      val = o[key];
+      out[key] = clone(val);
+    }
+
+    return out;
+  }
+  function useEffectUpdate(effect, deps) {
+    var isFirstRender = React.useRef(true);
+    React.useEffect(function () {
+      if (!isFirstRender.current) {
+        effect();
+      }
+    }, deps);
+    React.useEffect(function () {
+      isFirstRender.current = false;
+    }, []);
+  }
 
   var initialState = {
     mounted: true,
@@ -2151,11 +2178,114 @@
     });
   });
 
-  var styles$1 = "#color-wings {\n  margin-left: -12px;\n  margin-right: -12px; }\n\n[style=\"display: none;\"] + #color-wings {\n  margin-top: -15px; }\n\n.cw-row {\n  display: flex; }\n  .cw-row .col {\n    flex: 1; }\n  .cw-row .col-1 {\n    flex: 0 0 8.33333%; }\n  .cw-row .col-2 {\n    flex: 0 0 16.66667%; }\n  .cw-row .col-3 {\n    flex: 0 0 25%; }\n  .cw-row .col-4 {\n    flex: 0 0 33.33333%; }\n  .cw-row .col-5 {\n    flex: 0 0 41.66667%; }\n  .cw-row .col-6 {\n    flex: 0 0 50%; }\n  .cw-row .col-7 {\n    flex: 0 0 58.33333%; }\n  .cw-row .col-8 {\n    flex: 0 0 66.66667%; }\n  .cw-row .col-9 {\n    flex: 0 0 75%; }\n  .cw-row .col-10 {\n    flex: 0 0 83.33333%; }\n  .cw-row .col-11 {\n    flex: 0 0 91.66667%; }\n  .cw-row .col-12 {\n    flex: 0 0 100%; }\n\n.cw-panel-heading {\n  padding: 10px;\n  align-items: center;\n  position: relative; }\n  .cw-panel-heading .popup-content {\n    width: 100%;\n    box-sizing: border-box;\n    position: absolute;\n    z-index: 5;\n    background: #fff;\n    right: 0;\n    border: 1px solid #ccc; }\n  .cw-panel-heading .popup-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0; }\n  .cw-panel-heading .popup-arrow {\n    width: 14px;\n    height: 14px;\n    background: white;\n    position: absolute;\n    right: 100px;\n    top: -6px;\n    transform: rotate(135deg);\n    z-index: -1;\n    box-shadow: rgba(0, 0, 0, 0.3) -1px 1px 1px; }\n  .cw-panel-heading .cw-current-page {\n    max-height: 30px;\n    white-space: pre-wrap;\n    overflow: auto; }\n  .cw-panel-heading .page-selector .button {\n    border-color: transparent;\n    background: none;\n    padding: 10px 20px; }\n    .cw-panel-heading .page-selector .button:focus {\n      border-color: #0071a1; }\n  .cw-panel-heading .cw-pause {\n    margin: 0 0 0 auto;\n    display: block;\n    line-height: 1; }\n\n.button.button-block {\n  width: 100%;\n  text-align: center; }\n\n.cw-tabs {\n  display: flex;\n  margin: 0 -1px;\n  position: relative;\n  z-index: 2; }\n  .cw-tabs .tab {\n    flex: 1;\n    padding: 8px;\n    background: #ddd;\n    border: 1px solid transparent;\n    border-bottom-color: #ccc;\n    cursor: pointer;\n    text-align: center; }\n    .cw-tabs .tab.active {\n      border: 1px solid #ccc;\n      border-bottom-color: #fff;\n      background: #fff;\n      cursor: auto; }\n\n#cw-code-editor {\n  width: 100%; }\n\n.cw-code-editor .CodeMirror {\n  height: calc( 100vh - 255px);\n  margin-bottom: -22px;\n  overflow: hidden; }\n\n.customize-control .cw-link-wrap {\n  background: #fff;\n  padding: 6px 10px;\n  cursor: pointer;\n  border-left: 2px solid transparent;\n  transition: all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;\n  box-shadow: 0 0 0 1px #ddd;\n  position: relative; }\n  .customize-control .cw-link-wrap:hover {\n    color: #0073aa;\n    background: #f3f3f5;\n    border-left: 2px solid #0073aa; }\n    .customize-control .cw-link-wrap:hover:after {\n      color: #0073aa; }\n  .customize-control .cw-link-wrap:after {\n    content: '\\f345';\n    font: normal 16px/1 dashicons;\n    color: #a0a5aa;\n    position: absolute;\n    right: 6px;\n    top: calc(50% - 8px); }\n\n.customize-control .cw-link-text {\n  position: absolute;\n  right: 26px;\n  top: calc(50% - 9px);\n  font-size: 11px; }\n";
+  function Length(props) {
+    var _cw$components = cw.components,
+        LengthTab = _cw$components.LengthTab,
+        LengthIcon = _cw$components.LengthIcon;
+    var subType = props.subType,
+        val = props.val,
+        onChange = props.onChange;
+    var showShortHand = ['radius', 'padding', 'margin'].includes(subType);
+    var size = val;
+    var splits = size.split(' ');
+    var values = [size, size, size, size, size];
+
+    if (splits.length === 4) {
+      values = ['0px', splits[0], splits[1], splits[2], splits[3]];
+    } else if (splits.length === 3) {
+      values = ['0px', splits[0], splits[1], splits[2], splits[1]];
+    } else if (splits.length === 2) {
+      values = ['0px', splits[0], splits[1], splits[0], splits[1]];
+    }
+
+    var _React$useState = React.useState({
+      tab: 0,
+      values: values,
+      currentVal: val
+    }),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        state = _React$useState2[0],
+        setState = _React$useState2[1];
+
+    var onTab = function onTab(e, i) {
+      e.currentTarget.parentNode.childNodes.forEach(function (tab) {
+        return tab.classList.remove('active');
+      });
+      e.currentTarget.classList.add('active');
+      setState(function (prev) {
+        return _objectSpread2(_objectSpread2({}, prev), {}, {
+          tab: i
+        });
+      });
+    };
+
+    var handleChange = function handleChange(tab, val) {
+      var values = state.values;
+      values[tab] = val;
+      var currentVal = val;
+
+      if (tab !== 0 && tab !== undefined) {
+        currentVal = "".concat(values[1], " ").concat(values[2], " ").concat(values[3], " ").concat(values[4]);
+      }
+
+      setState(function (prev) {
+        return _objectSpread2(_objectSpread2({}, prev), {}, {
+          currentVal: currentVal,
+          values: values
+        });
+      });
+      onChange(currentVal);
+    };
+
+    var tabs = showShortHand && /*#__PURE__*/React.createElement("div", {
+      className: "cw-tabs"
+    }, [0, 1, 2, 3, 4].map(function (i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        className: "tab tab-".concat(i, " ").concat(i === 0 ? 'active' : ''),
+        onClick: function onClick(e) {
+          return onTab(e, i);
+        }
+      }, /*#__PURE__*/React.createElement(LengthIcon, {
+        tab: i,
+        subType: subType
+      }));
+    }));
+    var tabContent;
+
+    if (showShortHand) {
+      tabContent = [0, 1, 2, 3, 4].map(function (i) {
+        return /*#__PURE__*/React.createElement(LengthTab, _extends({}, props, {
+          values: values,
+          key: i,
+          tab: i,
+          hidden: i !== state.tab,
+          handleChange: handleChange
+        }));
+      });
+    } else {
+      tabContent = /*#__PURE__*/React.createElement(LengthTab, _extends({}, props, {
+        handleChange: handleChange
+      }));
+    }
+
+    var output = showShortHand && /*#__PURE__*/React.createElement("div", {
+      className: "output"
+    }, "Output: ", state.currentVal);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cw-control-content cw-length " + (showShortHand ? 'shorthand' : 'single-length')
+    }, props.label && /*#__PURE__*/React.createElement("span", {
+      className: "cw-control-title"
+    }, props.label), props.description && /*#__PURE__*/React.createElement("span", {
+      className: "description customize-control-description"
+    }, props.description), tabs, tabContent, output);
+  }
+
+  var resetVal;
 
   function LengthTab(props) {
     var showShortHand = ['radius', 'padding', 'margin'].includes(props.subType);
-    var units = {
+    var units = 'units' in props ? props.units : {
       'px': {
         step: 1,
         min: 0,
@@ -2257,15 +2387,10 @@
         state = _React$useState2[0],
         setState = _React$useState2[1];
 
-    var _React$useState3 = React.useState([]),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        resetVal = _React$useState4[0],
-        setReset = _React$useState4[1];
-
     React.useEffect(function () {
-      setReset(getLength());
+      resetVal = clone(getLength());
     }, []);
-    React.useEffect(function () {
+    useEffectUpdate(function () {
       var _getLength3 = getLength(),
           _getLength4 = _slicedToArray(_getLength3, 2),
           main = _getLength4[0],
@@ -2278,6 +2403,9 @@
         });
       });
     }, [props.val]);
+    useEffectUpdate(function () {
+      handleChange("".concat(state.main).concat(state.unit));
+    }, [state]);
 
     var handleChange = function handleChange(val) {
       props.handleChange(props.tab, val);
@@ -2285,11 +2413,11 @@
 
     var reset = function reset() {
       setState(function (prev) {
-        var _resetVal = _slicedToArray(resetVal, 2),
-            main = _resetVal[0],
-            unit = _resetVal[1];
+        var _resetVal = resetVal,
+            _resetVal2 = _slicedToArray(_resetVal, 2),
+            main = _resetVal2[0],
+            unit = _resetVal2[1];
 
-        handleChange("".concat(main).concat(unit));
         return _objectSpread2(_objectSpread2({}, prev), {}, {
           main: main,
           unit: unit
@@ -2300,7 +2428,6 @@
     var handleLengthChange = function handleLengthChange(e) {
       e.persist();
       setState(function (prev) {
-        handleChange("".concat(e.target.value).concat(prev.unit));
         return _objectSpread2(_objectSpread2({}, prev), {}, {
           main: e.target.value
         });
@@ -2311,7 +2438,6 @@
       e.persist();
       var unit = e.target.value;
       setState(function (prev) {
-        handleChange("".concat(prev.main).concat(unit));
         return _objectSpread2(_objectSpread2({}, prev), {}, {
           unit: unit,
           step: units[unit].step,
@@ -2636,106 +2762,6 @@
     }, mainShape, extraShape);
   }
 
-  function Length(props) {
-    var subType = props.subType,
-        val = props.val,
-        onChange = props.onChange;
-    var showShortHand = ['radius', 'padding', 'margin'].includes(subType);
-    var size = val;
-    var splits = size.split(' ');
-    var values = [size, size, size, size, size];
-
-    if (splits.length === 4) {
-      values = ['0px', splits[0], splits[1], splits[2], splits[3]];
-    } else if (splits.length === 3) {
-      values = ['0px', splits[0], splits[1], splits[2], splits[1]];
-    } else if (splits.length === 2) {
-      values = ['0px', splits[0], splits[1], splits[0], splits[1]];
-    }
-
-    var _React$useState = React.useState({
-      tab: 0,
-      values: values,
-      currentVal: val
-    }),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        state = _React$useState2[0],
-        setState = _React$useState2[1];
-
-    var onTab = function onTab(e, i) {
-      e.currentTarget.parentNode.childNodes.forEach(function (tab) {
-        return tab.classList.remove('active');
-      });
-      e.currentTarget.classList.add('active');
-      setState(function (prev) {
-        return _objectSpread2(_objectSpread2({}, prev), {}, {
-          tab: i
-        });
-      });
-    };
-
-    var handleChange = function handleChange(tab, val) {
-      var values = state.values;
-      values[tab] = val;
-      var currentVal = val;
-
-      if (tab !== 0 && tab !== undefined) {
-        currentVal = "".concat(values[1], " ").concat(values[2], " ").concat(values[3], " ").concat(values[4]);
-      }
-
-      setState(function (prev) {
-        return _objectSpread2(_objectSpread2({}, prev), {}, {
-          currentVal: currentVal,
-          values: values
-        });
-      });
-      onChange(currentVal);
-    };
-
-    var tabs = showShortHand && /*#__PURE__*/React.createElement("div", {
-      className: "cw-tabs"
-    }, [0, 1, 2, 3, 4].map(function (i) {
-      return /*#__PURE__*/React.createElement("div", {
-        key: i,
-        className: "tab tab-".concat(i, " ").concat(i === 0 ? 'active' : ''),
-        onClick: function onClick(e) {
-          return onTab(e, i);
-        }
-      }, /*#__PURE__*/React.createElement(LengthIcon, {
-        tab: i,
-        subType: subType
-      }));
-    }));
-    var tabContent;
-
-    if (showShortHand) {
-      tabContent = [0, 1, 2, 3, 4].map(function (i) {
-        return /*#__PURE__*/React.createElement(LengthTab, _extends({}, props, {
-          values: values,
-          key: i,
-          tab: i,
-          hidden: i !== state.tab,
-          handleChange: handleChange
-        }));
-      });
-    } else {
-      tabContent = /*#__PURE__*/React.createElement(LengthTab, _extends({}, props, {
-        handleChange: handleChange
-      }));
-    }
-
-    var output = showShortHand && /*#__PURE__*/React.createElement("div", {
-      className: "output"
-    }, "Output: ", state.currentVal);
-    return /*#__PURE__*/React.createElement("div", {
-      className: "cw-control-content cw-length " + (showShortHand ? 'shorthand' : 'single-length')
-    }, props.label && /*#__PURE__*/React.createElement("span", {
-      className: "cw-control-title"
-    }, props.label), props.description && /*#__PURE__*/React.createElement("span", {
-      className: "description customize-control-description"
-    }, props.description), tabs, tabContent, output);
-  }
-
   function handlePickerPosition(irisRefNode) {
     var cp = irisRefNode.parentNode.parentNode.parentNode;
 
@@ -2825,6 +2851,78 @@
       "data-alpha": "true",
       defaultValue: defaultColor
     }));
+  }
+
+  var MediaUpload = wp.mediaUtils.MediaUpload;
+
+  function Media(props) {
+    var initialSrc = props.val;
+
+    if ('none' !== initialSrc) {
+      var matches = _toConsumableArray(initialSrc.matchAll(/(url)(?:\(['"]?)(.*?)(?:['"]?\))/g));
+
+      if (matches.length && matches[0].length > 2) {
+        initialSrc = matches[0][2];
+      }
+    }
+
+    var _React$useState = React.useState(initialSrc),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        src = _React$useState2[0],
+        updateSrc = _React$useState2[1];
+
+    var onSelect = function onSelect(media) {
+      updateSrc(media.url);
+      props.onChange("url('".concat(media.url, "')"));
+    };
+
+    var remove = function remove() {
+      updateSrc('none');
+      props.onChange("none");
+    };
+
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cw-control-content cw-media"
+    }, props.label && /*#__PURE__*/React.createElement("span", {
+      className: "cw-control-title"
+    }, props.label), /*#__PURE__*/React.createElement("div", {
+      className: "attachment-media-view"
+    }, 'none' === src ? /*#__PURE__*/React.createElement(MediaUpload, {
+      onSelect: onSelect,
+      allowedTypes: ['image'],
+      value: '',
+      render: function render(_ref) {
+        var open = _ref.open;
+        return /*#__PURE__*/React.createElement("button", {
+          type: "button",
+          onClick: open,
+          className: "upload-button button-add-media"
+        }, props.buttonText ? props.buttonText : 'Select Image');
+      }
+    }) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "thumbnail thumbnail-image"
+    }, /*#__PURE__*/React.createElement("img", {
+      className: "attachment-thumb",
+      src: src
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "actions"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: remove,
+      className: "button remove-button"
+    }, "Remove"), /*#__PURE__*/React.createElement(MediaUpload, {
+      onSelect: onSelect,
+      allowedTypes: ['image'],
+      value: '',
+      render: function render(_ref2) {
+        var open = _ref2.open;
+        return /*#__PURE__*/React.createElement("button", {
+          type: "button",
+          onClick: open,
+          className: "button upload-button"
+        }, props.changeText ? props.changeText : 'Change Image');
+      }
+    })))));
   }
 
   function highlightReducer(highlighted, value) {
@@ -3233,18 +3331,6 @@
     }))];
   }
 
-  const option = PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-  });
-  const optionType = PropTypes.oneOfType([option, PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(option)
-  })]);
-  const valueType = PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]);
-  const classNameType = PropTypes.oneOfType([PropTypes.string, PropTypes.func]);
-
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty$5(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3289,7 +3375,6 @@
     index: null,
     value: null
   };
-  Option.propTypes =  {};
   var Option$1 = /*#__PURE__*/React$1.memo(Option);
 
   function isSelected(itemValue, selectedValue) {
@@ -3481,7 +3566,6 @@
     },
     getOptions: null
   };
-  SelectSearch.propTypes =  {};
   var SelectSearch$1 = /*#__PURE__*/React$1.memo(SelectSearch);
 
   /**
@@ -3556,6 +3640,9 @@
   }
 
   function Shadow(props) {
+    var _cw$components = cw.components,
+        LengthTab = _cw$components.LengthTab,
+        Color = _cw$components.Color;
     var initState = ['0px', '0px', '0px', '0px', '#000000'];
 
     if (props.val !== 'none') {
@@ -3652,6 +3739,11 @@
   }
 
   function Border(props) {
+    var _cw$components = cw.components,
+        LengthTab = _cw$components.LengthTab,
+        LengthIcon = _cw$components.LengthIcon,
+        Color = _cw$components.Color,
+        Select = _cw$components.Select;
     var initState = {
       tab: 0,
       values: [['0px', 'none', '#000000'], ['0px', 'none', '#000000'], ['0px', 'none', '#000000'], ['0px', 'none', '#000000'], ['0px', 'none', '#000000']]
@@ -3757,6 +3849,31 @@
       className: "cw-control-title"
     }, props.label), tabs, tabContent);
   }
+
+  window.cw.components = {
+    Length: Length,
+    LengthTab: LengthTab,
+    LengthIcon: LengthIcon,
+    Color: Color,
+    Media: Media,
+    Select: Select,
+    Shadow: Shadow,
+    Border: Border
+  };
+
+  window.cw.addStyle = function () {
+    var _cw$StylesStore;
+
+    (_cw$StylesStore = cw.StylesStore).addStyle.apply(_cw$StylesStore, arguments);
+  };
+
+  window.cw.addStyleNow = function () {
+    var _cw$StylesStore2;
+
+    (_cw$StylesStore2 = cw.StylesStore).addStyleNow.apply(_cw$StylesStore2, arguments);
+  };
+
+  var styles$1 = "#color-wings {\n  margin-left: -12px;\n  margin-right: -12px; }\n\n[style=\"display: none;\"] + #color-wings {\n  margin-top: -15px; }\n\n.cw-row {\n  display: flex; }\n  .cw-row .col {\n    flex: 1; }\n  .cw-row .col-1 {\n    flex: 0 0 8.33333%; }\n  .cw-row .col-2 {\n    flex: 0 0 16.66667%; }\n  .cw-row .col-3 {\n    flex: 0 0 25%; }\n  .cw-row .col-4 {\n    flex: 0 0 33.33333%; }\n  .cw-row .col-5 {\n    flex: 0 0 41.66667%; }\n  .cw-row .col-6 {\n    flex: 0 0 50%; }\n  .cw-row .col-7 {\n    flex: 0 0 58.33333%; }\n  .cw-row .col-8 {\n    flex: 0 0 66.66667%; }\n  .cw-row .col-9 {\n    flex: 0 0 75%; }\n  .cw-row .col-10 {\n    flex: 0 0 83.33333%; }\n  .cw-row .col-11 {\n    flex: 0 0 91.66667%; }\n  .cw-row .col-12 {\n    flex: 0 0 100%; }\n\n.cw-panel-heading {\n  padding: 10px;\n  align-items: center;\n  position: relative; }\n  .cw-panel-heading .popup-content {\n    width: 100%;\n    box-sizing: border-box;\n    position: absolute;\n    z-index: 5;\n    background: #fff;\n    right: 0;\n    border: 1px solid #ccc; }\n  .cw-panel-heading .popup-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0; }\n  .cw-panel-heading .popup-arrow {\n    width: 14px;\n    height: 14px;\n    background: white;\n    position: absolute;\n    right: 100px;\n    top: -6px;\n    transform: rotate(135deg);\n    z-index: -1;\n    box-shadow: rgba(0, 0, 0, 0.3) -1px 1px 1px; }\n  .cw-panel-heading .cw-current-page {\n    max-height: 30px;\n    white-space: pre-wrap;\n    overflow: auto; }\n  .cw-panel-heading .page-selector .button {\n    border-color: transparent;\n    background: none;\n    padding: 10px 20px; }\n    .cw-panel-heading .page-selector .button:focus {\n      border-color: #0071a1; }\n  .cw-panel-heading .cw-pause {\n    margin: 0 0 0 auto;\n    display: block;\n    line-height: 1; }\n\n.button.button-block {\n  width: 100%;\n  text-align: center; }\n\n.cw-tabs {\n  display: flex;\n  margin: 0 -1px;\n  position: relative;\n  z-index: 2; }\n  .cw-tabs .tab {\n    flex: 1;\n    padding: 8px;\n    background: #ddd;\n    border: 1px solid transparent;\n    border-bottom-color: #ccc;\n    cursor: pointer;\n    text-align: center; }\n    .cw-tabs .tab.active {\n      border: 1px solid #ccc;\n      border-bottom-color: #fff;\n      background: #fff;\n      cursor: auto; }\n\n#cw-code-editor {\n  width: 100%; }\n\n.cw-code-editor .CodeMirror {\n  height: calc( 100vh - 255px);\n  margin-bottom: -22px;\n  overflow: hidden; }\n\n.customize-control .cw-link-wrap {\n  background: #fff;\n  padding: 6px 10px;\n  cursor: pointer;\n  border-left: 2px solid transparent;\n  transition: all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;\n  box-shadow: 0 0 0 1px #ddd;\n  position: relative; }\n  .customize-control .cw-link-wrap:hover {\n    color: #0073aa;\n    background: #f3f3f5;\n    border-left: 2px solid #0073aa; }\n    .customize-control .cw-link-wrap:hover:after {\n      color: #0073aa; }\n  .customize-control .cw-link-wrap:after {\n    content: '\\f345';\n    font: normal 16px/1 dashicons;\n    color: #a0a5aa;\n    position: absolute;\n    right: 6px;\n    top: calc(50% - 8px); }\n\n.customize-control .cw-link-text {\n  position: absolute;\n  right: 26px;\n  top: calc(50% - 9px);\n  font-size: 11px; }\n";
 
   /**
    * Quick Select selectors.
@@ -3875,83 +3992,18 @@
     })));
   }
 
-  var MediaUpload = wp.mediaUtils.MediaUpload;
-
-  function Media(props) {
-    var initialSrc = props.val;
-
-    if ('none' !== initialSrc) {
-      var matches = _toConsumableArray(initialSrc.matchAll(/(url)(?:\(['"]?)(.*?)(?:['"]?\))/g));
-
-      if (matches.length && matches[0].length > 2) {
-        initialSrc = matches[0][2];
-      }
-    }
-
-    var _React$useState = React.useState(initialSrc),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        src = _React$useState2[0],
-        updateSrc = _React$useState2[1];
-
-    var onSelect = function onSelect(media) {
-      updateSrc(media.url);
-      props.onChange("url('".concat(media.url, "')"));
-    };
-
-    var remove = function remove() {
-      updateSrc('none');
-      props.onChange("none");
-    };
-
-    return /*#__PURE__*/React.createElement("div", {
-      className: "cw-control-content cw-media"
-    }, props.label && /*#__PURE__*/React.createElement("span", {
-      className: "cw-control-title"
-    }, props.label), /*#__PURE__*/React.createElement("div", {
-      className: "attachment-media-view"
-    }, 'none' === src ? /*#__PURE__*/React.createElement(MediaUpload, {
-      onSelect: onSelect,
-      allowedTypes: ['image'],
-      value: '',
-      render: function render(_ref) {
-        var open = _ref.open;
-        return /*#__PURE__*/React.createElement("button", {
-          type: "button",
-          onClick: open,
-          className: "upload-button button-add-media"
-        }, props.buttonText ? props.buttonText : 'Select Image');
-      }
-    }) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: "thumbnail thumbnail-image"
-    }, /*#__PURE__*/React.createElement("img", {
-      className: "attachment-thumb",
-      src: src
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "actions"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      onClick: remove,
-      className: "button remove-button"
-    }, "Remove"), /*#__PURE__*/React.createElement(MediaUpload, {
-      onSelect: onSelect,
-      allowedTypes: ['image'],
-      value: '',
-      render: function render(_ref2) {
-        var open = _ref2.open;
-        return /*#__PURE__*/React.createElement("button", {
-          type: "button",
-          onClick: open,
-          className: "button upload-button"
-        }, props.changeText ? props.changeText : 'Change Image');
-      }
-    })))));
-  }
-
   var styles$2 = "#cw-editor-wrap ul, #cw-editor-wrap li {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\n#cw-editor-wrap .cw-panel {\n  background: #eee;\n  font-size: 13px;\n  color: #444; }\n\n#cw-editor-wrap .cw-panel-title {\n  background: #fff;\n  border-bottom: 1px solid #ddd;\n  font-size: 13px;\n  padding: 16px;\n  color: #444;\n  line-height: 16px;\n  margin: 0; }\n  #cw-editor-wrap .cw-panel-title * {\n    box-sizing: border-box; }\n  #cw-editor-wrap .cw-panel-title .title-inner {\n    display: inline-flex;\n    width: calc(100% - 54px); }\n  #cw-editor-wrap .cw-panel-title .title-desc {\n    padding: 3px 0;\n    width: 90px; }\n  #cw-editor-wrap .cw-panel-title .selector {\n    background: #f2f8ec;\n    border: 1px solid #7cb342;\n    padding: 3px 5px;\n    width: calc(100% - 90px);\n    border-radius: 0;\n    min-height: 24px;\n    line-height: 1;\n    font-size: 13px;\n    background-image: none !important; }\n    #cw-editor-wrap .cw-panel-title .selector:focus {\n      box-shadow: none;\n      border-color: #5b8230; }\n    #cw-editor-wrap .cw-panel-title .selector.invalid, #cw-editor-wrap .cw-panel-title .selector.invalid:focus {\n      border-color: #c78100; }\n\n#cw-editor-wrap .cw-panel-main {\n  height: calc(100% - 41px);\n  overflow-y: auto; }\n\n#cw-editor-wrap h3.cw-section-title {\n  border-bottom: 1px solid #ddd;\n  background: #fff;\n  font-size: 14px;\n  padding: 12px 16px;\n  font-weight: 600;\n  color: #444;\n  line-height: 16px;\n  margin: 0;\n  cursor: pointer; }\n\n.cw-section-content {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0 12px;\n  max-height: 0;\n  opacity: 0;\n  overflow: auto;\n  transition: max-height .2s ease, opacity .2s ease; }\n\n.cw-panel .open .cw-section-content {\n  opacity: 1;\n  max-height: 1000px;\n  border-bottom: 1px solid #ddd; }\n\n.cw-control {\n  flex-shrink: 0;\n  width: 100%;\n  margin-bottom: 12px;\n  box-sizing: border-box; }\n  .cw-control.padding, .cw-control.margin {\n    margin-bottom: 0; }\n  .cw-control.col-4 {\n    width: 33.333%; }\n  .cw-control.col-5 {\n    width: 41.666%; }\n  .cw-control.col-6 {\n    width: 50%; }\n  .cw-control.col-7 {\n    width: 58.333%; }\n  .cw-control.col-8 {\n    width: 66.666%; }\n  .cw-control .cw-tabs {\n    margin: 0 -12px -1px -13px; }\n  .cw-control .tab.active {\n    border-bottom-color: #eee;\n    background: #eee; }\n  .cw-control .tab-content {\n    position: relative;\n    padding: 30px 0 15px; }\n  .cw-control .shorthand .tab-content {\n    border-top: 1px solid #ccc; }\n  .cw-control .single-length .tab-content {\n    padding: 20px 0 0; }\n    .cw-control .single-length .tab-content .reset {\n      bottom: 32px; }\n  .cw-control .output {\n    padding: 5px;\n    border-top: 1px dotted #ddd;\n    border-bottom: 1px solid #ddd;\n    font-size: 11px;\n    margin-top: -1px; }\n  .cw-control .reset {\n    position: absolute;\n    right: 2px;\n    bottom: 47px;\n    padding: 4px;\n    cursor: pointer; }\n    .cw-control .reset:hover {\n      background: #fff; }\n  .cw-control .range-wrap {\n    padding-right: 5px;\n    line-height: 1.8; }\n  .cw-control input:focus {\n    outline: none; }\n  .cw-control svg {\n    display: block;\n    margin: auto; }\n  .cw-control .wp-picker-container {\n    position: relative; }\n    .cw-control .wp-picker-container.wp-picker-active {\n      min-height: 270px; }\n    .cw-control .wp-picker-container .wp-color-result.button {\n      margin-right: 2px; }\n  .cw-control .wp-picker-active .wp-color-result-text {\n    display: none; }\n  .cw-control .wp-picker-clear, .cw-control .wp-picker-clear:hover, .cw-control .wp-picker-clear:focus, .cw-control .wp-picker-clear:active {\n    height: 30px;\n    text-indent: -100px;\n    background-image: url(\"data:image/svg+xml,%3Csvg width='15px' height='14.7px' viewBox='0 0 50 49' version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,20 L14,0 C14,6 14,9 14,9 C40,-3 65,30 38,49 C58,27 36,7 18,17 C18,17 20,19 24,23 L0,20 Z' fill='%237CB342'%3E%3C/path%3E%3C/svg%3E\");\n    background-repeat: no-repeat;\n    background-position: center;\n    min-width: 26px; }\n  .cw-control.color input[type=\"text\"].wp-color-picker {\n    max-width: 120px; }\n  .cw-control.border input[type=\"text\"].wp-color-picker {\n    max-width: 100px; }\n  .cw-control.font-style, .cw-control.text-decoration, .cw-control.display {\n    padding-right: 12px; }\n  .cw-control.position .select-search__option {\n    font-size: 13px; }\n\n.cw-control-title {\n  display: block;\n  padding: 10px 0; }\n  .cw-control-title + .tab-content {\n    margin-top: -25px; }\n\n.border .cw-tab-wrap {\n  display: flex;\n  flex-wrap: wrap; }\n  .border .cw-tab-wrap > * {\n    flex-shrink: 0;\n    width: 100%;\n    box-sizing: border-box; }\n  .border .cw-tab-wrap .cw-color {\n    width: 60%; }\n  .border .cw-tab-wrap .cw-select {\n    width: 40%; }\n\nbutton.wp-color-result .color-alpha {\n  height: 28px !important; }\n\n#cw-quick-select .cw-qs-title {\n  padding: 15px 0 10px;\n  text-align: center;\n  line-height: 22px; }\n  #cw-quick-select .cw-qs-title .dashicons {\n    background-color: #0171a1;\n    background-image: linear-gradient(90deg, #01a0e4, #0171a1);\n    background-size: 100%;\n    background-repeat: repeat;\n    -webkit-background-clip: text;\n    -webkit-text-fill-color: transparent;\n    font-size: 16px;\n    height: 16px;\n    vertical-align: text-top; }\n\n#cw-quick-select .cw-qs-title svg {\n  vertical-align: text-top;\n  padding-left: 10px; }\n\n#cw-quick-select ul.cw-qs-btns {\n  padding: 10px;\n  display: flex;\n  flex-flow: column wrap;\n  align-content: space-between;\n  height: 300px; }\n  #cw-quick-select ul.cw-qs-btns::before, #cw-quick-select ul.cw-qs-btns::after {\n    content: '';\n    flex-basis: 100%;\n    width: 0;\n    order: 2; }\n\n#cw-quick-select .cw-qs-btn:nth-child(3n+1) {\n  order: 1; }\n\n#cw-quick-select .cw-qs-btn:nth-child(3n+2) {\n  order: 2; }\n\n#cw-quick-select .cw-qs-btn:nth-child(3n) {\n  order: 3; }\n\n#cw-quick-select li.cw-qs-btn {\n  padding: 6px 8px;\n  background: #fff linear-gradient(90deg, #ffffff 0%, #f3f7f4 100%);\n  color: #0071a1;\n  border: 1px solid #0071a1;\n  border-radius: 3px;\n  cursor: pointer;\n  width: calc(33.3% - 5px);\n  box-sizing: border-box;\n  margin-bottom: 10px;\n  text-align: center; }\n\n.cw-pseudo {\n  display: inline-block;\n  vertical-align: top;\n  cursor: pointer;\n  position: relative; }\n\n.cw-pseudo-icon {\n  display: inline-block;\n  background: #f2f8ec;\n  border: 1px solid #7cb342;\n  border-left: none;\n  color: #5b8230;\n  cursor: pointer;\n  line-height: 22px;\n  height: 24px; }\n\n.cw-pseudo-content {\n  border: 1px solid #7cb342;\n  box-sizing: border-box;\n  display: none;\n  position: absolute;\n  top: 0;\n  left: -1px;\n  background: white;\n  z-index: 3; }\n\n.cw-pseudo-item {\n  padding: 3px 0 3px 7px;\n  width: 52px;\n  display: none; }\n  .cw-pseudo-item:hover {\n    color: #5b8230; }\n\n.cw-pseudo.active .cw-pseudo-content {\n  display: inline-block; }\n\n.cw-pseudo.active .cw-pseudo-item:first-child {\n  display: inline-block;\n  background: #f2f8ec; }\n\n.cw-pseudo.active .cw-pseudo-icon {\n  display: none; }\n\n.cw-pseudo.open .cw-pseudo-content {\n  display: inline-block; }\n\n.cw-pseudo.open .cw-pseudo-item {\n  display: inline-block; }\n\n.cw-pseudo.open .cw-pseudo-icon {\n  display: none; }\n\n.cw-media .thumbnail img {\n  max-height: 100px; }\n\n[id*=\"__lpform_input\"] {\n  display: none !important; }\n";
 
   var selectStyles = "/**\n * Main wrapper\n */\n.select-search {\n  position: relative;\n  box-sizing: border-box; }\n\n.select-search *,\n.select-search *::after,\n.select-search *::before {\n  box-sizing: inherit; }\n\n/**\n * Value wrapper\n */\n.select-search__value {\n  position: relative;\n  z-index: 1; }\n\n.select-search__value::after {\n  content: '';\n  display: inline-block;\n  position: absolute;\n  top: calc(50% - 7px);\n  right: 19px;\n  width: 9px;\n  height: 9px; }\n\n/**\n * Input\n */\n.select-search__input {\n  display: block;\n  height: 30px;\n  width: 100%;\n  padding: 0 16px;\n  background: #fff !important;\n  border: 1px solid #7cb342;\n  border-radius: 3px;\n  outline: none;\n  font-family: 'Noto Sans', sans-serif;\n  font-size: 14px;\n  text-align: left;\n  text-overflow: ellipsis;\n  line-height: 36px;\n  -webkit-appearance: none;\n  margin: 0; }\n\n.select-search__input::-webkit-search-decoration,\n.select-search__input::-webkit-search-cancel-button,\n.select-search__input::-webkit-search-results-button,\n.select-search__input::-webkit-search-results-decoration {\n  -webkit-appearance: none; }\n\n.select-search__input:not([readonly]):focus {\n  cursor: initial; }\n\n/**\n * Options wrapper\n */\n.select-search__select {\n  background: #fff;\n  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15); }\n\n/**\n * Options\n */\n.select-search__options {\n  list-style: none; }\n\n/**\n * Option row\n */\n.select-search__row:not(:first-child) {\n  border-top: 1px solid #eee; }\n\n/**\n * Option\n */\n.select-search__option {\n  display: block;\n  height: 36px;\n  width: 100%;\n  padding: 0 16px;\n  background: #fff;\n  border: none;\n  outline: none;\n  font-size: 14px;\n  text-align: left;\n  cursor: pointer; }\n\n.select-search--multiple .select-search__option {\n  height: 48px; }\n\n.select-search__option.is-selected {\n  background: #7cb342;\n  color: #fff; }\n\n.select-search__option.is-highlighted,\n.select-search__option:not(.is-selected):hover {\n  background: #f1f7eb; }\n\n.select-search__option.is-highlighted.is-selected,\n.select-search__option.is-selected:hover {\n  background: #6fa13b;\n  color: #fff; }\n\n/**\n * Group\n */\n.select-search__group-header {\n  font-size: 10px;\n  text-transform: uppercase;\n  background: #f7f7f7;\n  padding: 6px 16px;\n  position: sticky;\n  top: 0;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }\n\n/**\n * States\n */\n.select-search.is-disabled {\n  opacity: 0.5; }\n\n.select-search.is-loading .select-search__value::after {\n  background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath fill='%232F2D37' d='M25,5A20.14,20.14,0,0,1,45,22.88a2.51,2.51,0,0,0,2.49,2.26h0A2.52,2.52,0,0,0,50,22.33a25.14,25.14,0,0,0-50,0,2.52,2.52,0,0,0,2.5,2.81h0A2.51,2.51,0,0,0,5,22.88,20.14,20.14,0,0,1,25,5Z'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 25 25' to='360 25 25' dur='0.6s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E\");\n  background-size: 11px; }\n\n.select-search:not(.is-disabled) .select-search__input {\n  cursor: pointer; }\n\n/**\n * Modifiers\n */\n.select-search--multiple {\n  border-radius: 3px;\n  overflow: hidden; }\n\n.select-search:not(.is-loading):not(.select-search--multiple) .select-search__value::after {\n  transform: rotate(45deg);\n  border-right: 2px solid #555;\n  border-bottom: 2px solid #555;\n  pointer-events: none; }\n\n.select-search--multiple .select-search__input {\n  cursor: initial; }\n\n.select-search--multiple .select-search__input {\n  border-radius: 3px 3px 0 0; }\n\n.select-search--multiple:not(.select-search--search) .select-search__input {\n  cursor: default; }\n\n.select-search:not(.select-search--multiple) .select-search__input:hover {\n  border-color: #7cb342; }\n\n.select-search:not(.select-search--multiple) .select-search__select {\n  z-index: 2;\n  top: 38px;\n  right: 0;\n  left: 0;\n  border-radius: 3px;\n  overflow: auto;\n  max-height: 360px;\n  border: 1px solid #7cb342; }\n\n.select-search--multiple .select-search__select {\n  position: relative;\n  overflow: auto;\n  max-height: 260px;\n  border-top: 1px solid #eee;\n  border-radius: 0 0 3px 3px; }\n\n.select-search.horizontal .select-search__value {\n  display: none; }\n\n.select-search.horizontal .select-search__select {\n  top: 0;\n  box-shadow: none; }\n\n.select-search.horizontal .select-search__options {\n  display: flex; }\n\n.select-search.horizontal .select-search__option {\n  height: 28px;\n  position: relative;\n  text-align: center;\n  padding: 0 10px; }\n\n.select-search.horizontal .select-search__row {\n  flex: 1; }\n  .select-search.horizontal .select-search__row:not(:first-child) {\n    border-top: none; }\n\n.select-search__row[data-value=\"italic\"] .select-search__option {\n  font-style: italic; }\n\n.select-search__row[data-value=\"overline\"] .select-search__option {\n  text-decoration: overline; }\n\n.select-search__row[data-value=\"underline\"] .select-search__option {\n  text-decoration: underline; }\n\n.select-search__row[data-value=\"line-through\"] .select-search__option {\n  text-decoration: line-through; }\n\n.cw-border .select-search__row .select-search__option:after {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 15%;\n  width: 70%; }\n\n.cw-border .select-search__row[data-value=\"solid\"] .select-search__option:after {\n  border-top: 2px solid #000; }\n\n.cw-border .select-search__row[data-value=\"dotted\"] .select-search__option:after {\n  border-top: 2px dotted #000; }\n\n.cw-border .select-search__row[data-value=\"dashed\"] .select-search__option:after {\n  border-top: 2px dashed #000; }\n\n.font-weight .select-search__row[data-value=\"100\"] .select-search__option {\n  font-weight: 100; }\n\n.font-weight .select-search__row[data-value=\"200\"] .select-search__option {\n  font-weight: 200; }\n\n.font-weight .select-search__row[data-value=\"300\"] .select-search__option {\n  font-weight: 300; }\n\n.font-weight .select-search__row[data-value=\"400\"] .select-search__option {\n  font-weight: 400; }\n\n.font-weight .select-search__row[data-value=\"500\"] .select-search__option {\n  font-weight: 500; }\n\n.font-weight .select-search__row[data-value=\"600\"] .select-search__option {\n  font-weight: 600; }\n\n.font-weight .select-search__row[data-value=\"700\"] .select-search__option {\n  font-weight: 700; }\n\n.font-weight .select-search__row[data-value=\"800\"] .select-search__option {\n  font-weight: 800; }\n\n.font-weight .select-search__row[data-value=\"900\"] .select-search__option {\n  font-weight: 900; }\n";
 
   function Editor() {
+    var _cw$components = cw.components,
+        Length = _cw$components.Length,
+        Color = _cw$components.Color,
+        Media = _cw$components.Media,
+        Select = _cw$components.Select,
+        Shadow = _cw$components.Shadow,
+        Border = _cw$components.Border;
     var colorWingsFonts = cwControlObject.fonts;
 
     var _useStore = useStore(MainStore),
@@ -5062,5 +5114,5 @@
     }
   });
 
-}(React, PropTypes));
+}(React));
 //# sourceMappingURL=color-wings.js.map

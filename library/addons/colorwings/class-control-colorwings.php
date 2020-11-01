@@ -37,7 +37,7 @@ if ( ! class_exists( 'ColorWings\Control_ColorWings' ) && class_exists( 'WP_Cust
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'color-picker-alpha', COLORWINGS_URL . '/js/wp-color-picker-alpha.min' . $min . '.js', array( 'jquery', 'wp-color-picker' ), COLORWINGS_VERSION, true );
 			wp_enqueue_script( 'codemirror-format', COLORWINGS_URL . '/js/formatting' . $min . '.js', array( 'wp-codemirror' ), COLORWINGS_VERSION, true );
-			wp_enqueue_script( 'color-wings-controls', COLORWINGS_URL . '/js/color-wings' . $min . '.js', array( 'jquery', 'react-dom', 'wp-media-utils' ), COLORWINGS_VERSION, true );
+			wp_enqueue_script( 'color-wings-controls', COLORWINGS_URL . '/js/color-wings' . $min . '.js', array( 'jquery', 'react-dom', 'wp-media-utils', 'codemirror-format', 'color-picker-alpha' ), COLORWINGS_VERSION, true );
 
 			$color_wings_control = array(
 				'fonts' => array(
