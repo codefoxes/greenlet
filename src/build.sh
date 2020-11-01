@@ -5,6 +5,7 @@ BRED='\033[1;31m'
 NC='\033[0m'
 
 declare -a css_files=( 'default' 'styles' 'shop' )
+declare -a pro_css=( 'styles' )
 
 buildjs() {
 	echo 'Build JS: Started'
@@ -38,6 +39,10 @@ buildcss() {
 	for i in "${css_files[@]}"; do
 		generatecss src/frontend/css/$i.scss assets/css/$i.css assets/css/$i.min.css
 	done
+
+	for i in "${pro_css[@]}"; do
+		generatecss library/pro/src/css/$i.scss library/pro/assets/css/$i.css library/pro/assets/css/$i.min.css
+	done
 	echo 'Build CSS: Complete'
 
 	echo 'Copying vendor css files'
@@ -58,6 +63,8 @@ buildbackend() {
 		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
 	elif [ "$1" == "only_cw" ]; then
 		ONLY_CW=1 ./node_modules/.bin/rollup -c
+	elif [ "$1" == "only_pro" ]; then
+		ONLY_PRO=1 ./node_modules/.bin/rollup -c
 	else
 		./node_modules/.bin/rollup -c
 	fi
@@ -122,6 +129,8 @@ elif [ "$1" == "backend" ]; then
 elif [ "$1" == "colorwings" ]; then
 	buildbackend only_cw
 	copyColorwings
+elif [ "$1" == "pro" ]; then
+	buildbackend only_pro
 elif [ "$1" == "i18n" ]; then
 	current=$(pwd)
 	cd library/languages

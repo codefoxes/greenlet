@@ -33,6 +33,7 @@
     "backend": "./src/build.sh backend",
     "backend:watch": "./src/build.sh backend --watch",
     "colorwings": "./src/build.sh colorwings",
+    "pro": "./src/build.sh pro",
     "upgrade": "./src/update-version",
     "i18n": "./src/build.sh i18n"
   },
