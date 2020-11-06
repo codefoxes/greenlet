@@ -48,7 +48,6 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		wp_localize_script( 'greenlet-scripts', 'greenletData', $l10n );
 
 		$css_framework = gl_get_option( 'css_framework', 'default' );
-		$load_js       = gl_get_option( 'load_js', false );
 
 		switch ( $css_framework ) {
 			case 'default':
@@ -57,24 +56,17 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 				break;
 			case 'bootstrap':
 				$default_css = GREENLET_STYLE_URL . '/bootstrap' . $min . '.css';
-				$default_js  = GREENLET_SCRIPT_URL . '/bootstrap' . $min . '.js';
 				$css_path    = gl_get_option( 'css_path', $default_css );
-				$js_path     = gl_get_option( 'js_path', $default_js );
 
 				$css_path = ( '' === $css_path ) ? $default_css : $css_path;
-				$js_path  = ( '' === $js_path ) ? $default_js : $js_path;
 				break;
 			default:
 				$css_path = GREENLET_STYLE_URL . '/default' . $min . '.css';
-				$js_path  = '';
 				break;
 		}
 
 		if ( 'default' !== $css_framework ) {
 			greenlet_enqueue_style( $css_framework, $css_path );
-			if ( false !== $load_js ) {
-				wp_enqueue_script( $css_framework . '-js', $js_path, array( 'jquery' ), GREENLET_VERSION, true );
-			}
 		}
 
 		$styles_href = GREENLET_STYLE_URL . '/styles' . $min . '.css';

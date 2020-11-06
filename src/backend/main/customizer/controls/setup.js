@@ -19,11 +19,17 @@ const insertExtLinks = () => {
 	const items = [{
 		id: 'accordion-section-title_tagline',
 		place: 'before',
-		type: 'section'
+		type: 'section',
+		tagName: 'li',
 	}, {
 		id: 'sub-accordion-section-blog_extra',
 		place: 'append',
-		type: 'control'
+		type: 'control',
+		tagName: 'li',
+	}, {
+		id: 'customize-control-post_list_layout',
+		place: 'append',
+		type: 'control',
 	}]
 
 	const extUrl = 'https://greenletwp.com/pro'
@@ -33,7 +39,7 @@ const insertExtLinks = () => {
 		const el = document.getElementById( item.id )
 		if ( null === el ) return
 
-		const link = document.createElement('li' )
+		const link = document.createElement( item.tagName || 'div' )
 		link.classList.add( 'gl-ext-link' )
 		link.innerHTML = markUp
 

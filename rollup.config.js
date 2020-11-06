@@ -34,9 +34,16 @@ const getCWBanner = filename => `/** @license ColorWings v1.0.0
 * LICENSE file in the root directory of this source tree.
 */`
 
-let paths
+let paths = []
 
-const mainPaths = [{
+const mainFEPaths = [{
+	name: 'Greenlet',
+	inputPath : 'src/frontend/js/scripts.js',
+	outputPath: 'assets/js/scripts.js',
+	outputMin : 'assets/js/scripts.min.js',
+}]
+
+const mainBEPaths = [{
 	inputPath : 'src/backend/main/customizer/greenlet-controls.js',
 	outputPath: 'library/backend/assets/js/greenlet-controls.js',
 	outputMin : 'library/backend/assets/js/greenlet-controls.min.js',
@@ -63,20 +70,44 @@ const cwPaths = [{
 	banner: getCWBanner( 'color-wings-preview.js' ),
 }]
 
-const proPaths = [{
+const proBEPaths = [{
 	inputPath : 'library/pro/src/js/customizer/glpro-controls.js',
 	outputPath: 'library/pro/assets/js/glpro-controls.js',
 	outputMin : 'library/pro/assets/js/glpro-controls.min.js',
+}, {
+	inputPath : 'library/pro/src/js/preview/glpro-preview.js',
+	outputPath: 'library/pro/assets/js/glpro-preview.js',
+	outputMin : 'library/pro/assets/js/glpro-preview.min.js',
+}, {
+	inputPath : 'library/pro/src/js/options.js',
+	outputPath: 'library/pro/assets/js/options.js',
+	outputMin : 'library/pro/assets/js/options.min.js',
 }]
 
-if ( process.env.ONLY_MAIN === '1' ) {
-	paths = mainPaths
-} else if ( process.env.ONLY_CW === '1' ) {
-	paths = cwPaths
-} else if ( process.env.ONLY_PRO === '1' ) {
-	paths = proPaths
-} else {
-	paths = [ ...mainPaths, ...cwPaths, ...proPaths ]
+const proFEPaths = [{
+	name: "Masonry",
+	inputPath : 'library/pro/src/js/masonry.js',
+	outputPath: 'library/pro/assets/js/masonry.js',
+	outputMin : 'library/pro/assets/js/masonry.min.js',
+}]
+
+if ( process.env.MAIN_FE === '1' || process.env.MAIN === '1' ) {
+	paths = [ ...paths, ...mainFEPaths ]
+}
+if ( process.env.MAIN_BE === '1' || process.env.MAIN === '1' ) {
+	paths = [ ...paths, ...mainBEPaths ]
+}
+if ( process.env.CW === '1' ) {
+	paths = [ ...paths, ...cwPaths ]
+}
+if ( process.env.PRO_BE === '1' || process.env.PRO === '1' ) {
+	paths = [ ...paths, ...proBEPaths ]
+}
+if ( process.env.PRO_FE === '1' || process.env.PRO === '1' ) {
+	paths = [ ...paths, ...proFEPaths ]
+}
+if ( paths.length === 0 ) {
+	paths = [ ...mainFEPaths, ...mainBEPaths, ...cwPaths, ...proFEPaths, ...proBEPaths ]
 }
 
 const config = paths.map(( path ) => ({

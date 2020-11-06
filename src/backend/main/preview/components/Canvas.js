@@ -31,7 +31,7 @@ function Canvas ( { pos } ) {
 	div.innerText = __( 'Infinite scrolling is temporarily disabled to edit footer.', 'greenlet' )
 
 	const toggleInfiniteScroll = ( enable = true ) => {
-		greenletToggleScroll( enable )
+		Greenlet.toggleScroll( enable )
 		const button = document.querySelector( '.pagination.infinite a' )
 		if ( null === button ) return
 		if ( ! enable ) {

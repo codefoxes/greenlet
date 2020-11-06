@@ -17,9 +17,10 @@ $menu_args = array(
 
 if ( false !== $slug ) {
 	if ( isset( $args['toggler'] ) && ( 'enable' === $args['toggler'] ) ) {
+		$menu_id = ! empty( $slug ) ? $slug : 'menu';
 		?>
-		<input id="<?php echo esc_attr( $slug ); ?>-toggle" class="menu-toggle" type="checkbox" />
-		<label class="menu-toggle-button" for="<?php echo esc_attr( $slug ); ?>-toggle" aria-label="<?php esc_attr_e( 'Toggle Menu', 'greenlet' ); ?>">
+		<input id="<?php echo esc_attr( $menu_id ); ?>-toggle" class="menu-toggle" type="checkbox" />
+		<label class="menu-toggle-button" for="<?php echo esc_attr( $menu_id ); ?>-toggle" aria-label="<?php esc_attr_e( 'Toggle Menu', 'greenlet' ); ?>">
 			<span class="hamburger hamburger-1"></span>
 			<span class="hamburger hamburger-2"></span>
 			<span class="hamburger hamburger-3"></span>

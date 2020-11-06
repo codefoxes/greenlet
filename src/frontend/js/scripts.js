@@ -4,14 +4,14 @@
  * @package greenlet\library\js
  */
 
-var greenletLoader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><circle class="loader-ring" cx="25" cy="25" r="22" /><circle class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
+const loader = '<svg id="greenlet-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><g id="loader-parts"><circle class="loader-ring" cx="25" cy="25" r="22" /><circle class="loader-c" cx="25" cy="25" r="22" /></g></svg>';
 
 /**
  * Page loader Listener.
  *
  * @param {Event} e Click event.
  */
-function greenletLoaderListener(e) {
+function listenLoader(e) {
 	e.preventDefault();
 	var thisElement = e.target;
 	var add         = false;
@@ -27,21 +27,25 @@ function greenletLoaderListener(e) {
 	} else {
 		next_page = thisElement.textContent;
 	}
-	greenletPageLoader( this, next_page, add )
+	loadPage( this, next_page, add )
 }
 
 /**
  * Initialize Pagination Listeners.
  */
-function greenletPaginationInit() {
+function initPagination() {
 	var loadElements = document.querySelectorAll( '.pagination.load a' );
 	var ajaxElements = document.querySelectorAll( '.pagination.ajax a' );
 	if ( loadElements.length > 0 ) {
-		loadElements[0].addEventListener( 'click', greenletLoaderListener );
+		loadElements[0].addEventListener( 'click', listenLoader );
 	}
 	var ajaxElementsLength = ajaxElements.length;
 	for (var i = 0; i < ajaxElementsLength; i++) {
-		ajaxElements[i].addEventListener( 'click', greenletLoaderListener );
+		ajaxElements[i].addEventListener( 'click', listenLoader );
+	}
+	if ( null === this.tmpEl ) {
+		this.tmpEl = document.createElement( 'div' )
+		this.tmpEl.id = 'greenlet-temp'
 	}
 }
 
@@ -53,14 +57,14 @@ function greenletPaginationInit() {
  * @param {bool}   add      Append or Replace.
  * @param {string} act      WordPress action.
  */
-function greenletPageLoader( obj, cur_page, add, act ) {
+function loadPage( obj, cur_page, add, act ) {
 	var nonce = document.getElementById( 'greenlet_generic_nonce' ).value;
 
-	obj.parentNode.parentNode.innerHTML = '<span id="page-loader">' + greenletLoader + '</span>';
+	obj.parentNode.parentNode.innerHTML = '<span id="page-loader">' + Greenlet.loader + '</span>';
 
 	add  = typeof add !== 'undefined' ? add : false;
 	act  = typeof act !== 'undefined' ? act : 'greenlet_get_paginated';
-	args = {
+	const args = {
 		location: greenletData.current_url,
 		page: greenletData.page,
 		query_vars: greenletData.query_vars,
@@ -82,25 +86,26 @@ function greenletPageLoader( obj, cur_page, add, act ) {
 		args.location = args.location.replace( /\/?/, "" ) + "?page=" + cur_page + ""
 	}
 
-	var xhr = new XMLHttpRequest();
+	const xhr = new XMLHttpRequest()
 	xhr.open( 'POST', greenletData.ajaxurl, true );
 	xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
-	xhr.send( greenletJsonToFormData( args ) );
+	xhr.send( jsonToFormData( args ) );
 
 	xhr.onload = function () {
-		var res = JSON.parse( xhr.responseText );
+		const res = JSON.parse( xhr.responseText );
 		if ( xhr.readyState === 4 && xhr.status === 200 ) {
 			if ( add ) {
-				var wrap       = document.querySelector( '.main .wrap' )
+				const wrap = document.querySelector( '.main .wrap' )
 				wrap.innerHTML = wrap.innerHTML + res.posts;
 			} else {
 				document.querySelector( '.main .wrap' ).innerHTML = res.posts
 			}
-			var pageLoader = document.getElementById( 'page-loader' );
+			const pageLoader = document.getElementById( 'page-loader' )
 			if ( pageLoader !== null ) {
-				pageLoader.parentElement.removeChild( pageLoader );
+				pageLoader.parentElement.removeChild( pageLoader )
 			}
-			greenletPaginationInit();
+			Greenlet._listeners.forEach( fn => fn() )
+			Greenlet.initPagination();
 		}
 	}
 }
@@ -108,7 +113,7 @@ function greenletPageLoader( obj, cur_page, add, act ) {
 /**
  * Infinite scroll.
  */
-function greenletInfiniteScroll() {
+function infiniteScroll() {
 	var infinite = document.getElementsByClassName( 'pagination infinite' );
 	if (infinite.length > 0) {
 
@@ -121,7 +126,7 @@ function greenletInfiniteScroll() {
 			if ( link !== null ) {
 				var next_page      = link.getAttribute( 'data-next' );
 				link.style.display = 'none';
-				greenletPageLoader( link, next_page, true );
+				loadPage( link, next_page, true );
 			}
 		}
 	}
@@ -132,18 +137,18 @@ function greenletInfiniteScroll() {
  *
  * @param {string} op Enable or Disable.
  */
-function greenletToggleScroll( op ) {
+function toggleScroll( op ) {
 	if ( ( 'undefined' === typeof op ) || ( false !== op ) ) {
-		window.addEventListener( 'scroll', greenletInfiniteScroll )
+		window.addEventListener( 'scroll', infiniteScroll )
 	} else {
-		window.removeEventListener( 'scroll', greenletInfiniteScroll )
+		window.removeEventListener( 'scroll', infiniteScroll )
 	}
 }
 
 /**
  * Fix tag.
  */
-function greenletFixTag() {
+function fixTag() {
 	var current = document.querySelector('meta[name="description"]');
 	if ( null === current ) {
 		var tag = document.createElement('meta');
@@ -156,46 +161,32 @@ function greenletFixTag() {
 /**
  * Convert JSON to Form data.
  *
- * @param {object} srcjson Source JSON object.
- * @returns {string}       Form Data.
+ * @param {object} body Source JSON object.
+ * @returns {string}    Form Data.
  */
-function greenletJsonToFormData( srcjson ) {
-	if ( (typeof srcjson !== 'object') && (typeof console !== 'undefined') ) {
-		console.log( '"srcjson" is not a JSON object' );
-		return null;
-	}
-	u = encodeURIComponent;
-
-	var urljson = '';
-	var keys    = Object.keys( srcjson );
-
-	var keysLength = keys.length
-	for ( var i = 0; i < keysLength; i++ ) {
-		urljson += u( keys[i] ) + '=' + u( srcjson[keys[i]] );
-
-		if ( i < (keys.length - 1) ) {
-			urljson += '&';
-		}
-	}
-	return urljson;
+function jsonToFormData ( body ) {
+	return Object.keys( body ).map( ( key ) => {
+		return Array.isArray( body[ key ] ) ? body[ key ].map( value => key + '=' + encodeURIComponent( value ) ).join( '&' ) : key + '=' + encodeURIComponent( body[ key ] )
+	} ).join( '&' )
 }
 
 /**
  * Fix Toggle Menu position.
  */
-function greenletFixMenu() {
+function fixMenu() {
+	let prevToggle = null
 	document.body.addEventListener( 'keyup', function ( e ) {
 		if ( e.key === 'Tab' || e.keyCode === '9' ) {
 			var parent = document.activeElement.parentNode
 			if ( ! parent.classList.contains( 'menu-item' ) ) {
 				var focused = document.querySelector( '.menu-item.focus' )
 				;( focused !== null ) && focused.classList.remove( 'focus' )
-				document.getElementById( 'menu-toggle' ).checked = false
+				;( prevToggle !== null ) && ( prevToggle.checked = false )
 			}
 			;( parent.previousElementSibling !== null ) && parent.previousElementSibling.classList.remove( 'focus' )
 			;( parent.nextElementSibling !== null ) && parent.nextElementSibling.classList.remove( 'focus' )
 			;( parent.classList.contains( 'menu-item-has-children' ) ) && parent.classList.add( 'focus' )
-			;( document.activeElement.id === 'menu-toggle' ) && ( document.activeElement.checked = true )
+			;( document.activeElement.classList.contains( 'menu-toggle' ) ) && ( document.activeElement.checked = true ) && ( prevToggle = document.activeElement )
 		}
 	});
 
@@ -217,7 +208,7 @@ function greenletFixMenu() {
 /**
  * Enable additional menu togglers.
  */
-function greenletToggleMenu() {
+function toggleMenu() {
 	var togglers = document.getElementsByClassName( 'menu-toggler' )
 
 	var toggleMenu = function( target ) {
@@ -235,7 +226,7 @@ function greenletToggleMenu() {
 	}
 }
 
-function greenletToTop() {
+function toTop() {
 	var btn = document.getElementsByClassName( 'to-top' )
 	if ( 0 === btn.length ) return
 	var showTop = function() {
@@ -255,9 +246,19 @@ function greenletToTop() {
 	window.addEventListener( 'load', showTop )
 }
 
-greenletToTop()
-greenletPaginationInit()
-greenletToggleScroll()
-greenletFixTag()
-greenletFixMenu()
-greenletToggleMenu()
+function subscribe( fn ) {
+	this._listeners.push( fn )
+}
+
+const Greenlet = { _listeners: [], tmpEl: null, subscribe, toTop, initPagination, toggleScroll, fixTag, fixMenu, toggleMenu, jsonToFormData, loader }
+Greenlet.init = function() {
+	this.toTop()
+	this.initPagination()
+	this.toggleScroll()
+	this.fixTag()
+	this.fixMenu()
+	this.toggleMenu()
+}
+Greenlet.init()
+
+export default Greenlet

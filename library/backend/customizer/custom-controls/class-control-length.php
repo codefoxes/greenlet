@@ -32,7 +32,16 @@ if ( ! class_exists( 'Control_Length' ) && class_exists( 'WP_Customize_Control' 
 		 * @access public
 		 * @var    string
 		 */
-		public $sub_type = '';
+		public $sub_type = 'size';
+
+		/**
+		 * The units of length.
+		 *
+		 * @since  2.1.0
+		 * @access public
+		 * @var    array
+		 */
+		public $units = array();
 
 		/**
 		 * Enqueue scripts/styles.
@@ -73,6 +82,8 @@ if ( ! class_exists( 'Control_Length' ) && class_exists( 'WP_Customize_Control' 
 			$this->json['type'] = $this->type;
 
 			$this->json['subType'] = $this->sub_type;
+
+			$this->json['units'] = $this->units;
 		}
 
 		/**

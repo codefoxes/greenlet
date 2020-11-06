@@ -17,12 +17,9 @@ wp.customize.controlConstructor['length'] = wp.customize.Control.extend(
 			const params = {
 				onChange,
 				label: control.params.label,
-				subType: 'size',
+				subType: control.params.subType,
 				val: control.setting._value,
-				units: {
-					'px': { step: 1, min: 0, max: 2000 },
-					'%': { step: 1, min: 0, max: 100 },
-				}
+				units: control.params.units
 			}
 			params.val = ( undefined === params.val ) ? '' : params.val
 

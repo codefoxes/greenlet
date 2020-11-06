@@ -77,7 +77,8 @@ class Customizer {
 	 * @since  1.1.0
 	 */
 	public function enqueue_preview_scripts() {
-		wp_enqueue_script( 'greenlet-preview', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-preview.js', array( 'customize-preview', 'react-dom', 'wp-i18n' ), GREENLET_VERSION, true );
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'greenlet-preview', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-preview' . $min . '.js', array( 'customize-preview', 'react-dom', 'wp-i18n' ), GREENLET_VERSION, true );
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'greenlet-preview', 'greenlet' );
 		}

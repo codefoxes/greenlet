@@ -2376,6 +2376,14 @@
         main = _getLength2[0],
         unit = _getLength2[1];
 
+    if (!(unit in units) || !('step' in units[unit])) {
+      units[unit] = {
+        step: 1,
+        min: 0,
+        max: 100
+      };
+    }
+
     var _React$useState = React.useState({
       main: main,
       unit: unit,

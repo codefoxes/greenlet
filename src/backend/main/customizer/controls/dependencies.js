@@ -28,12 +28,12 @@ function manageSidebarDependencies() {
 function managePostListDependencies() {
 	const control  = wp.customize.control( 'post_list_layout' )
 
-	if ( control.setting._value !== 'grid' ) {
+	if ( control.setting._value === 'list' ) {
 		document.getElementById( 'customize-control-posts_columns' ).style.display = 'none'
 	}
 
 	control.setting.bind( () => {
-		if ( control.setting._value !== 'grid' ) {
+		if ( control.setting._value === 'list' ) {
 			document.getElementById( 'customize-control-posts_columns' ).style.display = 'none'
 		} else {
 			document.getElementById( 'customize-control-posts_columns' ).style.display = ''
@@ -49,13 +49,17 @@ function managePerformanceDependencies() {
 
 	if ( control.setting._value !== false ) {
 		document.getElementById( 'customize-control-defer_block_css' ).style.display = 'none'
+		document.getElementById( 'customize-control-inline_block_css' ).style.display = 'none'
+
 	}
 
 	control.setting.bind( () => {
 		if ( control.setting._value !== false ) {
 			document.getElementById( 'customize-control-defer_block_css' ).style.display = 'none'
+			document.getElementById( 'customize-control-inline_block_css' ).style.display = 'none'
 		} else {
 			document.getElementById( 'customize-control-defer_block_css' ).style.display = ''
+			document.getElementById( 'customize-control-inline_block_css' ).style.display = ''
 		}
 	} )
 }

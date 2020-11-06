@@ -124,20 +124,6 @@ function greenlet_options() {
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'load_js',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'framework',
-			'label'       => __( 'Load Respective JS', 'greenlet' ),
-			'description' => __( 'Eg: Load Bootstrap JS if loaded Bootstrap CSS.', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
 		'type' => 'section',
 		'id'   => 'header_section',
 		'args' => array(
@@ -357,10 +343,7 @@ function greenlet_options() {
 			'section'     => 'blog_list',
 			'label'       => __( 'Post List Layout', 'greenlet' ),
 			'description' => __( 'Layout variation for Post list.', 'greenlet' ),
-			'choices'     => array(
-				'list' => 'List',
-				'grid' => 'Grid',
-			),
+			'choices'     => greenlet_post_list_layouts(),
 		),
 	);
 
@@ -621,6 +604,7 @@ function greenlet_options() {
 			'type'    => 'length',
 			'section' => 'blog_extra',
 			'label'   => __( 'Show back to top button at position.', 'greenlet' ),
+			'units'    => array( 'px' => array( 'step' => 1, 'min' => 0, 'max' => 2000 ), '%' => array( 'step' => 1, 'min' => 0, 'max' => 100 ) ) // phpcs:ignore
 		),
 	);
 
@@ -700,6 +684,20 @@ function greenlet_options() {
 			'section'     => 'performance',
 			'label'       => __( 'Defer WP Block Editor CSS', 'greenlet' ),
 			'description' => __( 'Load Block Editor CSS files after page load.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'inline_block_css',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Inline WP Block Editor CSS', 'greenlet' ),
+			'description' => __( 'Load WP Block Editor CSS files inline, saves network requests.', 'greenlet' ),
 		),
 	);
 
