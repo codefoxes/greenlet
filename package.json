@@ -35,7 +35,7 @@
     "main": "MAIN=1 ./node_modules/.bin/rollup -c",
     "main:w": "MAIN=1 ./node_modules/.bin/rollup -c -w",
     "main:fe:w": "MAIN_FE=1 ./node_modules/.bin/rollup -c -w",
-    "main:be:w": "MAIN=1 ./node_modules/.bin/rollup -c -w",
+    "main:be:w": "MAIN_BE=1 ./node_modules/.bin/rollup -c -w",
     "colorwings": "CW=1 ./node_modules/.bin/rollup -c",
     "colorwings:w": "MAIN=1 ./node_modules/.bin/rollup -c -w",
     "pro": "PRO=1 ./node_modules/.bin/rollup -c",

@@ -7,9 +7,7 @@
  * @package greenlet
  */
 
-echo '</div>';
-echo '</div>';
-greenlet_markup_close();
+greenlet_markup_close( 3 );
 
 do_action( 'greenlet_before_footer' );
 do_action( 'greenlet_footer' );

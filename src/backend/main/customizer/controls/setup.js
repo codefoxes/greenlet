@@ -30,6 +30,10 @@ const insertExtLinks = () => {
 		id: 'customize-control-post_list_layout',
 		place: 'append',
 		type: 'control',
+	}, {
+		id: 'customize-control-css_framework',
+		place: 'append',
+		type: 'control',
 	}]
 
 	const extUrl = 'https://greenletwp.com/pro'

@@ -22,5 +22,5 @@ do_action( 'greenlet_header' );
 do_action( 'greenlet_after_header' );
 
 greenlet_markup( 'site-content', greenlet_attr( 'site-content' ) );
-echo '<div class="container">';
-echo '<div class="row">';
+greenlet_markup( 'div', greenlet_attr( 'container' ) );
+greenlet_markup( 'div', greenlet_attr( 'row' ) );

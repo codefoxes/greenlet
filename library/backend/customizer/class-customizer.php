@@ -61,7 +61,7 @@ class Customizer {
 		wp_enqueue_script( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'wp-i18n', 'jquery', 'color-wings-controls' ), GREENLET_VERSION, true );
 		wp_enqueue_style( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 		$control_data = array(
-			'ext'     => defined( 'GLPRO_VERSION' ),
+			'ext'     => ( defined( 'GLPRO' ) && ( false !== GLPRO ) ),
 			'extText' => __( 'More options with Greenlet Pro', 'greenlet' ),
 		);
 		$control_data = apply_filters( 'greenlet_control_l10n', $control_data );

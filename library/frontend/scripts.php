@@ -49,24 +49,23 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 
 		$css_framework = gl_get_option( 'css_framework', 'default' );
 
+		$handle   = $css_framework;
+		$css_path = false;
 		switch ( $css_framework ) {
 			case 'default':
-				$default_href = GREENLET_STYLE_URL . '/default' . $min . '.css';
-				greenlet_enqueue_style( 'greenlet-default', $default_href );
+				$css_path = GREENLET_STYLE_URL . '/default' . $min . '.css';
+				$handle   = 'greenlet-default';
 				break;
 			case 'bootstrap':
 				$default_css = GREENLET_STYLE_URL . '/bootstrap' . $min . '.css';
-				$css_path    = gl_get_option( 'css_path', $default_css );
 
+				$css_path = gl_get_option( 'css_path', $default_css );
 				$css_path = ( '' === $css_path ) ? $default_css : $css_path;
-				break;
-			default:
-				$css_path = GREENLET_STYLE_URL . '/default' . $min . '.css';
 				break;
 		}
 
-		if ( 'default' !== $css_framework ) {
-			greenlet_enqueue_style( $css_framework, $css_path );
+		if ( false !== $css_path ) {
+			greenlet_enqueue_style( $handle, $css_path );
 		}
 
 		$styles_href = GREENLET_STYLE_URL . '/styles' . $min . '.css';

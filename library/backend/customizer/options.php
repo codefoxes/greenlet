@@ -100,10 +100,7 @@ function greenlet_options() {
 			'type'    => 'radio',
 			'section' => 'framework',
 			'label'   => __( 'CSS Framework', 'greenlet' ),
-			'choices' => array(
-				'default'   => __( 'Greenlet Framework', 'greenlet' ),
-				'bootstrap' => __( 'Bootstrap 4.5.3', 'greenlet' ),
-			),
+			'choices' => greenlet_css_frameworks(),
 		),
 	);
 
