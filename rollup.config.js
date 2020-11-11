@@ -136,7 +136,7 @@ const config = paths.map(( path ) => ({
 		resolve({
 			browser: true,
 		}),
-		commonjs(),
+		commonjs( { transformMixedEsModules: true } ),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify( 'production' )
 		}),
