@@ -84,8 +84,8 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 						'description'   => sprintf( __( 'Appears on the posts and pages as sidebar %s.', 'greenlet' ), $i ),
 						'before_widget' => '<div id="%1$s" class="widget %2$s">',
 						'after_widget'  => '</div><!-- end widget -->',
-						'before_title'  => '<h5 class="widget-title">',
-						'after_title'   => '</h5>',
+						'before_title'  => '<h3 class="widget-title">',
+						'after_title'   => '</h3>',
 					)
 				);
 			}
@@ -114,8 +114,8 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 								'description'   => sprintf( __( 'Appears on the %1$s %2$s at column %3$s.', 'greenlet' ), $pos, $k, $i ),
 								'before_widget' => '<div id="%1$s" class="widget %2$s">',
 								'after_widget'  => '</div> <!-- end widget -->',
-								'before_title'  => '<h5 class="widget-title">',
-								'after_title'   => '</h5>',
+								'before_title'  => '<h3 class="widget-title">',
+								'after_title'   => '</h3>',
 							)
 						);
 					}

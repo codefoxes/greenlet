@@ -313,18 +313,30 @@ input[type="checkbox"].menu-toggle {
 	clear: both;
 }
 
+.meta-icons {
+	display: none;
+}
+
+.meta-icon {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+}
+
 .entry-meta li {
 	color: #2464c0;
 }
 
 .entry-meta svg {
 	fill: #999;
+	width: 14px;
+	height: 14px;
 	display: block;
 }
 
 .more-link {
-	padding: 0.1rem 1rem;
-	border: 1px solid #CCC;
+	padding: .1rem .8rem;
+	border: 1px solid #ddd;
 	margin-left: 6px;
 }
 
@@ -374,6 +386,10 @@ input[type="checkbox"].menu-toggle {
 	margin: 0;
 	line-height: 40px;
 	padding-left: 20px;
+}
+
+.widget-title {
+	font-size: 1.8rem;
 }
 
 .search-form {
@@ -543,12 +559,6 @@ input[type="checkbox"].menu-toggle {
 
 @-webkit-keyframes color{
 	100%{ stroke: #5c6b80; }
-}
-
-.sticky-icon, .user-icon, .date-icon, .clock-icon, .folder-icon, .tag-icon, .comment-icon {
-	display: inline-block;
-	width: 14px;
-	height: 14px;
 }
 
 .screen-reader-text {
@@ -727,6 +737,50 @@ blockquote {
 	}
 }
 
+.to-top {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background: #fff;
+	margin: 0;
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	transition: all 0.1s ease-in-out;
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&.show {
+		opacity: 1;
+		visibility: visible;
+		transform: scale(1);
+	}
+
+	.icon {
+		width: 25px;
+		height: 16px;
+		overflow: hidden;
+		position: relative;
+		margin-bottom: 8px;
+
+		&:before {
+			content: '';
+			width: 20px;
+			height: 20px;
+			border: 2px solid #6b6b6b;
+			display: block;
+			transform: rotateZ(45deg);
+			position: absolute;
+			top: 10px;
+			left: 2.5px;
+		}
+	}
+}
+
 @media (min-width: 801px) {
 	.admin-bar .header-section.sticky {
 		top: 32px;
@@ -772,4 +826,5 @@ blockquote {
 	}
 }
 
+@import "post-grid";
 @import "blocks";

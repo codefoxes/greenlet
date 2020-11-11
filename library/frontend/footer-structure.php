@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'greenlet_footer', 'greenlet_do_footer' );
+add_action( 'greenlet_after_footer', 'greenlet_to_top_button' );
 
 /**
  * Display the footer text.
@@ -34,7 +35,7 @@ function greenlet_footer_text() {
  * Display the footer.
  *
  * @since  1.0.0
- * @see    greenlet_cover() to display semifooter columns.
+ * @see    greenlet_cover() to display footer columns.
  * @return void
  */
 function greenlet_do_footer() {
@@ -44,4 +45,15 @@ function greenlet_do_footer() {
 	add_action( "greenlet_after_footer_{$last_footer}_columns", 'greenlet_footer_text' );
 
 	greenlet_cover( 'footer' );
+}
+
+/**
+ * Back to top button.
+ */
+function greenlet_to_top_button() {
+	if ( false !== gl_get_option( 'to_top', '1' ) ) {
+		echo '<button class="to-top" type="button" onclick="window.scrollTo(0,0)" aria-label="' . esc_attr__( 'Back to top', 'greenlet' ) . '">';
+		echo apply_filters( 'greenlet_to_top_content', '<div class="icon"></div>' ); // phpcs:ignore
+		echo '</button>';
+	}
 }

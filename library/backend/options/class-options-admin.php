@@ -156,7 +156,10 @@ class Options_Admin {
 						<div class="col-6">
 							<div class="ext-links">
 								<div class="link-wrap"><a href="https://greenletwp.com/pro/" target="_blank"><?php esc_html_e( 'Get Pro Version', 'greenlet' ); ?></a></div>
+								<div class="link-wrap"><a href="https://wordpress.org/support/theme/greenlet/reviews/#new-post" target="_blank"><?php esc_html_e( 'Show your love', 'greenlet' ); ?></a></div>
 								<div class="link-wrap"><a href="https://greenletwp.com/docs/" target="_blank"><?php esc_html_e( 'Documentation', 'greenlet' ); ?></a></div>
+								<div class="link-wrap"><a href="https://wordpress.org/support/theme/greenlet/" target="_blank"><?php esc_html_e( 'Support forum', 'greenlet' ); ?></a></div>
+								<div class="link-wrap"><a href="https://github.com/codefoxes/greenlet/issues/new" target="_blank"><?php esc_html_e( 'Report a bug', 'greenlet' ); ?></a></div>
 								<div class="link-wrap"><a href="https://github.com/codefoxes/greenlet/tree/dev" target="_blank"><?php esc_html_e( 'Latest dev branch', 'greenlet' ); ?></a></div>
 							</div>
 							<div id="xhr-section"></div>

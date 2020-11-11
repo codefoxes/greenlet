@@ -1,3 +1,19 @@
+Version 2.1.0 / Release: 12-11-2020
+===================
+New: Post List Layouts
+New: Back to Top button
+New: Excerpt and full content display options for post list.
+Improvement: Extra Post classes
+Improvement: Remove redundant actions
+Improvement: Editor Styles from custom CSS
+Improvement: Remove redundant customizer options
+Improvement: ColorWings update - Exposed Components
+Improvement: Use ColorWings components in Customizer
+Improvement: Arrange Blog settings to sections in customizer
+Fix: Menu toggle bug with id
+Fix: Extra styles length component bug
+Fix: wp_set_script_translations compatibility
+
 Version 2.0.1 / Release: 26-10-2020
 ===================
 - Fix: Bug in Extra styles.
