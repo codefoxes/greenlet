@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 12:45+0000\n"
-"PO-Revision-Date: 2020-10-25 12:46+0000\n"
+"POT-Creation-Date: 2020-11-10 22:01+0000\n"
+"PO-Revision-Date: 2020-11-10 22:01+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.3; wp-5.5.1"
+"X-Loco-Version: 2.4.4; wp-5.6-beta3-49552"
 
 #: 404.php:15
 msgid "Error 404 - Nothing Found"
@@ -30,7 +30,7 @@ msgctxt "Comment title"
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s commentaires"
-msgstr[1] ""
+msgstr[1] "% s commentaires"
 
 #: comments.php:37
 msgid "&larr; Older Comments"
@@ -52,12 +52,12 @@ msgstr "Rien n'a été trouvé!"
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/breadcrumb.php:64 library/frontend/main-structure.php:256
+#: templates/breadcrumb.php:64 library/frontend/main-structure.php:265
 msgctxt "Monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: templates/breadcrumb.php:68 library/frontend/main-structure.php:259
+#: templates/breadcrumb.php:68 library/frontend/main-structure.php:268
 msgctxt "Yearly archives date format"
 msgid "Y"
 msgstr "Y"
@@ -71,60 +71,76 @@ msgid "Home Page"
 msgstr "Page d'accueil"
 
 #: library/backend/helpers.php:22
-#: library/backend/assets/js/greenlet-controls.js:291
-#: library/backend/assets/js/greenlet-controls.js:2013
+#: library/backend/assets/js/greenlet-controls.js:337
+#: library/backend/assets/js/greenlet-controls.js:1820
 msgid "Main Content"
 msgstr "Contenu principal"
 
-#: library/common/helpers.php:509
+#: library/backend/helpers.php:191
+msgid "List"
+msgstr "liste"
+
+#: library/backend/helpers.php:192
+msgid "Grid"
+msgstr "la grille"
+
+#: library/backend/helpers.php:209
+msgid "Greenlet Framework"
+msgstr "Cadre de Greenlet"
+
+#: library/backend/helpers.php:210
+msgid "Bootstrap 4.5.3"
+msgstr "Bootstrap 4.5.3"
+
+#: library/common/helpers.php:510
 msgid "Logo"
 msgstr "Logo"
 
-#: library/common/helpers.php:516 library/common/helpers.php:521
+#: library/common/helpers.php:517 library/common/helpers.php:522
 msgid "Menu"
 msgstr "Menu"
 
-#: library/common/helpers.php:526
+#: library/common/helpers.php:527
 msgid "Mobile toggler"
 msgstr "Bascule mobile"
 
-#: library/common/helpers.php:529
+#: library/common/helpers.php:530
 msgid "Enable"
 msgstr "Activer"
 
-#: library/common/helpers.php:530
+#: library/common/helpers.php:531
 msgid "Disable"
 msgstr "Désactiver"
 
-#: library/common/helpers.php:537
+#: library/common/helpers.php:538
 msgid "Menu Toggler"
 msgstr "Menu Toggler"
 
-#: library/common/helpers.php:542
+#: library/common/helpers.php:543
 msgid "Target"
 msgstr "Cible"
 
-#: library/common/helpers.php:547
+#: library/common/helpers.php:548
 msgid "Query"
 msgstr "Requete"
 
-#: library/common/helpers.php:551
+#: library/common/helpers.php:552
 msgid "Effect"
 msgstr "Effet"
 
-#: library/common/helpers.php:554
+#: library/common/helpers.php:555
 msgid "From Top"
 msgstr "De haut"
 
-#: library/common/helpers.php:555
+#: library/common/helpers.php:556
 msgid "From Bottom"
 msgstr "Du bas"
 
-#: library/common/helpers.php:556
+#: library/common/helpers.php:557
 msgid "From Right"
 msgstr "De droite"
 
-#: library/common/helpers.php:557
+#: library/common/helpers.php:558
 msgid "From Left"
 msgstr "De gauche"
 
@@ -157,96 +173,99 @@ msgstr "Colonne"
 msgid "Appears on the %1$s %2$s at column %3$s."
 msgstr "Apparaît sur le %1$s %2$s la colonne %3$s."
 
-#: library/frontend/footer-structure.php:24
+#: library/frontend/footer-structure.php:25
 msgid "Y"
 msgstr "Y"
 
-#: library/frontend/footer-structure.php:27
+#: library/frontend/footer-structure.php:28
 msgid "Powered By"
 msgstr "Alimenté par"
 
 #. Name of the theme
-#: library/frontend/footer-structure.php:28
-#: library/backend/editor/class-editor.php:147
+#: library/frontend/footer-structure.php:29
+#: library/backend/editor/class-editor.php:189
 msgid "Greenlet"
 msgstr "Greenlet"
+
+#: library/frontend/footer-structure.php:55
+#: library/backend/customizer/options.php:588
+msgid "Back to top"
+msgstr "Retour au sommet"
 
 #: library/frontend/header-structure.php:39
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: library/frontend/main-structure.php:229
-#: library/frontend/main-structure.php:237
-#: library/frontend/main-structure.php:245
-#: library/frontend/main-structure.php:253
-#: library/frontend/main-structure.php:256
-#: library/frontend/main-structure.php:259
+#: library/frontend/main-structure.php:238
+#: library/frontend/main-structure.php:246
+#: library/frontend/main-structure.php:254
+#: library/frontend/main-structure.php:262
+#: library/frontend/main-structure.php:265
+#: library/frontend/main-structure.php:268
 msgid " Archives"
 msgstr "Les archives"
 
-#: library/frontend/main-structure.php:394
+#: library/frontend/main-structure.php:463
 msgid "Featured"
 msgstr "En vedette"
 
-#: library/frontend/main-structure.php:458
+#: library/frontend/main-structure.php:527
 msgid "Leave a comment"
 msgstr "laissez un commentaire"
 
-#: library/frontend/main-structure.php:458
+#: library/frontend/main-structure.php:527
 msgid "One comment"
 msgstr "un commentaire"
 
-#: library/frontend/main-structure.php:458
+#: library/frontend/main-structure.php:527
 #, php-format
 msgid "View all % comments"
 msgstr "Voir tous les % commentaires"
 
-#: library/frontend/main-structure.php:465
+#: library/frontend/main-structure.php:534
 msgid "Edit"
 msgstr "Éditer"
 
-#: library/frontend/main-structure.php:499
-msgid "<span class=\"more-text\">Read More</span>"
-msgstr "<span class=\"more-text\">Lire la suite</span>"
+#: library/frontend/main-structure.php:569
+#: library/frontend/main-structure.php:672
+#: library/backend/customizer/options.php:456
+msgid "continue reading"
+msgstr "continuer la lecture"
 
-#: library/frontend/main-structure.php:571
+#: library/frontend/main-structure.php:642
 msgid "Author:"
 msgstr "Auteur:"
 
-#: library/frontend/main-structure.php:602
-msgid "Read More"
-msgstr "Lire la suite"
-
-#: library/frontend/main-structure.php:695
+#: library/frontend/main-structure.php:788
 msgid "&laquo; Newer Posts"
 msgstr "&laquo; Messages plus récents"
 
-#: library/frontend/main-structure.php:696
+#: library/frontend/main-structure.php:789
 msgid "Older Posts &raquo;"
 msgstr "Articles plus anciens &raquo;"
 
-#: library/frontend/main-structure.php:766
+#: library/frontend/main-structure.php:859
 msgid "There are no posts meeting your criteria"
 msgstr "Aucun post ne correspond à vos critères"
 
-#: library/frontend/main-structure.php:947
+#: library/frontend/main-structure.php:1031
 msgid "Load More"
 msgstr "Charger plus"
 
-#: library/frontend/main-structure.php:990
+#: library/frontend/main-structure.php:1073
 msgid "Search for:"
 msgstr "Rechercher:"
 
-#: library/frontend/main-structure.php:991
+#: library/frontend/main-structure.php:1074
 msgid "Search &hellip;"
 msgstr "Chercher &hellip;"
 
-#: library/frontend/main-structure.php:991
-#: library/frontend/main-structure.php:993
+#: library/frontend/main-structure.php:1074
+#: library/frontend/main-structure.php:1076
 msgid "Search"
 msgstr "Chercher"
 
-#: templates/menu/main.php:11 templates/menu/menu.php:16
+#: templates/menu/main.php:11 templates/menu/menu.php:23
 #: templates/menu/toggler.php:9
 msgid "Toggle Menu"
 msgstr "Basculer le menu"
@@ -255,91 +274,67 @@ msgstr "Basculer le menu"
 msgid "Extra Styles"
 msgstr "Styles supplémentaires"
 
-#: library/addons/colorwings/class-colorwings-admin.php:157
+#: library/addons/colorwings/class-colorwings-admin.php:165
 msgid "Markup is not allowed in CSS."
 msgstr "Le balisage n'est pas autorisé dans CSS."
 
-#: library/backend/customizer/options.php:46
-msgid "Logo Width"
-msgstr "Largeur du logo"
+#: library/backend/customizer/class-customizer.php:65
+msgid "More options with Greenlet Pro"
+msgstr "Plus d'options avec Greenlet Pro"
 
-#: library/backend/customizer/options.php:65
-msgid "Logo Height"
-msgstr "Hauteur du logo"
-
-#: library/backend/customizer/options.php:83
+#: library/backend/customizer/options.php:42
 msgid "Show Title"
 msgstr "Montrer le titre"
 
-#: library/backend/customizer/options.php:96
+#: library/backend/customizer/options.php:55
 msgid "Show Tagline"
 msgstr "Afficher le slogan"
 
-#: library/backend/customizer/options.php:107
+#: library/backend/customizer/options.php:66
 msgid "Title Styles"
 msgstr "Styles de titre"
 
-#: library/backend/customizer/options.php:119
+#: library/backend/customizer/options.php:78
 msgid "Layout"
 msgstr "Disposition"
 
-#: library/backend/customizer/options.php:120
+#: library/backend/customizer/options.php:79
 msgid "Site Layout."
 msgstr "Disposition du site."
 
-#: library/backend/customizer/options.php:129
+#: library/backend/customizer/options.php:88
 msgid "Framework"
 msgstr "Cadre"
 
-#: library/backend/customizer/options.php:143
+#: library/backend/customizer/options.php:102
 #: library/backend/options/class-options-admin.php:119
 msgid "CSS Framework"
 msgstr "CSS Cadre"
 
-#: library/backend/customizer/options.php:145
-msgid "Greenlet Framework"
-msgstr "Cadre de Greenlet"
-
-#: library/backend/customizer/options.php:146
-msgid "Bootstrap 4.5.3"
-msgstr "Bootstrap 4.5.3"
-
-#: library/backend/customizer/options.php:160
+#: library/backend/customizer/options.php:116
 msgid "Enter URL if different CDN or CSS Framework"
 msgstr "Entrez l'URL si un framework CDN ou CSS différent"
 
-#: library/backend/customizer/options.php:162
+#: library/backend/customizer/options.php:118
 msgid "https://somecdn.com/css_framework.css"
 msgstr "https://certainscdn.com/css_framework.css"
 
-#: library/backend/customizer/options.php:176
-msgid "Load Respective JS"
-msgstr "Charger JS respectif"
-
-#: library/backend/customizer/options.php:177
-msgid "Eg: Load Bootstrap JS if loaded Bootstrap CSS."
-msgstr "Par exemple: chargez Bootstrap JS si vous chargez Bootstrap CSS."
-
-#: library/backend/customizer/options.php:191
-msgid "Container Width"
-msgstr "Largeur du conteneur"
-
-#: library/backend/customizer/options.php:199
-#: library/backend/customizer/options.php:213
+#: library/backend/customizer/options.php:127
+#: library/backend/customizer/options.php:141
 #: library/backend/options/class-options-admin.php:120
 msgid "Header Layout"
 msgstr "Disposition des en-têtes"
 
-#: library/backend/customizer/options.php:224
+#: library/backend/customizer/options.php:152
 #: library/backend/options/class-options-admin.php:121
 msgid "Main Layout"
 msgstr "Disposition principale"
 
-#: library/backend/customizer/options.php:238
+#: library/backend/customizer/options.php:166
 msgid "Number of Sidebars ( For Main Container )"
 msgstr "Nombre de barres latérales (pour le conteneur principal)"
 
-#: library/backend/customizer/options.php:239
+#: library/backend/customizer/options.php:167
 msgid ""
 "How many sidebars to register for main container of page ? (Not for header "
 "or footer.)"
@@ -347,185 +342,268 @@ msgstr ""
 "Combien de barres latérales s'inscrire pour le conteneur principal de la "
 "page? (Pas pour l'en-tête ou le pied de page.)"
 
-#: library/backend/customizer/options.php:257
+#: library/backend/customizer/options.php:185
 msgid "Home Page (Post List) Layout"
 msgstr "Mise en page de la page d'accueil (liste des articles)"
 
-#: library/backend/customizer/options.php:276
+#: library/backend/customizer/options.php:204
 msgid "Default Page Layout"
 msgstr "Mise en page par défaut"
 
-#: library/backend/customizer/options.php:295
+#: library/backend/customizer/options.php:223
 msgid "Single Post Layout"
 msgstr "Disposition de poste unique"
 
-#: library/backend/customizer/options.php:314
+#: library/backend/customizer/options.php:242
 msgid "Archive Layout"
 msgstr "Disposition des archives"
 
-#: library/backend/customizer/options.php:337
+#: library/backend/customizer/options.php:265
 msgid "Main Layout Styles"
 msgstr "Styles de disposition principaux"
 
-#: library/backend/customizer/options.php:348
-#: library/backend/customizer/options.php:362
+#: library/backend/customizer/options.php:276
+#: library/backend/customizer/options.php:290
 #: library/backend/options/class-options-admin.php:122
 msgid "Footer Layout"
 msgstr "Disposition du pied de page"
 
-#: library/backend/customizer/options.php:374
+#: library/backend/customizer/options.php:302
 #: library/backend/options/class-options-admin.php:123
 msgid "Blog Settings"
 msgstr "Paramètres du blog"
 
-#: library/backend/customizer/options.php:388
-msgid "Breadcrumb"
-msgstr "Breadcrumb"
+#: library/backend/customizer/options.php:303
+msgid "Blog posts settings."
+msgstr "Paramètres des articles de blog."
 
-#: library/backend/customizer/options.php:389
-msgid "Enable breadcrumb navigation"
-msgstr "Activer la navigation au fil d'Ariane"
+#: library/backend/customizer/options.php:312
+msgid "Post List"
+msgstr "Liste des messages"
 
-#: library/backend/customizer/options.php:402
-msgid "Breadcrumb Separator"
-msgstr "Breadcrumb Séparateur"
+#: library/backend/customizer/options.php:326
+msgid "Posts per page"
+msgstr "Articles par page"
 
-#: library/backend/customizer/options.php:403
-msgid "Separator between links in breadcrumb. Eg: / or >"
-msgstr "Séparateur entre les liens dans le fil d'Ariane. Par exemple: / ou >"
+#: library/backend/customizer/options.php:327
+msgid "Number of posts in post list page."
+msgstr "Nombre de messages dans la page de liste de messages."
 
-#: library/backend/customizer/options.php:416
+#: library/backend/customizer/options.php:341
+msgid "Post List Layout"
+msgstr "Disposition de la liste des articles"
+
+#: library/backend/customizer/options.php:342
+msgid "Layout variation for Post list."
+msgstr "Variante de mise en page pour la liste des articles."
+
+#: library/backend/customizer/options.php:356
+msgid "Posts per row"
+msgstr "Messages par ligne"
+
+#: library/backend/customizer/options.php:357
+msgid "Number of posts in a single row (columns)."
+msgstr "Nombre de messages dans une seule ligne (colonnes)."
+
+#: library/backend/customizer/options.php:371
 msgid "Featured Image"
 msgstr "L'image sélectionnée"
 
-#: library/backend/customizer/options.php:417
+#: library/backend/customizer/options.php:372
 msgid "Show featured image on post list and archives."
 msgstr ""
 "Afficher l'image sélectionnée sur la liste des publications et les archives."
 
-#: library/backend/customizer/options.php:430
+#: library/backend/customizer/options.php:385
+msgid "Content display"
+msgstr "Affichage du contenu"
+
+#: library/backend/customizer/options.php:386
+msgid "Post content display format."
+msgstr "Format d'affichage du contenu de l'article."
+
+#: library/backend/customizer/options.php:403
 msgid "Excerpt length"
 msgstr "Extrait longueur"
 
-#: library/backend/customizer/options.php:431
+#: library/backend/customizer/options.php:404
 msgid "Number of characters in excerpts for post list."
 msgstr "Nombre de caractères dans les extraits de la liste des articles."
 
-#: library/backend/customizer/options.php:444
+#: library/backend/customizer/options.php:417
 msgid "Pagination"
 msgstr "Pagination"
 
-#: library/backend/customizer/options.php:445
+#: library/backend/customizer/options.php:418
 msgid "Paging Navigation display format."
 msgstr "Format d'affichage de la navigation de pagination."
 
-#: library/backend/customizer/options.php:466
-msgid "Show Author Info"
-msgstr "Afficher les informations sur l'auteur"
-
-#: library/backend/customizer/options.php:485
+#: library/backend/customizer/options.php:439
 msgid "Show Meta Info"
 msgstr "Afficher les méta-informations"
 
-#: library/backend/customizer/options.php:508
+#: library/backend/customizer/options.php:461
+msgid "Continue reading text"
+msgstr "Continuer la lecture du texte"
+
+#: library/backend/customizer/options.php:462
+msgid "Post excerpt more link text"
+msgstr "Post extrait plus de texte du lien"
+
+#: library/backend/customizer/options.php:470
+msgid "Single Post"
+msgstr "Poste unique"
+
+#: library/backend/customizer/options.php:484
+msgid "Breadcrumb"
+msgstr "Breadcrumb"
+
+#: library/backend/customizer/options.php:485
+msgid "Enable breadcrumb navigation"
+msgstr "Activer la navigation au fil d'Ariane"
+
+#: library/backend/customizer/options.php:498
+msgid "Breadcrumb Separator"
+msgstr "Breadcrumb Séparateur"
+
+#: library/backend/customizer/options.php:499
+msgid "Separator between links in breadcrumb. Eg: / or >"
+msgstr "Séparateur entre les liens dans le fil d'Ariane. Par exemple: / ou >"
+
+#: library/backend/customizer/options.php:513
+msgid "Show Author Info"
+msgstr "Afficher les informations sur l'auteur"
+
+#: library/backend/customizer/options.php:532
 msgid "Show Comments"
 msgstr "Afficher les commentaires"
 
-#: library/backend/customizer/options.php:525
+#: library/backend/customizer/options.php:549
 msgid "Schema Markup"
 msgstr "Balisage de schéma"
 
-#: library/backend/customizer/options.php:526
+#: library/backend/customizer/options.php:550
 msgid "Enable Schema Markup"
 msgstr "Activer le balisage de schéma"
 
-#: library/backend/customizer/options.php:540
+#: library/backend/customizer/options.php:564
 msgid "Editor Styles"
 msgstr "Styles de l'éditeur"
 
-#: library/backend/customizer/options.php:541
+#: library/backend/customizer/options.php:565
 msgid "Match the Post editor styles to the frontend styles."
 msgstr ""
 "Faites correspondre les styles de l'éditeur de publication aux styles "
 "frontaux."
 
-#: library/backend/customizer/options.php:549
+#: library/backend/customizer/options.php:573
+msgid "Others"
+msgstr "Autres"
+
+#: library/backend/customizer/options.php:589
+msgid "Show back to top scroll button."
+msgstr "Afficher le bouton de défilement vers le haut."
+
+#: library/backend/customizer/options.php:603
+msgid "Show back to top button at position."
+msgstr "Afficher le bouton de retour en haut à la position."
+
+#: library/backend/customizer/options.php:612
 #: library/backend/options/class-options-admin.php:124
 msgid "Performance"
 msgstr "Performance"
 
-#: library/backend/customizer/options.php:563
+#: library/backend/customizer/options.php:626
 msgid "Inline CSS"
 msgstr "CSS en ligne"
 
-#: library/backend/customizer/options.php:564
+#: library/backend/customizer/options.php:627
 msgid "Load theme CSS files inline, saves network requests."
 msgstr ""
 "Charger les fichiers CSS de thème en ligne, enregistre les requêtes réseau."
 
-#: library/backend/customizer/options.php:577
+#: library/backend/customizer/options.php:640
 msgid "Defer CSS"
 msgstr "Différer CSS"
 
-#: library/backend/customizer/options.php:578
+#: library/backend/customizer/options.php:641
 msgid "Load theme CSS files after page load."
 msgstr "Chargez les fichiers CSS de thème après le chargement de la page."
 
-#: library/backend/customizer/options.php:591
+#: library/backend/customizer/options.php:654
 msgid "Inline Javascript"
 msgstr "Javascript en ligne"
 
-#: library/backend/customizer/options.php:592
+#: library/backend/customizer/options.php:655
 msgid "Load theme JS files inline, saves a network request."
 msgstr ""
 "Charger les fichiers JS de thème en ligne, enregistre une demande réseau."
 
-#: library/backend/customizer/options.php:605
+#: library/backend/customizer/options.php:668
 msgid "Disable WP Block Editor Style"
 msgstr "Désactiver le style de l'éditeur de blocs WP"
 
-#: library/backend/customizer/options.php:606
+#: library/backend/customizer/options.php:669
 msgid "Posts created with WP Block Editor may break, disable with caution."
 msgstr ""
 "Les publications créées avec WP Block Editor peuvent se casser, désactivez-"
 "les avec prudence."
 
-#: library/backend/customizer/options.php:619
+#: library/backend/customizer/options.php:682
 msgid "Defer WP Block Editor CSS"
 msgstr "Différer le CSS de l'éditeur de blocs WP"
 
-#: library/backend/customizer/options.php:620
+#: library/backend/customizer/options.php:683
 msgid "Load Block Editor CSS files after page load."
 msgstr ""
 "Chargez les fichiers CSS de l'éditeur de blocs après le chargement de la "
 "page."
 
-#: library/backend/customizer/options.php:628
+#: library/backend/customizer/options.php:696
+msgid "Inline WP Block Editor CSS"
+msgstr "Éditeur de blocs WP en ligne CSS"
+
+#: library/backend/customizer/options.php:697
+msgid "Load WP Block Editor CSS files inline, saves network requests."
+msgstr ""
+"Charger les fichiers CSS WP Block Editor en ligne, enregistre les demandes "
+"réseau."
+
+#: library/backend/customizer/options.php:705
 msgid "Presets"
 msgstr "Préconfigurations"
 
-#: library/backend/customizer/options.php:643
+#: library/backend/customizer/options.php:720
 #: library/backend/options/class-options-admin.php:125
 msgid "Theme Presets"
 msgstr "Préréglages de thème"
 
-#: library/backend/editor/class-editor.php:154
+#: library/backend/editor/class-editor.php:196
 msgid "Full Width Banner"
 msgstr "Bannière pleine largeur"
 
-#: library/backend/editor/class-editor.php:155
+#: library/backend/editor/class-editor.php:197
 msgid "Full width Banner Cover."
 msgstr "Couverture de bannière pleine largeur."
 
-#: library/backend/editor/class-editor.php:164
+#: library/backend/editor/class-editor.php:206
 msgid "Full Width Banner with Container"
 msgstr "Bannière pleine largeur avec conteneur"
 
-#: library/backend/editor/class-editor.php:165
+#: library/backend/editor/class-editor.php:207
 msgid "Full width Banner Cover with contents inside a container."
 msgstr ""
 "Couverture de bannière pleine largeur avec contenu à l'intérieur d'un "
 "conteneur."
+
+#: library/backend/helpers/class-cssparser.php:41
+msgid "String is empty."
+msgstr "La chaîne est vide."
+
+#: library/backend/helpers/class-cssparser.php:70
+#: library/backend/helpers/class-cssparser.php:74
+msgid "css is not parsable."
+msgstr "css n'est pas analysable."
 
 #: library/backend/options/class-options-admin.php:62
 msgid "Greenlet Settings"
@@ -552,19 +630,47 @@ msgid "Get Pro Version"
 msgstr "Obtenez la version Pro"
 
 #: library/backend/options/class-options-admin.php:159
+msgid "Show your love"
+msgstr "Montre ton amour"
+
+#: library/backend/options/class-options-admin.php:160
 msgid "Documentation"
 msgstr "Documentation"
 
-#: library/backend/options/class-options-admin.php:160
+#: library/backend/options/class-options-admin.php:161
+msgid "Support forum"
+msgstr "Forum d'entraide"
+
+#: library/backend/options/class-options-admin.php:162
+msgid "Report a bug"
+msgstr "Signaler un bug"
+
+#: library/backend/options/class-options-admin.php:163
 msgid "Latest dev branch"
 msgstr "Dernière branche de développement"
+
+#: library/pro/backend/options.php:120
+msgid "Columns Gap"
+msgstr "Écart de colonnes"
+
+#: library/pro/backend/options.php:136
+msgid "Buttons"
+msgstr "Boutons"
+
+#: library/pro/backend/options.php:151
+msgid "Button Color"
+msgstr "Couleur du bouton"
+
+#: library/pro/backend/options.php:165
+msgid "Button Background"
+msgstr "Arrière-plan du bouton"
 
 #: library/support/woocommerce/class-woocommerce.php:216
 msgid "Shopping Cart"
 msgstr "Panier"
 
 #: library/backend/customizer/custom-controls/class-control-template.php:97
-#: library/backend/assets/js/greenlet-controls.js:1759
+#: library/backend/assets/js/greenlet-controls.js:1538
 msgid "Enter column numbers separated by hyphen."
 msgstr "Saisissez les numéros de colonne séparés par un tiret."
 
@@ -626,78 +732,78 @@ msgstr "Voir Panier d'achat"
 msgid "%d Item"
 msgid_plural "%d Items"
 msgstr[0] "%d élément"
-msgstr[1] ""
+msgstr[1] "% d éléments"
 
-#: library/backend/assets/js/greenlet-controls.js:295
-#: library/backend/assets/js/greenlet-controls.js:2017
+#: library/backend/assets/js/greenlet-controls.js:341
+#: library/backend/assets/js/greenlet-controls.js:1824
 msgid "Sidebar"
 msgstr "Barre latérale"
 
-#: library/backend/assets/js/greenlet-controls.js:1480
+#: library/backend/assets/js/greenlet-controls.js:1259
 msgid "Items"
 msgstr "Articles"
 
-#: library/backend/assets/js/greenlet-controls.js:1695
+#: library/backend/assets/js/greenlet-controls.js:1474
 msgid "Main"
 msgstr "Principale"
 
-#: library/backend/assets/js/greenlet-controls.js:1717
+#: library/backend/assets/js/greenlet-controls.js:1496
 msgid "Sticky"
 msgstr "Gluante"
 
-#: library/backend/assets/js/greenlet-controls.js:1721
+#: library/backend/assets/js/greenlet-controls.js:1500
 msgid "Select Columns Layout"
 msgstr "Sélectionnez la disposition des colonnes"
 
-#: library/backend/assets/js/greenlet-controls.js:1759
+#: library/backend/assets/js/greenlet-controls.js:1538
 msgid "Sum should be"
 msgstr "La somme doit être"
 
-#: library/backend/assets/js/greenlet-controls.js:1770
+#: library/backend/assets/js/greenlet-controls.js:1549
 msgid "Vertical"
 msgstr "Verticale"
 
-#: library/backend/assets/js/greenlet-controls.js:1780
+#: library/backend/assets/js/greenlet-controls.js:1559
 msgid "No"
 msgstr "Non"
 
-#: library/backend/assets/js/greenlet-controls.js:1782
+#: library/backend/assets/js/greenlet-controls.js:1561
 msgid "Left"
 msgstr "La gauche"
 
-#: library/backend/assets/js/greenlet-controls.js:1784
+#: library/backend/assets/js/greenlet-controls.js:1563
 msgid "Right"
 msgstr "Droite"
 
-#: library/backend/assets/js/greenlet-controls.js:1791
+#: library/backend/assets/js/greenlet-controls.js:1570
 msgid "Delete"
 msgstr "Effacer"
 
-#: library/backend/assets/js/greenlet-controls.js:1795
+#: library/backend/assets/js/greenlet-controls.js:1574
 msgid "Hide"
 msgstr "Cacher"
 
-#: library/backend/assets/js/greenlet-controls.js:1795
+#: library/backend/assets/js/greenlet-controls.js:1574
 msgid "Show"
 msgstr "Spectacle"
 
-#: library/backend/assets/js/greenlet-controls.js:1795
+#: library/backend/assets/js/greenlet-controls.js:1574
 msgid "Advanced"
 msgstr "Avancée"
 
-#: library/backend/assets/js/greenlet-meta.js:132
+#: library/backend/assets/js/greenlet-meta.js:139
 msgid "Default"
 msgstr "Défaut"
 
-#: library/backend/assets/js/greenlet-meta.js:138
+#: library/backend/assets/js/greenlet-meta.js:145
 msgid "Custom"
 msgstr "Douane"
 
-#: library/backend/assets/js/greenlet-meta.js:227
+#: library/backend/assets/js/greenlet-meta.js:234
 msgid "Page Layout"
 msgstr "Mise en page"
 
-#: library/backend/assets/js/greenlet-preview.js:127
+#: library/backend/assets/js/greenlet-preview.js:173
 msgid "Infinite scrolling is temporarily disabled to edit footer."
 msgstr ""
 "Le défilement infini est temporairement désactivé pour modifier le pied de "

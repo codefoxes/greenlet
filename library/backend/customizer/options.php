@@ -23,56 +23,12 @@ function greenlet_options() {
 		$sidebars_qty[ $i ] = $i;
 	}
 
-	$logo_width  = 0;
-	$logo_height = 0;
-	$logo        = greenlet_get_logo();
-	if ( $logo ) {
-		list( $logo_width, $logo_height ) = getimagesize( esc_url( $logo ) );
-	}
-
 	$posts_count   = array_combine( range( 1, 40 ), range( 1, 40 ) );
 	$posts_columns = array_combine( range( 1, 12 ), range( 1, 12 ) );
 
 	$options = array();
 
 	// Site Identity.
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'logo_width',
-		'sargs' => array(
-			'default'   => $logo_width . 'px',
-			'transport' => 'postMessage',
-		),
-		'cargs' => array(
-			'type'        => 'length',
-			'section'     => 'title_tagline',
-			'description' => __( 'Logo Width', 'greenlet' ),
-			'input_attrs' => array(
-				'min' => 0,
-				'max' => 500,
-			),
-			'priority'    => 8,
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'logo_height',
-		'sargs' => array(
-			'default'   => $logo_height . 'px',
-			'transport' => 'postMessage',
-		),
-		'cargs' => array(
-			'type'        => 'length',
-			'section'     => 'title_tagline',
-			'description' => __( 'Logo Height', 'greenlet' ),
-			'input_attrs' => array(
-				'min' => 0,
-				'max' => 500,
-			),
-			'priority'    => 8,
-		),
-	);
 
 	$options[] = array(
 		'type'  => 'setting_control',
@@ -144,10 +100,7 @@ function greenlet_options() {
 			'type'    => 'radio',
 			'section' => 'framework',
 			'label'   => __( 'CSS Framework', 'greenlet' ),
-			'choices' => array(
-				'default'   => __( 'Greenlet Framework', 'greenlet' ),
-				'bootstrap' => __( 'Bootstrap 4.5.3', 'greenlet' ),
-			),
+			'choices' => greenlet_css_frameworks(),
 		),
 	);
 
@@ -164,34 +117,6 @@ function greenlet_options() {
 			'input_attrs' => array(
 				'placeholder' => __( 'https://somecdn.com/css_framework.css', 'greenlet' ),
 			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'load_js',
-		'sargs' => array(
-			'default' => false,
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'framework',
-			'label'       => __( 'Load Respective JS', 'greenlet' ),
-			'description' => __( 'Eg: Load Bootstrap JS if loaded Bootstrap CSS.', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'container_width',
-		'sargs' => array(
-			'default'   => '',
-			'transport' => 'postMessage',
-		),
-		'cargs' => array(
-			'type'    => 'length',
-			'section' => 'framework',
-			'label'   => __( 'Container Width', 'greenlet' ),
 		),
 	);
 
@@ -415,10 +340,7 @@ function greenlet_options() {
 			'section'     => 'blog_list',
 			'label'       => __( 'Post List Layout', 'greenlet' ),
 			'description' => __( 'Layout variation for Post list.', 'greenlet' ),
-			'choices'     => array(
-				'list' => 'List',
-				'grid' => 'Grid',
-			),
+			'choices'     => greenlet_post_list_layouts(),
 		),
 	);
 
@@ -633,7 +555,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'editor_styles',
 		'sargs' => array(
-			'default'   => '1',
+			'default'   => false,
 			'transport' => 'postMessage',
 		),
 		'cargs' => array(
@@ -641,6 +563,45 @@ function greenlet_options() {
 			'section'     => 'blog_single',
 			'label'       => __( 'Editor Styles', 'greenlet' ),
 			'description' => __( 'Match the Post editor styles to the frontend styles.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type' => 'section',
+		'id'   => 'blog_extra',
+		'args' => array(
+			'title' => __( 'Others', 'greenlet' ),
+			'panel' => 'blog',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'to_top',
+		'sargs' => array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog_extra',
+			'label'       => __( 'Back to top', 'greenlet' ),
+			'description' => __( 'Show back to top scroll button.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'to_top_at',
+		'sargs' => array(
+			'default'   => '100px',
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'    => 'length',
+			'section' => 'blog_extra',
+			'label'   => __( 'Show back to top button at position.', 'greenlet' ),
+			'units'    => array( 'px' => array( 'step' => 1, 'min' => 0, 'max' => 2000 ), '%' => array( 'step' => 1, 'min' => 0, 'max' => 100 ) ) // phpcs:ignore
 		),
 	);
 
@@ -720,6 +681,20 @@ function greenlet_options() {
 			'section'     => 'performance',
 			'label'       => __( 'Defer WP Block Editor CSS', 'greenlet' ),
 			'description' => __( 'Load Block Editor CSS files after page load.', 'greenlet' ),
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'inline_block_css',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'performance',
+			'label'       => __( 'Inline WP Block Editor CSS', 'greenlet' ),
+			'description' => __( 'Load WP Block Editor CSS files inline, saves network requests.', 'greenlet' ),
 		),
 	);
 

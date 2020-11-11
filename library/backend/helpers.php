@@ -176,3 +176,39 @@ if ( ! function_exists( 'greenlet_is_assoc' ) ) {
 		return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
 	}
 }
+
+if ( ! function_exists( 'greenlet_post_list_layouts' ) ) {
+	/**
+	 * Post list layout options.
+	 *
+	 * @since  2.1.0
+	 * @return mixed Layout options
+	 */
+	function greenlet_post_list_layouts() {
+		return apply_filters(
+			'greenlet_post_list_layouts',
+			array(
+				'list' => __( 'List', 'greenlet' ),
+				'grid' => __( 'Grid', 'greenlet' ),
+			)
+		);
+	}
+}
+
+if ( ! function_exists( 'greenlet_css_frameworks' ) ) {
+	/**
+	 * CSS frameworks options.
+	 *
+	 * @since  2.1.0
+	 * @return mixed Frameworks options
+	 */
+	function greenlet_css_frameworks() {
+		return apply_filters(
+			'greenlet_css_frameworks',
+			array(
+				'default'   => __( 'Greenlet Framework', 'greenlet' ),
+				'bootstrap' => __( 'Bootstrap 4.5.3', 'greenlet' ),
+			)
+		);
+	}
+}

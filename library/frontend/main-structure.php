@@ -701,7 +701,7 @@ function greenlet_posts_open() {
 		$columns = gl_get_option( 'posts_columns', 3 );
 
 		$class_names = 'posts-list ' . $layout . ( ( 'grid' === $layout ) ? ' cols-' . $columns : '' );
-		greenlet_markup( 'posts-list', greenlet_attr( $class_names ) );
+		greenlet_markup( 'posts-list', greenlet_attr( apply_filters( 'greenlet_post_list_classes', $class_names ) ) );
 	}
 }
 

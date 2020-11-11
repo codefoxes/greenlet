@@ -1,6 +1,5 @@
 /* Greenlet Default Styles */
 
-
 @import "reset";
 @import "variables";
 @import "mixins";
@@ -8,7 +7,10 @@
 
 /* Default Style */
 
-html { font-size: 62.5%; }
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
 
 body {
 	margin: 0;

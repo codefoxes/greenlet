@@ -30,16 +30,23 @@
     "fonts": "./src/build.sh fonts",
     "css": "./src/build.sh css",
     "js": "./src/build.sh js",
-    "backend": "./src/build.sh backend",
-    "backend:watch": "./src/build.sh backend --watch",
-    "colorwings": "./src/build.sh colorwings",
     "upgrade": "./src/update-version",
-    "i18n": "./src/build.sh i18n"
+    "i18n": "./src/build.sh i18n",
+    "main": "MAIN=1 ./node_modules/.bin/rollup -c",
+    "main:w": "MAIN=1 ./node_modules/.bin/rollup -c -w",
+    "main:fe:w": "MAIN_FE=1 ./node_modules/.bin/rollup -c -w",
+    "main:be:w": "MAIN_BE=1 ./node_modules/.bin/rollup -c -w",
+    "colorwings": "CW=1 ./node_modules/.bin/rollup -c",
+    "colorwings:w": "MAIN=1 ./node_modules/.bin/rollup -c -w",
+    "pro": "PRO=1 ./node_modules/.bin/rollup -c",
+    "pro:w": "PRO=1 ./node_modules/.bin/rollup -c -w",
+    "pro:be:w": "PRO_BE=1 ./node_modules/.bin/rollup -c -w",
+    "pro:fe:w": "PRO_FE=1 ./node_modules/.bin/rollup -c -w"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codefoxes/greenlet.git"
   },
   "author": "Karthik Bhat",
-  "license": "ISC"
+  "license": "GPLv2"
 }

@@ -77,11 +77,11 @@ function greenlet_attr( $args, $get_array = false ) {
 
 	$mq = wp_parse_args( $media, $media_defaults );
 
+	// Get css framework from options.
+	$css_framework = gl_get_option( 'css_framework', 'default' );
+
 	// If width is set.
 	if ( $width ) {
-		// Get css framework from options.
-		$css_framework = gl_get_option( 'css_framework', 'default' );
-
 		switch ( $css_framework ) {
 			case 'default':
 				$attributes['class'] .= ' col-' . $width;
@@ -96,6 +96,7 @@ function greenlet_attr( $args, $get_array = false ) {
 				}
 				break;
 		}
+		$attributes = apply_filters( 'greenlet_attr_col', $attributes, $primary, $css_framework, $width, $mq );
 	}
 
 	// If schema enabled, add filter to each primary class.
@@ -111,7 +112,7 @@ function greenlet_attr( $args, $get_array = false ) {
 	 * @var string $primary    HTML class.
 	 * @var array  $attributes HTML attributes.
 	 */
-	$attributes = apply_filters( "greenlet_attr_{$primary}", $attributes, $primary );
+	$attributes = apply_filters( "greenlet_attr_{$primary}", $attributes, $primary, $css_framework );
 
 	if ( true === $get_array ) {
 		return $attributes;

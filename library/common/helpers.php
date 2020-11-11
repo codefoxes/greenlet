@@ -173,7 +173,7 @@ if ( ! function_exists( 'greenlet_enqueue_script' ) ) {
 			$path = str_replace( get_home_url(), ABSPATH, $src );
 			ob_start();
 			require_once $path;
-			greenlet_enqueue_inline_script( $handle, ob_get_clean() );
+			greenlet_enqueue_inline_script( $handle, ob_get_clean(), $deps );
 			return;
 		}
 
@@ -188,9 +188,10 @@ if ( ! function_exists( 'greenlet_enqueue_inline_script' ) ) {
 	 * @since 2.0.0
 	 * @param string $handle Script handle.
 	 * @param string $data   CSS Data.
+	 * @param array  $deps   An array of registered script handles.
 	 */
-	function greenlet_enqueue_inline_script( $handle, $data ) {
-		wp_register_script( $handle, false, array(), GREENLET_VERSION, true );
+	function greenlet_enqueue_inline_script( $handle, $data, $deps = array() ) {
+		wp_register_script( $handle, false, $deps, GREENLET_VERSION, true );
 		wp_enqueue_script( $handle );
 		wp_add_inline_script( $handle, $data );
 	}
