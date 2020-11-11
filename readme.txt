@@ -6,7 +6,7 @@ Tags: blog, custom-background, custom-colors, editor-style, featured-images, foo
 Tested up to: 5.5.1
 Requires at least: 5.3
 Requires PHP: 5.6
-Stable tag: 2.0.1
+Stable tag: 2.1.0
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -61,8 +61,19 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 
 == Changelog ==
 
-- Fix: Bug in Extra styles.
-- Fix: Unknown font family is gracefully handled
+- New: Post List Layouts
+- New: Back to Top button
+- New: Excerpt and full content display options for post list.
+- Improvement: Extra Post classes
+- Improvement: Remove redundant actions
+- Improvement: Editor Styles from custom CSS
+- Improvement: Remove redundant customizer options
+- Improvement: ColorWings update - Exposed Components
+- Improvement: Use ColorWings components in Customizer
+- Improvement: Arrange Blog settings to sections in customizer
+- Fix: Menu toggle bug with id
+- Fix: Extra styles length component bug
+- Fix: wp_set_script_translations compatibility
 
 == Copyright ==
 

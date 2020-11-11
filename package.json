@@ -1,6 +1,6 @@
 {
   "name": "greenlet",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Extremely fast and highly customizable WordPress theme.",
   "dependencies": {
     "react-select-search": "^2.1.1"
