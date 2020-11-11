@@ -555,7 +555,7 @@ function greenlet_options() {
 		'type'  => 'setting_control',
 		'id'    => 'editor_styles',
 		'sargs' => array(
-			'default'   => '1',
+			'default'   => false,
 			'transport' => 'postMessage',
 		),
 		'cargs' => array(

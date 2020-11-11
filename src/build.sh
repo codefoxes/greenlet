@@ -9,10 +9,15 @@ declare -a pro_css=( 'styles' )
 
 buildjs() {
 	echo 'Build JS: Started'
-	rm -rf assets/js
-	mkdir -p assets/js
-	cp src/frontend/js/scripts.js assets/js/scripts.js
-	./node_modules/.bin/uglifyjs assets/js/scripts.js -c -m -o assets/js/scripts.min.js --source-map
+	if [ "$1" == "only_main" ]; then
+		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
+	elif [ "$1" == "only_cw" ]; then
+		ONLY_CW=1 ./node_modules/.bin/rollup -c
+	elif [ "$1" == "only_pro" ]; then
+		ONLY_PRO=1 ./node_modules/.bin/rollup -c
+	else
+		./node_modules/.bin/rollup -c
+	fi
 	echo 'Build JS: Complete'
 }
 
@@ -56,18 +61,6 @@ buildfonts() {
 	python3 $DIR/build-google-fonts
 }
 
-buildbackend() {
-	if [ "$1" == "only_main" ]; then
-		ONLY_MAIN=1 ./node_modules/.bin/rollup -c
-	elif [ "$1" == "only_cw" ]; then
-		ONLY_CW=1 ./node_modules/.bin/rollup -c
-	elif [ "$1" == "only_pro" ]; then
-		ONLY_PRO=1 ./node_modules/.bin/rollup -c
-	else
-		./node_modules/.bin/rollup -c
-	fi
-}
-
 removePOBackups() {
 	echo "Removing po backups"
 	rm -rf library/languages/*.po~
@@ -81,9 +74,8 @@ copyColorwings() {
 }
 
 if [ -z "$1" ]; then
-	buildjs
 	buildcss
-	buildbackend
+	buildjs
 	buildfonts
 elif [ "$1" == "--watch" ]; then
 	fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh
@@ -94,9 +86,8 @@ elif [ "$1" == "--final" ]; then
 	[ $? == 0 ] || exit 1
 	cd $current
 	printf "${BGREEN}STEP 2: BUILDING${NC}\n"
-	buildjs
 	buildcss
-	buildbackend
+	buildjs
 	buildfonts
 	removePOBackups
 	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
@@ -120,15 +111,15 @@ elif [ "$1" == "css" ]; then
 elif [ "$1" == "js" ]; then
 	buildjs
 elif [ "$1" == "backend" ]; then
-	buildbackend only_main
+	buildjs only_main
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
 elif [ "$1" == "colorwings" ]; then
-	buildbackend only_cw
+	buildjs only_cw
 	copyColorwings
 elif [ "$1" == "pro" ]; then
-	buildbackend only_pro
+	buildjs only_pro
 elif [ "$1" == "i18n" ]; then
 	current=$(pwd)
 	cd library/languages

@@ -50,7 +50,7 @@ class Editor {
 	public function __construct() {
 		require_once GREENLET_LIBRARY_DIR . '/backend/helpers/class-cssparser.php';
 
-		$enable_editor_styles = gl_get_option( 'editor_styles', true );
+		$enable_editor_styles = gl_get_option( 'editor_styles', false );
 		if ( $enable_editor_styles ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_editor_styles' ) );
 			add_action( 'admin_enqueue_scripts', 'greenlet_enqueue_fonts', 90 );
