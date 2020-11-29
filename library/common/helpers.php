@@ -187,7 +187,7 @@ if ( ! function_exists( 'greenlet_enqueue_inline_script' ) ) {
 	 *
 	 * @since 2.0.0
 	 * @param string $handle Script handle.
-	 * @param string $data   CSS Data.
+	 * @param string $data   JS Data.
 	 * @param array  $deps   An array of registered script handles.
 	 */
 	function greenlet_enqueue_inline_script( $handle, $data, $deps = array() ) {
