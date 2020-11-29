@@ -58,7 +58,7 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			define( 'COLORWINGS_VERSION', '1.0.0' );
+			define( 'COLORWINGS_VERSION', '1.1.0' );
 			define( 'COLORWINGS_URL', $this->get_path_url() );
 			define( 'COLORWINGS_DIR', dirname( __FILE__ ) );
 

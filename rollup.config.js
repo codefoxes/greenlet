@@ -25,7 +25,7 @@ const EXTERNAL = [
 	'ReactDOM',
 ]
 
-const getCWBanner = filename => `/** @license ColorWings v1.0.0
+const getCWBanner = filename => `/** @license ColorWings v1.1.0
 * ${ filename }
 *
 * Copyright (c) Color Wings and its affiliates.
@@ -68,6 +68,11 @@ const cwPaths = [{
 	outputPath: 'library/addons/colorwings/js/color-wings-preview.js',
 	outputMin : 'library/addons/colorwings/js/color-wings-preview.min.js',
 	banner: getCWBanner( 'color-wings-preview.js' ),
+}, {
+	inputPath : 'library/addons/colorwings/pro/src/Pro.js',
+	outputPath: 'library/addons/colorwings/pro/js/color-wings-pro.js',
+	outputMin : 'library/addons/colorwings/pro/js/color-wings-pro.min.js',
+	banner: getCWBanner( 'color-wings-pro.js' ),
 }]
 
 const proBEPaths = [{

@@ -1,4 +1,4 @@
-/** @license ColorWings v1.0.0
+/** @license ColorWings v1.1.0
 * color-wings-preview.js
 *
 * Copyright (c) Color Wings and its affiliates.
@@ -814,11 +814,11 @@
 
 	  if (PreviewStore.isFocused() && op !== 'lock') {
 	    PreviewStore.unlockFocus();
-	    Evt.emit('focusUnlocked', currentSelector);
+	    Evt.emit('focus-unlocked', currentSelector);
 	    deHighlight();
 	  } else {
 	    PreviewStore.lockFocus();
-	    Evt.emit('focusLocked', {
+	    Evt.emit('focus-locked', {
 	      currentSelector: currentSelector,
 	      currentTarget: currentTarget
 	    });
@@ -856,7 +856,6 @@
 	  }
 	};
 
-	var $ = jQuery;
 	function debounce(callback, wait) {
 	  var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 	  var timeout = null;
@@ -1154,8 +1153,8 @@
 	  }
 	};
 
-	cw.Evt.on('focusLocked', showTree);
-	cw.Evt.on('focusUnlocked', hideTree);
+	cw.Evt.on('focus-locked', showTree);
+	cw.Evt.on('focus-unlocked', hideTree);
 
 	function Focuser() {
 	  var _useStore = useStore(PreviewStore),

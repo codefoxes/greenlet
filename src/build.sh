@@ -57,8 +57,10 @@ buildcss() {
 }
 
 buildfonts() {
+	echo 'Build Fonts: Started'
 	DIR="$(cd "$(dirname "$0")" && pwd)"
 	python3 $DIR/build-google-fonts
+	echo 'Build Fonts: Complete'
 }
 
 removePOBackups() {
@@ -68,7 +70,8 @@ removePOBackups() {
 }
 
 copyColorwings() {
-	cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
+	# cp -R ./library/addons/colorwings/* ../../plugins/colorwings/
+	rsync -avP --exclude '.git' ./library/addons/colorwings/* ../../plugins/colorwings/
 	# Todo: Replace text domain.
 	sed -i '' 's/greenlet/colorwings/g' ../../plugins/colorwings/class-colorwings-admin.php
 }
@@ -115,8 +118,8 @@ elif [ "$1" == "backend" ]; then
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
-elif [ "$1" == "colorwings" ]; then
-	buildjs only_cw
+elif [ "$1" == "cw:final" ]; then
+	buildfonts
 	copyColorwings
 elif [ "$1" == "pro" ]; then
 	buildjs only_pro

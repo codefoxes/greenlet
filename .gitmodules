@@ -4,3 +4,6 @@
 [submodule "src/backend/colorwings"]
 	path = src/backend/colorwings
 	url = git@colorwings-source.git
+[submodule "library/addons/colorwings/pro"]
+	path = library/addons/colorwings/pro
+	url = git@colorwings-pro.git
