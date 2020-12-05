@@ -6,7 +6,7 @@ assets/js/*
 library/backend/assets/css/greenlet-preview.*
 library/backend/assets/js/greenlet-*
 
-library/addons/colorwings/**.js.map
+library/addons/colorwings/**/*.js.map
 library/addons/colorwings/fonts/google-fonts.json
 
 **/cypress.env.json
