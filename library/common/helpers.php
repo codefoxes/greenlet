@@ -91,7 +91,9 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 			} else {
 				$path = str_replace( array( content_url(), get_home_url() ), array( WP_CONTENT_DIR, ABSPATH ), $src );
 			}
-			greenlet_enqueue_inline_style( $handle, file_get_contents( $path ) ); //phpcs:ignore
+			ob_start();
+			include_once $path;
+			greenlet_enqueue_inline_style( $handle, ob_get_clean() );
 			return;
 		}
 
@@ -169,7 +171,9 @@ if ( ! function_exists( 'greenlet_enqueue_script' ) ) {
 		}
 		if ( false !== $inline ) {
 			$path = str_replace( array( content_url(), get_home_url() ), array( WP_CONTENT_DIR, ABSPATH ), $src );
-			greenlet_enqueue_inline_script( $handle, file_get_contents( $path ), $deps ); //phpcs:ignore
+			ob_start();
+			include_once $path;
+			greenlet_enqueue_inline_script( $handle, ob_get_clean(), $deps );
 			return;
 		}
 
