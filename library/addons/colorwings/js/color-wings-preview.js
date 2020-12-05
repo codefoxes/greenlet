@@ -981,21 +981,44 @@
 	window.addEventListener('resize', debouncedUpdateFocus);
 
 	var bodyContent = document.querySelectorAll('body > *:not(script):not(style):not(#color-wings)');
-	bodyContent.forEach(function (el) {
-	  el.addEventListener('mouseover', moveFocus);
-	});
-	cw.Evt.on('mount-colorwings', function () {
+
+	function listenFocusActions() {
 	  bodyContent.forEach(function (el) {
+	    el.addEventListener('mouseover', moveFocus);
 	    el.addEventListener('click', lockUnlockFocus, true);
 	  });
-	});
-	cw.Evt.on('unmount-colorwings', function () {
+	  document.body.addEventListener('mouseleave', reduceFocus);
+	  document.body.addEventListener('mouseenter', increaseFocus);
+	}
+
+	function unListenFocusActions() {
 	  bodyContent.forEach(function (el) {
+	    el.removeEventListener('mouseover', moveFocus);
 	    el.removeEventListener('click', lockUnlockFocus, true);
 	  });
+	  document.body.removeEventListener('mouseleave', reduceFocus);
+	  document.body.removeEventListener('mouseenter', increaseFocus);
+	}
+
+	function selectElement(selector) {
+	  moveFocus(selector, true);
+	  lockUnlockFocus(false, 'lock');
+	}
+
+	cw.Evt.on('preview-object-ready', function () {
+	  cw.Evt.off('mount-colorwings', listenFocusActions);
+	  cw.Evt.off('unmount-colorwings', unListenFocusActions);
+	  cw.Evt.off('select-element', selectElement);
+	  cw.Evt.off('update-selector', updateSelector);
+	  cw.Evt.off('highlight-elements', highlightElements);
+	  cw.Evt.off('de-highlight-elements', deHighlight);
 	});
-	document.body.addEventListener('mouseleave', reduceFocus);
-	document.body.addEventListener('mouseenter', increaseFocus); // Quick Select
+	cw.Evt.on('mount-colorwings', listenFocusActions);
+	cw.Evt.on('unmount-colorwings', unListenFocusActions);
+	cw.Evt.on('select-element', selectElement);
+	cw.Evt.on('update-selector', updateSelector);
+	cw.Evt.on('highlight-elements', highlightElements);
+	cw.Evt.on('de-highlight-elements', deHighlight); // Quick Select
 
 	var selectors = [{
 	  name: 'Body',
@@ -1044,15 +1067,6 @@
 	  return null !== document.querySelector(item.sel);
 	});
 	cw.MainStore.setQuickSelectors(filtered);
-	cw.Evt.on('select-element', function (selector) {
-	  moveFocus(selector, true);
-	  lockUnlockFocus(false, 'lock');
-	});
-	cw.Evt.on('update-selector', function (selector) {
-	  updateSelector(selector);
-	});
-	cw.Evt.on('highlight-elements', highlightElements);
-	cw.Evt.on('de-highlight-elements', deHighlight);
 
 	var getTree$1 = function getTree(el) {
 	  if (false === el) return [];
@@ -1153,6 +1167,18 @@
 	  }
 	};
 
+	/**
+	This is solution for an interesting problem.
+	'preview-object-ready' is already triggered when JS reaches here.
+	However, as cw.Evt is an object from the parent window (customizer, not the preview where this code is running)
+	event callbacks for old page are still triggered after a new page is loaded in the preview.
+	Those callbacks (registered in the parent cw.Evt) can be removed in the old preview page upon new preview page's 'preview-object-ready' event.
+	 */
+
+	cw.Evt.on('preview-object-ready', function () {
+	  cw.Evt.off('focus-locked', showTree);
+	  cw.Evt.off('focus-unlocked', hideTree);
+	});
 	cw.Evt.on('focus-locked', showTree);
 	cw.Evt.on('focus-unlocked', hideTree);
 
@@ -1204,7 +1230,7 @@
 	  }, focusDetails.selector));
 	}
 
-	var styles = "#cw-domtree {\n  width: 100%;\n  bottom: 0;\n  position: fixed;\n  background: #eee;\n  font-size: 14px;\n  color: #444;\n  line-height: 16px;\n  margin: 0; }\n  #cw-domtree .cw-domtree-list {\n    white-space: nowrap;\n    list-style-type: none;\n    margin: 0;\n    border-top: 1px solid #bbb; }\n  #cw-domtree .cw-domtree-node {\n    display: inline-block;\n    background-color: #ddd;\n    margin: 0;\n    position: relative; }\n  #cw-domtree .cw-node-tag {\n    position: relative; }\n    #cw-domtree .cw-node-tag button {\n      margin: 0;\n      text-transform: none;\n      border: none;\n      letter-spacing: normal;\n      font-size: 12px;\n      font-weight: 500;\n      height: 24px;\n      line-height: 24px;\n      padding: 0 16px 0 20px;\n      background: #ddd;\n      color: #555;\n      transition: none; }\n    #cw-domtree .cw-node-tag .cw-target {\n      display: none;\n      position: absolute;\n      right: -3px;\n      top: 6px;\n      width: 12px;\n      height: 12px;\n      border-radius: 6px;\n      background: center/contain no-repeat url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12px' height='12px' viewBox='0 0 12 12'%3E%3Crect fill='%23333' x='5.5' y='.5' width='1' height='3.5'/%3E%3Crect fill='%23333' x='5.5' y='8' width='1' height='3.5'/%3E%3Crect fill='%23333' x='.5' y='5.5' width='3.5' height='1'/%3E%3Crect fill='%23333' x='8' y='5.5' width='3.5' height='1'/%3E%3C/svg%3E\");\n      padding: 0;\n      z-index: 3; }\n    #cw-domtree .cw-node-tag:before {\n      content: \" \";\n      display: block;\n      width: 0;\n      height: 0;\n      border-top: 12px solid transparent;\n      border-bottom: 12px solid transparent;\n      border-left: 10px solid rgba(0, 0, 0, 0.4);\n      position: absolute;\n      top: 0;\n      margin-left: 1px;\n      left: 100%;\n      z-index: 1; }\n    #cw-domtree .cw-node-tag:after {\n      content: \" \";\n      display: block;\n      width: 0;\n      height: 0;\n      border-top: 12px solid transparent;\n      border-bottom: 12px solid transparent;\n      border-left: 10px solid #ddd;\n      position: absolute;\n      top: 0;\n      left: 100%;\n      z-index: 2; }\n  #cw-domtree .cw-domtree-node:hover, #cw-domtree .cw-domtree-node:hover .cw-node-tag button, #cw-domtree .cw-domtree-node .selected button {\n    background-color: #7cb342;\n    color: #fff; }\n  #cw-domtree .cw-domtree-node:hover .cw-node-tag:after, #cw-domtree .cw-domtree-node .cw-node-tag.selected:after {\n    border-left-color: #7cb342; }\n  #cw-domtree .cw-domtree-node:not(:last-child):hover .cw-target {\n    display: block;\n    background-color: #fff; }\n  #cw-domtree .cw-domtree-node .selected button {\n    color: #fff; }\n  #cw-domtree .cw-node-attributes {\n    display: none;\n    position: absolute;\n    bottom: 100%;\n    background: #eee;\n    height: auto;\n    min-width: 15em;\n    color: #444;\n    line-height: 16px;\n    margin: 0;\n    padding: 0 5px;\n    transition: all .5s ease-in-out;\n    border: 1px solid #bbb;\n    border-radius: 3px;\n    left: 0; }\n  #cw-domtree .cw-select {\n    display: flex;\n    flex-wrap: wrap;\n    border: none;\n    border-bottom: 1px solid #ccc;\n    border-radius: 0;\n    box-shadow: none;\n    background: #eee;\n    padding: 5px 0; }\n    #cw-domtree .cw-select:last-child {\n      border-bottom: none; }\n    #cw-domtree .cw-select .cw-select-option {\n      margin: 2px;\n      border: none; }\n    #cw-domtree .cw-select button {\n      margin: 0;\n      text-transform: none;\n      font-weight: 500;\n      letter-spacing: normal;\n      height: 22px;\n      line-height: 22px;\n      font-size: 12px;\n      border-radius: 3px;\n      padding: 0 8px;\n      background: #fff;\n      color: #444;\n      border: none; }\n      #cw-domtree .cw-select button.selected {\n        background-color: #7cb342;\n        color: #fff; }\n      #cw-domtree .cw-select button:hover {\n        background: #f1f7eb; }\n      #cw-domtree .cw-select button.selected:hover {\n        background: #6fa13b; }\n  #cw-domtree .cw-domtree-node:hover > .cw-node-attributes {\n    display: block; }\n";
+	var styles = "#cw-domtree{width:100%;bottom:0;position:fixed;background:#eee;font-size:14px;color:#444;line-height:16px;margin:0}#cw-domtree .cw-domtree-list{white-space:nowrap;list-style-type:none;margin:0;border-top:1px solid #bbb}#cw-domtree .cw-domtree-node{display:inline-block;background-color:#ddd;margin:0;position:relative}#cw-domtree .cw-node-tag{position:relative}#cw-domtree .cw-node-tag button{margin:0;text-transform:none;border:none;letter-spacing:normal;font-size:12px;font-weight:500;height:24px;line-height:24px;padding:0 16px 0 20px;background:#ddd;color:#555;transition:none}#cw-domtree .cw-node-tag .cw-target{display:none;position:absolute;right:-3px;top:6px;width:12px;height:12px;border-radius:6px;background:center/contain no-repeat url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12px' height='12px' viewBox='0 0 12 12'%3E%3Crect fill='%23333' x='5.5' y='.5' width='1' height='3.5'/%3E%3Crect fill='%23333' x='5.5' y='8' width='1' height='3.5'/%3E%3Crect fill='%23333' x='.5' y='5.5' width='3.5' height='1'/%3E%3Crect fill='%23333' x='8' y='5.5' width='3.5' height='1'/%3E%3C/svg%3E\");padding:0;z-index:3}#cw-domtree .cw-node-tag:before{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid rgba(0,0,0,0.4);position:absolute;top:0;margin-left:1px;left:100%;z-index:1}#cw-domtree .cw-node-tag:after{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid #ddd;position:absolute;top:0;left:100%;z-index:2}#cw-domtree .cw-domtree-node:hover,#cw-domtree .cw-domtree-node:hover .cw-node-tag button,#cw-domtree .cw-domtree-node .selected button{background-color:#7cb342;color:#fff}#cw-domtree .cw-domtree-node:hover .cw-node-tag:after,#cw-domtree .cw-domtree-node .cw-node-tag.selected:after{border-left-color:#7cb342}#cw-domtree .cw-domtree-node:not(:last-child):hover .cw-target{display:block;background-color:#fff}#cw-domtree .cw-domtree-node .selected button{color:#fff}#cw-domtree .cw-node-attributes{display:none;position:absolute;bottom:100%;background:#eee;height:auto;min-width:15em;color:#444;line-height:16px;margin:0;padding:0 5px;transition:all .5s ease-in-out;border:1px solid #bbb;border-radius:3px;left:0}#cw-domtree .cw-select{display:flex;flex-wrap:wrap;border:none;border-bottom:1px solid #ccc;border-radius:0;box-shadow:none;background:#eee;padding:5px 0}#cw-domtree .cw-select:last-child{border-bottom:none}#cw-domtree .cw-select .cw-select-option{margin:2px;border:none}#cw-domtree .cw-select button{margin:0;text-transform:none;font-weight:500;letter-spacing:normal;height:22px;line-height:22px;font-size:12px;border-radius:3px;padding:0 8px;background:#fff;color:#444;border:none}#cw-domtree .cw-select button.selected{background-color:#7cb342;color:#fff}#cw-domtree .cw-select button:hover{background:#f1f7eb}#cw-domtree .cw-select button.selected:hover{background:#6fa13b}#cw-domtree .cw-domtree-node:hover>.cw-node-attributes{display:block}\n";
 
 	function DomTree() {
 	  var _useStore = useStore(PreviewStore),
@@ -1410,7 +1436,7 @@
 	  })), /*#__PURE__*/React.createElement("style", null, similarStyles));
 	}
 
-	var styles$1 = "#color-wings {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 0;\n  overflow: visible;\n  z-index: 1500; }\n\n#cw-focuser .cw-focus-line {\n  position: absolute;\n  border-color: #7cb342;\n  border-style: solid;\n  border-width: 0;\n  box-shadow: 0 0 2px rgba(124, 179, 66, 0.6); }\n\n#cw-focus-details {\n  position: absolute;\n  color: #fff;\n  font-size: 12px;\n  line-height: 24px;\n  font-weight: 500; }\n  #cw-focus-details .cw-selector {\n    padding: 0 10px;\n    white-space: nowrap; }\n\n#cw-highlighter .cw-highlight-box {\n  position: absolute; }\n\n#cw-highlighter .cw-highlight-main {\n  position: absolute;\n  background: rgba(92, 153, 214, 0.6); }\n\n#cw-highlighter .cw-highlight-padding {\n  position: absolute;\n  top: 0;\n  left: 0;\n  border: 0 solid rgba(147, 197, 129, 0.6);\n  box-sizing: border-box; }\n\n#cw-highlighter .cw-highlight-margin {\n  position: absolute;\n  border: 0 solid rgba(244, 166, 87, 0.6);\n  box-sizing: content-box; }\n\n.customize-partial-edit-shortcut, .customize-partial-edit-shortcut {\n  display: none; }\n";
+	var styles$1 = "#color-wings{font-family:system-ui, -apple-system, Arial, sans-serif;position:absolute;top:0;left:0;width:100%;height:0;overflow:visible;z-index:1500}#cw-focuser .cw-focus-line{position:absolute;border-color:#7cb342;border-style:solid;border-width:0;box-shadow:0 0 2px rgba(124,179,66,0.6)}#cw-focus-details{position:absolute;color:#fff;font-size:12px;line-height:24px;font-weight:500}#cw-focus-details .cw-selector{padding:0 10px;white-space:nowrap}#cw-highlighter .cw-highlight-box{position:absolute}#cw-highlighter .cw-highlight-main{position:absolute;background:rgba(92,153,214,0.6)}#cw-highlighter .cw-highlight-padding{position:absolute;top:0;left:0;border:0 solid rgba(147,197,129,0.6);box-sizing:border-box}#cw-highlighter .cw-highlight-margin{position:absolute;border:0 solid rgba(244,166,87,0.6);box-sizing:content-box}.customize-partial-edit-shortcut,.customize-partial-edit-shortcut{display:none}\n";
 
 	function Canvas() {
 	  return /*#__PURE__*/React.createElement("div", {
