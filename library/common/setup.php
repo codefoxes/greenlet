@@ -5,8 +5,6 @@
  * @package greenlet\library\common
  */
 
-use Greenlet\Columns as GreenletColumns;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -49,6 +47,9 @@ if ( ! function_exists( 'greenlet_setup' ) ) {
 
 		// Register nav menus.
 		register_nav_menus( array( 'main-menu' => __( 'Main Menu', 'greenlet' ) ) );
+
+		// Add support for widgets selective refresh.
+		add_theme_support( 'customize-selective-refresh-widgets' );
 
 		// Add support for woocommerce.
 		add_theme_support( 'woocommerce' );
@@ -101,10 +102,10 @@ if ( ! function_exists( 'greenlet_widget_init' ) ) {
 				$k = 1;
 				// For each row in the cover position.
 				foreach ( $cover_rows as $row ) {
-					$cobj = new GreenletColumns( $row['columns'] );
+					$col_total = count( explode( '-', $row['columns'] ) );
 
 					// For total number of columns register sidebars.
-					for ( $i = 1; $i <= ( $cobj->total ); $i++ ) {
+					for ( $i = 1; $i <= ( $col_total ); $i++ ) {
 						register_sidebar(
 							array(
 								// translators: %1$s: Widget Position. %2$s: Widget Column.

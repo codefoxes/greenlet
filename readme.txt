@@ -6,7 +6,7 @@ Tags: blog, custom-background, custom-colors, editor-style, featured-images, foo
 Tested up to: 5.5.1
 Requires at least: 5.3
 Requires PHP: 5.6
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -61,19 +61,16 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 
 == Changelog ==
 
-- New: Post List Layouts
-- New: Back to Top button
-- New: Excerpt and full content display options for post list.
-- Improvement: Extra Post classes
-- Improvement: Remove redundant actions
-- Improvement: Editor Styles from custom CSS
-- Improvement: Remove redundant customizer options
-- Improvement: ColorWings update - Exposed Components
-- Improvement: Use ColorWings components in Customizer
-- Improvement: Arrange Blog settings to sections in customizer
-- Fix: Menu toggle bug with id
-- Fix: Extra styles length component bug
-- Fix: wp_set_script_translations compatibility
+- New: Plugin Recommender
+- New: 3 more theme presets
+- Improvement: Replace iris with ColorWings Color
+- Improvement: Update Colorwings to 1.1.0
+- Improvement: Customizer range style
+- Improvement: Use CSS variables for theming & easy override
+- Improvement: Report bug link to correct issue template
+- Improvement: Few more performance optimization
+- Fix: Extra column bug
+- Fix: Enqueue url to path bug
 
 == Copyright ==
 
@@ -97,11 +94,6 @@ Screenshot used in the theme is a bespoke image created by the theme author and 
 = Icons Licenses =
 
 All the icons used in the theme are created by the theme author and can be distributed under the terms of the GNU GPL v2.
-
-= WP Color Picker Alpha License =
-
-WP Color Picker Alpha is used to Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker By Sergio. (https://github.com/kallookoo/wp-color-picker-alpha)
-Distributed under the terms of the GNU GPL v2.
 
 = Choices.js License =
 

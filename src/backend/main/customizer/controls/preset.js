@@ -4,22 +4,22 @@
  * @package greenlet
  */
 
-import { $, clone } from '../Helpers'
+import { clone } from '../Helpers'
 
 wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 	{
 		ready: function () {
-			var control = this
-			var radios  = $( control.selector + ' input[type="radio"]' )
+			const control = this
+			const radios = document.querySelector( `${ control.selector } .gl-radio-images` )
 
-			var defaultPreset = control.params.presets['Default']
+			const defaultPreset = control.params.presets['Default']
 			const cw = clone( defaultPreset.color_wings )
 			defaultPreset.color_wings = wp.customize.control( 'color_wings' ).setting._value
 			defaultPreset.color_wings[ cwControlObject.theme ] = cw
 
-			var deepMerge = function(targetObject, source) {
-				var target   = Object.assign( {}, targetObject )
-				for ( var key in source ) {
+			const deepMerge = function(targetObject, source) {
+				const target   = Object.assign( {}, targetObject )
+				for ( let key in source ) {
 					if ( ! Object.hasOwnProperty.call( source, key ) ) {
 						continue
 					}
@@ -32,25 +32,32 @@ wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 				return target
 			}
 
-			radios.on(
-				'change',
-				function () {
-					var confirm = window.confirm( 'This will override all customizer settings and\nApply "' + this.value + '" preset.\nProceed?' )
-					if ( confirm === false ) {
-						return
-					}
-					const preset = clone( control.params.presets[ this.value ] )
-					preset.color_wings = { [ cwControlObject.theme ]: preset.color_wings }
-					var currentPreset = ( this.value === 'Default' ) ? defaultPreset : deepMerge( preset, defaultPreset )
-					for (var prop in currentPreset) {
-						const singleControl = wp.customize.control( prop )
-						if( undefined !== singleControl ) {
-							singleControl.setting.set( currentPreset[ prop ] )
-						}
-					}
-					wp.customize.previewer.refresh()
+			let confirmShown = false
+
+			const onRadiosChange = function( e ) {
+				if ( 'radio' !== e.target.type ) return
+
+				let confirm = true
+				if ( ! confirmShown ) {
+					confirm = window.confirm( 'This will override all customizer settings and\nApply "' + this.value + '" preset.\nProceed?' )
+					confirmShown = true
 				}
-			)
+				if ( confirm === false ) {
+					return
+				}
+				const preset = clone( control.params.presets[ e.target.value ] )
+				preset.color_wings = { [ cwControlObject.theme ]: preset.color_wings }
+				const currentPreset = ( e.target.value === 'Default' ) ? defaultPreset : deepMerge( preset, defaultPreset )
+				for ( let prop in currentPreset ) {
+					const singleControl = wp.customize.control( prop )
+					if( undefined !== singleControl ) {
+						singleControl.setting.set( currentPreset[ prop ] )
+					}
+				}
+				wp.customize.previewer.refresh()
+			}
+
+			radios.addEventListener( 'change', onRadiosChange )
 		}
 	}
 )

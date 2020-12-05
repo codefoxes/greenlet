@@ -46,7 +46,7 @@ if ( ! function_exists( 'greenlet_constants' ) ) {
 		define( 'GREENLET_CHILD_URL', get_stylesheet_directory_uri() );
 
 		// Define other constants.
-		define( 'GREENLET_VERSION', '2.1.0' );
+		define( 'GREENLET_VERSION', '2.2.0' );
 	}
 
 	add_action( 'greenlet_init', 'greenlet_constants' );
@@ -80,6 +80,7 @@ if ( ! function_exists( 'greenlet_load_framework' ) ) {
 		require_once GREENLET_LIBRARY_DIR . '/common/class-columns.php';
 
 		require_once GREENLET_LIBRARY_DIR . '/pro/class-pro.php';
+		require_once GREENLET_LIBRARY_DIR . '/addons/colorwings/pro/class-pro.php';
 
 		require_once GREENLET_LIBRARY_DIR . '/addons/colorwings/class-colorwings.php';
 

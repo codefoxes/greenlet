@@ -1,3 +1,16 @@
+Version 2.2.0 / Release: 06-12-2020
+===================
+New: Plugin Recommender
+New: 3 more theme presets
+Improvement: Replace iris with ColorWings Color
+Improvement: Update Colorwings to 1.1.0
+Improvement: Customizer range style
+Improvement: Use CSS variables for theming & easy override
+Improvement: Report bug link to correct issue template
+Improvement: Few more performance optimization
+Fix: Extra column bug
+Fix: Enqueue url to path bug
+
 Version 2.1.0 / Release: 12-11-2020
 ===================
 New: Post List Layouts

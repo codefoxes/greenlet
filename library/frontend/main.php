@@ -5,8 +5,6 @@
  * @package greenlet\library\frontend
  */
 
-use Greenlet\Columns as GreenletColumns;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -93,13 +91,11 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 
 			do_action( "greenlet_before_{$pos}_{$k}_columns" );
 
-			// Create new column object with current layout as parameter.
-			// @see library/classes.php.
-			$cobj = new GreenletColumns( $row['columns'] );
+			$col_array = explode( '-', $row['columns'] );
 
 			// For each columns in the array.
 			$i = 1;
-			foreach ( $cobj->array as $col ) {
+			foreach ( $col_array as $col ) {
 
 				$args = array(
 					'primary'  => "{$pos}-column {$pos}-column-{$i}",

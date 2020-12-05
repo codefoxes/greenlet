@@ -89,11 +89,9 @@ if ( ! function_exists( 'greenlet_enqueue_style' ) ) {
 			if ( '/' === substr( $src, 0, 1 ) ) {
 				$path = ABSPATH . $src;
 			} else {
-				$path = str_replace( get_home_url(), ABSPATH, $src );
+				$path = str_replace( array( content_url(), get_home_url() ), array( WP_CONTENT_DIR, ABSPATH ), $src );
 			}
-			ob_start();
-			require_once $path;
-			greenlet_enqueue_inline_style( $handle, ob_get_clean() );
+			greenlet_enqueue_inline_style( $handle, file_get_contents( $path ) ); //phpcs:ignore
 			return;
 		}
 
@@ -170,10 +168,8 @@ if ( ! function_exists( 'greenlet_enqueue_script' ) ) {
 			$inline = gl_get_option( 'inline_js', '1' );
 		}
 		if ( false !== $inline ) {
-			$path = str_replace( get_home_url(), ABSPATH, $src );
-			ob_start();
-			require_once $path;
-			greenlet_enqueue_inline_script( $handle, ob_get_clean(), $deps );
+			$path = str_replace( array( content_url(), get_home_url() ), array( WP_CONTENT_DIR, ABSPATH ), $src );
+			greenlet_enqueue_inline_script( $handle, file_get_contents( $path ), $deps ); //phpcs:ignore
 			return;
 		}
 
@@ -187,7 +183,7 @@ if ( ! function_exists( 'greenlet_enqueue_inline_script' ) ) {
 	 *
 	 * @since 2.0.0
 	 * @param string $handle Script handle.
-	 * @param string $data   CSS Data.
+	 * @param string $data   JS Data.
 	 * @param array  $deps   An array of registered script handles.
 	 */
 	function greenlet_enqueue_inline_script( $handle, $data, $deps = array() ) {

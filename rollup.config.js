@@ -25,7 +25,7 @@ const EXTERNAL = [
 	'ReactDOM',
 ]
 
-const getCWBanner = filename => `/** @license ColorWings v1.0.0
+const getCWBanner = filename => `/** @license ColorWings v1.1.0
 * ${ filename }
 *
 * Copyright (c) Color Wings and its affiliates.
@@ -55,6 +55,11 @@ const mainBEPaths = [{
 	inputPath : 'src/backend/main/editor/greenlet-meta.js',
 	outputPath: 'library/backend/assets/js/greenlet-meta.js',
 	outputMin : 'library/backend/assets/js/greenlet-meta.min.js',
+}, {
+	name: 'GreenletOptions',
+	inputPath : 'src/backend/main/options/greenlet-options.js',
+	outputPath: 'library/backend/assets/js/greenlet-options.js',
+	outputMin : 'library/backend/assets/js/greenlet-options.min.js',
 }]
 
 const cwPaths = [{
@@ -68,19 +73,20 @@ const cwPaths = [{
 	outputPath: 'library/addons/colorwings/js/color-wings-preview.js',
 	outputMin : 'library/addons/colorwings/js/color-wings-preview.min.js',
 	banner: getCWBanner( 'color-wings-preview.js' ),
+}, {
+	inputPath : 'library/addons/colorwings/pro/src/Pro.js',
+	outputMin : 'library/addons/colorwings/pro/js/color-wings-pro.min.js',
+	banner: getCWBanner( 'color-wings-pro.js' ),
 }]
 
 const proBEPaths = [{
 	inputPath : 'library/pro/src/js/customizer/glpro-controls.js',
-	outputPath: 'library/pro/assets/js/glpro-controls.js',
 	outputMin : 'library/pro/assets/js/glpro-controls.min.js',
 }, {
 	inputPath : 'library/pro/src/js/preview/glpro-preview.js',
-	outputPath: 'library/pro/assets/js/glpro-preview.js',
 	outputMin : 'library/pro/assets/js/glpro-preview.min.js',
 }, {
 	inputPath : 'library/pro/src/js/options.js',
-	outputPath: 'library/pro/assets/js/options.js',
 	outputMin : 'library/pro/assets/js/options.min.js',
 }]
 
@@ -110,38 +116,47 @@ if ( paths.length === 0 ) {
 	paths = [ ...mainFEPaths, ...mainBEPaths, ...cwPaths, ...proFEPaths, ...proBEPaths ]
 }
 
-const config = paths.map(( path ) => ({
-	input: path.inputPath,
-	output: [{
-		sourcemap: true,
-		format: 'iife',
-		name: ( 'name' in path ) ? path.name : 'app',
-		file: path.outputPath,
-		globals: GLOBALS,
-		banner: ( 'banner' in path ) ? path.banner : ''
-	}, {
-		sourcemap: false,
-		format: 'iife',
-		name: ( 'name' in path ) ? path.name : 'app',
-		file: path.outputMin,
-		globals: GLOBALS,
-		plugins: [terser()]
-	}],
-	external: EXTERNAL,
-	plugins: [
-		babel({
-			exclude: 'node_modules/**',
-			babelHelpers: 'bundled',
-		}),
-		resolve({
-			browser: true,
-		}),
-		commonjs( { transformMixedEsModules: true } ),
-		replace({
-			'process.env.NODE_ENV': JSON.stringify( 'production' )
-		}),
-		scss({ output: false })
-	]
-}))
+const config = paths.map(( path ) => {
+	const currentConf = {
+		input: path.inputPath,
+		output: [],
+		external: EXTERNAL,
+		plugins: [
+			babel({
+				exclude: 'node_modules/**',
+				babelHelpers: 'bundled',
+			}),
+			resolve({
+				browser: true,
+			}),
+			commonjs( { transformMixedEsModules: true } ),
+			replace({
+				'process.env.NODE_ENV': JSON.stringify( 'production' )
+			}),
+			scss({ output: false, outputStyle: 'compressed' })
+		]
+	}
+	if ( 'outputPath' in path ) {
+		currentConf.output.push({
+			sourcemap: true,
+			format: 'iife',
+			name: ( 'name' in path ) ? path.name : 'app',
+			file: path.outputPath,
+			globals: GLOBALS,
+			banner: ( 'banner' in path ) ? path.banner : ''
+		})
+	}
+	if ( 'outputMin' in path ) {
+		currentConf.output.push({
+			sourcemap: ! path.outputPath,
+			format: 'iife',
+			name: ( 'name' in path ) ? path.name : 'app',
+			file: path.outputMin,
+			globals: GLOBALS,
+			plugins: [terser()]
+		})
+	}
+	return currentConf
+} )
 
 export default config
