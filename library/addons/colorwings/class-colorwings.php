@@ -58,7 +58,7 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			define( 'COLORWINGS_VERSION', '1.0.0' );
+			define( 'COLORWINGS_VERSION', '1.1.0' );
 			define( 'COLORWINGS_URL', $this->get_path_url() );
 			define( 'COLORWINGS_DIR', dirname( __FILE__ ) );
 
@@ -81,7 +81,8 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 		 * @return bool|string
 		 */
 		public function get_path_url( $path = __DIR__ ) {
-			$relative_path = str_replace( '\\', '/', str_replace( str_replace( '/', '\\', WP_CONTENT_DIR ), '', str_replace( WP_CONTENT_DIR, '', $path ) ) );
+			$content_dir   = realpath( WP_CONTENT_DIR );
+			$relative_path = str_replace( '\\', '/', str_replace( str_replace( '/', '\\', $content_dir ), '', str_replace( $content_dir, '', $path ) ) );
 			if ( $relative_path ) {
 				return content_url( $relative_path );
 			}

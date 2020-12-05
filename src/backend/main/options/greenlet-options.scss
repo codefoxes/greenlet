@@ -113,14 +113,15 @@
 }
 
 #greenlet-options .heading {
-	font-size: 16px;
+	font-weight: 500;
 	padding: 10px 15px;
 	border-bottom: 1px solid #ddd;
 }
 
-#greenlet-options .link {
+#greenlet-options .link, #greenlet-options .plugin {
 	padding: 10px 15px;
 	border-bottom: 1px solid #eee;
+	position: relative;
 }
 
 #greenlet-options .content-wrap {
@@ -176,7 +177,7 @@
 	background: #cb000b;
 }
 
-#greenlet-options .settings, #greenlet-options .backend, #greenlet-options .impex {
+#greenlet-options .settings, #greenlet-options .plugins, #greenlet-options .impex {
 	background: #fff;
 	border: 1px solid #ccc;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
@@ -199,11 +200,42 @@
 	display: block;
 }
 
-.ext-links {
-	margin-bottom: 10px;
+#greenlet-options .plugin .message {
+	width: fit-content;
+	right: 120px;
+	padding: 10px;
+	text-transform: capitalize;
+	background: none;
+	color: #0073aa;
 }
 
-.ext-links .link-wrap a {
-	padding: 10px 0;
-	display: block;
+.plugin-op {
+	float: right;
+	text-transform: capitalize;
+	position: relative;
+
+	.spinner {
+		position: absolute;
+		right: 100%;
+		margin-top: 0;
+		background-size: 18px;
+	}
+
+	&.running {
+		pointer-events: none;
+		color: #999;
+
+		.spinner {
+			visibility: visible;
+		}
+	}
+}
+
+.ext-links {
+	margin-bottom: 10px;
+
+	.link-wrap a {
+		padding: 10px 0;
+		display: block;
+	}
 }

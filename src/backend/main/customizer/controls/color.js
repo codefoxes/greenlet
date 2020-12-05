@@ -4,28 +4,27 @@
  * @package greenlet
  */
 
-import { $ } from '../Helpers'
-
 wp.customize.controlConstructor['gl-color'] = wp.customize.Control.extend(
 	{
 		ready: function() {
-			var control = this
-			var picker  = $( control.selector + ' .color-picker' )
-			var options = {
-				change: function(event, ui) {
-					var color = ui.color.toString();
-					if ( $( 'html' ).hasClass( 'window-loaded' ) ) {
-						control.setting.set( color )
-					}
-				},
-				clear: function() {
-					control.setting.set( '' );
-				}
+			const { Color } = cw.components
+			const control  = this
+
+			const onChange = ( data ) => {
+				control.setting.set( data )
 			}
-			if ( control.params.palettes.length > 0 ) {
-				options['palettes'] = control.params.palettes
+
+			const params = {
+				onChange,
+				label: control.params.label,
+				val: control.setting._value,
 			}
-			picker.wpColorPicker( options )
+			params.val = ( undefined === params.val ) ? '' : params.val
+
+			ReactDOM.render(
+				<div className='cw-control'><Color { ...params } /></div>,
+				document.getElementById( control.id + '-root' )
+			)
 		}
 	}
 )

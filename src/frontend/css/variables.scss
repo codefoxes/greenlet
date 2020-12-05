@@ -1,4 +1,58 @@
 $grid-columns: 12 !default;
-$header-color: #383838;
-$header-link-color: #383838;
-$header-link-hover: #01579B;
+
+$white:        hsl(0, 0%, 100%) !default;
+$white-sec:    hsl(0, 0%, 96%) !default;
+
+$black:        hsl(0, 0%, 0%) !default;
+$black-sec:    hsl(0, 0%, 7%) !default;
+
+$grey-darker:  hsl(0, 0%, 21%) !default;
+$grey-dark:    hsl(0, 0%, 29%) !default;
+$grey:         hsl(0, 0%, 48%) !default;
+$grey-light:   hsl(0, 0%, 71%) !default;
+$grey-lighter: hsl(0, 0%, 86%) !default;
+$grey-lightest: hsl(0, 0%, 93%) !default;
+$grey-light2:  hsl(0, 0%, 60%) !default;
+
+$orange:       hsl(14,  100%, 53%) !default;
+$yellow:       hsl(48,  100%, 67%) !default;
+$green:        hsl(141, 53%,  53%) !default;
+$turquoise:    hsl(171, 100%, 41%) !default;
+$cyan:         hsl(204, 71%,  53%) !default;
+$blue:         hsl(217, 71%,  53%) !default;
+$purple:       hsl(271, 100%, 71%) !default;
+$red:          hsl(348, 86%, 61%) !default;
+$accent:       hsl(89, 46%, 48%) !default;
+
+$light: $white-sec !default;
+$dark: $grey-darker !default;
+
+$text: $grey-darker !default;
+$text-inv: $white-sec !default;
+
+$link: $blue !default;
+$link-visited: $purple !default;
+$link-hover: $grey-darker !default;
+$link-inv: $white-sec !default;
+$link-inv-hover: $white !default;
+
+$bg-pri: $white !default;
+$bg-sec: $white-sec !default;
+$bg-inv: $black !default;
+$bg-inv-sec: $black-sec !default;
+
+$border: $grey-lighter !default;
+$border-hover: $grey-light !default;
+
+$shadow: hsla(0, 0%, 0%, .2) !default;
+
+$button: $text !default;
+$button-bg: $bg-pri !default;
+$input-bg: $bg-pri !default;
+
+$radius-small: 0 !default
+$radius: 0 !default
+$radius-large: 0 !default
+$radius-rounded: 290486px !default
+
+$font: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji' !default;

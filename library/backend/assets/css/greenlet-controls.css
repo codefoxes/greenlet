@@ -186,19 +186,6 @@
 	margin: 10px -12px;
 }
 
-.gl-color button.wp-color-result .color-alpha, .gl-border button.wp-color-result .color-alpha {
-	height: 28px !important;
-}
-
-.gl-color input.color-picker.wp-color-picker {
-	max-width: 150px;
-	letter-spacing: -.6px;
-}
-
-.gl-color .button.button-small.wp-picker-clear {
-	min-height: 30px;
-}
-
 .customize-control-range, .customize-control-length, .customize-control-length .tab-content .gl-row {
 	position: relative;
 }
@@ -215,6 +202,24 @@
 .customize-control-range input:focus,
 .customize-control input[type="range"]:focus {
 	outline: none;
+}
+
+.customize-control input[type="range"]::-webkit-slider-thumb {
+	width: 14px;
+	height: 14px;
+	background: #fff;
+	border-radius: 14px;
+	-webkit-appearance: none;
+	box-shadow: 0 0 2px 1px rgba(0, 0, 0, .5 );
+}
+
+.customize-control input[type="range"]::-moz-range-thumb {
+	width: 14px;
+	height: 14px;
+	background: #fff;
+	border-radius: 14px;
+	-webkit-appearance: none;
+	box-shadow: 0 0 2px 1px rgba(0, 0, 0, .5 );
 }
 
 .customize-control-range .reset, .gl-length .reset {

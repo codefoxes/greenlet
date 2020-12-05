@@ -161,6 +161,10 @@ class Columns {
 
 		// Calculate total number of columns.
 		$this->total = count( $this->array );
+
+		if ( is_array( $this->sequence ) && ( count( $this->sequence ) > $this->total ) ) {
+			array_splice( $this->sequence, $this->total );
+		}
 	}
 
 	/**

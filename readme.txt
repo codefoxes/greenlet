@@ -98,11 +98,6 @@ Screenshot used in the theme is a bespoke image created by the theme author and 
 
 All the icons used in the theme are created by the theme author and can be distributed under the terms of the GNU GPL v2.
 
-= WP Color Picker Alpha License =
-
-WP Color Picker Alpha is used to Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker By Sergio. (https://github.com/kallookoo/wp-color-picker-alpha)
-Distributed under the terms of the GNU GPL v2.
-
 = Choices.js License =
 
 choices.js is used to create configurable select box by Josh Johnson. (https://github.com/jshjohnson/Choices)
