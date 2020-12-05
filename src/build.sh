@@ -97,7 +97,7 @@ elif [ "$1" == "--final" ]; then
 
 	if [ -z "$2" ]; then
 		rm -rf ~/Desktop/greenlet.zip ~/Desktop/greenlet
-		rsync -avP --exclude={'.*','*node_modules*','*package*','*tests*','*src/build*','*src/update*','pro*','todo*','*.map','*src/backend/colorwings*','rollup.config.js'} ./* --delete ~/Desktop/greenlet
+		rsync -avP --exclude={'.*','*node_modules*','*package*','*tests*','*src/build*','*src/update*','pro*','todo*','backup*','*.map','*src/backend/colorwings*','rollup.config.js'} ./* --delete ~/Desktop/greenlet
 		current=$(pwd)
 		cd ~/Desktop
 		awk '/pro\/class-pro\.php/{n=2}; n {n--; next}; 1' < ./greenlet/library/init.php > ./greenlet/library/init-awk.php
