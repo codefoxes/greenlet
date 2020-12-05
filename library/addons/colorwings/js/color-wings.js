@@ -3415,8 +3415,10 @@
       });
     }, [multiple]);
     const onMouseDown = React$1.useCallback(e => {
-      if (!closeOnSelect) {
-        e.preventDefault();
+      e.preventDefault();
+
+      if (closeOnSelect && ref.current) {
+        ref.current.blur();
       }
 
       onSelect(e.currentTarget.value);
@@ -3620,7 +3622,8 @@
     renderOption,
     renderGroupHeader,
     getOptions,
-    fuse
+    fuse,
+    emptyMessage
   }, ref) => {
     const selectRef = React$1.useRef(null);
     const [snapshot, valueProps, optionProps] = useSelect({
@@ -3660,6 +3663,16 @@
 
       return className.split(' ')[0] + "__" + key;
     }, [className]);
+    const renderEmptyMessage = React$1.useCallback(() => {
+      if (emptyMessage === null) {
+        return null;
+      }
+
+      const content = typeof emptyMessage === 'function' ? emptyMessage() : emptyMessage;
+      return /*#__PURE__*/React__default['default'].createElement("li", {
+        className: cls('not-found')
+      }, content);
+    }, [emptyMessage, cls]);
     const wrapperClass = [cls('container'), disabled ? cls('is-disabled') : false, searching ? cls('is-loading') : false, focus ? cls('has-focus') : false].filter(single => !!single).join(' ');
     const inputValue = focus && search ? searchValue : displayValue;
     React$1.useEffect(() => {
@@ -3713,10 +3726,11 @@
       value: inputValue
     }), snapshot, cls('input'))), shouldRenderOptions && /*#__PURE__*/React__default['default'].createElement("div", {
       className: cls('select'),
-      ref: selectRef
+      ref: selectRef,
+      onMouseDown: e => e.preventDefault()
     }, /*#__PURE__*/React__default['default'].createElement("ul", {
       className: cls('options')
-    }, options.map(option => {
+    }, options.length > 0 ? options.map(option => {
       const isGroup = option.type === 'group';
       const items = isGroup ? option.items : [option];
       const base = {
@@ -3745,7 +3759,7 @@
       }
 
       return rendered;
-    }))));
+    }) : renderEmptyMessage() || null)));
   });
   SelectSearch.defaultProps = {
     className: 'select-search',
@@ -3774,7 +3788,8 @@
       keys: ['name', 'groupName'],
       threshold: 0.3
     },
-    getOptions: null
+    getOptions: null,
+    emptyMessage: null
   };
   var SelectSearch$1 = /*#__PURE__*/React$1.memo(SelectSearch);
 
