@@ -222,6 +222,8 @@ class Options_Admin {
 
 	/**
 	 * Toggle Plugin activation and deactivation.
+	 *
+	 * @since 2.2.0
 	 */
 	public function toggle_plugin() {
 		if (

@@ -94,18 +94,53 @@ elif [ "$1" == "--final" ]; then
 	buildfonts
 	removePOBackups
 	printf "${BGREEN}STEP 3: BUNDLING${NC}\n"
-	rm -rf ~/Desktop/greenlet.zip ~/Desktop/greenlet
-	rsync -avP --exclude '.*' --exclude '*node_modules*' --exclude '*package*' --exclude '*tests*' --exclude '*src/build*' --exclude '*src/update-version' \
-	--exclude 'library/pro*' --exclude 'pro*' --exclude 'todo*' --exclude '*.map' --exclude '*src/backend/colorwings*' --exclude 'rollup.config.js' ./* --delete ~/Desktop/greenlet
-	current=$(pwd)
-	cd ~/Desktop
-	awk '/pro\/class-pro\.php/{n=2}; n {n--; next}; 1' < ./greenlet/library/init.php > ./greenlet/library/init-awk.php
-	mv ./greenlet/library/init-awk.php ./greenlet/library/init.php
-	zip -r greenlet.zip greenlet
-	cd $current
-	rm -rf ../greenlet-final
-	cp -R ~/Desktop/greenlet ../greenlet-final
-	sed -i '' 's/Theme Name: Greenlet/Theme Name: Greenlet Final/g' ../greenlet-final/style.css
+
+	if [ -z "$2" ]; then
+		rm -rf ~/Desktop/greenlet.zip ~/Desktop/greenlet
+		rsync -avP --exclude={'.*','*node_modules*','*package*','*tests*','*src/build*','*src/update*','pro*','todo*','*.map','*src/backend/colorwings*','rollup.config.js'} ./* --delete ~/Desktop/greenlet
+		current=$(pwd)
+		cd ~/Desktop
+		awk '/pro\/class-pro\.php/{n=2}; n {n--; next}; 1' < ./greenlet/library/init.php > ./greenlet/library/init-awk.php
+		mv ./greenlet/library/init-awk.php ./greenlet/library/init.php
+		zip -r greenlet.zip greenlet
+		cd $current
+		rm -rf ../greenlet-final
+		cp -R ~/Desktop/greenlet ../greenlet-final
+		sed -i '' 's/Theme Name: Greenlet/Theme Name: Greenlet Final/g' ../greenlet-final/style.css
+	elif [ "$2" == "pro" ]; then
+		rm -rf ~/Desktop/greenlet-pro.zip ~/Desktop/greenlet-pro ~/Desktop/greenlet-pro-envato
+		mkdir ~/Desktop/greenlet-pro-envato
+		rsync -avP --exclude={'.*','*node_modules*','*package*','*tests*','/src*','/pro*','*pro/src*','todo*','*.map','rollup.config.js'} ./* --delete ~/Desktop/greenlet-pro
+		current=$(pwd)
+		cd ~/Desktop
+		sed -i '' 's/Theme Name: Greenlet/Theme Name: Greenlet Pro/g' greenlet-pro/style.css
+		mv greenlet-pro/library/pro/envato/* greenlet-pro-envato/ && rm -rf  greenlet-pro/library/pro/envato
+		zip -r greenlet-pro.zip greenlet-pro
+		mv greenlet-pro.zip greenlet-pro-envato
+		cd greenlet-pro-envato
+		zip -r preview.zip preview/* && rm -rf preview
+		cd $current
+		rm -rf ../greenlet-pro
+		cp -R ~/Desktop/greenlet-pro ../greenlet-pro
+	elif [ "$2" == "cw" ]; then
+		rm -rf ~/Desktop/colorwings.zip ~/Desktop/colorwings
+		rsync -avP --exclude={'.*','pro*','*.map'} ../../plugins/colorwings/* --delete ~/Desktop/colorwings
+		current=$(pwd)
+		cd ~/Desktop
+		awk '!/pro\/class-pro\.php/' < ./colorwings/colorwings.php > ./colorwings/colorwings-awk.php
+		mv ./colorwings/colorwings-awk.php ./colorwings/colorwings.php
+		zip -r colorwings.zip colorwings
+		cd $current
+	elif [ "$2" == "cwPro" ]; then
+		rm -rf ~/Desktop/colorwings-pro.zip ~/Desktop/colorwings-pro
+		rsync -avP --exclude={'.*','*pro/src*','*.map'} ../../plugins/colorwings/* --delete ~/Desktop/colorwings-pro
+		current=$(pwd)
+		cd ~/Desktop
+		sed -i '' 's/Plugin Name: Color Wings/Plugin Name: Color Wings Pro/g' colorwings-pro/colorwings.php
+		zip -r colorwings-pro.zip colorwings-pro
+		cd $current
+	fi
+
 	printf "${BGREEN}BUILD COMPLETE${NC}\n"
 elif [ "$1" == "fonts" ]; then
 	buildfonts
@@ -118,7 +153,7 @@ elif [ "$1" == "backend" ]; then
 	if [ "$2" == "--watch" ]; then
 		fswatch -0 ./src | xargs -0 -n 1 -I {} ./src/build.sh backend
 	fi
-elif [ "$1" == "cw:final" ]; then
+elif [ "$1" == "cw:cp" ]; then
 	buildfonts
 	copyColorwings
 elif [ "$1" == "pro" ]; then
