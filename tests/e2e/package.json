@@ -1,6 +1,6 @@
 {
   "name": "e2e-testing",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "End to End Testing for Greenlet",
   "main": "index.js",
   "scripts": {
