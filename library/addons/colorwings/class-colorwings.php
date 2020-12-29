@@ -122,6 +122,10 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 						$this->styles .= $value['styles'];
 					}
 					$this->add_font( $value );
+				} elseif ( 'single' === $value['type'] ) {
+					if ( ( get_the_ID() === $page ) || ( get_post_field( 'post_name' ) === $page ) ) {
+						$this->styles .= $value['styles'];
+					}
 				}
 			}
 		}

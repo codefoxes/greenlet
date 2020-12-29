@@ -30,6 +30,7 @@ $vars: (
 	"radius":		$radius,
 	"radius-large":	$radius-large,
 	"radius-rounded": $radius-rounded,
+	"width":		$width,
 ) !default;
 
 :root {
@@ -832,10 +833,6 @@ blockquote {
 @media (min-width: 801px) {
 	.admin-bar .header-section.sticky {
 		top: 32px;
-	}
-
-	.container {
-		max-width: 1170px;
 	}
 
 	.site-header h1 {

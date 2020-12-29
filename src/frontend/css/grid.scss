@@ -6,7 +6,7 @@
 .container {
 	position: relative;
 	width: 100%;
-	max-width: 1170px;
+	max-width: 95%;
 	margin: 0 auto;
 	padding: 0 20px;
 }
@@ -25,15 +25,9 @@
 	padding: 0 15px;
 }
 
-@media (min-width: 480px) {
-	.container {
-		max-width: 90%;
-	}
-}
-
 @media (min-width: 801px) {
 	.container {
-		max-width: 95%;
+		max-width: var(--width);
 	}
 
 	@for $i from 1 through $grid-columns {

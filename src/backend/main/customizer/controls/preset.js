@@ -14,7 +14,7 @@ wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 
 			const defaultPreset = control.params.presets['Default']
 			const cw = clone( defaultPreset.color_wings )
-			defaultPreset.color_wings = wp.customize.control( 'color_wings' ).setting._value
+			defaultPreset.color_wings = clone( wp.customize.control( 'color_wings' ).setting._value )
 			defaultPreset.color_wings[ cwControlObject.theme ] = cw
 
 			const deepMerge = function(targetObject, source) {

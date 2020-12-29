@@ -71,7 +71,7 @@ input[type="button"] {
 	box-shadow: none;
 	display: inline-flex;
 	font-size: 1.6rem;
-	height: 38px;
+	height: 2.5em;
 	line-height: 1.5;
 	position: relative;
 	vertical-align: top;
@@ -119,7 +119,7 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
-	height: 38px;
+	height: 2.5em;
 	padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
 	background-color: var(--input-bg);
 	border: 1px solid var(--border);
