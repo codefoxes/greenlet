@@ -1,0 +1,7 @@
+@import "variables";
+
+:root {
+	@each $v, $value in $vars {
+		--#{$v}: #{$value};
+	}
+}

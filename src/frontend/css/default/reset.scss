@@ -1,6 +1,10 @@
-/* Reset */
+/**
+ * Browsers default styles reset
+ */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 
@@ -26,12 +30,16 @@ abbr[title] {
 	text-decoration: underline dotted;
 }
 
-b, strong {
+b,
+strong {
 	font-weight: bolder;
 }
 
-code, kbd, samp, pre {
-	font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+code,
+kbd,
+samp,
+pre {
+	font-family: var(--code-font);
 	font-size: 1em;
 	overflow: auto;
 	padding: 15px;
@@ -41,7 +49,8 @@ small {
 	font-size: 80%;
 }
 
-sub, sup {
+sub,
+sup {
 	font-size: 75%;
 	line-height: 0;
 	position: relative;
@@ -56,18 +65,26 @@ sup {
 	top: -0.5em;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
 	font-family: inherit;
 	font-size: 100%;
 	line-height: 1.15;
 	margin: 0;
 }
 
-button, select {
+button,
+select {
 	text-transform: none;
 }
 
-button, [type='button'], [type='reset'], [type='submit'] {
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
 	-webkit-appearance: button;
 }
 
@@ -79,7 +96,10 @@ button::-moz-focus-inner,
 	padding: 0;
 }
 
-button:-moz-focusring, [type='button']:-moz-focusring, [type='reset']:-moz-focusring, [type='submit']:-moz-focusring {
+button:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
 	outline: 1px dotted ButtonText;
 }
 
@@ -95,7 +115,8 @@ progress {
 	vertical-align: baseline;
 }
 
-[type='number']::-webkit-inner-spin-button, [type='number']::-webkit-outer-spin-button {
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
 	height: auto;
 }
 
