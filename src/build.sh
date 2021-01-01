@@ -2,10 +2,8 @@
 
 BGREEN='\033[1;32m'
 BRED='\033[1;31m'
+BBLUE='\033[1;34m'
 NC='\033[0m'
-
-declare -a css_files=( 'default' 'styles' 'shop' )
-declare -a pro_css=( 'styles' )
 
 buildjs() {
 	echo 'Build JS: Started'
@@ -21,34 +19,10 @@ buildjs() {
 	echo 'Build JS: Complete'
 }
 
-generatecss() {
-	# $1 = src path
-	# $2 = dest path
-	# $3 = dest min path
-
-	# Compile SCSS to CSS
-	./node_modules/.bin/node-sass --output-style expanded --indent-type tab --indent-width 1 --source-map true $1 $2
-	# Autoprefix
-	./node_modules/.bin/postcss --use autoprefixer --map false --cascade false --output $2 $2
-	# Remove spaced alignment from autoprefixer.
-	sed -i '' 's/\  \ *//g' $2
-	# Uglify
-	cleancss -o $3 $2
-}
-
 buildcss() {
-	echo 'Build CSS: Started'
-	rm -rf assets/css
-	mkdir -p assets/css
-
-	for i in "${css_files[@]}"; do
-		generatecss src/frontend/css/$i.scss assets/css/$i.css assets/css/$i.min.css
-	done
-
-	for i in "${pro_css[@]}"; do
-		generatecss library/pro/src/css/$i.scss library/pro/assets/css/$i.css library/pro/assets/css/$i.min.css
-	done
-	echo 'Build CSS: Complete'
+	printf "${BBLUE}Build CSS: Started${NC}\n"
+	CSS=1 ./node_modules/.bin/rollup -c
+	printf "${BBLUE}Build CSS: Complete${NC}\n"
 
 	echo 'Copying vendor css files'
 	cp ./src/frontend/css/bootstrap.css ./assets/css/bootstrap.css

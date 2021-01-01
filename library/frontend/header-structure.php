@@ -9,9 +9,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action( 'greenlet_before_topbar', 'greenlet_skip_link' );
+add_filter( 'body_class', 'greenlet_body_class' );
 add_action( 'greenlet_head', 'greenlet_do_head' );
+add_action( 'greenlet_before_header', 'greenlet_skip_link' );
 add_action( 'greenlet_header', 'greenlet_do_header' );
+
+/**
+ * Add body classes.
+ *
+ * @param  array $classes Body classes.
+ * @return array          Body classes.
+ */
+function greenlet_body_class( $classes ) {
+	if ( is_singular() ) {
+		$classes[] = 'is-singular';
+	} else {
+		$classes[] = 'is-posts-list';
+	}
+	return $classes;
+}
 
 /**
  * Print the head.

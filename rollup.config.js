@@ -10,6 +10,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import { terser } from "rollup-plugin-terser"
 import scss from 'rollup-plugin-scss'
+import autoprefixer from 'autoprefixer'
+import postcss from 'postcss'
 
 const GLOBALS = {
 	jQuery: 'jQuery',
@@ -158,5 +160,55 @@ const config = paths.map(( path ) => {
 	}
 	return currentConf
 } )
+
+const cssPaths = [ {
+	inputPath: 'src/frontend/css/root.scss',
+	outputPath: 'assets/css/root.css',
+	outputMin: 'assets/css/root.min.css',
+	sourceMap: false,
+}, {
+	inputPath: 'src/frontend/css/default.scss',
+	outputPath: 'assets/css/default.css',
+	outputMin: 'assets/css/default.min.css',
+}, {
+	inputPath: 'src/frontend/css/styles.scss',
+	outputPath: 'assets/css/styles.css',
+	outputMin: 'assets/css/styles.min.css',
+}, {
+	inputPath: 'src/frontend/css/shop.scss',
+	outputPath: 'assets/css/shop.css',
+	outputMin: 'assets/css/shop.min.css',
+}, {
+	inputPath: 'library/pro/src/css/styles.scss',
+	outputPath: 'library/pro/assets/css/styles.css',
+	outputMin: 'library/pro/assets/css/styles.min.css',
+} ]
+
+const defaultCssConfig = {
+	output: { file: 'backup/dummy.js' },
+	scssConfig: {
+		outputStyle: 'expanded',
+		indentType: 'tab',
+		indentWidth: 1,
+		sourceMap: false,
+		processor: css => postcss( [ autoprefixer( { overrideBrowserslist: '> 1%', cascade: false } ) ] ),
+		watch: [ 'src/frontend/css', 'library/pro/src/css' ],
+	},
+}
+
+if ( process.env.CSS === '1' ) {
+	config.length = 0
+	cssPaths.forEach( ( path ) => {
+		config.push( {
+			input: path.inputPath,
+			output: defaultCssConfig.output,
+			plugins: [ scss( Object.assign( {}, defaultCssConfig.scssConfig, { output: path.outputPath, sourceMap: ( 'sourceMap' in path ) ? path.sourceMap : path.outputPath + '.map' } ) ) ]
+		}, {
+			input: path.inputPath,
+			output: defaultCssConfig.output,
+			plugins: [ scss( Object.assign( {}, defaultCssConfig.scssConfig, { output: path.outputMin, outputStyle: 'compressed' } ) ) ]
+		} )
+	} )
+}
 
 export default config

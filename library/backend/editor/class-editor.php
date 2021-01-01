@@ -29,13 +29,16 @@ class Editor {
 	 * @var array $mapping
 	 */
 	public $mapping = array(
+		':root'          => array( '.editor-styles-wrapper' => true ),
 		'body'           => array( '.editor-styles-wrapper' => array( 'background' ) ),
 		'.entry-article' => array( '.editor-styles-wrapper:before' => array( 'background', 'background-color' ) ),
 		'.container'     => array(
 			'.editor-styles-wrapper:before' => array( 'width', 'max-width' ),
 			'.wp-block'                     => array(
-				'width'     => array( 'calc( ', ' - 6em)' ),
 				'max-width' => array( 'calc( ', ' - 6em)' ),
+			),
+			'.is-root-container>.wp-block'  => array(
+				'width' => array( 'calc( ', ' - 6em)' ),
 			),
 		),
 	);
@@ -51,8 +54,8 @@ class Editor {
 		require_once GREENLET_LIBRARY_DIR . '/backend/helpers/class-cssparser.php';
 
 		$enable_editor_styles = gl_get_option( 'editor_styles', false );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_editor_styles' ) );
 		if ( $enable_editor_styles ) {
-			add_action( 'admin_enqueue_scripts', array( $this, 'load_editor_styles' ) );
 			add_action( 'admin_enqueue_scripts', 'greenlet_enqueue_fonts', 90 );
 		}
 		add_action( 'init', array( $this, 'register_patterns' ) );
@@ -103,7 +106,9 @@ class Editor {
 					$inline = array();
 					$props  = greenlet_is_assoc( $raw_props ) ? array_keys( $raw_props ) : $raw_props;
 					foreach ( $rule[ $selector ] as $prop => $val ) {
-						if ( in_array( $prop, $props, true ) ) {
+						if ( true === $raw_props ) {
+							$inline[] = array( $prop, $val );
+						} elseif ( in_array( $prop, $props, true ) ) {
 							$value = ( isset( $raw_props[ $prop ] ) && is_array( $raw_props[ $prop ] ) && isset( $raw_props[ $prop ][0] ) ) ? $raw_props[ $prop ][0] . $val : $val;
 							$value = ( isset( $raw_props[ $prop ] ) && is_array( $raw_props[ $prop ] ) && isset( $raw_props[ $prop ][1] ) ) ? $value . $raw_props[ $prop ][1] : $value;
 
@@ -122,14 +127,18 @@ class Editor {
 	 * @since 1.1.0
 	 */
 	public function load_editor_styles() {
-		$this->prepare_styles();
+		$enable_editor_styles = gl_get_option( 'editor_styles', false );
+		if ( $enable_editor_styles ) {
+			$this->prepare_styles();
+		}
 
 		ob_start();
 		?>
-		.edit-post-layout .editor-styles-wrapper:before, .edit-post-layout__content .editor-styles-wrapper:before, .block-editor-editor-skeleton__content .editor-styles-wrapper:before {
+		.editor-styles-wrapper:before {
 			content: '';
 			display: block;
 			height: 100%;
+			width: 100%;
 			position: absolute;
 			top: 0;
 			left: 50%;
@@ -138,8 +147,16 @@ class Editor {
 
 		/* Pattern Styles */
 		.wp-block-cover.full-width {
-			width: calc(100vw - 280px);
+			width: 100vw;
 			max-width: 100vw;
+			left: 50%;
+			right: 50%;
+			margin-left: -50vw;
+			margin-right: -50vw;
+		}
+
+		.is-sidebar-opened .wp-block-cover.full-width {
+			width: calc(100vw - 280px);
 			left: calc(50% - 140px);
 			right: calc(50% - 140px);
 			margin-left: calc(-50vw + 280px);
@@ -151,17 +168,25 @@ class Editor {
 		}
 
 		.wp-block-group.full-width-box .wp-block-cover:first-child {
-			width: calc(100vw - 280px);
+			width: 100vw;
 			max-width: 100vw;
 			position: absolute;
-			left: calc(50% - 140px);
-			right: calc(50% - 140px);
-			margin-left: calc(-50vw + 280px);
-			margin-right: calc(-50vw + 280px);
+			left: 50%;
+			right: 50%;
+			margin-left: -50vw;
+			margin-right: -50vw;
 			min-height: auto;
 			height: 100%;
 			margin-top: 0;
 			z-index: 1;
+		}
+
+		.is-sidebar-opened .wp-block-group.full-width-box .wp-block-cover:first-child {
+			width: calc(100vw - 280px);
+			left: calc(50% - 140px);
+			right: calc(50% - 140px);
+			margin-left: calc(-50vw + 280px);
+			margin-right: calc(-50vw + 280px);
 		}
 
 		.wp-block-group.full-width-box .wp-block-cover:first-child > *:not(.components-placeholder) {

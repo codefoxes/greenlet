@@ -1,4 +1,4 @@
-$post_grid_cols: 12;
+@import "../variables";
 
 @mixin make-col($size) {
 	width: percentage(1 / $size) + (4 / $size) - 4;
@@ -10,7 +10,7 @@ $post_grid_cols: 12;
 	display: flex;
 	flex-wrap: wrap;
 
-	@for $i from 1 through $post_grid_cols {
+	@for $i from 1 through $post-grid-columns {
 		&.cols-#{$i} .entry{
 			@include make-col($i);
 		}
