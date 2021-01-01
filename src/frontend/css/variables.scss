@@ -46,8 +46,10 @@ $hr:			$grey-lightest !default;
 
 $shadow:		hsla(0, 0%, 0%, .2) !default;
 
+$icon:			$grey-light2 !default;
 $button:		$text !default;
 $button-bg:		$bg-pri !default;
+$button-icon:	$icon !default;
 $input-bg:		$bg-pri !default;
 
 $radius-small:	0 !default
@@ -98,10 +100,11 @@ $vars: (
 	"header-bg-sec": $bg-sec,
 	"header-link":	$link-hover,
 	"header-link-hover": $link,
+	"icon":			$icon,
 	"button":		$button,
 	"button-bg":	$button-bg,
+	"button-icon":	$button-icon,
 	"input-bg":		$input-bg,
-	"icon":			$grey-light2,
 	"selection":	$selection,
 	"selection-bg":	$selection-bg,
 	"width":		$width,

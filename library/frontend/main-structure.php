@@ -1068,12 +1068,14 @@ function greenlet_get_load_page_link( $next_page, $max_page = 0 ) {
  * @return string Search form HTML.
  */
 function greenlet_search_form() {
+	$search_button = ( 'icon' === gl_get_option( 'search_submit', 'icon' ) ) ? greenlet_get_file_contents( GREENLET_IMAGE_DIR . '/icons/search.svg' ) : __( 'Search', 'greenlet' );
+
 	$html = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 		<label>
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
 			<input type="search" class="search-field search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
 		</label>
-		<input type="submit" class="search-submit" value="' . esc_attr__( 'Search', 'greenlet' ) . '">
+		<button class="search-submit" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '"> ' . $search_button . '</button>
 	</form>';
 
 	return $html;

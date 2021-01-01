@@ -492,22 +492,27 @@ input[type="checkbox"].menu-toggle {
  * 3.6 Search form styles.
  */
 .search-form {
+	display: flex;
+
 	label {
-		display: inline;
+		flex-grow: 1;
+		margin-bottom: 1.2rem;
 	}
 
-	input[type=search] {
-		width: calc(100% - 80px);
-		float: left;
+	.search-input {
+		width: 100%;
+		margin: 0;
 		border-radius: var(--radius) 0 0 var(--radius);
 	}
 
-	input[type=submit] {
-		padding: 0;
-		width: 80px;
+	.search-submit {
 		min-height: 28px;
 		margin-bottom: 1.2rem;
 		border-radius: 0 var(--radius) var(--radius) 0;
+
+		svg {
+			fill: var(--button-icon);
+		}
 	}
 }
 
