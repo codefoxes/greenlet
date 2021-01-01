@@ -69,7 +69,7 @@
 	"Midnight Dark": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--bg-pri:#000;--bg-sec:#222;--bg-inv-sec:#000;--text:#eee;--text-inv:#eee;--link:#9cd7f7;--link-hover:#dff3ff;--box-shadow:hsla(255, 255%, 255%, .2);--border:#333;--border-hover:#666;--header-bg:#000;--header:#ddd;--header-link:#ddd;--header-link-hover:#fff;--button: #fff;--button-bg:#000;--input-bg:#000;}",
+				"styles": ":root{--bg-pri:#000;--bg-sec:#222;--bg-inv-sec:#000;--text:#eee;--text-inv:#eee;--link:#9cd7f7;--link-hover:#dff3ff;--box-shadow:hsla(255, 255%, 255%, .2);--border:#333;--border-hover:#666;--header-bg:#000;--header:#ddd;--header-link:#ddd;--header-link-hover:#fff;--button:#fff;--button-bg:#000;--button-icon:#fff;--input-bg:#000;}",
 				"type": "global",
 				"fonts": {}
 			}
@@ -78,7 +78,7 @@
 	"Summer Shower": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--accent:#4c5270;--bg-pri:#fff;--bg-sec:#e9f1ef;--bg-inv-sec:#4c5270;--text:#4c5270;--text-inv:#fff;--link:#0b867d;--link-hover:#0fbdb1;--box-shadow:hsla(255, 255%, 255%, .2);--border:#e9f1ef;--border-hover:#e9f1ef;--header-bg:#f652a0;--header:#fff;--header-link:#fff;--header-link-hover:#4c5270;--button:#fff;--button-bg:#4c5270;--input-bg:#e9f1ef;--icon:#0eaa9f}body{font-family:ABeeZee,sans-serif;}",
+				"styles": ":root{--accent:#4c5270;--bg-pri:#fff;--bg-sec:#e9f1ef;--bg-inv-sec:#4c5270;--text:#4c5270;--text-inv:#fff;--link:#0b867d;--link-hover:#0fbdb1;--box-shadow:hsla(255, 255%, 255%, .2);--border:#e9f1ef;--border-hover:#e9f1ef;--header-bg:#f652a0;--header:#fff;--header-link:#fff;--header-link-hover:#4c5270;--button:#fff;--button-bg:#4c5270;--button-icon:#fff;--input-bg:#e9f1ef;--icon:#0eaa9f}body{font-family:ABeeZee,sans-serif;}",
 				"type": "global",
 				"fonts": {
 					"google": {
@@ -91,7 +91,7 @@
 	"Way Up North": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--accent:#0c2d48;--bg-pri:#fff;--bg-sec:#ebf4f7;--bg-inv-sec:#0c2d48;--text:#0c2d48;--text-inv:#fff;--link:#145da0;--link-hover:#2e8bc0;--box-shadow:hsla(255, 255%, 255%, .2);--border:#145da0;--border-hover:#145da0;--header-bg:#145da0;--header:#fff;--header-link:#fff;--header-link-hover:#eee;--button:#fff;--button-bg:#145da0;--input-bg:#ebf4f7;--icon:#2e8bc0}body{font-family:Source Serif Pro,serif;}",
+				"styles": ":root{--accent:#0c2d48;--bg-pri:#fff;--bg-sec:#ebf4f7;--bg-inv-sec:#0c2d48;--text:#0c2d48;--text-inv:#fff;--link:#145da0;--link-hover:#2e8bc0;--box-shadow:hsla(255, 255%, 255%, .2);--border:#145da0;--border-hover:#145da0;--header-bg:#145da0;--header:#fff;--header-link:#fff;--header-link-hover:#eee;--button:#fff;--button-bg:#145da0;--button-icon:#fff;--input-bg:#ebf4f7;--icon:#2e8bc0}body{font-family:Source Serif Pro,serif;}",
 				"type": "global",
 				"fonts": {
 					"google": {
@@ -104,7 +104,7 @@
 	"Mermaid Lagoon": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--bg-pri:#0c2d48;--bg-sec:#145da0;--bg-inv-sec:#0c2d48;--text:#fff;--text-inv:#fff;--link:#b1d4e0;--link-hover:#ebf4f7;--box-shadow:hsla(0, 0%, 0%, .4);--border:#145da0;--border-hover:#145da0;--header-bg:#0c2d48;--header:#fff;--header-link:#fff;--header-link-hover:#eee;--button:#fff;--button-bg:#145da0;--input-bg:#145da0;--icon:#2e8bc0}input::placeholder{color:rgba(255,255,255,.6)}.to-top .icon:before{border-color:#fff;}body{font-family:Montserrat,sans-serif;}",
+				"styles": ":root{--bg-pri:#0c2d48;--bg-sec:#145da0;--bg-inv-sec:#0c2d48;--text:#fff;--text-inv:#fff;--link:#b1d4e0;--link-hover:#ebf4f7;--box-shadow:hsla(0, 0%, 0%, .4);--border:#145da0;--border-hover:#145da0;--header-bg:#0c2d48;--header:#fff;--header-link:#fff;--header-link-hover:#eee;--button:#fff;--button-bg:#145da0;--button-icon:#fff;--input-bg:#145da0;--icon:#2e8bc0}input::placeholder{color:rgba(255,255,255,.6)}.to-top .icon:before{border-color:#fff;}body{font-family:Montserrat,sans-serif;}",
 				"type": "global",
 				"fonts": {
 					"google": {
@@ -136,7 +136,7 @@
 	"Pomegranate": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--accent:#3B0918;--text:#351D19;--bg-pri:#fff;--bg-sec:#EEECEC;--bg-inv-sec:#351D19;--link:#B71B21;--header:#fff;--header-bg:#B8390E;--header-link-hover:#EEECEC;--border:#B71B21;--border-hover:#B71B21;--border-focus:#B71B21;--button:#fff;--button-bg:#B71B21;--input-bg:#EEECEC;--icon:#D27F4C}body{font-family:Nunito,sans-serif}",
+				"styles": ":root{--accent:#3B0918;--text:#351D19;--bg-pri:#fff;--bg-sec:#EEECEC;--bg-inv-sec:#351D19;--link:#B71B21;--header:#fff;--header-bg:#B8390E;--header-link-hover:#EEECEC;--border:#B71B21;--border-hover:#B71B21;--border-focus:#B71B21;--button:#fff;--button-bg:#B71B21;--button-icon:#fff;--input-bg:#EEECEC;--icon:#D27F4C}body{font-family:Nunito,sans-serif}",
 				"type": "global",
 				"fonts": {
 					"google": {
@@ -149,7 +149,7 @@
 	"Chocolaty": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--accent:#3B0918;--text:#2A190D;--bg-pri:#e0cec2;--bg-sec:#9D6040;--bg-inv-sec:#351D19;--link:#773B21;--header:#fff;--header-bg:#552F1E;--header-link-hover:#EEECEC;--border:#9D6040;--border-hover:#552F1E;--border-focus:#552F1E;--button:#fff;--button-bg:#773B21;--input-bg:#9D6040;--icon:#9D6040}body{font-family:Noto Sans,sans-serif}.entry-title a,h1,h2,h3,h4,h5,h6{font-family:Noto Serif,serif}",
+				"styles": ":root{--accent:#3B0918;--text:#2A190D;--bg-pri:#e0cec2;--bg-sec:#9D6040;--bg-inv-sec:#351D19;--link:#773B21;--header:#fff;--header-bg:#552F1E;--header-link-hover:#EEECEC;--border:#9D6040;--border-hover:#552F1E;--border-focus:#552F1E;--button:#fff;--button-bg:#773B21;--button-icon:#fff;--input-bg:#9D6040;--icon:#9D6040}body{font-family:Noto Sans,sans-serif}.entry-title a,h1,h2,h3,h4,h5,h6{font-family:Noto Serif,serif}",
 				"type": "global",
 				"fonts": {
 					"google": {
@@ -170,7 +170,7 @@
 	"Avocado": {
 		"color_wings": {
 			"global": {
-				"styles": ":root{--font:Varela Round,sans-serif;--accent:#121D13;--text:#121D13;--bg-pri:#f5f6f0;--bg-sec:#a1d883;--bg-inv-sec:#121D13;--link:#304F27;--header:#fff;--header-bg:#304F27;--header-link-hover:#f5f6f0;--border:#304F27;--border-hover:#304F27;--border-focus:#304F27;--button:#fff;--button-bg:#304F27;--input-bg:#f5f6f0;--radius-small:2px;--radius:4px;--radius-large:6px;--icon:#B8B097}",
+				"styles": ":root{--font:Varela Round,sans-serif;--accent:#121D13;--text:#121D13;--bg-pri:#f5f6f0;--bg-sec:#a1d883;--bg-inv-sec:#121D13;--link:#304F27;--header:#fff;--header-bg:#304F27;--header-link-hover:#f5f6f0;--border:#304F27;--border-hover:#304F27;--border-focus:#304F27;--button:#fff;--button-bg:#304F27;--button-icon:#fff;--input-bg:#f5f6f0;--radius-small:2px;--radius:4px;--radius-large:6px;--icon:#B8B097}",
 				"type": "global",
 				"fonts": {
 					"google": {
