@@ -145,6 +145,7 @@ class Options_Admin {
 
 		$plugins = array(
 			array( __( 'Greenlet Booster', 'greenlet' ), 'greenlet-booster', 'greenlet-booster/booster.php' ),
+			array( __( 'Greenlet Site Importer', 'greenlet' ), 'greenlet-importer', 'greenlet-importer/importer.php' ),
 		);
 		?>
 

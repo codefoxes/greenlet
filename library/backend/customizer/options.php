@@ -385,8 +385,8 @@ function greenlet_options() {
 			'label'       => __( 'Content display', 'greenlet' ),
 			'description' => __( 'Post content display format.', 'greenlet' ),
 			'choices'     => array(
-				'excerpt' => 'Excerpt (short text extract)',
-				'full'    => 'Full Content',
+				'excerpt' => __( 'Excerpt (short text extract)', 'greenlet' ),
+				'full'    => __( 'Full Content', 'greenlet' ),
 			),
 		),
 	);
@@ -417,11 +417,11 @@ function greenlet_options() {
 			'label'       => __( 'Pagination', 'greenlet' ),
 			'description' => __( 'Paging Navigation display format.', 'greenlet' ),
 			'choices'     => array(
-				'simple'   => 'Simple',
-				'number'   => 'Numbered',
-				'ajax'     => 'Numbered (Ajax)',
-				'load'     => 'Load More Button',
-				'infinite' => 'Infinite Scroll',
+				'simple'   => __( 'Simple', 'greenlet' ),
+				'number'   => __( 'Numbered', 'greenlet' ),
+				'ajax'     => __( 'Numbered (Ajax)', 'greenlet' ),
+				'load'     => __( 'Load More Button', 'greenlet' ),
+				'infinite' => __( 'Infinite Scroll', 'greenlet' ),
 			),
 		),
 	);
@@ -438,13 +438,13 @@ function greenlet_options() {
 			'section' => 'blog_list',
 			'label'   => __( 'Show Meta Info', 'greenlet' ),
 			'choices' => array(
-				'sticky' => 'Featured (Sticky)',
-				'author' => 'Author',
-				'date'   => 'Published Date',
-				'mod'    => 'Updated Date',
-				'cats'   => 'Categories',
-				'tags'   => 'Tags',
-				'reply'  => 'Comments',
+				'sticky' => __( 'Featured (Sticky)', 'greenlet' ),
+				'author' => __( 'Author', 'greenlet' ),
+				'date'   => __( 'Published Date', 'greenlet' ),
+				'mod'    => __( 'Updated Date', 'greenlet' ),
+				'cats'   => __( 'Categories', 'greenlet' ),
+				'tags'   => __( 'Tags', 'greenlet' ),
+				'reply'  => __( 'Comments', 'greenlet' ),
 			),
 		),
 	);
@@ -512,9 +512,9 @@ function greenlet_options() {
 			'section' => 'blog_single',
 			'label'   => __( 'Show Author Info', 'greenlet' ),
 			'choices' => array(
-				'name'  => 'Name',
-				'image' => 'Avatar',
-				'bio'   => 'Biographical Info',
+				'name'  => __( 'Name', 'greenlet' ),
+				'image' => __( 'Avatar', 'greenlet' ),
+				'bio'   => __( 'Biographical Info', 'greenlet' ),
 			),
 		),
 	);
@@ -531,8 +531,8 @@ function greenlet_options() {
 			'section' => 'blog_single',
 			'label'   => __( 'Show Comments', 'greenlet' ),
 			'choices' => array(
-				'posts' => 'Posts',
-				'pages' => 'Pages',
+				'posts' => __( 'Posts', 'greenlet' ),
+				'pages' => __( 'Pages', 'greenlet' ),
 			),
 		),
 	);
@@ -572,6 +572,24 @@ function greenlet_options() {
 		'args' => array(
 			'title' => __( 'Others', 'greenlet' ),
 			'panel' => 'blog',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'search_submit',
+		'sargs' => array(
+			'default' => 'icon',
+		),
+		'cargs' => array(
+			'type'        => 'radio',
+			'section'     => 'blog_extra',
+			'label'       => __( 'Search button', 'greenlet' ),
+			'description' => __( 'Search form submit button content.', 'greenlet' ),
+			'choices'     => array(
+				'text' => __( 'Text', 'greenlet' ),
+				'icon' => __( 'Icon', 'greenlet' ),
+			),
 		),
 	);
 

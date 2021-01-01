@@ -58,7 +58,7 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			define( 'COLORWINGS_VERSION', '1.1.0' );
+			define( 'COLORWINGS_VERSION', '1.2.0' );
 			define( 'COLORWINGS_URL', $this->get_path_url() );
 			define( 'COLORWINGS_DIR', dirname( __FILE__ ) );
 
@@ -107,6 +107,7 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 				return;
 			}
 
+			// Todo: Order: Global first, Template next and page last.
 			foreach ( $cw[ $theme ] as $page => $value ) {
 				if ( 'global' === $value['type'] ) {
 					$this->styles .= $value['styles'];
@@ -122,6 +123,10 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 						$this->styles .= $value['styles'];
 					}
 					$this->add_font( $value );
+				} elseif ( 'single' === $value['type'] ) {
+					if ( ( get_the_ID() === $page ) || ( get_post_field( 'post_name' ) === $page ) ) {
+						$this->styles .= $value['styles'];
+					}
 				}
 			}
 		}

@@ -169,7 +169,7 @@ if ( ! function_exists( 'greenlet_is_assoc' ) ) {
 	 * @return bool
 	 */
 	function greenlet_is_assoc( $arr ) {
-		if ( array() === $arr ) {
+		if ( ! is_array( $arr ) || array() === $arr ) {
 			return false;
 		}
 

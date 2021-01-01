@@ -47,6 +47,8 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 		$l10n = apply_filters( 'greenlet_l10n_object', $l10n );
 		wp_localize_script( 'greenlet-scripts', 'greenletData', $l10n );
 
+		greenlet_enqueue_style( 'greenlet-root', GREENLET_STYLE_URL . '/root' . $min . '.css', array(), false, true );
+
 		$css_framework = gl_get_option( 'css_framework', 'default' );
 
 		$handle   = $css_framework;

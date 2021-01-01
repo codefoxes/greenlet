@@ -1,4 +1,4 @@
-@import "variables";
+@import "../variables";
 
 @mixin make-col($size, $columns: $grid-columns) {
 	flex: 0 0 percentage($size / $columns);

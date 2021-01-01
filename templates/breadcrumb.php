@@ -10,14 +10,14 @@ $separator = gl_get_option( 'breadcrumb_sep', '&raquo;' );
 
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb' ), null ) );
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
-echo '<a href="' . esc_url( home_url() ) . '" itemprop="item"><span itemprop="name">' . esc_html__( 'Home', 'greenlet' ) . '</span></a><meta itemprop="position" content="1" /></div>' . esc_html( $separator );
+echo '<a href="' . esc_url( home_url() ) . '" itemprop="item"><span itemprop="name">' . esc_html__( 'Home', 'greenlet' ) . '</span></a><meta itemprop="position" content="1" /></div><span>' . esc_html( $separator ) . '</span>';
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 
 if ( is_single() ) {
 	$category = get_the_category();
 	if ( $category ) {
 		echo '<a href="' . esc_url( get_category_link( $category[0]->term_id ) );
-		echo '" itemprop="item"><span itemprop="name">' . esc_html( $category[0]->cat_name ) . '</span></a><meta itemprop="position" content="2" /></div>' . esc_html( $separator );
+		echo '" itemprop="item"><span itemprop="name">' . esc_html( $category[0]->cat_name ) . '</span></a><meta itemprop="position" content="2" /></div><span>' . esc_html( $separator ) . '</span>';
 		printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 	}
 
@@ -36,7 +36,7 @@ if ( is_single() ) {
 			echo esc_html( get_the_title( $post->ancestors[ $i ] ) );
 			echo '</span></a>';
 			printf( '<meta itemprop="position" content="%s" /></div>', esc_attr( ( $i * -1 ) + $ancestors_count + 1 ) );
-			echo esc_html( $separator );
+			echo '<span>' . esc_html( $separator ) . '</span>';
 			printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );
 		}
 	}
