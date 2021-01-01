@@ -39,7 +39,7 @@ wp.customize.controlConstructor['preset'] = wp.customize.Control.extend(
 
 				let confirm = true
 				if ( ! confirmShown ) {
-					confirm = window.confirm( 'This will override all customizer settings and\nApply "' + this.value + '" preset.\nProceed?' )
+					confirm = window.confirm( 'This will override all customizer settings and\nApply "' + e.target.value + '" preset.\nProceed?' )
 					confirmShown = true
 				}
 				if ( confirm === false ) {

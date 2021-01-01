@@ -1,3 +1,14 @@
+Version 2.3.0 / Release: 01-01-2021
+===================
+New: Search Icon
+New Theming inside theme
+Improvement: Site importer Plugin in recommendation
+Improvement: Add singular & post-list class
+Improvement: Update Colorwings to 1.2.0
+Improvement: Breadcrumb structure improvement
+Improvement: More CSS variables
+Fix: Editor style bug
+
 Version 2.2.0 / Release: 06-12-2020
 ===================
 New: Plugin Recommender
