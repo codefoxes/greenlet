@@ -2182,7 +2182,9 @@
     var _MainStore$get2 = MainStore.get(),
         mounted = _MainStore$get2.mounted;
 
-    if (!mounted || mount === true) {
+    mount = mount === 'toggle' ? !mounted : mount;
+
+    if (mount === true) {
       cw.Evt.emit('mount-colorwings');
       toggleMediaEditor('enable');
       MainStore.setMounted(true);
@@ -3002,6 +3004,10 @@
       setState(_objectSpread2(_objectSpread2({}, state), {}, {
         tab: tab
       }));
+
+      if ('onTab' in props) {
+        props.onTab(tab);
+      }
     };
 
     var GradientPicker = function GradientPicker() {
@@ -3553,7 +3559,7 @@
 
   function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-  const Option = (_ref) => {
+  const Option$1 = (_ref) => {
     let {
       optionProps,
       highlighted,
@@ -3582,12 +3588,12 @@
     }, optionClass));
   };
 
-  Option.defaultProps = {
+  Option$1.defaultProps = {
     disabled: false,
     index: null,
     value: null
   };
-  var Option$1 = /*#__PURE__*/React$1.memo(Option);
+  var Option$2 = /*#__PURE__*/React$1.memo(Option$1);
 
   function isSelected(itemValue, selectedValue) {
     if (!selectedValue) {
@@ -3738,7 +3744,7 @@
         optionProps,
         renderOption
       };
-      const rendered = items.map(o => /*#__PURE__*/React__default['default'].createElement(Option$1, _extends$1({
+      const rendered = items.map(o => /*#__PURE__*/React__default['default'].createElement(Option$2, _extends$1({
         key: o.value,
         selected: isSelected(o, value),
         highlighted: highlighted === o.index
@@ -4098,7 +4104,188 @@
     (_cw$StylesStore2 = cw.StylesStore).addStyleNow.apply(_cw$StylesStore2, arguments);
   };
 
-  var styles$1 = "#color-wings{margin-left:-12px;margin-right:-12px}[style=\"display: none;\"]+#color-wings{margin-top:-15px}.cw-row{display:flex}.cw-row .col{flex:1}.cw-row .col-1{flex:0 0 8.33333%}.cw-row .col-2{flex:0 0 16.66667%}.cw-row .col-3{flex:0 0 25%}.cw-row .col-4{flex:0 0 33.33333%}.cw-row .col-5{flex:0 0 41.66667%}.cw-row .col-6{flex:0 0 50%}.cw-row .col-7{flex:0 0 58.33333%}.cw-row .col-8{flex:0 0 66.66667%}.cw-row .col-9{flex:0 0 75%}.cw-row .col-10{flex:0 0 83.33333%}.cw-row .col-11{flex:0 0 91.66667%}.cw-row .col-12{flex:0 0 100%}.cw-panel-heading{padding:10px;align-items:center;position:relative}.cw-panel-heading .popup-content{width:100%;box-sizing:border-box;position:absolute;z-index:5;background:#fff;right:0;border:1px solid #ccc}.cw-panel-heading .popup-overlay{position:fixed;top:0;bottom:0;left:0;right:0}.cw-panel-heading .popup-arrow{width:14px;height:14px;background:white;position:absolute;right:100px;top:-6px;transform:rotate(135deg);z-index:-1;box-shadow:rgba(0,0,0,0.3) -1px 1px 1px}.cw-panel-heading .cw-current-page{max-height:30px;white-space:pre-wrap;overflow:auto}.cw-panel-heading .page-selector .button{border-color:transparent;background:none;padding:10px 20px}.cw-panel-heading .page-selector .button:focus{border-color:#0071a1}.cw-panel-heading .cw-pause{margin:0 0 0 auto;display:block;line-height:1}.button.button-block{width:100%;text-align:center}.cw-tabs{display:flex;margin:0 -1px;position:relative;z-index:2}.cw-tabs .tab{flex:1;padding:8px;background:#ddd;border:1px solid transparent;border-bottom-color:#ccc;cursor:pointer;text-align:center}.cw-tabs .tab.active{border:1px solid #ccc;border-bottom-color:#fff;background:#fff;cursor:auto}.cw-main-tabs{display:inline-flex;width:50%}.cw-main-tabs .main-tab{color:#0071a1;outline:none}.cw-main-tabs .main-tab:focus,.cw-main-tabs .main-tab:hover{border-top:2px solid #0171a1;padding-top:7px}.cw-main-tabs .main-tab:focus:not(.active),.cw-main-tabs .main-tab:hover:not(.active){background:#f1f1f1}.cw-extra-tabs{display:inline-flex;width:calc(50% + 2px);height:36px;vertical-align:top;background:#ddd;border-top:1px solid transparent;border-bottom:1px solid #ccc;align-items:center;justify-content:flex-end}.cw-extra-tabs .button{border:none;height:100%;border-radius:0;background:none;line-height:1}.cw-extra-tabs .button:focus{box-shadow:none}.cw-extra-tabs .button:disabled,.cw-extra-tabs .button[disabled]{background:none !important}.cw-extra-tabs .button .dashicons{font-size:16px;line-height:20px}#cw-code-editor{width:100%}.cw-code-editor .CodeMirror{height:calc( 100vh - 254px);margin-bottom:-24px;overflow:hidden}.cw-settings-wrap{height:calc( 100vh - 254px);background:#fff;margin-bottom:-24px;padding:24px 12px;box-sizing:border-box}.customize-control .cw-link-wrap{background:#fff;padding:6px 10px;cursor:pointer;border-left:2px solid transparent;transition:all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;box-shadow:0 0 0 1px #ddd;position:relative}.customize-control .cw-link-wrap:hover{color:#0073aa;background:#f3f3f5;border-left:2px solid #0073aa}.customize-control .cw-link-wrap:hover:after{color:#0073aa}.customize-control .cw-link-wrap:after{content:'\\f345';font:normal 16px/1 dashicons;color:#a0a5aa;position:absolute;right:6px;top:calc(50% - 8px)}.customize-control .cw-link-text{position:absolute;right:26px;top:calc(50% - 9px);font-size:11px}\n";
+  var styles$1 = "#color-wings{margin-left:-12px;margin-right:-12px}[style=\"display: none;\"]+#color-wings{margin-top:-15px}.cw-row{display:flex}.cw-row .col{flex:1}.cw-row .col-1{flex:0 0 8.33333%}.cw-row .col-2{flex:0 0 16.66667%}.cw-row .col-3{flex:0 0 25%}.cw-row .col-4{flex:0 0 33.33333%}.cw-row .col-5{flex:0 0 41.66667%}.cw-row .col-6{flex:0 0 50%}.cw-row .col-7{flex:0 0 58.33333%}.cw-row .col-8{flex:0 0 66.66667%}.cw-row .col-9{flex:0 0 75%}.cw-row .col-10{flex:0 0 83.33333%}.cw-row .col-11{flex:0 0 91.66667%}.cw-row .col-12{flex:0 0 100%}.cw-panel-heading{padding:10px;align-items:center;position:relative}.cw-panel-heading .popup-content{width:100%;box-sizing:border-box;position:absolute;z-index:5;background:#fff;right:0;border:1px solid #ccc}.cw-panel-heading .popup-overlay{position:fixed;top:0;bottom:0;left:0;right:0}.cw-panel-heading .popup-arrow{width:14px;height:14px;background:white;position:absolute;right:100px;top:-6px;transform:rotate(135deg);z-index:-1;box-shadow:rgba(0,0,0,0.3) -1px 1px 1px}.cw-panel-heading .cw-current-page{max-height:30px;white-space:pre-wrap;overflow:auto}.cw-panel-heading .page-selector .button{border-color:transparent;background:none;padding:10px 20px}.cw-panel-heading .page-selector .button:focus{border-color:#0071a1}.cw-panel-heading .cw-pause{margin:0 0 0 auto;display:block;line-height:1}.button.button-block{width:100%;text-align:center}.cw-tabs{display:flex;margin:0 -1px;position:relative;z-index:2}.cw-tabs .tab{flex:1;padding:8px;background:#ddd;border:1px solid transparent;border-bottom-color:#ccc;cursor:pointer;text-align:center}.cw-tabs .tab.active{border:1px solid #ccc;border-bottom-color:#fff;background:#fff;cursor:auto}.cw-main-tabs{display:inline-flex;width:60%}.cw-main-tabs .main-tab{color:#0071a1;outline:none}.cw-main-tabs .main-tab:focus,.cw-main-tabs .main-tab:hover{border-top:2px solid #0171a1;padding-top:7px}.cw-main-tabs .main-tab:focus:not(.active),.cw-main-tabs .main-tab:hover:not(.active){background:#f1f1f1}.cw-extra-tabs{display:inline-flex;width:calc(40% + 2px);height:36px;vertical-align:top;background:#ddd;border-top:1px solid transparent;border-bottom:1px solid #ccc;align-items:center;justify-content:flex-end}.cw-extra-tabs .button{border:none;height:100%;border-radius:0;background:none;line-height:1}.cw-extra-tabs .button:focus{box-shadow:none}.cw-extra-tabs .button:disabled,.cw-extra-tabs .button[disabled]{background:none !important}.cw-extra-tabs .button .dashicons{font-size:16px;line-height:20px}#cw-code-editor{width:100%}.cw-code-editor .CodeMirror{height:calc( 100vh - 254px);margin-bottom:-24px;overflow:hidden}.cw-settings-controls{padding:24px 12px}.customize-control .cw-link-wrap{background:#fff;padding:6px 10px;cursor:pointer;border-left:2px solid transparent;transition:all .15s ease-in-out, border-color .15s ease-in-out, background .15s ease-in-out;box-shadow:0 0 0 1px #ddd;position:relative}.customize-control .cw-link-wrap:hover{color:#0073aa;background:#f3f3f5;border-left:2px solid #0073aa}.customize-control .cw-link-wrap:hover:after{color:#0073aa}.customize-control .cw-link-wrap:after{content:'\\f345';font:normal 16px/1 dashicons;color:#a0a5aa;position:absolute;right:6px;top:calc(50% - 8px)}.customize-control .cw-link-text{position:absolute;right:26px;top:calc(50% - 9px);font-size:11px}.cw-theming-controls{padding:12px;min-height:calc( 100vh - 327px);margin-bottom:-24px;display:flex;flex-direction:column;align-items:center;justify-content:center}.cw-theming-controls .cw-control{margin-bottom:18px}.cw-theming-controls .cw-control-title{font-size:13px}.cw-theming-controls .cw-color{display:flex;align-items:center;flex-wrap:wrap}.cw-theming-controls .cw-color .cw-control-title{width:50%}.cw-theming-controls .cw-color-info{width:50%}.cw-theming-controls .cw-color-wrap{min-width:1px}.cw-theming-controls .cw-select{display:flex;margin-top:20px}.cw-theming-controls .cw-select .cw-control-title{width:66.667%}.cw-theming-controls .cw-select .select-search{width:33.333%}\n";
+
+  function Header() {
+    var _React$useState = React.useState({
+      show: false,
+      style: {
+        content: {
+          top: 0
+        },
+        arrow: {
+          right: 0
+        }
+      }
+    }),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        popState = _React$useState2[0],
+        setPopState = _React$useState2[1];
+
+    var _useStore = useStore(MainStore),
+        previewObject = _useStore.previewObject,
+        mounted = _useStore.mounted;
+
+    var allPages = [{
+      type: 'global',
+      name: 'global',
+      title: 'All Pages'
+    }];
+
+    if ('pages' in previewObject) {
+      if (previewObject.pages.is_home) {
+        allPages.push({
+          type: 'template',
+          name: 'is_home',
+          title: 'Blog Post List Page'
+        });
+      }
+
+      if (previewObject.pages.is_front_page) {
+        allPages.push({
+          type: 'template',
+          name: 'is_front_page',
+          title: 'Front Page'
+        });
+      }
+
+      if (previewObject.pages.is_single) {
+        allPages.push({
+          type: 'template',
+          name: 'is_single',
+          title: 'All Single Posts'
+        });
+        allPages.push({
+          type: 'single',
+          name: previewObject.page.id,
+          title: "Post: ".concat(previewObject.page.title)
+        });
+      }
+
+      if (previewObject.pages.is_page) {
+        allPages.push({
+          type: 'template',
+          name: 'is_page',
+          title: 'All Single Pages'
+        });
+        allPages.push({
+          type: 'single',
+          name: previewObject.page.id,
+          title: "Page: ".concat(previewObject.page.title)
+        });
+      }
+    }
+
+    var _MainStore$get = MainStore.get(),
+        currentPage = _MainStore$get.currentPage;
+
+    var currentTitle = 'All Pages';
+
+    for (var page in allPages) {
+      if (allPages.hasOwnProperty(page) && allPages[page].name === currentPage) {
+        currentTitle = allPages[page].title;
+        break;
+      }
+    }
+
+    var changePage = function changePage(e, page) {
+      MainStore.changePage(page.name, page.type);
+      setPopState(function (prev) {
+        return _objectSpread2(_objectSpread2({}, prev), {}, {
+          show: false
+        });
+      });
+    };
+
+    var popupNow = function popupNow(e) {
+      var clientRect = e.target.getBoundingClientRect();
+      var buttonBottom = clientRect.bottom - e.target.offsetParent.getBoundingClientRect().top;
+      setPopState(function (prevPopState) {
+        return {
+          show: !prevPopState.show,
+          style: {
+            content: {
+              top: "".concat(buttonBottom + 10, "px")
+            },
+            arrow: {
+              left: "".concat(clientRect.left + clientRect.width / 2 - 7, "px")
+            }
+          }
+        };
+      });
+    };
+
+    var togglePause = function togglePause() {
+      toggleMounted();
+    };
+
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cw-panel-heading cw-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "col-5"
+    }, /*#__PURE__*/React.createElement("span", null, "Editing Styles for: ")), /*#__PURE__*/React.createElement("div", {
+      className: "col-5"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "button button-block cw-current-page",
+      onClick: popupNow,
+      type: "button"
+    }, currentTitle), /*#__PURE__*/React.createElement("div", {
+      className: "popup-overlay ".concat(popState.show ? '' : 'hidden'),
+      onClick: function onClick() {
+        return setPopState(function (prev) {
+          return _objectSpread2(_objectSpread2({}, prev), {}, {
+            show: false
+          });
+        });
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "page-selector popup-content ".concat(popState.show ? '' : 'hidden'),
+      style: popState.style.content
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "popup-arrow",
+      style: popState.style.arrow
+    }), allPages.map(function (page) {
+      return /*#__PURE__*/React.createElement("button", {
+        key: page.name,
+        onClick: function onClick(e) {
+          return changePage(e, page);
+        },
+        className: "button button-block",
+        type: "button"
+      }, page.title);
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "col-2"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "button cw-pause",
+      onClick: togglePause,
+      type: "button"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "dashicons dashicons-controls-".concat(mounted ? 'pause' : 'play')
+    }))));
+  }
+
+  function History() {
+    var _useStore = useStore(StylesStore),
+        history = _useStore.history;
+
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cw-extra-tabs"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "button",
+      onClick: undo,
+      disabled: history.past.length === 0
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "dashicons dashicons-undo"
+    })), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "button",
+      onClick: redo,
+      disabled: history.future.length === 0
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "dashicons dashicons-redo"
+    })));
+  }
 
   /**
    * Quick Select selectors.
@@ -4217,7 +4404,65 @@
     })));
   }
 
-  var styles$2 = "#cw-editor-wrap ul,#cw-editor-wrap li{list-style:none;margin:0;padding:0}#cw-editor-wrap .cw-panel{background:#eee;font-size:13px;color:#444}#cw-editor-wrap .cw-panel-title{background:#fff;border-bottom:1px solid #ddd;font-size:13px;padding:16px;color:#444;line-height:16px;margin:0}#cw-editor-wrap .cw-panel-title *{box-sizing:border-box}#cw-editor-wrap .cw-panel-title .title-inner{display:inline-flex;width:calc(100% - 54px)}#cw-editor-wrap .cw-panel-title .title-desc{padding:3px 0;width:90px}#cw-editor-wrap .cw-panel-title .selector{background:#f2f8ec;border:1px solid #7cb342;padding:3px 5px;width:calc(100% - 90px);border-radius:0;min-height:24px;line-height:1;font-size:13px;background-image:none !important}#cw-editor-wrap .cw-panel-title .selector:focus{box-shadow:none;border-color:#5b8230}#cw-editor-wrap .cw-panel-title .selector.invalid,#cw-editor-wrap .cw-panel-title .selector.invalid:focus{border-color:#c78100}#cw-editor-wrap .cw-panel-main{height:calc(100% - 41px);overflow-y:auto}#cw-editor-wrap .cw-section-title{border:none;border-left:3px solid transparent;border-bottom:1px solid #ddd;background:#fff;font-size:14px;padding:12px 16px;font-weight:600;color:#444;line-height:16px;margin:0;cursor:pointer;width:100%;text-align:left;transition:.15s all ease-in-out}#cw-editor-wrap .cw-section-title:hover{color:#0073aa;background:#f3f3f5;border-left-color:#0073aa}#cw-editor-wrap .cw-section-title:focus{outline:none;color:#0073aa;border-left-color:#0073aa}.cw-section-content{display:flex;flex-wrap:wrap;padding:0 12px;max-height:0;opacity:0;overflow:auto;transition:max-height .2s ease, opacity .2s ease}.cw-panel .open .cw-section-content{opacity:1;max-height:1000px;border-bottom:1px solid #ddd}.cw-panel .cw-link{display:block;text-decoration:none;box-sizing:border-box;box-shadow:0 0 0 1px #7cb342;margin:1px 0;color:#0073aa}.cw-control{flex-shrink:0;width:100%;margin-bottom:12px;box-sizing:border-box}.cw-control.padding,.cw-control.margin{margin-bottom:0}.cw-control.col-4{width:33.333%}.cw-control.col-5{width:41.666%}.cw-control.col-6{width:50%}.cw-control.col-7{width:58.333%}.cw-control.col-8{width:66.666%}.cw-control .cw-tabs{margin:0 -12px -1px -13px}.cw-control .tab.active{border-bottom-color:#eee;background:#eee}.cw-control .tab-content{position:relative;padding:30px 0 15px}.cw-control .shorthand .tab-content{border-top:1px solid #ccc}.cw-control .single-length .tab-content{padding:20px 0 0}.cw-control .length-ips{position:relative}.cw-control .length-ips input[type=\"number\"]{padding-right:30px}.cw-control .length-ips.unit-less input[type=\"number\"]{padding-right:0}.cw-control .length-unit{position:absolute;top:1px;right:0;width:30px;padding:0;border:none;min-height:28px;background:#f5f5f5;font-size:13px;text-align:center;text-align-last:center;border-radius:0 3px 3px 0}.cw-control .output{padding:5px;border-top:1px dotted #ddd;border-bottom:1px solid #ddd;font-size:11px;margin-top:-1px}.cw-control .reset{position:absolute;right:2px;bottom:34px;padding:4px 6px 2px;cursor:pointer;border-radius:2px;border:none;outline:none}.cw-control .reset:hover{background:#fff}.cw-control .reset:focus{background:#fff;box-shadow:0 0 0 1px #007cba}.cw-control .reset svg{max-height:12px}.cw-control .range-wrap{padding-right:5px;line-height:1.8;box-sizing:border-box}.cw-control input:focus{outline:none}.cw-control svg{display:block;margin:auto}.cw-control .cw-color .components-color-picker__body{padding:16px 4px 0}.cw-control .cw-color-info{display:flex;align-items:center}.cw-control .cw-color-info>*:not(:first-child){margin-left:10px}.cw-control .solid-selector,.cw-control .gradient-selector{width:30px;height:30px;border-radius:50%;border:1px solid #666}.cw-control .solid-selector:focus,.cw-control .gradient-selector:focus{outline:none;box-shadow:0 0 0 1px #027cba}.cw-control .cw-color-value{background:#fff;padding:4px 10px;border-radius:2px;white-space:nowrap;max-width:calc(100% - 100px);overflow:auto}.cw-control .cw-color-wrap{position:relative;min-height:320px}.cw-control .cw-color-wrap.cw-wrap-gradient{min-height:220px}.cw-control .cw-color-holder{position:absolute;top:6px;padding:12px;background:#fff;border:1px solid #ccc;box-shadow:0 2px 6px rgba(0,0,0,0.05);border-radius:2px;box-sizing:border-box;width:calc(18vw - 50px)}.cw-control .cw-wrap-gradient .cw-color-holder{width:100%}.cw-control .components-color-picker__inputs-wrapper{width:calc(100% - 50px);min-width:220px}.cw-control .components-color-picker__inputs-toggle{display:block;padding:0 5px;border:1px solid #999}.cw-control .components-color-picker__inputs-fields,.cw-control .components-base-control__field{margin:0}.cw-control .components-text-control__input[type=\"number\"]{border-radius:0;border-right:none}.cw-control label.components-base-control__label{text-transform:capitalize;font-size:12px;margin:0 0 4px 4px;color:#666;line-height:1}.cw-control .cw-color-clear{position:absolute;right:12px;bottom:12px;height:30px}.cw-control .cw-color-gradient .cw-link{height:180px;background-image:linear-gradient(135deg, #9cccfc 0%, #e6cffc 100%);display:flex;align-items:center;justify-content:center;color:#000;border-radius:2px;text-decoration:none;font-size:14px;text-align:center;line-height:22px}.cw-control.font-style,.cw-control.text-decoration,.cw-control.display,.cw-control.list-style-type{padding-right:12px}.cw-control.position .select-search__option{font-size:13px}.cw-control-title{display:block;padding:10px 0}.cw-control-title+.tab-content{margin-top:-25px}.border .cw-tab-wrap{display:flex;flex-wrap:wrap}.border .cw-tab-wrap>*{flex-shrink:0;width:100%;box-sizing:border-box}.border .cw-tab-wrap .cw-color{width:60%}.border .cw-tab-wrap .cw-select{width:40%}button.wp-color-result .color-alpha{height:28px !important}#cw-quick-select .cw-qs-title{padding:15px 0 10px;text-align:center;line-height:22px}#cw-quick-select .cw-qs-title .dashicons{background-color:#0171a1;background-image:linear-gradient(90deg, #01a0e4, #0171a1);background-size:100%;background-repeat:repeat;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:16px;height:16px;vertical-align:text-top}#cw-quick-select .cw-qs-title svg{vertical-align:text-top;padding-left:10px}#cw-quick-select ul.cw-qs-btns{padding:10px;display:flex;flex-flow:column wrap;align-content:space-between;height:300px}#cw-quick-select ul.cw-qs-btns::before,#cw-quick-select ul.cw-qs-btns::after{content:'';flex-basis:100%;width:0;order:2}#cw-quick-select .cw-qs-btn:nth-child(3n+1){order:1}#cw-quick-select .cw-qs-btn:nth-child(3n+2){order:2}#cw-quick-select .cw-qs-btn:nth-child(3n){order:3}#cw-quick-select li.cw-qs-btn{padding:6px 8px;background:#fff linear-gradient(90deg, #fff 0%, #f3f7f4 100%);color:#0071a1;border:1px solid #0071a1;border-radius:3px;cursor:pointer;width:calc(33.3% - 5px);box-sizing:border-box;margin-bottom:10px;text-align:center}.cw-pseudo{display:inline-block;vertical-align:top;cursor:pointer;position:relative}.cw-pseudo-icon{display:inline-block;background:#f2f8ec;border:1px solid #7cb342;border-left:none;color:#5b8230;cursor:pointer;line-height:22px;height:24px}.cw-pseudo-content{border:1px solid #7cb342;box-sizing:border-box;display:none;position:absolute;top:0;left:-1px;background:white;z-index:3}.cw-pseudo-item{padding:3px 0 3px 7px;width:52px;display:none}.cw-pseudo-item:hover{color:#5b8230}.cw-pseudo.active .cw-pseudo-content{display:inline-block}.cw-pseudo.active .cw-pseudo-item:first-child{display:inline-block;background:#f2f8ec}.cw-pseudo.active .cw-pseudo-icon{display:none}.cw-pseudo.open .cw-pseudo-content{display:inline-block}.cw-pseudo.open .cw-pseudo-item{display:inline-block}.cw-pseudo.open .cw-pseudo-icon{display:none}.cw-media .thumbnail img{max-height:100px}[id*=\"__lpform_input\"]{display:none !important}\n";
+  function Selector() {
+    var _useStore = useStore(MainStore),
+        currentSelector = _useStore.currentSelector,
+        selectorClass = _useStore.selectorClass;
+
+    var _React$useState = React.useState(currentSelector),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        tempSelector = _React$useState2[0],
+        updateTempSelector = _React$useState2[1];
+
+    React.useEffect(function () {
+      return updateTempSelector(currentSelector);
+    }, [currentSelector]);
+
+    var onSelectorChange = function onSelectorChange(e) {
+      updateTempSelector(e.target.value);
+      cw.Evt.emit('update-selector', e.target.value);
+    };
+
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cw-panel-title"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "title-inner"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "title-desc"
+    }, "You're editing:"), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      className: "selector ".concat(selectorClass),
+      value: tempSelector,
+      onChange: onSelectorChange
+    })), /*#__PURE__*/React.createElement(Pseudo, null));
+  }
+
+  function ControlBase(_ref) {
+    var control = _ref.control;
+
+    var _useStore = useStore(MainStore),
+        currentSelector = _useStore.currentSelector;
+
+    var media = MediaStore.get().currentMedia.query;
+
+    var _StylesStore$get = StylesStore.get(),
+        styles = _StylesStore$get.styles;
+
+    if (media in styles && currentSelector in styles[media] && control.property in styles[media][currentSelector]) {
+      // Todo: all `val`s can not be changed. Only do this if control allows it or of is length?
+      if (control.Component.name === 'Length') {
+        var dirty = styles.all[currentSelector][control.property];
+
+        if (/\d/.test(dirty)) {
+          control.params.val = styles.all[currentSelector][control.property];
+        }
+      }
+    }
+
+    return /*#__PURE__*/React.createElement(control.Component, control.params);
+  }
+
+  var styles$2 = "#cw-editor-wrap ul,#cw-editor-wrap li{list-style:none;margin:0;padding:0}#cw-editor-wrap .cw-panel{background:#eee;font-size:13px;color:#444}.cw-panel-title{background:#fff;border-bottom:1px solid #ddd;font-size:13px;padding:16px;color:#444;line-height:16px;margin:0}.cw-panel-title *{box-sizing:border-box}.cw-panel-title .title-inner{display:inline-flex;width:calc(100% - 54px)}.cw-panel-title .title-desc{padding:3px 0;width:90px}.cw-panel-title input.selector{background:#f2f8ec;border:1px solid #7cb342;padding:3px 5px;width:calc(100% - 90px);border-radius:0;min-height:24px;line-height:1;font-size:13px;background-image:none !important}.cw-panel-title input.selector:focus{box-shadow:none;border-color:#5b8230}.cw-panel-title input.selector.invalid,.cw-panel-title input.selector.invalid:focus{border-color:#c78100}.cw-panel-main{height:calc(100% - 41px);overflow-y:auto}.cw-section-title{border:none;border-left:3px solid transparent;border-bottom:1px solid #ddd;background:#fff;font-size:14px;padding:12px 16px;font-weight:600;color:#444;line-height:16px;margin:0;cursor:pointer;width:100%;text-align:left;transition:.15s all ease-in-out}.cw-section-title:hover{color:#0073aa;background:#f3f3f5;border-left-color:#0073aa}.cw-section-title:focus{outline:none;color:#0073aa;border-left-color:#0073aa}.cw-section-content{display:flex;flex-wrap:wrap;padding:0 12px;max-height:0;opacity:0;overflow:auto;transition:max-height .2s ease, opacity .2s ease}.cw-panel .open .cw-section-content{opacity:1;max-height:1000px;border-bottom:1px solid #ddd}.cw-panel .cw-link{display:block;text-decoration:none;box-sizing:border-box;box-shadow:0 0 0 1px #7cb342;margin:1px 0;color:#0073aa}.cw-control{flex-shrink:0;width:100%;margin-bottom:12px;box-sizing:border-box}.cw-control.padding,.cw-control.margin{margin-bottom:0}.cw-control.col-4{width:33.333%}.cw-control.col-5{width:41.666%}.cw-control.col-6{width:50%}.cw-control.col-7{width:58.333%}.cw-control.col-8{width:66.666%}.cw-control .cw-tabs{margin:0 -12px -1px -13px}.cw-control .tab.active{border-bottom-color:#eee;background:#eee}.cw-control .tab-content{position:relative;padding:30px 0 15px}.cw-control .shorthand .tab-content{border-top:1px solid #ccc}.cw-control .single-length .tab-content{padding:20px 0 0}.cw-control .length-ips{position:relative}.cw-control .length-ips input[type=\"number\"]{padding-right:30px}.cw-control .length-ips.unit-less input[type=\"number\"]{padding-right:0}.cw-control .length-unit{position:absolute;top:1px;right:0;width:30px;padding:0;border:none;min-height:28px;background:#f5f5f5;font-size:13px;text-align:center;text-align-last:center;border-radius:0 3px 3px 0}.cw-control .output{padding:5px;border-top:1px dotted #ddd;border-bottom:1px solid #ddd;font-size:11px;margin-top:-1px}.cw-control .reset{position:absolute;right:2px;bottom:34px;padding:4px 6px 2px;cursor:pointer;border-radius:2px;border:none;outline:none}.cw-control .reset:hover{background:#fff}.cw-control .reset:focus{background:#fff;box-shadow:0 0 0 1px #007cba}.cw-control .reset svg{max-height:12px}.cw-control .range-wrap{padding-right:5px;line-height:1.8;box-sizing:border-box}.cw-control input:focus{outline:none}.cw-control svg{display:block;margin:auto}.cw-control .cw-color .components-color-picker__body{padding:16px 4px 0}.cw-control .cw-color-info{display:flex;align-items:center}.cw-control .cw-color-info>*:not(:first-child){margin-left:10px}.cw-control .solid-selector,.cw-control .gradient-selector{width:30px;height:30px;border-radius:50%;border:1px solid #999}.cw-control .solid-selector:focus,.cw-control .gradient-selector:focus{outline:none;box-shadow:0 0 0 1px #027cba}.cw-control .cw-color-value{background:#fff;padding:4px 10px;border-radius:2px;white-space:nowrap;max-width:calc(100% - 100px);overflow:auto}.cw-control .cw-color-wrap{position:relative;min-height:320px}.cw-control .cw-color-wrap.cw-wrap-gradient{min-height:220px}.cw-control .cw-color-holder{position:absolute;top:6px;padding:12px;background:#fff;border:1px solid #ccc;box-shadow:0 2px 6px rgba(0,0,0,0.05);border-radius:2px;box-sizing:border-box;width:calc(18vw - 50px)}.cw-control .cw-wrap-gradient .cw-color-holder{width:100%}.cw-control .components-color-picker__inputs-wrapper{width:calc(100% - 50px);min-width:220px}.cw-control .components-color-picker__inputs-toggle{display:block;padding:0 5px;border:1px solid #999}.cw-control .components-color-picker__inputs-fields,.cw-control .components-base-control__field{margin:0}.cw-control .components-text-control__input[type=\"number\"]{border-radius:0;border-right:none}.cw-control label.components-base-control__label{text-transform:capitalize;font-size:12px;margin:0 0 4px 4px;color:#666;line-height:1}.cw-control .cw-color-clear{position:absolute;right:12px;bottom:12px;height:30px}.cw-control .cw-color-gradient .cw-link{height:180px;background-image:linear-gradient(135deg, #9cccfc 0%, #e6cffc 100%);display:flex;align-items:center;justify-content:center;color:#000;border-radius:2px;text-decoration:none;font-size:14px;text-align:center;line-height:22px}.cw-control.font-style,.cw-control.text-decoration,.cw-control.display,.cw-control.list-style-type{padding-right:12px}.cw-control.position .select-search__option{font-size:13px}.cw-control-title{display:block;padding:10px 0}.cw-control-title+.tab-content{margin-top:-25px}.border .cw-tab-wrap{display:flex;flex-wrap:wrap}.border .cw-tab-wrap>*{flex-shrink:0;width:100%;box-sizing:border-box}.border .cw-tab-wrap .cw-color{width:60%}.border .cw-tab-wrap .cw-select{width:40%}button.wp-color-result .color-alpha{height:28px !important}#cw-quick-select .cw-qs-title{padding:15px 0 10px;text-align:center;line-height:22px}#cw-quick-select .cw-qs-title .dashicons{background-color:#0171a1;background-image:linear-gradient(90deg, #01a0e4, #0171a1);background-size:100%;background-repeat:repeat;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:16px;height:16px;vertical-align:text-top}#cw-quick-select .cw-qs-title svg{vertical-align:text-top;padding-left:10px}#cw-quick-select ul.cw-qs-btns{padding:10px;display:flex;flex-flow:column wrap;align-content:space-between;height:300px}#cw-quick-select ul.cw-qs-btns::before,#cw-quick-select ul.cw-qs-btns::after{content:'';flex-basis:100%;width:0;order:2}#cw-quick-select .cw-qs-btn:nth-child(3n+1){order:1}#cw-quick-select .cw-qs-btn:nth-child(3n+2){order:2}#cw-quick-select .cw-qs-btn:nth-child(3n){order:3}#cw-quick-select li.cw-qs-btn{padding:6px 8px;background:#fff linear-gradient(90deg, #fff 0%, #f3f7f4 100%);color:#0071a1;border:1px solid #0071a1;border-radius:3px;cursor:pointer;width:calc(33.3% - 5px);box-sizing:border-box;margin-bottom:10px;text-align:center}.cw-pseudo{display:inline-block;vertical-align:top;cursor:pointer;position:relative}.cw-pseudo-icon{display:inline-block;background:#f2f8ec;border:1px solid #7cb342;border-left:none;color:#5b8230;cursor:pointer;line-height:22px;height:24px}.cw-pseudo-content{border:1px solid #7cb342;box-sizing:border-box;display:none;position:absolute;top:0;left:-1px;background:white;z-index:3}.cw-pseudo-item{padding:3px 0 3px 7px;width:52px;display:none}.cw-pseudo-item:hover{color:#5b8230}.cw-pseudo.active .cw-pseudo-content{display:inline-block}.cw-pseudo.active .cw-pseudo-item:first-child{display:inline-block;background:#f2f8ec}.cw-pseudo.active .cw-pseudo-icon{display:none}.cw-pseudo.open .cw-pseudo-content{display:inline-block}.cw-pseudo.open .cw-pseudo-item{display:inline-block}.cw-pseudo.open .cw-pseudo-icon{display:none}.cw-media .thumbnail img{max-height:100px}[id*=\"__lpform_input\"]{display:none !important}\n";
 
   var selectStyles = ".select-search{position:relative;box-sizing:border-box}.select-search *,.select-search *::after,.select-search *::before{box-sizing:inherit}.select-search__value{position:relative;z-index:1}.select-search__value::after{content:'';display:inline-block;position:absolute;top:calc(50% - 7px);right:19px;width:9px;height:9px}.select-search__input{display:block;height:30px;width:100%;padding:0 16px;background:#fff !important;border:1px solid #7cb342;border-radius:3px;outline:none;font-family:'Noto Sans', sans-serif;font-size:14px;text-align:left;text-overflow:ellipsis;line-height:36px;-webkit-appearance:none;margin:0}.select-search__input::-webkit-search-decoration,.select-search__input::-webkit-search-cancel-button,.select-search__input::-webkit-search-results-button,.select-search__input::-webkit-search-results-decoration{-webkit-appearance:none}.select-search__input:not([readonly]):focus{cursor:initial}.select-search__select{background:#fff;box-shadow:0 0.0625rem 0.125rem rgba(0,0,0,0.15)}.select-search__options{list-style:none}.select-search__row:not(:first-child){border-top:1px solid #eee}.select-search__option{display:block;height:36px;width:100%;padding:0 16px;background:#fff;border:none;outline:none;font-size:14px;text-align:left;cursor:pointer}.select-search--multiple .select-search__option{height:48px}.select-search__option.is-selected{background:#7cb342;color:#fff}.select-search__option.is-highlighted,.select-search__option:not(.is-selected):hover{background:#f1f7eb}.select-search__option.is-highlighted.is-selected,.select-search__option.is-selected:hover{background:#6fa13b;color:#fff}.select-search__group-header{font-size:10px;text-transform:uppercase;background:#f7f7f7;padding:6px 16px;position:sticky;top:0;box-shadow:0 1px 3px rgba(0,0,0,0.2)}.select-search.is-disabled{opacity:0.5}.select-search.is-loading .select-search__value::after{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath fill='%232F2D37' d='M25,5A20.14,20.14,0,0,1,45,22.88a2.51,2.51,0,0,0,2.49,2.26h0A2.52,2.52,0,0,0,50,22.33a25.14,25.14,0,0,0-50,0,2.52,2.52,0,0,0,2.5,2.81h0A2.51,2.51,0,0,0,5,22.88,20.14,20.14,0,0,1,25,5Z'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 25 25' to='360 25 25' dur='0.6s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E\");background-size:11px}.select-search:not(.is-disabled) .select-search__input{cursor:pointer}.select-search--multiple{border-radius:3px;overflow:hidden}.select-search:not(.is-loading):not(.select-search--multiple) .select-search__value::after{transform:rotate(45deg);border-right:2px solid #555;border-bottom:2px solid #555;pointer-events:none}.select-search--multiple .select-search__input{cursor:initial}.select-search--multiple .select-search__input{border-radius:3px 3px 0 0}.select-search--multiple:not(.select-search--search) .select-search__input{cursor:default}.select-search:not(.select-search--multiple) .select-search__input:hover{border-color:#7cb342}.select-search:not(.select-search--multiple) .select-search__select{z-index:2;top:38px;right:0;left:0;border-radius:3px;overflow:auto;max-height:360px;border:1px solid #7cb342}.select-search--multiple .select-search__select{position:relative;overflow:auto;max-height:260px;border-top:1px solid #eee;border-radius:0 0 3px 3px}.select-search.horizontal .select-search__value{display:none}.select-search.horizontal .select-search__select{top:0;box-shadow:none}.select-search.horizontal .select-search__options{display:flex}.select-search.horizontal .select-search__option{height:28px;position:relative;text-align:center;padding:0 10px}.select-search.horizontal .select-search__row{flex:1}.select-search.horizontal .select-search__row:not(:first-child){border-top:none}.select-search__row[data-value=\"italic\"] .select-search__option{font-style:italic}.select-search__row[data-value=\"overline\"] .select-search__option{text-decoration:overline}.select-search__row[data-value=\"underline\"] .select-search__option{text-decoration:underline}.select-search__row[data-value=\"line-through\"] .select-search__option{text-decoration:line-through}.cw-border .select-search__row .select-search__option:after{content:'';position:absolute;top:50%;left:15%;width:70%}.cw-border .select-search__row[data-value=\"solid\"] .select-search__option:after{border-top:2px solid #000}.cw-border .select-search__row[data-value=\"dotted\"] .select-search__option:after{border-top:2px dotted #000}.cw-border .select-search__row[data-value=\"dashed\"] .select-search__option:after{border-top:2px dashed #000}.font-weight .select-search__row[data-value=\"100\"] .select-search__option{font-weight:100}.font-weight .select-search__row[data-value=\"200\"] .select-search__option{font-weight:200}.font-weight .select-search__row[data-value=\"300\"] .select-search__option{font-weight:300}.font-weight .select-search__row[data-value=\"400\"] .select-search__option{font-weight:400}.font-weight .select-search__row[data-value=\"500\"] .select-search__option{font-weight:500}.font-weight .select-search__row[data-value=\"600\"] .select-search__option{font-weight:600}.font-weight .select-search__row[data-value=\"700\"] .select-search__option{font-weight:700}.font-weight .select-search__row[data-value=\"800\"] .select-search__option{font-weight:800}.font-weight .select-search__row[data-value=\"900\"] .select-search__option{font-weight:900}\n";
 
@@ -4236,8 +4481,7 @@
         currentSelector = _useStore.currentSelector,
         openSection = _useStore.openSection,
         currentStyles = _useStore.currentStyles,
-        quickSelectors = _useStore.quickSelectors,
-        selectorClass = _useStore.selectorClass;
+        quickSelectors = _useStore.quickSelectors;
 
     var _React$useState = React.useState({
       styleOptions: ['normal', 'italic'],
@@ -5080,38 +5324,12 @@
         }
       });
     });
-
-    var _React$useState5 = React.useState(currentSelector),
-        _React$useState6 = _slicedToArray(_React$useState5, 2),
-        tempSelector = _React$useState6[0],
-        updateTempSelector = _React$useState6[1];
-
-    React.useEffect(function () {
-      return updateTempSelector(currentSelector);
-    }, [currentSelector]);
-
-    var onSelectorChange = function onSelectorChange(e) {
-      updateTempSelector(e.target.value);
-      cw.Evt.emit('update-selector', e.target.value);
-    };
-
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-editor-wrap"
     }, /*#__PURE__*/React.createElement("div", {
       id: "cw-editor-panel",
       className: "cw-panel"
-    }, currentSelector !== '' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: "cw-panel-title"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "title-inner"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "title-desc"
-    }, "You're editing:"), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      className: "selector ".concat(selectorClass),
-      value: tempSelector,
-      onChange: onSelectorChange
-    })), /*#__PURE__*/React.createElement(Pseudo, null)), /*#__PURE__*/React.createElement("div", {
+    }, currentSelector !== '' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Selector, null), /*#__PURE__*/React.createElement("div", {
       className: "cw-panel-main"
     }, /*#__PURE__*/React.createElement("ul", {
       className: "cw-panel-sections"
@@ -5131,7 +5349,9 @@
         return openSection === section.id ? /*#__PURE__*/React.createElement("div", {
           key: control.property,
           className: "cw-control ".concat(control.property, " ").concat(control.cls ? control.cls : '')
-        }, renderControls && /*#__PURE__*/React.createElement(control.Component, control.params)) : null;
+        }, renderControls && /*#__PURE__*/React.createElement(ControlBase, {
+          control: control
+        })) : null;
       })));
     }), afterSections))) : /*#__PURE__*/React.createElement(QuickSelect, {
       selectors: quickSelectors
@@ -5279,6 +5499,111 @@
     });
   }
 
+  function Theming() {
+    var _useStore = useStore(MainStore),
+        cssVars = _useStore.previewObject.cssVars;
+
+    var media = MediaStore.get().currentMedia.query;
+
+    var is = function is(str, prop) {
+      var s = new Option().style;
+      s[prop] = str;
+      return s[prop] === str || prop === 'color' && s.color.startsWith('rgb') || prop === 'width' && s.width === '0px';
+    };
+
+    var _React$useState = React.useState([]),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        controls = _React$useState2[0],
+        updateControls = _React$useState2[1];
+
+    var getControls = function getControls() {
+      var _StylesStore$get = StylesStore.get(),
+          styles = _StylesStore$get.styles;
+
+      var computed = [];
+      Object.entries(cssVars).forEach(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            varName = _ref2[0],
+            val = _ref2[1];
+
+        var control = {
+          property: varName,
+          params: {}
+        };
+
+        if (is(val, 'color')) {
+          control.Component = cw.components.Color;
+
+          control.params.onTab = function (tab) {
+            if (tab === false) {
+              setTimeout(function () {
+                return updateControls(getControls());
+              });
+            }
+          };
+        } else if (is(val, 'width')) {
+          control.Component = cw.components.Length;
+        } else if (is(val, 'transition-duration')) {
+          control.Component = cw.components.Length;
+          control.params = _objectSpread2(_objectSpread2({}, control.params), {}, {
+            units: {
+              's': {
+                step: .1,
+                min: 0,
+                max: 10
+              },
+              'ms': {
+                step: 10,
+                min: 0,
+                max: 2000
+              }
+            }
+          });
+        } else if (is(val, 'font-weight')) {
+          control.Component = cw.components.Select;
+          control.params = _objectSpread2(_objectSpread2({}, control.params), {}, {
+            options: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+          });
+        }
+
+        if ('Component' in control) {
+          if (media in styles && ':root' in styles[media] && varName in styles[media][':root']) {
+            val = styles[media][':root'][varName];
+          }
+
+          control.params = _objectSpread2(_objectSpread2({}, control.params), {}, {
+            label: varName,
+            val: val
+          });
+
+          control.params.onChange = function (data) {
+            StylesStore.addStyle(':root', varName, data);
+          };
+
+          computed.push(control);
+        }
+      });
+      return computed;
+    };
+
+    React.useEffect(function () {
+      return updateControls(getControls());
+    }, []);
+    var Spinner = wp.components.Spinner;
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "cw-panel-title"
+    }, "Theming"), /*#__PURE__*/React.createElement("div", {
+      className: "cw-theming-controls"
+    }, controls.map(function (control) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: control.property,
+        className: "cw-control"
+      }, /*#__PURE__*/React.createElement(control.Component, control.params));
+    }), !controls.length && /*#__PURE__*/React.createElement("div", {
+      className: "loading"
+    }, /*#__PURE__*/React.createElement(Spinner, null))));
+  }
+
   function Settings() {
     var cwSettings = {
       shortcuts: true,
@@ -5313,8 +5638,10 @@
       localStorage.setItem('cwSettings', JSON.stringify(options));
       cw.Evt.emit('update-settings', options);
     }, [options]);
-    return /*#__PURE__*/React.createElement("ul", {
-      className: "cw-settings-wrap"
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "cw-panel-title"
+    }, "Settings"), /*#__PURE__*/React.createElement("ul", {
+      className: "cw-settings-controls"
     }, /*#__PURE__*/React.createElement("li", {
       className: "customize-control customize-control-checkbox"
     }, /*#__PURE__*/React.createElement("input", {
@@ -5339,7 +5666,7 @@
       type: "number",
       value: options.history,
       onChange: change
-    })));
+    }))));
   }
 
   function Panel() {
@@ -5348,166 +5675,15 @@
         tab = _React$useState2[0],
         setTab = _React$useState2[1];
 
-    var _React$useState3 = React.useState({
-      show: false,
-      style: {
-        content: {
-          top: 0
-        },
-        arrow: {
-          right: 0
-        }
-      }
-    }),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        popState = _React$useState4[0],
-        setPopState = _React$useState4[1];
-
-    var _useStore = useStore(MainStore),
-        previewObject = _useStore.previewObject,
-        mounted = _useStore.mounted;
-
-    var _useStore2 = useStore(StylesStore),
-        history = _useStore2.history;
-
-    var allPages = [{
-      type: 'global',
-      name: 'global',
-      title: 'All Pages'
-    }];
-
-    if ('pages' in previewObject) {
-      if (previewObject.pages.is_home) {
-        allPages.push({
-          type: 'template',
-          name: 'is_home',
-          title: 'Blog Post List Page'
-        });
-      }
-
-      if (previewObject.pages.is_front_page) {
-        allPages.push({
-          type: 'template',
-          name: 'is_front_page',
-          title: 'Front Page'
-        });
-      }
-
-      if (previewObject.pages.is_single) {
-        allPages.push({
-          type: 'template',
-          name: 'is_single',
-          title: 'All Single Posts'
-        });
-        allPages.push({
-          type: 'single',
-          name: previewObject.page.id,
-          title: "Post: ".concat(previewObject.page.title)
-        });
-      }
-
-      if (previewObject.pages.is_page) {
-        allPages.push({
-          type: 'template',
-          name: 'is_page',
-          title: 'All Single Pages'
-        });
-        allPages.push({
-          type: 'single',
-          name: previewObject.page.id,
-          title: "Page: ".concat(previewObject.page.title)
-        });
-      }
+    if (['editor', 'code'].includes(tab)) {
+      cw.Evt.emit('toggle-preview', 'show');
+    } else {
+      cw.Evt.emit('toggle-preview', 'hide');
     }
-
-    var _MainStore$get = MainStore.get(),
-        currentPage = _MainStore$get.currentPage;
-
-    var currentTitle = 'All Pages';
-
-    for (var page in allPages) {
-      if (allPages.hasOwnProperty(page) && allPages[page].name === currentPage) {
-        currentTitle = allPages[page].title;
-        break;
-      }
-    }
-
-    var changePage = function changePage(e, page) {
-      MainStore.changePage(page.name, page.type);
-      setPopState(function (prev) {
-        return _objectSpread2(_objectSpread2({}, prev), {}, {
-          show: false
-        });
-      });
-    };
-
-    var popupNow = function popupNow(e) {
-      var clientRect = e.target.getBoundingClientRect();
-      var buttonBottom = clientRect.bottom - e.target.offsetParent.getBoundingClientRect().top;
-      setPopState(function (prevPopState) {
-        return {
-          show: !prevPopState.show,
-          style: {
-            content: {
-              top: "".concat(buttonBottom + 10, "px")
-            },
-            arrow: {
-              left: "".concat(clientRect.left + clientRect.width / 2 - 7, "px")
-            }
-          }
-        };
-      });
-    };
-
-    var togglePause = function togglePause() {
-      toggleMounted();
-    };
 
     return /*#__PURE__*/React.createElement("div", {
       className: "cw-panel"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "cw-panel-heading cw-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "col-5"
-    }, /*#__PURE__*/React.createElement("span", null, "Editing Styles for: ")), /*#__PURE__*/React.createElement("div", {
-      className: "col-5"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "button button-block cw-current-page",
-      onClick: popupNow,
-      type: "button"
-    }, currentTitle), /*#__PURE__*/React.createElement("div", {
-      className: "popup-overlay ".concat(popState.show ? '' : 'hidden'),
-      onClick: function onClick() {
-        return setPopState(function (prev) {
-          return _objectSpread2(_objectSpread2({}, prev), {}, {
-            show: false
-          });
-        });
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "page-selector popup-content ".concat(popState.show ? '' : 'hidden'),
-      style: popState.style.content
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "popup-arrow",
-      style: popState.style.arrow
-    }), allPages.map(function (page) {
-      return /*#__PURE__*/React.createElement("button", {
-        key: page.name,
-        onClick: function onClick(e) {
-          return changePage(e, page);
-        },
-        className: "button button-block",
-        type: "button"
-      }, page.title);
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "col-2"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "button cw-pause",
-      onClick: togglePause,
-      type: "button"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "dashicons dashicons-controls-".concat(mounted ? 'pause' : 'play')
-    })))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement("div", {
       className: "panel-main"
     }, /*#__PURE__*/React.createElement("div", {
       className: "cw-tabs cw-main-tabs"
@@ -5529,34 +5705,28 @@
       className: "dashicons dashicons-editor-code"
     })), /*#__PURE__*/React.createElement("button", {
       type: "button",
+      className: "theming-tab tab main-tab" + (tab === 'theming' ? ' active' : ''),
+      onClick: function onClick() {
+        return setTab('theming');
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "dashicons dashicons-color-picker"
+    })), /*#__PURE__*/React.createElement("button", {
+      type: "button",
       className: "settings-tab tab main-tab" + (tab === 'settings' ? ' active' : ''),
       onClick: function onClick() {
         return setTab('settings');
       }
     }, /*#__PURE__*/React.createElement("span", {
       className: "dashicons dashicons-admin-generic"
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "cw-extra-tabs"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "button",
-      onClick: undo,
-      disabled: history.past.length === 0
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "dashicons dashicons-undo"
-    })), /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "button",
-      onClick: redo,
-      disabled: history.future.length === 0
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "dashicons dashicons-redo"
-    }))), /*#__PURE__*/React.createElement("div", {
+    }))), /*#__PURE__*/React.createElement(History, null), /*#__PURE__*/React.createElement("div", {
       className: 'tab-content cw-editor' + (tab !== 'editor' ? ' hidden' : '')
     }, /*#__PURE__*/React.createElement(Editor, null)), /*#__PURE__*/React.createElement("div", {
       className: 'tab-content cw-code-editor' + (tab !== 'code' ? ' hidden' : '')
-    }, /*#__PURE__*/React.createElement(CodeEditor, null)), /*#__PURE__*/React.createElement("div", {
-      className: 'tab-content cw-settings' + (tab !== 'settings' ? ' hidden' : '')
+    }, /*#__PURE__*/React.createElement(CodeEditor, null)), tab === 'theming' && /*#__PURE__*/React.createElement("div", {
+      className: "tab-content cw-theming"
+    }, /*#__PURE__*/React.createElement(Theming, null)), tab === 'settings' && /*#__PURE__*/React.createElement("div", {
+      className: "tab-content cw-settings"
     }, /*#__PURE__*/React.createElement(Settings, null))));
   }
 
