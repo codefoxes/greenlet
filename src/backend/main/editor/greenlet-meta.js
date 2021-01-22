@@ -49,7 +49,7 @@ const LayoutMetaField = withDispatch( ( dispatch ) => {
 							<div key={ key } className="gl-radio-image">
 								<label>
 									<input type="radio" name="template" value={ key } onChange={ updateTemplate } defaultChecked={ template === key } />
-									<img src={ choice } alt={ key } />
+									<div className="gl-icon" dangerouslySetInnerHTML={ { __html: choice } } />
 									<span className="template-name">{ key }</span>
 								</label>
 							</div>

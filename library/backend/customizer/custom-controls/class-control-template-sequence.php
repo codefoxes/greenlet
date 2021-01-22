@@ -91,12 +91,23 @@ if ( ! class_exists( 'Control_Template_Sequence' ) && class_exists( 'WP_Customiz
 			<# if ( data.label ) { #><span class="customize-control-title">{{{ data.label }}}</span><# } #>
 			<# if ( data.description ) { #><span class="description customize-control-description">{{{ data.description }}}</span><# } #>
 
+			<svg class="svg-def" width="0" height="0" viewBox="0 0 201 11">
+				<defs>
+					<g id="gl-arrow-shape" fill="#ccc">
+						<rect x="2" y="5" width="199" height="1" />
+						<rect x="0" y="0" width="1" height="11" fill="#ddd" />
+						<polygon points="1 5.5 4 2 4 9" />
+					</g>
+				</defs>
+			</svg>
+
 			<div class="gl-radio-images">
 				<# for ( key in data.templates ) { #>
 				<div class="gl-radio-image">
 					<label<# if ( data.value.template === key ) { #> class="checked"<# } #>>
 						<input type="radio" name="{{ data.id }}" value="{{ key }}" <# if ( data.value.template === key ) { #> checked<# } #> />
-						<img src="{{ data.templates[ key ] }}">
+						<div class="icon">{{{ data.templates[ key ] }}}</div>
+						<span class="template-name">{{ key }}</span>
 					</label>
 				</div>
 				<# } #>
@@ -104,18 +115,26 @@ if ( ! class_exists( 'Control_Template_Sequence' ) && class_exists( 'WP_Customiz
 
 			<# var cols = data.value.template.split('-'); #>
 
-			<div class="gl-template-matcher-sequence gl-row">
+			<div class="gl-sequence gl-row">
 			<# _.each( cols, function( col, index ){  #>
-				<div class="gl-template-matcher col-{{ col }}">
-					<select class="gl-template-selection" >
+				<div class="gl-sequence-col col-{{ col }}">
+					<select class="gl-sequence-content" >
 						<# _.each( data.columns, function( col_name, col_id ){  #>
 						<option <# if ( data.value.sequence[index] == col_id ){ #> selected="selected" <# } #> value="{{ col_id }}">{{ col_name }}</option>
 						<# } ); #>
 					</select>
-					<div class="gl-template-matcher-column">col {{ index + 1 }} ({{ col }})</div>
+					<div class="gl-sequence-name">
+						<svg class="gl-arrow left" width="201px" height="11px" viewBox="0 0 201 11">
+							<use href="#gl-arrow-shape" />
+						</svg>
+						<svg class="gl-arrow right" width="201px" height="11px" viewBox="0 0 201 11">
+							<use href="#gl-arrow-shape" />
+						</svg>
+						<span>{{ col }}</span>
+					</div>
 				</div>
 			<# } ); #>
-		</div>
+			</div>
 			<?php
 		}
 

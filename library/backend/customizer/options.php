@@ -164,7 +164,7 @@ function greenlet_options() {
 			'type'        => 'select',
 			'section'     => 'main_layout',
 			'label'       => __( 'Number of Sidebars ( For Main Container )', 'greenlet' ),
-			'description' => __( 'How many sidebars to register for main container of page ? (Not for header or footer.)', 'greenlet' ),
+			'description' => __( 'How many sidebars to register for the main container of the page?', 'greenlet' ),
 			'choices'     => $sidebars_qty,
 		),
 	);

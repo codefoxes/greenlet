@@ -59,6 +59,18 @@ const insertExtLinks = () => {
 	})
 }
 
+function addInputVars() {
+	// add input variables.
+	// Array.from( document.getElementsByTagName( 'input' ) ).forEach( input => {
+	// 	if ( input.type !== 'range' ) return
+	// 	const addVar = () => { input.style.cssText = `--min:${ input.min };--max:${ input.max };--val:${ input.value };` }
+	// 	addVar()
+	// 	input.addEventListener( 'input', addVar )
+	// 	input.addEventListener( 'change', addVar )
+	// } )
+}
+
 wp.customize.bind( 'ready', () => {
 	insertExtLinks()
+	addInputVars()
 } )

@@ -567,7 +567,7 @@
       }
     }
 
-    var styles = "".concat(selector, " {\n\t\toutline: 1px dashed #7cb342 !important;\n\t\toutline-offset: -1px !important;\n\t}");
+    var styles = "".concat(selector, " {\n\t\toutline: 1px dashed var(--accent) !important;\n\t\toutline-offset: -1px !important;\n\t}");
     PreviewStore.setSimilarStyles(styles);
     isPrevTemp = temp;
   };
@@ -661,6 +661,8 @@
     return tree;
   };
 
+  var naCls = ['clearfix', 'row', 'wrap', 'hentry'];
+
   var getSelectorFromTree = function getSelectorFromTree(tree) {
     // Changes tree object. So don't call this directly.
     var selector = '';
@@ -685,6 +687,7 @@
         if (clsList.length >= 2) return; // Ignore autogen sequential classes
 
         if (/\w*-\d+/g.test("".concat(cls))) return;
+        if (naCls.includes(cls)) return;
         if ("".concat(elSelector, ".").concat(cls, " ").concat(selector).length >= maxSelectorLength) return;
         elObj.cwSelected.classSelected.push(cls);
         elSelector = "".concat(elSelector, ".").concat(cls);
@@ -726,7 +729,7 @@
     var selectorTree = getTree(el);
     getSelectorFromTree(selectorTree);
     return selectorTree;
-  };
+  }; // Todo: Not used?
 
   var getFocusLinesNewState = function getFocusLinesNewState(client) {
     var offsetTop = window.pageYOffset + client.top;
@@ -766,7 +769,7 @@
       return;
     }
 
-    var isSelector = false;
+    var selector = '';
 
     if ((ip === undefined || ip === false) && currentTarget !== undefined) ; else if (ip.target === undefined) {
       if ('' === ip) {
@@ -779,9 +782,26 @@
         currentTarget = allTargets[0];
       }
 
-      isSelector = true;
+      selector = ip;
     } else {
       currentTarget = ip.target;
+    }
+
+    if (force === false) {
+      window.cwSelectorsLocal = window.cwSelectorsLocal || {};
+      Object.entries(window.cwSelectorsLocal).forEach(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            localSelector = _ref2[0],
+            localTarget = _ref2[1].localTarget;
+
+        if (currentTarget === localTarget) {
+          selector = localSelector;
+        }
+      });
+    }
+
+    if (selector === '') {
+      selector = getSelector(currentTarget);
     }
 
     var client = currentTarget.getBoundingClientRect();
@@ -799,9 +819,9 @@
           left: client.left,
           top: detailsTop,
           height: '24px',
-          background: '#7CB342'
+          background: 'var(--accent)'
         },
-        selector: isSelector ? ip : getSelector(currentTarget)
+        selector: selector
       }
     };
     PreviewStore.moveFocus(newState);
@@ -852,10 +872,33 @@
   var updateFocus = function updateFocus() {
     if (currentTarget === undefined) {
       return;
-    }
+    } // Todo: Better method to move focus without changing the selector.
 
-    moveFocus(false, true);
+
+    PreviewStore.unlockFocus();
+    moveFocus(false, false);
+    PreviewStore.lockFocus();
   };
+
+  var saveSelected = function saveSelected(selector) {
+    // Todo: Uses too much of memory? Especially domTree
+    if (currentTarget === undefined || typeof selector !== 'string') return;
+    window.cwSelectorsLocal = window.cwSelectorsLocal || {};
+    Object.entries(window.cwSelectorsLocal).forEach(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+          localSelector = _ref4[0],
+          localTarget = _ref4[1].localTarget;
+
+      if (currentTarget === localTarget) {
+        delete window.cwSelectorsLocal[localSelector];
+      }
+    });
+    window.cwSelectorsLocal[selector.trim()] = {
+      localTarget: currentTarget,
+      domTree: PreviewStore.get().domTree
+    };
+  };
+
   var updateSelector = function updateSelector(selector) {
     var el = null;
 
@@ -868,7 +911,13 @@
     } else {
       moveFocus(selector, true);
       lockUnlockFocus(false, 'lock');
+      saveSelected(selector);
     }
+  };
+  var selectElement = function selectElement(selector) {
+    moveFocus(selector, true);
+    lockUnlockFocus(false, 'lock');
+    saveSelected(selector);
   };
 
   function debounce(callback, wait) {
@@ -935,32 +984,26 @@
         allOutputs = _cw$StylesStore$get.allOutputs;
 
     var output = '';
-
-    if ('global' in allOutputs) {
-      output += allOutputs.global;
-    }
+    var specifics = {
+      templates: '',
+      id: ''
+    };
 
     for (var page in allOutputs) {
       if (!allOutputs.hasOwnProperty(page)) {
         continue;
       }
 
-      if (page in window.cwPreviewObject.pages && window.cwPreviewObject.pages[page]) {
-        output += allOutputs[page];
+      if (page === 'global') {
+        output += allOutputs.global;
+      } else if (page in window.cwPreviewObject.pages && window.cwPreviewObject.pages[page]) {
+        specifics.templates += allOutputs[page];
+      } else if ('page' in window.cwPreviewObject && 'id' in window.cwPreviewObject.page && page === window.cwPreviewObject.page.id.toString()) {
+        specifics.id += allOutputs[page];
       }
     }
 
-    for (var _page in allOutputs) {
-      if (!allOutputs.hasOwnProperty(_page)) {
-        continue;
-      }
-
-      if ('page' in window.cwPreviewObject && 'id' in window.cwPreviewObject.page && _page === window.cwPreviewObject.page.id.toString()) {
-        output += allOutputs[_page];
-      }
-    }
-
-    styleTagMain.innerHTML = output;
+    styleTagMain.innerHTML = output + specifics.templates + specifics.id;
     styleTagTemp.innerHTML = '';
   };
 
@@ -1025,11 +1068,6 @@
     });
     document.body.removeEventListener('mouseleave', reduceFocus);
     document.body.removeEventListener('mouseenter', increaseFocus);
-  }
-
-  function selectElement(selector) {
-    moveFocus(selector, true);
-    lockUnlockFocus(false, 'lock');
   }
 
   function togglePreview() {
@@ -1140,7 +1178,25 @@
         showDomTree = _PreviewStore$get.showDomTree;
 
     if (currentTarget !== data.currentTarget || !showDomTree) {
-      PreviewStore.showDomTree(data, getTree$1(data.currentTarget));
+      var tree = false;
+      window.cwSelectorsLocal = window.cwSelectorsLocal || {};
+      Object.entries(window.cwSelectorsLocal).forEach(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            ls = _ref2[0],
+            _ref2$ = _ref2[1],
+            localTarget = _ref2$.localTarget,
+            domTree = _ref2$.domTree;
+
+        if (data.currentTarget === localTarget) {
+          tree = domTree;
+        }
+      });
+
+      if (tree === false) {
+        tree = getTree$1(data.currentTarget);
+      }
+
+      PreviewStore.showDomTree(data, tree);
     }
   };
   var hideTree = function hideTree() {
@@ -1268,7 +1324,7 @@
     }, focusDetails.selector));
   }
 
-  var styles = "#cw-domtree{width:100%;bottom:0;position:fixed;background:#eee;font-size:14px;color:#444;line-height:16px;margin:0}#cw-domtree .cw-domtree-list{white-space:nowrap;list-style-type:none;margin:0;border-top:1px solid #bbb}#cw-domtree .cw-domtree-node{display:inline-block;background-color:#ddd;margin:0;position:relative}#cw-domtree .cw-node-tag{position:relative}#cw-domtree .cw-node-tag button{margin:0;text-transform:none;border:none;letter-spacing:normal;font-size:12px;font-weight:500;height:24px;line-height:24px;padding:0 16px 0 20px;background:#ddd;color:#555;transition:none}#cw-domtree .cw-node-tag .cw-target{display:none;position:absolute;right:-3px;top:6px;width:12px;height:12px;border-radius:6px;background:center/contain no-repeat url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12px' height='12px' viewBox='0 0 12 12'%3E%3Crect fill='%23333' x='5.5' y='.5' width='1' height='3.5'/%3E%3Crect fill='%23333' x='5.5' y='8' width='1' height='3.5'/%3E%3Crect fill='%23333' x='.5' y='5.5' width='3.5' height='1'/%3E%3Crect fill='%23333' x='8' y='5.5' width='3.5' height='1'/%3E%3C/svg%3E\");padding:0;z-index:3}#cw-domtree .cw-node-tag:before{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid rgba(0,0,0,0.4);position:absolute;top:0;margin-left:1px;left:100%;z-index:1}#cw-domtree .cw-node-tag:after{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid #ddd;position:absolute;top:0;left:100%;z-index:2}#cw-domtree .cw-domtree-node:hover,#cw-domtree .cw-domtree-node:hover .cw-node-tag button,#cw-domtree .cw-domtree-node .selected button{background-color:#7cb342;color:#fff}#cw-domtree .cw-domtree-node:hover .cw-node-tag:after,#cw-domtree .cw-domtree-node .cw-node-tag.selected:after{border-left-color:#7cb342}#cw-domtree .cw-domtree-node:not(:last-child):hover .cw-target{display:block;background-color:#fff}#cw-domtree .cw-domtree-node .selected button{color:#fff}#cw-domtree .cw-node-attributes{display:none;position:absolute;bottom:100%;background:#eee;height:auto;min-width:15em;color:#444;line-height:16px;margin:0;padding:0 5px;transition:all .5s ease-in-out;border:1px solid #bbb;border-radius:3px;left:0}#cw-domtree .cw-select{display:flex;flex-wrap:wrap;border:none;border-bottom:1px solid #ccc;border-radius:0;box-shadow:none;background:#eee;padding:5px 0}#cw-domtree .cw-select:last-child{border-bottom:none}#cw-domtree .cw-select .cw-select-option{margin:2px;border:none}#cw-domtree .cw-select button{margin:0;text-transform:none;font-weight:500;letter-spacing:normal;height:22px;line-height:22px;font-size:12px;border-radius:3px;padding:0 8px;background:#fff;color:#444;border:none}#cw-domtree .cw-select button.selected{background-color:#7cb342;color:#fff}#cw-domtree .cw-select button:hover{background:#f1f7eb}#cw-domtree .cw-select button.selected:hover{background:#6fa13b}#cw-domtree .cw-domtree-node:hover>.cw-node-attributes{display:block}\n";
+  var styles = "#cw-domtree{width:100%;bottom:0;position:fixed;background:#eee;font-size:14px;color:#444;line-height:16px;margin:0}#cw-domtree .cw-domtree-list{white-space:nowrap;list-style-type:none;margin:0;border-top:1px solid #bbb}#cw-domtree .cw-domtree-node{display:inline-block;background-color:#ddd;margin:0;position:relative}#cw-domtree .cw-node-tag{position:relative}#cw-domtree .cw-node-tag button{margin:0;text-transform:none;border:none;letter-spacing:normal;font-size:12px;font-weight:500;height:24px;line-height:24px;padding:0 16px 0 20px;background:#ddd;color:#555;transition:none}#cw-domtree .cw-node-tag .cw-target{display:none;position:absolute;right:-3px;top:6px;width:12px;height:12px;border-radius:6px;background:center/contain no-repeat url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12px' height='12px' viewBox='0 0 12 12'%3E%3Crect fill='%23333' x='5.5' y='.5' width='1' height='3.5'/%3E%3Crect fill='%23333' x='5.5' y='8' width='1' height='3.5'/%3E%3Crect fill='%23333' x='.5' y='5.5' width='3.5' height='1'/%3E%3Crect fill='%23333' x='8' y='5.5' width='3.5' height='1'/%3E%3C/svg%3E\");padding:0;z-index:3}#cw-domtree .cw-node-tag:before{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid rgba(0,0,0,0.4);position:absolute;top:0;margin-left:1px;left:100%;z-index:1}#cw-domtree .cw-node-tag:after{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid #ddd;position:absolute;top:0;left:100%;z-index:2}#cw-domtree .cw-domtree-node:hover,#cw-domtree .cw-domtree-node:hover .cw-node-tag button,#cw-domtree .cw-domtree-node .selected button{background-color:var(--accent);color:#fff}#cw-domtree .cw-domtree-node:hover .cw-node-tag:after,#cw-domtree .cw-domtree-node .cw-node-tag.selected:after{border-left-color:var(--accent)}#cw-domtree .cw-domtree-node:not(:last-child):hover .cw-target{display:block;background-color:#fff}#cw-domtree .cw-domtree-node .selected button{color:#fff}#cw-domtree .cw-node-attributes{display:none;position:absolute;bottom:100%;background:#eee;height:auto;min-width:15em;color:#444;line-height:16px;margin:0;padding:0 5px;transition:all .5s ease-in-out;border:1px solid #bbb;border-radius:3px;left:0}#cw-domtree .cw-select{display:flex;flex-wrap:wrap;border:none;border-bottom:1px solid #ccc;border-radius:0;box-shadow:none;background:#eee;padding:5px 0}#cw-domtree .cw-select:last-child{border-bottom:none}#cw-domtree .cw-select .cw-select-option{margin:2px;border:none}#cw-domtree .cw-select button{margin:0;text-transform:none;font-weight:500;letter-spacing:normal;height:22px;line-height:22px;font-size:12px;border-radius:3px;padding:0 8px;background:#fff;color:#444;border:none}#cw-domtree .cw-select button.selected{background-color:var(--accent);color:#fff}#cw-domtree .cw-select button:hover{background:#f1f7eb}#cw-domtree .cw-select button.selected:hover{background:#6fa13b}#cw-domtree .cw-domtree-node:hover>.cw-node-attributes{display:block}\n";
 
   function DomTree() {
     var _useStore = useStore(PreviewStore),
@@ -1474,7 +1530,7 @@
     })), /*#__PURE__*/React.createElement("style", null, similarStyles));
   }
 
-  var styles$1 = "#color-wings{font-family:system-ui, -apple-system, Arial, sans-serif;position:absolute;top:0;left:0;width:100%;height:0;overflow:visible;z-index:1500}#cw-focuser .cw-focus-line{position:absolute;border-color:#7cb342;border-style:solid;border-width:0;box-shadow:0 0 2px rgba(124,179,66,0.6)}#cw-focus-details{position:absolute;color:#fff;font-size:12px;line-height:24px;font-weight:500}#cw-focus-details .cw-selector{padding:0 10px;white-space:nowrap}#cw-highlighter .cw-highlight-box{position:absolute}#cw-highlighter .cw-highlight-main{position:absolute;background:rgba(92,153,214,0.6)}#cw-highlighter .cw-highlight-padding{position:absolute;top:0;left:0;border:0 solid rgba(147,197,129,0.6);box-sizing:border-box}#cw-highlighter .cw-highlight-margin{position:absolute;border:0 solid rgba(244,166,87,0.6);box-sizing:content-box}.customize-partial-edit-shortcut,.customize-partial-edit-shortcut{display:none}\n";
+  var styles$1 = "#color-wings{--accent: #23b887;--accentLight: hsl(160, 68%, 97%);--accentDark: hsl(160, 68%, 30%)}#color-wings{font-family:system-ui, -apple-system, Arial, sans-serif;position:absolute;top:0;left:0;width:100%;height:0;overflow:visible;z-index:1500}#cw-focuser .cw-focus-line{position:absolute;border-color:var(--accent);border-style:solid;border-width:0;box-shadow:0 0 2px rgba(24,129,94,0.1)}#cw-focus-details{position:absolute;color:#fff;font-size:12px;line-height:24px;font-weight:500}#cw-focus-details .cw-selector{padding:0 10px;white-space:nowrap}#cw-highlighter .cw-highlight-box{position:absolute}#cw-highlighter .cw-highlight-main{position:absolute;background:rgba(92,153,214,0.6)}#cw-highlighter .cw-highlight-padding{position:absolute;top:0;left:0;border:0 solid rgba(147,197,129,0.6);box-sizing:border-box}#cw-highlighter .cw-highlight-margin{position:absolute;border:0 solid rgba(244,166,87,0.6);box-sizing:content-box}.customize-partial-edit-shortcut,.customize-partial-edit-shortcut{display:none}\n";
 
   function Canvas() {
     return /*#__PURE__*/React.createElement("div", {
