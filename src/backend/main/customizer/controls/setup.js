@@ -59,18 +59,43 @@ const insertExtLinks = () => {
 	})
 }
 
-function addInputVars() {
-	// add input variables.
-	// Array.from( document.getElementsByTagName( 'input' ) ).forEach( input => {
-	// 	if ( input.type !== 'range' ) return
-	// 	const addVar = () => { input.style.cssText = `--min:${ input.min };--max:${ input.max };--val:${ input.value };` }
-	// 	addVar()
-	// 	input.addEventListener( 'input', addVar )
-	// 	input.addEventListener( 'change', addVar )
-	// } )
+const insertDocLinks = () => {
+	const { __ } = wp.i18n
+
+	const items = [{
+		id: 'sub-accordion-section-title_tagline',
+		link: 'customize/logo-title-tagline/',
+		tagName: 'li'
+	}, {
+		id: 'sub-accordion-section-framework',
+		link: 'customize/css-framework/',
+		tagName: 'li'
+	}, {
+		id: 'customize-control-header_layout',
+		link: 'customize/header-footer-builder/'
+	}, {
+		id: 'customize-control-footer_layout',
+		link: 'customize/header-footer-builder/'
+	}, {
+		id: 'sub-accordion-section-main_layout',
+		link: 'customize/page-layout/'
+	}]
+
+	const extUrl = 'https://greenletwp.com/docs'
+
+	items.forEach( ( item ) => {
+		const el = document.getElementById( item.id )
+		if ( null === el ) return
+
+		const link = document.createElement( item.tagName || 'div' )
+		link.classList.add( 'gl-doc-link', 'customize-control' )
+		link.innerHTML = `<a href="${ extUrl }/${ item.link }" target="_blank"><span>${ __( 'Documentation', 'greenlet' ) }</span></a>`
+
+		el.insertAdjacentElement( 'beforeend', link )
+	})
 }
 
 wp.customize.bind( 'ready', () => {
 	insertExtLinks()
-	addInputVars()
+	insertDocLinks()
 } )
