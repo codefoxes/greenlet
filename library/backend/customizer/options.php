@@ -163,8 +163,8 @@ function greenlet_options() {
 		'cargs' => array(
 			'type'        => 'select',
 			'section'     => 'main_layout',
-			'label'       => __( 'Number of Sidebars ( For Main Container )', 'greenlet' ),
-			'description' => __( 'How many sidebars to register for the main container of the page?', 'greenlet' ),
+			'label'       => __( 'Main Layout Sidebars', 'greenlet' ),
+			'description' => __( 'Number of sidebars to register for the main container of the page', 'greenlet' ),
 			'choices'     => $sidebars_qty,
 		),
 	);

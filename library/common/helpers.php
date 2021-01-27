@@ -528,7 +528,7 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 						'name'  => __( 'Menu', 'greenlet' ),
 						'type'  => 'select',
 						'items' => greenlet_get_menus(),
-						'empty' => __( 'No menus found. Create new menu under menus screen, save and reload.' ),
+						'empty' => __( 'No menus found. Create new menu under menus screen, save and reload.', 'greenlet' ),
 					),
 					'toggler' => array(
 						'name'  => __( 'Mobile toggler', 'greenlet' ),
