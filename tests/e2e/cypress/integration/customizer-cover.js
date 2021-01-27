@@ -57,10 +57,11 @@ describe('Customizer', () => {
 				cy.window().then( win => {
 					settings = win.wp.customize.control('header_layout').setting._value
 				}).then(() => {
+					console.log( settings )
 					expect( settings ).to.deep.equal( [ {
 						"columns":"3-9",
 						"primary":true,
-						"items":{"1":["logo"],"2":[{"id":"menu","meta":{"slug":false,"toggler":"enable"}}]}
+						"items":{"1":["logo","widgets"],"2":[{"id":"menu","meta":{"slug":false,"toggler":"enable"}},"widgets"]}
 					} ] )
 				})
 			})
