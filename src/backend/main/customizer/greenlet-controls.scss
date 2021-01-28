@@ -177,7 +177,7 @@
 }
 
 .gl-radio-image {
-	max-width: 24%;
+	max-width: calc(25% - 5px);
 	padding: 10px 0;
 	box-sizing: border-box;
 
@@ -246,13 +246,19 @@
 	}
 }
 
-.customize-control-template-sequence .icon svg {
-	height: 40px;
-}
+.customize-control-template-sequence {
+	.gl-radio-image {
+		max-width: 62px;
+	}
 
-.customize-control-template-sequence .icon rect {
-	height: 36px;
-	y: -10;
+	.icon svg {
+		height: 40px;
+	}
+
+	.icon rect {
+		height: 42px;
+		y: -13;
+	}
 }
 
 .customize-control-template {
