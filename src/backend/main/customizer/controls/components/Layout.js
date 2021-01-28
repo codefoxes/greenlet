@@ -2,6 +2,7 @@ import RowItems from './RowItems'
 
 function Layout( { control, updateSettings } ) {
 	const { __ } = wp.i18n
+	const { Tooltip } = wp.components
 
 	const { position, choices } = control.params
 
@@ -12,6 +13,25 @@ function Layout( { control, updateSettings } ) {
 	const capitalize = str => `${ str.charAt( 0 ).toUpperCase() }${ str.slice( 1 ) }`
 	const pos = capitalize( position )
 
+	React.useEffect( () => {
+		// Set notification to save and refresh to update sidebars (by coverRows update)
+		const sidebars = wp.customize.Widgets.data.registeredSidebars.map( sb => sb.id )
+		control.notifications.remove( 'updateWidgets' )
+		let extra = false
+		coverRows.forEach( ( row, i ) => {
+			row.columns.split( '-' ).forEach( ( c, j ) => {
+				if ( ! sidebars.includes( `${ position }-sidebar-${ i + 1 }-${ j + 1 }` ) ) {
+					extra = true
+				}
+			} )
+		} )
+		if ( extra ) {
+			const message = __( 'Extra widget areas are added. Please save and refresh this page to reflect new Widget areas', 'greenlet' )
+			const notification = new wp.customize.Notification( 'updateWidgets', { message:  `${ message } (${ pos } Sidebars)`, type: 'info' } )
+			control.notifications.add( 'updateWidgets', notification )
+		}
+	}, [ coverRows ] )
+
 	const updateRows = ( cb ) => {
 		setRows( prev => {
 			const newRows = cb( JSON.parse( JSON.stringify( prev ) ) )
@@ -21,7 +41,6 @@ function Layout( { control, updateSettings } ) {
 	}
 
 	const toggleRow = ( e, i ) => {
-		e.preventDefault()
 		e.stopPropagation()
 		setExpanded( prev => ( prev === i ) ? -1 : i )
 	}
@@ -29,6 +48,18 @@ function Layout( { control, updateSettings } ) {
 	const toggleAdvanced = ( e, i ) => {
 		const val = e.currentTarget.checked
 		setAdvanced( prev => ( { ...prev, [ i ]: val } ) )
+	}
+
+	const changePrimary = ( e, i ) => {
+		e.stopPropagation()
+		setRows( ( prev ) => {
+			const rows = prev.map( row => ( { ...row } ) )
+			rows.forEach( ( r, m ) => {
+				r[ 'primary' ] = ( m === i )
+			} )
+			updateSettings( rows )
+			return rows
+		} )
 	}
 
 	const changeSticky = ( i ) => {
@@ -60,8 +91,7 @@ function Layout( { control, updateSettings } ) {
 		} )
 	}
 
-	const deleteRow = ( e, i ) => {
-		e.preventDefault()
+	const deleteRow = ( i ) => {
 		const confirmed = window.confirm( `Are you sure you want to remove ${ position } ${ i + 1 }` )
 		if ( ! confirmed ) return
 		setRows( ( prev ) => {
@@ -72,8 +102,7 @@ function Layout( { control, updateSettings } ) {
 		} )
 	}
 
-	const addRow = ( e, placement ) => {
-		e.preventDefault()
+	const addRow = ( placement ) => {
 		setRows( ( prev ) => {
 			const rows = prev.map( row => ( { ...row } ) )
 			const newRow = { columns: '12' }
@@ -90,13 +119,18 @@ function Layout( { control, updateSettings } ) {
 	return (
 		<div className="layout-wrap">
 			<div className="add-wrap add-before">
-				<button className="add-button" onClick={ (e ) => addRow( e, 'before' ) }><span className="dashicons dashicons-plus-alt2" /></button>
+				<Tooltip text={ __( 'Add Header', 'greenlet' ) } position="top center">
+					<button type="button" className="add-button" onClick={ () => addRow( 'before' ) }><span className="dashicons dashicons-plus-alt2" /></button>
+				</Tooltip>
 			</div>
 			{ coverRows.map( ( row, i ) => (
 				<div key={ i } className={ `row ${ ( expanded === i ) ? 'expanded' : '' }` }>
 					<div className="row-title" onClick={ ( e ) => toggleRow( e, i ) }>
-						{ row.primary ? `${ pos } ${ i + 1 } (${ __( 'Main', 'greenlet' ) })` : `${ pos } ${ i + 1 }` }
-						<button className="toggler" onClick={ ( e ) => toggleRow( e, i ) }><span className="dashicons dashicons-arrow-down" /></button>
+						{ `${ pos } ${ i + 1 }` }
+						<Tooltip text={ `${ row.primary ? __( 'Main', 'greenlet' ) : __( 'Make this Main', 'greenlet' ) } ${ pos }` } position="top left">
+							<button type="button" className={ `make-primary${ row.primary ? ' is-primary' : '' }` } onClick={ ( e ) => changePrimary( e, i ) }><span className={ `dashicons dashicons-star-${ row.primary ? 'filled' : 'empty' }` } /></button>
+						</Tooltip>
+						<button type="button" className="toggler" onClick={ ( e ) => toggleRow( e, i ) }><span className="dashicons dashicons-arrow-down" /></button>
 					</div>
 					<div className="row-content">
 						<div className="layout-control customize-control-checkbox">
@@ -112,14 +146,14 @@ function Layout( { control, updateSettings } ) {
 									<div key={ key } className="gl-radio-image">
 										<label>
 											<input type="radio" name={ `${ pos }-${ i }-template` } value={ key } onChange={ ( e ) => changeColumns( e, i ) } defaultChecked={ row.columns === key } />
-											<img src={ choice } alt={ key } />
+											<div className="icon" dangerouslySetInnerHTML={ { __html: choice } } />
 											<span className="template-name">{ key }</span>
 										</label>
 									</div>
 								) ) }
 							</div>
 						</div>
-						<RowItems props={ { row, i, pos, updateRows, items: control.params.items } } />
+						<RowItems props={ { row, i, pos, updateRows, control } } />
 						<div className={ `advanced ${ advanced[ i ] ? 'open': '' }` }>
 							<div className="layout-control">
 								<label>
@@ -139,21 +173,23 @@ function Layout( { control, updateSettings } ) {
 									</select>
 								</div>
 							</div>
-							<div className="layout-control">
-								<button className="delete" onClick={ ( e ) => deleteRow( e, i ) }>{ `${ __( 'Delete', 'greenlet' ) } ${ pos } ${ i + 1 }` } <span className="dashicons dashicons-trash" /></button>
-							</div>
 						</div>
-						<div className="advanced-toggle">
-							<label>
-								<span>{ advanced[ i ] ? __( 'Hide', 'greenlet' ) : __( 'Show', 'greenlet' ) } { __( 'Advanced', 'greenlet' ) }</span>
-								<input type="checkbox" className="check" onChange={ ( e ) => toggleAdvanced( e, i ) } />
-							</label>
+						<div className="row-footer">
+							<button type="button" className="delete" onClick={ () => deleteRow( i ) }>{ `${ __( 'Delete', 'greenlet' ) } ${ pos } ${ i + 1 }` }</button>
+							<div className="advanced-toggle">
+								<label>
+									<span>{ advanced[ i ] ? __( 'Hide', 'greenlet' ) : __( 'Show', 'greenlet' ) } { __( 'Advanced', 'greenlet' ) }</span>
+									<input type="checkbox" className="check" onChange={ ( e ) => toggleAdvanced( e, i ) } />
+								</label>
+							</div>
 						</div>
 					</div>
 				</div>
 			) ) }
 			<div className="add-wrap add-after">
-				<button className="add-button" onClick={ ( e ) => addRow( e ) } ><span className="dashicons dashicons-plus-alt2" /></button>
+				<Tooltip text={ __( 'Add Header', 'greenlet' ) } position="bottom center">
+					<button type="button" className="add-button" onClick={ () => addRow() } ><span className="dashicons dashicons-plus-alt2" /></button>
+				</Tooltip>
 			</div>
 		</div>
 	)

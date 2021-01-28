@@ -9,6 +9,7 @@ $( window ).on(
 	}
 )
 
+const extUrl = 'https://greenletwp.com'
 const style = document.createElement( 'style' )
 style.id = 'greenlet-controls'
 style.innerHTML = `${ popupStyles } ${ styles }`
@@ -36,8 +37,7 @@ const insertExtLinks = () => {
 		type: 'control',
 	}]
 
-	const extUrl = 'https://greenletwp.com/pro'
-	const markUp = `<a href="${ extUrl }" target="_blank"><span>${ glControlData.extText }</span></a>`
+	const markUp = `<a href="${ extUrl }/pro" target="_blank"><span>${ glControlData.extText }</span></a>`
 
 	items.forEach( ( item ) => {
 		const el = document.getElementById( item.id )
@@ -59,6 +59,55 @@ const insertExtLinks = () => {
 	})
 }
 
+const insertDocLinks = () => {
+	const { __ } = wp.i18n
+
+	const items = [{
+		id: 'sub-accordion-section-title_tagline',
+		link: 'customize/logo-title-tagline/',
+	}, {
+		id: 'sub-accordion-section-framework',
+		link: 'customize/css-framework/',
+	}, {
+		id: 'sub-accordion-section-header_section',
+		link: 'customize/header-footer-builder/'
+	}, {
+		id: 'sub-accordion-section-footer_section',
+		link: 'customize/header-footer-builder/'
+	}, {
+		id: 'sub-accordion-section-main_layout',
+		link: 'customize/page-layout/'
+	}, {
+		id: 'sub-accordion-section-blog_list',
+		link: 'customize/post-list-design/'
+	}, {
+		id: 'sub-accordion-section-blog_single',
+		link: 'customize/single-post-design/'
+	}, {
+		id: 'sub-accordion-section-performance',
+		link: 'customize/performance/'
+	}, {
+		id: 'sub-accordion-section-presets',
+		link: 'customize/presets/'
+	}, {
+		id: 'sub-accordion-section-extra_styles',
+		link: 'customize/colorwings-visual-style-editor/'
+	}]
+
+	items.forEach( ( item ) => {
+		const el = document.querySelector( `#${ item.id } .customize-section-title` )
+		if ( null === el ) return
+
+		const link = document.createElement( 'a' )
+		link.classList.add( 'gl-doc-link' )
+		link.href = `${ extUrl }/docs/${ item.link }`; link.target = '_blank'
+		link.innerHTML = `<span class="dashicons dashicons-book"></span><span class="tip">${ __( 'Documentation', 'greenlet' ) }</span>`
+
+		el.insertAdjacentElement( 'beforeend', link )
+	})
+}
+
 wp.customize.bind( 'ready', () => {
 	insertExtLinks()
+	insertDocLinks()
 } )

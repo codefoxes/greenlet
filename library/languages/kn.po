@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-10 22:01+0000\n"
-"PO-Revision-Date: 2021-01-01 12:54+0000\n"
+"PO-Revision-Date: 2021-01-27 18:37+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: Kannada\n"
 "Language: kn\n"
@@ -45,7 +45,16 @@ msgstr "&laquo; ಹೊಸ ಪೋಸ್ಟ್‌ಗಳು"
 msgid "&larr; Older Comments"
 msgstr "&larr; ಹಳೆಯ ಪ್ರತಿಕ್ರಿಯೆಗಳು"
 
-#: library/backend/assets/js/greenlet-controls.js:1594
+#: library/backend/assets/js/greenlet-controls.js:1632
+#: library/backend/assets/js/greenlet-controls.js:1774
+msgid "Add Header"
+msgstr "ಹೆಡರ್ ಸೇರಿಸಿ"
+
+#: library/backend/assets/js/greenlet-controls.js:1283
+msgid "Add/Edit widgets"
+msgstr "ವಿಜೆಟ್‌ಗಳನ್ನು ಸೇರಿಸಿ / ಸಂಪಾದಿಸಿ"
+
+#: library/backend/assets/js/greenlet-controls.js:1764
 msgid "Advanced"
 msgstr "ಹೆಚ್ಚುವರಿ"
 
@@ -99,7 +108,7 @@ msgstr "ಬ್ಲಾಗ್ ಪೋಸ್ಟ್‌ಗಳ ಸೆಟ್ಟಿಂಗ�
 msgid "Blog Settings"
 msgstr "ಬ್ಲಾಗ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 
-#: library/backend/helpers.php:210
+#: library/backend/helpers.php:208
 msgid "Bootstrap 4.5.3"
 msgstr "ಬೂಟ್ ಸ್ಟ್ರಾಪ್ 4.5.3"
 
@@ -200,11 +209,11 @@ msgstr "CSS ಮುಂದೂಡಿ"
 msgid "Defer WP Block Editor CSS"
 msgstr "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕ ಸಿಎಸ್ಎಸ್ ಅನ್ನು ಮುಂದೂಡಿ"
 
-#: library/backend/assets/js/greenlet-controls.js:1590
+#: library/backend/assets/js/greenlet-controls.js:1762
 msgid "Delete"
 msgstr "ಅಳಿಸಿ"
 
-#: library/common/helpers.php:531
+#: library/common/helpers.php:538
 msgid "Disable"
 msgstr "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
 
@@ -213,6 +222,7 @@ msgid "Disable WP Block Editor Style"
 msgstr "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕ ಶೈಲಿಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
 
 #: library/backend/options/class-options-admin.php:210
+#: library/backend/assets/js/greenlet-controls.js:276
 msgid "Documentation"
 msgstr "ದಾಖಲೆ"
 
@@ -224,7 +234,7 @@ msgstr "ತಿದ್ದು"
 msgid "Editor Styles"
 msgstr "ಸಂಪಾದಕ ಶೈಲಿಗಳು"
 
-#: library/common/helpers.php:552
+#: library/common/helpers.php:559
 msgid "Effect"
 msgstr "ಪರಿಣಾಮ"
 
@@ -232,7 +242,7 @@ msgstr "ಪರಿಣಾಮ"
 msgid "Eg: 4-8 or 9-3"
 msgstr "ಉದಾ: 4-8 ಅಥವಾ 9-3"
 
-#: library/common/helpers.php:530
+#: library/common/helpers.php:537
 msgid "Enable"
 msgstr "ಸಕ್ರಿಯಗೊಳಿಸಿ"
 
@@ -249,7 +259,7 @@ msgid "Enhance Greenlet with free plugins"
 msgstr "ಉಚಿತ ಪ್ಲಗ್‌ಇನ್‌ಗಳೊಂದಿಗೆ ಗ್ರೀನ್‌ಲೆಟ್ ಅನ್ನು ವರ್ಧಿಸಿ"
 
 #: library/backend/customizer/custom-controls/class-control-template.php:97
-#: library/backend/assets/js/greenlet-controls.js:1558
+#: library/backend/assets/js/greenlet-controls.js:1729
 msgid "Enter column numbers separated by hyphen."
 msgstr "ಹೈಫನ್‌ನಿಂದ ಬೇರ್ಪಡಿಸಿದ ಕಾಲಮ್ ಸಂಖ್ಯೆಗಳನ್ನು ನಮೂದಿಸಿ."
 
@@ -273,6 +283,14 @@ msgstr "ಆಯ್ದ ಉದ್ದ"
 msgid "Extra Styles"
 msgstr "ಹೆಚ್ಚುವರಿ ಶೈಲಿಗಳು"
 
+#: library/backend/assets/js/greenlet-controls.js:1513
+msgid ""
+"Extra widget areas are added. Please save and refresh this page to reflect "
+"new Widget areas"
+msgstr ""
+"ಹೆಚ್ಚುವರಿ ವಿಜೆಟ್ ಪ್ರದೇಶಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ. ಹೊಸ ವಿಜೆಟ್ ಪ್ರದೇಶಗಳನ್ನು "
+"ಪ್ರತಿಬಿಂಬಿಸಲು ದಯವಿಟ್ಟು ಈ ಪುಟವನ್ನು ಉಳಿಸಿ ಮತ್ತು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+
 #: library/frontend/main-structure.php:463
 msgid "Featured"
 msgstr "ವೈಶಿಷ್ಟ್ಯ"
@@ -295,19 +313,19 @@ msgstr "ಅಡಿಟಿಪ್ಪಣಿ ವಿನ್ಯಾಸ"
 msgid "Framework"
 msgstr "ಚೌಕಟ್ಟು"
 
-#: library/common/helpers.php:556
+#: library/common/helpers.php:563
 msgid "From Bottom"
 msgstr "ಕೆಳಗಿನಿಂದ"
 
-#: library/common/helpers.php:558
+#: library/common/helpers.php:565
 msgid "From Left"
 msgstr "ಎಡದಿಂದ"
 
-#: library/common/helpers.php:557
+#: library/common/helpers.php:564
 msgid "From Right"
 msgstr "ಬಲದಿಂದ"
 
-#: library/common/helpers.php:555
+#: library/common/helpers.php:562
 msgid "From Top"
 msgstr "ಮೇಲಿನಿಂದ"
 
@@ -315,19 +333,19 @@ msgstr "ಮೇಲಿನಿಂದ"
 msgid "Full Content"
 msgstr "ಪೂರ್ಣ ವಿಷಯ"
 
-#: library/backend/editor/class-editor.php:221
+#: library/backend/editor/class-editor.php:224
 msgid "Full Width Banner"
 msgstr "ಪೂರ್ಣ ಅಗಲ ಬ್ಯಾನರ್"
 
-#: library/backend/editor/class-editor.php:232
+#: library/backend/editor/class-editor.php:235
 msgid "Full width Banner Cover with contents inside a container."
 msgstr "ಪೂರ್ಣ ಅಗಲ ಬ್ಯಾನರ್ ಕಂಟೇನರ್ ಒಳಗೆ ವಿಷಯಗಳೊಂದಿಗೆ ಕವರ್."
 
-#: library/backend/editor/class-editor.php:222
+#: library/backend/editor/class-editor.php:225
 msgid "Full width Banner Cover."
 msgstr "ಪೂರ್ಣ ಅಗಲ ಬ್ಯಾನರ್ ಕವರ್."
 
-#: library/backend/editor/class-editor.php:231
+#: library/backend/editor/class-editor.php:234
 msgid "Full Width Banner with Container"
 msgstr "ಕಂಟೇನರ್ನೊಂದಿಗೆ ಪೂರ್ಣ ಅಗಲ ಬ್ಯಾನರ್"
 
@@ -337,7 +355,7 @@ msgstr "ಪ್ರೊ ಆವೃತ್ತಿ ಪಡೆಯಿರಿ"
 
 #. Name of the theme
 #: library/frontend/footer-structure.php:29
-#: library/backend/editor/class-editor.php:214
+#: library/backend/editor/class-editor.php:217
 msgid "Greenlet"
 msgstr "ಗ್ರೀನ್ಲೆಟ್"
 
@@ -345,7 +363,7 @@ msgstr "ಗ್ರೀನ್ಲೆಟ್"
 msgid "Greenlet Booster"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ಬೂಸ್ಟರ್"
 
-#: library/backend/helpers.php:209
+#: library/backend/helpers.php:207
 msgid "Greenlet Framework"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ಚೌಕಟ್ಟು"
 
@@ -390,7 +408,7 @@ msgstr "ಗ್ರೀನ್ಲೆಟ್ ಸೈಟ್ ಆಮದುದಾರ"
 msgid "Greenlet Team"
 msgstr "ಗ್ರೀನ್ಲೆಟ್ ತಂಡ"
 
-#: library/backend/helpers.php:192
+#: library/backend/helpers.php:190
 msgid "Grid"
 msgstr "ಗ್ರಿಡ್"
 
@@ -400,7 +418,7 @@ msgstr "ಗ್ರಿಡ್"
 msgid "Header Layout"
 msgstr "ಶಿರೋಲೇಖ ನಕ್ಷೆ"
 
-#: library/backend/assets/js/greenlet-controls.js:1594
+#: library/backend/assets/js/greenlet-controls.js:1764
 msgid "Hide"
 msgstr "ಮರೆಮಾಡಿ"
 
@@ -415,14 +433,6 @@ msgstr "ಮುಖಪುಟ"
 #: library/backend/customizer/options.php:185
 msgid "Home Page (Post List) Layout"
 msgstr "ಮುಖಪುಟ (ಪೋಸ್ಟ್ ಪಟ್ಟಿ) ವಿನ್ಯಾಸ"
-
-#: library/backend/customizer/options.php:167
-msgid ""
-"How many sidebars to register for main container of page ? (Not for header "
-"or footer.)"
-msgstr ""
-"ಪುಟದ ಮುಖ್ಯ ಪಾತ್ರೆಯಲ್ಲಿ ನೋಂದಾಯಿಸಲು ಎಷ್ಟು ಸೈಡ್‌ಬಾರ್‌ಗಳು? (ಹೆಡರ್ ಅಥವಾ "
-"ಅಡಿಟಿಪ್ಪಣಿಗಾಗಿ ಅಲ್ಲ.)"
 
 #. URI of the theme
 msgid "https://greenletwp.com"
@@ -466,7 +476,7 @@ msgstr "ಇನ್ಲೈನ್ WP ಬ್ಲಾಕ್ ಸಂಪಾದಕ ಸಿಎ
 msgid "It looks like nothing was found here. Maybe try a search?"
 msgstr "ಇಲ್ಲಿ ಏನೂ ಕಂಡುಬಂದಿಲ್ಲ ಎಂದು ತೋರುತ್ತಿದೆ. ಹುಡುಕಾಟವನ್ನು ಪ್ರಯತ್ನಿಸಬಹುದೇ?"
 
-#: library/backend/assets/js/greenlet-controls.js:1279
+#: library/backend/assets/js/greenlet-controls.js:1397
 msgid "Items"
 msgstr "ಐಟಂಗಳು"
 
@@ -486,11 +496,11 @@ msgstr "ಪೋಸ್ಟ್ ಪಟ್ಟಿಗೆ ವಿನ್ಯಾಸ ಬದಲ
 msgid "Leave a comment"
 msgstr "ಕಾಮೆಂಟ್ ಮಾಡಿ"
 
-#: library/backend/assets/js/greenlet-controls.js:1581
+#: library/backend/assets/js/greenlet-controls.js:1752
 msgid "Left"
 msgstr "ಎಡ"
 
-#: library/backend/helpers.php:191
+#: library/backend/helpers.php:189
 msgid "List"
 msgstr "ಪಟ್ಟಿ"
 
@@ -528,7 +538,7 @@ msgstr ""
 "WP ಬ್ಲಾಕ್ ಸಂಪಾದಕವನ್ನು CSS ಫೈಲ್‌ಗಳನ್ನು ಇನ್ಲೈನ್‌ನಲ್ಲಿ ಲೋಡ್ ಮಾಡಿ, ನೆಟ್‌ವರ್ಕ್ "
 "ವಿನಂತಿಗಳನ್ನು ಉಳಿಸುತ್ತದೆ."
 
-#: library/common/helpers.php:510
+#: library/common/helpers.php:516
 msgid "Logo"
 msgstr "ಲೋಗೋ"
 
@@ -536,13 +546,13 @@ msgstr "ಲೋಗೋ"
 msgid "Logo, Title & Tagline"
 msgstr "ಲೋಗೋ, ಶೀರ್ಷಿಕೆ ಮತ್ತು ಟ್ಯಾಗ್‌ಲೈನ್"
 
-#: library/backend/assets/js/greenlet-controls.js:1494
+#: library/backend/assets/js/greenlet-controls.js:1652
 msgid "Main"
 msgstr "ಮುಖ್ಯ"
 
 #: library/backend/helpers.php:22
-#: library/backend/assets/js/greenlet-controls.js:339
-#: library/backend/assets/js/greenlet-controls.js:1846
+#: library/backend/assets/js/greenlet-controls.js:385
+#: library/backend/assets/js/greenlet-controls.js:2020
 msgid "Main Content"
 msgstr "ಮುಖ್ಯ ವಿಷಯ"
 
@@ -550,6 +560,10 @@ msgstr "ಮುಖ್ಯ ವಿಷಯ"
 #: library/backend/options/class-options-admin.php:138
 msgid "Main Layout"
 msgstr "ಮುಖ್ಯ ವಿನ್ಯಾಸ"
+
+#: library/backend/customizer/options.php:166
+msgid "Main Layout Sidebars"
+msgstr "ಮುಖ್ಯ ವಿನ್ಯಾಸದ ಅಡ್ಡಪಟ್ಟಿಗಳು"
 
 #: library/backend/customizer/options.php:265
 msgid "Main Layout Styles"
@@ -559,6 +573,10 @@ msgstr "ಮುಖ್ಯ ವಿನ್ಯಾಸದ ಶೈಲಿಗಳು"
 msgid "Main Menu"
 msgstr "ಮುಖ್ಯ ಪಟ್ಟಿ"
 
+#: library/backend/assets/js/greenlet-controls.js:1652
+msgid "Make this Main"
+msgstr "ಇದನ್ನು ಮುಖ್ಯಗೊಳಿಸಿ"
+
 #: library/addons/colorwings/class-colorwings-admin.php:165
 msgid "Markup is not allowed in CSS."
 msgstr "ಸಿಎಸ್ಎಸ್ನಲ್ಲಿ ಮಾರ್ಕಪ್ ಅನ್ನು ಅನುಮತಿಸಲಾಗುವುದಿಲ್ಲ."
@@ -567,15 +585,15 @@ msgstr "ಸಿಎಸ್ಎಸ್ನಲ್ಲಿ ಮಾರ್ಕಪ್ ಅನ್�
 msgid "Match the Post editor styles to the frontend styles."
 msgstr "ಪೋಸ್ಟ್ ಎಡಿಟರ್ ಶೈಲಿಗಳನ್ನು ಮುಂಭಾಗದ ಶೈಲಿಗಳಿಗೆ ಹೊಂದಿಸಿ."
 
-#: library/common/helpers.php:517 library/common/helpers.php:522
+#: library/common/helpers.php:523 library/common/helpers.php:528
 msgid "Menu"
 msgstr "ಮೆನು"
 
-#: library/common/helpers.php:538
+#: library/common/helpers.php:545
 msgid "Menu Toggler"
 msgstr "ಮೆನು ಟಾಗ್ಲರ್"
 
-#: library/common/helpers.php:527
+#: library/common/helpers.php:534
 msgid "Mobile toggler"
 msgstr "ಮೊಬೈಲ್ ಟಾಗ್ಲರ್"
 
@@ -584,7 +602,7 @@ msgctxt "Monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: library/backend/customizer/class-customizer.php:65
+#: library/backend/customizer/class-customizer.php:64
 msgid "More options with Greenlet Pro"
 msgstr "ಗ್ರೀನ್‌ಲೆಟ್ ಪ್ರೊನೊಂದಿಗೆ ಹೆಚ್ಚಿನ ಆಯ್ಕೆಗಳು"
 
@@ -600,9 +618,23 @@ msgstr "ಹೆಸರು"
 msgid "Newer Comments &rarr;"
 msgstr "ಹೊಸ ಪ್ರತಿಕ್ರಿಯೆಗಳು &rarr;"
 
-#: library/backend/assets/js/greenlet-controls.js:1579
+#: library/backend/assets/js/greenlet-controls.js:1750
 msgid "No"
 msgstr "ಬೇಡ"
+
+#: library/common/helpers.php:531
+msgid "No menus found. Create new menu under menus screen, save and reload."
+msgstr ""
+"ಯಾವುದೇ ಮೆನುಗಳು ಕಂಡುಬಂದಿಲ್ಲ. ಮೆನುಗಳ ಪರದೆಯ ಅಡಿಯಲ್ಲಿ ಹೊಸ ಮೆನುವನ್ನು ರಚಿಸಿ, ಉಳಿಸಿ "
+"ಮತ್ತು ಮರುಲೋಡ್ ಮಾಡಿ."
+
+#: library/common/helpers.php:586
+msgid ""
+"No templates found in your child theme. Add PHP templates under "
+"child_theme/templates/"
+msgstr ""
+"ನಿಮ್ಮ ಮಕ್ಕಳ ಥೀಮ್‌ನಲ್ಲಿ ಯಾವುದೇ ಟೆಂಪ್ಲೇಟ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ. ಚೈಲ್ಡ್_ಥೀಮ್ / "
+"ಟೆಂಪ್ಲೆಟ್ / ಅಡಿಯಲ್ಲಿ ಪಿಎಚ್ಪಿ ಟೆಂಪ್ಲೆಟ್ಗಳನ್ನು ಸೇರಿಸಿ"
 
 #: content-none.php:13
 msgid "Nothing found!"
@@ -628,9 +660,9 @@ msgstr "ಒಂದು ಸಾಲಿನಲ್ಲಿ ಉತ್ಪನ್ನಗಳ ಸ
 msgid "Number of Products in product archives page."
 msgstr "ಉತ್ಪನ್ನ ಆರ್ಕೈವ್ಸ್ ಪುಟದಲ್ಲಿನ ಉತ್ಪನ್ನಗಳ ಸಂಖ್ಯೆ."
 
-#: library/backend/customizer/options.php:166
-msgid "Number of Sidebars ( For Main Container )"
-msgstr "ಸೈಡ್‌ಬಾರ್‌ಗಳ ಸಂಖ್ಯೆ (ಮುಖ್ಯ ಕಂಟೇನರ್‌ಗಾಗಿ)"
+#: library/backend/customizer/options.php:167
+msgid "Number of sidebars to register for the main container of the page"
+msgstr "ಪುಟದ ಮುಖ್ಯ ಪಾತ್ರೆಯಲ್ಲಿ ನೋಂದಾಯಿಸಲು ಸೈಡ್‌ಬಾರ್‌ಗಳ ಸಂಖ್ಯೆ"
 
 #: library/backend/customizer/options.php:421
 msgid "Numbered"
@@ -656,7 +688,7 @@ msgstr "ಪ್ರೊ ಆವೃತ್ತಿಯೊಂದಿಗೆ ಆಯ್ಕೆ 
 msgid "Others"
 msgstr "ಇತರರು"
 
-#: library/backend/assets/js/greenlet-meta.js:234
+#: library/backend/assets/js/greenlet-meta.js:236
 msgid "Page Layout"
 msgstr "ಪುಟದ ವಿನ್ಯಾಸ"
 
@@ -676,6 +708,17 @@ msgstr "ಪುಟದ ಜಾಡುಹಿಡಿತ ಪ್ರದರ್ಶನ ಸ್
 #: library/backend/options/class-options-admin.php:141
 msgid "Performance"
 msgstr "ಸಾಮರ್ಥ್ಯ"
+
+#: library/common/helpers.php:578
+msgid "PHP Template"
+msgstr "ಪಿಎಚ್ಪಿ ಟೆಂಪ್ಲೇಟು"
+
+#: library/backend/assets/js/greenlet-controls.js:1198
+msgid ""
+"Please save and refresh this page to reflect the newly added Widget areas"
+msgstr ""
+"ಹೊಸದಾಗಿ ಸೇರಿಸಲಾದ ವಿಜೆಟ್ ಪ್ರದೇಶಗಳನ್ನು ಪ್ರತಿಬಿಂಬಿಸಲು ದಯವಿಟ್ಟು ಈ ಪುಟವನ್ನು ಉಳಿಸಿ "
+"ಮತ್ತು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
 
 #: library/backend/customizer/options.php:386
 msgid "Post content display format."
@@ -743,7 +786,7 @@ msgstr "ಉತ್ಪನ್ನ ಟ್ಯಾಗ್ಗಳ ವಿನ್ಯಾಸ"
 msgid "Published Date"
 msgstr "ಪ್ರಕಟಿತ ದಿನಾಂಕ"
 
-#: library/common/helpers.php:548
+#: library/common/helpers.php:555
 msgid "Query"
 msgstr "ಪ್ರಶ್ನೆ"
 
@@ -751,7 +794,7 @@ msgstr "ಪ್ರಶ್ನೆ"
 msgid "Report a bug"
 msgstr "ದೋಷವನ್ನು ವರದಿ ಮಾಡಿ"
 
-#: library/backend/assets/js/greenlet-controls.js:1583
+#: library/backend/assets/js/greenlet-controls.js:1754
 msgid "Right"
 msgstr "ಬಲ"
 
@@ -785,7 +828,7 @@ msgstr "ಹುಡುಕಾಟ ಫಾರ್ಮ್ ಬಟನ್ ವಿಷಯವನ
 msgid "Search: "
 msgstr "ಹುಡುಕಿ: "
 
-#: library/backend/assets/js/greenlet-controls.js:1520
+#: library/backend/assets/js/greenlet-controls.js:1689
 msgid "Select Columns Layout"
 msgstr "ಕಾಲಮ್ ಅಟ್ಟಣೆ ಆಯ್ಕೆಮಾಡಿ"
 
@@ -805,7 +848,7 @@ msgstr "ಅಂಗಡಿ ವಿನ್ಯಾಸ"
 msgid "Shopping Cart"
 msgstr "ಶಾಪಿಂಗ್ ಕಾರ್ಟ್"
 
-#: library/backend/assets/js/greenlet-controls.js:1594
+#: library/backend/assets/js/greenlet-controls.js:1764
 msgid "Show"
 msgstr "ತೋರಿಸು"
 
@@ -845,8 +888,8 @@ msgstr "ಶೀರ್ಷಿಕೆಯನ್ನು ತೋರಿಸಿ"
 msgid "Show your love"
 msgstr "ನಿಮ್ಮ ಪ್ರೀತಿಯನ್ನು ತೋರಿಸಿ"
 
-#: library/backend/assets/js/greenlet-controls.js:343
-#: library/backend/assets/js/greenlet-controls.js:1850
+#: library/backend/assets/js/greenlet-controls.js:389
+#: library/backend/assets/js/greenlet-controls.js:2024
 msgid "Sidebar"
 msgstr "ಅಡ್ಡಪಟ್ಟಿ"
 
@@ -876,7 +919,7 @@ msgstr "ಸೈಟ್ ವಿನ್ಯಾಸ."
 msgid "Skip to content"
 msgstr "ವಿಷಯಕ್ಕೆ ತೆರಳಿ"
 
-#: library/backend/assets/js/greenlet-controls.js:1516
+#: library/backend/assets/js/greenlet-controls.js:1685
 msgid "Sticky"
 msgstr "ಅಂಟಿಕೊಂಡ"
 
@@ -884,7 +927,7 @@ msgstr "ಅಂಟಿಕೊಂಡ"
 msgid "String is empty."
 msgstr "ಸ್ಟ್ರಿಂಗ್ ಖಾಲಿಯಾಗಿದೆ."
 
-#: library/backend/assets/js/greenlet-controls.js:1558
+#: library/backend/assets/js/greenlet-controls.js:1729
 msgid "Sum should be"
 msgstr "ಮೊತ್ತ ಇರಬೇಕು"
 
@@ -900,9 +943,13 @@ msgstr "ಬೆಂಬಲ ವೇದಿಕೆ"
 msgid "Tags"
 msgstr "ಟ್ಯಾಗ್ಗಳು"
 
-#: library/common/helpers.php:543
+#: library/common/helpers.php:550
 msgid "Target"
 msgstr "ಗುರಿ"
+
+#: library/common/helpers.php:583
+msgid "Template"
+msgstr "ಟೆಂಪ್ಲೇಟು"
 
 #: library/backend/customizer/options.php:590
 msgid "Text"
@@ -930,7 +977,7 @@ msgstr "ಟಾಗಲ್ ಮೆನು"
 msgid "Updated Date"
 msgstr "ನವೀಕರಿಸಿದ ದಿನಾಂಕ"
 
-#: library/backend/assets/js/greenlet-controls.js:1569
+#: library/backend/assets/js/greenlet-controls.js:1740
 msgid "Vertical"
 msgstr "ಲಂಬ"
 
@@ -946,6 +993,10 @@ msgstr "ಶಾಪಿಂಗ್ ಕಾರ್ಟ್ ವೀಕ್ಷಿಸಿ"
 #: library/backend/options/class-options-admin.php:143
 msgid "Visual Style Editor"
 msgstr "ವಿಷುಯಲ್ ಸ್ಟೈಲ್ ಎಡಿಟರ್"
+
+#: library/common/helpers.php:572
+msgid "Widgets"
+msgstr "ವಿಡ್ಗೆಟ್ಗಳು"
 
 #: library/frontend/footer-structure.php:25
 msgid "Y"

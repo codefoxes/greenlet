@@ -27,8 +27,8 @@ wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.exte
 					var sidebars    = $( '#_customize-input-sidebars_qty' ).val()
 
 					for ( var i = 1; i <= colsLength; i ++ ) {
-						matcherHtml += '<div class="gl-template-matcher col-' + cols[ i - 1 ] + '">'
-						matcherHtml += '<select class="gl-template-selection">'
+						matcherHtml += '<div class="gl-sequence-col col-' + cols[ i - 1 ] + '">'
+						matcherHtml += '<select class="gl-sequence-content">'
 						var selected = ( i === 1 ) ? 'selected' : ''
 						matcherHtml += `<option value="main" ${ selected }>${ __( 'Main Content', 'greenlet' ) }</option>`
 						for ( var j = 1; j <= sidebars; j ++ ) {
@@ -36,14 +36,22 @@ wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.exte
 							matcherHtml += `<option value="sidebar-${ j }" ${ selected }>${ __( 'Sidebar', 'greenlet' ) } ${ j }</option>`
 						}
 						matcherHtml += '</select>'
-						matcherHtml += '<div class="gl-template-matcher-column">col ' + i + ' (' + cols[ i - 1 ] + ')</div>'
+						matcherHtml += `<div class="gl-sequence-name">
+							<svg class="gl-arrow left" width="201px" height="11px" viewBox="0 0 201 11">
+								<use href="#gl-arrow-shape" />
+							</svg>
+							<svg class="gl-arrow right" width="201px" height="11px" viewBox="0 0 201 11">
+								<use href="#gl-arrow-shape" />
+							</svg>
+							<span>${ cols[ i - 1 ] }</span>
+						</div>`
 						matcherHtml += '</div>'
 						if ( i < colsLength ) {
 							sequence.push( 'sidebar-' + i )
 						}
 					}
 
-					$( '#customize-control-' + control.id ).find( '.gl-template-matcher-sequence' ).html( matcherHtml )
+					$( '#customize-control-' + control.id ).find( '.gl-sequence' ).html( matcherHtml )
 
 					val = {
 						template: template,
@@ -57,7 +65,7 @@ wp.customize.controlConstructor['template-sequence'] = wp.customize.Control.exte
 			// Listen to Template column sequence change.
 			$( control.selector ).on(
 				'change',
-				'.gl-template-matcher select',
+				'.gl-sequence-content',
 				function () {
 					// Update control value.
 					var sequence = []

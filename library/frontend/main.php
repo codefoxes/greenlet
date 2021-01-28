@@ -54,16 +54,7 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 	 * @param string $pos column position.
 	 */
 	function greenlet_cover( $pos = 'header' ) {
-
-		/**
-		 * Filters the content sources and their sequence for current cover column.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param array $content_sources Position content sources. Default array( 'widgets', 'templates' ).
-		 */
-		$sources = apply_filters( $pos . '_content_sources', array( 'widgets', 'templates' ) );
-		$items   = greenlet_cover_layout_items( $pos );
+		$items = greenlet_cover_layout_items( $pos );
 
 		$cover_rows = gl_get_option( $pos . '_layout', greenlet_cover_layout_defaults( $pos ) );
 
@@ -117,17 +108,19 @@ if ( ! function_exists( 'greenlet_cover' ) ) {
 							get_template_part( $item_obj['template'], null, $meta );
 						}
 
+						if ( isset( $item_obj['type'] ) ) {
+							if ( 'widgets' === $item_obj['type'] ) {
+								dynamic_sidebar( "{$pos}-sidebar-{$k}-{$i}" );
+							}
+
+							if ( ( 'php' === $item_obj['type'] ) && isset( $meta['template'] ) ) {
+								get_template_part( $meta['template'] );
+							}
+						}
+
 						if ( isset( $item_obj['function'] ) && function_exists( $item_obj['function'] ) ) {
 							call_user_func( $item_obj['function'] );
 						}
-					}
-				}
-
-				foreach ( $sources as $source ) {
-					if ( 'widgets' === $source ) {
-						dynamic_sidebar( "{$pos}-sidebar-{$k}-{$i}" );
-					} elseif ( 'templates' === $source ) {
-						get_template_part( 'templates/' . $pos . '/column', ( $i ) );
 					}
 				}
 

@@ -30,6 +30,11 @@ a.cart-button {
 		padding: 10px;
 		box-shadow: 0 0 3px rgba(0, 0, 0, .5);
 	}
+
+	svg {
+		display: block;
+		fill: var(--button-icon);
+	}
 }
 
 .woocommerce {
