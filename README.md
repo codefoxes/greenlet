@@ -19,8 +19,10 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - Customize Column Sequence
 - 8 Global Predefined Layouts (extendable)
 - Unlimited Individual Post Layout
-- Unlimited Header and Footer layout
-- Optional Topbar and Semi-Footer
+- Unlimited Header and Footer layout (Rows & Columns)
+- Powerful Header and Footer builder
+- Add Logo, Menu & Togglers to headers & footers
+- Header and Footer Contents from Widgets or Template File
 - Pagination - Default (Newer and Older Posts)
 - Pagination - Numbered
 - Pagination - Numbered Ajax
@@ -30,12 +32,11 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - RTL Support
 - Change Theme design via customizer
 - Change Theme behaviour via tons of hooks
+- Powerful Visual Style Editor
 - Tons of Color options
 - Tons of Google Fonts
 - Mobile Ready
 - Page Builders Ready
-- Change Logo and Menu Position
-- Header and Footer Contents from Widgets or Template File
 - 2 to 12 Sidebars Customizable
 - Enable or Disable Breadcrumb
 - Custom Breadcrumb Separator
@@ -44,10 +45,13 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - Toggle Post Author Info
 - Toggle WP Emoji, WP Embed and Block editor scripts and styles
 - WooCommerce Support
+- Editor style matching to Frontend
+- Theme Presets
 
 ## Requirements
-- PHP 5.4 or above
-- WordPress 4.6 or above
+- PHP 5.6 or above
+- MySQL 5.6 or above
+- WordPress 5.3 or above
 
 ## Coding Standards
 PHP CS: WordPress

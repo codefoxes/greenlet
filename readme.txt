@@ -3,10 +3,10 @@ Contributors: greenlet
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, custom-background, custom-colors, editor-style, featured-images, footer-widgets, full-width-template, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks, custom-menu, custom-logo, entertainment, one-column, two-columns, three-columns, four-columns, right-sidebar, left-sidebar, e-commerce, post-formats
-Tested up to: 5.5.1
+Tested up to: 5.6
 Requires at least: 5.3
 Requires PHP: 5.6
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -33,6 +33,9 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 - 8 Global Predefined Layouts (extendable)
 - Unlimited Individual Post Layout
 - Unlimited Header and Footer layout (Rows & Columns)
+- Powerful Header and Footer builder
+- Add Logo, Menu & Togglers to headers & footers
+- Header and Footer Contents from Widgets or Template File
 - Pagination - Default (Newer and Older Posts)
 - Pagination - Numbered
 - Pagination - Numbered Ajax
@@ -42,12 +45,11 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 - RTL Support
 - Change Theme design via customizer
 - Change Theme behaviour via tons of hooks
+- Powerful Visual Style Editor
 - Tons of Color options
 - Tons of Google Fonts
 - Mobile Ready
 - Page Builders Ready
-- Add Logo, Menu & Togglers to headers & footers
-- Header and Footer Contents from Widgets or Template File
 - 2 to 12 Sidebars Customizable
 - Enable or Disable Breadcrumb
 - Custom Breadcrumb Separator
@@ -61,14 +63,21 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 
 == Changelog ==
 
-- New: Search Icon
-- New Theming inside theme
-- Improvement: Site importer Plugin in recommendation
-- Improvement: Add singular & post-list class
-- Improvement: Update Colorwings to 1.2.0
-- Improvement: Breadcrumb structure improvement
-- Improvement: More CSS variables
-- Fix: Editor style bug
+- New: Option to set primary header, footer
+- New: Header, footer builder content sequencing
+- New: Documentation links
+- Improvement: Accent color change
+- Improvement: Header, footer builder with more source options
+- Improvement: Update Colorwings to 1.3.0
+- Improvement: Better frontend icons
+- Improvement: Better backend icons
+- Improvement: Better backend styles
+- Improvement: Better customizer notice display
+- Improvement: More customizer tooltip
+- Improvement: Screenshot update
+- Fix: Vertical header, footer fix
+- Fix: Inline styles order fix
+- Fix: Accessibility fixes
 
 == Copyright ==
 
