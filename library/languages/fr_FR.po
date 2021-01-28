@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-10 22:01+0000\n"
-"PO-Revision-Date: 2021-01-01 12:55+0000\n"
+"PO-Revision-Date: 2021-01-27 18:37+0000\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -45,7 +45,16 @@ msgstr "&laquo; Messages plus récents"
 msgid "&larr; Older Comments"
 msgstr "&larr; Commentaires plus anciens"
 
-#: library/backend/assets/js/greenlet-controls.js:1594
+#: library/backend/assets/js/greenlet-controls.js:1632
+#: library/backend/assets/js/greenlet-controls.js:1774
+msgid "Add Header"
+msgstr "Ajouter un en-tête"
+
+#: library/backend/assets/js/greenlet-controls.js:1283
+msgid "Add/Edit widgets"
+msgstr "Ajouter / modifier des widgets"
+
+#: library/backend/assets/js/greenlet-controls.js:1764
 msgid "Advanced"
 msgstr "Avancée"
 
@@ -100,7 +109,7 @@ msgstr "Paramètres des articles de blog."
 msgid "Blog Settings"
 msgstr "Paramètres du blog"
 
-#: library/backend/helpers.php:210
+#: library/backend/helpers.php:208
 msgid "Bootstrap 4.5.3"
 msgstr "Bootstrap 4.5.3"
 
@@ -201,11 +210,11 @@ msgstr "Différer CSS"
 msgid "Defer WP Block Editor CSS"
 msgstr "Différer le CSS de l'éditeur de blocs WP"
 
-#: library/backend/assets/js/greenlet-controls.js:1590
+#: library/backend/assets/js/greenlet-controls.js:1762
 msgid "Delete"
 msgstr "Effacer"
 
-#: library/common/helpers.php:531
+#: library/common/helpers.php:538
 msgid "Disable"
 msgstr "Désactiver"
 
@@ -214,6 +223,7 @@ msgid "Disable WP Block Editor Style"
 msgstr "Désactiver le style de l'éditeur de blocs WP"
 
 #: library/backend/options/class-options-admin.php:210
+#: library/backend/assets/js/greenlet-controls.js:276
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -225,7 +235,7 @@ msgstr "Éditer"
 msgid "Editor Styles"
 msgstr "Styles de l'éditeur"
 
-#: library/common/helpers.php:552
+#: library/common/helpers.php:559
 msgid "Effect"
 msgstr "Effet"
 
@@ -233,7 +243,7 @@ msgstr "Effet"
 msgid "Eg: 4-8 or 9-3"
 msgstr "Par exemple: 4-8 ou 9-3"
 
-#: library/common/helpers.php:530
+#: library/common/helpers.php:537
 msgid "Enable"
 msgstr "Activer"
 
@@ -250,7 +260,7 @@ msgid "Enhance Greenlet with free plugins"
 msgstr "Améliorez Greenlet avec des plugins gratuits"
 
 #: library/backend/customizer/custom-controls/class-control-template.php:97
-#: library/backend/assets/js/greenlet-controls.js:1558
+#: library/backend/assets/js/greenlet-controls.js:1729
 msgid "Enter column numbers separated by hyphen."
 msgstr "Saisissez les numéros de colonne séparés par un tiret."
 
@@ -274,6 +284,14 @@ msgstr "Extrait longueur"
 msgid "Extra Styles"
 msgstr "Styles supplémentaires"
 
+#: library/backend/assets/js/greenlet-controls.js:1513
+msgid ""
+"Extra widget areas are added. Please save and refresh this page to reflect "
+"new Widget areas"
+msgstr ""
+"Des zones de widgets supplémentaires sont ajoutées. Veuillez enregistrer et "
+"actualiser cette page pour refléter les nouvelles zones de widget"
+
 #: library/frontend/main-structure.php:463
 msgid "Featured"
 msgstr "En vedette"
@@ -296,19 +314,19 @@ msgstr "Disposition du pied de page"
 msgid "Framework"
 msgstr "Cadre"
 
-#: library/common/helpers.php:556
+#: library/common/helpers.php:563
 msgid "From Bottom"
 msgstr "Du bas"
 
-#: library/common/helpers.php:558
+#: library/common/helpers.php:565
 msgid "From Left"
 msgstr "De gauche"
 
-#: library/common/helpers.php:557
+#: library/common/helpers.php:564
 msgid "From Right"
 msgstr "De droite"
 
-#: library/common/helpers.php:555
+#: library/common/helpers.php:562
 msgid "From Top"
 msgstr "De haut"
 
@@ -316,21 +334,21 @@ msgstr "De haut"
 msgid "Full Content"
 msgstr "Contenu complet"
 
-#: library/backend/editor/class-editor.php:221
+#: library/backend/editor/class-editor.php:224
 msgid "Full Width Banner"
 msgstr "Bannière pleine largeur"
 
-#: library/backend/editor/class-editor.php:232
+#: library/backend/editor/class-editor.php:235
 msgid "Full width Banner Cover with contents inside a container."
 msgstr ""
 "Couverture de bannière pleine largeur avec contenu à l'intérieur d'un "
 "conteneur."
 
-#: library/backend/editor/class-editor.php:222
+#: library/backend/editor/class-editor.php:225
 msgid "Full width Banner Cover."
 msgstr "Couverture de bannière pleine largeur."
 
-#: library/backend/editor/class-editor.php:231
+#: library/backend/editor/class-editor.php:234
 msgid "Full Width Banner with Container"
 msgstr "Bannière pleine largeur avec conteneur"
 
@@ -340,7 +358,7 @@ msgstr "Obtenez la version Pro"
 
 #. Name of the theme
 #: library/frontend/footer-structure.php:29
-#: library/backend/editor/class-editor.php:214
+#: library/backend/editor/class-editor.php:217
 msgid "Greenlet"
 msgstr "Greenlet"
 
@@ -348,7 +366,7 @@ msgstr "Greenlet"
 msgid "Greenlet Booster"
 msgstr "Booster Greenlet"
 
-#: library/backend/helpers.php:209
+#: library/backend/helpers.php:207
 msgid "Greenlet Framework"
 msgstr "Cadre de Greenlet"
 
@@ -394,7 +412,7 @@ msgstr "Importateur de site Greenlet"
 msgid "Greenlet Team"
 msgstr "L'équipe Greenlet"
 
-#: library/backend/helpers.php:192
+#: library/backend/helpers.php:190
 msgid "Grid"
 msgstr "la grille"
 
@@ -404,7 +422,7 @@ msgstr "la grille"
 msgid "Header Layout"
 msgstr "Disposition des en-têtes"
 
-#: library/backend/assets/js/greenlet-controls.js:1594
+#: library/backend/assets/js/greenlet-controls.js:1764
 msgid "Hide"
 msgstr "Cacher"
 
@@ -419,14 +437,6 @@ msgstr "Page d'accueil"
 #: library/backend/customizer/options.php:185
 msgid "Home Page (Post List) Layout"
 msgstr "Mise en page de la page d'accueil (liste des articles)"
-
-#: library/backend/customizer/options.php:167
-msgid ""
-"How many sidebars to register for main container of page ? (Not for header "
-"or footer.)"
-msgstr ""
-"Combien de barres latérales s'inscrire pour le conteneur principal de la "
-"page? (Pas pour l'en-tête ou le pied de page.)"
 
 #. URI of the theme
 msgid "https://greenletwp.com"
@@ -471,7 +481,7 @@ msgid "It looks like nothing was found here. Maybe try a search?"
 msgstr ""
 "On dirait que rien n'a été trouvé ici. Peut-être essayer une recherche?"
 
-#: library/backend/assets/js/greenlet-controls.js:1279
+#: library/backend/assets/js/greenlet-controls.js:1397
 msgid "Items"
 msgstr "Articles"
 
@@ -491,11 +501,11 @@ msgstr "Variante de mise en page pour la liste des articles."
 msgid "Leave a comment"
 msgstr "laissez un commentaire"
 
-#: library/backend/assets/js/greenlet-controls.js:1581
+#: library/backend/assets/js/greenlet-controls.js:1752
 msgid "Left"
 msgstr "La gauche"
 
-#: library/backend/helpers.php:191
+#: library/backend/helpers.php:189
 msgid "List"
 msgstr "liste"
 
@@ -533,7 +543,7 @@ msgstr ""
 "Charger les fichiers CSS WP Block Editor en ligne, enregistre les demandes "
 "réseau."
 
-#: library/common/helpers.php:510
+#: library/common/helpers.php:516
 msgid "Logo"
 msgstr "Logo"
 
@@ -541,13 +551,13 @@ msgstr "Logo"
 msgid "Logo, Title & Tagline"
 msgstr "Logo, titre et slogan"
 
-#: library/backend/assets/js/greenlet-controls.js:1494
+#: library/backend/assets/js/greenlet-controls.js:1652
 msgid "Main"
 msgstr "Principale"
 
 #: library/backend/helpers.php:22
-#: library/backend/assets/js/greenlet-controls.js:339
-#: library/backend/assets/js/greenlet-controls.js:1846
+#: library/backend/assets/js/greenlet-controls.js:385
+#: library/backend/assets/js/greenlet-controls.js:2020
 msgid "Main Content"
 msgstr "Contenu principal"
 
@@ -556,6 +566,10 @@ msgstr "Contenu principal"
 msgid "Main Layout"
 msgstr "Disposition principale"
 
+#: library/backend/customizer/options.php:166
+msgid "Main Layout Sidebars"
+msgstr "Barres latérales de la disposition principale"
+
 #: library/backend/customizer/options.php:265
 msgid "Main Layout Styles"
 msgstr "Styles de disposition principaux"
@@ -563,6 +577,10 @@ msgstr "Styles de disposition principaux"
 #: library/common/setup.php:49
 msgid "Main Menu"
 msgstr "Menu principal"
+
+#: library/backend/assets/js/greenlet-controls.js:1652
+msgid "Make this Main"
+msgstr "Rendre ce principal"
 
 #: library/addons/colorwings/class-colorwings-admin.php:165
 msgid "Markup is not allowed in CSS."
@@ -574,15 +592,15 @@ msgstr ""
 "Faites correspondre les styles de l'éditeur de publication aux styles "
 "frontaux."
 
-#: library/common/helpers.php:517 library/common/helpers.php:522
+#: library/common/helpers.php:523 library/common/helpers.php:528
 msgid "Menu"
 msgstr "Menu"
 
-#: library/common/helpers.php:538
+#: library/common/helpers.php:545
 msgid "Menu Toggler"
 msgstr "Menu Toggler"
 
-#: library/common/helpers.php:527
+#: library/common/helpers.php:534
 msgid "Mobile toggler"
 msgstr "Bascule mobile"
 
@@ -591,7 +609,7 @@ msgctxt "Monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: library/backend/customizer/class-customizer.php:65
+#: library/backend/customizer/class-customizer.php:64
 msgid "More options with Greenlet Pro"
 msgstr "Plus d'options avec Greenlet Pro"
 
@@ -607,9 +625,23 @@ msgstr "Nom"
 msgid "Newer Comments &rarr;"
 msgstr "Commentaires récents &rarr;"
 
-#: library/backend/assets/js/greenlet-controls.js:1579
+#: library/backend/assets/js/greenlet-controls.js:1750
 msgid "No"
 msgstr "Non"
+
+#: library/common/helpers.php:531
+msgid "No menus found. Create new menu under menus screen, save and reload."
+msgstr ""
+"Aucun menu trouvé. Créez un nouveau menu sous l'écran des menus, enregistrez "
+"et rechargez."
+
+#: library/common/helpers.php:586
+msgid ""
+"No templates found in your child theme. Add PHP templates under "
+"child_theme/templates/"
+msgstr ""
+"Aucun modèle trouvé dans votre thème enfant. Ajoutez des modèles PHP sous "
+"child_theme / templates /"
 
 #: content-none.php:13
 msgid "Nothing found!"
@@ -635,9 +667,11 @@ msgstr "Nombre de produits sur une ligne. (Le nombre de colonnes)."
 msgid "Number of Products in product archives page."
 msgstr "Nombre de produits dans la page des archives de produits."
 
-#: library/backend/customizer/options.php:166
-msgid "Number of Sidebars ( For Main Container )"
-msgstr "Nombre de barres latérales (pour le conteneur principal)"
+#: library/backend/customizer/options.php:167
+msgid "Number of sidebars to register for the main container of the page"
+msgstr ""
+"Nombre de barres latérales à enregistrer pour le conteneur principal de la "
+"page"
 
 #: library/backend/customizer/options.php:421
 msgid "Numbered"
@@ -663,7 +697,7 @@ msgstr "Option disponible avec la version Pro"
 msgid "Others"
 msgstr "Autres"
 
-#: library/backend/assets/js/greenlet-meta.js:234
+#: library/backend/assets/js/greenlet-meta.js:236
 msgid "Page Layout"
 msgstr "Mise en page"
 
@@ -683,6 +717,17 @@ msgstr "Format d'affichage de la navigation de pagination."
 #: library/backend/options/class-options-admin.php:141
 msgid "Performance"
 msgstr "Performance"
+
+#: library/common/helpers.php:578
+msgid "PHP Template"
+msgstr "Modèle PHP"
+
+#: library/backend/assets/js/greenlet-controls.js:1198
+msgid ""
+"Please save and refresh this page to reflect the newly added Widget areas"
+msgstr ""
+"Veuillez enregistrer et actualiser cette page pour refléter les zones de "
+"widget nouvellement ajoutées"
 
 #: library/backend/customizer/options.php:386
 msgid "Post content display format."
@@ -750,7 +795,7 @@ msgstr "Présentation des étiquettes de produit"
 msgid "Published Date"
 msgstr "date de publication"
 
-#: library/common/helpers.php:548
+#: library/common/helpers.php:555
 msgid "Query"
 msgstr "Requete"
 
@@ -758,7 +803,7 @@ msgstr "Requete"
 msgid "Report a bug"
 msgstr "Signaler un bug"
 
-#: library/backend/assets/js/greenlet-controls.js:1583
+#: library/backend/assets/js/greenlet-controls.js:1754
 msgid "Right"
 msgstr "Droite"
 
@@ -792,7 +837,7 @@ msgstr "Formulaire de recherche soumettre le contenu du bouton."
 msgid "Search: "
 msgstr "Chercher:"
 
-#: library/backend/assets/js/greenlet-controls.js:1520
+#: library/backend/assets/js/greenlet-controls.js:1689
 msgid "Select Columns Layout"
 msgstr "Sélectionnez la disposition des colonnes"
 
@@ -812,7 +857,7 @@ msgstr "Disposition de la boutique"
 msgid "Shopping Cart"
 msgstr "Panier"
 
-#: library/backend/assets/js/greenlet-controls.js:1594
+#: library/backend/assets/js/greenlet-controls.js:1764
 msgid "Show"
 msgstr "Spectacle"
 
@@ -853,8 +898,8 @@ msgstr "Montrer le titre"
 msgid "Show your love"
 msgstr "Montre ton amour"
 
-#: library/backend/assets/js/greenlet-controls.js:343
-#: library/backend/assets/js/greenlet-controls.js:1850
+#: library/backend/assets/js/greenlet-controls.js:389
+#: library/backend/assets/js/greenlet-controls.js:2024
 msgid "Sidebar"
 msgstr "Barre latérale"
 
@@ -884,7 +929,7 @@ msgstr "Disposition du site."
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: library/backend/assets/js/greenlet-controls.js:1516
+#: library/backend/assets/js/greenlet-controls.js:1685
 msgid "Sticky"
 msgstr "Gluante"
 
@@ -892,7 +937,7 @@ msgstr "Gluante"
 msgid "String is empty."
 msgstr "La chaîne est vide."
 
-#: library/backend/assets/js/greenlet-controls.js:1558
+#: library/backend/assets/js/greenlet-controls.js:1729
 msgid "Sum should be"
 msgstr "La somme doit être"
 
@@ -908,9 +953,13 @@ msgstr "Forum d'entraide"
 msgid "Tags"
 msgstr "Mots clés"
 
-#: library/common/helpers.php:543
+#: library/common/helpers.php:550
 msgid "Target"
 msgstr "Cible"
+
+#: library/common/helpers.php:583
+msgid "Template"
+msgstr "Modèle"
 
 #: library/backend/customizer/options.php:590
 msgid "Text"
@@ -938,7 +987,7 @@ msgstr "Basculer le menu"
 msgid "Updated Date"
 msgstr "Date de mise à jour"
 
-#: library/backend/assets/js/greenlet-controls.js:1569
+#: library/backend/assets/js/greenlet-controls.js:1740
 msgid "Vertical"
 msgstr "Verticale"
 
@@ -954,6 +1003,10 @@ msgstr "Voir Panier d'achat"
 #: library/backend/options/class-options-admin.php:143
 msgid "Visual Style Editor"
 msgstr "Éditeur de style visuel"
+
+#: library/common/helpers.php:572
+msgid "Widgets"
+msgstr "Widgets"
 
 #: library/frontend/footer-structure.php:25
 msgid "Y"

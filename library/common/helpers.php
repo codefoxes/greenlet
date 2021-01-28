@@ -456,30 +456,6 @@ if ( ! function_exists( 'greenlet_get_min_sidebars' ) ) {
 	}
 }
 
-if ( ! function_exists( 'top_bottom_default_columns' ) ) {
-	/**
-	 * Get default columns for Topbar, Header, Semi-footer and Footer.
-	 *
-	 * @since  1.0.0
-	 * @param  string $pos Position.
-	 * @return string      Columns String.
-	 */
-	function top_bottom_default_columns( $pos ) {
-		switch ( $pos ) {
-			case 'topbar':
-				return '4-8';
-			case 'header':
-				return '3-9';
-			case 'semifooter':
-				return '4-4-4';
-			case 'footer':
-				return '12';
-			default:
-				return '12';
-		}
-	}
-}
-
 if ( ! function_exists( 'greenlet_get_menus' ) ) {
 	/**
 	 * Get all menus.
@@ -491,6 +467,36 @@ if ( ! function_exists( 'greenlet_get_menus' ) ) {
 			$menus[ $menu->slug ] = $menu->name;
 		}
 		return $menus;
+	}
+}
+
+if ( ! function_exists( 'greenlet_get_cover_templates' ) ) {
+	/**
+	 * Get cover layout templates if found in child theme.
+	 *
+	 * @since  2.4.0
+	 *
+	 * @param  string $pos Cover layout position.
+	 * @return array       Cover templates Array.
+	 */
+	function greenlet_get_cover_templates( $pos = 'header' ) {
+		$result = array();
+
+		global $wp_customize;
+		if ( ! is_admin() && ! isset( $wp_customize ) ) {
+			return $result;
+		}
+
+		if ( is_dir( GREENLET_CHILD_DIR . '/templates/' . $pos ) ) {
+			$child_dir = scandir( GREENLET_CHILD_DIR . '/templates/' . $pos );
+			foreach ( $child_dir as $key => $value ) {
+				if ( ! in_array( $value, array( '.', '..' ), true ) && substr( $value, -4 ) === '.php' ) {
+					$result[ 'templates/' . $pos . '/' . substr( $value, 0, -4 ) ] = $value;
+				}
+			}
+		}
+
+		return $result;
 	}
 }
 
@@ -522,6 +528,7 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 						'name'  => __( 'Menu', 'greenlet' ),
 						'type'  => 'select',
 						'items' => greenlet_get_menus(),
+						'empty' => __( 'No menus found. Create new menu under menus screen, save and reload.', 'greenlet' ),
 					),
 					'toggler' => array(
 						'name'  => __( 'Mobile toggler', 'greenlet' ),
@@ -560,6 +567,26 @@ if ( ! function_exists( 'greenlet_cover_layout_items' ) ) {
 					),
 				),
 			),
+			array(
+				'id'        => 'widgets',
+				'name'      => __( 'Widgets', 'greenlet' ),
+				'type'      => 'widgets',
+				'positions' => array( 'header', 'footer' ),
+			),
+			array(
+				'id'        => 'php',
+				'name'      => __( 'PHP Template', 'greenlet' ),
+				'type'      => 'php',
+				'positions' => array( 'header', 'footer' ),
+				'meta'      => array(
+					'template' => array(
+						'name'  => __( 'Template', 'greenlet' ),
+						'type'  => 'select',
+						'items' => greenlet_get_cover_templates( $pos ),
+						'empty' => __( 'No templates found in your child theme. Add PHP templates under child_theme/templates/', 'greenlet' ) . $pos,
+					),
+				),
+			),
 		);
 
 		$items = apply_filters( 'greenlet_cover_layout_items', $items );
@@ -589,7 +616,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 				'columns' => '3-9',
 				'primary' => true,
 				'items'   => array(
-					1 => array( 'logo' ),
+					1 => array( 'logo', 'widgets' ),
 					2 => array(
 						array(
 							'id'   => 'menu',
@@ -598,6 +625,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 								'toggler' => 'enable',
 							),
 						),
+						'widgets',
 					),
 				),
 			),
@@ -606,7 +634,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 			array(
 				'columns' => '12',
 				'primary' => true,
-				'items'   => array(),
+				'items'   => array( 1 => array( 'widgets' ) ),
 			),
 		);
 		return $$position;

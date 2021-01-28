@@ -134,6 +134,9 @@ class Editor {
 
 		ob_start();
 		?>
+		.editor-styles-wrapper {
+			--bg-sec: #fff;
+		}
 		.editor-styles-wrapper:before {
 			content: '';
 			display: block;

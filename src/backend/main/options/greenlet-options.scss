@@ -1,4 +1,7 @@
 /* Options Admin Styles */
+:root {
+	--accent: #23b887;
+}
 
 .appearance_page_greenlet #wpcontent {
 	padding: 0;
@@ -19,7 +22,7 @@
 
 #greenlet .title {
 	padding: 20px;
-	background: #7CB342;
+	background: var(--accent);
 	color: #fff;
 	font-size: 18px;
 	font-weight: 100;
@@ -167,7 +170,7 @@
 }
 
 #greenlet-options .message.success{
-	background: #7cb342;
+	background: var(--accent);
 }
 #greenlet-options .message.warning{
 	background: #FFF59D;

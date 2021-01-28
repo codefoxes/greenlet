@@ -7,7 +7,7 @@ function manageSidebarDependencies() {
 
 	selector.addEventListener( 'change', ( e ) => {
 		const sidebars = e.target.value
-		const templates = document.querySelectorAll( '.gl-template-selection' )
+		const templates = document.querySelectorAll( '.gl-sequence-content' )
 		templates.forEach( ( template ) => {
 			let selected = ( template.value === 'main' ) ? 'selected' : ''
 			let matcherHtml = `<option value="main" ${ selected }>${ __( 'Main Content', 'greenlet' ) }</option>`

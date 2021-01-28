@@ -146,7 +146,7 @@ describe('Customizer', () => {
 
 			it('Updates Template on Sidebars change', () => {
 				cy.get('#_customize-input-sidebars_qty').select('4')
-				cy.get('.gl-template-selection').each(($el) => {
+				cy.get('.gl-sequence-content').each(($el) => {
 					cy.wrap($el).contains('Sidebar 4')
 				})
 			})
@@ -157,7 +157,7 @@ describe('Customizer', () => {
 
 			it('Updates Home Template Sequence to 6-3-3', () => {
 				cy.get('#customize-control-home_template').find('[value="6-3-3"]').check({ force: true }).should('be.checked')
-				cy.get('#customize-control-home_template .gl-template-selection').each(($el, index) => {
+				cy.get('#customize-control-home_template .gl-sequence-content').each(($el, index) => {
 					if (index === 0) {
 						cy.wrap($el).should('have.value', 'main')
 					}

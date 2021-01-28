@@ -5,7 +5,8 @@ import { debounce, arrayMoveMutate } from '../../Helpers'
 function RowItems( { props } ) {
 	const { __ } = wp.i18n
 
-	const { row, i, pos, updateRows, items } = props
+	const { row, i, pos, updateRows, control } = props
+	const { items } = control.params
 	const cols = row.columns.split( '-' )
 	const [ expanded, setExpanded ] = React.useState( -1 )
 
@@ -14,40 +15,73 @@ function RowItems( { props } ) {
 		closePop = cb
 	}
 
-	const toggleRow = ( e, i ) => {
-		e.preventDefault()
-		e.stopPropagation()
-		setExpanded( prev => ( prev === i ) ? -1 : i )
+	const openSidebar = ( col ) => {
+		const sidebar = `${ pos.toLowerCase() }-sidebar-${ i + 1 }-${ col }`
+		const section = wp.customize.section( `sidebar-widgets-${ sidebar }`)
+		if ( section === undefined ) {
+			control.notifications.remove( 'updateWidgets' )
+			const notification = new wp.customize.Notification( 'updateWidgets', { message: __( 'Please save and refresh this page to reflect the newly added Widget areas', 'greenlet' ), type: 'warning' } )
+			control.notifications.add( 'updateWidgets', notification )
+			return
+		}
+		section.expand( { duration: 0 } )
+		const parent = document.querySelector( `#sub-accordion-section-sidebar-widgets-${ sidebar } .customize-section-title` )
+		const btn = document.createElement( 'button' )
+		btn.classList.add( 'customize-section-back', 'back-to-layout' )
+		btn.type = 'button'
+		btn.innerHTML = '<span class="screen-reader-text">Back</span>'
+		parent.insertBefore( btn, parent.getElementsByTagName( 'h3' )[ 0 ] )
+
+		btn.onclick = () => {
+			const backSection = wp.customize.section( `${ pos.toLowerCase() }_section` )
+			backSection.expand()
+			btn.remove()
+		}
+	}
+
+	const onClickItem = ( item, col, k ) => {
+		setExpanded( prev => ( prev === `${col}-${k}` ) ? -1 : `${col}-${k}` )
 	}
 
 	const addItem = ( col, item ) => {
 		updateRows( ( prev ) => {
+			const formatted = { id: item.id }
+			if ( 'meta' in item ) {
+				const meta = {}
+				for ( const propKey in item.meta ) {
+					if ( 'items' in item.meta[ propKey ] ) {
+						const keys = Object.keys( item.meta[ propKey ].items )
+						meta[ propKey ] = ( keys.length > 0 ) ? keys[ 0 ] : ''
+					}
+				}
+				formatted.meta = meta
+			}
 			if ( 'items' in prev[ i ] ) {
 				if ( col in prev[ i ].items ) {
-					prev[ i ].items[ col ].push( item.id )
+					prev[ i ].items[ col ].push( formatted )
 				} else {
-					prev[ i ].items[ col ] = [ item.id ]
+					prev[ i ].items[ col ] = [ formatted ]
 				}
 			} else {
-				prev[ i ].items = { [ col ]: [ item.id ] }
+				prev[ i ].items = { [ col ]: [ formatted ] }
 			}
 			return prev
 		} )
 		closePop()
 	}
 
-	const removeItem = ( col, item ) => {
+	const removeItem = ( col, k ) => {
 		updateRows( ( prev ) => {
-			prev[ i ].items[ col ].splice( prev[ i ].items[ col ].indexOf( item ), 1 )
+			prev[ i ].items[ col ].splice( k, 1 )
 			return prev
 		} )
 	}
 
-	const hasItems = () => {
-		return ( 'items' in row ) ? Object.entries( row.items ).some( ( [ c, items ] ) => ( ( items !== null ) && ( items.length > 0 ) ) ) : false
-	}
-
 	const ColItemProps = ( { col, index, item } ) => {
+		if ( item === 'widgets' ) {
+			return <div className="item-props expandable"><button type="button" className="item-prop" onClick={ () => openSidebar( col ) }>{ __( 'Add/Edit widgets', 'greenlet' ) }</button></div>
+		}
+
 		const meta = ( item in items && 'meta' in items[ item ] ) ? items[ item ].meta : false
 		const currentMeta = row.items[ col ][ index ].meta
 		const hasQuery = ( currentMeta && ( 'target' in currentMeta ) && ( 'query' !== currentMeta.target ) )
@@ -74,7 +108,9 @@ function RowItems( { props } ) {
 					value: defaultValue,
 					onChange: val => onChange( val, propKey ),
 				}
-
+				if ( ( forwardProps.options.length === 0 ) && ( 'empty' in prop ) ) {
+					return <span>{ prop.empty }</span>
+				}
 				return <SelectSearch { ...forwardProps } />
 			} else if ( 'input' === prop.type ) {
 				return <input type="text" className="prop-control" defaultValue={ defaultValue } onChange={ e => debouncedChange( e.target.value, propKey ) } />
@@ -83,12 +119,18 @@ function RowItems( { props } ) {
 
 		return !! meta ? (
 			<div className="item-props expandable">
-				{ Object.entries( meta ).map( ( [ propKey, prop ] ) => (
-					<div key={ propKey } className={ `item-prop ${ ( hasQuery && 'input' === prop.type) ? 'hidden' : '' }` }>
-						<span className="prop-title">{ prop.name }</span>
-						{ renderProp( propKey, prop ) }
-					</div>
-				) ) }
+				{ Object.entries( meta ).map( ( [ propKey, prop ] ) => {
+					if ( ( 'items' in prop ) && ( Object.keys( prop.items ).length === 0 ) && ( 'empty' in prop ) ) {
+						return <div key={ propKey } className="empty-message">{ prop.empty }</div>
+					} else {
+						return (
+							<div key={ propKey } className={ `item-prop ${ ( hasQuery && 'input' === prop.type) ? 'hidden' : '' }` }>
+								<span className="prop-title">{ prop.name }</span>
+								{ renderProp( propKey, prop ) }
+							</div>
+						)
+					}
+				 } ) }
 			</div>
 		) : null
 	}
@@ -118,13 +160,13 @@ function RowItems( { props } ) {
 								{ rowItems.map( ( item, k ) => (
 									<ColItem key={ `${col}-${k}` } index={ k }>
 										<div className={ `gl-col-item${ ( expanded === `${col}-${k}` ) ? ' open' : '' }` }>
-											<div className="item-id" tabIndex="0" onClick={ ( e ) => toggleRow( e, `${col}-${k}` ) }>
+											<div className="item-id" onClick={ () => onClickItem( item.id ? item.id : item, col, k ) }>
 												<DragHandle />
 												<span>{ item.id ? item.id : item }</span>
 											</div>
-											<div className="item-x" tabIndex="0" onClick={ () => removeItem( col, item ) }>
+											<button className="item-x" onClick={ () => removeItem( col, k ) }>
 												<span className="dashicons dashicons-trash" />
-											</div>
+											</button>
 											<ColItemProps col={ col } index={ k } item={ item.id ? item.id : item } />
 										</div>
 									</ColItem>

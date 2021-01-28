@@ -39,35 +39,33 @@ if ( ! function_exists( 'greenlet_template_images' ) ) {
 	 * @return array  Templates Images Array.
 	 */
 	function greenlet_template_images( $section = 'main' ) {
-		$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/main/';
+		$path = GREENLET_LIBRARY_DIR . '/backend/assets/images/cover/';
 
 		if ( 'cover' === $section ) {
-			$imagepath = GREENLET_LIBRARY_URL . '/backend/assets/images/cover/';
-
 			$templates = array(
-				'12'      => $imagepath . '12.svg',
-				'8-4'     => $imagepath . '8-4.svg',
-				'4-8'     => $imagepath . '4-8.svg',
-				'9-3'     => $imagepath . '9-3.svg',
-				'3-9'     => $imagepath . '3-9.svg',
-				'2-10'    => $imagepath . '2-10.svg',
-				'10-2'    => $imagepath . '10-2.svg',
-				'6-6'     => $imagepath . '6-6.svg',
-				'4-4-4'   => $imagepath . '4-4-4.svg',
-				'3-3-3-3' => $imagepath . '3-3-3-3.svg',
-				'3-6-3'   => $imagepath . '3-6-3.svg',
-				'3-3-6'   => $imagepath . '3-3-6.svg',
+				'12'      => greenlet_get_file_contents( $path . '12.svg' ),
+				'8-4'     => greenlet_get_file_contents( $path . '8-4.svg' ),
+				'4-8'     => greenlet_get_file_contents( $path . '4-8.svg' ),
+				'9-3'     => greenlet_get_file_contents( $path . '9-3.svg' ),
+				'3-9'     => greenlet_get_file_contents( $path . '3-9.svg' ),
+				'2-10'    => greenlet_get_file_contents( $path . '2-10.svg' ),
+				'10-2'    => greenlet_get_file_contents( $path . '10-2.svg' ),
+				'6-6'     => greenlet_get_file_contents( $path . '6-6.svg' ),
+				'4-4-4'   => greenlet_get_file_contents( $path . '4-4-4.svg' ),
+				'3-3-3-3' => greenlet_get_file_contents( $path . '3-3-3-3.svg' ),
+				'3-6-3'   => greenlet_get_file_contents( $path . '3-6-3.svg' ),
+				'3-3-6'   => greenlet_get_file_contents( $path . '3-3-6.svg' ),
 			);
 		} else {
 			$templates = array(
-				'12'    => $imagepath . '12.png',
-				'8-4'   => $imagepath . '8-4.png',
-				'4-8'   => $imagepath . '4-8.png',
-				'9-3'   => $imagepath . '9-3.png',
-				'3-9'   => $imagepath . '3-9.png',
-				'3-6-3' => $imagepath . '3-6-3.png',
-				'3-3-6' => $imagepath . '3-3-6.png',
-				'6-3-3' => $imagepath . '6-3-3.png',
+				'12'    => greenlet_get_file_contents( $path . '12.svg' ),
+				'8-4'   => greenlet_get_file_contents( $path . '8-4.svg' ),
+				'4-8'   => greenlet_get_file_contents( $path . '4-8.svg' ),
+				'9-3'   => greenlet_get_file_contents( $path . '9-3.svg' ),
+				'3-9'   => greenlet_get_file_contents( $path . '3-9.svg' ),
+				'3-6-3' => greenlet_get_file_contents( $path . '3-6-3.svg' ),
+				'3-3-6' => greenlet_get_file_contents( $path . '3-3-6.svg' ),
+				'6-3-3' => greenlet_get_file_contents( $path . '6-3-3.svg' ),
 			);
 		}
 

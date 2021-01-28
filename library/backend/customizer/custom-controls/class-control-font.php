@@ -70,7 +70,6 @@ if ( ! class_exists( 'Control_Font' ) && class_exists( 'WP_Customize_Control' ) 
 			wp_enqueue_script( 'choices', GREENLET_LIBRARY_URL . '/backend/assets/js/choices.min.js', array( 'jquery' ), GREENLET_VERSION, true );
 			wp_enqueue_style( 'choices', GREENLET_LIBRARY_URL . '/backend/assets/css/choices.css', array(), GREENLET_VERSION );
 			wp_enqueue_script( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/js/greenlet-controls' . $min . '.js', array( 'choices' ), GREENLET_VERSION, true );
-			wp_enqueue_style( 'greenlet-controls', GREENLET_LIBRARY_URL . '/backend/assets/css/greenlet-controls.css', array(), GREENLET_VERSION );
 			wp_localize_script( 'greenlet-controls', 'greenletAllFonts', $this->get_all_fonts() );
 
 			$color_wings_fonts = array(
