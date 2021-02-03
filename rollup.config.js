@@ -16,6 +16,7 @@ import postcss from 'postcss'
 const GLOBALS = {
 	jQuery: 'jQuery',
 	react: 'React',
+	sortablejs: 'Sortable',
 	'react-dom': 'ReactDOM',
 }
 
@@ -25,6 +26,7 @@ const EXTERNAL = [
 	'react-dom',
 	'React',
 	'ReactDOM',
+	'sortablejs',
 ]
 
 const getCWBanner = filename => `/** @license ColorWings v1.1.0
