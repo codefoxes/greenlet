@@ -77,7 +77,7 @@ function greenlet_options() {
 		'args' => array(
 			'title'       => __( 'Layout', 'greenlet' ),
 			'description' => __( 'Site Layout.', 'greenlet' ),
-			'priority'    => 35,
+			'priority'    => 22,
 		),
 	);
 
@@ -301,7 +301,7 @@ function greenlet_options() {
 		'args' => array(
 			'title'       => __( 'Blog Settings', 'greenlet' ),
 			'description' => __( 'Blog posts settings.', 'greenlet' ),
-			'priority'    => 220,
+			'priority'    => 24,
 		),
 	);
 
@@ -542,7 +542,7 @@ function greenlet_options() {
 		'id'   => 'performance',
 		'args' => array(
 			'title'    => __( 'Performance', 'greenlet' ),
-			'priority' => 250,
+			'priority' => 26,
 		),
 	);
 
@@ -635,7 +635,7 @@ function greenlet_options() {
 		'id'   => 'presets',
 		'args' => array(
 			'title'    => __( 'Presets', 'greenlet' ),
-			'priority' => 300,
+			'priority' => 28,
 		),
 	);
 
