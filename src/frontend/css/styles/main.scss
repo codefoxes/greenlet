@@ -450,8 +450,7 @@ input[type="checkbox"].menu-toggle {
 	border-top: 1px solid var(--hr);
 
 	.author-avatar {
-		display: inline-block;
-		vertical-align: bottom;
+		float: left;
 
 		img {
 			display: block;
@@ -464,12 +463,11 @@ input[type="checkbox"].menu-toggle {
 	.author-heading {
 		font-size: 1em;
 		margin: 0;
-		line-height: 40px;
-		padding-left: 20px;
+		padding-left: 50px;
 	}
 
-	.author-description {
-		display: inline-block;
+	.author-bio {
+		padding-left: 50px;
 	}
 }
 

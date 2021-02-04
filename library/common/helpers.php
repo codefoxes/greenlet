@@ -616,7 +616,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 				'columns' => '3-9',
 				'primary' => true,
 				'items'   => array(
-					1 => array( 'logo', 'widgets' ),
+					1 => array( array( 'id' => 'logo' ), array( 'id' => 'widgets' ) ),
 					2 => array(
 						array(
 							'id'   => 'menu',
@@ -625,7 +625,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 								'toggler' => 'enable',
 							),
 						),
-						'widgets',
+						array( 'id' => 'widgets' ),
 					),
 				),
 			),
@@ -634,7 +634,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 			array(
 				'columns' => '12',
 				'primary' => true,
-				'items'   => array( 1 => array( 'widgets' ) ),
+				'items'   => array( 1 => array( array( 'id' => 'widgets' ) ) ),
 			),
 		);
 		return $$position;
@@ -699,5 +699,181 @@ if ( ! function_exists( 'greenlet_font_defaults' ) ) {
 				'italic' => array( '100', '200', '300', '400', '500', '600', '700', '800', '900' ),
 			),
 		);
+	}
+}
+
+if ( ! function_exists( 'greenlet_content_layout_items' ) ) {
+	/**
+	 * Get content layout items.
+	 *
+	 * @since  2.5.0
+	 * @param  string $type Page type to get the layout items for.
+	 * @return array        Content layout items.
+	 */
+	function greenlet_content_layout_items( $type = 'post' ) {
+		if ( 'author' === $type ) {
+			$items = array(
+				'name'  => __( 'Name', 'greenlet' ),
+				'image' => __( 'Avatar', 'greenlet' ),
+				'bio'   => __( 'Biographical Info', 'greenlet' ),
+			);
+		} elseif ( 'meta' === $type ) {
+			$items = array(
+				'sticky' => __( 'Featured', 'greenlet' ),
+				'author' => __( 'Author', 'greenlet' ),
+				'date'   => __( 'Published', 'greenlet' ),
+				'mod'    => __( 'Updated', 'greenlet' ),
+				'cats'   => __( 'Categories', 'greenlet' ),
+				'tags'   => __( 'Tags', 'greenlet' ),
+				'reply'  => __( 'Comments', 'greenlet' ),
+			);
+		} else {
+			$items = array(
+				'title'   => __( 'Title', 'greenlet' ),
+				'meta'    => __( 'Post Meta', 'greenlet' ),
+				'image'   => __( 'Featured Image', 'greenlet' ),
+				'content' => __( 'Post Content', 'greenlet' ),
+				'author'  => __( 'Author Info', 'greenlet' ),
+				'crumb'   => __( 'Breadcrumb', 'greenlet' ),
+			);
+		}
+
+		$items['controls'] = array(
+			'layout'         => array( 'type' => 'sorter' ),
+			'separator'      => array(
+				'type'  => 'input',
+				'label' => __( 'Separator', 'greenlet' ),
+				'desc'  => __( 'Separator between links. Eg: / or >', 'greenlet' ),
+			),
+			'excerpt_length' => array(
+				'type'  => 'number',
+				'label' => __( 'Excerpt Length', 'greenlet' ),
+			),
+			'display'        => array(
+				'type'    => 'radio',
+				'label'   => __( 'Display Format', 'greenlet' ),
+				'choices' => array(
+					'excerpt' => __( 'Excerpt (short text extract)', 'greenlet' ),
+					'full'    => __( 'Full Content', 'greenlet' ),
+				),
+			),
+		);
+
+		return $items;
+	}
+}
+
+if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
+	/**
+	 * Get Post content layout default sequence.
+	 *
+	 * @since  2.5.0
+	 *
+	 * @param  string $type Page type to get the layout defaults for.
+	 * @return array        Content Layout defaults.
+	 */
+	function greenlet_content_layout_defaults( $type = 'list' ) {
+		$groups = array();
+
+		if ( 'single' === $type ) {
+			$groups['above'] = array(
+				array(
+					'id'   => 'crumb',
+					'meta' => array(
+						'separator' => array( 'val' => '&raquo;' ),
+					),
+				),
+			);
+		}
+
+		$main_groups = array(
+			'top'    => array(
+				array( 'id' => 'title' ),
+				array(
+					'id'   => 'meta',
+					'meta' => array(
+						'layout' => array(
+							'val' => array(
+								array( 'id' => 'sticky' ),
+								array( 'id' => 'author' ),
+								array( 'id' => 'date' ),
+								array( 'id' => 'cats' ),
+								array( 'id' => 'tags' ),
+								array( 'id' => 'reply' ),
+								array(
+									'id'      => 'mod',
+									'visible' => false,
+								),
+							),
+						),
+					),
+				),
+			),
+			'middle' => array(
+				array( 'id' => 'image' ),
+				array( 'id' => 'content' ),
+			),
+			'bottom' => array(
+				array(
+					'id'   => 'author',
+					'meta' => array(
+						'layout' => array(
+							'val' => array(
+								array( 'id' => 'image' ),
+								array( 'id' => 'name' ),
+								array( 'id' => 'bio' ),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		if ( 'list' === $type ) {
+			$main_groups['middle'][1] = array(
+				'id'   => 'content',
+				'meta' => array(
+					'display'        => array( 'val' => 'excerpt' ),
+					'excerpt_length' => array( 'val' => 55 ),
+				),
+			);
+
+			$main_groups['bottom'][0]['visible'] = false;
+		}
+
+		$groups = array_merge( $groups, $main_groups );
+
+		$layout_items = greenlet_content_layout_items();
+		foreach ( $groups as $group => &$items ) {
+			foreach ( $items as &$item ) {
+				$item['name']    = $layout_items[ $item['id'] ];
+				$item['visible'] = isset( $item['visible'] ) && ( ! $item['visible'] ) ? false : true;
+
+				if ( isset( $item['meta'] ) && isset( $item['meta']['layout'] ) ) {
+					$meta_items = greenlet_content_layout_items( $item['id'] );
+					foreach ( $item['meta']['layout']['val'] as &$meta_item ) {
+						$meta_item['name']    = $meta_items[ $meta_item['id'] ];
+						$meta_item['visible'] = isset( $meta_item['visible'] ) && ( ! $meta_item['visible'] ) ? false : true;
+					}
+				}
+			}
+		}
+
+		return $groups;
+	}
+}
+
+if ( ! function_exists( 'greenlet_get_content_layout' ) ) {
+	/**
+	 * Get Content Layout for the current page.
+	 *
+	 * @since  2.5.0
+	 * @return array Content layout.
+	 */
+	function greenlet_get_content_layout() {
+		if ( is_singular() ) {
+			return gl_get_option( 'content_layout', greenlet_content_layout_defaults( 'single' ) );
+		}
+		return gl_get_option( 'content_layout_list', greenlet_content_layout_defaults() );
 	}
 }

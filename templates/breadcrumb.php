@@ -6,7 +6,7 @@
  */
 
 global $post;
-$separator = gl_get_option( 'breadcrumb_sep', '&raquo;' );
+$separator = ( isset( $args ) && isset( $args['separator'] ) ) ? $args['separator'] : '&raquo;';
 
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb' ), null ) );
 printf( '<div %s>', wp_kses( greenlet_attr( 'breadcrumb-item' ), null ) );

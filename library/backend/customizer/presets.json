@@ -9,53 +9,26 @@
 		"sidebars_qty": "3",
 		"home_template": {
 			"template": "8-4",
-			"sequence": [
-				"main",
-				"sidebar-1"
-			]
+			"sequence": ["main", "sidebar-1"]
 		},
 		"default_template": {
 			"template": "12",
-			"sequence": [
-				"main"
-			]
+			"sequence": ["main"]
 		},
 		"post_template": {
 			"template": "12",
-			"sequence": [
-				"main"
-			]
+			"sequence": ["main"]
 		},
 		"archive_template": {
 			"template": "12",
-			"sequence": [
-				"main"
-			]
+			"sequence": ["main"]
 		},
 		"footer_layout": [{"columns":"12","primary":true,"items":[]}],
 		"post_list_layout": "list",
-		"breadcrumb": "1",
-		"breadcrumb_sep": "&raquo;",
-		"featured_image": "1",
-		"excerpt_length": 55,
 		"paging_nav": "number",
-		"show_author": [
-			"name",
-			"image",
-			"bio"
-		],
-		"show_meta": [
-			"sticky",
-			"author",
-			"date",
-			"cats",
-			"tags",
-			"reply"
-		],
-		"show_comments": [
-			"posts",
-			"pages"
-		],
+		"content_layout_list": {"top":[{"id":"title","visible":true},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":true},{"id":"author","visible":true},{"id":"date","visible":true},{"id":"cats","visible":true},{"id":"tags","visible":true},{"id":"reply","visible":true},{"id":"mod","visible":false}]}},"visible":true}],"middle":[{"id":"image","visible":true},{"id":"content","meta":{"display":{"val":"excerpt"},"excerpt_length":{"val":55}},"visible":true}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image","visible":true},{"id":"name","visible":true},{"id":"bio","visible":true}]}},"visible":false}]},
+		"content_layout": {"above":[{"id":"crumb","meta":{"separator":{"val":"&raquo;"}},"visible":true}],"top":[{"id":"title","visible":true},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":true},{"id":"author","visible":true},{"id":"date","visible":true},{"id":"cats","visible":true},{"id":"tags","visible":true},{"id":"reply","visible":true},{"id":"mod","visible":false}]}},"visible":true}],"middle":[{"id":"image","visible":true},{"id":"content","visible":true}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image","visible":true},{"visible":true},{"id":"bio","visible":true}]}},"visible":true}]},
+		"show_comments": ["posts", "pages"],
 		"schema": "1",
 		"defer_css": "1",
 		"disable_emojis": false,
@@ -127,7 +100,6 @@
 				}
 			}
 		},
-		"show_meta": [],
 		"home_template": {
 			"template": "12",
 			"sequence": [ "main" ]
@@ -160,7 +132,7 @@
 			}
 		},
 		"post_list_layout": "grid",
-		"show_meta": ["author", "date"],
+		"content_layout_list": {"top":[{"id":"title","visible":true},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":false},{"id":"author","visible":true},{"id":"date","visible":true},{"id":"cats","visible":false},{"id":"tags","visible":false},{"id":"reply","visible":false},{"id":"mod","visible":false}]}},"visible":true}]},
 		"home_template": {
 			"template": "12",
 			"sequence": [ "main" ]

@@ -361,47 +361,16 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'featured_image',
+		'id'    => 'content_layout_list',
 		'sargs' => array(
-			'default' => '1',
+			'default' => greenlet_content_layout_defaults(),
 		),
 		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'blog_list',
-			'label'       => __( 'Featured Image', 'greenlet' ),
-			'description' => __( 'Show featured image on post list and archives.', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'excerpt_type',
-		'sargs' => array(
-			'default' => 'excerpt',
-		),
-		'cargs' => array(
-			'type'        => 'radio',
-			'section'     => 'blog_list',
-			'label'       => __( 'Content display', 'greenlet' ),
-			'description' => __( 'Post content display format.', 'greenlet' ),
-			'choices'     => array(
-				'excerpt' => __( 'Excerpt (short text extract)', 'greenlet' ),
-				'full'    => __( 'Full Content', 'greenlet' ),
-			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'excerpt_length',
-		'sargs' => array(
-			'default' => 55,
-		),
-		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'blog_list',
-			'label'       => __( 'Excerpt length', 'greenlet' ),
-			'description' => __( 'Number of characters in excerpts for post list.', 'greenlet' ),
+			'type'    => 'content-layout',
+			'section' => 'blog_list',
+			'label'   => __( 'Post Sections', 'greenlet' ),
+			'groups'  => array( 'top', 'middle', 'bottom' ),
+			'items'   => greenlet_content_layout_items(),
 		),
 	);
 
@@ -422,29 +391,6 @@ function greenlet_options() {
 				'ajax'     => __( 'Numbered (Ajax)', 'greenlet' ),
 				'load'     => __( 'Load More Button', 'greenlet' ),
 				'infinite' => __( 'Infinite Scroll', 'greenlet' ),
-			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'show_meta',
-		'sargs' => array(
-			'default'           => array( 'sticky', 'author', 'date', 'cats', 'tags', 'reply' ),
-			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
-		),
-		'cargs' => array(
-			'type'    => 'multicheck',
-			'section' => 'blog_list',
-			'label'   => __( 'Show Meta Info', 'greenlet' ),
-			'choices' => array(
-				'sticky' => __( 'Featured (Sticky)', 'greenlet' ),
-				'author' => __( 'Author', 'greenlet' ),
-				'date'   => __( 'Published Date', 'greenlet' ),
-				'mod'    => __( 'Updated Date', 'greenlet' ),
-				'cats'   => __( 'Categories', 'greenlet' ),
-				'tags'   => __( 'Tags', 'greenlet' ),
-				'reply'  => __( 'Comments', 'greenlet' ),
 			),
 		),
 	);
@@ -474,48 +420,16 @@ function greenlet_options() {
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'breadcrumb',
+		'id'    => 'content_layout',
 		'sargs' => array(
-			'default' => '1',
+			'default' => greenlet_content_layout_defaults( 'single' ),
 		),
 		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'blog_single',
-			'label'       => __( 'Breadcrumb', 'greenlet' ),
-			'description' => __( 'Enable breadcrumb navigation', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'breadcrumb_sep',
-		'sargs' => array(
-			'default' => '&raquo;',
-		),
-		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'blog_single',
-			'label'       => __( 'Breadcrumb Separator', 'greenlet' ),
-			'description' => __( 'Separator between links in breadcrumb. Eg: / or >', 'greenlet' ),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'show_author',
-		'sargs' => array(
-			'default'           => array( 'name', 'image', 'bio' ),
-			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
-		),
-		'cargs' => array(
-			'type'    => 'multicheck',
+			'type'    => 'content-layout',
 			'section' => 'blog_single',
-			'label'   => __( 'Show Author Info', 'greenlet' ),
-			'choices' => array(
-				'name'  => __( 'Name', 'greenlet' ),
-				'image' => __( 'Avatar', 'greenlet' ),
-				'bio'   => __( 'Biographical Info', 'greenlet' ),
-			),
+			'label'   => __( 'Post Sections', 'greenlet' ),
+			'groups'  => array( 'above', 'top', 'middle', 'bottom' ),
+			'items'   => greenlet_content_layout_items(),
 		),
 	);
 
@@ -534,20 +448,6 @@ function greenlet_options() {
 				'posts' => __( 'Posts', 'greenlet' ),
 				'pages' => __( 'Pages', 'greenlet' ),
 			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'schema',
-		'sargs' => array(
-			'default' => '1',
-		),
-		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'blog_single',
-			'label'       => __( 'Schema Markup', 'greenlet' ),
-			'description' => __( 'Enable Schema Markup', 'greenlet' ),
 		),
 	);
 
@@ -572,6 +472,20 @@ function greenlet_options() {
 		'args' => array(
 			'title' => __( 'Others', 'greenlet' ),
 			'panel' => 'blog',
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'schema',
+		'sargs' => array(
+			'default' => '1',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog_extra',
+			'label'       => __( 'Schema Markup', 'greenlet' ),
+			'description' => __( 'Enable Schema Markup', 'greenlet' ),
 		),
 	);
 
