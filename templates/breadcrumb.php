@@ -2,7 +2,7 @@
 /**
  * Breadcrumb Template.
  *
- * @package greenlet\library\frontend
+ * @package greenlet\templates
  */
 
 global $post;

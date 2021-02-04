@@ -496,6 +496,10 @@ if ( ! function_exists( 'greenlet_get_cover_templates' ) ) {
 			}
 		}
 
+		if ( 'footer' === $pos ) {
+			$result['templates/copyright'] = 'copyright.php';
+		}
+
 		return $result;
 	}
 }
@@ -634,7 +638,14 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 			array(
 				'columns' => '12',
 				'primary' => true,
-				'items'   => array( 1 => array( array( 'id' => 'widgets' ) ) ),
+				'items'   => array(
+					1 => array(
+						array(
+							'id'   => 'php',
+							'meta' => array( 'template' => 'templates/copyright' ),
+						),
+					),
+				),
 			),
 		);
 		return $$position;
