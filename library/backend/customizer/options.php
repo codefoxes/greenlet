@@ -369,43 +369,8 @@ function greenlet_options() {
 			'type'    => 'content-layout',
 			'section' => 'blog_list',
 			'label'   => __( 'Post Sections', 'greenlet' ),
-			'groups'  => array( 'top', 'middle', 'bottom' ),
+			'groups'  => array( 'above', 'top', 'middle', 'bottom', 'below' ),
 			'items'   => greenlet_content_layout_items(),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'paging_nav',
-		'sargs' => array(
-			'default' => 'number',
-		),
-		'cargs' => array(
-			'type'        => 'radio',
-			'section'     => 'blog_list',
-			'label'       => __( 'Pagination', 'greenlet' ),
-			'description' => __( 'Paging Navigation display format.', 'greenlet' ),
-			'choices'     => array(
-				'simple'   => __( 'Simple', 'greenlet' ),
-				'number'   => __( 'Numbered', 'greenlet' ),
-				'ajax'     => __( 'Numbered (Ajax)', 'greenlet' ),
-				'load'     => __( 'Load More Button', 'greenlet' ),
-				'infinite' => __( 'Infinite Scroll', 'greenlet' ),
-			),
-		),
-	);
-
-	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'read_more',
-		'sargs' => array(
-			'default' => __( 'continue reading', 'greenlet' ),
-		),
-		'cargs' => array(
-			'type'        => 'text',
-			'section'     => 'blog_list',
-			'label'       => __( 'Continue reading text', 'greenlet' ),
-			'description' => __( 'Post excerpt more link text', 'greenlet' ),
 		),
 	);
 
@@ -428,41 +393,32 @@ function greenlet_options() {
 			'type'    => 'content-layout',
 			'section' => 'blog_single',
 			'label'   => __( 'Post Sections', 'greenlet' ),
-			'groups'  => array( 'above', 'top', 'middle', 'bottom' ),
+			'groups'  => array( 'above', 'top', 'middle', 'bottom', 'below' ),
 			'items'   => greenlet_content_layout_items(),
 		),
 	);
 
 	$options[] = array(
-		'type'  => 'setting_control',
-		'id'    => 'show_comments',
-		'sargs' => array(
-			'default'           => array( 'posts', 'pages' ),
-			'sanitize_callback' => array( 'Greenlet\Sanitizer', 'sanitize_multicheck' ),
-		),
-		'cargs' => array(
-			'type'    => 'multicheck',
-			'section' => 'blog_single',
-			'label'   => __( 'Show Comments', 'greenlet' ),
-			'choices' => array(
-				'posts' => __( 'Posts', 'greenlet' ),
-				'pages' => __( 'Pages', 'greenlet' ),
-			),
+		'type' => 'section',
+		'id'   => 'blog_page',
+		'args' => array(
+			'title' => __( 'Single Page', 'greenlet' ),
+			'panel' => 'blog',
 		),
 	);
 
 	$options[] = array(
 		'type'  => 'setting_control',
-		'id'    => 'editor_styles',
+		'id'    => 'content_layout_page',
 		'sargs' => array(
-			'default'   => false,
-			'transport' => 'postMessage',
+			'default' => greenlet_content_layout_defaults( 'page' ),
 		),
 		'cargs' => array(
-			'type'        => 'checkbox',
-			'section'     => 'blog_single',
-			'label'       => __( 'Editor Styles', 'greenlet' ),
-			'description' => __( 'Match the Post editor styles to the frontend styles.', 'greenlet' ),
+			'type'    => 'content-layout',
+			'section' => 'blog_page',
+			'label'   => __( 'Page Sections', 'greenlet' ),
+			'groups'  => array( 'above', 'top', 'middle', 'bottom', 'below' ),
+			'items'   => greenlet_content_layout_items(),
 		),
 	);
 
@@ -534,6 +490,22 @@ function greenlet_options() {
 			'section' => 'blog_extra',
 			'label'   => __( 'Show back to top button at position.', 'greenlet' ),
 			'units'    => array( 'px' => array( 'step' => 1, 'min' => 0, 'max' => 2000 ), '%' => array( 'step' => 1, 'min' => 0, 'max' => 100 ) ) // phpcs:ignore
+		),
+	);
+
+	$options[] = array(
+		'type'  => 'setting_control',
+		'id'    => 'editor_styles',
+		'sargs' => array(
+			'default'   => false,
+			'transport' => 'postMessage',
+		),
+		'cargs' => array(
+			'type'        => 'checkbox',
+			'section'     => 'blog_extra',
+			'label'       => __( 'Editor Styles', 'greenlet' ),
+			'description' => __( 'Match the Post editor styles to the frontend styles.', 'greenlet' ),
+			'priority'    => 900,
 		),
 	);
 

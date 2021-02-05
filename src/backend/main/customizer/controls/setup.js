@@ -84,6 +84,9 @@ const insertDocLinks = () => {
 		id: 'sub-accordion-section-blog_single',
 		link: 'customize/single-post-design/'
 	}, {
+		id: 'sub-accordion-section-blog_page',
+		link: 'customize/single-page-design/'
+	}, {
 		id: 'sub-accordion-section-performance',
 		link: 'customize/performance/'
 	}, {

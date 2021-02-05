@@ -54,14 +54,30 @@ function ContentLayout( { control, updateSettings } ) {
 		} )
 	}
 
+	const [ hiddens, setHiddens ] = React.useState( [] )
+	const onPreviewChange = ( previewObject ) => {
+		setHiddens( ( control.params.id === 'content_layout_list' ) && previewObject.pages.is_home ? [ 'above' ] : [] )
+	}
+
+	React.useEffect( () => {
+		cw.Evt.on( 'preview-object-ready', onPreviewChange )
+	}, [] )
+
 	return (
 		<>
 			<span className="customize-control-title">{ control.params.label }</span>
 			<div className={ `gl-sorter ${ control.params.cls }` }>
 				{ control.params.groups.map( group => (
-					<div className={ `group ${ group }` } key={ group }>
-						{ control.params.groups.length > 1 && <div className="group-title">{ group }</div> }
-						<Sorter items={ state[ group ] } group={ control.params.id } onChange={ ( list, update ) => onChange( list, group, update ) } onEnd={ () => updateNow() }/>
+					<div className={ `group ${ group }${ hiddens.includes( group ) ? ' hidden' : '' }` } key={ group }>
+						<div className="group-inner">
+							{ control.params.groups.length > 1 && <div className="group-title">{ group }</div> }
+							<Sorter
+								items={ state[ group ] }
+								group={ ( ( control.params.id === 'content_layout_list' ) && [ 'above', 'below' ].includes( group ) ) ? `${ control.params.id }-${ group }` : control.params.id }
+								onChange={ ( list, update ) => onChange( list, group, update ) }
+								onEnd={ () => updateNow() }
+							/>
+						</div>
 					</div>
 				) ) }
 			</div>

@@ -13,15 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'pre_get_posts', 'greenlet_set_query' );
 add_action( 'greenlet_main_container', 'greenlet_do_main_container' );
-add_action( 'greenlet_before_loop', 'greenlet_do_before', 2 );
-add_action( 'greenlet_before_loop', 'greenlet_archive_header_template' );
+add_action( 'greenlet_before_loop', 'greenlet_do_before' );
 add_action( 'greenlet_archive_header', 'greenlet_do_archive_header' );
 add_action( 'greenlet_loop', 'greenlet_meta_icons' );
 add_action( 'greenlet_loop', 'greenlet_do_loop' );
 add_action( 'greenlet_entry_header', 'greenlet_do_entry_header' );
 add_action( 'greenlet_entry_content', 'greenlet_do_entry_content' );
 add_action( 'greenlet_entry_footer', 'greenlet_do_entry_footer' );
-add_action( 'greenlet_after_entry', 'greenlet_comments_template' );
+add_action( 'greenlet_after_loop', 'greenlet_do_after' );
 add_action( 'greenlet_post_meta', 'greenlet_post_meta' );
 add_action( 'greenlet_post_author_info', 'greenlet_post_author_info' );
 add_action( 'greenlet_before_while', 'greenlet_posts_open' );
@@ -389,8 +388,10 @@ function greenlet_render_content_section( $section ) {
 			continue;
 		}
 
-		if ( 'crumb' === $item['id'] ) {
+		if ( 'breadcrumb' === $item['id'] ) {
 			greenlet_breadcrumb( $item['meta']['separator']['val'] );
+		} elseif ( 'list_title' === $item['id'] ) {
+			greenlet_archive_header_template();
 		} elseif ( 'title' === $item['id'] ) {
 			// If single page, display title. Else, display title in a link.
 			if ( is_singular() ) {
@@ -436,22 +437,25 @@ function greenlet_render_content_section( $section ) {
 				the_content();
 				apply_filters( 'greenlet_page_break', wp_link_pages() );
 			} else {
-				global $post;
+				global $post, $excerpt_length, $read_more;
 				$is_more = strpos( $post->post_content, '<!--more-->' );
 				$more    = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
+
+				$read_more = $item['meta']['read_more']['val'];
 
 				if ( 'full' === $item['meta']['display']['val'] ) {
 					the_content();
 				} elseif ( $is_more ) {
 					the_content( $more );
 				} elseif ( 0 !== $item['meta']['excerpt_length']['val'] ) {
-					global $excerpt_length;
 					$excerpt_length = $item['meta']['excerpt_length']['val'];
 					the_excerpt();
 				}
 			}
 		} elseif ( 'author' === $item['id'] ) {
 			do_action( 'greenlet_post_author_info', $item['meta']['layout']['val'] );
+		} elseif ( 'comments' === $item['id'] ) {
+			comments_template();
 		}
 	}
 
@@ -467,6 +471,15 @@ function greenlet_render_content_section( $section ) {
  */
 function greenlet_do_before() {
 	greenlet_render_content_section( 'above' );
+}
+
+/**
+ * Render sections after main loop.
+ *
+ * @since 2.5.0
+ */
+function greenlet_do_after() {
+	greenlet_render_content_section( 'below' );
 }
 
 /**
@@ -547,75 +560,73 @@ function greenlet_post_meta( $show_meta ) {
 		),
 	);
 
-	if ( get_post_type() === 'post' ) {
-		$cat_list = get_the_category_list( ', ' );
-		$tag_list = get_the_tag_list( '', ', ' );
+	$cat_list = get_the_category_list( ', ' );
+	$tag_list = get_the_tag_list( '', ', ' );
 
-		foreach ( $show_meta as $item ) {
-			if ( ! $item['visible'] ) {
-				continue;
-			}
-
-			if ( ( 'sticky' === $item['id'] ) && is_sticky() ) {
-				printf(
-					'<li %s><span class="meta-icon sticky-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
-					wp_kses( greenlet_attr( 'meta-featured-post list-inline-item' ), null ),
-					'pin',
-					esc_html__( 'Featured', 'greenlet' )
-				);
-			} elseif ( 'author' === $item['id'] ) {
-				printf(
-					'<li %s><span class="meta-icon user-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span><a href="%s" rel="author"> %s</a></li>',
-					wp_kses( greenlet_attr( 'meta-author list-inline-item' ), null ),
-					'user',
-					esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-					get_the_author()
-				);
-			} elseif ( 'date' === $item['id'] ) {
-				printf(
-					'<li %s><span class="meta-icon date-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
-					wp_kses( greenlet_attr( 'meta-date list-inline-item' ), null ),
-					'date',
-					get_the_date()
-				);
-			} elseif ( 'mod' === $item['id'] ) {
-				printf(
-					'<li %s><span class="meta-icon clock-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
-					wp_kses( greenlet_attr( 'meta-modified list-inline-item' ), null ),
-					'clock',
-					get_the_modified_date() // phpcs:ignore
-				);
-			} elseif ( ( 'cats' === $item['id'] ) && $cat_list ) {
-				printf(
-					'<li %s><span class="meta-icon folder-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
-					wp_kses( greenlet_attr( 'meta-categories list-inline-item' ), null ),
-					'folder',
-					wp_kses( $cat_list, $term_list_tags )
-				);
-			} elseif ( ( 'tags' === $item['id'] ) && $tag_list ) {
-				printf(
-					'<li %s><span class="meta-icon tag-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
-					wp_kses( greenlet_attr( 'meta-tags list-inline-item' ), null ),
-					'tag',
-					wp_kses( $tag_list, $term_list_tags )
-				);
-			} elseif ( ( 'reply' === $item['id'] ) && comments_open() ) {
-				printf(
-					'<li %s><span class="meta-icon comment-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> ',
-					wp_kses( greenlet_attr( 'meta-reply list-inline-item' ), null ),
-					'comment'
-				);
-				comments_popup_link( __( 'Leave a comment', 'greenlet' ), __( 'One comment', 'greenlet' ), __( 'View all % comments', 'greenlet' ) );
-				echo '</li>';
-			}
+	foreach ( $show_meta as $item ) {
+		if ( ! $item['visible'] ) {
+			continue;
 		}
 
-		// Edit link.
-		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && ! is_customize_preview() ) {
-			printf( '<li %s><span class="dashicons dashicons-edit"></span> ', wp_kses( greenlet_attr( 'meta-edit list-inline-item' ), null ) );
-			edit_post_link( __( 'Edit', 'greenlet' ) );
+		if ( ( 'sticky' === $item['id'] ) && is_sticky() ) {
+			printf(
+				'<li %s><span class="meta-icon sticky-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
+				wp_kses( greenlet_attr( 'meta-featured-post list-inline-item' ), null ),
+				'pin',
+				esc_html__( 'Featured', 'greenlet' )
+			);
+		} elseif ( 'author' === $item['id'] ) {
+			printf(
+				'<li %s><span class="meta-icon user-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span><a href="%s" rel="author"> %s</a></li>',
+				wp_kses( greenlet_attr( 'meta-author list-inline-item' ), null ),
+				'user',
+				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+				get_the_author()
+			);
+		} elseif ( 'date' === $item['id'] ) {
+			printf(
+				'<li %s><span class="meta-icon date-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
+				wp_kses( greenlet_attr( 'meta-date list-inline-item' ), null ),
+				'date',
+				get_the_date()
+			);
+		} elseif ( 'mod' === $item['id'] ) {
+			printf(
+				'<li %s><span class="meta-icon clock-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
+				wp_kses( greenlet_attr( 'meta-modified list-inline-item' ), null ),
+				'clock',
+				get_the_modified_date() // phpcs:ignore
+			);
+		} elseif ( ( 'cats' === $item['id'] ) && $cat_list ) {
+			printf(
+				'<li %s><span class="meta-icon folder-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
+				wp_kses( greenlet_attr( 'meta-categories list-inline-item' ), null ),
+				'folder',
+				wp_kses( $cat_list, $term_list_tags )
+			);
+		} elseif ( ( 'tags' === $item['id'] ) && $tag_list ) {
+			printf(
+				'<li %s><span class="meta-icon tag-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
+				wp_kses( greenlet_attr( 'meta-tags list-inline-item' ), null ),
+				'tag',
+				wp_kses( $tag_list, $term_list_tags )
+			);
+		} elseif ( ( 'reply' === $item['id'] ) && comments_open() ) {
+			printf(
+				'<li %s><span class="meta-icon comment-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> ',
+				wp_kses( greenlet_attr( 'meta-reply list-inline-item' ), null ),
+				'comment'
+			);
+			comments_popup_link( __( 'Leave a comment', 'greenlet' ), __( 'One comment', 'greenlet' ), __( 'View all % comments', 'greenlet' ) );
 			echo '</li>';
 		}
+	}
+
+	// Edit link.
+	if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && ! is_customize_preview() ) {
+		printf( '<li %s><span class="dashicons dashicons-edit"></span> ', wp_kses( greenlet_attr( 'meta-edit list-inline-item' ), null ) );
+		edit_post_link( __( 'Edit', 'greenlet' ) );
+		echo '</li>';
 	}
 
 	greenlet_markup_close();
@@ -694,8 +705,8 @@ function greenlet_excerpt_more( $more ) {
 		return $more;
 	}
 
-	global $post;
-	$more = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
+	global $post, $read_more;
+	$more = '<span class="more-text">' . $read_more . '</span>';
 	return apply_filters( 'greenlet_more_link', '<a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>' );
 }
 
@@ -742,21 +753,6 @@ function greenlet_posts_close() {
 }
 
 /**
- * Renders comment template.
- *
- * @since  1.0.0
- * @return void
- */
-function greenlet_comments_template() {
-	$show = gl_get_option( 'show_comments', array( 'posts' ) );
-	if ( comments_open() ) {
-		if ( ( is_page() && in_array( 'pages', $show, true ) ) || ( is_single() && in_array( 'posts', $show, true ) ) ) {
-			comments_template();
-		}
-	}
-}
-
-/**
  * Renders pagination navigation.
  *
  * @since  1.0.0
@@ -764,8 +760,16 @@ function greenlet_comments_template() {
  * @return void
  */
 function greenlet_paging_nav( $query = null ) {
+	if ( is_singular() ) {
+		return;
+	}
 
-	$format   = gl_get_option( 'paging_nav', 'number' );
+	$content_layout = greenlet_get_content_layout();
+	if ( ! isset( $content_layout['below'] ) || ( count( $content_layout['below'] ) < 1 ) || ! isset( $content_layout['below'][0]['id'] ) || ! $content_layout['below'][0]['visible'] ) {
+		return;
+	}
+
+	$format   = $content_layout['below'][0]['meta']['format']['val'];
 	$pag_attr = greenlet_attr( "pagination {$format}" );
 
 	if ( empty( $query ) ) {

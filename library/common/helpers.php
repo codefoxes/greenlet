@@ -740,12 +740,15 @@ if ( ! function_exists( 'greenlet_content_layout_items' ) ) {
 			);
 		} else {
 			$items = array(
-				'title'   => __( 'Title', 'greenlet' ),
-				'meta'    => __( 'Post Meta', 'greenlet' ),
-				'image'   => __( 'Featured Image', 'greenlet' ),
-				'content' => __( 'Post Content', 'greenlet' ),
-				'author'  => __( 'Author Info', 'greenlet' ),
-				'crumb'   => __( 'Breadcrumb', 'greenlet' ),
+				'title'      => __( 'Title', 'greenlet' ),
+				'meta'       => __( 'Post Meta', 'greenlet' ),
+				'image'      => __( 'Featured Image', 'greenlet' ),
+				'content'    => __( 'Post Content', 'greenlet' ),
+				'author'     => __( 'Author Info', 'greenlet' ),
+				'breadcrumb' => __( 'Breadcrumb', 'greenlet' ),
+				'list_title' => __( 'List Title', 'greenlet' ),
+				'comments'   => __( 'Comments', 'greenlet' ),
+				'pagination' => __( 'Pagination', 'greenlet' ),
 			);
 		}
 
@@ -760,12 +763,27 @@ if ( ! function_exists( 'greenlet_content_layout_items' ) ) {
 				'type'  => 'number',
 				'label' => __( 'Excerpt Length', 'greenlet' ),
 			),
+			'read_more'      => array(
+				'type'  => 'input',
+				'label' => __( 'Continue reading text', 'greenlet' ),
+			),
 			'display'        => array(
 				'type'    => 'radio',
 				'label'   => __( 'Display Format', 'greenlet' ),
 				'choices' => array(
 					'excerpt' => __( 'Excerpt (short text extract)', 'greenlet' ),
 					'full'    => __( 'Full Content', 'greenlet' ),
+				),
+			),
+			'format'         => array(
+				'type'    => 'radio',
+				'label'   => __( 'Display Format', 'greenlet' ),
+				'choices' => array(
+					'simple'   => __( 'Simple', 'greenlet' ),
+					'number'   => __( 'Numbered', 'greenlet' ),
+					'ajax'     => __( 'Numbered (Ajax)', 'greenlet' ),
+					'load'     => __( 'Load More Button', 'greenlet' ),
+					'infinite' => __( 'Infinite Scroll', 'greenlet' ),
 				),
 			),
 		);
@@ -784,20 +802,15 @@ if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
 	 * @return array        Content Layout defaults.
 	 */
 	function greenlet_content_layout_defaults( $type = 'list' ) {
-		$groups = array();
-
-		if ( 'single' === $type ) {
-			$groups['above'] = array(
+		$groups = array(
+			'above'  => array(
 				array(
-					'id'   => 'crumb',
+					'id'   => 'breadcrumb',
 					'meta' => array(
 						'separator' => array( 'val' => '&raquo;' ),
 					),
 				),
-			);
-		}
-
-		$main_groups = array(
+			),
 			'top'    => array(
 				array( 'id' => 'title' ),
 				array(
@@ -841,18 +854,35 @@ if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
 		);
 
 		if ( 'list' === $type ) {
-			$main_groups['middle'][1] = array(
+			array_push( $groups['above'], array( 'id' => 'list_title' ) );
+			$groups['middle'][1] = array(
 				'id'   => 'content',
 				'meta' => array(
 					'display'        => array( 'val' => 'excerpt' ),
 					'excerpt_length' => array( 'val' => 55 ),
+					'read_more'      => array( 'val' => __( 'continue reading', 'greenlet' ) ),
 				),
 			);
 
-			$main_groups['bottom'][0]['visible'] = false;
+			$groups['bottom'][0]['visible'] = false;
+
+			$groups['below'] = array(
+				array(
+					'id'   => 'pagination',
+					'meta' => array(
+						'format' => array( 'val' => 'number' ),
+					),
+				),
+			);
+		} elseif ( 'page' === $type ) {
+			$groups['above'][0]['visible']  = false;
+			$groups['top'][1]['visible']    = false;
+			$groups['bottom'][0]['visible'] = false;
 		}
 
-		$groups = array_merge( $groups, $main_groups );
+		if ( ( 'single' === $type ) || ( 'page' === $type ) ) {
+			$groups['below'] = array( array( 'id' => 'comments' ) );
+		}
 
 		$layout_items = greenlet_content_layout_items();
 		foreach ( $groups as $group => &$items ) {
@@ -882,8 +912,10 @@ if ( ! function_exists( 'greenlet_get_content_layout' ) ) {
 	 * @return array Content layout.
 	 */
 	function greenlet_get_content_layout() {
-		if ( is_singular() ) {
+		if ( is_single() ) {
 			return gl_get_option( 'content_layout', greenlet_content_layout_defaults( 'single' ) );
+		} elseif ( is_singular() ) {
+			return gl_get_option( 'content_layout_page', greenlet_content_layout_defaults( 'page' ) );
 		}
 		return gl_get_option( 'content_layout_list', greenlet_content_layout_defaults() );
 	}
