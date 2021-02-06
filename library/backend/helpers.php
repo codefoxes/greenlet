@@ -205,7 +205,7 @@ if ( ! function_exists( 'greenlet_css_frameworks' ) ) {
 			'greenlet_css_frameworks',
 			array(
 				'default'   => __( 'Greenlet Framework', 'greenlet' ),
-				'bootstrap' => __( 'Bootstrap 4.5.3', 'greenlet' ),
+				'bootstrap' => __( 'Bootstrap 4.6.0', 'greenlet' ),
 			)
 		);
 	}

@@ -1,3 +1,20 @@
+Version 2.5.0 / Release: 07-02-2021
+===================
+New: Post sections ordering
+New: Post sections visibility
+New: Section layout for Post list, Single Post & Page
+New: Editable copyright section
+New: Background repeat option
+Improvement: Better search bar styling
+Improvement: Bootstrap styles fix
+Improvement: Bootstrap upgrade to 4.6.0
+Improvement: Better customizer Content Layout options
+Improvement: Customizer options rearrange & hint
+Improvement: Replace react-sortable with react-sorablejs
+Improvement: Handle Deprecated functions
+Fix: Few frontend styles fixes
+Fix: Removed legacy font control
+
 Version 2.4.0 / Release: 28-01-2021
 ===================
 New: Option to set primary header, footer

@@ -23,6 +23,8 @@ Use Greenlet as base theme and as a starting point to create a child theme accor
 - Powerful Header and Footer builder
 - Add Logo, Menu & Togglers to headers & footers
 - Header and Footer Contents from Widgets or Template File
+- Content Layout - Section ordering
+- Content Layout - Section visibility
 - Pagination - Default (Newer and Older Posts)
 - Pagination - Numbered
 - Pagination - Numbered Ajax

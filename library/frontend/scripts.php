@@ -72,6 +72,10 @@ if ( ! function_exists( 'greenlet_scripts' ) ) {
 
 		$styles_href = GREENLET_STYLE_URL . '/styles' . $min . '.css';
 		greenlet_enqueue_style( 'greenlet-styles', $styles_href );
+
+		if ( 'bootstrap' === $css_framework ) {
+			greenlet_enqueue_style( 'bootstrap-extra', GREENLET_STYLE_URL . '/bootstrap-extra' . $min . '.css' );
+		}
 	}
 }
 

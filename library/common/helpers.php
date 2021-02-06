@@ -496,6 +496,10 @@ if ( ! function_exists( 'greenlet_get_cover_templates' ) ) {
 			}
 		}
 
+		if ( 'footer' === $pos ) {
+			$result['templates/copyright'] = 'copyright.php';
+		}
+
 		return $result;
 	}
 }
@@ -616,7 +620,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 				'columns' => '3-9',
 				'primary' => true,
 				'items'   => array(
-					1 => array( 'logo', 'widgets' ),
+					1 => array( array( 'id' => 'logo' ), array( 'id' => 'widgets' ) ),
 					2 => array(
 						array(
 							'id'   => 'menu',
@@ -625,7 +629,7 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 								'toggler' => 'enable',
 							),
 						),
-						'widgets',
+						array( 'id' => 'widgets' ),
 					),
 				),
 			),
@@ -634,7 +638,14 @@ if ( ! function_exists( 'greenlet_cover_layout_defaults' ) ) {
 			array(
 				'columns' => '12',
 				'primary' => true,
-				'items'   => array( 1 => array( 'widgets' ) ),
+				'items'   => array(
+					1 => array(
+						array(
+							'id'   => 'php',
+							'meta' => array( 'template' => 'templates/copyright' ),
+						),
+					),
+				),
 			),
 		);
 		return $$position;
@@ -699,5 +710,194 @@ if ( ! function_exists( 'greenlet_font_defaults' ) ) {
 				'italic' => array( '100', '200', '300', '400', '500', '600', '700', '800', '900' ),
 			),
 		);
+	}
+}
+
+if ( ! function_exists( 'greenlet_content_layout_items' ) ) {
+	/**
+	 * Get content layout items.
+	 *
+	 * @since  2.5.0
+	 * @return array Content layout items.
+	 */
+	function greenlet_content_layout_items() {
+		$items = array(
+			'title'      => __( 'Title', 'greenlet' ),
+			'meta'       => __( 'Post Meta', 'greenlet' ),
+			'image'      => __( 'Featured Image', 'greenlet' ),
+			'content'    => __( 'Post Content', 'greenlet' ),
+			'author'     => __( 'Author Info', 'greenlet' ),
+			'breadcrumb' => __( 'Breadcrumb', 'greenlet' ),
+			'list_title' => __( 'List Title', 'greenlet' ),
+			'comments'   => __( 'Comments', 'greenlet' ),
+			'pagination' => __( 'Pagination', 'greenlet' ),
+		);
+
+		$items['meta:author'] = array(
+			'name'  => __( 'Name', 'greenlet' ),
+			'image' => __( 'Avatar', 'greenlet' ),
+			'bio'   => __( 'Biographical Info', 'greenlet' ),
+		);
+
+		$items['meta:meta'] = array(
+			'sticky' => __( 'Featured', 'greenlet' ),
+			'author' => __( 'Author', 'greenlet' ),
+			'date'   => __( 'Published', 'greenlet' ),
+			'mod'    => __( 'Updated', 'greenlet' ),
+			'cats'   => __( 'Categories', 'greenlet' ),
+			'tags'   => __( 'Tags', 'greenlet' ),
+			'reply'  => __( 'Comments', 'greenlet' ),
+		);
+
+		$items['controls'] = array(
+			'layout'         => array( 'type' => 'sorter' ),
+			'separator'      => array(
+				'type'  => 'input',
+				'label' => __( 'Separator', 'greenlet' ),
+				'desc'  => __( 'Separator between links. Eg: / or >', 'greenlet' ),
+			),
+			'excerpt_length' => array(
+				'type'  => 'number',
+				'label' => __( 'Excerpt Length', 'greenlet' ),
+			),
+			'read_more'      => array(
+				'type'  => 'input',
+				'label' => __( 'Continue reading text', 'greenlet' ),
+			),
+			'display'        => array(
+				'type'    => 'radio',
+				'label'   => __( 'Display Format', 'greenlet' ),
+				'choices' => array(
+					'excerpt' => __( 'Excerpt (short text extract)', 'greenlet' ),
+					'full'    => __( 'Full Content', 'greenlet' ),
+				),
+			),
+			'format'         => array(
+				'type'    => 'radio',
+				'label'   => __( 'Display Format', 'greenlet' ),
+				'choices' => array(
+					'simple'   => __( 'Simple', 'greenlet' ),
+					'number'   => __( 'Numbered', 'greenlet' ),
+					'ajax'     => __( 'Numbered (Ajax)', 'greenlet' ),
+					'load'     => __( 'Load More Button', 'greenlet' ),
+					'infinite' => __( 'Infinite Scroll', 'greenlet' ),
+				),
+			),
+		);
+
+		return $items;
+	}
+}
+
+if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
+	/**
+	 * Get Post content layout default sequence.
+	 *
+	 * @since  2.5.0
+	 *
+	 * @param  string $type Page type to get the layout defaults for.
+	 * @return array        Content Layout defaults.
+	 */
+	function greenlet_content_layout_defaults( $type = 'list' ) {
+		$groups = array(
+			'above'  => array(
+				array(
+					'id'   => 'breadcrumb',
+					'meta' => array(
+						'separator' => array( 'val' => '&raquo;' ),
+					),
+				),
+			),
+			'top'    => array(
+				array( 'id' => 'title' ),
+				array(
+					'id'   => 'meta',
+					'meta' => array(
+						'layout' => array(
+							'val' => array(
+								array( 'id' => 'sticky' ),
+								array( 'id' => 'author' ),
+								array( 'id' => 'date' ),
+								array( 'id' => 'cats' ),
+								array( 'id' => 'tags' ),
+								array( 'id' => 'reply' ),
+								array(
+									'id'      => 'mod',
+									'visible' => false,
+								),
+							),
+						),
+					),
+				),
+			),
+			'middle' => array(
+				array( 'id' => 'image' ),
+				array( 'id' => 'content' ),
+			),
+			'bottom' => array(
+				array(
+					'id'   => 'author',
+					'meta' => array(
+						'layout' => array(
+							'val' => array(
+								array( 'id' => 'image' ),
+								array( 'id' => 'name' ),
+								array( 'id' => 'bio' ),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		if ( 'list' === $type ) {
+			array_push( $groups['above'], array( 'id' => 'list_title' ) );
+			$groups['middle'][1] = array(
+				'id'   => 'content',
+				'meta' => array(
+					'display'        => array( 'val' => 'excerpt' ),
+					'excerpt_length' => array( 'val' => 55 ),
+					'read_more'      => array( 'val' => __( 'continue reading', 'greenlet' ) ),
+				),
+			);
+
+			$groups['bottom'][0]['visible'] = false;
+
+			$groups['below'] = array(
+				array(
+					'id'   => 'pagination',
+					'meta' => array(
+						'format' => array( 'val' => 'number' ),
+					),
+				),
+			);
+		} elseif ( 'page' === $type ) {
+			$groups['above'][0]['visible']  = false;
+			$groups['top'][1]['visible']    = false;
+			$groups['bottom'][0]['visible'] = false;
+		}
+
+		if ( ( 'single' === $type ) || ( 'page' === $type ) ) {
+			$groups['below'] = array( array( 'id' => 'comments' ) );
+		}
+
+		return $groups;
+	}
+}
+
+if ( ! function_exists( 'greenlet_get_content_layout' ) ) {
+	/**
+	 * Get Content Layout for the current page.
+	 *
+	 * @since  2.5.0
+	 * @return array Content layout.
+	 */
+	function greenlet_get_content_layout() {
+		if ( is_single() ) {
+			return gl_get_option( 'content_layout', greenlet_content_layout_defaults( 'single' ) );
+		} elseif ( is_singular() ) {
+			return gl_get_option( 'content_layout_page', greenlet_content_layout_defaults( 'page' ) );
+		}
+		return gl_get_option( 'content_layout_list', greenlet_content_layout_defaults() );
 	}
 }

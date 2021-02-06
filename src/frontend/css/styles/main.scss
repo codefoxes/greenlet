@@ -365,6 +365,7 @@ input[type="checkbox"].menu-toggle {
 .entry-meta {
 	li {
 		color: var(--link);
+		margin: 0;
 	}
 
 	svg {
@@ -390,14 +391,21 @@ input[type="checkbox"].menu-toggle {
  * 3.1 Pagination styles.
  */
 .pagination {
-	text-align: center;
+	display: flex;
 	justify-content: center;
 	margin: 2rem 0;
 
 	li {
-		display: inline;
+		list-style: none;
+		margin: 0;
+
+		&:not(:first-child) {
+			margin-left: .6rem;
+		}
 
 		a, span {
+			display: block;
+			line-height: 1;
 			padding: 0.8rem 1.2rem;
 			color: var(--button);
 			background: var(--button-bg);
@@ -450,8 +458,7 @@ input[type="checkbox"].menu-toggle {
 	border-top: 1px solid var(--hr);
 
 	.author-avatar {
-		display: inline-block;
-		vertical-align: bottom;
+		float: left;
 
 		img {
 			display: block;
@@ -464,12 +471,11 @@ input[type="checkbox"].menu-toggle {
 	.author-heading {
 		font-size: 1em;
 		margin: 0;
-		line-height: 40px;
-		padding-left: 20px;
+		padding-left: 50px;
 	}
 
-	.author-description {
-		display: inline-block;
+	.author-bio {
+		padding-left: 50px;
 	}
 }
 
@@ -508,6 +514,7 @@ input[type="checkbox"].menu-toggle {
  */
 .search-form {
 	display: flex;
+	position: relative;
 
 	label {
 		flex-grow: 1;
@@ -517,10 +524,13 @@ input[type="checkbox"].menu-toggle {
 	.search-input {
 		width: 100%;
 		margin: 0;
-		border-radius: var(--radius) 0 0 var(--radius);
+		border-radius: var(--radius);
+		padding-right: 5.6rem;
 	}
 
 	.search-submit {
+		position: absolute;
+		right: 0;
 		min-height: 28px;
 		margin-bottom: 0;
 		border-radius: 0 var(--radius) var(--radius) 0;
