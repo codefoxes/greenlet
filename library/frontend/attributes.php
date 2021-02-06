@@ -339,7 +339,7 @@ function greenlet_attributes( $attributes, $primary ) {
 function greenlet_framework_attributes( $attributes, $primary ) {
 	$classes = array(
 		'search-input'  => ' form-control',
-		'search-submit' => ' btn btn-link',
+		'search-submit' => ' btn btn-light',
 		'more-link'     => ' btn btn-light',
 		'to-top'        => ' btn btn-light',
 	);

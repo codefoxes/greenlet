@@ -5,7 +5,7 @@
 		"css_framework": "default",
 		"css_path": "",
 		"load_js": false,
-		"header_layout": [{"columns":"3-9","primary":true,"items":{"1":["logo"],"2":[{"id":"menu","meta":{"slug":false,"toggler":"enable"}}]}}],
+		"header_layout": [{"columns":"3-9","primary":true,"items":{"1":[{"id":"logo"},{"id":"widgets"}],"2":[{"id":"menu","meta":{"slug":false,"toggler":"enable"}},{"id":"widgets"}]}}],
 		"sidebars_qty": "3",
 		"home_template": {
 			"template": "8-4",
@@ -23,12 +23,11 @@
 			"template": "12",
 			"sequence": ["main"]
 		},
-		"footer_layout": [{"columns":"12","primary":true,"items":[]}],
+		"footer_layout": [{"columns":"12","primary":true,"items":{"1":[{"id":"php","meta":{"template":"templates/copyright"}}]}}],
 		"post_list_layout": "list",
-		"paging_nav": "number",
-		"content_layout_list": {"top":[{"id":"title","visible":true},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":true},{"id":"author","visible":true},{"id":"date","visible":true},{"id":"cats","visible":true},{"id":"tags","visible":true},{"id":"reply","visible":true},{"id":"mod","visible":false}]}},"visible":true}],"middle":[{"id":"image","visible":true},{"id":"content","meta":{"display":{"val":"excerpt"},"excerpt_length":{"val":55}},"visible":true}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image","visible":true},{"id":"name","visible":true},{"id":"bio","visible":true}]}},"visible":false}]},
-		"content_layout": {"above":[{"id":"crumb","meta":{"separator":{"val":"&raquo;"}},"visible":true}],"top":[{"id":"title","visible":true},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":true},{"id":"author","visible":true},{"id":"date","visible":true},{"id":"cats","visible":true},{"id":"tags","visible":true},{"id":"reply","visible":true},{"id":"mod","visible":false}]}},"visible":true}],"middle":[{"id":"image","visible":true},{"id":"content","visible":true}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image","visible":true},{"visible":true},{"id":"bio","visible":true}]}},"visible":true}]},
-		"show_comments": ["posts", "pages"],
+		"content_layout_list": {"above":[{"id":"breadcrumb","meta":{"separator":{"val":"&raquo;"}}},{"id":"list_title"}],"top":[{"id":"title"},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky"},{"id":"author"},{"id":"date"},{"id":"cats"},{"id":"tags"},{"id":"reply"},{"id":"mod","visible":false}]}}}],"middle":[{"id":"image"},{"id":"content","meta":{"display":{"val":"excerpt"},"excerpt_length":{"val":55},"read_more":{"val":"continue reading"}}}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image"},{"id":"name"},{"id":"bio"}]}},"visible":false}],"below":[{"id":"pagination","meta":{"format":{"val":"number"}}}]},
+		"content_layout": {"above":[{"id":"breadcrumb","meta":{"separator":{"val":"&raquo;"}}}],"top":[{"id":"title"},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky"},{"id":"author"},{"id":"date"},{"id":"cats"},{"id":"tags"},{"id":"reply"},{"id":"mod","visible":false}]}}}],"middle":[{"id":"image"},{"id":"content"}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image"},{"id":"name"},{"id":"bio"}]}}}],"below":[{"id":"comments"}]},
+		"content_layout_page": {"above":[{"id":"breadcrumb","meta":{"separator":{"val":"&raquo;"}},"visible":false}],"top":[{"id":"title"},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky"},{"id":"author"},{"id":"date"},{"id":"cats"},{"id":"tags"},{"id":"reply"},{"id":"mod","visible":false}]}},"visible":false}],"middle":[{"id":"image"},{"id":"content"}],"bottom":[{"id":"author","meta":{"layout":{"val":[{"id":"image"},{"id":"name"},{"id":"bio"}]}},"visible":false}],"below":[{"id":"comments"}]},
 		"schema": "1",
 		"defer_css": "1",
 		"disable_emojis": false,
@@ -132,12 +131,11 @@
 			}
 		},
 		"post_list_layout": "grid",
-		"content_layout_list": {"top":[{"id":"title","visible":true},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":false},{"id":"author","visible":true},{"id":"date","visible":true},{"id":"cats","visible":false},{"id":"tags","visible":false},{"id":"reply","visible":false},{"id":"mod","visible":false}]}},"visible":true}]},
+		"content_layout_list": {"top":[{"id":"title"},{"id":"meta","meta":{"layout":{"val":[{"id":"sticky","visible":false},{"id":"author"},{"id":"date"},{"id":"cats","visible":false},{"id":"tags","visible":false},{"id":"reply","visible":false},{"id":"mod","visible":false}]}}}],"below":[{"id":"pagination","meta":{"format":{"val":"load"}}}]},
 		"home_template": {
 			"template": "12",
 			"sequence": [ "main" ]
-		},
-		"paging_nav": "load"
+		}
 	},
 	"Avocado": {
 		"color_wings": {

@@ -373,7 +373,7 @@ function greenlet_render_content_section( $section ) {
 
 	$has_items = false;
 	foreach ( $content_layout[ $section ] as $item ) {
-		if ( ! ! $item['visible'] ) {
+		if ( ! isset( $item['visible'] ) || ! ! $item['visible'] ) {
 			$has_items = true;
 			break;
 		}
@@ -384,7 +384,7 @@ function greenlet_render_content_section( $section ) {
 	}
 
 	foreach ( $content_layout[ $section ] as $item ) {
-		if ( ! $item['visible'] ) {
+		if ( isset( $item['visible'] ) && ! $item['visible'] ) {
 			continue;
 		}
 
@@ -564,7 +564,7 @@ function greenlet_post_meta( $show_meta ) {
 	$tag_list = get_the_tag_list( '', ', ' );
 
 	foreach ( $show_meta as $item ) {
-		if ( ! $item['visible'] ) {
+		if ( isset( $item['visible'] ) && ! $item['visible'] ) {
 			continue;
 		}
 
@@ -661,7 +661,7 @@ function greenlet_do_entry_footer() {
  */
 function greenlet_post_author_info( $author_items ) {
 	foreach ( $author_items as $item ) {
-		if ( ! $item['visible'] ) {
+		if ( isset( $item['visible'] ) && ! $item['visible'] ) {
 			continue;
 		}
 
@@ -764,12 +764,12 @@ function greenlet_paging_nav( $query = null ) {
 		return;
 	}
 
-	$content_layout = greenlet_get_content_layout();
-	if ( ! isset( $content_layout['below'] ) || ( count( $content_layout['below'] ) < 1 ) || ! isset( $content_layout['below'][0]['id'] ) || ! $content_layout['below'][0]['visible'] ) {
+	$cl = greenlet_get_content_layout();
+	if ( ! isset( $cl['below'] ) || ( count( $cl['below'] ) < 1 ) || ! isset( $cl['below'][0]['id'] ) || ( isset( $cl['below'][0]['visible'] ) && ! $cl['below'][0]['visible'] ) ) {
 		return;
 	}
 
-	$format   = $content_layout['below'][0]['meta']['format']['val'];
+	$format   = $cl['below'][0]['meta']['format']['val'];
 	$pag_attr = greenlet_attr( "pagination {$format}" );
 
 	if ( empty( $query ) ) {

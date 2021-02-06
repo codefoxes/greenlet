@@ -718,39 +718,36 @@ if ( ! function_exists( 'greenlet_content_layout_items' ) ) {
 	 * Get content layout items.
 	 *
 	 * @since  2.5.0
-	 * @param  string $type Page type to get the layout items for.
-	 * @return array        Content layout items.
+	 * @return array Content layout items.
 	 */
-	function greenlet_content_layout_items( $type = 'post' ) {
-		if ( 'author' === $type ) {
-			$items = array(
-				'name'  => __( 'Name', 'greenlet' ),
-				'image' => __( 'Avatar', 'greenlet' ),
-				'bio'   => __( 'Biographical Info', 'greenlet' ),
-			);
-		} elseif ( 'meta' === $type ) {
-			$items = array(
-				'sticky' => __( 'Featured', 'greenlet' ),
-				'author' => __( 'Author', 'greenlet' ),
-				'date'   => __( 'Published', 'greenlet' ),
-				'mod'    => __( 'Updated', 'greenlet' ),
-				'cats'   => __( 'Categories', 'greenlet' ),
-				'tags'   => __( 'Tags', 'greenlet' ),
-				'reply'  => __( 'Comments', 'greenlet' ),
-			);
-		} else {
-			$items = array(
-				'title'      => __( 'Title', 'greenlet' ),
-				'meta'       => __( 'Post Meta', 'greenlet' ),
-				'image'      => __( 'Featured Image', 'greenlet' ),
-				'content'    => __( 'Post Content', 'greenlet' ),
-				'author'     => __( 'Author Info', 'greenlet' ),
-				'breadcrumb' => __( 'Breadcrumb', 'greenlet' ),
-				'list_title' => __( 'List Title', 'greenlet' ),
-				'comments'   => __( 'Comments', 'greenlet' ),
-				'pagination' => __( 'Pagination', 'greenlet' ),
-			);
-		}
+	function greenlet_content_layout_items() {
+		$items = array(
+			'title'      => __( 'Title', 'greenlet' ),
+			'meta'       => __( 'Post Meta', 'greenlet' ),
+			'image'      => __( 'Featured Image', 'greenlet' ),
+			'content'    => __( 'Post Content', 'greenlet' ),
+			'author'     => __( 'Author Info', 'greenlet' ),
+			'breadcrumb' => __( 'Breadcrumb', 'greenlet' ),
+			'list_title' => __( 'List Title', 'greenlet' ),
+			'comments'   => __( 'Comments', 'greenlet' ),
+			'pagination' => __( 'Pagination', 'greenlet' ),
+		);
+
+		$items['meta:author'] = array(
+			'name'  => __( 'Name', 'greenlet' ),
+			'image' => __( 'Avatar', 'greenlet' ),
+			'bio'   => __( 'Biographical Info', 'greenlet' ),
+		);
+
+		$items['meta:meta'] = array(
+			'sticky' => __( 'Featured', 'greenlet' ),
+			'author' => __( 'Author', 'greenlet' ),
+			'date'   => __( 'Published', 'greenlet' ),
+			'mod'    => __( 'Updated', 'greenlet' ),
+			'cats'   => __( 'Categories', 'greenlet' ),
+			'tags'   => __( 'Tags', 'greenlet' ),
+			'reply'  => __( 'Comments', 'greenlet' ),
+		);
 
 		$items['controls'] = array(
 			'layout'         => array( 'type' => 'sorter' ),
@@ -882,22 +879,6 @@ if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
 
 		if ( ( 'single' === $type ) || ( 'page' === $type ) ) {
 			$groups['below'] = array( array( 'id' => 'comments' ) );
-		}
-
-		$layout_items = greenlet_content_layout_items();
-		foreach ( $groups as $group => &$items ) {
-			foreach ( $items as &$item ) {
-				$item['name']    = $layout_items[ $item['id'] ];
-				$item['visible'] = isset( $item['visible'] ) && ( ! $item['visible'] ) ? false : true;
-
-				if ( isset( $item['meta'] ) && isset( $item['meta']['layout'] ) ) {
-					$meta_items = greenlet_content_layout_items( $item['id'] );
-					foreach ( $item['meta']['layout']['val'] as &$meta_item ) {
-						$meta_item['name']    = $meta_items[ $meta_item['id'] ];
-						$meta_item['visible'] = isset( $meta_item['visible'] ) && ( ! $meta_item['visible'] ) ? false : true;
-					}
-				}
-			}
 		}
 
 		return $groups;

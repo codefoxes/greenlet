@@ -4,10 +4,19 @@ import Sorter from './Sorter'
 function ContentLayout( { control, updateSettings } ) {
 	const initItems = clone( control.setting._value )
 
+	// Format initItems by adding values to default/setting values from Items.
 	for ( const group in initItems ) {
 		if ( ! initItems.hasOwnProperty( group ) ) continue
 		initItems[ group ].forEach( item => {
+			item.name = control.params.items[ item.id ]
+			item.visible = ! ( ( 'visible' in item ) && ! item.visible )
 			if ( 'meta' in item ) {
+				if ( 'layout' in item.meta ) {
+					item.meta.layout.val.forEach( metaItem => {
+						metaItem.name = control.params.items[ `meta:${ item.id }` ][ metaItem.id ]
+						metaItem.visible = ! ( ( 'visible' in metaItem ) && ! metaItem.visible )
+					} )
+				}
 				for ( const ctrl in item.meta ) {
 					if ( ! item.meta.hasOwnProperty( ctrl ) ) continue
 					if ( ctrl in control.params.items.controls ) {
