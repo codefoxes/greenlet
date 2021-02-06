@@ -3,10 +3,10 @@ Contributors: greenlet
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, custom-background, custom-colors, editor-style, featured-images, footer-widgets, full-width-template, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks, custom-menu, custom-logo, entertainment, one-column, two-columns, three-columns, four-columns, right-sidebar, left-sidebar, e-commerce, post-formats
-Tested up to: 5.6
+Tested up to: 5.6.1
 Requires at least: 5.3
 Requires PHP: 5.6
-Stable tag: 2.4.0
+Stable tag: 2.5.0
 
 Extremely fast and highly customizable WordPress theme.
 
@@ -36,6 +36,8 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 - Powerful Header and Footer builder
 - Add Logo, Menu & Togglers to headers & footers
 - Header and Footer Contents from Widgets or Template File
+- Content Layout - Section ordering
+- Content Layout - Section visibility
 - Pagination - Default (Newer and Older Posts)
 - Pagination - Numbered
 - Pagination - Numbered Ajax
@@ -63,21 +65,20 @@ Greenlet also is SEO friendly. Theme integrates schema.org efficiently for Searc
 
 == Changelog ==
 
-- New: Option to set primary header, footer
-- New: Header, footer builder content sequencing
-- New: Documentation links
-- Improvement: Accent color change
-- Improvement: Header, footer builder with more source options
-- Improvement: Update Colorwings to 1.3.0
-- Improvement: Better frontend icons
-- Improvement: Better backend icons
-- Improvement: Better backend styles
-- Improvement: Better customizer notice display
-- Improvement: More customizer tooltip
-- Improvement: Screenshot update
-- Fix: Vertical header, footer fix
-- Fix: Inline styles order fix
-- Fix: Accessibility fixes
+- New: Post sections ordering
+- New: Post sections visibility
+- New: Section layout for Post list, Single Post & Page
+- New: Editable copyright section
+- New: Background repeat option
+- Improvement: Better search bar styling
+- Improvement: Bootstrap styles fix
+- Improvement: Bootstrap upgrade to 4.6.0
+- Improvement: Better customizer Content Layout options
+- Improvement: Customizer options rearrange & hint
+- Improvement: Replace react-sortable with react-sorablejs
+- Improvement: Handle Deprecated functions
+- Fix: Few frontend styles fixes
+- Fix: Removed legacy font control
 
 == Copyright ==
 
