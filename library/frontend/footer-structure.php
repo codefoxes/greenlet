@@ -28,7 +28,7 @@ function greenlet_do_footer() {
  */
 function greenlet_to_top_button() {
 	if ( false !== gl_get_option( 'to_top', '1' ) ) {
-		echo '<button class="to-top" type="button" onclick="window.scrollTo(0,0)" aria-label="' . esc_attr__( 'Back to top', 'greenlet' ) . '">';
+		echo '<button ' . wp_kses( greenlet_attr( 'to-top' ), null ) . ' type="button" onclick="window.scrollTo(0,0)" aria-label="' . esc_attr__( 'Back to top', 'greenlet' ) . '">';
 		echo apply_filters( 'greenlet_to_top_content', '<div class="icon"></div>' ); // phpcs:ignore
 		echo '</button>';
 	}

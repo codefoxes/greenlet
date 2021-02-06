@@ -707,7 +707,7 @@ function greenlet_excerpt_more( $more ) {
 
 	global $post, $read_more;
 	$more = '<span class="more-text">' . $read_more . '</span>';
-	return apply_filters( 'greenlet_more_link', '<a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>' );
+	return apply_filters( 'greenlet_more_link', '<a ' . greenlet_attr( 'more-link' ) . ' href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>' );
 }
 
 /**
@@ -1102,9 +1102,9 @@ function greenlet_search_form() {
 	$html = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 		<label>
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
-			<input type="search" class="search-field search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
+			<input type="search" ' . greenlet_attr( 'search-input search-field' ) . ' placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
 		</label>
-		<button class="search-submit" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '"> ' . $search_button . '</button>
+		<button ' . greenlet_attr( 'search-submit' ) . ' aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '"> ' . $search_button . '</button>
 	</form>';
 
 	return $html;

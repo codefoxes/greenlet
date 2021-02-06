@@ -181,6 +181,10 @@ const cssPaths = [ {
 	outputPath: 'assets/css/shop.css',
 	outputMin: 'assets/css/shop.min.css',
 }, {
+	inputPath: 'src/frontend/css/bootstrap-extra.scss',
+	outputPath: 'assets/css/bootstrap-extra.css',
+	outputMin: 'assets/css/bootstrap-extra.min.css',
+}, {
 	inputPath: 'library/pro/src/css/styles.scss',
 	outputPath: 'library/pro/assets/css/styles.css',
 	outputMin: 'library/pro/assets/css/styles.min.css',
