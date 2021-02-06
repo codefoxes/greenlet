@@ -158,6 +158,24 @@
 	height: 100%;
 }
 
+#accordion-section-title_tagline,
+#accordion-panel-layout,
+#accordion-panel-blog,
+#accordion-section-performance,
+#accordion-section-presets,
+#accordion-section-extra_styles {
+	h3:before {
+		content: '';
+		width: 4px;
+		height: 4px;
+		position: absolute;
+		right: 6px;
+		top: calc(50% - 2px);
+		background: var(--accent);
+		border-radius: 50%;
+	}
+}
+
 #accordion-section-framework {
 	margin-bottom: 15px;
 }
@@ -459,12 +477,16 @@
 		}
 	}
 
-	.col-name, .col-items {
+	.col-name, .col-items, .col-items .sortable {
 		padding: 5px;
 		display: flex;
 		flex-wrap: wrap;
 		column-gap: 10px;
-		row-gap: 15px;
+		row-gap: 10px;
+	}
+
+	.col-items .sortable {
+		padding: 0;
 	}
 
 	.col-name {
@@ -642,6 +664,7 @@
 		height: 24px;
 		line-height: 24px;
 		font-size: 13px;
+		border-radius: 0;
 	}
 }
 
@@ -848,38 +871,6 @@
 	margin-bottom: 10px;
 }
 
-.gl-font .size-wrap {
-	margin-top: 10px;
-}
-
-.gl-row .range-wrap {
-	padding-right: 5px;
-	line-height: 1.8;
-}
-
-.gl-font .font-unit {
-	background-position: right 2px top 55%;
-	padding: 0 18px 0 5px;
-}
-
-.customize-control-font {
-	margin-bottom: 25px;
-}
-
-.customize-control.togglable {
-	max-height: 500px;
-	transition: .5s all;
-	opacity: 1;
-}
-
-.customize-control.collapse {
-	max-height: 0;
-	overflow: hidden;
-	margin: 0;
-	padding: 0;
-	opacity: 0;
-}
-
 .aspect {
 	position: absolute;
 	left: 40%;
@@ -955,5 +946,191 @@
 		.tip {
 			opacity: 1;
 		}
+	}
+}
+
+.gl-sorter {
+	.group {
+		position: relative;
+		padding: 5px 0;
+
+		&.top, &.middle, &.bottom {
+			&:before {
+				content: '';
+				width: calc(100% + 10px);
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: -6px;
+				border: 1px dashed #bbb;
+				border-top-color: transparent;
+				border-bottom-color: transparent;
+			}
+		}
+
+		&.top {
+			padding-top: 22px;
+
+			&:before {
+				border-top-color: #bbb;
+			}
+
+			&:after {
+				content: 'CARD';
+				top: 0;
+				left: 0;
+				position: absolute;
+				font-size: 8px;
+				font-weight: 600;
+				color: #999;
+			}
+		}
+
+		&.bottom {
+			padding-bottom: 8px;
+
+			&:before {
+				border-bottom-color: #bbb;
+			}
+		}
+
+		&.above, &.below {
+			padding: 20px 0 10px;
+		}
+	}
+
+	.group-inner {
+		background: #e6e6e6;
+		padding: 1px 5px 5px 0;
+		min-height: 44px;
+		box-sizing: border-box;
+		position: relative;
+	}
+
+	.group-title {
+		position: absolute;
+		left: 50%;
+		top: -8px;
+		font-size: 8px;
+		line-height: 14px;
+		background: #e6e6e6;
+		padding: 0 10px;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: #999;
+		transform: translateX(-50%);
+		border-radius: 50%;
+	}
+
+	.item {
+		border: 1px solid #c4c8ca;
+		margin: 5px 0 0 5px;
+		background: #fff;
+	}
+
+	.hidden-item {
+		opacity: .6;
+		transition: .2s opacity;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.handle {
+		padding: 12px;
+		display: inline-block;
+		line-height: .7;
+		font-size: 16px;
+		cursor: move;
+	}
+
+	.title {
+		font-weight: 500;
+	}
+
+	button {
+		float: right;
+		padding: 8px 6px 5px;
+		background: none;
+		border: 1px solid transparent;
+		border-left-color: #eee;
+		color: #565f67;
+		cursor: pointer;
+
+		&:focus {
+			outline: none;
+			border-color: var(--accent);
+			box-shadow: inset 0 0 0 1px var(--accent);
+		}
+	}
+
+	.dashicons {
+		font-size: 16px;
+
+		&:after {
+			opacity: 0;
+			margin-left: -4px;
+		}
+	}
+
+	.dashicons-visibility:after {
+		content: '\f530';
+	}
+
+	.dashicons-hidden:after {
+		content: '\f177';
+	}
+
+	button:hover .dashicons-visibility, button:hover .dashicons-hidden {
+		&:before {
+			font-size: 0;
+			opacity: 0;
+		}
+
+		&:after {
+			opacity: 1;
+		}
+	}
+
+	.toggler .dashicons {
+		font-size: 14px;
+		line-height: 20px;
+		transition: .2s transform;
+	}
+
+	.toggler.open .dashicons {
+		transform: rotateZ( -180deg );
+	}
+
+	.item-meta {
+		display: none;
+
+		&.open {
+			display: block;
+		}
+
+		label {
+			display: block;
+			padding: 6px 0;
+
+			span {
+				margin-left: 4px;
+			}
+		}
+	}
+
+	.meta-control {
+		padding: 10px;
+		border-top: 1px solid #ddd;
+	}
+
+	.control-label {
+		font-weight: 500;
+		margin-bottom: 6px;
+	}
+
+	.control-description {
+		margin-bottom: 6px;
 	}
 }

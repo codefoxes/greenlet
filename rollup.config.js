@@ -16,6 +16,7 @@ import postcss from 'postcss'
 const GLOBALS = {
 	jQuery: 'jQuery',
 	react: 'React',
+	sortablejs: 'Sortable',
 	'react-dom': 'ReactDOM',
 }
 
@@ -25,6 +26,7 @@ const EXTERNAL = [
 	'react-dom',
 	'React',
 	'ReactDOM',
+	'sortablejs',
 ]
 
 const getCWBanner = filename => `/** @license ColorWings v1.1.0
@@ -178,6 +180,10 @@ const cssPaths = [ {
 	inputPath: 'src/frontend/css/shop.scss',
 	outputPath: 'assets/css/shop.css',
 	outputMin: 'assets/css/shop.min.css',
+}, {
+	inputPath: 'src/frontend/css/bootstrap-extra.scss',
+	outputPath: 'assets/css/bootstrap-extra.css',
+	outputMin: 'assets/css/bootstrap-extra.min.css',
 }, {
 	inputPath: 'library/pro/src/css/styles.scss',
 	outputPath: 'library/pro/assets/css/styles.css',

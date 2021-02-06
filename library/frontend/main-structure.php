@@ -13,16 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'pre_get_posts', 'greenlet_set_query' );
 add_action( 'greenlet_main_container', 'greenlet_do_main_container' );
-add_action( 'greenlet_before_loop', 'greenlet_breadcrumb', 2 );
-add_action( 'greenlet_before_loop', 'greenlet_archive_header_template' );
+add_action( 'greenlet_before_loop', 'greenlet_do_before' );
 add_action( 'greenlet_archive_header', 'greenlet_do_archive_header' );
 add_action( 'greenlet_loop', 'greenlet_meta_icons' );
 add_action( 'greenlet_loop', 'greenlet_do_loop' );
 add_action( 'greenlet_entry_header', 'greenlet_do_entry_header' );
 add_action( 'greenlet_entry_content', 'greenlet_do_entry_content' );
 add_action( 'greenlet_entry_footer', 'greenlet_do_entry_footer' );
-add_action( 'greenlet_after_entry', 'greenlet_comments_template' );
+add_action( 'greenlet_after_loop', 'greenlet_do_after' );
 add_action( 'greenlet_post_meta', 'greenlet_post_meta' );
+add_action( 'greenlet_post_author_info', 'greenlet_post_author_info' );
 add_action( 'greenlet_before_while', 'greenlet_posts_open' );
 add_action( 'greenlet_after_endwhile', 'greenlet_posts_close' );
 add_action( 'greenlet_after_endwhile', 'greenlet_paging_nav' );
@@ -171,12 +171,13 @@ function greenlet_do_main_container() {
 }
 
 /**
- * Renders breadcrumb.
+ * Render breadcrumb.
  *
  * @since  1.0.0
+ * @param  string $separator Separator.
  * @return void
  */
-function greenlet_breadcrumb() {
+function greenlet_breadcrumb( $separator ) {
 
 	if ( ! is_front_page() && ( false !== gl_get_option( 'breadcrumb', '1' ) ) ) {
 		do_action( 'greenlet_before_breadcrumb' );
@@ -200,7 +201,7 @@ function greenlet_breadcrumb() {
 		} elseif ( function_exists( 'breadcrumbs_everywhere' ) ) {
 			breadcrumbs_everywhere();
 		} else {
-			get_template_part( 'templates/breadcrumb' );
+			get_template_part( 'templates/breadcrumb', null, array( 'separator' => $separator ) );
 		}
 
 		do_action( 'greenlet_after_breadcrumb' );
@@ -350,7 +351,139 @@ function greenlet_run_loop( $query = null ) {
 }
 
 /**
- * Renders post header.
+ * Render post content section like entry header, entry content, etc.
+ *
+ * @since 2.5.0
+ * @param string $section Content section.
+ */
+function greenlet_render_content_section( $section ) {
+	$content_layout = greenlet_get_content_layout();
+	if ( ! isset( $content_layout[ $section ] ) ) {
+		return;
+	}
+
+	$markup = false;
+	if ( 'top' === $section ) {
+		$markup = array( 'entry-header', 'entry-header' );
+	} elseif ( 'middle' === $section ) {
+		$markup = array( 'entry-content', 'entry-content clearfix' );
+	} elseif ( 'bottom' === $section ) {
+		$markup = array( 'entry-footer', 'entry-footer' );
+	}
+
+	$has_items = false;
+	foreach ( $content_layout[ $section ] as $item ) {
+		if ( ! isset( $item['visible'] ) || ! ! $item['visible'] ) {
+			$has_items = true;
+			break;
+		}
+	}
+
+	if ( ( false !== $markup ) && $has_items ) {
+		greenlet_markup( $markup[0], greenlet_attr( $markup[1] ) );
+	}
+
+	foreach ( $content_layout[ $section ] as $item ) {
+		if ( isset( $item['visible'] ) && ! $item['visible'] ) {
+			continue;
+		}
+
+		if ( 'breadcrumb' === $item['id'] ) {
+			greenlet_breadcrumb( $item['meta']['separator']['val'] );
+		} elseif ( 'list_title' === $item['id'] ) {
+			greenlet_archive_header_template();
+		} elseif ( 'title' === $item['id'] ) {
+			// If single page, display title. Else, display title in a link.
+			if ( is_singular() ) {
+				printf( '<h1 %s>', wp_kses( greenlet_attr( 'entry-title' ), null ) );
+				the_title();
+				echo '</h1>';
+			} else {
+				printf( '<h2 %s>', wp_kses( greenlet_attr( 'entry-title' ), null ) );
+				$title = get_the_title();
+
+				if ( empty( $title ) ) {
+					?>
+					<a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo get_the_date(); ?></a>
+					<?php
+				} else {
+					?>
+					<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+					<?php
+				}
+				echo '</h2>';
+			}
+		} elseif ( 'meta' === $item['id'] ) {
+			do_action( 'greenlet_post_meta', $item['meta']['layout']['val'] );
+		} elseif ( 'image' === $item['id'] ) {
+			if ( is_single() || is_page() ) {
+				if ( has_post_thumbnail() ) {
+					greenlet_markup( 'featured-image', greenlet_attr( 'featured-image' ) );
+					the_post_thumbnail();
+					greenlet_markup_close();
+				}
+			} else {
+				// If the post has a thumbnail and not password protected, display.
+				if ( has_post_thumbnail() && ! post_password_required() ) {
+					greenlet_markup( 'entry-thumbnail', greenlet_attr( 'entry-thumbnail' ) );
+					echo '<a href="' . esc_url( get_permalink() ) . '" title="' . esc_html( get_the_title() ) . '">';
+					the_post_thumbnail( 'medium' );
+					echo '</a>';
+					greenlet_markup_close();
+				}
+			}
+		} elseif ( 'content' === $item['id'] ) {
+			if ( is_single() || is_page() ) {
+				the_content();
+				apply_filters( 'greenlet_page_break', wp_link_pages() );
+			} else {
+				global $post, $excerpt_length, $read_more;
+				$is_more = strpos( $post->post_content, '<!--more-->' );
+				$more    = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
+
+				$read_more = $item['meta']['read_more']['val'];
+
+				if ( 'full' === $item['meta']['display']['val'] ) {
+					the_content();
+				} elseif ( $is_more ) {
+					the_content( $more );
+				} elseif ( 0 !== $item['meta']['excerpt_length']['val'] ) {
+					$excerpt_length = $item['meta']['excerpt_length']['val'];
+					the_excerpt();
+				}
+			}
+		} elseif ( 'author' === $item['id'] ) {
+			do_action( 'greenlet_post_author_info', $item['meta']['layout']['val'] );
+		} elseif ( 'comments' === $item['id'] ) {
+			comments_template();
+		}
+	}
+
+	if ( ( false !== $markup ) && $has_items ) {
+		greenlet_markup_close();
+	}
+}
+
+/**
+ * Render sections before main loop.
+ *
+ * @since 2.5.0
+ */
+function greenlet_do_before() {
+	greenlet_render_content_section( 'above' );
+}
+
+/**
+ * Render sections after main loop.
+ *
+ * @since 2.5.0
+ */
+function greenlet_do_after() {
+	greenlet_render_content_section( 'below' );
+}
+
+/**
+ * Render post header.
  *
  * @since  1.0.0
  * @return void
@@ -361,33 +494,7 @@ function greenlet_do_entry_header() {
 		return;
 	}
 
-	greenlet_markup( 'entry-header', greenlet_attr( 'entry-header' ) );
-
-	// If single page, display title. Else, display title in a link.
-	if ( is_singular() ) {
-		printf( '<h1 %s>', wp_kses( greenlet_attr( 'entry-title' ), null ) );
-		the_title();
-		echo '</h1>';
-	} else {
-		printf( '<h2 %s>', wp_kses( greenlet_attr( 'entry-title' ), null ) );
-		$title = get_the_title();
-
-		if ( empty( $title ) ) {
-			?>
-			<a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo get_the_date(); ?></a>
-			<?php
-		} else {
-			?>
-			<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-			<?php
-		}
-		echo '</h2>';
-	}
-
-	$show_meta = gl_get_option( 'show_meta', array( 'sticky', 'author', 'date', 'cats', 'tags', 'reply' ) );
-	do_action( 'greenlet_post_meta', $show_meta );
-
-	greenlet_markup_close();
+	greenlet_render_content_section( 'top' );
 }
 
 /**
@@ -437,7 +544,7 @@ function greenlet_meta_icons() {
 }
 
 /**
- * Renders post meta.
+ * Render post meta.
  *
  * @since  1.0.0
  * @param  array $show_meta Meta info display details.
@@ -453,19 +560,22 @@ function greenlet_post_meta( $show_meta ) {
 		),
 	);
 
-	if ( get_post_type() === 'post' ) {
-		// If the post is sticky, mark it.
-		if ( is_sticky() && in_array( 'sticky', $show_meta, true ) ) {
+	$cat_list = get_the_category_list( ', ' );
+	$tag_list = get_the_tag_list( '', ', ' );
+
+	foreach ( $show_meta as $item ) {
+		if ( isset( $item['visible'] ) && ! $item['visible'] ) {
+			continue;
+		}
+
+		if ( ( 'sticky' === $item['id'] ) && is_sticky() ) {
 			printf(
 				'<li %s><span class="meta-icon sticky-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-featured-post list-inline-item' ), null ),
 				'pin',
 				esc_html__( 'Featured', 'greenlet' )
 			);
-		}
-
-		// Get the post author.
-		if ( in_array( 'author', $show_meta, true ) ) {
+		} elseif ( 'author' === $item['id'] ) {
 			printf(
 				'<li %s><span class="meta-icon user-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span><a href="%s" rel="author"> %s</a></li>',
 				wp_kses( greenlet_attr( 'meta-author list-inline-item' ), null ),
@@ -473,52 +583,35 @@ function greenlet_post_meta( $show_meta ) {
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				get_the_author()
 			);
-		}
-
-		// Get the date.
-		if ( in_array( 'date', $show_meta, true ) ) {
+		} elseif ( 'date' === $item['id'] ) {
 			printf(
 				'<li %s><span class="meta-icon date-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-date list-inline-item' ), null ),
 				'date',
 				get_the_date()
 			);
-		}
-
-		// Get the date.
-		if ( in_array( 'mod', $show_meta, true ) ) {
+		} elseif ( 'mod' === $item['id'] ) {
 			printf(
 				'<li %s><span class="meta-icon clock-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-modified list-inline-item' ), null ),
 				'clock',
 				get_the_modified_date() // phpcs:ignore
 			);
-		}
-
-		// The categories.
-		$category_list = get_the_category_list( ', ' );
-		if ( $category_list && in_array( 'cats', $show_meta, true ) ) {
+		} elseif ( ( 'cats' === $item['id'] ) && $cat_list ) {
 			printf(
 				'<li %s><span class="meta-icon folder-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-categories list-inline-item' ), null ),
 				'folder',
-				wp_kses( $category_list, $term_list_tags )
+				wp_kses( $cat_list, $term_list_tags )
 			);
-		}
-
-		// The tags.
-		$tag_list = get_the_tag_list( '', ', ' );
-		if ( $tag_list && in_array( 'tags', $show_meta, true ) ) {
+		} elseif ( ( 'tags' === $item['id'] ) && $tag_list ) {
 			printf(
 				'<li %s><span class="meta-icon tag-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> %s </li>',
 				wp_kses( greenlet_attr( 'meta-tags list-inline-item' ), null ),
 				'tag',
 				wp_kses( $tag_list, $term_list_tags )
 			);
-		}
-
-		// Comments link.
-		if ( comments_open() && in_array( 'reply', $show_meta, true ) ) {
+		} elseif ( ( 'reply' === $item['id'] ) && comments_open() ) {
 			printf(
 				'<li %s><span class="meta-icon comment-icon"><svg><use xlink:href="#gl-path-%s" /></svg></span> ',
 				wp_kses( greenlet_attr( 'meta-reply list-inline-item' ), null ),
@@ -527,108 +620,59 @@ function greenlet_post_meta( $show_meta ) {
 			comments_popup_link( __( 'Leave a comment', 'greenlet' ), __( 'One comment', 'greenlet' ), __( 'View all % comments', 'greenlet' ) );
 			echo '</li>';
 		}
+	}
 
-		// Edit link.
-		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && ! is_customize_preview() ) {
-			printf( '<li %s><span class="dashicons dashicons-edit"></span> ', wp_kses( greenlet_attr( 'meta-edit list-inline-item' ), null ) );
-			edit_post_link( __( 'Edit', 'greenlet' ) );
-			echo '</li>';
-		}
+	// Edit link.
+	if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && ! is_customize_preview() ) {
+		printf( '<li %s><span class="dashicons dashicons-edit"></span> ', wp_kses( greenlet_attr( 'meta-edit list-inline-item' ), null ) );
+		edit_post_link( __( 'Edit', 'greenlet' ) );
+		echo '</li>';
 	}
 
 	greenlet_markup_close();
 }
 
 /**
- * Renders post content.
+ * Render post content.
  *
  * @since  1.0.0
  * @return void
  */
 function greenlet_do_entry_content() {
-
-	greenlet_markup( 'entry-content', greenlet_attr( 'entry-content clearfix' ) );
-
-	if ( is_single() || is_page() ) {
-
-		if ( has_post_thumbnail() ) {
-			greenlet_markup( 'featured-image', greenlet_attr( 'featured-image' ) );
-			the_post_thumbnail();
-			greenlet_markup_close();
-		}
-
-		the_content();
-		apply_filters( 'greenlet_page_break', wp_link_pages() );
-	} else {
-
-		$excerpt_type = gl_get_option( 'excerpt_type', 'excerpt' );
-		$show_image   = gl_get_option( 'featured_image', '1' );
-
-		global $post;
-		$is_more = strpos( $post->post_content, '<!--more-->' );
-		$more    = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
-
-		// If the post has a thumbnail and not password protected, display.
-		if ( ( false !== $show_image ) && has_post_thumbnail() && ! post_password_required() ) {
-
-			greenlet_markup( 'entry-thumbnail', greenlet_attr( 'entry-thumbnail' ) );
-			echo '<a href="' . esc_url( get_permalink() ) . '" title="' . esc_html( get_the_title() ) . '">';
-			the_post_thumbnail( 'medium' );
-			echo '</a>';
-			greenlet_markup_close();
-		}
-
-		if ( 'full' === $excerpt_type ) {
-			the_content();
-		} elseif ( $is_more ) {
-			the_content( $more );
-		} elseif ( 0 !== greenlet_excerpt_length( 55 ) ) {
-			the_excerpt();
-		}
-	}
-
-	greenlet_markup_close();
+	greenlet_render_content_section( 'middle' );
 }
 
 /**
- * Renders post footer.
+ * Render post footer.
  *
  * @since  1.0.0
  * @return void
  */
 function greenlet_do_entry_footer() {
+	greenlet_render_content_section( 'bottom' );
+}
 
-	$show_author = gl_get_option( 'show_author', array( 'name', 'image', 'bio' ) );
+/**
+ * Render author info.
+ *
+ * @since  2.5.0
+ * @param  array $author_items Author info display items.
+ * @return void
+ */
+function greenlet_post_author_info( $author_items ) {
+	foreach ( $author_items as $item ) {
+		if ( isset( $item['visible'] ) && ! $item['visible'] ) {
+			continue;
+		}
 
-	$name  = null;
-	$image = null;
-	$bio   = null;
-
-	if ( is_array( $show_author ) && count( $show_author ) > 0 ) {
-		$name  = in_array( 'name', $show_author, true ) ? true : false;
-		$image = in_array( 'image', $show_author, true ) ? true : false;
-		$bio   = in_array( 'bio', $show_author, true ) ? true : false;
-	}
-
-	// If we have a single post.
-	if ( is_single() && ( $name || $image || $bio ) ) {
-
-		greenlet_markup( 'entry-footer', greenlet_attr( 'entry-footer' ) );
-
-		if ( $image ) {
-
+		if ( 'image' === $item['id'] ) {
 			$size = apply_filters( 'greenlet_author_bio_avatar_size', 56 );
 			printf(
 				'<div %s>%s</div>',
 				wp_kses( greenlet_attr( 'author-avatar' ), null ),
 				get_avatar( get_the_author_meta( 'user_email' ), $size )
 			);
-		}
-
-		printf( '<div %s>', wp_kses( greenlet_attr( 'author-description' ), null ) );
-
-		if ( $name ) {
-
+		} elseif ( 'name' === $item['id'] ) {
 			$author_url = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
 
 			$author = sprintf(
@@ -639,20 +683,13 @@ function greenlet_do_entry_footer() {
 				get_the_author()
 			);
 
-			$heading = sprintf( '<h2 %s> %s %s</h2>', greenlet_attr( 'author-heading' ), __( 'Author:', 'greenlet' ), $author );
+			$heading = sprintf( '<h2 %s> %s</h2>', greenlet_attr( 'author-heading' ), $author );
 
 			echo apply_filters( 'greenlet_author', $heading, $author ); // phpcs:ignore
-		}
-
-		if ( $bio && get_the_author_meta( 'description' ) ) {
-
+		} elseif ( ( 'bio' === $item['id'] ) && get_the_author_meta( 'description' ) ) {
 			$desc = sprintf( '<p %s>%s</p>', greenlet_attr( 'author-bio' ), get_the_author_meta( 'description' ) );
 			echo apply_filters( 'greenlet_author_description', $desc ); // phpcs:ignore
 		}
-
-		echo '</div>';
-
-		greenlet_markup_close();
 	}
 }
 
@@ -668,9 +705,9 @@ function greenlet_excerpt_more( $more ) {
 		return $more;
 	}
 
-	global $post;
-	$more = '<span class="more-text">' . gl_get_option( 'read_more', __( 'continue reading', 'greenlet' ) ) . '</span>';
-	return apply_filters( 'greenlet_more_link', '<a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>' );
+	global $post, $read_more;
+	$more = '<span class="more-text">' . $read_more . '</span>';
+	return apply_filters( 'greenlet_more_link', '<a ' . greenlet_attr( 'more-link' ) . ' href="' . esc_url( get_permalink( $post->ID ) ) . '">' . $more . '</a>' );
 }
 
 /**
@@ -685,9 +722,8 @@ function greenlet_excerpt_length( $length ) {
 		return $length;
 	}
 
-	$length = gl_get_option( 'excerpt_length', 55 );
-	$length = apply_filters( 'greenlet_excerpt_length', $length );
-	return $length;
+	global $excerpt_length;
+	return $excerpt_length;
 }
 
 /**
@@ -717,21 +753,6 @@ function greenlet_posts_close() {
 }
 
 /**
- * Renders comment template.
- *
- * @since  1.0.0
- * @return void
- */
-function greenlet_comments_template() {
-	$show = gl_get_option( 'show_comments', array( 'posts' ) );
-	if ( comments_open() ) {
-		if ( ( is_page() && in_array( 'pages', $show, true ) ) || ( is_single() && in_array( 'posts', $show, true ) ) ) {
-			comments_template();
-		}
-	}
-}
-
-/**
  * Renders pagination navigation.
  *
  * @since  1.0.0
@@ -739,8 +760,16 @@ function greenlet_comments_template() {
  * @return void
  */
 function greenlet_paging_nav( $query = null ) {
+	if ( is_singular() ) {
+		return;
+	}
 
-	$format   = gl_get_option( 'paging_nav', 'number' );
+	$cl = greenlet_get_content_layout();
+	if ( ! isset( $cl['below'] ) || ( count( $cl['below'] ) < 1 ) || ! isset( $cl['below'][0]['id'] ) || ( isset( $cl['below'][0]['visible'] ) && ! $cl['below'][0]['visible'] ) ) {
+		return;
+	}
+
+	$format   = $cl['below'][0]['meta']['format']['val'];
 	$pag_attr = greenlet_attr( "pagination {$format}" );
 
 	if ( empty( $query ) ) {
@@ -1073,9 +1102,9 @@ function greenlet_search_form() {
 	$html = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 		<label>
 			<span class="screen-reader-text">' . __( 'Search for:', 'greenlet' ) . '</span>
-			<input type="search" class="search-field search-input" placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
+			<input type="search" ' . greenlet_attr( 'search-input search-field' ) . ' placeholder="' . esc_attr__( 'Search &hellip;', 'greenlet' ) . '" value="' . get_search_query() . '" name="s" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '">
 		</label>
-		<button class="search-submit" aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '"> ' . $search_button . '</button>
+		<button ' . greenlet_attr( 'search-submit' ) . ' aria-label="' . esc_attr__( 'Search', 'greenlet' ) . '"> ' . $search_button . '</button>
 	</form>';
 
 	return $html;

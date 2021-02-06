@@ -1,0 +1,44 @@
+:root {
+	--radius: .25rem;
+	--radius-small: .12rem;
+}
+
+.site-header h1 {
+	font-size: 2.5rem;
+}
+
+.nav-menu ul, .widget ul {
+	padding: 0;
+}
+
+.widget li {
+	margin-bottom: .8rem;
+}
+
+.search-form {
+	margin-bottom: 1rem;
+}
+
+.search-submit {
+	height: 2.4em;
+	display: inline-flex;
+	align-items: center;
+	border-color: var(--border);
+}
+
+.widget-title {
+	font-size: 1.2rem;
+}
+
+.more-link {
+	line-height: 1em;
+	vertical-align: unset;
+}
+
+.comment-form textarea {
+	width: 100%;
+}
+
+.to-top {
+	border-color: var(--border);
+}

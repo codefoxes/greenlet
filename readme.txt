@@ -102,11 +102,6 @@ Screenshot used in the theme is a bespoke image created by the theme author and 
 
 All the icons used in the theme are created by the theme author and can be distributed under the terms of the GNU GPL v2.
 
-= Choices.js License =
-
-choices.js is used to create configurable select box by Josh Johnson. (https://github.com/jshjohnson/Choices)
-Distributed under the MIT License
-
 = Bootstrap Licence =
 
 Bootstrap is HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. (https://github.com/twbs/bootstrap)
@@ -117,9 +112,14 @@ Distributed under the MIT License
 Colorwings is a visual style editor for WordPress by Karthik Bhat. (https://github.com/karthikax/colorwings/)
 Distributed under the MIT License
 
-= React Sortable HOC Licence =
+= SortableJS Licence =
 
-React Sortable HOC is a components sorting library by Claudéric Demers. (https://github.com/clauderic/react-sortable-hoc)
+Sortable is a JavaScript library for reorderable drag-and-drop lists. (https://github.com/SortableJS/Sortable/)
+Distributed under the MIT License
+
+= react-sortablejs Licence =
+
+react-sortablejs is a React binding library for SortableJS. (https://github.com/SortableJS/react-sortablejs)
 Distributed under the MIT License
 
 = react-select-search Licence =

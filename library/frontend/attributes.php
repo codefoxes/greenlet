@@ -99,9 +99,22 @@ function greenlet_attr( $args, $get_array = false ) {
 		$attributes = apply_filters( 'greenlet_attr_col', $attributes, $primary, $css_framework, $width, $mq );
 	}
 
-	// If schema enabled, add filter to each primary class.
+	// If schema enabled, add attributes to each element.
 	if ( gl_get_option( 'schema', '1' ) ) {
-		add_filter( "greenlet_attr_{$primary}", 'greenlet_attribute', 10, 2 );
+		add_filter( "greenlet_attr_{$primary}", 'greenlet_attributes', 10, 2 );
+	}
+
+	/**
+	 * Add framework attributes.
+	 *
+	 * @var string $primary       HTML class.
+	 * @var array  $css_framework Current CSS framework.
+	 */
+	if ( apply_filters( 'greenlet_add_framework_attributes', true, $primary, $css_framework ) ) {
+		// If bootstrap, add extra classes to each primary class.
+		if ( 'bootstrap' === $css_framework ) {
+			add_filter( "greenlet_attr_{$primary}", 'greenlet_framework_attributes', 10, 2 );
+		}
 	}
 
 	/**
@@ -132,17 +145,18 @@ function greenlet_attr( $args, $get_array = false ) {
 }
 
 /**
- * Get attributes array.
+ * Get schema added attributes.
  *
  * Returns extra attributes array for schema, rel, role etc.
  *
  * @since 1.0.0
+ * @since 2.5.0 Renamed from greenlet_attribute to greenlet_attributes.
  *
  * @param  array  $attributes HTML attributes.
- * @param  string $primary HTML class.
- * @return array of extra attributes.
+ * @param  string $primary    HTML class.
+ * @return array              Schema added attributes.
  */
-function greenlet_attribute( $attributes, $primary ) {
+function greenlet_attributes( $attributes, $primary ) {
 
 	// If $primary variable.
 	switch ( $primary ) {
@@ -213,7 +227,7 @@ function greenlet_attribute( $attributes, $primary ) {
 			}
 			break;
 
-		// Is sidebar, add complementory role, sidebar schema.
+		// Is sidebar, add complementary role, sidebar schema.
 		case 'sidebar':
 			$attributes['role']      = 'complementary';
 			$attributes['itemscope'] = 'itemscope';
@@ -314,62 +328,25 @@ function greenlet_attribute( $attributes, $primary ) {
 	return $attributes;
 }
 
-
 /**
- * Converts number to words.
+ * Get framework classes added attributes.
  *
- * @since  1.0.0
- * @param  integer $num Number to be converted.
- * @return string       Number in words.
+ * @since  2.5.0
+ * @param  array  $attributes HTML attributes.
+ * @param  string $primary    HTML class.
+ * @return array              classes added attributes.
  */
-function greenlet_read_number( $num ) {
-	$num  = (int) $num;
-	$word = '';
+function greenlet_framework_attributes( $attributes, $primary ) {
+	$classes = array(
+		'search-input'  => ' form-control',
+		'search-submit' => ' btn btn-light',
+		'more-link'     => ' btn btn-light',
+		'to-top'        => ' btn btn-light',
+	);
 
-	// from 0 to 99.
-	$mod = floor( $num / 10 );
-	if ( 0 === $mod ) { // ones place.
-		if ( 1 === $num ) {
-			$word .= 'one';
-		} elseif ( 2 === $num ) {
-			$word .= 'two';
-		} elseif ( 3 === $num ) {
-			$word .= 'three';
-		} elseif ( 4 === $num ) {
-			$word .= 'four';
-		} elseif ( 5 === $num ) {
-			$word .= 'five';
-		} elseif ( 6 === $num ) {
-			$word .= 'six';
-		} elseif ( 7 === $num ) {
-			$word .= 'seven';
-		} elseif ( 8 === $num ) {
-			$word .= 'eight';
-		} elseif ( 9 === $num ) {
-			$word .= 'nine';
-		}
-	} elseif ( 1 === $mod ) { // if there's a one in the ten's place.
-		if ( 10 === $num ) {
-			$word .= 'ten';
-		} elseif ( 11 === $num ) {
-			$word .= 'eleven';
-		} elseif ( 12 === $num ) {
-			$word .= 'twelve';
-		} elseif ( 13 === $num ) {
-			$word .= 'thirteen';
-		} elseif ( 14 === $num ) {
-			$word .= 'fourteen';
-		} elseif ( 15 === $num ) {
-			$word .= 'fifteen';
-		} elseif ( 16 === $num ) {
-			$word .= 'sixteen';
-		} elseif ( 17 === $num ) {
-			$word .= 'seventeen';
-		} elseif ( 18 === $num ) {
-			$word .= 'eighteen';
-		} elseif ( 19 === $num ) {
-			$word .= 'nineteen';
-		}
+	if ( isset( $classes[ $primary ] ) ) {
+		$attributes['class'] .= $classes[ $primary ];
 	}
-	return $word;
+
+	return $attributes;
 }

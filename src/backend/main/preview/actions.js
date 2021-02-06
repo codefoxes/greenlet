@@ -23,3 +23,7 @@ export const toggleToTop = ( val ) => {
 		btn[ 0 ].style.display = 'none'
 	}
 }
+
+export const changeAjaxUrl = () => {
+	greenletData.ajaxurl = `${ greenletData.ajaxurl }${ window.location.search }`
+}
