@@ -57,11 +57,10 @@ describe('Customizer', () => {
 				cy.window().then( win => {
 					settings = win.wp.customize.control('header_layout').setting._value
 				}).then(() => {
-					console.log( settings )
 					expect( settings ).to.deep.equal( [ {
 						"columns":"3-9",
 						"primary":true,
-						"items":{"1":["logo","widgets"],"2":[{"id":"menu","meta":{"slug":false,"toggler":"enable"}},"widgets"]}
+						"items":{"1":[{"id":"logo"},{"id":"widgets"}],"2":[{"id":"menu","meta":{"slug":false,"toggler":"enable"}},{"id":"widgets"}]}
 					} ] )
 				})
 			})
@@ -115,6 +114,84 @@ describe('Customizer', () => {
 			})
 
 			// Todo: Test other header options like custom input, vertical, header contents etc.
+		})
+
+		describe('Footer Layout', () => {
+			before( () => {
+				cy.get('#accordion-section-footer_section').click()
+			})
+
+			after( () => {
+				const initHeight = Cypress.config( 'viewportHeight' )
+				cy.viewport( Cypress.config( 'viewportWidth' ), 300 )
+				cy.get('#customize-controls .control-section:visible').scrollTo(0, 0 )
+				cy.get('.customize-section-back:visible').click( { force: true } )
+				cy.viewport( Cypress.config( 'viewportWidth' ), initHeight )
+			})
+
+			it('Contains correct control settings', () => {
+				let settings = []
+				cy.window().then( win => {
+					settings = win.wp.customize.control('footer_layout').setting._value
+				}).then(() => {
+					expect( settings ).to.deep.equal( [ {
+						"columns":"12",
+						"primary":true,
+						"items":{"1":[{"id":"php","meta":{"template":"templates/copyright"}}]}
+					} ] )
+				})
+			})
+
+			it('Contains Add before & after', () => {
+				cy.get('.add-before').should('be.visible')
+				cy.get('.add-after').should('exist')
+			})
+
+			it('Contains Default footer', () => {
+				cy.get('.row').contains('Footer 1')
+			})
+
+			it('Updates Footer columns', () => {
+				cy.get('#footer_layout-root .row:first [type="radio"]').check('4-4-4', { force: true })
+
+				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+					const body = $iframe.contents().find('body')
+					if (body.length > 0) {
+						return (body.find('.footer-1 .row:first .footer-column-1').hasClass('col-4')
+							&& body.find('.footer-1 .row:first .footer-column-2').hasClass('col-4')
+							&& body.find('.footer-1 .row:first .footer-column-3').hasClass('col-4'))
+					}
+					return false;
+				}), { timeout: 5000 })
+			})
+
+			it('Adds Footer', () => {
+				cy.get('#footer_layout-root  .add-after button').click( { force: true } )
+
+				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+					const body = $iframe.contents().find('body')
+					if (body.length > 0) {
+						return body.find('.footer-2 .footer-column-1').hasClass('col-12')
+					}
+					return false;
+				}), { timeout: 5000 })
+			})
+
+			it('Deletes Footer', () => {
+				cy.get('#footer_layout-root .row:nth-child(2)').click( { force: true } )
+				cy.get('#footer_layout-root .row:nth-child(2) [type="checkbox"]').check( { force: true } )
+				cy.get('#footer_layout-root .row:nth-child(2) button.delete').click( { force: true } )
+
+				cy.waitUntil(() => cy.get('#customize-preview iframe').then(($iframe) => {
+					const body = $iframe.contents().find('body')
+					if (body.length > 0) {
+						return body.find('.footer-2').length === 0
+					}
+					return false;
+				}), { timeout: 5000 })
+			})
+
+			// Todo: Test other footer options like custom input, vertical, footer contents etc.
 		})
 	})
 })
