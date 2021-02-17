@@ -8,7 +8,7 @@ Requires at least: 5.3
 Requires PHP: 5.6
 Stable tag: 2.5.0
 
-Extremely fast and highly customizable WordPress theme.
+Extremely fast, lightweight, and highly customizable WordPress theme.
 
 == Description ==
 
