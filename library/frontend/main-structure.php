@@ -351,6 +351,23 @@ function greenlet_run_loop( $query = null ) {
 }
 
 /**
+ * Get post content without Post Cover.
+ *
+ * Used to filter post content, if first cover block is already rendered.
+ *
+ * @since  2.5.1
+ * @param  string $content Post content.
+ * @return string          Filtered post content.
+ */
+function greenlet_no_cover_content( $content ) {
+	global $greenlet_post_cover;
+	if ( isset( $greenlet_post_cover ) ) {
+		return str_replace( $greenlet_post_cover, '', $content );
+	}
+	return $content;
+}
+
+/**
  * Render post content section like entry header, entry content, etc.
  *
  * @since 2.5.0
@@ -430,6 +447,16 @@ function greenlet_render_content_section( $section ) {
 					the_post_thumbnail( 'medium' );
 					echo '</a>';
 					greenlet_markup_close();
+				}
+			}
+		} elseif ( 'cover' === $item['id'] ) {
+			global $post, $greenlet_post_cover;
+			$blocks = parse_blocks( $post->post_content );
+			if ( count( $blocks ) > 0 ) {
+				if ( ( 'core/cover' === $blocks[0]['blockName'] ) || ( isset( $blocks[0]['attrs']['className'] ) && ( false !== strpos( $blocks[0]['attrs']['className'], 'cover' ) ) ) ) {
+					$greenlet_post_cover = render_block( $blocks[0] );
+					echo wp_filter_content_tags( $greenlet_post_cover ); // phpcs:ignore
+					add_filter( 'the_content', 'greenlet_no_cover_content', 9 );
 				}
 			}
 		} elseif ( 'content' === $item['id'] ) {
