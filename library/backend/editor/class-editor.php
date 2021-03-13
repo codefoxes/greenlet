@@ -224,7 +224,7 @@ class Editor {
 					'title'       => __( 'Full Width Banner', 'greenlet' ),
 					'description' => __( 'Full width Banner Cover.', 'greenlet' ),
 					'categories'  => array( 'greenlet', 'header' ),
-					'content'     => '<!-- wp:cover {"customOverlayColor":"#ffecb3","className":"full-width"} --><div class="wp-block-cover has-background-dim full-width" style="background-color:#ffecb3"><div class="wp-block-cover__inner-container"><!-- wp:heading {"align":"center","textColor":"black","style":{"color":{"background":"#9ccc65"}}} --><h2 class="has-text-align-center has-black-color has-text-color has-background" style="background-color:#9ccc65">Full width banner</h2><!-- /wp:heading --></div></div><!-- /wp:cover -->',
+					'content'     => '<!-- wp:cover {"customOverlayColor":"#f4f9fc","className":"full-width"} --><div class="wp-block-cover has-background-dim full-width" style="background-color:#f4f9fc"><div class="wp-block-cover__inner-container"><!-- wp:heading {"align":"center","textColor":"black","style":{"color":{"background":"#23b887"}}} --><h2 class="has-text-align-center has-black-color has-text-color has-background" style="background-color:#23b887">Full width banner</h2><!-- /wp:heading --></div></div><!-- /wp:cover -->',
 				)
 			);
 
@@ -234,7 +234,7 @@ class Editor {
 					'title'       => __( 'Full Width Banner with Container', 'greenlet' ),
 					'description' => __( 'Full width Banner Cover with contents inside a container.', 'greenlet' ),
 					'categories'  => array( 'greenlet', 'header' ),
-					'content'     => '<!-- wp:group {"className":"full-width-box"} --><div class="wp-block-group full-width-box"><div class="wp-block-group__inner-container"><!-- wp:cover {"customOverlayColor":"#ffecb3"} --><div class="wp-block-cover has-background-dim" style="background-color:#ffecb3"><div class="wp-block-cover__inner-container"></div></div><!-- /wp:cover --><!-- wp:heading {"align":"center","textColor":"black","style":{"color":{"background":"#9ccc65"}}} --><h2 class="has-text-align-center has-black-color has-text-color has-background" style="background-color:#9ccc65">Full width banner</h2><!-- /wp:heading --></div></div><!-- /wp:group -->',
+					'content'     => '<!-- wp:group {"className":"full-width-box"} --><div class="wp-block-group full-width-box"><div class="wp-block-group__inner-container"><!-- wp:cover {"customOverlayColor":"#f4f9fc"} --><div class="wp-block-cover has-background-dim" style="background-color:#f4f9fc"><div class="wp-block-cover__inner-container"></div></div><!-- /wp:cover --><!-- wp:heading {"align":"center","textColor":"black","style":{"color":{"background":"#23b887"}}} --><h2 class="has-text-align-center has-black-color has-text-color has-background" style="background-color:#23b887">Full width banner</h2><!-- /wp:heading --></div></div><!-- /wp:group -->',
 				)
 			);
 		}

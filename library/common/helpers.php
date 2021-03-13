@@ -725,6 +725,7 @@ if ( ! function_exists( 'greenlet_content_layout_items' ) ) {
 			'title'      => __( 'Title', 'greenlet' ),
 			'meta'       => __( 'Post Meta', 'greenlet' ),
 			'image'      => __( 'Featured Image', 'greenlet' ),
+			'cover'      => __( 'Post Cover', 'greenlet' ),
 			'content'    => __( 'Post Content', 'greenlet' ),
 			'author'     => __( 'Author Info', 'greenlet' ),
 			'breadcrumb' => __( 'Breadcrumb', 'greenlet' ),
@@ -832,6 +833,10 @@ if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
 			),
 			'middle' => array(
 				array( 'id' => 'image' ),
+				array(
+					'id'      => 'cover',
+					'visible' => false,
+				),
 				array( 'id' => 'content' ),
 			),
 			'bottom' => array(
@@ -852,7 +857,7 @@ if ( ! function_exists( 'greenlet_content_layout_defaults' ) ) {
 
 		if ( 'list' === $type ) {
 			array_push( $groups['above'], array( 'id' => 'list_title' ) );
-			$groups['middle'][1] = array(
+			$groups['middle'][2] = array(
 				'id'   => 'content',
 				'meta' => array(
 					'display'        => array( 'val' => 'excerpt' ),
