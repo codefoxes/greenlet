@@ -1,3 +1,16 @@
+Version 2.5.1 / Release: 13-03-2021
+===================
+New: Color palette
+New: Color palette settings
+New: Post cover ordering
+New: Background repeat options
+New: Keyboard shortcut details
+New: Customizer preview zoom in and out
+Improvement: Comments, quotes and caption styles
+Improvement: Better banner color
+Fix: Removed choices js
+Fix: Removed tooltip extra character
+
 Version 2.5.0 / Release: 07-02-2021
 ===================
 New: Post sections ordering
