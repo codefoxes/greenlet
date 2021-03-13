@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenlet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-06 18:03+0000\n"
+"POT-Creation-Date: 2021-03-13 10:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Greenlet Team <hello@greenletwp.com>\n"
 "Language-Team: \n"
@@ -38,7 +38,7 @@ msgid_plural "%d Items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: library/frontend/main-structure.php:817
+#: library/frontend/main-structure.php:844
 msgid "&laquo; Newer Posts"
 msgstr ""
 
@@ -79,15 +79,15 @@ msgstr ""
 msgid "Archive page Products Count."
 msgstr ""
 
-#: library/common/helpers.php:744
+#: library/common/helpers.php:745
 msgid "Author"
 msgstr ""
 
-#: library/common/helpers.php:729
+#: library/common/helpers.php:730
 msgid "Author Info"
 msgstr ""
 
-#: library/common/helpers.php:738
+#: library/common/helpers.php:739
 msgid "Avatar"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgstr ""
 msgid "Back to top"
 msgstr ""
 
-#: library/common/helpers.php:739
+#: library/common/helpers.php:740
 msgid "Biographical Info"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Bootstrap 4.6.0"
 msgstr ""
 
-#: library/common/helpers.php:730
+#: library/common/helpers.php:731
 msgid "Breadcrumb"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Can not install plugin"
 msgstr ""
 
-#: library/common/helpers.php:747
+#: library/common/helpers.php:748
 msgid "Categories"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: library/common/helpers.php:732 library/common/helpers.php:749
+#: library/common/helpers.php:733 library/common/helpers.php:750
 msgid "Comments"
 msgstr ""
 
@@ -158,11 +158,11 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: library/common/helpers.php:860 library/frontend/main-structure.php:442
+#: library/common/helpers.php:865 library/frontend/main-structure.php:469
 msgid "continue reading"
 msgstr ""
 
-#: library/common/helpers.php:765
+#: library/common/helpers.php:766
 msgid "Continue reading text"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Disable WP Block Editor Style"
 msgstr ""
 
-#: library/common/helpers.php:769 library/common/helpers.php:777
+#: library/common/helpers.php:770 library/common/helpers.php:778
 msgid "Display Format"
 msgstr ""
 
@@ -221,7 +221,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: library/frontend/main-structure.php:628
+#: library/frontend/main-structure.php:655
 msgid "Edit"
 msgstr ""
 
@@ -262,11 +262,11 @@ msgstr ""
 msgid "Error 404 - Nothing Found"
 msgstr ""
 
-#: library/common/helpers.php:771
+#: library/common/helpers.php:772
 msgid "Excerpt (short text extract)"
 msgstr ""
 
-#: library/common/helpers.php:761
+#: library/common/helpers.php:762
 msgid "Excerpt Length"
 msgstr ""
 
@@ -276,7 +276,7 @@ msgid ""
 "new Widget areas"
 msgstr ""
 
-#: library/common/helpers.php:743 library/frontend/main-structure.php:576
+#: library/common/helpers.php:744 library/frontend/main-structure.php:603
 msgid "Featured"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "From Top"
 msgstr ""
 
-#: library/common/helpers.php:772
+#: library/common/helpers.php:773
 msgid "Full Content"
 msgstr ""
 
@@ -357,8 +357,9 @@ msgid ""
 "Added | No jQuery | 12 Column Design System | 8 Predefined Layouts "
 "(extendable) | Unlimited Post Layout | Unlimited Header and Footer layout | "
 "Pagination ( Default, Numbered, Ajax, Load More, Infinite Scroll ) | ML "
-"Support | RTL Support | Visual style edtor | Mobile Ready | Breadcrumb | "
-"WooCommerce Support | Theme Presets and so much more."
+"Support | RTL Support | Visual style editor | Mobile Ready | Breadcrumb | "
+"Popular plugins support including WooCommerce | Theme Presets and so much "
+"more."
 msgstr ""
 
 #: library/backend/options/class-options-admin.php:65
@@ -419,11 +420,11 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: library/common/helpers.php:783
+#: library/common/helpers.php:784
 msgid "Infinite Scroll"
 msgstr ""
 
-#: library/backend/assets/js/greenlet-preview.js:176
+#: library/backend/assets/js/greenlet-preview.js:178
 msgid "Infinite scrolling is temporarily disabled to edit footer."
 msgstr ""
 
@@ -459,7 +460,7 @@ msgstr ""
 msgid "Layout variation for Post list."
 msgstr ""
 
-#: library/frontend/main-structure.php:620
+#: library/frontend/main-structure.php:647
 msgid "Leave a comment"
 msgstr ""
 
@@ -471,7 +472,7 @@ msgstr ""
 msgid "List"
 msgstr ""
 
-#: library/common/helpers.php:731
+#: library/common/helpers.php:732
 msgid "List Title"
 msgstr ""
 
@@ -479,11 +480,11 @@ msgstr ""
 msgid "Load Block Editor CSS files after page load."
 msgstr ""
 
-#: library/frontend/main-structure.php:1060
+#: library/frontend/main-structure.php:1087
 msgid "Load More"
 msgstr ""
 
-#: library/common/helpers.php:782
+#: library/common/helpers.php:783
 msgid "Load More Button"
 msgstr ""
 
@@ -517,7 +518,7 @@ msgstr ""
 
 #: library/backend/helpers.php:22
 #: library/backend/assets/js/greenlet-controls.js:376
-#: library/backend/assets/js/greenlet-controls.js:1740
+#: library/backend/assets/js/greenlet-controls.js:1759
 msgid "Main Content"
 msgstr ""
 
@@ -575,7 +576,7 @@ msgstr ""
 msgid "More options with Pro version"
 msgstr ""
 
-#: library/common/helpers.php:737
+#: library/common/helpers.php:738
 msgid "Name"
 msgstr ""
 
@@ -621,19 +622,19 @@ msgstr ""
 msgid "Number of sidebars to register for the main container of the page"
 msgstr ""
 
-#: library/common/helpers.php:780
+#: library/common/helpers.php:781
 msgid "Numbered"
 msgstr ""
 
-#: library/common/helpers.php:781
+#: library/common/helpers.php:782
 msgid "Numbered (Ajax)"
 msgstr ""
 
-#: library/frontend/main-structure.php:818
+#: library/frontend/main-structure.php:845
 msgid "Older Posts &raquo;"
 msgstr ""
 
-#: library/frontend/main-structure.php:620
+#: library/frontend/main-structure.php:647
 msgid "One comment"
 msgstr ""
 
@@ -653,7 +654,7 @@ msgstr ""
 msgid "Page Sections"
 msgstr ""
 
-#: library/common/helpers.php:733
+#: library/common/helpers.php:734
 msgid "Pagination"
 msgstr ""
 
@@ -671,8 +672,12 @@ msgid ""
 "Please save and refresh this page to reflect the newly added Widget areas"
 msgstr ""
 
-#: library/common/helpers.php:728
+#: library/common/helpers.php:729
 msgid "Post Content"
+msgstr ""
+
+#: library/common/helpers.php:728
+msgid "Post Cover"
 msgstr ""
 
 #: library/backend/customizer/options.php:312
@@ -732,7 +737,7 @@ msgstr ""
 msgid "Product Tags Layout"
 msgstr ""
 
-#: library/common/helpers.php:745
+#: library/common/helpers.php:746
 msgid "Published"
 msgstr ""
 
@@ -752,13 +757,13 @@ msgstr ""
 msgid "Schema Markup"
 msgstr ""
 
-#: library/frontend/main-structure.php:1100
-#: library/frontend/main-structure.php:1105
-#: library/frontend/main-structure.php:1107
+#: library/frontend/main-structure.php:1127
+#: library/frontend/main-structure.php:1132
+#: library/frontend/main-structure.php:1134
 msgid "Search"
 msgstr ""
 
-#: library/frontend/main-structure.php:1105
+#: library/frontend/main-structure.php:1132
 msgid "Search &hellip;"
 msgstr ""
 
@@ -766,7 +771,7 @@ msgstr ""
 msgid "Search button"
 msgstr ""
 
-#: library/frontend/main-structure.php:1104
+#: library/frontend/main-structure.php:1131
 msgid "Search for:"
 msgstr ""
 
@@ -782,11 +787,11 @@ msgstr ""
 msgid "Select Columns Layout"
 msgstr ""
 
-#: library/common/helpers.php:756
+#: library/common/helpers.php:757
 msgid "Separator"
 msgstr ""
 
-#: library/common/helpers.php:757
+#: library/common/helpers.php:758
 msgid "Separator between links. Eg: / or >"
 msgstr ""
 
@@ -827,7 +832,7 @@ msgid "Show your love"
 msgstr ""
 
 #: library/backend/assets/js/greenlet-controls.js:380
-#: library/backend/assets/js/greenlet-controls.js:1744
+#: library/backend/assets/js/greenlet-controls.js:1763
 msgid "Sidebar"
 msgstr ""
 
@@ -837,7 +842,7 @@ msgstr ""
 msgid "Sidebar %s"
 msgstr ""
 
-#: library/common/helpers.php:779
+#: library/common/helpers.php:780
 msgid "Simple"
 msgstr ""
 
@@ -885,7 +890,7 @@ msgstr ""
 msgid "Support forum"
 msgstr ""
 
-#: library/common/helpers.php:748
+#: library/common/helpers.php:749
 msgid "Tags"
 msgstr ""
 
@@ -906,7 +911,7 @@ msgstr ""
 msgid "Theme Presets"
 msgstr ""
 
-#: library/frontend/main-structure.php:888
+#: library/frontend/main-structure.php:915
 msgid "There are no posts meeting your criteria"
 msgstr ""
 
@@ -923,7 +928,7 @@ msgstr ""
 msgid "Toggle Menu"
 msgstr ""
 
-#: library/common/helpers.php:746
+#: library/common/helpers.php:747
 msgid "Updated"
 msgstr ""
 
@@ -931,7 +936,7 @@ msgstr ""
 msgid "Vertical"
 msgstr ""
 
-#: library/frontend/main-structure.php:620
+#: library/frontend/main-structure.php:647
 #, php-format
 msgid "View all % comments"
 msgstr ""

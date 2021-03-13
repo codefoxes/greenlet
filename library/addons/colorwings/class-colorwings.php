@@ -58,7 +58,7 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-			define( 'COLORWINGS_VERSION', '1.3.0' );
+			define( 'COLORWINGS_VERSION', '1.4.0' );
 			define( 'COLORWINGS_URL', $this->get_path_url() );
 			define( 'COLORWINGS_DIR', dirname( __FILE__ ) );
 
@@ -112,6 +112,9 @@ if ( ! class_exists( 'ColorWings\ColorWings' ) ) {
 				'id'        => '',
 			);
 			foreach ( $cw[ $theme ] as $page => $value ) {
+				if ( 'settings' === $page ) {
+					continue;
+				}
 				if ( 'global' === $value['type'] ) {
 					$this->styles .= $value['styles'];
 					$this->add_font( $value );

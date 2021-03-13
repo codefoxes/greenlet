@@ -25,5 +25,7 @@ export const toggleToTop = ( val ) => {
 }
 
 export const changeAjaxUrl = () => {
-	greenletData.ajaxurl = `${ greenletData.ajaxurl }${ window.location.search }`
+	if ( 'greenletData' in window ) {
+		greenletData.ajaxurl = `${ greenletData.ajaxurl }${ window.location.search }`
+	}
 }

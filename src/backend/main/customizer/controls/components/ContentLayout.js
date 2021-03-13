@@ -4,6 +4,10 @@ import Sorter from './Sorter'
 function ContentLayout( { control, updateSettings } ) {
 	const initItems = clone( control.setting._value )
 
+	const initFlat = []
+	const allFlat = []
+	Object.values( control.params.default ).forEach( v => { v.forEach( i => allFlat.push( i.id ) ) } )
+
 	// Format initItems by adding values to default/setting values from Items.
 	for ( const group in initItems ) {
 		if ( ! initItems.hasOwnProperty( group ) ) continue
@@ -24,8 +28,15 @@ function ContentLayout( { control, updateSettings } ) {
 					}
 				}
 			}
+			initFlat.push( item.id )
 		} )
 	}
+
+	allFlat.forEach( itemId => {
+		if ( ! initFlat.includes( itemId ) ) {
+			initItems[ Object.keys( initItems ).pop() ].push( { id: itemId, name: control.params.items[ itemId ], visible: false } )
+		}
+	} )
 
 	const [ state, setState ] = React.useState( initItems )
 

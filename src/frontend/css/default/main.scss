@@ -177,7 +177,49 @@ fieldset {
 
 input[type="checkbox"],
 input[type="radio"] {
-	display: inline;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	appearance: none;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-small);
+	margin: 0 1rem 0 0;
+	vertical-align: middle;
+	background: var(--bg-pri);
+
+	&:checked {
+		border-color: var(--accent);
+		background: var(--accent);
+
+		&:before {
+			content: '';
+			width: 8px;
+			height: 5px;
+			border: 2px solid #fff;
+			border-top: none;
+			border-right: none;
+			transform: rotate(-45deg);
+			margin: 3px auto;
+			display: block;
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+input[type="radio"] {
+	border-radius: var(--radius-rounded);
+
+	&:checked:before {
+		width: 8px;
+		height: 8px;
+		border-radius: 8px;
+		border: none;
+		margin: 3px;
+		background: var(--bg-pri);
+	}
 }
 
 label > .label-body {
@@ -233,6 +275,7 @@ tt {
 	line-height: 1.6;
 	padding: 0 1rem;
 	margin: 0 .2rem;
+	max-width: 100%;
 }
 
 pre {
