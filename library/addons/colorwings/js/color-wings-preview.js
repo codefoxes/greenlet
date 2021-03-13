@@ -409,6 +409,8 @@
     return Subscribe;
   }(React.PureComponent);
   function useStore(store) {
+    var stateItem = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
     var _React$useState = React.useState(store.get()),
         _React$useState2 = _slicedToArray(_React$useState, 2),
         state = _React$useState2[0],
@@ -416,6 +418,16 @@
 
     function updateState() {
       setState(store.get());
+    }
+
+    if (!!stateItem && stateItem in store.get()) {
+      React.useEffect(function () {
+        store.subscribe(updateState);
+        return function () {
+          return store.unsubscribe(updateState);
+        };
+      }, [state[stateItem]]);
+      return state;
     }
 
     React.useEffect(function () {
