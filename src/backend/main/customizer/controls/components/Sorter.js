@@ -22,7 +22,7 @@ function Sorter( { items, group, onChange, onEnd } ) {
 	}
 
 	const getEscaped = ( char ) => {
-		const chars = { '&nbsp;': '\u00A0', '&ndash;': '\u002013', '&mdash;': '\u002014', '&brvbar;': '\u00A6', '&bull;': '\u002022', '&tri;': '\u002023', '&hellip;': '\u002026', '&lsaquo;': '\u002039', '&rsaquo;': '\u00203A', '&laquo;': '\u00AB', '&raquo;': '\u00BB' }
+		const chars = { '&nbsp;': '\u00A0', '&ndash;': '\u2013', '&mdash;': '\u2014', '&brvbar;': '\u00A6', '&bull;': '\u2022', '&tri;': '\u2023', '&hellip;': '\u2026', '&lsaquo;': '\u2039', '&rsaquo;': '\u203A', '&laquo;': '\u00AB', '&raquo;': '\u00BB' }
 		return ( char in chars ) ? chars[ char ] : char
 	}
 
