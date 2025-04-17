@@ -76,3 +76,6 @@ npm start
 # rsync is needed. Will bundle to ~/Desktop
 npm run bundle
 ```
+
+Add submodule URLs under .git/config
+Add .env file with GOOGLE_KEY (Google font API Key)

@@ -22,6 +22,7 @@ buildjs() {
 buildcss() {
 	printf "${BBLUE}Build CSS: Started${NC}\n"
 	CSS=1 ./node_modules/.bin/rollup -c
+	rm -f dummy.js
 	printf "${BBLUE}Build CSS: Complete${NC}\n"
 
 	echo 'Copying vendor css files'

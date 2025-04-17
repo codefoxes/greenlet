@@ -1,11 +1,12 @@
-@import "../variables";
+@use 'sass:math';
+@use '../variables' as *;
 
 @mixin make-col($size, $columns: $grid-columns) {
-	flex: 0 0 percentage($size / $columns);
-	max-width: percentage($size / $columns);
+	flex: 0 0 math.percentage( calc($size / $columns) );
+	max-width: math.percentage( calc($size / $columns) );
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
-	$num: $size / $columns;
-	margin-left: if($num == 0, 0, percentage($num));
+	$num: calc($size / $columns);
+	margin-left: if($num == 0, 0, math.percentage($num));
 }

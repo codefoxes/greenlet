@@ -16,3 +16,5 @@ library/addons/colorwings/fonts/google-fonts.json
 **/cypress/fixtures
 
 **/lighthouse/reports
+
+.DS_Store

@@ -8,7 +8,7 @@ import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
-import { terser } from "rollup-plugin-terser"
+import terser from '@rollup/plugin-terser'
 import scss from 'rollup-plugin-scss'
 import autoprefixer from 'autoprefixer'
 import postcss from 'postcss'
@@ -135,6 +135,7 @@ const config = paths.map(( path ) => {
 			}),
 			commonjs( { transformMixedEsModules: true } ),
 			replace({
+				preventAssignment: true,
 				'process.env.NODE_ENV': JSON.stringify( 'production' )
 			}),
 			scss({ output: false, outputStyle: 'compressed' })
@@ -191,7 +192,7 @@ const cssPaths = [ {
 } ]
 
 const defaultCssConfig = {
-	output: { file: 'backup/dummy.js' },
+	output: { file: 'dummy.js' },
 	scssConfig: {
 		outputStyle: 'expanded',
 		indentType: 'tab',
@@ -208,11 +209,11 @@ if ( process.env.CSS === '1' ) {
 		config.push( {
 			input: path.inputPath,
 			output: defaultCssConfig.output,
-			plugins: [ scss( Object.assign( {}, defaultCssConfig.scssConfig, { output: path.outputPath, sourceMap: ( 'sourceMap' in path ) ? path.sourceMap : path.outputPath + '.map' } ) ) ]
+			plugins: [ scss( Object.assign( {}, defaultCssConfig.scssConfig, { fileName: path.outputPath, sourceMap: ( 'sourceMap' in path ) ? path.sourceMap : path.outputPath + '.map' } ) ) ]
 		}, {
 			input: path.inputPath,
 			output: defaultCssConfig.output,
-			plugins: [ scss( Object.assign( {}, defaultCssConfig.scssConfig, { output: path.outputMin, outputStyle: 'compressed' } ) ) ]
+			plugins: [ scss( Object.assign( {}, defaultCssConfig.scssConfig, { fileName: path.outputMin, outputStyle: 'compressed' } ) ) ]
 		} )
 	} )
 }

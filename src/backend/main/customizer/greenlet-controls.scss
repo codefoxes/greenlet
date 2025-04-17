@@ -1,10 +1,12 @@
+@use 'sass:math';
+
 .gl-row {
 	display: flex;
 }
 
 @for $i from 1 through 12 {
 	.gl-row .col-#{$i} {
-		width: percentage($i / 12);
+		width: math.percentage(calc($i / 12));
 	}
 }
 
@@ -213,7 +215,7 @@
 		& + .icon {
 			color: #fff;
 			background: #c4c8ca;
-			transition: all.1s;
+			transition: all .1s;
 		}
 
 		&:checked + .icon, &:focus + .icon {

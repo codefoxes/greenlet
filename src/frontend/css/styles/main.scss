@@ -1,4 +1,5 @@
-@import "../variables";
+@use 'sass:math';
+@use '../variables' as *;
 
 /**
  * 1.0 Base styles.
@@ -770,7 +771,7 @@ figure {
 
 @for $i from 2 through $gallery-columns {
 	.gallery-columns-#{$i} .gallery-item {
-		max-width: percentage(1 / $i);
+		max-width: math.percentage(calc(1 / $i));
 	}
 }
 

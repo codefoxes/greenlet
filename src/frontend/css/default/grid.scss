@@ -2,8 +2,8 @@
  * Grid styles
  */
 
-@import "../variables";
-@import "mixins";
+@use '../variables' as *;
+@use 'mixins' as *;
 
 .container {
 	position: relative;

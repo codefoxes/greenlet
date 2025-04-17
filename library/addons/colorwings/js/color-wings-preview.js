@@ -9,242 +9,173 @@
 (function () {
   'use strict';
 
-  function _typeof(obj) {
-    "@babel/helpers - typeof";
-
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
   }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
+  function _arrayWithHoles(r) {
+    if (Array.isArray(r)) return r;
   }
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+  function _arrayWithoutHoles(r) {
+    if (Array.isArray(r)) return _arrayLikeToArray(r);
+  }
+  function _assertThisInitialized(e) {
+    if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return e;
+  }
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _classCallCheck(a, n) {
+    if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+  }
+  function _defineProperties(e, r) {
+    for (var t = 0; t < r.length; t++) {
+      var o = r[t];
+      o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o);
     }
   }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
+  function _createClass(e, r, t) {
+    return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
+      writable: !1
+    }), e;
   }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
   }
-
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
+  function _getPrototypeOf(t) {
+    return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) {
+      return t.__proto__ || Object.getPrototypeOf(t);
+    }, _getPrototypeOf(t);
   }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
+  function _inherits(t, e) {
+    if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+    t.prototype = Object.create(e && e.prototype, {
       constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
+        value: t,
+        writable: !0,
+        configurable: !0
       }
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
+    }), Object.defineProperty(t, "prototype", {
+      writable: !1
+    }), e && _setPrototypeOf(t, e);
   }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-
-    return _setPrototypeOf(o, p);
-  }
-
   function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
   }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
+  function _iterableToArray(r) {
+    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
   }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-          result;
-
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-
-  function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-  }
-
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-  }
-
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-  }
-
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
-  }
-
-  function _iterableToArrayLimit(arr, i) {
-    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
+  function _iterableToArrayLimit(r, l) {
+    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (null != t) {
+      var e,
+        n,
+        i,
+        u,
+        a = [],
+        f = !0,
+        o = !1;
       try {
-        if (!_n && _i["return"] != null) _i["return"]();
+        if (i = (t = t.call(r)).next, 0 === l) {
+          if (Object(t) !== t) return;
+          f = !1;
+        } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+      } catch (r) {
+        o = !0, n = r;
       } finally {
-        if (_d) throw _e;
+        try {
+          if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+        } finally {
+          if (o) throw n;
+        }
       }
+      return a;
     }
-
-    return _arr;
   }
-
-  function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-
-  function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-
-    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _possibleConstructorReturn(t, e) {
+    if (e && ("object" == typeof e || "function" == typeof e)) return e;
+    if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");
+    return _assertThisInitialized(t);
+  }
+  function _setPrototypeOf(t, e) {
+    return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) {
+      return t.__proto__ = e, t;
+    }, _setPrototypeOf(t, e);
+  }
+  function _slicedToArray(r, e) {
+    return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+  }
+  function _toConsumableArray(r) {
+    return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _typeof(o) {
+    "@babel/helpers - typeof";
 
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+    }
   }
 
   window.cw = window.parent.cw;
@@ -261,7 +192,6 @@
   }, []).forEach(function (varName) {
     cssVars[varName] = computed.getPropertyValue(varName).trim();
   });
-
   if ('cwPreviewObject' in window) {
     cw.Evt.emit('preview-object-ready', _objectSpread2(_objectSpread2({}, window.cwPreviewObject), {}, {
       cssVars: cssVars
@@ -273,7 +203,6 @@
   var Store = /*#__PURE__*/function () {
     function Store(initialState, name) {
       _classCallCheck(this, Store);
-
       this.name = '';
       this._listeners = [];
       if (name) this.name = name;
@@ -281,8 +210,7 @@
       STORE[this.idx] = initialState;
       this.initialState = initialState;
     }
-
-    _createClass(Store, [{
+    return _createClass(Store, [{
       key: "get",
       value: function get() {
         return STORE[this.idx];
@@ -296,7 +224,6 @@
         } else {
           STORE[this.idx] = Object.assign(Object.assign({}, STORE[this.idx]), state(STORE[this.idx]));
         }
-
         this._listeners.forEach(function (fn) {
           return fn();
         });
@@ -310,7 +237,6 @@
         } else {
           STORE[this.idx] = state(STORE[this.idx]);
         }
-
         this._listeners.forEach(function (fn) {
           return fn();
         });
@@ -345,31 +271,22 @@
         this.initialState = state;
       }
     }]);
+  }();
 
-    return Store;
-  }(); // React Specific.
-
-  var Subscribe = /*#__PURE__*/function (_React$PureComponent) {
-    _inherits(Subscribe, _React$PureComponent);
-
-    var _super = _createSuper(Subscribe);
-
+  // React Specific.
+  /*#__PURE__*/(function (_React$PureComponent) {
     function Subscribe() {
       var _this;
-
       _classCallCheck(this, Subscribe);
-
-      _this = _super.apply(this, arguments);
+      _this = _callSuper(this, Subscribe, arguments);
       _this.stores = [];
-
       _this.onUpdate = function () {
         _this.forceUpdate();
       };
-
       return _this;
     }
-
-    _createClass(Subscribe, [{
+    _inherits(Subscribe, _React$PureComponent);
+    return _createClass(Subscribe, [{
       key: "componentWillReceiveProps",
       value: function componentWillReceiveProps() {
         this._unsubscribe();
@@ -383,7 +300,6 @@
       key: "_unsubscribe",
       value: function _unsubscribe() {
         var _this2 = this;
-
         this.stores.forEach(function (store) {
           store.unsubscribe(_this2.onUpdate);
         });
@@ -392,8 +308,7 @@
       key: "render",
       value: function render() {
         var _this3 = this,
-            _this$props;
-
+          _this$props;
         var stores = [];
         var states = this.props.to.map(function (store) {
           store.unsubscribe(_this3.onUpdate);
@@ -405,21 +320,16 @@
         return (_this$props = this.props).children.apply(_this$props, _toConsumableArray(states));
       }
     }]);
-
-    return Subscribe;
-  }(React.PureComponent);
+  })(React.PureComponent);
   function useStore(store) {
     var stateItem = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
     var _React$useState = React.useState(store.get()),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        state = _React$useState2[0],
-        setState = _React$useState2[1];
-
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      state = _React$useState2[0],
+      setState = _React$useState2[1];
     function updateState() {
       setState(store.get());
     }
-
     if (!!stateItem && stateItem in store.get()) {
       React.useEffect(function () {
         store.subscribe(updateState);
@@ -429,7 +339,6 @@
       }, [state[stateItem]]);
       return state;
     }
-
     React.useEffect(function () {
       store.subscribe(updateState);
       return function () {
@@ -464,19 +373,13 @@
     showDomTree: false,
     domTree: []
   };
-
   var PreviewClass = /*#__PURE__*/function (_Store) {
-    _inherits(PreviewClass, _Store);
-
-    var _super = _createSuper(PreviewClass);
-
     function PreviewClass() {
       _classCallCheck(this, PreviewClass);
-
-      return _super.apply(this, arguments);
+      return _callSuper(this, PreviewClass, arguments);
     }
-
-    _createClass(PreviewClass, [{
+    _inherits(PreviewClass, _Store);
+    return _createClass(PreviewClass, [{
       key: "moveFocus",
       value: function moveFocus(newState) {
         this.set(function () {
@@ -564,10 +467,7 @@
         });
       }
     }]);
-
-    return PreviewClass;
   }(Store);
-
   var PreviewStore = new PreviewClass(initialState);
 
   var prevStyles = '';
@@ -578,7 +478,6 @@
         prevStyles = PreviewStore.get().similarStyles;
       }
     }
-
     var styles = "".concat(selector, " {\n\t\toutline: 1px dashed var(--accent) !important;\n\t\toutline-offset: -1px !important;\n\t}");
     PreviewStore.setSimilarStyles(styles);
     isPrevTemp = temp;
@@ -592,13 +491,11 @@
   };
   var highlight = function highlight(selector, target, temp) {
     var el;
-
     if (undefined === target) {
       el = document.querySelector(selector);
     } else {
       el = target;
     }
-
     if (null !== el) {
       var client = el.getBoundingClientRect();
       var styles = window.getComputedStyle(el);
@@ -642,7 +539,6 @@
       };
       PreviewStore.setHighlightStyles(highlightStyles);
     }
-
     markSimilar(selector, temp);
   };
   var deHighlight = function deHighlight() {
@@ -657,26 +553,22 @@
   };
 
   var _cw = cw,
-      Evt = _cw.Evt;
+    Evt = _cw.Evt;
   var maxSelectorLength = 30;
-
-  var getTree = function getTree(el) {
+  var _getTree = function getTree(el) {
     var tree = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     tree.push({
       el: el
     });
-
     if (el.parentNode !== document) {
-      getTree(el.parentNode, tree);
+      _getTree(el.parentNode, tree);
     }
-
     return tree;
   };
-
   var naCls = ['clearfix', 'row', 'wrap', 'hentry'];
-
   var getSelectorFromTree = function getSelectorFromTree(tree) {
     // Changes tree object. So don't call this directly.
+
     var selector = '';
     tree.forEach(function (elObj, i) {
       var el = elObj.el;
@@ -684,7 +576,6 @@
         classSelected: []
       };
       var elSelector = '';
-
       if (el.id !== '' && !/\w*-\d+/g.test("".concat(el.id))) {
         if ("#".concat(el.id, " ").concat(selector).length <= maxSelectorLength) {
           elObj.cwSelected.idSelected = true;
@@ -692,12 +583,12 @@
           return;
         }
       }
-
       var clsList = [];
       el.classList.forEach(function (cls) {
         // Ignore classes
-        if (clsList.length >= 2) return; // Ignore autogen sequential classes
+        if (clsList.length >= 2) return;
 
+        // Ignore autogen sequential classes
         if (/\w*-\d+/g.test("".concat(cls))) return;
         if (naCls.includes(cls)) return;
         if ("".concat(elSelector, ".").concat(cls, " ").concat(selector).length >= maxSelectorLength) return;
@@ -705,44 +596,37 @@
         elSelector = "".concat(elSelector, ".").concat(cls);
         clsList.push(cls);
       });
-
       if (el.classList.length === 0) {
         var tagName = el.tagName.toLowerCase();
         if ('html' === tagName && 0 !== selector.length) return;
-
         if ("".concat(tagName).concat(elSelector, " ").concat(selector).length <= maxSelectorLength) {
           elSelector = "".concat(tagName).concat(elSelector);
           elObj.cwSelected.tagSelected = true;
         }
       }
-
       if ("".concat(elSelector, " ").concat(selector).length >= maxSelectorLength) {
         elObj.cwSelected = {
           classSelected: []
         };
         return;
       }
-
       selector = 0 === i ? elSelector : "".concat('' === elSelector ? '' : elSelector + ' ').concat(selector);
     });
     return selector;
   };
-
-  var getSelector = function getSelector(el) {
+  var getSelector$1 = function getSelector(el) {
     // Todo: throws error if el === null
     // Maybe this?
     if (null === el) return '';
-    var selectorTree = getTree(el);
+    var selectorTree = _getTree(el);
     return getSelectorFromTree(selectorTree);
   };
-
   var getSelectorTree = function getSelectorTree(el) {
     if (null === el) return '';
-    var selectorTree = getTree(el);
+    var selectorTree = _getTree(el);
     getSelectorFromTree(selectorTree);
     return selectorTree;
-  }; // Todo: Not used?
-
+  };
   var getFocusLinesNewState = function getFocusLinesNewState(client) {
     var offsetTop = window.pageYOffset + client.top;
     return {
@@ -772,58 +656,45 @@
       }
     };
   };
-
   var currentTarget;
   var moveFocus = function moveFocus(ip) {
     var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
     if (PreviewStore.isFocused() && force === false) {
       return;
     }
-
     var selector = '';
-
     if ((ip === undefined || ip === false) && currentTarget !== undefined) ; else if (ip.target === undefined) {
       if ('' === ip) {
         return;
       }
-
       var allTargets = _toConsumableArray(document.querySelectorAll(ip));
-
       if (!allTargets.includes(currentTarget)) {
         currentTarget = allTargets[0];
       }
-
       selector = ip;
     } else {
       currentTarget = ip.target;
     }
-
     if (force === false) {
       window.cwSelectorsLocal = window.cwSelectorsLocal || {};
       Object.entries(window.cwSelectorsLocal).forEach(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
-            localSelector = _ref2[0],
-            localTarget = _ref2[1].localTarget;
-
+          localSelector = _ref2[0],
+          localTarget = _ref2[1].localTarget;
         if (currentTarget === localTarget) {
           selector = localSelector;
         }
       });
     }
-
     if (selector === '') {
-      selector = getSelector(currentTarget);
+      selector = getSelector$1(currentTarget);
     }
-
     var client = currentTarget.getBoundingClientRect();
     var offsetTop = window.pageYOffset + client.top;
     var detailsTop = offsetTop - 24 < window.pageYOffset ? offsetTop + client.height : offsetTop - 24;
-
     if (detailsTop >= document.body.clientHeight) {
       detailsTop = 0;
     }
-
     var newState = {
       focusLines: getFocusLinesNewState(client),
       focusDetails: {
@@ -841,24 +712,19 @@
   var highlightElements = function highlightElements(selector) {
     var temp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var target;
-
     if ('string' !== typeof selector) {
       target = selector;
-      selector = getSelector(selector);
+      selector = getSelector$1(selector);
     }
-
     highlight(selector, target, temp);
   };
   var lockUnlockFocus = function lockUnlockFocus(e) {
     var op = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-
     var currentSelector = PreviewStore.get().focusDetails.selector;
-
     if (PreviewStore.isFocused() && op !== 'lock') {
       PreviewStore.unlockFocus();
       Evt.emit('focus-unlocked', currentSelector);
@@ -872,7 +738,6 @@
       deHighlight();
       markSimilar(currentSelector);
     }
-
     cw.MainStore.setSelectorClass();
   };
   var reduceFocus = function reduceFocus() {
@@ -884,23 +749,21 @@
   var updateFocus = function updateFocus() {
     if (currentTarget === undefined) {
       return;
-    } // Todo: Better method to move focus without changing the selector.
+    }
 
-
+    // Todo: Better method to move focus without changing the selector.
     PreviewStore.unlockFocus();
     moveFocus(false, false);
     PreviewStore.lockFocus();
   };
-
   var saveSelected = function saveSelected(selector) {
     // Todo: Uses too much of memory? Especially domTree
     if (currentTarget === undefined || typeof selector !== 'string') return;
     window.cwSelectorsLocal = window.cwSelectorsLocal || {};
     Object.entries(window.cwSelectorsLocal).forEach(function (_ref3) {
       var _ref4 = _slicedToArray(_ref3, 2),
-          localSelector = _ref4[0],
-          localTarget = _ref4[1].localTarget;
-
+        localSelector = _ref4[0],
+        localTarget = _ref4[1].localTarget;
       if (currentTarget === localTarget) {
         delete window.cwSelectorsLocal[localSelector];
       }
@@ -910,14 +773,11 @@
       domTree: PreviewStore.get().domTree
     };
   };
-
-  var updateSelector = function updateSelector(selector) {
+  var updateSelector$1 = function updateSelector(selector) {
     var el = null;
-
     try {
       el = document.querySelector(selector);
     } catch (_unused) {}
-
     if (el === null) {
       cw.MainStore.setSelectorClass('invalid');
     } else {
@@ -937,17 +797,13 @@
     var timeout = null;
     return function () {
       var _arguments = arguments,
-          _this = this;
-
+        _this = this;
       var callNow = immediate && !timeout;
-
       var next = function next() {
         return callback.apply(_this, _arguments);
       };
-
       clearTimeout(timeout);
       timeout = setTimeout(next, wait);
-
       if (callNow) {
         next();
       }
@@ -956,18 +812,14 @@
   function clone(o) {
     // If Date or Proto disabling is needed, use: https://github.com/davidmarkclements/rfdc
     var out, val, key;
-
     if (_typeof(o) !== "object" || o === null) {
       return o;
     }
-
     out = Array.isArray(o) ? [] : {};
-
     for (key in o) {
       val = o[key];
       out[key] = clone(val);
     }
-
     return out;
   }
 
@@ -978,7 +830,6 @@
     document.head.appendChild(styleTag);
     return styleTag;
   };
-
   var addCWLinkTag = function addCWLinkTag(id) {
     var linkTag = document.createElement('link');
     linkTag.id = id;
@@ -986,26 +837,21 @@
     document.head.appendChild(linkTag);
     return linkTag;
   };
-
   var styleTagMain = addCWStylesTag();
   var styleTagTemp = addCWStylesTag('cw-temp-styles');
   var fontLinkTag = addCWLinkTag('cw-applied-font');
-
   var addStyles = function addStyles() {
     var _cw$StylesStore$get = cw.StylesStore.get(),
-        allOutputs = _cw$StylesStore$get.allOutputs;
-
+      allOutputs = _cw$StylesStore$get.allOutputs;
     var output = '';
     var specifics = {
       templates: '',
       id: ''
     };
-
     for (var page in allOutputs) {
       if (!allOutputs.hasOwnProperty(page)) {
         continue;
       }
-
       if (page === 'global') {
         output += allOutputs.global;
       } else if (page in window.cwPreviewObject.pages && window.cwPreviewObject.pages[page]) {
@@ -1014,48 +860,37 @@
         specifics.id += allOutputs[page];
       }
     }
-
     styleTagMain.innerHTML = output + specifics.templates + specifics.id;
     styleTagTemp.innerHTML = '';
   };
-
   var addTempStyles = function addTempStyles(styleOutput) {
     return styleTagTemp.innerHTML = styleOutput;
   };
-
-  var debouncedUpdateFocus = debounce(updateFocus, 500, true); // Not Needed
-
+  var debouncedUpdateFocus = debounce(updateFocus, 500, true);
   var addFont = function addFont() {
     var _cw$MainStore$get = cw.MainStore.get(),
-        currentPage = _cw$MainStore$get.currentPage,
-        allFonts = _cw$MainStore$get.allFonts;
-
+      currentPage = _cw$MainStore$get.currentPage,
+      allFonts = _cw$MainStore$get.allFonts;
     for (var source in allFonts[currentPage]) {
       if (!allFonts[currentPage].hasOwnProperty(source)) {
         continue;
       }
-
       var fonts = allFonts[currentPage][source];
-
       if ('google' === source) {
         var args = [];
-
         for (var family in fonts) {
           if (!fonts.hasOwnProperty(family)) {
             continue;
           }
-
           var weights = fonts[family];
           var familyFormatted = family.replace(' ', '+');
           args.push("".concat(familyFormatted, ":").concat(weights.join(',')));
         }
-
         fontLinkTag.href = "https://fonts.googleapis.com/css?family=".concat(args.join('|'), "&display=fallback");
-      } // Todo: Add custom fonts.
-
+      }
+      // Todo: Add custom fonts.
     }
   };
-
   cw.StylesStore.registerSpecialSubscriber(addTempStyles);
   cw.StylesStore.registerSpecialSubscriber(addFont, 'fontManager');
   cw.StylesStore.subscribe(addStyles);
@@ -1063,7 +898,6 @@
   window.addEventListener('resize', debouncedUpdateFocus);
 
   var bodyContent = document.querySelectorAll('body > *:not(script):not(style):not(#color-wings)');
-
   function listenFocusActions() {
     bodyContent.forEach(function (el) {
       el.addEventListener('mouseover', moveFocus);
@@ -1072,7 +906,6 @@
     document.body.addEventListener('mouseleave', reduceFocus);
     document.body.addEventListener('mouseenter', increaseFocus);
   }
-
   function unListenFocusActions() {
     bodyContent.forEach(function (el) {
       el.removeEventListener('mouseover', moveFocus);
@@ -1081,21 +914,18 @@
     document.body.removeEventListener('mouseleave', reduceFocus);
     document.body.removeEventListener('mouseenter', increaseFocus);
   }
-
   function togglePreview() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'show';
     var el = document.getElementById('color-wings');
-
     if (el !== null) {
       el.style.display = state === 'show' ? '' : 'none';
     }
   }
-
   cw.Evt.on('preview-object-ready', function () {
     cw.Evt.off('mount-colorwings', listenFocusActions);
     cw.Evt.off('unmount-colorwings', unListenFocusActions);
     cw.Evt.off('select-element', selectElement);
-    cw.Evt.off('update-selector', updateSelector);
+    cw.Evt.off('update-selector', updateSelector$1);
     cw.Evt.off('highlight-elements', highlightElements);
     cw.Evt.off('de-highlight-elements', deHighlight);
     cw.Evt.off('toggle-preview', togglePreview);
@@ -1103,11 +933,12 @@
   cw.Evt.on('mount-colorwings', listenFocusActions);
   cw.Evt.on('unmount-colorwings', unListenFocusActions);
   cw.Evt.on('select-element', selectElement);
-  cw.Evt.on('update-selector', updateSelector);
+  cw.Evt.on('update-selector', updateSelector$1);
   cw.Evt.on('highlight-elements', highlightElements);
   cw.Evt.on('de-highlight-elements', deHighlight);
-  cw.Evt.on('toggle-preview', togglePreview); // Quick Select
+  cw.Evt.on('toggle-preview', togglePreview);
 
+  // Quick Select
   var selectors = [{
     name: 'Body',
     sel: 'body'
@@ -1156,7 +987,7 @@
   });
   cw.MainStore.setQuickSelectors(filtered);
 
-  var getTree$1 = function getTree(el) {
+  var getTree = function getTree(el) {
     if (false === el) return [];
     var domTree = [];
     var selectorTree = getSelectorTree(el);
@@ -1168,12 +999,10 @@
       };
       element.tag.name = elObj.el.tagName.toLowerCase();
       element.tag.selected = !!(elObj.cwSelected && elObj.cwSelected.tagSelected);
-
       if (elObj.el.id !== '') {
         element.id.name = "#".concat(elObj.el.id);
         element.id.selected = !!(elObj.cwSelected && elObj.cwSelected.idSelected);
       }
-
       elObj.el.classList.forEach(function (cls) {
         element.cls[".".concat(cls)] = {
           name: ".".concat(cls),
@@ -1186,50 +1015,42 @@
   };
   var showTree = function showTree(data) {
     var _PreviewStore$get = PreviewStore.get(),
-        currentTarget = _PreviewStore$get.currentTarget,
-        showDomTree = _PreviewStore$get.showDomTree;
-
+      currentTarget = _PreviewStore$get.currentTarget,
+      showDomTree = _PreviewStore$get.showDomTree;
     if (currentTarget !== data.currentTarget || !showDomTree) {
       var tree = false;
       window.cwSelectorsLocal = window.cwSelectorsLocal || {};
       Object.entries(window.cwSelectorsLocal).forEach(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            ls = _ref2[0],
-            _ref2$ = _ref2[1],
-            localTarget = _ref2$.localTarget,
-            domTree = _ref2$.domTree;
-
+        var _ref2 = _slicedToArray(_ref, 2);
+          _ref2[0];
+          var _ref2$ = _ref2[1],
+          localTarget = _ref2$.localTarget,
+          domTree = _ref2$.domTree;
         if (data.currentTarget === localTarget) {
           tree = domTree;
         }
       });
-
       if (tree === false) {
-        tree = getTree$1(data.currentTarget);
+        tree = getTree(data.currentTarget);
       }
-
       PreviewStore.showDomTree(data, tree);
     }
   };
   var hideTree = function hideTree() {
     return PreviewStore.hideDomTree();
   };
-
-  var getSelector$1 = function getSelector(domTree) {
+  var getSelector = function getSelector(domTree) {
     var selector = '';
     domTree.forEach(function (el) {
       if (selector !== '' && !selector.endsWith(' ')) {
         selector += ' ';
       }
-
       if ('name' in el.tag && !!el.tag.selected) {
         selector += el.tag.name;
       }
-
       if ('name' in el.id && !!el.id.selected) {
         selector += el.id.name;
       }
-
       Object.values(el.cls).forEach(function (cls) {
         if (!!cls.selected) {
           selector += cls.name;
@@ -1238,23 +1059,18 @@
     });
     return selector;
   };
-
-  var updateSelector$1 = function updateSelector(domTree) {
-    var selector = getSelector$1(domTree);
+  var updateSelector = function updateSelector(domTree) {
+    var selector = getSelector(domTree);
     cw.Evt.emit('select-element', selector);
   };
-
   var getTarget = function getTarget(reverseIndex) {
     var target = PreviewStore.get().currentTarget;
-
     while (reverseIndex > 0) {
       target = target.parentElement;
       reverseIndex--;
     }
-
     return target;
   };
-
   var changeTarget = function changeTarget(ri) {
     PreviewStore.hideDomTree();
     setTimeout(function () {
@@ -1265,7 +1081,6 @@
   };
   var highlightToggle = function highlightToggle(ri) {
     var deHighlight = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
     if (deHighlight === true) {
       cw.Evt.emit('de-highlight-elements', true);
     } else {
@@ -1280,7 +1095,6 @@
   event callbacks for old page are still triggered after a new page is loaded in the preview.
   Those callbacks (registered in the parent cw.Evt) can be removed in the old preview page upon new preview page's 'preview-object-ready' event.
    */
-
   cw.Evt.on('preview-object-ready', function () {
     cw.Evt.off('focus-locked', showTree);
     cw.Evt.off('focus-unlocked', hideTree);
@@ -1290,9 +1104,8 @@
 
   function Focuser() {
     var _useStore = useStore(PreviewStore),
-        focusLines = _useStore.focusLines,
-        focusOpacity = _useStore.focusOpacity;
-
+      focusLines = _useStore.focusLines,
+      focusOpacity = _useStore.focusOpacity;
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-focuser",
       style: {
@@ -1319,13 +1132,11 @@
 
   function FocusDetails() {
     var _useStore = useStore(PreviewStore),
-        focusDetails = _useStore.focusDetails,
-        detailsOpacity = _useStore.detailsOpacity;
-
+      focusDetails = _useStore.focusDetails,
+      detailsOpacity = _useStore.detailsOpacity;
     var styles = _objectSpread2(_objectSpread2({}, focusDetails.style), {}, {
       opacity: detailsOpacity
     });
-
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-focus-details",
       className: "cw-focus-details",
@@ -1336,31 +1147,28 @@
     }, focusDetails.selector));
   }
 
-  var styles = "#cw-domtree{width:100%;bottom:0;position:fixed;background:#eee;font-size:14px;color:#444;line-height:16px;margin:0}#cw-domtree .cw-domtree-list{white-space:nowrap;list-style-type:none;margin:0;border-top:1px solid #bbb}#cw-domtree .cw-domtree-node{display:inline-block;background-color:#ddd;margin:0;position:relative}#cw-domtree .cw-node-tag{position:relative}#cw-domtree .cw-node-tag button{margin:0;text-transform:none;border:none;letter-spacing:normal;font-size:12px;font-weight:500;height:24px;line-height:24px;padding:0 16px 0 20px;background:#ddd;color:#555;transition:none}#cw-domtree .cw-node-tag .cw-target{display:none;position:absolute;right:-3px;top:6px;width:12px;height:12px;border-radius:6px;background:center/contain no-repeat url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12px' height='12px' viewBox='0 0 12 12'%3E%3Crect fill='%23333' x='5.5' y='.5' width='1' height='3.5'/%3E%3Crect fill='%23333' x='5.5' y='8' width='1' height='3.5'/%3E%3Crect fill='%23333' x='.5' y='5.5' width='3.5' height='1'/%3E%3Crect fill='%23333' x='8' y='5.5' width='3.5' height='1'/%3E%3C/svg%3E\");padding:0;z-index:3}#cw-domtree .cw-node-tag:before{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid rgba(0,0,0,0.4);position:absolute;top:0;margin-left:1px;left:100%;z-index:1}#cw-domtree .cw-node-tag:after{content:\" \";display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:10px solid #ddd;position:absolute;top:0;left:100%;z-index:2}#cw-domtree .cw-domtree-node:hover,#cw-domtree .cw-domtree-node:hover .cw-node-tag button,#cw-domtree .cw-domtree-node .selected button{background-color:var(--accent);color:#fff}#cw-domtree .cw-domtree-node:hover .cw-node-tag:after,#cw-domtree .cw-domtree-node .cw-node-tag.selected:after{border-left-color:var(--accent)}#cw-domtree .cw-domtree-node:not(:last-child):hover .cw-target{display:block;background-color:#fff}#cw-domtree .cw-domtree-node .selected button{color:#fff}#cw-domtree .cw-node-attributes{display:none;position:absolute;bottom:100%;background:#eee;height:auto;min-width:15em;color:#444;line-height:16px;margin:0;padding:0 5px;transition:all .5s ease-in-out;border:1px solid #bbb;border-radius:3px;left:0}#cw-domtree .cw-select{display:flex;flex-wrap:wrap;border:none;border-bottom:1px solid #ccc;border-radius:0;box-shadow:none;background:#eee;padding:5px 0}#cw-domtree .cw-select:last-child{border-bottom:none}#cw-domtree .cw-select .cw-select-option{margin:2px;border:none}#cw-domtree .cw-select button{margin:0;text-transform:none;font-weight:500;letter-spacing:normal;height:22px;line-height:22px;font-size:12px;border-radius:3px;padding:0 8px;background:#fff;color:#444;border:none}#cw-domtree .cw-select button.selected{background-color:var(--accent);color:#fff}#cw-domtree .cw-select button:hover{background:var(--accentLight)}#cw-domtree .cw-select button.selected:hover{background:var(--accentDark)}#cw-domtree .cw-domtree-node:hover>.cw-node-attributes{display:block}\n";
+  var styles$1 = "#cw-domtree{width:100%;bottom:0;position:fixed;background:#eee;font-size:14px;color:#444;line-height:16px;margin:0}#cw-domtree .cw-domtree-list{white-space:nowrap;list-style-type:none;margin:0;border-top:1px solid #bbb}#cw-domtree .cw-domtree-node{display:inline-block;background-color:#ddd;margin:0;position:relative}#cw-domtree .cw-node-tag{position:relative}#cw-domtree .cw-node-tag button{margin:0;text-transform:none;border:none;letter-spacing:normal;font-size:12px;font-weight:500;height:24px;line-height:24px;padding:0 16px 0 20px;background:#ddd;color:#555;transition:none}#cw-domtree .cw-node-tag .cw-target{display:none;position:absolute;right:-3px;top:6px;width:12px;height:12px;border-radius:6px;background:center/contain no-repeat url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12px' height='12px' viewBox='0 0 12 12'%3E%3Crect fill='%23333' x='5.5' y='.5' width='1' height='3.5'/%3E%3Crect fill='%23333' x='5.5' y='8' width='1' height='3.5'/%3E%3Crect fill='%23333' x='.5' y='5.5' width='3.5' height='1'/%3E%3Crect fill='%23333' x='8' y='5.5' width='3.5' height='1'/%3E%3C/svg%3E\");padding:0;z-index:3}#cw-domtree .cw-node-tag:before{content:\" \";display:block;width:0;height:0;border-top:12px solid rgba(0,0,0,0);border-bottom:12px solid rgba(0,0,0,0);border-left:10px solid rgba(0,0,0,.4);position:absolute;top:0;margin-left:1px;left:100%;z-index:1}#cw-domtree .cw-node-tag:after{content:\" \";display:block;width:0;height:0;border-top:12px solid rgba(0,0,0,0);border-bottom:12px solid rgba(0,0,0,0);border-left:10px solid #ddd;position:absolute;top:0;left:100%;z-index:2}#cw-domtree .cw-domtree-node:hover,#cw-domtree .cw-domtree-node:hover .cw-node-tag button,#cw-domtree .cw-domtree-node .selected button{background-color:var(--accent);color:#fff}#cw-domtree .cw-domtree-node:hover .cw-node-tag:after,#cw-domtree .cw-domtree-node .cw-node-tag.selected:after{border-left-color:var(--accent)}#cw-domtree .cw-domtree-node:not(:last-child):hover .cw-target{display:block;background-color:#fff}#cw-domtree .cw-domtree-node .selected button{color:#fff}#cw-domtree .cw-node-attributes{display:none;position:absolute;bottom:100%;background:#eee;height:auto;min-width:15em;color:#444;line-height:16px;margin:0;padding:0 5px;transition:all .5s ease-in-out;border:1px solid #bbb;border-radius:3px;left:0}#cw-domtree .cw-select{display:flex;flex-wrap:wrap;border:none;border-bottom:1px solid #ccc;border-radius:0;box-shadow:none;background:#eee;padding:5px 0}#cw-domtree .cw-select:last-child{border-bottom:none}#cw-domtree .cw-select .cw-select-option{margin:2px;border:none}#cw-domtree .cw-select button{margin:0;text-transform:none;font-weight:500;letter-spacing:normal;height:22px;line-height:22px;font-size:12px;border-radius:3px;padding:0 8px;background:#fff;color:#444;border:none}#cw-domtree .cw-select button.selected{background-color:var(--accent);color:#fff}#cw-domtree .cw-select button:hover{background:var(--accentLight)}#cw-domtree .cw-select button.selected:hover{background:var(--accentDark)}#cw-domtree .cw-domtree-node:hover>.cw-node-attributes{display:block}";
 
   function DomTree() {
     var _useStore = useStore(PreviewStore),
-        showDomTree = _useStore.showDomTree,
-        domTree = _useStore.domTree;
-
+      showDomTree = _useStore.showDomTree,
+      domTree = _useStore.domTree;
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-domtree"
     }, showDomTree ? DomTreeList(domTree) : '', /*#__PURE__*/React.createElement("style", {
       type: "text/css"
-    }, styles));
+    }, styles$1));
   }
-
   function DomTreeList(domTree) {
     // If no timeout dom update is jerky.
     var update = function update() {
       return setTimeout(function () {
-        return updateSelector$1(domTree);
+        return updateSelector(domTree);
       }, 100);
     };
-
     var listItems = [];
     domTree.forEach(function (element, i) {
-      listItems.push( /*#__PURE__*/React.createElement("li", {
+      listItems.push(/*#__PURE__*/React.createElement("li", {
         key: "".concat(element.tag.name, "-").concat(i),
         className: "cw-domtree-node"
       }, /*#__PURE__*/React.createElement(DomTreeTag, {
@@ -1378,17 +1186,14 @@
       className: "cw-domtree-list"
     }, listItems);
   }
-
   function DomTreeTag(_ref) {
     var element = _ref.element,
-        callUpdateSelector = _ref.callUpdateSelector,
-        ri = _ref.ri;
-
+      callUpdateSelector = _ref.callUpdateSelector,
+      ri = _ref.ri;
     var _React$useState = React.useState(!!element.tag.selected),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        selected = _React$useState2[0],
-        updateSelected = _React$useState2[1];
-
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      selected = _React$useState2[0],
+      updateSelected = _React$useState2[1];
     var changeSelected = function changeSelected() {
       updateSelected(function (prev) {
         element.tag.selected = !prev;
@@ -1396,7 +1201,6 @@
       });
       callUpdateSelector();
     };
-
     return /*#__PURE__*/React.createElement("div", {
       className: "cw-node-tag".concat(selected ? ' selected' : '')
     }, /*#__PURE__*/React.createElement("button", {
@@ -1412,43 +1216,36 @@
       onMouseLeave: highlightToggle
     }));
   }
-
   function DomNodeAttributes(_ref2) {
     var element = _ref2.element,
-        callUpdateSelector = _ref2.callUpdateSelector;
+      callUpdateSelector = _ref2.callUpdateSelector;
     var idValue = [],
-        clsValue = [],
-        idOptions = [],
-        clsOptions = [];
-
+      clsValue = [],
+      idOptions = [],
+      clsOptions = [];
     if (element.id && element.id.name) {
       if (element.id.selected) {
         idValue.push(element.id.name);
       }
-
       idOptions.push({
         value: element.id.name,
         name: element.id.name
       });
     }
-
     if (element.cls) {
       Object.entries(element.cls).map(function (_ref3) {
-        var _ref4 = _slicedToArray(_ref3, 2),
-            x = _ref4[0],
-            cls = _ref4[1];
-
+        var _ref4 = _slicedToArray(_ref3, 2);
+          _ref4[0];
+          var cls = _ref4[1];
         if (cls.selected) {
           clsValue.push(cls.name);
         }
-
         clsOptions.push({
           value: cls.name,
           name: cls.name
         });
       });
     }
-
     var onClsChange = function onClsChange(values) {
       Object.values(element.cls).forEach(function (cls) {
         cls.selected = false;
@@ -1458,12 +1255,10 @@
       });
       callUpdateSelector();
     };
-
     var onIdChange = function onIdChange(values) {
       element.id.selected = values.includes(element.id.name);
       callUpdateSelector();
     };
-
     return /*#__PURE__*/React.createElement(React.Fragment, null, idOptions.length > 0 && /*#__PURE__*/React.createElement(DomAttributesSelect, {
       options: idOptions,
       onChange: onIdChange,
@@ -1474,22 +1269,19 @@
       value: clsValue
     }));
   }
-
   function DomAttributesSelect(_ref5) {
     var options = _ref5.options,
-        value = _ref5.value,
-        onChange = _ref5.onChange;
+      value = _ref5.value,
+      onChange = _ref5.onChange;
     var cOptions = clone(options).map(function (option) {
       return _objectSpread2(_objectSpread2({}, option), {}, {
         selected: value.includes(option.value)
       });
     });
-
     var _React$useState3 = React.useState(cOptions),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        sOptions = _React$useState4[0],
-        updateOptions = _React$useState4[1];
-
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      sOptions = _React$useState4[0],
+      updateOptions = _React$useState4[1];
     var _onClick = function onClick(i) {
       updateOptions(function (prev) {
         var cloned = clone(prev);
@@ -1498,13 +1290,11 @@
           if (o.selected) {
             a.push(o.value);
           }
-
           return a;
         }, []));
         return cloned;
       });
     };
-
     return /*#__PURE__*/React.createElement("div", {
       className: "cw-select"
     }, sOptions.map(function (option, i) {
@@ -1522,9 +1312,8 @@
 
   function Highlighter() {
     var _useStore = useStore(PreviewStore),
-        highlightStyles = _useStore.highlightStyles,
-        similarStyles = _useStore.similarStyles;
-
+      highlightStyles = _useStore.highlightStyles,
+      similarStyles = _useStore.similarStyles;
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-highlighter"
     }, /*#__PURE__*/React.createElement("div", {
@@ -1542,36 +1331,36 @@
     })), /*#__PURE__*/React.createElement("style", null, similarStyles));
   }
 
-  var styles$1 = "#color-wings{--accent: #23b887;--accentLight: hsl(160, 68%, 97%);--accentDark: hsl(160, 68%, 30%)}#color-wings{font-family:system-ui, -apple-system, Arial, sans-serif;position:absolute;top:0;left:0;width:100%;height:0;overflow:visible;z-index:1500}#cw-focuser .cw-focus-line{position:absolute;border-color:var(--accent);border-style:solid;border-width:0;box-shadow:0 0 2px rgba(24,129,94,0.1)}#cw-focus-details{position:absolute;color:#fff;font-size:12px;line-height:24px;font-weight:500}#cw-focus-details .cw-selector{padding:0 10px;white-space:nowrap}#cw-highlighter .cw-highlight-box{position:absolute}#cw-highlighter .cw-highlight-main{position:absolute;background:rgba(92,153,214,0.6)}#cw-highlighter .cw-highlight-padding{position:absolute;top:0;left:0;border:0 solid rgba(147,197,129,0.6);box-sizing:border-box}#cw-highlighter .cw-highlight-margin{position:absolute;border:0 solid rgba(244,166,87,0.6);box-sizing:content-box}.customize-partial-edit-shortcut,.customize-partial-edit-shortcut{display:none}\n";
+  var styles = "#color-wings{--accent: #23b887;--accentLight: hsl(160, 68%, 97%);--accentDark: hsl(160, 68%, 30%)}#color-wings{font-family:system-ui,-apple-system,Arial,sans-serif;position:absolute;top:0;left:0;width:100%;height:0;overflow:visible;z-index:1500}#cw-focuser .cw-focus-line{position:absolute;border-color:var(--accent);border-style:solid;border-width:0;box-shadow:0 0 2px hsla(160,68%,30%,.1)}#cw-focus-details{position:absolute;color:#fff;font-size:12px;line-height:24px;font-weight:500}#cw-focus-details .cw-selector{padding:0 10px;white-space:nowrap}#cw-highlighter .cw-highlight-box{position:absolute}#cw-highlighter .cw-highlight-main{position:absolute;background:hsla(210,60%,60%,.6)}#cw-highlighter .cw-highlight-padding{position:absolute;top:0;left:0;border:0 solid hsla(104,37%,64%,.6);box-sizing:border-box}#cw-highlighter .cw-highlight-margin{position:absolute;border:0 solid hsla(30,88%,65%,.6);box-sizing:content-box}.customize-partial-edit-shortcut,.customize-partial-edit-shortcut{display:none}";
 
   function Canvas() {
     return /*#__PURE__*/React.createElement("div", {
       id: "cw-canvas"
     }, /*#__PURE__*/React.createElement(FocusDetails, null), /*#__PURE__*/React.createElement(Focuser, null), /*#__PURE__*/React.createElement(Highlighter, null), /*#__PURE__*/React.createElement(DomTree, null), /*#__PURE__*/React.createElement("style", {
       type: "text/css"
-    }, styles$1));
+    }, styles));
   }
 
   /**
    * Color Wings
    */
-
   function isCustomizer() {
     return !!(typeof wp !== 'undefined' && wp.hasOwnProperty('customize'));
   }
-
   if (isCustomizer()) {
     wp.customize.bind('preview-ready', function () {
       // Send Example
       // wp.customize.preview.send( 'test-event', 'Reply' )
+
       var canvas = document.createElement('div');
       canvas.id = 'color-wings';
-      document.body.appendChild(canvas); // Todo: This might occur before preview-ready.
+      document.body.appendChild(canvas);
 
+      // Todo: This might occur before preview-ready.
       cw.Evt.on('mount-colorwings', function () {
         // Todo: Without setTimeout browser hangs, not sure why.
         setTimeout(function () {
-          return ReactDOM.render( /*#__PURE__*/React.createElement(Canvas, null), canvas);
+          return ReactDOM.render(/*#__PURE__*/React.createElement(Canvas, null), canvas);
         }, 100);
       });
       cw.Evt.on('unmount-colorwings', function () {
@@ -1580,5 +1369,5 @@
     });
   }
 
-}());
+})();
 //# sourceMappingURL=color-wings-preview.js.map
